@@ -131,6 +131,24 @@
          id="recover-card">
         <h1 class="mb-3">Восстановление</h1>
         <form class="row gy-3 mb-3">
+            <div class="col-12">
+                <div class="form-floating">
+                    <input type="email"
+                           class="form-control"
+                           id="email-field-recover"
+                           placeholder="name@example.com"
+                           required
+                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                    <label for="email-field-recover">E-mail</label>
+                </div>
+                <div class="invalid-feedback"
+                     id="email-error-recover"></div>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-lg btn-outline-danger w-100"
+                        type="submit">Восстановить
+                </button>
+            </div>
         </form>
         <div class="row gy-2">
         </div>
