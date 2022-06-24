@@ -39,6 +39,82 @@ const email_error_recover = document.getElementById('email-error-recover');
 
 const validationEventType = 'input';
 
+email_field_login.addEventListener(validationEventType, function (event)
+{
+    updateError(email_field_login, email_error_login,
+        email_field_login.validity.valueMissing, 'Необходимо ввести адрес электронной почты.',
+        email_field_login.validity.patternMismatch, 'Введенное значение должно быть адресом электронной почты.');
+});
+
+password_field_login.addEventListener(validationEventType, function (event)
+{
+    updateError(password_field_login, password_error_login,
+        password_field_login.validity.valueMissing, 'Необходимо ввести пароль.');
+});
+
+login_form.addEventListener('submit', function (event)
+{
+    validateForm(event, login_form,
+        email_field_login, password_field_login);
+});
+
+email_field_signup.addEventListener(validationEventType, function (event)
+{
+    updateError(email_field_signup, email_error_signup,
+        email_field_signup.validity.valueMissing, 'Необходимо ввести адрес электронной почты.',
+        email_field_signup.validity.patternMismatch, 'Введенное значение должно быть адресом электронной почты.');
+});
+
+position_field_signup.addEventListener(validationEventType, function (event)
+{
+    updateError(position_field_signup, position_error_signup,
+        position_field_signup.validity.valueMissing, 'Необходимо выбрать должность.');
+});
+
+password_field_signup.addEventListener(validationEventType, function (event)
+{
+    password_check_field_signup.setAttribute('pattern', password_field_signup.value);
+    updateError(password_field_signup, password_error_signup,
+        password_field_signup.validity.valueMissing, 'Необходимо ввести пароль.',
+        password_field_signup.validity.patternMismatch, 'Введённый пароль слишком лёгкий.<br>' +
+        'Введённый пароль должен удовлетворять условиям:<br>' +
+        '- Цифра должна встречаться хотя бы один раз<br>' +
+        '- Строчная буква должна встречаться хотя бы один раз<br>' +
+        '- Заглавная буква должна встречаться хотя бы один раз<br>' +
+        '- Специальный символ должен встречаться хотя бы один раз (@#$%^&+=)<br>' +
+        '- Не допускаются пробелы<br>' +
+        '- Количество символов - от 8 до 32)');
+    updateError(password_check_field_signup, password_check_error_signup,
+        !password_check_field_signup.validity.valueMissing &&
+        password_check_field_signup.validity.patternMismatch, 'Пароли не совпадают.');
+});
+
+password_check_field_signup.addEventListener(validationEventType, function (event)
+{
+    updateError(password_check_field_signup, password_check_error_signup,
+        password_check_field_signup.validity.valueMissing, 'Необходимо подтвердить пароль.',
+        password_check_field_signup.validity.patternMismatch, 'Пароли не совпадают.');
+});
+
+signup_form.addEventListener('submit', function (event)
+{
+    validateForm(event, signup_form,
+        email_field_signup, position_field_signup, password_field_signup, password_check_field_signup);
+});
+
+email_field_recover.addEventListener(validationEventType, function (event)
+{
+    updateError(email_field_recover, email_error_recover,
+        email_field_recover.validity.valueMissing, 'Необходимо ввести адрес электронной почты.',
+        email_field_recover.validity.patternMismatch, 'Введенное значение должно быть адресом электронной почты.');
+});
+
+recover_form.addEventListener('submit', function (event)
+{
+    validateForm(event, recover_form,
+        email_field_recover);
+});
+
 function hideError(error)
 {
     error.innerHTML = '';
