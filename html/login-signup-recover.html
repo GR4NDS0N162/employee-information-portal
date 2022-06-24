@@ -56,6 +56,73 @@
          id="signup-card">
         <h1 class="mb-3">Регистрация</h1>
         <form class="row gy-3 mb-3">
+            <div class="col-12">
+                <div class="form-floating">
+                    <input type="email"
+                           class="form-control"
+                           id="email-field-signup"
+                           placeholder="name@example.com"
+                           required
+                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                    <label for="email-field-signup">E-mail</label>
+                </div>
+                <div class="invalid-feedback"
+                     id="email-error-signup"></div>
+            </div>
+            <div class="col-12">
+                <div class="form-floating">
+                    <select class="form-select"
+                            id="position-field-signup"
+                            aria-label="Должность"
+                            required>
+                        <option value
+                                disabled
+                                selected>Не выбрана
+                        </option>
+                        <option value="1">Уборщик</option>
+                        <option value="2">Фасовщик</option>
+                        <option value="3">Менеджер</option>
+                        <option value="4">Швейцар</option>
+                        <option value="5">Шеф-повар</option>
+                        <option value="6">Экономист</option>
+                        <option value="7">Электрик</option>
+                        <option value="8">Юрист</option>
+                    </select>
+                    <label for="position-field-signup">Должность</label>
+                </div>
+                <div class="invalid-feedback"
+                     id="position-error-signup"></div>
+            </div>
+            <div class="col-12">
+                <div class="form-floating">
+                    <input type="password"
+                           class="form-control"
+                           id="password-field-signup"
+                           placeholder="Пароль"
+                           required
+                           pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,32}$">
+                    <label for="password-field-signup">Пароль</label>
+                </div>
+                <div class="invalid-feedback"
+                     id="password-error-signup"></div>
+            </div>
+            <div class="col-12">
+                <div class="form-floating">
+                    <input type="password"
+                           class="form-control"
+                           id="password-check-field-signup"
+                           placeholder="Подтверждение пароля"
+                           required>
+                    <label for="password-check-field-signup">Подтверждение пароля</label>
+                </div>
+                <div class="invalid-feedback"
+                     id="password-check-error-signup"></div>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-lg btn-outline-success w-100"
+                        type="submit">Зарегистрироваться
+                </button>
+            </div>
         </form>
         <div class="row gy-2">
         </div>
