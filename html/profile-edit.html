@@ -276,8 +276,50 @@
                             </div>
                             <div class="col-12">
                                 <div class="card p-3">
-                                    <div class="row gy-3">
-                                    </div>
+                                    <form class="row gy-3">
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="password"
+                                                       class="form-control"
+                                                       id="password-current-field"
+                                                       placeholder="Текущий пароль"
+                                                       required>
+                                                <label for="password-current-field">Текущий пароль</label>
+                                            </div>
+                                            <div class="invalid-feedback"
+                                                 id="password-current-error"></div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="password"
+                                                       class="form-control"
+                                                       id="password-new-field"
+                                                       placeholder="Новый пароль"
+                                                       required
+                                                       pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,32}$">
+                                                <label for="password-new-field">Новый пароль</label>
+                                            </div>
+                                            <div class="invalid-feedback"
+                                                 id="password-new-error"></div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="password"
+                                                       class="form-control"
+                                                       id="password-check-field"
+                                                       placeholder="Подтверждение пароля"
+                                                       required>
+                                                <label for="password-check-field">Подтверждение пароля</label>
+                                            </div>
+                                            <div class="invalid-feedback"
+                                                 id="password-check-error"></div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn btn-outline-success w-100"
+                                                    type="submit">Изменить пароль
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
