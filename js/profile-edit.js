@@ -34,6 +34,7 @@ password_new_field.addEventListener(validationEventType, function (event)
 
 password_check_field.addEventListener(validationEventType, function (event)
 {
+    password_check_field.setAttribute('pattern', password_new_field.value);
     updateError(password_check_field, password_check_error,
         password_check_field.validity.valueMissing, 'Необходимо подтвердить пароль.',
         password_check_field.validity.patternMismatch, 'Пароли не совпадают.');
