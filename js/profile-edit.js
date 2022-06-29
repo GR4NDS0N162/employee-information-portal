@@ -115,4 +115,11 @@ new_phone_form.addEventListener('submit', function (event)
     phones.appendChild(phone_el);
 
     new_phone_input.value = '';
+
+    phone_input_el.addEventListener(validationEventType, function (event)
+    {
+        updateError(phone_input_el, phone_error_el,
+            phone_input_el.validity.valueMissing, 'Нельзя оставлять поле пустым.',
+            phone_input_el.validity.patternMismatch, 'Введённая строка - не телефон');
+    });
 });
