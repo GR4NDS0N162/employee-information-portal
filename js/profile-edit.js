@@ -137,4 +137,9 @@ new_phone_form.addEventListener('submit', function (event)
             phone_edit_el.blur();
         }
     });
+
+    phone_delete_el.addEventListener('click', function (event)
+    {
+        phones.removeChild(phone_el);
+    });
 });
