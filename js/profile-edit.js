@@ -51,3 +51,6 @@ const new_phone_input = document.getElementById('new-phone-input');
 const new_phone_submit = document.getElementById('new-phone-submit');
 const new_phone_error = document.getElementById('new-phone-error');
 const phones = document.getElementById('phones');
+
+const phonePattern = '^\\+7([0-9]){10}$';
+new_phone_input.setAttribute("pattern", phonePattern);
