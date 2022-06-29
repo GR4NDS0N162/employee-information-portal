@@ -45,3 +45,9 @@ password_form.addEventListener('submit', function (event)
     validateForm(event, password_form,
         password_current_field, password_new_field, password_check_field);
 });
+
+const new_phone_form = document.getElementById('new-phone-form');
+const new_phone_input = document.getElementById('new-phone-input');
+const new_phone_submit = document.getElementById('new-phone-submit');
+const new_phone_error = document.getElementById('new-phone-error');
+const phones = document.getElementById('phones');
