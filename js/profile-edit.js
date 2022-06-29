@@ -66,4 +66,9 @@ new_phone_form.addEventListener('submit', function (event)
 {
     event.preventDefault();
     new_phone_submit.blur();
+
+    if (!new_phone_input.validity.valid) {
+        new_phone_input.focus();
+        return;
+    }
 });
