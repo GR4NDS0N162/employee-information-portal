@@ -96,7 +96,7 @@ new_phone_form.addEventListener('submit', function (event)
     phone_content_el.classList.add('col');
     phone_actions_el.classList.add('col-auto', 'btn-group');
     phone_error_el.classList.add('col-12', 'invalid-feedback', 'd-none');
-    phone_input_el.classList.add('form-control');
+    phone_input_el.classList.add('form-control', 'phone-input');
     phone_edit_el.classList.add('btn', 'btn-outline-warning');
     phone_delete_el.classList.add('btn', 'btn-outline-danger');
 
@@ -142,6 +142,25 @@ new_phone_form.addEventListener('submit', function (event)
     {
         phones.removeChild(phone_el);
     });
+});
+
+const phone_form_error = document.getElementById('phone-form-error');
+
+phones.addEventListener('submit', function (event)
+{
+    let isFormValid = true;
+    $('.phone-input').each(function ()
+    {
+        let attr = $(this).attr('readonly');
+        isFormValid = isFormValid && (typeof attr !== 'undefined' && attr !== false);
+    });
+    if (isFormValid) {
+        hideError(phone_form_error);
+    } else {
+        event.preventDefault();
+        phone_form_error.innerHTML = 'Все поля должны быть сохранены.';
+        phone_form_error.classList.replace('d-none', 'd-block');
+    }
 });
 
 const new_email_form = document.getElementById('new-email-form');
@@ -194,7 +213,7 @@ new_email_form.addEventListener('submit', function (event)
     email_content_el.classList.add('col');
     email_actions_el.classList.add('col-auto', 'btn-group');
     email_error_el.classList.add('col-12', 'invalid-feedback', 'd-none');
-    email_input_el.classList.add('form-control');
+    email_input_el.classList.add('form-control', 'email-input');
     email_edit_el.classList.add('btn', 'btn-outline-warning');
     email_delete_el.classList.add('btn', 'btn-outline-danger');
 
@@ -240,4 +259,23 @@ new_email_form.addEventListener('submit', function (event)
     {
         emails.removeChild(email_el);
     });
+});
+
+const email_form_error = document.getElementById('email-form-error');
+
+emails.addEventListener('submit', function (event)
+{
+    let isFormValid = true;
+    $('.email-input').each(function ()
+    {
+        let attr = $(this).attr('readonly');
+        isFormValid = isFormValid && (typeof attr !== 'undefined' && attr !== false);
+    });
+    if (isFormValid) {
+        hideError(email_form_error);
+    } else {
+        event.preventDefault();
+        email_form_error.innerHTML = 'Все поля должны быть сохранены.';
+        email_form_error.classList.replace('d-none', 'd-block');
+    }
 });
