@@ -90,4 +90,25 @@ new_phone_form.addEventListener('submit', function (event)
     phone_content_el.appendChild(phone_input_el);
     phone_actions_el.appendChild(phone_edit_el);
     phone_actions_el.appendChild(phone_delete_el);
+
+    phone_el.classList.add('col-12');
+    phone_row_el.classList.add('row', 'gx-3');
+    phone_content_el.classList.add('col');
+    phone_actions_el.classList.add('col-auto', 'btn-group');
+    phone_error_el.classList.add('col-12', 'invalid-feedback', 'd-none');
+    phone_input_el.classList.add('form-control');
+    phone_edit_el.classList.add('btn', 'btn-outline-warning');
+    phone_delete_el.classList.add('btn', 'btn-outline-danger');
+
+    phone_input_el.type = 'tel';
+    phone_input_el.value = new_phone_input.value;
+    phone_input_el.setAttribute('readonly', 'readonly');
+    phone_input_el.setAttribute('required', 'required');
+    phone_input_el.setAttribute("pattern", phonePattern);
+
+    phone_edit_el.type = 'button';
+    phone_edit_el.innerText = 'Edit';
+
+    phone_delete_el.type = 'button';
+    phone_delete_el.innerText = 'Del';
 });
