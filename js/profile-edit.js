@@ -111,4 +111,6 @@ new_phone_form.addEventListener('submit', function (event)
 
     phone_delete_el.type = 'button';
     phone_delete_el.innerText = 'Del';
+
+    phones.appendChild(phone_el);
 });
