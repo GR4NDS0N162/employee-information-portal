@@ -54,3 +54,10 @@ const phones = document.getElementById('phones');
 
 const phonePattern = '^\\+7([0-9]){10}$';
 new_phone_input.setAttribute("pattern", phonePattern);
+
+new_phone_input.addEventListener(validationEventType, function (event)
+{
+    updateError(new_phone_input, new_phone_error,
+        new_phone_input.validity.valueMissing, 'Необходимо ввести телефонный номер.',
+        new_phone_input.validity.patternMismatch, 'Введённая строка - не телефон');
+});
