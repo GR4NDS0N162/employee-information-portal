@@ -143,3 +143,101 @@ new_phone_form.addEventListener('submit', function (event)
         phones.removeChild(phone_el);
     });
 });
+
+const new_email_form = document.getElementById('new-email-form');
+const new_email_input = document.getElementById('new-email-input');
+const new_email_submit = document.getElementById('new-email-submit');
+const new_email_error = document.getElementById('new-email-error');
+const emails = document.getElementById('emails');
+
+const emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
+new_email_input.setAttribute("pattern", emailPattern);
+
+new_email_input.addEventListener(validationEventType, function (event)
+{
+    updateError(new_email_input, new_email_error,
+        new_email_input.validity.valueMissing, 'Необходимо ввести электронную почту.',
+        new_email_input.validity.patternMismatch, 'Введённая строка - не электронная почта');
+});
+
+new_email_form.addEventListener('submit', function (event)
+{
+    event.preventDefault();
+    new_email_submit.blur();
+
+    if (!new_email_input.validity.valid) {
+        new_email_input.focus();
+        return;
+    }
+
+    const email_el = document.createElement('div');
+    const email_row_el = document.createElement('div');
+    const email_content_el = document.createElement('div');
+    const email_input_el = document.createElement('input');
+    const email_actions_el = document.createElement('div');
+    const email_edit_el = document.createElement('button');
+    const email_delete_el = document.createElement('button');
+    const email_error_el = document.createElement('div');
+
+    email_el.appendChild(email_row_el);
+
+    email_row_el.appendChild(email_content_el);
+    email_row_el.appendChild(email_actions_el);
+    email_row_el.appendChild(email_error_el);
+
+    email_content_el.appendChild(email_input_el);
+    email_actions_el.appendChild(email_edit_el);
+    email_actions_el.appendChild(email_delete_el);
+
+    email_el.classList.add('col-12');
+    email_row_el.classList.add('row', 'gx-3');
+    email_content_el.classList.add('col');
+    email_actions_el.classList.add('col-auto', 'btn-group');
+    email_error_el.classList.add('col-12', 'invalid-feedback', 'd-none');
+    email_input_el.classList.add('form-control');
+    email_edit_el.classList.add('btn', 'btn-outline-warning');
+    email_delete_el.classList.add('btn', 'btn-outline-danger');
+
+    email_input_el.type = 'tel';
+    email_input_el.value = new_email_input.value;
+    email_input_el.setAttribute('readonly', 'readonly');
+    email_input_el.setAttribute('required', 'required');
+    email_input_el.setAttribute("pattern", emailPattern);
+
+    email_edit_el.type = 'button';
+    email_edit_el.innerText = 'Edit';
+
+    email_delete_el.type = 'button';
+    email_delete_el.innerText = 'Del';
+
+    emails.appendChild(email_el);
+
+    new_email_input.value = '';
+
+    email_input_el.addEventListener(validationEventType, function (event)
+    {
+        updateError(email_input_el, email_error_el,
+            email_input_el.validity.valueMissing, 'Нельзя оставлять поле пустым.',
+            email_input_el.validity.patternMismatch, 'Введённая строка - не электронная почта');
+    });
+
+    email_edit_el.addEventListener('click', function (event)
+    {
+        if (email_edit_el.innerText.toLowerCase() == 'edit') {
+            email_input_el.removeAttribute('readonly');
+            email_input_el.focus();
+            email_edit_el.classList.replace('btn-outline-warning', 'btn-outline-success');
+            email_edit_el.innerText = 'Save';
+        } else if (email_input_el.validity.valid) {
+            email_input_el.setAttribute('readonly', 'readonly');
+            email_edit_el.classList.replace('btn-outline-success', 'btn-outline-warning');
+            email_edit_el.innerText = 'Edit';
+            email_edit_el.blur();
+        }
+    });
+
+    email_delete_el.addEventListener('click', function (event)
+    {
+        emails.removeChild(email_el);
+    });
+});
