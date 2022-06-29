@@ -122,4 +122,19 @@ new_phone_form.addEventListener('submit', function (event)
             phone_input_el.validity.valueMissing, 'Нельзя оставлять поле пустым.',
             phone_input_el.validity.patternMismatch, 'Введённая строка - не телефон');
     });
+
+    phone_edit_el.addEventListener('click', function (event)
+    {
+        if (phone_edit_el.innerText.toLowerCase() == 'edit') {
+            phone_input_el.removeAttribute('readonly');
+            phone_input_el.focus();
+            phone_edit_el.classList.replace('btn-outline-warning', 'btn-outline-success');
+            phone_edit_el.innerText = 'Save';
+        } else if (phone_input_el.validity.valid) {
+            phone_input_el.setAttribute('readonly', 'readonly');
+            phone_edit_el.classList.replace('btn-outline-success', 'btn-outline-warning');
+            phone_edit_el.innerText = 'Edit';
+            phone_edit_el.blur();
+        }
+    });
 });
