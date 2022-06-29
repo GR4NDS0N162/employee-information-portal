@@ -163,73 +163,31 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <label for="input-email"
-                                       class="form-label">E-mail-ы</label>
+                                <div class="form-label">E-mail-ы</div>
                                 <div class="card p-3">
-                                    <div class="row gy-3">
-                                        <div class="col-12">
-                                            <div class="row gx-3">
-                                                <div class="col">
-                                                    <input class="form-control"
-                                                           id="input-email"
-                                                           type="email"
-                                                           placeholder="name@example.com">
-                                                </div>
-                                                <div class="col-auto">
-                                                    <button class="btn btn-outline-primary"
-                                                            type="button">Add
-                                                    </button>
-                                                </div>
-                                            </div>
+                                    <form class="row gx-3 mb-3"
+                                          id="new-email-form"
+                                          novalidate>
+                                        <div class="col">
+                                            <input class="form-control"
+                                                   id="new-email-input"
+                                                   type="tel"
+                                                   placeholder="name@example.com"
+                                                   required>
                                         </div>
-                                        <div class="col-12">
-                                            <div class="row gx-3">
-                                                <div class="col">
-                                                    <input class="form-control"
-                                                           type="email"
-                                                           placeholder="name@example.com"
-                                                           readonly
-                                                           id="email-1"
-                                                           name="email-1"
-                                                           value="abcdef@example.com">
-                                                </div>
-                                                <div class="col-auto">
-                                                    <div class="btn-group"
-                                                         role="group">
-                                                        <button class="btn btn-outline-success"
-                                                                type="button">Save
-                                                        </button>
-                                                        <button class="btn btn-outline-danger"
-                                                                type="button">Del
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div class="col-auto">
+                                            <button class="btn btn-outline-primary"
+                                                    id="new-email-submit"
+                                                    type="submit">Add
+                                            </button>
                                         </div>
-                                        <div class="col-12">
-                                            <div class="row gx-3">
-                                                <div class="col">
-                                                    <input class="form-control"
-                                                           type="email"
-                                                           placeholder="name@example.com"
-                                                           id="email-2"
-                                                           name="email-2"
-                                                           value="abcdefgh@example.com">
-                                                </div>
-                                                <div class="col-auto">
-                                                    <div class="btn-group"
-                                                         role="group">
-                                                        <button class="btn btn-outline-warning"
-                                                                type="button">Edit
-                                                        </button>
-                                                        <button class="btn btn-outline-danger"
-                                                                type="button">Del
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        <div class="col-12 invalid-feedback d-none"
+                                             id="new-email-error"></div>
+                                    </form>
+                                    <form class="row gy-3"
+                                          id="emails"
+                                          novalidate>
+                                    </form>
                                 </div>
                             </div>
                             <div class="col-12">
