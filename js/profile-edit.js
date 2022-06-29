@@ -61,3 +61,9 @@ new_phone_input.addEventListener(validationEventType, function (event)
         new_phone_input.validity.valueMissing, 'Необходимо ввести телефонный номер.',
         new_phone_input.validity.patternMismatch, 'Введённая строка - не телефон');
 });
+
+new_phone_form.addEventListener('submit', function (event)
+{
+    event.preventDefault();
+    new_phone_submit.blur();
+});
