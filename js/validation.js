@@ -1,7 +1,7 @@
 function hideError(error)
 {
     error.innerHTML = '';
-    error.className = 'invalid-feedback';
+    error.classList.replace('d-block', 'd-none');
 }
 
 function showError(error, warnings)
@@ -11,7 +11,7 @@ function showError(error, warnings)
             error.innerHTML = warnings[i];
             break;
         }
-    error.className = 'invalid-feedback d-block';
+    error.classList.replace('d-none', 'd-block');
 }
 
 function updateError(field, error, ...warnings)
