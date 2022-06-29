@@ -71,4 +71,23 @@ new_phone_form.addEventListener('submit', function (event)
         new_phone_input.focus();
         return;
     }
+
+    const phone_el = document.createElement('div');
+    const phone_row_el = document.createElement('div');
+    const phone_content_el = document.createElement('div');
+    const phone_input_el = document.createElement('input');
+    const phone_actions_el = document.createElement('div');
+    const phone_edit_el = document.createElement('button');
+    const phone_delete_el = document.createElement('button');
+    const phone_error_el = document.createElement('div');
+
+    phone_el.appendChild(phone_row_el);
+
+    phone_row_el.appendChild(phone_content_el);
+    phone_row_el.appendChild(phone_actions_el);
+    phone_row_el.appendChild(phone_error_el);
+
+    phone_content_el.appendChild(phone_input_el);
+    phone_actions_el.appendChild(phone_edit_el);
+    phone_actions_el.appendChild(phone_delete_el);
 });
