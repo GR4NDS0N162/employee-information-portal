@@ -73,12 +73,28 @@
                                      class="user-photo w-100 rounded-circle"
                                      alt="Фото пользователя">
                             </div>
-                            <div class="col-12">
+                            <div class="col-12 col-md-6">
                                 <label for="input-photo"
                                        class="form-label">Фото</label>
                                 <input id="input-photo"
                                        class="form-control"
                                        type="file">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label for="input-position"
+                                       class="form-label">Должность</label>
+                                <select id="input-position"
+                                        class="form-select">
+                                    <option value="1"
+                                            selected>Уборщик
+                                    </option>
+                                    <option value="2">Директор</option>
+                                    <option value="3">Менеджер</option>
+                                    <option value="4">Программист</option>
+                                    <option value="5">Проектировщик</option>
+                                    <option value="6">Тестировщик</option>
+                                    <option value="7">Часть команды - часть корабля</option>
+                                </select>
                             </div>
                             <div class="col-12 col-md-6">
                                 <label for="input-surname"
@@ -128,6 +144,27 @@
                                        class="form-control"
                                        type="text"
                                        placeholder="ivanivanov">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           value=""
+                                           id="flexCheck-admin">
+                                    <label class="form-check-label"
+                                           for="flexCheck-admin">Администратор</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           value=""
+                                           id="flexCheck-active"
+                                           checked>
+                                    <label class="form-check-label"
+                                           for="flexCheck-active">Активирован</label>
+                                </div>
                             </div>
                             <div class="col-12">
                                 <button class="btn btn-outline-success w-100"
