@@ -9,6 +9,8 @@
           href="/css/bootstrap.min.css">
     <link rel="stylesheet"
           href="/css/style.css">
+    <link rel="stylesheet"
+          href="/css/profile-edit.css">
 </head>
 <body>
 <div class="container">
@@ -61,10 +63,212 @@
             </nav>
         </header>
         <main class="col-12">
+            <div class="card mb-2 mb-md-3 p-3 p-sm-4 p-md-5">
+                <h1 class="mb-4 mb-md-5">Редактирование профиля</h1>
+                <div class="row gy-3">
+                    <div class="col-12 col-lg-7 col-xl-8">
+                        <form class="row g-3">
+                            <div class="col-12 text-center">
+                                <img src="https://picsum.photos/900"
+                                     class="user-photo w-100 rounded-circle"
+                                     alt="Фото пользователя">
+                            </div>
+                            <div class="col-12">
+                                <label for="input-photo"
+                                       class="form-label">Фото</label>
+                                <input id="input-photo"
+                                       class="form-control"
+                                       type="file">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label for="input-surname"
+                                       class="form-label">Фамилия</label>
+                                <input id="input-surname"
+                                       class="form-control"
+                                       type="text"
+                                       placeholder="Иванов">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label for="input-name"
+                                       class="form-label">Имя</label>
+                                <input id="input-name"
+                                       class="form-control"
+                                       type="text"
+                                       placeholder="Иван">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label for="input-patronymic"
+                                       class="form-label">Отчество</label>
+                                <input id="input-patronymic"
+                                       class="form-control"
+                                       type="text"
+                                       placeholder="Иванович">
+                            </div>
+                            <div class="col-6">
+                                <label for="input-gender"
+                                       class="form-label">Пол</label>
+                                <select id="input-gender"
+                                        class="form-select">
+                                    <option selected>Не выбран</option>
+                                    <option value="1">Мужской</option>
+                                    <option value="2">Женский</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label for="input-birthday"
+                                       class="form-label">Дата рождения</label>
+                                <input id="input-birthday"
+                                       class="form-control"
+                                       type="date">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label for="input-skype"
+                                       class="form-label">Skype</label>
+                                <input id="input-skype"
+                                       class="form-control"
+                                       type="text"
+                                       placeholder="ivanivanov">
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-outline-success w-100"
+                                        type="submit">Сохранить изменения
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col">
+                        <div class="row gy-3">
+                            <div class="col-12">
+                                <div class="form-label">Телефоны</div>
+                                <div class="card p-3">
+                                    <form class="row gx-3 mb-3"
+                                          id="new-phone-form"
+                                          novalidate>
+                                        <div class="col">
+                                            <input class="form-control"
+                                                   id="new-phone-input"
+                                                   type="tel"
+                                                   placeholder="+7XXXXXXXXXX"
+                                                   required>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button class="btn btn-outline-primary"
+                                                    id="new-phone-submit"
+                                                    type="submit">Add
+                                            </button>
+                                        </div>
+                                        <div class="col-12 invalid-feedback d-none"
+                                             id="new-phone-error"></div>
+                                    </form>
+                                    <form class="row gy-3"
+                                          id="phones"
+                                          novalidate>
+                                    </form>
+                                    <div class="invalid-feedback d-none"
+                                         id="phone-form-error"></div>
+                                    <button class="btn btn-outline-success mt-3"
+                                            id="phone-form-submit"
+                                            form="phones"
+                                            type="submit">Сохранить изменения
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-label">E-mail-ы</div>
+                                <div class="card p-3">
+                                    <form class="row gx-3 mb-3"
+                                          id="new-email-form"
+                                          novalidate>
+                                        <div class="col">
+                                            <input class="form-control"
+                                                   id="new-email-input"
+                                                   type="tel"
+                                                   placeholder="name@example.com"
+                                                   required>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button class="btn btn-outline-primary"
+                                                    id="new-email-submit"
+                                                    type="submit">Add
+                                            </button>
+                                        </div>
+                                        <div class="col-12 invalid-feedback d-none"
+                                             id="new-email-error"></div>
+                                    </form>
+                                    <form class="row gy-3"
+                                          id="emails"
+                                          novalidate>
+                                    </form>
+                                    <div class="invalid-feedback d-none"
+                                         id="email-form-error"></div>
+                                    <button class="btn btn-outline-success mt-3"
+                                            id="email-form-submit"
+                                            form="emails"
+                                            type="submit">Сохранить изменения
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-label">Пароль</div>
+                                <div class="card p-3">
+                                    <form class="row gy-3"
+                                          id="password-form"
+                                          novalidate>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="password"
+                                                       class="form-control"
+                                                       id="password-current-field"
+                                                       placeholder="Текущий пароль"
+                                                       required>
+                                                <label for="password-current-field">Текущий пароль</label>
+                                            </div>
+                                            <div class="invalid-feedback"
+                                                 id="password-current-error"></div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="password"
+                                                       class="form-control"
+                                                       id="password-new-field"
+                                                       placeholder="Новый пароль"
+                                                       required
+                                                       pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,32}$">
+                                                <label for="password-new-field">Новый пароль</label>
+                                            </div>
+                                            <div class="invalid-feedback"
+                                                 id="password-new-error"></div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="password"
+                                                       class="form-control"
+                                                       id="password-check-field"
+                                                       placeholder="Подтверждение пароля"
+                                                       required>
+                                                <label for="password-check-field">Подтверждение пароля</label>
+                                            </div>
+                                            <div class="invalid-feedback"
+                                                 id="password-check-error"></div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn btn-outline-success w-100"
+                                                    type="submit">Изменить пароль
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </div>
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/js/validation.js"></script>
+<script src="/js/profile-edit.js"></script>
 </body>
 </html>
