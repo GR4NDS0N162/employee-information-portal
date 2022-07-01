@@ -93,6 +93,71 @@
                         <div class="row g-3">
                             <div class="col-12 col-lg-4 col col-xl-3">
                                 <form class="row g-3">
+                                    <div class="col-12 col-sm-6 col-lg-12">
+                                        <div class="card p-3">
+                                            <label for="input-position-filter"
+                                                   class="form-label">Должность</label>
+                                            <select id="input-position-filter"
+                                                    class="form-select">
+                                                <option selected>Не выбрана</option>
+                                                <option value="1">Директор</option>
+                                                <option value="2">Менеджер</option>
+                                                <option value="3">Юрист</option>
+                                                <option value="4">Уборщик</option>
+                                                <option value="5">Грузчик</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-lg-12">
+                                        <div class="card p-3">
+                                            <label for="input-gender-filter"
+                                                   class="form-label">Пол</label>
+                                            <select id="input-gender-filter"
+                                                    class="form-select">
+                                                <option selected>Не выбран</option>
+                                                <option value="1">Мужской</option>
+                                                <option value="2">Женский</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="card p-3">
+                                            <p class="form-label">Возраст</p>
+                                            <div class="row g-3">
+                                                <div class="col">
+                                                    <label for="input-min-age-filter"
+                                                           class="form-label">От</label>
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           id="input-min-age-filter"
+                                                           placeholder="1">
+                                                </div>
+                                                <div class="col">
+                                                    <label for="input-max-age-filter"
+                                                           class="form-label">До</label>
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           id="input-max-age-filter"
+                                                           placeholder="99">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="card p-3">
+                                            <label for="input-fullname-phone-email-filter"
+                                                   class="form-label">ФИО, телефон, email</label>
+                                            <textarea class="form-control resize-none"
+                                                      id="input-fullname-phone-email-filter"
+                                                      rows="3"
+                                                      placeholder="Иванов Иван Иванович, +79283627374, example@name.com"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-outline-success w-100"
+                                                type="submit">Применить фильтры
+                                        </button>
+                                    </div>
                                 </form>
                             </div>
                             <div class="col">
