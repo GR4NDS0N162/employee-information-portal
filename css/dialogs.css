@@ -1,3 +1,11 @@
 .user-photo {
     max-width: 70px;
 }
+
+.resize-none {
+    resize: none;
+}
+
+.potential-dialog > .card {
+    background-color: #f5f5f5;
+}
