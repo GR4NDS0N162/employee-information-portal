@@ -11,6 +11,10 @@ body {
     max-width: 60px;
 }
 
+.message-avatar {
+    max-width: 50px;
+}
+
 .resize-none {
     resize: none;
 }
