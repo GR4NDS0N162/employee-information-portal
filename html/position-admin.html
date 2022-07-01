@@ -61,10 +61,45 @@
             </nav>
         </header>
         <main class="col-12">
+            <div class="card mb-2 mb-md-3 p-3 p-sm-4 p-md-5">
+                <h1 class="mb-4 mb-md-5">Управление должностями</h1>
+                <form class="row gx-3 mb-3"
+                      id="new-position-form"
+                      novalidate>
+                    <div class="col">
+                        <input class="form-control"
+                               id="new-position-input"
+                               type="tel"
+                               placeholder="Уборщик"
+                               required>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-outline-primary"
+                                id="new-position-submit"
+                                type="submit">Add
+                        </button>
+                    </div>
+                    <div class="col-12 invalid-feedback d-none"
+                         id="new-position-error"></div>
+                </form>
+                <form class="row gy-3"
+                      id="positions"
+                      novalidate>
+                </form>
+                <div class="invalid-feedback d-none"
+                     id="position-form-error"></div>
+                <button class="btn btn-outline-success mt-3"
+                        id="position-form-submit"
+                        form="positions"
+                        type="submit">Сохранить изменения
+                </button>
+            </div>
         </main>
     </div>
 </div>
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/js/validation.js"></script>
+<script src="/js/position-admin.js"></script>
 </body>
 </html>
