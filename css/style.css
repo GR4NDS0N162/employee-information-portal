@@ -7,6 +7,10 @@ body {
     max-width: 70px;
 }
 
+.buddy-photo {
+    max-width: 60px;
+}
+
 .resize-none {
     resize: none;
 }
