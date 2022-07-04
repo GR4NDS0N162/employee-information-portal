@@ -262,20 +262,24 @@ new_email_form.addEventListener('submit', function (event)
 });
 
 const email_form_error = document.getElementById('email-form-error');
+const allSavedError = 'Все поля должны быть сохранены.';
+const atLeastOneError = 'Должен быть хотя бы один email.';
 
 emails.addEventListener('submit', function (event)
 {
     let isFormValid = true;
+    let emailCount = 0;
     $('.email-input').each(function ()
     {
+        ++emailCount;
         let attr = $(this).attr('readonly');
         isFormValid = isFormValid && (typeof attr !== 'undefined' && attr !== false);
     });
-    if (isFormValid) {
+    if (isFormValid && emailCount) {
         hideError(email_form_error);
     } else {
         event.preventDefault();
-        email_form_error.innerHTML = 'Все поля должны быть сохранены.';
+        email_form_error.innerHTML = (emailCount) ? allSavedError : atLeastOneError;
         email_form_error.classList.replace('d-none', 'd-block');
     }
 });
