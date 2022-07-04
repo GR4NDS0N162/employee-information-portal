@@ -46,6 +46,35 @@ password_form.addEventListener('submit', function (event)
         password_current_field, password_new_field, password_check_field);
 });
 
+const editSVG = '<svg width="24" height="24" fill="currentColor" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">\n' +
+    '    <title/>\n' +
+    '    <g data-name="menu " id="menu_">\n' +
+    '        <path d="M29,6H3A1,1,0,0,0,3,8H29a1,1,0,0,0,0-2Z"/>\n' +
+    '        <path d="M3,17H16a1,1,0,0,0,0-2H3a1,1,0,0,0,0,2Z"/>\n' +
+    '        <path d="M25,24H3a1,1,0,0,0,0,2H25a1,1,0,0,0,0-2Z"/>\n' +
+    '    </g>\n' +
+    '</svg>';
+const saveSVG = '<svg width="24" height="24" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">\n' +
+    '    <defs>\n' +
+    '        <style>.cls-1{fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style>\n' +
+    '    </defs>\n' +
+    '    <title/>\n' +
+    '    <g id="checkmark">\n' +
+    '        <line class="cls-1" x1="3" x2="12" y1="16" y2="25"/>\n' +
+    '        <line class="cls-1" x1="12" x2="29" y1="25" y2="7"/>\n' +
+    '    </g>\n' +
+    '</svg>';
+const delSVG = '<svg width="24" height="24" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">\n' +
+    '    <defs>\n' +
+    '        <style>.cls-1{fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style>\n' +
+    '    </defs>\n' +
+    '    <title/>\n' +
+    '    <g id="cross">\n' +
+    '        <line class="cls-1" x1="7" x2="25" y1="7" y2="25"/>\n' +
+    '        <line class="cls-1" x1="7" x2="25" y1="25" y2="7"/>\n' +
+    '    </g>\n' +
+    '</svg>';
+
 const new_phone_form = document.getElementById('new-phone-form');
 const new_phone_input = document.getElementById('new-phone-input');
 const new_phone_submit = document.getElementById('new-phone-submit');
@@ -97,7 +126,7 @@ new_phone_form.addEventListener('submit', function (event)
     phone_actions_el.classList.add('col-auto', 'btn-group');
     phone_error_el.classList.add('col-12', 'invalid-feedback', 'd-none');
     phone_input_el.classList.add('form-control', 'phone-input');
-    phone_edit_el.classList.add('btn', 'btn-outline-warning');
+    phone_edit_el.classList.add('btn', 'btn-outline-warning', 'edit');
     phone_delete_el.classList.add('btn', 'btn-outline-danger');
 
     phone_input_el.type = 'tel';
@@ -107,10 +136,10 @@ new_phone_form.addEventListener('submit', function (event)
     phone_input_el.setAttribute("pattern", phonePattern);
 
     phone_edit_el.type = 'button';
-    phone_edit_el.innerText = 'Edit';
+    phone_edit_el.innerHTML = editSVG;
 
     phone_delete_el.type = 'button';
-    phone_delete_el.innerText = 'Del';
+    phone_delete_el.innerHTML = delSVG;
 
     phones.appendChild(phone_el);
 
@@ -125,15 +154,17 @@ new_phone_form.addEventListener('submit', function (event)
 
     phone_edit_el.addEventListener('click', function (event)
     {
-        if (phone_edit_el.innerText.toLowerCase() == 'edit') {
+        if (phone_edit_el.classList.contains('edit')) {
             phone_input_el.removeAttribute('readonly');
             phone_input_el.focus();
             phone_edit_el.classList.replace('btn-outline-warning', 'btn-outline-success');
-            phone_edit_el.innerText = 'Save';
+            phone_edit_el.classList.toggle('edit');
+            phone_edit_el.innerHTML = saveSVG;
         } else if (phone_input_el.validity.valid) {
             phone_input_el.setAttribute('readonly', 'readonly');
             phone_edit_el.classList.replace('btn-outline-success', 'btn-outline-warning');
-            phone_edit_el.innerText = 'Edit';
+            phone_edit_el.classList.toggle('edit');
+            phone_edit_el.innerHTML = editSVG;
             phone_edit_el.blur();
         }
     });
@@ -214,7 +245,7 @@ new_email_form.addEventListener('submit', function (event)
     email_actions_el.classList.add('col-auto', 'btn-group');
     email_error_el.classList.add('col-12', 'invalid-feedback', 'd-none');
     email_input_el.classList.add('form-control', 'email-input');
-    email_edit_el.classList.add('btn', 'btn-outline-warning');
+    email_edit_el.classList.add('btn', 'btn-outline-warning', 'edit');
     email_delete_el.classList.add('btn', 'btn-outline-danger');
 
     email_input_el.type = 'tel';
@@ -224,10 +255,10 @@ new_email_form.addEventListener('submit', function (event)
     email_input_el.setAttribute("pattern", emailPattern);
 
     email_edit_el.type = 'button';
-    email_edit_el.innerText = 'Edit';
+    email_edit_el.innerHTML = editSVG;
 
     email_delete_el.type = 'button';
-    email_delete_el.innerText = 'Del';
+    email_delete_el.innerHTML = delSVG;
 
     emails.appendChild(email_el);
 
@@ -242,15 +273,17 @@ new_email_form.addEventListener('submit', function (event)
 
     email_edit_el.addEventListener('click', function (event)
     {
-        if (email_edit_el.innerText.toLowerCase() == 'edit') {
+        if (email_edit_el.classList.contains('edit')) {
             email_input_el.removeAttribute('readonly');
             email_input_el.focus();
             email_edit_el.classList.replace('btn-outline-warning', 'btn-outline-success');
-            email_edit_el.innerText = 'Save';
+            email_edit_el.classList.toggle('edit');
+            email_edit_el.innerHTML = saveSVG;
         } else if (email_input_el.validity.valid) {
             email_input_el.setAttribute('readonly', 'readonly');
             email_edit_el.classList.replace('btn-outline-success', 'btn-outline-warning');
-            email_edit_el.innerText = 'Edit';
+            email_edit_el.classList.toggle('edit');
+            email_edit_el.innerHTML = editSVG;
             email_edit_el.blur();
         }
     });
