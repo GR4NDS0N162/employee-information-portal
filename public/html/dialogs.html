@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <title>Список диалогов - Информационный портал сотрудников</title>
+    <link rel="stylesheet"
+          href="/css/bootstrap.5.2.0-beta1.min.css">
+    <link rel="stylesheet"
+          href="/css/main.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <header class="col-12"
+                w3-include-html="navbar.html">
+        </header>
+        <main class="col-12">
+            <div class="card mb-2 mb-md-3 p-3 p-sm-4 p-md-5">
+                <h1 class="mb-4 mb-md-5">Список диалогов</h1>
+                <div class="row g-3">
+                    <div class="col-12 col-lg-4 col col-xl-3">
+                        <form class="row g-3">
+                            <div class="col-12 col-sm-6 col-lg-12">
+                                <div class="card p-3">
+                                    <label for="input-position-filter"
+                                           class="form-label">Должность</label>
+                                    <select id="input-position-filter"
+                                            class="form-select">
+                                        <option selected>Не выбрана</option>
+                                        <option value="1">Директор</option>
+                                        <option value="2">Менеджер</option>
+                                        <option value="3">Юрист</option>
+                                        <option value="4">Уборщик</option>
+                                        <option value="5">Грузчик</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-lg-12">
+                                <div class="card p-3">
+                                    <label for="input-gender-filter"
+                                           class="form-label">Пол</label>
+                                    <select id="input-gender-filter"
+                                            class="form-select">
+                                        <option selected>Не выбран</option>
+                                        <option value="1">Мужской</option>
+                                        <option value="2">Женский</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card p-3">
+                                    <p class="form-label">Возраст</p>
+                                    <div class="row g-3">
+                                        <div class="col">
+                                            <label for="input-min-age-filter"
+                                                   class="form-label">От</label>
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="input-min-age-filter"
+                                                   placeholder="1">
+                                        </div>
+                                        <div class="col">
+                                            <label for="input-max-age-filter"
+                                                   class="form-label">До</label>
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="input-max-age-filter"
+                                                   placeholder="99">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card p-3">
+                                    <label for="input-fullname-phone-filter"
+                                           class="form-label">ФИО, телефон</label>
+                                    <textarea class="form-control resize-none"
+                                              id="input-fullname-phone-filter"
+                                              rows="2"
+                                              placeholder="Иванов Иван Иванович, +79283627374"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-outline-success w-100"
+                                        type="submit">Применить фильтры
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="card p-3">
+                                    <div class="row g-3">
+                                        <div class="col-auto">
+                                            <img src="https://picsum.photos/900"
+                                                 class="user-photo img-fluid rounded"
+                                                 alt="Фото пользователя">
+                                        </div>
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <p class="h6 full-name">Зубенко Михаил Петрович</p>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <span class="text-secondary">Должность:</span>
+                                                    <span class="position">Уборщик</span>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <span class="text-secondary">Возраст:</span>
+                                                    <span class="age">49</span> лет
+                                                </div>
+                                                <div class="col-auto">
+                                                    <span class="text-secondary">Пол:</span>
+                                                    <span class="gender">Мужской</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto d-flex align-items-center">
+                                            <a href="messages.html"
+                                               class="btn btn-primary">К диалогу</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 card-gray-bg">
+                                <div class="card p-3">
+                                    <div class="row g-3">
+                                        <div class="col-auto">
+                                            <img src="https://picsum.photos/900"
+                                                 class="user-photo img-fluid rounded"
+                                                 alt="Фото пользователя">
+                                        </div>
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <p class="h6 full-name">Зубенко Михаил Петрович</p>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <span class="text-secondary">Должность:</span>
+                                                    <span class="position">Уборщик</span>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <span class="text-secondary">Возраст:</span>
+                                                    <span class="age">49</span> лет
+                                                </div>
+                                                <div class="col-auto">
+                                                    <span class="text-secondary">Пол:</span>
+                                                    <span class="gender">Мужской</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto d-flex align-items-center">
+                                            <a href="messages.html"
+                                               class="btn btn-success">Создать диалог</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/js/includeHTML.js"></script>
+</body>
+</html>

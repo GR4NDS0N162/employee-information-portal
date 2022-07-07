@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <title>Сообщения - Информационный портал сотрудников</title>
+    <link rel="stylesheet"
+          href="/css/bootstrap.5.2.0-beta1.min.css">
+    <link rel="stylesheet"
+          href="/css/main.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <header class="col-12"
+                w3-include-html="navbar.html">
+        </header>
+        <main class="col-12">
+            <div class="card mb-2 mb-md-3 p-3 p-sm-4 p-md-5">
+                <h1 class="mb-4 mb-md-5">Сообщения</h1>
+                <div class="row gy-3">
+                    <div class="col-12">
+                        <div class="row g-3 justify-content-between align-items-center">
+                            <div class="col-12 col-md-auto">
+                                <a href="dialogs.html"
+                                   class="btn btn-primary">Вернуться к диалогам</a>
+                            </div>
+                            <div class="col-12 col-md-auto">
+                                <div class="row g-2 align-items-center">
+                                    <div class="col-auto order-md-1">
+                                        <img src="https://picsum.photos/900"
+                                             class="buddy-photo img-fluid rounded"
+                                             alt="Фото пользователя">
+                                    </div>
+                                    <div class="col-auto order-md-0">
+                                        <span class="h6">Александр</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <form class="row gx-3">
+                            <div class="col">
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="Напишите сообщение...">
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-outline-success"
+                                        type="submit">Отправить
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-12">
+                        <div class="row gy-3">
+                            <div class="col-12">
+                                <div class="row g-3">
+                                    <div class="col-auto">
+                                        <img src="https://picsum.photos/900"
+                                             class="message-avatar img-fluid rounded"
+                                             alt="Фото пользователя"></div>
+                                    <div class="col">
+                                        <div class="row g-1">
+                                            <div class="col-12">
+                                                <div class="row gx-2">
+                                                    <div class="col-auto">
+                                                        <span class="h6">Михаил</span>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <span class="small">16.05.2022 16:32</span>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <span class="small text-muted">16.05.2022 16:33</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <p class="m-0">
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                                    Doloremque, nemo!
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center">
+                        <button class="btn btn-primary">Загрузить ещё</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/js/includeHTML.js"></script>
+</body>
+</html>
