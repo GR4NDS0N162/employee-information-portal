@@ -1,0 +1,17 @@
+html, body {
+    height: 100%;
+}
+
+main {
+    max-width: 400px;
+    padding: 15px;
+    text-align: center;
+}
+
+form {
+    text-align: start;
+}
+
+#signup-card, #recover-card {
+    display: none;
+}
