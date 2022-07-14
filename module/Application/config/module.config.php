@@ -118,11 +118,14 @@ return [
                         ],
                     ],
                     'messages' => [
-                        'type'    => Literal::class,
+                        'type'    => Segment::class,
                         'options' => [
-                            'route'    => '/messages',
+                            'route'    => '/messages/:id',
                             'defaults' => [
                                 'action' => 'messages',
+                            ],
+                            'constraints' => [
+                                'id' => '\d+',
                             ],
                         ],
                     ],
