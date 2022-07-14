@@ -97,6 +97,34 @@ return [
                     ],
                 ],
             ],
+            'messenger' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/messenger',
+                    'defaults' => [
+                        'controller' => Controller\MessengerController::class,
+                        'action'     => 'dialogs',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes'  => [
+                    'dialogs' => [
+                        'type'    => Literal::class,
+                        'options' => [
+                            'route' => '/dialogs',
+                        ],
+                    ],
+                    'messages' => [
+                        'type'    => Literal::class,
+                        'options' => [
+                            'route'    => '/messages',
+                            'defaults' => [
+                                'action' => 'messages',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
