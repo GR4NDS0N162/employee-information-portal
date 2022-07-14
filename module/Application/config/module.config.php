@@ -40,6 +40,7 @@ return [
             Controller\UserController::class => InvokableFactory::class,
             Controller\AdminController::class => InvokableFactory::class,
             Controller\PositionController::class => InvokableFactory::class,
+            Controller\MessengerController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [
