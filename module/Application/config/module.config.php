@@ -87,6 +87,16 @@ return [
                     ],
                 ],
             ],
+            'position' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/position',
+                    'defaults' => [
+                        'controller' => Controller\PositionController::class,
+                        'action'     => 'edit',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
