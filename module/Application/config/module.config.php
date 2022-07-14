@@ -21,6 +21,34 @@ return [
                     ],
                 ],
             ],
+            'profile' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/profile',
+                    'defaults' => [
+                        'controller' => Controller\ProfileController::class,
+                        'action'     => 'view',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes'  => [
+                    'view' => [
+                        'type'    => Literal::class,
+                        'options' => [
+                            'route' => '/view',
+                        ],
+                    ],
+                    'edit' => [
+                        'type'    => Literal::class,
+                        'options' => [
+                            'route'    => '/edit',
+                            'defaults' => [
+                                'action' => 'edit',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
