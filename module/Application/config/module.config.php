@@ -49,6 +49,16 @@ return [
                     ],
                 ],
             ],
+            'user' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/list',
+                    'defaults' => [
+                        'controller' => Controller\UserController::class,
+                        'action'     => 'list',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
