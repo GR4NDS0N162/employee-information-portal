@@ -59,6 +59,34 @@ return [
                     ],
                 ],
             ],
+            'admin' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/admin',
+                    'defaults' => [
+                        'controller' => Controller\AdminController::class,
+                        'action'     => 'list',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes'  => [
+                    'list' => [
+                        'type'    => Literal::class,
+                        'options' => [
+                            'route' => '/list',
+                        ],
+                    ],
+                    'edit' => [
+                        'type'    => Literal::class,
+                        'options' => [
+                            'route'    => '/edit',
+                            'defaults' => [
+                                'action' => 'edit',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
