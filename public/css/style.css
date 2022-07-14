@@ -1,12 +1,24 @@
-:root {
-    --brand-color: #013755;
+body {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
 }
 
-.navbar {
-    background-color: var(--brand-color);
+.user-photo {
+    max-width: 70px;
 }
 
-.btn-primary {
-    background-color: var(--brand-color);
-    border-color: var(--brand-color);
+.buddy-photo {
+    max-width: 60px;
+}
+
+.message-avatar {
+    max-width: 50px;
+}
+
+.resize-none {
+    resize: none;
+}
+
+.card-gray-bg > .card {
+    background-color: #f5f5f5;
 }
