@@ -77,11 +77,14 @@ return [
                         ],
                     ],
                     'edit' => [
-                        'type'    => Literal::class,
+                        'type'    => Segment::class,
                         'options' => [
-                            'route'    => '/edit',
+                            'route'    => '/edit/:id',
                             'defaults' => [
                                 'action' => 'edit',
+                            ],
+                            'constraints' => [
+                                'id' => '\d+',
                             ],
                         ],
                     ],
