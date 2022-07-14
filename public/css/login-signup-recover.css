@@ -2,6 +2,10 @@ html, body {
     height: 100%;
 }
 
+body {
+    display: flex;
+}
+
 main {
     max-width: 400px;
     padding: 15px;
