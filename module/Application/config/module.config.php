@@ -39,6 +39,7 @@ return [
             Controller\ProfileController::class => InvokableFactory::class,
             Controller\UserController::class => InvokableFactory::class,
             Controller\AdminController::class => InvokableFactory::class,
+            Controller\PositionController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [
