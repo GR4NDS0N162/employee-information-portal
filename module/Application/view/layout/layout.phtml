@@ -1,6 +1,7 @@
 <?php
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
+ * @var $navbar
  */
 ?>
 <?= $this->doctype() ?>
@@ -31,6 +32,27 @@
 <div class="container">
     <div class="row">
         <header class="col-12">
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+                <a class="navbar-brand"
+                   href="#">ИнфоПортал</a>
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse"
+                     id="navbarNavDropdown">
+                    <?= $this->navigation(($navbar) ?: "Laminas\Navigation\Default")
+                        ->menu()
+                        ->setUlClass('nav navbar-nav')
+                        ->setPartial('application/partials/menu')
+                        ->render() ?>
+                </div>
+            </nav>
         </header>
         <main class="col-12">
             <?= $this->content ?>

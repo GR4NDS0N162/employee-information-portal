@@ -1,0 +1,40 @@
+<ul class="<?= $this->navigation()->menu()->getUlClass() ?>">
+    <?php foreach ($this->container as $page) { ?>
+        <?php $isDropdown = false; ?>
+        <?php foreach ($page as $subpage) { ?>
+            <?php $isDropdown = true; ?>
+            <?php break; ?>
+        <?php } ?>
+        <?php if ($isDropdown) { ?>
+            <?php $idDropdown = uniqid() ?>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle"
+                   href="<?= $page->getHref() ?>"
+                   id="<?= $idDropdown ?>"
+                   role="button"
+                   data-bs-toggle="dropdown"
+                   aria-expanded="false">
+                    <?= $this->escapeHtml($page->getLabel()) ?>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark"
+                    aria-labelledby="<?= $idDropdown ?>">
+                    <?php foreach ($page as $subpage) { ?>
+                        <li>
+                            <a href="<?= $subpage->getHref() ?>"
+                               class="dropdown-item">
+                                <?= $this->escapeHtml($subpage->getLabel()) ?>
+                            </a>
+                        </li>
+                    <?php } ?>
+                </ul>
+            </li>
+        <?php } else { ?>
+            <li class="nav-item">
+                <a href="<?= $page->getHref() ?>"
+                   class="nav-link<?= $page->isActive() ? ' active' : '' ?>">
+                    <?= $this->escapeHtml($page->getLabel()) ?>
+                </a>
+            </li>
+        <?php } ?>
+    <?php } ?>
+</ul>

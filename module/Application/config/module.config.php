@@ -143,6 +143,70 @@ return [
             Controller\MessengerController::class => InvokableFactory::class,
         ],
     ],
+    'navigation' => [
+        'default' => [
+            [
+                'label' => 'Профиль',
+                'route' => 'profile',
+                'pages' => [
+                    [
+                        'label'  => 'Просмотр',
+                        'route'  => 'profile/view',
+                    ],
+                    [
+                        'label'  => 'Редактирование',
+                        'route'  => 'profile/edit',
+                    ],
+                ],
+            ],
+            [
+                'label' => 'Пользователи',
+                'route' => 'user',
+            ],
+            [
+                'label' => 'Мессенджер',
+                'route' => 'messenger',
+            ],
+        ],
+        'admin' => [
+            [
+                'label' => 'Профиль',
+                'route' => 'profile',
+                'pages' => [
+                    [
+                        'label'  => 'Просмотр',
+                        'route'  => 'profile/view',
+                    ],
+                    [
+                        'label'  => 'Редактирование',
+                        'route'  => 'profile/edit',
+                    ],
+                ],
+            ],
+            [
+                'label' => 'Пользователи',
+                'route' => 'user',
+            ],
+            [
+                'label' => 'Мессенджер',
+                'route' => 'messenger',
+            ],
+            [
+                'label' => 'Администраторам',
+                'route' => 'admin',
+                'pages' => [
+                    [
+                        'label'  => 'Пользователи',
+                        'route'  => 'admin/list',
+                    ],
+                    [
+                        'label'  => 'Должности',
+                        'route'  => 'position',
+                    ],
+                ],
+            ],
+        ],
+    ],
     'view_manager' => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
