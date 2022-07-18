@@ -33,7 +33,7 @@ class LoginForm extends Form
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
-                'value' => 'Submit',
+                'value' => 'Войти',
             ],
         ]);
     }
