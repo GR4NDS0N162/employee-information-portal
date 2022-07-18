@@ -1,6 +1,7 @@
 <?php
 /**
  * @var $loginForm
+ * @var $signupForm
  */
 $this->headTitle("Вход | Регистрация");
 $this->layout('layout/login');
@@ -10,6 +11,7 @@ $this->inlineScript()
     ->appendFile($this->basePath('js/validation.js'))
     ->appendFile($this->basePath('js/login-signup-recover.js'));
 $emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
+$passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,32}$";
 ?>
 <div class="card p-4"
      id="login-card">
@@ -83,6 +85,94 @@ $emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
 <div class="card p-4"
      id="signup-card">
     <h1 class="mb-3">Регистрация</h1>
+
+    <?php
+    $signupForm->prepare();
+    $signupForm->setAttribute('action', $this->url('login/process'));
+    $signupForm->setAttribute('method', 'post');
+
+    $signupForm->setAttribute('id', 'signup-form');
+    $signupForm->setAttribute('novalidate', 'novalidate');
+
+    $signupForm->setAttribute('class', 'row gy-3 mb-3');
+    ?>
+
+    <?= $this->form()->openTag($signupForm) ?>
+    <div class="col-12">
+        <?php
+        $email = $signupForm->get('email');
+        $email->setAttribute('class', 'form-control');
+        $email->setAttribute('placeholder', 'E-mail');
+
+        $email->setAttribute('id', 'email-field-signup');
+        $email->setAttribute('required', 'required');
+        $email->setAttribute('pattern', $emailPattern);
+        ?>
+        <div class="form-floating">
+            <?= $this->formElement($email) ?>
+            <?= $this->formLabel($email) ?>
+        </div>
+        <div class="invalid-feedback d-none"
+             id="email-error-signup"></div>
+    </div>
+    <div class="col-12">
+        <?php
+        $position = $signupForm->get('position');
+        $position->setAttribute('class', 'form-select');
+        $position->setAttribute('placeholder', 'Должность');
+
+        $position->setAttribute('id', 'position-field-signup');
+        $position->setAttribute('required', 'required');
+        ?>
+        <div class="form-floating">
+            <?= $this->formElement($position) ?>
+            <?= $this->formLabel($position) ?>
+        </div>
+        <div class="invalid-feedback d-none"
+             id="position-error-signup"></div>
+    </div>
+    <div class="col-12">
+        <?php
+        $password = $signupForm->get('password');
+        $password->setAttribute('class', 'form-control');
+        $password->setAttribute('placeholder', 'Пароль');
+
+        $password->setAttribute('id', 'password-field-signup');
+        $password->setAttribute('required', 'required');
+        $password->setAttribute('pattern', $passwordPattern);
+        ?>
+        <div class="form-floating">
+            <?= $this->formElement($password) ?>
+            <?= $this->formLabel($password) ?>
+        </div>
+        <div class="invalid-feedback d-none"
+             id="password-error-signup"></div>
+    </div>
+    <div class="col-12">
+        <?php
+        $passwordCheck = $signupForm->get('password-check');
+        $passwordCheck->setAttribute('class', 'form-control');
+        $passwordCheck->setAttribute('placeholder', 'Подтверждение пароля');
+
+        $passwordCheck->setAttribute('id', 'password-check-field-signup');
+        $passwordCheck->setAttribute('required', 'required');
+        ?>
+        <div class="form-floating">
+            <?= $this->formElement($passwordCheck) ?>
+            <?= $this->formLabel($passwordCheck) ?>
+        </div>
+        <div class="invalid-feedback d-none"
+             id="password-check-error-signup"></div>
+    </div>
+    <div class="col-12">
+        <?php
+        $submit = $signupForm->get('submit');
+        $submit->setAttribute('class', 'btn btn-lg btn-outline-success w-100');
+        ?>
+        <?= $this->formSubmit($submit) ?>
+    </div>
+    <?= $this->form()->closeTag() ?>
+
     <div class="row gy-2">
         <div class="col-12">
             <span>Уже есть аккаунт?</span>
