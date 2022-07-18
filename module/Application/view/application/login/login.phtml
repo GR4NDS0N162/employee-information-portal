@@ -19,14 +19,33 @@ $this->inlineScript()
 
     <?= $this->form()->openTag($loginForm) ?>
     <div class="col-12">
+        <?php
+        $email = $loginForm->get('email');
+        $email->setAttribute('class', 'form-control');
+        $email->setAttribute('placeholder', 'E-mail');
+        ?>
         <div class="form-floating">
+            <?= $this->formElement($email) ?>
+            <?= $this->formLabel($email) ?>
         </div>
     </div>
     <div class="col-12">
+        <?php
+        $password = $loginForm->get('password');
+        $password->setAttribute('class', 'form-control');
+        $password->setAttribute('placeholder', 'Пароль');
+        ?>
         <div class="form-floating">
+            <?= $this->formElement($password) ?>
+            <?= $this->formLabel($password) ?>
         </div>
     </div>
     <div class="col-12">
+        <?php
+        $submit = $loginForm->get('submit');
+        $submit->setAttribute('class', 'btn btn-lg btn-outline-primary w-100');
+        ?>
+        <?= $this->formSubmit($submit) ?>
     </div>
     <?= $this->form()->closeTag() ?>
 
