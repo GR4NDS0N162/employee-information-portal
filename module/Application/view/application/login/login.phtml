@@ -9,6 +9,7 @@ $this->headLink()
 $this->inlineScript()
     ->appendFile($this->basePath('js/validation.js'))
     ->appendFile($this->basePath('js/login-signup-recover.js'));
+$emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
 ?>
 <div class="card p-4"
      id="login-card">
@@ -19,6 +20,9 @@ $this->inlineScript()
     $loginForm->setAttribute('action', $this->url('login/process'));
     $loginForm->setAttribute('method', 'post');
 
+    $loginForm->setAttribute('id', 'login-form');
+    $loginForm->setAttribute('novalidate', 'novalidate');
+
     $loginForm->setAttribute('class', 'row gy-3 mb-3');
     ?>
 
@@ -28,22 +32,33 @@ $this->inlineScript()
         $email = $loginForm->get('email');
         $email->setAttribute('class', 'form-control');
         $email->setAttribute('placeholder', 'E-mail');
+
+        $email->setAttribute('id', 'email-field-login');
+        $email->setAttribute('required', 'required');
+        $email->setAttribute('pattern', $emailPattern);
         ?>
         <div class="form-floating">
             <?= $this->formElement($email) ?>
             <?= $this->formLabel($email) ?>
         </div>
+        <div class="invalid-feedback d-none"
+             id="email-error-login"></div>
     </div>
     <div class="col-12">
         <?php
         $password = $loginForm->get('password');
         $password->setAttribute('class', 'form-control');
         $password->setAttribute('placeholder', 'Пароль');
+
+        $password->setAttribute('id', 'password-field-login');
+        $password->setAttribute('required', 'required');
         ?>
         <div class="form-floating">
             <?= $this->formElement($password) ?>
             <?= $this->formLabel($password) ?>
         </div>
+        <div class="invalid-feedback d-none"
+             id="password-error-login"></div>
     </div>
     <div class="col-12">
         <?php
