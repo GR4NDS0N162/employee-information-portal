@@ -22,12 +22,10 @@ class ProfileController extends AbstractActionController
         $profileForm = new ProfileForm();
         $passwordForm = new PasswordForm();
 
-        $view = new ViewModel([
+        return new ViewModel([
             'profileForm'  => $profileForm,
             'passwordForm' => $passwordForm,
         ]);
-
-        return $view;
     }
 
     public function processAction()
