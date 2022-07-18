@@ -7,6 +7,7 @@ $this->layout('layout/login');
 $this->headLink()
     ->appendStylesheet($this->basePath('css/login-signup-recover.css'));
 $this->inlineScript()
+    ->appendFile($this->basePath('js/validation.js'))
     ->appendFile($this->basePath('js/login-signup-recover.js'));
 ?>
 <div class="card p-4"
