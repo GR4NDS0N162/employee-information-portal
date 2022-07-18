@@ -20,6 +20,18 @@ return [
                         'action'     => 'login',
                     ],
                 ],
+                'may_terminate' => true,
+                'child_routes'  => [
+                    'process' => [
+                        'type'    => Literal::class,
+                        'options' => [
+                            'route'    => '/process',
+                            'defaults' => [
+                                'action' => 'process',
+                            ],
+                        ],
+                    ],
+                ],
             ],
             'profile' => [
                 'type'    => Literal::class,

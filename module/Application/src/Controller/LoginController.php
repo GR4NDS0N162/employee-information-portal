@@ -13,4 +13,9 @@ class LoginController extends AbstractActionController
     {
         return new ViewModel();
     }
+
+    public function processAction()
+    {
+        return new ViewModel();
+    }
 }
