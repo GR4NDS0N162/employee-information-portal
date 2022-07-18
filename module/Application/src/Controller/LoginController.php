@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Controller;
 
+use Application\Form\LoginForm;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
@@ -11,7 +12,9 @@ class LoginController extends AbstractActionController
 {
     public function loginAction()
     {
-        return new ViewModel();
+        $form = new LoginForm();
+
+        return new ViewModel(['form' => $form]);
     }
 
     public function processAction()
