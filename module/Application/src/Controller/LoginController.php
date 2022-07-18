@@ -12,9 +12,11 @@ class LoginController extends AbstractActionController
 {
     public function loginAction()
     {
-        $form = new LoginForm();
+        $loginForm = new LoginForm();
 
-        return new ViewModel(['form' => $form]);
+        return new ViewModel([
+            'loginForm' => $loginForm,
+        ]);
     }
 
     public function processAction()
