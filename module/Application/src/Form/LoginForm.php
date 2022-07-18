@@ -15,9 +15,24 @@ class LoginForm extends Form
     {
         parent::__construct();
 
+        $this->attributes = [
+            'class' => 'row gy-3 mb-3',
+            'action' => '//process',
+            'method' => 'post',
+            'id' => 'login-form',
+            'novalidate' => 'novalidate',
+        ];
+
         $this->add([
             'name' => 'email',
             'type' => Email::class,
+            'attributes' => [
+                'class' => 'form-control',
+                'placeholder' => 'E-mail',
+                'id' => 'email-field-login',
+                'required' => 'required',
+                'pattern' => SignUpForm::emailPattern,
+            ],
             'options' => [
                 'label' => 'E-mail',
             ],
@@ -25,6 +40,12 @@ class LoginForm extends Form
         $this->add([
             'name' => 'password',
             'type' => Password::class,
+            'attributes' => [
+                'class' => 'form-control',
+                'placeholder' => 'Пароль',
+                'id' => 'password-field-login',
+                'required' => 'required',
+            ],
             'options' => [
                 'label' => 'Пароль',
             ],
@@ -33,6 +54,7 @@ class LoginForm extends Form
             'name' => 'submit',
             'type' => Submit::class,
             'attributes' => [
+                'class' => 'btn btn-lg btn-outline-primary w-100',
                 'value' => 'Войти',
             ],
         ]);

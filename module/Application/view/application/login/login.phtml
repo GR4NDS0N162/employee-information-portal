@@ -11,35 +11,16 @@ $this->headLink()
 $this->inlineScript()
     ->appendFile($this->basePath('js/validation.js'))
     ->appendFile($this->basePath('js/login-signup-recover.js'));
-$emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
-$passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,32}$";
 ?>
 <div class="card p-4"
      id="login-card">
     <h1 class="mb-3">Вход</h1>
 
-    <?php
-    $loginForm->prepare();
-    $loginForm->setAttribute('action', $this->url('login/process'));
-    $loginForm->setAttribute('method', 'post');
-
-    $loginForm->setAttribute('id', 'login-form');
-    $loginForm->setAttribute('novalidate', 'novalidate');
-
-    $loginForm->setAttribute('class', 'row gy-3 mb-3');
-    ?>
+    <?php $loginForm->prepare(); ?>
 
     <?= $this->form()->openTag($loginForm) ?>
     <div class="col-12">
-        <?php
-        $email = $loginForm->get('email');
-        $email->setAttribute('class', 'form-control');
-        $email->setAttribute('placeholder', 'E-mail');
-
-        $email->setAttribute('id', 'email-field-login');
-        $email->setAttribute('required', 'required');
-        $email->setAttribute('pattern', $emailPattern);
-        ?>
+        <?php $email = $loginForm->get('email'); ?>
         <div class="form-floating">
             <?= $this->formElement($email) ?>
             <?= $this->formLabel($email) ?>
@@ -48,14 +29,7 @@ $passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{
              id="email-error-login"></div>
     </div>
     <div class="col-12">
-        <?php
-        $password = $loginForm->get('password');
-        $password->setAttribute('class', 'form-control');
-        $password->setAttribute('placeholder', 'Пароль');
-
-        $password->setAttribute('id', 'password-field-login');
-        $password->setAttribute('required', 'required');
-        ?>
+        <?php $password = $loginForm->get('password'); ?>
         <div class="form-floating">
             <?= $this->formElement($password) ?>
             <?= $this->formLabel($password) ?>
@@ -64,10 +38,7 @@ $passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{
              id="password-error-login"></div>
     </div>
     <div class="col-12">
-        <?php
-        $submit = $loginForm->get('submit');
-        $submit->setAttribute('class', 'btn btn-lg btn-outline-primary w-100');
-        ?>
+        <?php $submit = $loginForm->get('submit'); ?>
         <?= $this->formSubmit($submit) ?>
     </div>
     <?= $this->form()->closeTag() ?>
@@ -87,28 +58,11 @@ $passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{
      id="signup-card">
     <h1 class="mb-3">Регистрация</h1>
 
-    <?php
-    $signupForm->prepare();
-    $signupForm->setAttribute('action', $this->url('login/process'));
-    $signupForm->setAttribute('method', 'post');
-
-    $signupForm->setAttribute('id', 'signup-form');
-    $signupForm->setAttribute('novalidate', 'novalidate');
-
-    $signupForm->setAttribute('class', 'row gy-3 mb-3');
-    ?>
+    <?php $signupForm->prepare(); ?>
 
     <?= $this->form()->openTag($signupForm) ?>
     <div class="col-12">
-        <?php
-        $email = $signupForm->get('email');
-        $email->setAttribute('class', 'form-control');
-        $email->setAttribute('placeholder', 'E-mail');
-
-        $email->setAttribute('id', 'email-field-signup');
-        $email->setAttribute('required', 'required');
-        $email->setAttribute('pattern', $emailPattern);
-        ?>
+        <?php $email = $signupForm->get('email'); ?>
         <div class="form-floating">
             <?= $this->formElement($email) ?>
             <?= $this->formLabel($email) ?>
@@ -117,14 +71,7 @@ $passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{
              id="email-error-signup"></div>
     </div>
     <div class="col-12">
-        <?php
-        $position = $signupForm->get('position');
-        $position->setAttribute('class', 'form-select');
-        $position->setAttribute('placeholder', 'Должность');
-
-        $position->setAttribute('id', 'position-field-signup');
-        $position->setAttribute('required', 'required');
-        ?>
+        <?php $position = $signupForm->get('position'); ?>
         <div class="form-floating">
             <?= $this->formElement($position) ?>
             <?= $this->formLabel($position) ?>
@@ -133,15 +80,7 @@ $passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{
              id="position-error-signup"></div>
     </div>
     <div class="col-12">
-        <?php
-        $password = $signupForm->get('password');
-        $password->setAttribute('class', 'form-control');
-        $password->setAttribute('placeholder', 'Пароль');
-
-        $password->setAttribute('id', 'password-field-signup');
-        $password->setAttribute('required', 'required');
-        $password->setAttribute('pattern', $passwordPattern);
-        ?>
+        <?php $password = $signupForm->get('password'); ?>
         <div class="form-floating">
             <?= $this->formElement($password) ?>
             <?= $this->formLabel($password) ?>
@@ -150,14 +89,7 @@ $passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{
              id="password-error-signup"></div>
     </div>
     <div class="col-12">
-        <?php
-        $passwordCheck = $signupForm->get('password-check');
-        $passwordCheck->setAttribute('class', 'form-control');
-        $passwordCheck->setAttribute('placeholder', 'Подтверждение пароля');
-
-        $passwordCheck->setAttribute('id', 'password-check-field-signup');
-        $passwordCheck->setAttribute('required', 'required');
-        ?>
+        <?php $passwordCheck = $signupForm->get('password-check'); ?>
         <div class="form-floating">
             <?= $this->formElement($passwordCheck) ?>
             <?= $this->formLabel($passwordCheck) ?>
@@ -166,10 +98,7 @@ $passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{
              id="password-check-error-signup"></div>
     </div>
     <div class="col-12">
-        <?php
-        $submit = $signupForm->get('submit');
-        $submit->setAttribute('class', 'btn btn-lg btn-outline-success w-100');
-        ?>
+        <?php $submit = $signupForm->get('submit'); ?>
         <?= $this->formSubmit($submit) ?>
     </div>
     <?= $this->form()->closeTag() ?>
@@ -185,28 +114,11 @@ $passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{
      id="recover-card">
     <h1 class="mb-3">Восстановление</h1>
 
-    <?php
-    $recoverForm->prepare();
-    $recoverForm->setAttribute('action', $this->url('login/process'));
-    $recoverForm->setAttribute('method', 'post');
-
-    $recoverForm->setAttribute('id', 'recover-form');
-    $recoverForm->setAttribute('novalidate', 'novalidate');
-
-    $recoverForm->setAttribute('class', 'row gy-3 mb-3');
-    ?>
+    <?php $recoverForm->prepare(); ?>
 
     <?= $this->form()->openTag($recoverForm) ?>
     <div class="col-12">
-        <?php
-        $email = $recoverForm->get('email');
-        $email->setAttribute('class', 'form-control');
-        $email->setAttribute('placeholder', 'E-mail');
-
-        $email->setAttribute('id', 'email-field-recover');
-        $email->setAttribute('required', 'required');
-        $email->setAttribute('pattern', $emailPattern);
-        ?>
+        <?php $email = $recoverForm->get('email'); ?>
         <div class="form-floating">
             <?= $this->formElement($email) ?>
             <?= $this->formLabel($email) ?>
@@ -215,10 +127,7 @@ $passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{
              id="email-error-recover"></div>
     </div>
     <div class="col-12">
-        <?php
-        $submit = $recoverForm->get('submit');
-        $submit->setAttribute('class', 'btn btn-lg btn-outline-danger w-100');
-        ?>
+        <?php $submit = $recoverForm->get('submit'); ?>
         <?= $this->formSubmit($submit) ?>
     </div>
     <?= $this->form()->closeTag() ?>
