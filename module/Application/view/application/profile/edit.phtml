@@ -1,3 +1,81 @@
 <?php
-$this->headTitle("Редактирование профиля");
+/**
+ * @var $profileForm
+ */
+$headTitle = 'Редактирование профиля';
+$this->headTitle($headTitle);
+$this->headLink()
+    ->appendStylesheet($this->basePath('css/profile.css'));
+$this->inlineScript()
+    ->appendFile($this->basePath('js/validation.js'))
+    ->appendFile($this->basePath('js/profile-edit.js'));
 ?>
+<div class="card mb-2 mb-md-3 p-3 p-sm-4 p-md-5">
+    <h1 class="mb-4 mb-md-5"><?= $this->escapeHtml($headTitle) ?></h1>
+    <div class="row gy-3">
+        <div class="col-12 col-lg-7 col-xl-8">
+            <?php $profileForm->prepare(); ?>
+
+            <?= $this->form()->openTag($profileForm) ?>
+            <div class="col-12">
+                <?php $photo = $profileForm->get('photo'); ?>
+                <?= $this->formLabel($photo) ?>
+                <?= $this->formElement($photo) ?>
+            </div>
+            <div class="col-12 col-md-6">
+                <?php $surname = $profileForm->get('surname'); ?>
+                <?= $this->formLabel($surname) ?>
+                <?= $this->formElement($surname) ?>
+            </div>
+            <div class="col-12 col-md-6">
+                <?php $name = $profileForm->get('name'); ?>
+                <?= $this->formLabel($name) ?>
+                <?= $this->formElement($name) ?>
+            </div>
+            <div class="col-12 col-md-6">
+                <?php $patronymic = $profileForm->get('patronymic'); ?>
+                <?= $this->formLabel($patronymic) ?>
+                <?= $this->formElement($patronymic) ?>
+            </div>
+            <div class="col-6">
+                <?php $gender = $profileForm->get('gender'); ?>
+                <?= $this->formLabel($gender) ?>
+                <?= $this->formElement($gender) ?>
+            </div>
+            <div class="col-6">
+                <?php $birthday = $profileForm->get('birthday'); ?>
+                <?= $this->formLabel($birthday) ?>
+                <?= $this->formElement($birthday) ?>
+            </div>
+            <div class="col-12 col-md-6">
+                <?php $skype = $profileForm->get('skype'); ?>
+                <?= $this->formLabel($skype) ?>
+                <?= $this->formElement($skype) ?>
+            </div>
+            <div class="col-12">
+                <?php $submit = $profileForm->get('submit'); ?>
+                <?= $this->formSubmit($submit) ?>
+            </div>
+            <?= $this->form()->closeTag() ?>
+        </div>
+        <div class="col">
+            <div class="row gy-3">
+                <div class="col-12">
+                    <div class="form-label">Телефоны</div>
+                    <div class="card p-3">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-label">E-mail-ы</div>
+                    <div class="card p-3">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-label">Пароль</div>
+                    <div class="card p-3">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
