@@ -2,3 +2,37 @@
 $this->headTitle("Вход | Регистрация");
 $this->layout('layout/login');
 ?>
+<div class="card p-4"
+     id="login-card">
+    <h1 class="mb-3">Вход</h1>
+    <div class="row gy-2">
+        <div class="col-12">
+            <span>Нет аккаунта?</span>
+            <button class="p-0 border-0 bg-transparent text-success signup-show">Зарегистрироваться</button>
+        </div>
+        <div class="col-12">
+            <span>Забыли пароль?</span>
+            <button class="p-0 border-0 bg-transparent text-danger recover-show">Восстановить</button>
+        </div>
+    </div>
+</div>
+<div class="card p-4"
+     id="signup-card">
+    <h1 class="mb-3">Регистрация</h1>
+    <div class="row gy-2">
+        <div class="col-12">
+            <span>Уже есть аккаунт?</span>
+            <button class="p-0 border-0 bg-transparent text-primary login-show">Войти</button>
+        </div>
+    </div>
+</div>
+<div class="card p-4"
+     id="recover-card">
+    <h1 class="mb-3">Восстановление</h1>
+    <div class="row gy-2">
+        <div class="col-12">
+            <span>Вспомнили пароль?</span>
+            <button class="p-0 border-0 bg-transparent text-primary login-show">Войти</button>
+        </div>
+    </div>
+</div>
