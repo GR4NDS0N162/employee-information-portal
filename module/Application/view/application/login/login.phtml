@@ -14,6 +14,10 @@ $this->inlineScript()
     <h1 class="mb-3">Вход</h1>
 
     <?php
+    $loginForm->prepare();
+    $loginForm->setAttribute('action', $this->url('login/process'));
+    $loginForm->setAttribute('method', 'post');
+
     $loginForm->setAttribute('class', 'row gy-3 mb-3');
     ?>
 
