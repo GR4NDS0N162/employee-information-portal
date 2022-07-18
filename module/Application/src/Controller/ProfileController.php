@@ -20,4 +20,9 @@ class ProfileController extends AbstractActionController
         $view = new ViewModel();
         return $view;
     }
+
+    public function processAction()
+    {
+        return new ViewModel();
+    }
 }
