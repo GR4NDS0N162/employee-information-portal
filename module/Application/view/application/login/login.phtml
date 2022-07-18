@@ -13,6 +13,10 @@ $this->inlineScript()
      id="login-card">
     <h1 class="mb-3">Вход</h1>
 
+    <?php
+    $loginForm->setAttribute('class', 'row gy-3 mb-3');
+    ?>
+
     <?= $this->form()->openTag($loginForm) ?>
     <div class="col-12">
         <div class="form-floating">
