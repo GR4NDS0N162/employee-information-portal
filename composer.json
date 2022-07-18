@@ -16,7 +16,8 @@
         "laminas/laminas-skeleton-installer": "^0.6",
         "laminas/laminas-mvc": "^3.1.1",
         "laminas/laminas-navigation": "^2.13",
-        "laminas/laminas-form": "^3.2"
+        "laminas/laminas-form": "^3.2",
+        "laminas/laminas-i18n": "*"
     },
     "autoload": {
         "psr-4": {
