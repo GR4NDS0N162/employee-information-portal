@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Controller;
 
+use Application\Form\PasswordForm;
 use Application\Form\ProfileForm;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
@@ -19,9 +20,11 @@ class ProfileController extends AbstractActionController
     public function editAction()
     {
         $profileForm = new ProfileForm();
+        $passwordForm = new PasswordForm();
 
         $view = new ViewModel([
-            'profileForm' => $profileForm,
+            'profileForm'  => $profileForm,
+            'passwordForm' => $passwordForm,
         ]);
 
         return $view;

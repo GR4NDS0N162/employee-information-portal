@@ -1,6 +1,7 @@
 <?php
 /**
  * @var $profileForm
+ * @var $passwordForm
  */
 $headTitle = 'Редактирование профиля';
 $this->headTitle($headTitle);
@@ -73,6 +74,43 @@ $this->inlineScript()
                 <div class="col-12">
                     <div class="form-label">Пароль</div>
                     <div class="card p-3">
+                        <?php $passwordForm->prepare(); ?>
+
+                        <?= $this->form()->openTag($passwordForm) ?>
+
+                        <div class="col-12">
+                            <?php $currentPassword = $passwordForm->get('password-current'); ?>
+                            <div class="form-floating">
+                                <?= $this->formElement($currentPassword) ?>
+                                <?= $this->formLabel($currentPassword) ?>
+                            </div>
+                            <div class="invalid-feedback d-none"
+                                 id="password-current-error"></div>
+                        </div>
+                        <div class="col-12">
+                            <?php $newPassword = $passwordForm->get('password-new'); ?>
+                            <div class="form-floating">
+                                <?= $this->formElement($newPassword) ?>
+                                <?= $this->formLabel($newPassword) ?>
+                            </div>
+                            <div class="invalid-feedback d-none"
+                                 id="password-new-error"></div>
+                        </div>
+                        <div class="col-12">
+                            <?php $passwordCheck = $passwordForm->get('password-check'); ?>
+                            <div class="form-floating">
+                                <?= $this->formElement($passwordCheck) ?>
+                                <?= $this->formLabel($passwordCheck) ?>
+                            </div>
+                            <div class="invalid-feedback d-none"
+                                 id="password-check-error"></div>
+                        </div>
+                        <div class="col-12">
+                            <?php $submit = $passwordForm->get('submit'); ?>
+                            <?= $this->formSubmit($submit) ?>
+                        </div>
+
+                        <?= $this->form()->closeTag() ?>
                     </div>
                 </div>
             </div>
