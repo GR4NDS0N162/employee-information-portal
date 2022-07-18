@@ -2,6 +2,7 @@
 /**
  * @var $loginForm
  * @var $signupForm
+ * @var $recoverForm
  */
 $this->headTitle("Вход | Регистрация");
 $this->layout('layout/login');
@@ -183,6 +184,45 @@ $passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{
 <div class="card p-4"
      id="recover-card">
     <h1 class="mb-3">Восстановление</h1>
+
+    <?php
+    $recoverForm->prepare();
+    $recoverForm->setAttribute('action', $this->url('login/process'));
+    $recoverForm->setAttribute('method', 'post');
+
+    $recoverForm->setAttribute('id', 'recover-form');
+    $recoverForm->setAttribute('novalidate', 'novalidate');
+
+    $recoverForm->setAttribute('class', 'row gy-3 mb-3');
+    ?>
+
+    <?= $this->form()->openTag($recoverForm) ?>
+    <div class="col-12">
+        <?php
+        $email = $recoverForm->get('email');
+        $email->setAttribute('class', 'form-control');
+        $email->setAttribute('placeholder', 'E-mail');
+
+        $email->setAttribute('id', 'email-field-recover');
+        $email->setAttribute('required', 'required');
+        $email->setAttribute('pattern', $emailPattern);
+        ?>
+        <div class="form-floating">
+            <?= $this->formElement($email) ?>
+            <?= $this->formLabel($email) ?>
+        </div>
+        <div class="invalid-feedback d-none"
+             id="email-error-recover"></div>
+    </div>
+    <div class="col-12">
+        <?php
+        $submit = $recoverForm->get('submit');
+        $submit->setAttribute('class', 'btn btn-lg btn-outline-danger w-100');
+        ?>
+        <?= $this->formSubmit($submit) ?>
+    </div>
+    <?= $this->form()->closeTag() ?>
+
     <div class="row gy-2">
         <div class="col-12">
             <span>Вспомнили пароль?</span>
