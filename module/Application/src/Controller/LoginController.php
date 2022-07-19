@@ -24,9 +24,4 @@ class LoginController extends AbstractActionController
             'recoverForm' => $recoverForm,
         ]);
     }
-
-    public function processAction()
-    {
-        return new ViewModel();
-    }
 }
