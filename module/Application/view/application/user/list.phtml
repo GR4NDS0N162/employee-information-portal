@@ -46,10 +46,16 @@ $this->headTitle($headTitle);
 
                     <div class="col-12 col-sm-6 col-lg-12">
                         <div class="card p-3">
+                            <?php $element = $listForm->get('position'); ?>
+                            <?= $this->formLabel($element) ?>
+                            <?= $this->formElement($element) ?>
                         </div>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-12">
                         <div class="card p-3">
+                            <?php $element = $listForm->get('gender'); ?>
+                            <?= $this->formLabel($element) ?>
+                            <?= $this->formElement($element) ?>
                         </div>
                     </div>
                     <div class="col-12">
@@ -57,17 +63,28 @@ $this->headTitle($headTitle);
                             <p class="form-label">Возраст</p>
                             <div class="row g-3">
                                 <div class="col">
+                                    <?php $element = $listForm->get('min-age'); ?>
+                                    <?= $this->formLabel($element) ?>
+                                    <?= $this->formElement($element) ?>
                                 </div>
                                 <div class="col">
+                                    <?php $element = $listForm->get('max-age'); ?>
+                                    <?= $this->formLabel($element) ?>
+                                    <?= $this->formElement($element) ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="card p-3">
+                            <?php $element = $listForm->get('fullname-phone-email'); ?>
+                            <?= $this->formLabel($element) ?>
+                            <?= $this->formElement($element) ?>
                         </div>
                     </div>
                     <div class="col-12">
+                        <?php $element = $listForm->get('submit'); ?>
+                        <?= $this->formElement($element) ?>
                     </div>
 
                     <?= $this->form()->closeTag() ?>
