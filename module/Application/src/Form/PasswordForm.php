@@ -16,7 +16,6 @@ class PasswordForm extends Form
 
         $this->attributes = [
             'class'      => 'row gy-3',
-            'action'     => '//process',
             'method'     => 'post',
             'id'         => 'password-form',
             'novalidate' => 'novalidate',
