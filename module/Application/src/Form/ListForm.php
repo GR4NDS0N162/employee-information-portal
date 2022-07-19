@@ -12,9 +12,6 @@ use Laminas\Form\Form;
 
 class ListForm extends Form
 {
-    const emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
-    const passwordPattern = '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,32}$';
-
     public function __construct()
     {
         parent::__construct();
