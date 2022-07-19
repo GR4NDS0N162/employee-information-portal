@@ -16,7 +16,6 @@ class RecoverForm extends Form
 
         $this->attributes = [
             'class' => 'row gy-3 mb-3',
-            'action' => '//process',
             'method' => 'post',
             'id' => 'recover-form',
             'novalidate' => 'novalidate',
