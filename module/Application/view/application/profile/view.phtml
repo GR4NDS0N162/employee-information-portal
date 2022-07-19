@@ -1,3 +1,80 @@
 <?php
-$this->headTitle("Просмотр профиля");
+$headTitle = 'Просмотр профиля';
+$this->headTitle($headTitle);
+$this->headLink()
+    ->appendStylesheet($this->basePath('css/profile.css'));
 ?>
+<div class="card mb-2 mb-md-3 p-3 p-sm-4 p-md-5">
+    <h1 class="mb-4 mb-md-5"><?= $this->escapeHtml($headTitle) ?></h1>
+    <div class="row g-3">
+        <div class="col-12 col-lg-8">
+            <div class="row g-3">
+                <div class="col-12 text-center">
+                    <img src="https://picsum.photos/900"
+                         class="user-photo w-100 rounded-circle"
+                         alt="Фото пользователя">
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card p-3">
+                        <h5 class="mb-2">Фамилия</h5>
+                        <p class="mb-0">Зубенко</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card p-3">
+                        <h5 class="mb-2">Имя</h5>
+                        <p class="mb-0">Михаил</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card p-3">
+                        <h5 class="mb-2">Отчество</h5>
+                        <p class="mb-0">Петрович</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="card p-3">
+                        <h5 class="mb-2">Пол</h5>
+                        <p class="mb-0">Мужской</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <div class="card p-3">
+                        <h5 class="mb-2">Дата рождения</h5>
+                        <p class="mb-0">16.10.1968</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card p-3">
+                        <h5 class="mb-2">Skype</h5>
+                        <p class="mb-0">ivanivanov</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row g-3">
+                <div class="col-12 col-md-4 col-lg-12">
+                    <div class="card">
+                        <h5 class="m-3">Телефоны</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">+79285749375</li>
+                            <li class="list-group-item">+79285749375</li>
+                            <li class="list-group-item">+79285749375</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <h5 class="m-3">E-mail-ы</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">name@mail.ru</li>
+                            <li class="list-group-item">name@mail.ru</li>
+                            <li class="list-group-item">name@mail.ru</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
