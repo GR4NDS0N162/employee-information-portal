@@ -18,10 +18,12 @@ class LoginController extends AbstractActionController
         $signupForm = new SignUpForm();
         $recoverForm = new RecoverForm();
 
-        return new ViewModel([
-            'loginForm' => $loginForm,
-            'signupForm' => $signupForm,
+        $view = new ViewModel([
+            'loginForm'   => $loginForm,
+            'signupForm'  => $signupForm,
             'recoverForm' => $recoverForm,
         ]);
+
+        return $view;
     }
 }
