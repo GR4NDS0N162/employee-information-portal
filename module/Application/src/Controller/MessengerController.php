@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Controller;
 
+use Application\Form\DialogForm;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
@@ -11,7 +12,12 @@ class MessengerController extends AbstractActionController
 {
     public function dialogsAction()
     {
-        $view = new ViewModel();
+        $dialogForm = new DialogForm();
+
+        $view = new ViewModel([
+            'dialogForm' => $dialogForm,
+        ]);
+
         return $view;
     }
 

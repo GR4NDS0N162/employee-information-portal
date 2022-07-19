@@ -1,3 +1,134 @@
 <?php
-$this->headTitle("Диалоги");
+/**
+ * @var $dialogForm
+ */
+$headTitle = 'Диалоги';
+$this->headTitle($headTitle);
 ?>
+<div class="card mb-2 mb-md-3 p-3 p-sm-4 p-md-5">
+    <h1 class="mb-4 mb-md-5"><?= $this->escapeHtml($headTitle) ?></h1>
+    <div class="row g-3">
+        <div class="col-12 col-lg-4 col col-xl-3">
+            <?php $dialogForm->prepare(); ?>
+
+            <?= $this->form()->openTag($dialogForm) ?>
+
+            <div class="col-12 col-sm-6 col-lg-12">
+                <div class="card p-3">
+                    <?php $element = $dialogForm->get('position'); ?>
+                    <?= $this->formLabel($element) ?>
+                    <?= $this->formElement($element) ?>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-12">
+                <div class="card p-3">
+                    <?php $element = $dialogForm->get('gender'); ?>
+                    <?= $this->formLabel($element) ?>
+                    <?= $this->formElement($element) ?>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card p-3">
+                    <p class="form-label">Возраст</p>
+                    <div class="row g-3">
+                        <div class="col">
+                            <?php $element = $dialogForm->get('min-age'); ?>
+                            <?= $this->formLabel($element) ?>
+                            <?= $this->formElement($element) ?>
+                        </div>
+                        <div class="col">
+                            <?php $element = $dialogForm->get('max-age'); ?>
+                            <?= $this->formLabel($element) ?>
+                            <?= $this->formElement($element) ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card p-3">
+                    <?php $element = $dialogForm->get('fullname-phone'); ?>
+                    <?= $this->formLabel($element) ?>
+                    <?= $this->formElement($element) ?>
+                </div>
+            </div>
+            <div class="col-12">
+                <?php $element = $dialogForm->get('submit'); ?>
+                <?= $this->formElement($element) ?>
+            </div>
+
+            <?= $this->form()->closeTag() ?>
+        </div>
+        <div class="col">
+            <div class="row g-3">
+                <div class="col-12">
+                    <div class="card p-3">
+                        <div class="row g-3">
+                            <div class="col-auto">
+                                <img src="https://picsum.photos/900"
+                                     class="user-photo img-fluid rounded"
+                                     alt="Фото пользователя">
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="h6 full-name">Зубенко Михаил Петрович</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <span class="text-secondary">Должность:</span>
+                                        <span class="position">Уборщик</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <span class="text-secondary">Возраст:</span>
+                                        <span class="age">49</span> лет
+                                    </div>
+                                    <div class="col-auto">
+                                        <span class="text-secondary">Пол:</span>
+                                        <span class="gender">Мужской</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto d-flex align-items-center">
+                                <a href="messages.html"
+                                   class="btn btn-primary">К диалогу</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 card-gray-bg">
+                    <div class="card p-3">
+                        <div class="row g-3">
+                            <div class="col-auto">
+                                <img src="https://picsum.photos/900"
+                                     class="user-photo img-fluid rounded"
+                                     alt="Фото пользователя">
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="h6 full-name">Зубенко Михаил Петрович</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <span class="text-secondary">Должность:</span>
+                                        <span class="position">Уборщик</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <span class="text-secondary">Возраст:</span>
+                                        <span class="age">49</span> лет
+                                    </div>
+                                    <div class="col-auto">
+                                        <span class="text-secondary">Пол:</span>
+                                        <span class="gender">Мужской</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto d-flex align-items-center">
+                                <a href="messages.html"
+                                   class="btn btn-success">Создать диалог</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
