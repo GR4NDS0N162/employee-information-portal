@@ -7,7 +7,6 @@ namespace Application\Form;
 use Laminas\Form\Element\Number;
 use Laminas\Form\Element\Select;
 use Laminas\Form\Element\Submit;
-use Laminas\Form\Element\Textarea;
 use Laminas\Form\Form;
 
 class ListForm extends Form
@@ -96,21 +95,6 @@ class ListForm extends Form
             ],
             'options'    => [
                 'label'            => 'До',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
-            ],
-        ]);
-        $this->add([
-            'name'       => 'fullname-phone-email',
-            'type'       => Textarea::class,
-            'attributes' => [
-                'class'       => 'form-control resize-none',
-                'rows'        => '3',
-                'placeholder' => 'Иванов Иван Иванович, +79283627374, example@name.com',
-            ],
-            'options'    => [
-                'label' => 'ФИО, телефон, email',
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],

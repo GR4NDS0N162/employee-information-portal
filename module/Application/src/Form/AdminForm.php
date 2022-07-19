@@ -6,7 +6,7 @@ namespace Application\Form;
 
 use Laminas\Form\Element\Select;
 
-class AdminForm extends ListForm
+class AdminForm extends UserForm
 {
     public function __construct()
     {

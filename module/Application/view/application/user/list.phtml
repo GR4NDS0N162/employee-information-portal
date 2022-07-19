@@ -1,6 +1,6 @@
 <?php
 /**
- * @var $listForm
+ * @var $userForm
  */
 $headTitle = 'Список пользователей';
 $this->headTitle($headTitle);
@@ -40,20 +40,20 @@ $this->headTitle($headTitle);
         <div class="col-12">
             <div class="row g-3">
                 <div class="col-12 col-lg-4 col col-xl-3">
-                    <?php $listForm->prepare(); ?>
+                    <?php $userForm->prepare(); ?>
 
-                    <?= $this->form()->openTag($listForm) ?>
+                    <?= $this->form()->openTag($userForm) ?>
 
                     <div class="col-12 col-sm-6 col-lg-12">
                         <div class="card p-3">
-                            <?php $element = $listForm->get('position'); ?>
+                            <?php $element = $userForm->get('position'); ?>
                             <?= $this->formLabel($element) ?>
                             <?= $this->formElement($element) ?>
                         </div>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-12">
                         <div class="card p-3">
-                            <?php $element = $listForm->get('gender'); ?>
+                            <?php $element = $userForm->get('gender'); ?>
                             <?= $this->formLabel($element) ?>
                             <?= $this->formElement($element) ?>
                         </div>
@@ -63,12 +63,12 @@ $this->headTitle($headTitle);
                             <p class="form-label">Возраст</p>
                             <div class="row g-3">
                                 <div class="col">
-                                    <?php $element = $listForm->get('min-age'); ?>
+                                    <?php $element = $userForm->get('min-age'); ?>
                                     <?= $this->formLabel($element) ?>
                                     <?= $this->formElement($element) ?>
                                 </div>
                                 <div class="col">
-                                    <?php $element = $listForm->get('max-age'); ?>
+                                    <?php $element = $userForm->get('max-age'); ?>
                                     <?= $this->formLabel($element) ?>
                                     <?= $this->formElement($element) ?>
                                 </div>
@@ -77,13 +77,13 @@ $this->headTitle($headTitle);
                     </div>
                     <div class="col-12">
                         <div class="card p-3">
-                            <?php $element = $listForm->get('fullname-phone-email'); ?>
+                            <?php $element = $userForm->get('fullname-phone-email'); ?>
                             <?= $this->formLabel($element) ?>
                             <?= $this->formElement($element) ?>
                         </div>
                     </div>
                     <div class="col-12">
-                        <?php $element = $listForm->get('submit'); ?>
+                        <?php $element = $userForm->get('submit'); ?>
                         <?= $this->formElement($element) ?>
                     </div>
 
