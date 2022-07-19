@@ -6,7 +6,7 @@ namespace Application\Form;
 
 use Laminas\Form\Element\Textarea;
 
-class DialogForm extends ListForm
+class DialogForm extends FilterForm
 {
     public function __construct()
     {
