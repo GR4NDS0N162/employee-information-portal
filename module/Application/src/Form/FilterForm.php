@@ -9,7 +9,7 @@ use Laminas\Form\Element\Select;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Form;
 
-class FilterForm extends Form
+abstract class FilterForm extends Form
 {
     public function __construct()
     {
