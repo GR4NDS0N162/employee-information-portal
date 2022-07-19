@@ -16,30 +16,31 @@ $this->inlineScript()
      id="login-card">
     <h1 class="mb-3">Вход</h1>
 
-    <?php $loginForm->prepare(); ?>
+    <?php $form = $loginForm; ?>
+    <?php $form->prepare(); ?>
 
-    <?= $this->form()->openTag($loginForm) ?>
+    <?= $this->form()->openTag($form) ?>
     <div class="col-12">
-        <?php $email = $loginForm->get('email'); ?>
+        <?php $element = $form->get('email'); ?>
         <div class="form-floating">
-            <?= $this->formElement($email) ?>
-            <?= $this->formLabel($email) ?>
+            <?= $this->formElement($element) ?>
+            <?= $this->formLabel($element) ?>
         </div>
         <div class="invalid-feedback d-none"
              id="email-error-login"></div>
     </div>
     <div class="col-12">
-        <?php $password = $loginForm->get('password'); ?>
+        <?php $element = $form->get('password'); ?>
         <div class="form-floating">
-            <?= $this->formElement($password) ?>
-            <?= $this->formLabel($password) ?>
+            <?= $this->formElement($element) ?>
+            <?= $this->formLabel($element) ?>
         </div>
         <div class="invalid-feedback d-none"
              id="password-error-login"></div>
     </div>
     <div class="col-12">
-        <?php $submit = $loginForm->get('submit'); ?>
-        <?= $this->formSubmit($submit) ?>
+        <?php $element = $form->get('submit'); ?>
+        <?= $this->formSubmit($element) ?>
     </div>
     <?= $this->form()->closeTag() ?>
 
@@ -58,48 +59,49 @@ $this->inlineScript()
      id="signup-card">
     <h1 class="mb-3">Регистрация</h1>
 
-    <?php $signupForm->prepare(); ?>
+    <?php $form = $signupForm; ?>
+    <?php $form->prepare(); ?>
 
-    <?= $this->form()->openTag($signupForm) ?>
+    <?= $this->form()->openTag($form) ?>
     <div class="col-12">
-        <?php $email = $signupForm->get('email'); ?>
+        <?php $element = $form->get('email'); ?>
         <div class="form-floating">
-            <?= $this->formElement($email) ?>
-            <?= $this->formLabel($email) ?>
+            <?= $this->formElement($element) ?>
+            <?= $this->formLabel($element) ?>
         </div>
         <div class="invalid-feedback d-none"
              id="email-error-signup"></div>
     </div>
     <div class="col-12">
-        <?php $position = $signupForm->get('position'); ?>
+        <?php $element = $form->get('position'); ?>
         <div class="form-floating">
-            <?= $this->formElement($position) ?>
-            <?= $this->formLabel($position) ?>
+            <?= $this->formElement($element) ?>
+            <?= $this->formLabel($element) ?>
         </div>
         <div class="invalid-feedback d-none"
              id="position-error-signup"></div>
     </div>
     <div class="col-12">
-        <?php $password = $signupForm->get('password'); ?>
+        <?php $element = $form->get('password'); ?>
         <div class="form-floating">
-            <?= $this->formElement($password) ?>
-            <?= $this->formLabel($password) ?>
+            <?= $this->formElement($element) ?>
+            <?= $this->formLabel($element) ?>
         </div>
         <div class="invalid-feedback d-none"
              id="password-error-signup"></div>
     </div>
     <div class="col-12">
-        <?php $passwordCheck = $signupForm->get('password-check'); ?>
+        <?php $element = $form->get('password-check'); ?>
         <div class="form-floating">
-            <?= $this->formElement($passwordCheck) ?>
-            <?= $this->formLabel($passwordCheck) ?>
+            <?= $this->formElement($element) ?>
+            <?= $this->formLabel($element) ?>
         </div>
         <div class="invalid-feedback d-none"
              id="password-check-error-signup"></div>
     </div>
     <div class="col-12">
-        <?php $submit = $signupForm->get('submit'); ?>
-        <?= $this->formSubmit($submit) ?>
+        <?php $element = $form->get('submit'); ?>
+        <?= $this->formSubmit($element) ?>
     </div>
     <?= $this->form()->closeTag() ?>
 
@@ -114,21 +116,22 @@ $this->inlineScript()
      id="recover-card">
     <h1 class="mb-3">Восстановление</h1>
 
-    <?php $recoverForm->prepare(); ?>
+    <?php $form = $recoverForm; ?>
+    <?php $form->prepare(); ?>
 
-    <?= $this->form()->openTag($recoverForm) ?>
+    <?= $this->form()->openTag($form) ?>
     <div class="col-12">
-        <?php $email = $recoverForm->get('email'); ?>
+        <?php $element = $form->get('email'); ?>
         <div class="form-floating">
-            <?= $this->formElement($email) ?>
-            <?= $this->formLabel($email) ?>
+            <?= $this->formElement($element) ?>
+            <?= $this->formLabel($element) ?>
         </div>
         <div class="invalid-feedback d-none"
              id="email-error-recover"></div>
     </div>
     <div class="col-12">
-        <?php $submit = $recoverForm->get('submit'); ?>
-        <?= $this->formSubmit($submit) ?>
+        <?php $element = $form->get('submit'); ?>
+        <?= $this->formSubmit($element) ?>
     </div>
     <?= $this->form()->closeTag() ?>
 

@@ -40,20 +40,22 @@ $this->headTitle($headTitle);
         <div class="col-12">
             <div class="row g-3">
                 <div class="col-12 col-lg-4 col col-xl-3">
-                    <?php $userForm->prepare(); ?>
 
-                    <?= $this->form()->openTag($userForm) ?>
+                    <?php $form = $userForm; ?>
+                    <?php $form->prepare(); ?>
+
+                    <?= $this->form()->openTag($form) ?>
 
                     <div class="col-12 col-sm-6 col-lg-12">
                         <div class="card p-3">
-                            <?php $element = $userForm->get('position'); ?>
+                            <?php $element = $form->get('position'); ?>
                             <?= $this->formLabel($element) ?>
                             <?= $this->formElement($element) ?>
                         </div>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-12">
                         <div class="card p-3">
-                            <?php $element = $userForm->get('gender'); ?>
+                            <?php $element = $form->get('gender'); ?>
                             <?= $this->formLabel($element) ?>
                             <?= $this->formElement($element) ?>
                         </div>
@@ -63,12 +65,12 @@ $this->headTitle($headTitle);
                             <p class="form-label">Возраст</p>
                             <div class="row g-3">
                                 <div class="col">
-                                    <?php $element = $userForm->get('min-age'); ?>
+                                    <?php $element = $form->get('min-age'); ?>
                                     <?= $this->formLabel($element) ?>
                                     <?= $this->formElement($element) ?>
                                 </div>
                                 <div class="col">
-                                    <?php $element = $userForm->get('max-age'); ?>
+                                    <?php $element = $form->get('max-age'); ?>
                                     <?= $this->formLabel($element) ?>
                                     <?= $this->formElement($element) ?>
                                 </div>
@@ -77,13 +79,13 @@ $this->headTitle($headTitle);
                     </div>
                     <div class="col-12">
                         <div class="card p-3">
-                            <?php $element = $userForm->get('fullname-phone-email'); ?>
+                            <?php $element = $form->get('fullname-phone-email'); ?>
                             <?= $this->formLabel($element) ?>
                             <?= $this->formElement($element) ?>
                         </div>
                     </div>
                     <div class="col-12">
-                        <?php $element = $userForm->get('submit'); ?>
+                        <?php $element = $form->get('submit'); ?>
                         <?= $this->formElement($element) ?>
                     </div>
 
