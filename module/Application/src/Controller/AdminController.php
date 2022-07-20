@@ -14,12 +14,24 @@ class AdminController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
+        $headTitleName = 'Список пользователей (Администратор)';
+
+        $viewModel->setVariables([
+            'headTitleName' => $headTitleName,
+        ]);
+
         return $viewModel;
     }
 
     public function editAction()
     {
         $viewModel = new ViewModel();
+
+        $headTitleName = 'Редактирование пользователя (Администратор)';
+
+        $viewModel->setVariables([
+            'headTitleName' => $headTitleName,
+        ]);
 
         return $viewModel;
     }

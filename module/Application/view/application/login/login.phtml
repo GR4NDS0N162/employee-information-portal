@@ -1,11 +1,14 @@
 <?php
 /**
- * @var $loginForm
- * @var $signupForm
- * @var $recoverForm
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ * @var string $headTitleName
+ * @var Application\Form\LoginForm $loginForm
+ * @var Application\Form\SignUpForm $signupForm
+ * @var Application\Form\RecoverForm $recoverForm
  */
-$this->headTitle("Вход | Регистрация");
-$this->layout('layout/login');
+?>
+<?php $this->headTitle($headTitleName); ?>
+<?php
 $this->headLink()
     ->appendStylesheet($this->basePath('css/login-signup-recover.css'));
 $this->inlineScript()

@@ -1,12 +1,13 @@
 <?php
 /**
- * @var $userForm
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ * @var string $headTitleName
+ * @var Application\Form\UserForm $userForm
  */
-$headTitle = 'Список пользователей';
-$this->headTitle($headTitle);
 ?>
+<?php $this->headTitle($headTitleName); ?>
 <div class="card mb-2 mb-md-3 p-3 p-sm-4 p-md-5">
-    <h1 class="mb-4 mb-md-5"><?= $this->escapeHtml($headTitle) ?></h1>
+    <h1 class="mb-4 mb-md-5"><?= $this->escapeHtml($headTitleName) ?></h1>
     <div class="row g-3">
         <div class="col-12">
             <div class="row align-items-center justify-content-between g-3">

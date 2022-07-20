@@ -13,6 +13,12 @@ class PositionController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
+        $headTitleName = 'Управление должностями (Администратор)';
+
+        $viewModel->setVariables([
+            'headTitleName' => $headTitleName,
+        ]);
+
         return $viewModel;
     }
 }

@@ -14,6 +14,12 @@ class UserController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
+        $headTitleName = 'Список пользователей';
+
+        $viewModel->setVariables([
+            'headTitleName' => $headTitleName,
+        ]);
+
         return $viewModel;
     }
 }

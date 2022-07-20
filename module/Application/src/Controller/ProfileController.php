@@ -15,12 +15,24 @@ class ProfileController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
+        $headTitleName = 'Просмотр профиля';
+
+        $viewModel->setVariables([
+            'headTitleName' => $headTitleName,
+        ]);
+
         return $viewModel;
     }
 
     public function editAction()
     {
         $viewModel = new ViewModel();
+
+        $headTitleName = 'Редактирование профиля';
+
+        $viewModel->setVariables([
+            'headTitleName' => $headTitleName,
+        ]);
 
         return $viewModel;
     }
