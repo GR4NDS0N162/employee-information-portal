@@ -16,10 +16,17 @@ class LoginController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
+        $loginForm = new LoginForm();
+        $signupForm = new SignUpForm();
+        $recoverForm = new RecoverForm();
+
         $headTitleName = 'Вход | Регистрация';
 
         $viewModel->setVariables([
             'headTitleName' => $headTitleName,
+            'loginForm'     => $loginForm,
+            'signupForm'    => $signupForm,
+            'recoverForm'   => $recoverForm,
         ]);
 
         return $viewModel;
