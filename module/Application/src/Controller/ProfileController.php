@@ -13,23 +13,15 @@ class ProfileController extends AbstractActionController
 {
     public function viewAction()
     {
-        $view = new ViewModel();
-        return $view;
+        $viewModel = new ViewModel();
+
+        return $viewModel;
     }
 
     public function editAction()
     {
-        $profileForm = new ProfileForm();
-        $passwordForm = new PasswordForm();
+        $viewModel = new ViewModel();
 
-        return new ViewModel([
-            'profileForm'  => $profileForm,
-            'passwordForm' => $passwordForm,
-        ]);
-    }
-
-    public function processAction()
-    {
-        return new ViewModel();
+        return $viewModel;
     }
 }

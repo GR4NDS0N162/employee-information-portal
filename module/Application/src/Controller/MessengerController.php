@@ -12,18 +12,15 @@ class MessengerController extends AbstractActionController
 {
     public function dialogsAction()
     {
-        $dialogForm = new DialogForm();
+        $viewModel = new ViewModel();
 
-        $view = new ViewModel([
-            'dialogForm' => $dialogForm,
-        ]);
-
-        return $view;
+        return $viewModel;
     }
 
     public function messagesAction()
     {
-        $view = new ViewModel();
-        return $view;
+        $viewModel = new ViewModel();
+
+        return $viewModel;
     }
 }

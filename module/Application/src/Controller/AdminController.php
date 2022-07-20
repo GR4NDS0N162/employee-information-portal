@@ -12,18 +12,15 @@ class AdminController extends AbstractActionController
 {
     public function listAction()
     {
-        $adminForm = new AdminForm();
+        $viewModel = new ViewModel();
 
-        $view = new ViewModel([
-            'adminForm' => $adminForm,
-        ]);
-
-        return $view;
+        return $viewModel;
     }
 
     public function editAction()
     {
-        $view = new ViewModel();
-        return $view;
+        $viewModel = new ViewModel();
+
+        return $viewModel;
     }
 }

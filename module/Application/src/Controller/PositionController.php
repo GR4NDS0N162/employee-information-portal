@@ -11,7 +11,8 @@ class PositionController extends AbstractActionController
 {
     public function editAction()
     {
-        $view = new ViewModel();
-        return $view;
+        $viewModel = new ViewModel();
+
+        return $viewModel;
     }
 }

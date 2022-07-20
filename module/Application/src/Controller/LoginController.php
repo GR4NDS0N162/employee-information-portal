@@ -14,16 +14,8 @@ class LoginController extends AbstractActionController
 {
     public function loginAction()
     {
-        $loginForm = new LoginForm();
-        $signupForm = new SignUpForm();
-        $recoverForm = new RecoverForm();
+        $viewModel = new ViewModel();
 
-        $view = new ViewModel([
-            'loginForm'   => $loginForm,
-            'signupForm'  => $signupForm,
-            'recoverForm' => $recoverForm,
-        ]);
-
-        return $view;
+        return $viewModel;
     }
 }

@@ -12,12 +12,8 @@ class UserController extends AbstractActionController
 {
     public function listAction()
     {
-        $userForm = new UserForm();
+        $viewModel = new ViewModel();
 
-        $view = new ViewModel([
-            'userForm' => $userForm,
-        ]);
-
-        return $view;
+        return $viewModel;
     }
 }
