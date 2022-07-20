@@ -8,13 +8,11 @@
 
 <?= $this->form()->openTag($recoverForm) ?>
 <div class="col-12">
-    <?php $element = $recoverForm->get('email'); ?>
-    <div class="form-floating">
-        <?= $this->formElement($element) ?>
-        <?= $this->formLabel($element) ?>
-    </div>
-    <div class="invalid-feedback d-none"
-         id="email-error-recover"></div>
+    <?= $this->partial('partial/form_floating', [
+        'form'        => $recoverForm,
+        'elementName' => 'email',
+        'formName'    => 'recover',
+    ]); ?>
 </div>
 <div class="col-12">
     <?php $element = $recoverForm->get('submit'); ?>

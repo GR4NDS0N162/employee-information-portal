@@ -27,8 +27,7 @@ class LoginForm extends Form
             'type' => Email::class,
             'attributes' => [
                 'class' => 'form-control',
-                'placeholder' => 'E-mail',
-                'id' => 'email-field-login',
+                'placeholder' => '#',
                 'required' => 'required',
                 'pattern' => SignUpForm::emailPattern,
             ],
@@ -41,8 +40,7 @@ class LoginForm extends Form
             'type' => Password::class,
             'attributes' => [
                 'class' => 'form-control',
-                'placeholder' => 'Пароль',
-                'id' => 'password-field-login',
+                'placeholder' => '#',
                 'required' => 'required',
             ],
             'options' => [

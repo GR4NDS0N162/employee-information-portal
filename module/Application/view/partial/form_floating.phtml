@@ -3,9 +3,16 @@
  * @var Laminas\View\Renderer\PhpRenderer $this
  */
 ?>
+
+<?php $element = $this->form->get($this->elementName); ?>
+<?php $element->setAttribute('id', $this->elementName . '-field-' . $this->formName) ?>
+
 <div class="form-floating">
-    <?php $element = $this->vars('element'); ?>
     <?= $this->formElement($element) ?>
     <?= $this->formLabel($element) ?>
 </div>
-<div class="invalid-feedback d-none"></div>
+<div
+        class="invalid-feedback d-none"
+        id="<?= $this->elementName . '-error-' . $this->formName ?>"
+>
+</div>

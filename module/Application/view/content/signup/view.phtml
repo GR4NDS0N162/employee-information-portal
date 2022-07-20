@@ -8,40 +8,32 @@
 
 <?= $this->form()->openTag($signupForm) ?>
 <div class="col-12">
-    <?php $element = $signupForm->get('email'); ?>
-    <div class="form-floating">
-        <?= $this->formElement($element) ?>
-        <?= $this->formLabel($element) ?>
-    </div>
-    <div class="invalid-feedback d-none"
-         id="email-error-signup"></div>
+    <?= $this->partial('partial/form_floating', [
+        'form'        => $signupForm,
+        'elementName' => 'email',
+        'formName'    => 'signup',
+    ]); ?>
 </div>
 <div class="col-12">
-    <?php $element = $signupForm->get('position'); ?>
-    <div class="form-floating">
-        <?= $this->formElement($element) ?>
-        <?= $this->formLabel($element) ?>
-    </div>
-    <div class="invalid-feedback d-none"
-         id="position-error-signup"></div>
+    <?= $this->partial('partial/form_floating', [
+        'form'        => $signupForm,
+        'elementName' => 'position',
+        'formName'    => 'signup',
+    ]); ?>
 </div>
 <div class="col-12">
-    <?php $element = $signupForm->get('password'); ?>
-    <div class="form-floating">
-        <?= $this->formElement($element) ?>
-        <?= $this->formLabel($element) ?>
-    </div>
-    <div class="invalid-feedback d-none"
-         id="password-error-signup"></div>
+    <?= $this->partial('partial/form_floating', [
+        'form'        => $signupForm,
+        'elementName' => 'password',
+        'formName'    => 'signup',
+    ]); ?>
 </div>
 <div class="col-12">
-    <?php $element = $signupForm->get('password-check'); ?>
-    <div class="form-floating">
-        <?= $this->formElement($element) ?>
-        <?= $this->formLabel($element) ?>
-    </div>
-    <div class="invalid-feedback d-none"
-         id="password-check-error-signup"></div>
+    <?= $this->partial('partial/form_floating', [
+        'form'        => $signupForm,
+        'elementName' => 'password-check',
+        'formName'    => 'signup',
+    ]); ?>
 </div>
 <div class="col-12">
     <?php $element = $signupForm->get('submit'); ?>

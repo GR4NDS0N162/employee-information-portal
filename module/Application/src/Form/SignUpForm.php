@@ -31,8 +31,7 @@ class SignUpForm extends Form
             'type' => Email::class,
             'attributes' => [
                 'class' => 'form-control',
-                'placeholder' => 'E-mail',
-                'id' => 'email-field-signup',
+                'placeholder' => '#',
                 'required' => 'required',
                 'pattern' => self::emailPattern,
             ],
@@ -45,8 +44,6 @@ class SignUpForm extends Form
             'type' => Select::class,
             'attributes' => [
                 'class' => 'form-select',
-                'aria-label' => "Должность",
-                'id' => 'position-field-signup',
                 'required' => 'required',
             ],
             'options' => [
@@ -73,8 +70,7 @@ class SignUpForm extends Form
             'type' => Password::class,
             'attributes' => [
                 'class' => 'form-control',
-                'placeholder' => 'Пароль',
-                'id' => 'password-field-signup',
+                'placeholder' => '#',
                 'required' => 'required',
                 'pattern' => self::passwordPattern,
             ],
@@ -87,8 +83,7 @@ class SignUpForm extends Form
             'type' => Password::class,
             'attributes' => [
                 'class' => 'form-control',
-                'placeholder' => 'Подтверждение пароля',
-                'id' => 'password-check-field-signup',
+                'placeholder' => '#',
                 'required' => 'required',
             ],
             'options' => [

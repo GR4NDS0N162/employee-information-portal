@@ -26,8 +26,7 @@ class RecoverForm extends Form
             'type' => Email::class,
             'attributes' => [
                 'class' => 'form-control',
-                'placeholder' => 'E-mail',
-                'id' => 'email-field-recover',
+                'placeholder' => '#',
                 'required' => 'required',
                 'pattern' => SignUpForm::emailPattern,
             ],

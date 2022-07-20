@@ -8,20 +8,18 @@
 
 <?= $this->form()->openTag($loginForm) ?>
 <div class="col-12">
-    <?=
-    $this->formRow()
-        ->setPartial('partial/form_floating')
-        ->render($loginForm->get('email'))
-    ?>
+    <?= $this->partial('partial/form_floating', [
+        'form'        => $loginForm,
+        'elementName' => 'email',
+        'formName'    => 'login',
+    ]); ?>
 </div>
 <div class="col-12">
-    <?php $element = $loginForm->get('password'); ?>
-    <div class="form-floating">
-        <?= $this->formElement($element) ?>
-        <?= $this->formLabel($element) ?>
-    </div>
-    <div class="invalid-feedback d-none"
-         id="password-error-login"></div>
+    <?= $this->partial('partial/form_floating', [
+        'form'        => $loginForm,
+        'elementName' => 'password',
+        'formName'    => 'login',
+    ]); ?>
 </div>
 <div class="col-12">
     <?php $element = $loginForm->get('submit'); ?>
