@@ -14,12 +14,24 @@ class MessengerController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
+        $headTitleName = 'Диалоги';
+
+        $viewModel->setVariables([
+            'headTitleName' => $headTitleName,
+        ]);
+
         return $viewModel;
     }
 
     public function messagesAction()
     {
         $viewModel = new ViewModel();
+
+        $headTitleName = 'Сообщения';
+
+        $viewModel->setVariables([
+            'headTitleName' => $headTitleName,
+        ]);
 
         return $viewModel;
     }
