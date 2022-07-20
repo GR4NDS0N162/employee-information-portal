@@ -22,11 +22,31 @@ class LoginController extends AbstractActionController
 
         $headTitleName = 'Вход | Регистрация';
 
+        $loginViewModel = new ViewModel();
+        $loginViewModel->setVariables([
+            'loginForm' => $loginForm,
+        ]);
+        $loginViewModel->setTemplate('content/login/view');
+
+        $signupViewModel = new ViewModel();
+        $signupViewModel->setVariables([
+            'signupForm' => $signupForm,
+        ]);
+        $signupViewModel->setTemplate('content/signup/view');
+
+        $recoverViewModel = new ViewModel();
+        $recoverViewModel->setVariables([
+            'recoverForm' => $recoverForm,
+        ]);
+        $recoverViewModel->setTemplate('content/recover/view');
+
+        $viewModel
+            ->addChild($loginViewModel, 'login')
+            ->addChild($signupViewModel, 'signup')
+            ->addChild($recoverViewModel, 'recover');
+
         $viewModel->setVariables([
             'headTitleName' => $headTitleName,
-            'loginForm'     => $loginForm,
-            'signupForm'    => $signupForm,
-            'recoverForm'   => $recoverForm,
         ]);
 
         return $viewModel;
