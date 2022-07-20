@@ -4,19 +4,18 @@
  */
 ?>
 
-<?php $form = $loginForm; ?>
-<?php $form->prepare(); ?>
+<?php $loginForm->prepare(); ?>
 
-<?= $this->form()->openTag($form) ?>
+<?= $this->form()->openTag($loginForm) ?>
 <div class="col-12">
     <?=
     $this->formRow()
         ->setPartial('partial/form_floating')
-        ->render($form->get('email'))
+        ->render($loginForm->get('email'))
     ?>
 </div>
 <div class="col-12">
-    <?php $element = $form->get('password'); ?>
+    <?php $element = $loginForm->get('password'); ?>
     <div class="form-floating">
         <?= $this->formElement($element) ?>
         <?= $this->formLabel($element) ?>
@@ -25,7 +24,7 @@
          id="password-error-login"></div>
 </div>
 <div class="col-12">
-    <?php $element = $form->get('submit'); ?>
+    <?php $element = $loginForm->get('submit'); ?>
     <?= $this->formSubmit($element) ?>
 </div>
 <?= $this->form()->closeTag() ?>

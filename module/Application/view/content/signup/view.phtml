@@ -4,12 +4,11 @@
  */
 ?>
 
-<?php $form = $signupForm; ?>
-<?php $form->prepare(); ?>
+<?php $signupForm->prepare(); ?>
 
-<?= $this->form()->openTag($form) ?>
+<?= $this->form()->openTag($signupForm) ?>
 <div class="col-12">
-    <?php $element = $form->get('email'); ?>
+    <?php $element = $signupForm->get('email'); ?>
     <div class="form-floating">
         <?= $this->formElement($element) ?>
         <?= $this->formLabel($element) ?>
@@ -18,7 +17,7 @@
          id="email-error-signup"></div>
 </div>
 <div class="col-12">
-    <?php $element = $form->get('position'); ?>
+    <?php $element = $signupForm->get('position'); ?>
     <div class="form-floating">
         <?= $this->formElement($element) ?>
         <?= $this->formLabel($element) ?>
@@ -27,7 +26,7 @@
          id="position-error-signup"></div>
 </div>
 <div class="col-12">
-    <?php $element = $form->get('password'); ?>
+    <?php $element = $signupForm->get('password'); ?>
     <div class="form-floating">
         <?= $this->formElement($element) ?>
         <?= $this->formLabel($element) ?>
@@ -36,7 +35,7 @@
          id="password-error-signup"></div>
 </div>
 <div class="col-12">
-    <?php $element = $form->get('password-check'); ?>
+    <?php $element = $signupForm->get('password-check'); ?>
     <div class="form-floating">
         <?= $this->formElement($element) ?>
         <?= $this->formLabel($element) ?>
@@ -45,7 +44,7 @@
          id="password-check-error-signup"></div>
 </div>
 <div class="col-12">
-    <?php $element = $form->get('submit'); ?>
+    <?php $element = $signupForm->get('submit'); ?>
     <?= $this->formSubmit($element) ?>
 </div>
 <?= $this->form()->closeTag() ?>
