@@ -2,9 +2,44 @@
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
  * @var string $headTitleName
+ * @var Application\Form\EditPositionForm $editPositionForm
  */
+
+use Application\Form\FieldsetHelper;
+use Laminas\Form\View\Helper\FormCollection;
+
 ?>
 <?php $this->headTitle($headTitleName); ?>
+<?php $this->inlineScript()->appendFile('/js/position-edit.js'); ?>
 <div class="card mb-2 mb-md-3 p-3 p-sm-4 p-md-5">
     <h1 class="mb-4 mb-md-5"><?= $this->escapeHtml($headTitleName) ?></h1>
+
+    <?php $editPositionForm->prepare(); ?>
+
+    <button
+            onclick="return add_position()"
+            class="btn btn-outline-primary w-100"
+    >
+        Добавить новую должность
+    </button>
+
+    <?php echo $this->form()->openTag($editPositionForm); ?>
+
+    <?php $positions = $editPositionForm->get('positions'); ?>
+
+    <?php $fieldsetHelper = new FieldsetHelper(); ?>
+    <?php $formCollection = new FormCollection(); ?>
+
+    <?php echo $this->formCollection()
+        ->setWrapper('<div class="row gy-3" %4$s>%2$s%1$s%3$s</div>')
+        ->setFieldsetHelper(
+            $this->fieldsetHelper()
+                ->setWrapper('<div class="col-12" %4$s>%2$s%1$s%3$s</div>')
+        )
+        ->render($positions); ?>
+
+    <?php echo $this->formHidden($editPositionForm->get('csrf')); ?>
+    <?php echo $this->formElement($editPositionForm->get('submit')); ?>
+
+    <?php echo $this->form()->closeTag(); ?>
 </div>

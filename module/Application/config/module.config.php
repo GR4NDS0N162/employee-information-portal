@@ -224,4 +224,9 @@ return [
             __DIR__ . '/../view',
         ],
     ],
+    'view_helpers' => [
+        'invokables' => [
+            'fieldsetHelper' => 'Application\Form\FieldsetHelper',
+        ],
+    ],
 ];
