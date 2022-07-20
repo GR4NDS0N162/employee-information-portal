@@ -1,0 +1,11 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+?>
+<div class="form-floating">
+    <?php $element = $this->vars('element'); ?>
+    <?= $this->formElement($element) ?>
+    <?= $this->formLabel($element) ?>
+</div>
+<div class="invalid-feedback d-none"></div>
