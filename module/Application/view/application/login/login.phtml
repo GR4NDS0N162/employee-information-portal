@@ -8,13 +8,11 @@
  */
 ?>
 <?php $this->headTitle($headTitleName); ?>
-<?php
-$this->headLink()
-    ->appendStylesheet($this->basePath('css/login-signup-recover.css'));
-$this->inlineScript()
+<?php $this->headLink()
+    ->appendStylesheet($this->basePath('css/login-signup-recover.css')); ?>
+<?php $this->inlineScript()
     ->appendFile($this->basePath('js/validation.js'))
-    ->appendFile($this->basePath('js/login-signup-recover.js'));
-?>
+    ->appendFile($this->basePath('js/login-signup-recover.js')); ?>
 <div class="card p-4"
      id="login-card">
     <h1 class="mb-3">Вход</h1>
