@@ -26,6 +26,8 @@ return [
     'controllers' => [
         'factories' => [
             Controller\LoginController::class => InvokableFactory::class,
+            Controller\UserController::class => InvokableFactory::class,
+            Controller\AdminController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [
