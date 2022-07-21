@@ -13,12 +13,24 @@ class UserController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
+        $headTitleName = 'Просмотр профиля';
+
+        $this->layout()->setVariables([
+            'headTitleName' => $headTitleName,
+        ]);
+
         return $viewModel;
     }
 
     public function editProfileAction()
     {
         $viewModel = new ViewModel();
+
+        $headTitleName = 'Редактирование профиля';
+
+        $this->layout()->setVariables([
+            'headTitleName' => $headTitleName,
+        ]);
 
         return $viewModel;
     }
@@ -27,6 +39,12 @@ class UserController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
+        $headTitleName = 'Список пользователей';
+
+        $this->layout()->setVariables([
+            'headTitleName' => $headTitleName,
+        ]);
+
         return $viewModel;
     }
 
@@ -34,12 +52,24 @@ class UserController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
+        $headTitleName = 'Диалоги';
+
+        $this->layout()->setVariables([
+            'headTitleName' => $headTitleName,
+        ]);
+
         return $viewModel;
     }
 
     public function viewMessagesAction()
     {
         $viewModel = new ViewModel();
+
+        $headTitleName = 'Сообщения';
+
+        $this->layout()->setVariables([
+            'headTitleName' => $headTitleName,
+        ]);
 
         return $viewModel;
     }
