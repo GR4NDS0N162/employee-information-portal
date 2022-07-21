@@ -1,13 +1,15 @@
 <?php
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
+ * @var string $headTitleName
  */
 ?>
 <?= $this->doctype() ?>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <?= $this->headTitle('Laminas MVC Skeleton')->setSeparator(' - ')->setAutoEscape(false) ?>
+    <?php $this->headTitle($headTitleName); ?>
+    <?= $this->headTitle('Информационный портал сотрудников')->setSeparator(' - ')->setAutoEscape(false) ?>
 
     <?= $this->headMeta()
         ->appendName('viewport', 'width=device-width, initial-scale=1.0')
