@@ -13,5 +13,8 @@ return [
     ],
     'options' => [
         'label' => 'Пароль',
+        'label_attributes' => [
+            'class' => 'form-label',
+        ],
     ],
 ];

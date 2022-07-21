@@ -15,5 +15,8 @@ return [
     ],
     'options' => [
         'label' => 'E-mail',
+        'label_attributes' => [
+            'class' => 'form-label',
+        ],
     ],
 ];

@@ -11,6 +11,9 @@ return [
     ],
     'options' => [
         'label' => 'Должность',
+        'label_attributes' => [
+            'class' => 'form-label',
+        ],
         'options' => [
             null => [
                 'label' => 'Не выбрана',

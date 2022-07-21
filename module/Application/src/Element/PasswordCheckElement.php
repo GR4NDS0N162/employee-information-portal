@@ -12,5 +12,8 @@ return [
     ],
     'options' => [
         'label' => 'Подтверждение пароля',
+        'label_attributes' => [
+            'class' => 'form-label',
+        ],
     ],
 ];
