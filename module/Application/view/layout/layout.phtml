@@ -65,14 +65,16 @@
     </div>
 </nav>
 <div class="container">
-    <?= $this->content ?>
-    <hr>
-    <footer>
-        <p>
-            &copy; <?= date('Y') ?>
-            <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
-        </p>
-    </footer>
+    <div class="row">
+        <header class="col-12">
+        </header>
+        <main class="col-12">
+            <div class="card mb-2 mb-md-3 p-3 p-sm-4 p-md-5">
+                <h1 class="mb-4 mb-md-5"><?= $this->escapeHtml($headTitleName); ?></h1>
+                <?= $this->content ?>
+            </div>
+        </main>
+    </div>
 </div>
 <?= $this->inlineScript()
     ->prependFile($this->basePath('js/bootstrap.bundle.min.js'))
