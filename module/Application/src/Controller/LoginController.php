@@ -7,10 +7,12 @@ namespace Application\Controller;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
-class IndexController extends AbstractActionController
+class LoginController extends AbstractActionController
 {
-    public function indexAction()
+    public function loginAction()
     {
-        return new ViewModel();
+        $viewModel = new ViewModel();
+
+        return $viewModel;
     }
 }
