@@ -224,4 +224,11 @@ return [
             __DIR__ . '/../view',
         ],
     ],
+    'view_helpers' => [
+        'invokables' => [
+            'positionFieldsetHelper'       => 'Application\Helper\PositionFieldsetHelper',
+            'positionElementHelper'        => 'Application\Helper\PositionElementHelper',
+            'positionButtonFieldsetHelper' => 'Application\Helper\PositionButtonFieldsetHelper',
+        ],
+    ],
 ];
