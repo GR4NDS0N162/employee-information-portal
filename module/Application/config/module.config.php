@@ -123,7 +123,7 @@ return [
                         'options' => [
                             'route' => '/positions',
                             'defaults' => [
-                                'action' => 'edit-position',
+                                'action' => 'edit-positions',
                             ],
                         ],
                     ],
