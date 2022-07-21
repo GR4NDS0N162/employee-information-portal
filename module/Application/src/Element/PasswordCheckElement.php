@@ -7,7 +7,7 @@ return [
     'type' => Password::class,
     'attributes' => [
         'class' => 'form-control',
-        'placeholder' => '#',
+        'placeholder' => 'qwerty123',
         'required' => 'required',
     ],
     'options' => [

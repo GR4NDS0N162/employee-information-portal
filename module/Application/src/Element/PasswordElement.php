@@ -7,7 +7,7 @@ return [
     'type' => Password::class,
     'attributes' => [
         'class' => 'form-control',
-        'placeholder' => '#',
+        'placeholder' => 'qwerty123',
         'required' => 'required',
         'pattern' => '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,32}$',
     ],

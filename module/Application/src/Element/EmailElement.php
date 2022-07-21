@@ -9,7 +9,7 @@ return [
     'type' => Email::class,
     'attributes' => [
         'class' => 'form-control',
-        'placeholder' => '#',
+        'placeholder' => 'name@example.com',
         'required' => 'required',
         'pattern' => '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$',
     ],
