@@ -20,7 +20,6 @@ class PositionForm extends Form
 
         $this->setAttribute('method', 'POST');
         $this->setHydrator(new ClassMethodsHydrator());
-        $this->setInputFilter(new InputFilter());
 
         $this->add([
             'type'       => Collection::class,
@@ -29,7 +28,7 @@ class PositionForm extends Form
                 'class' => 'row gy-3',
             ],
             'options'    => [
-                'count'                  => 3,
+                'count'                  => 0,
                 'should_create_template' => true,
                 'allow_add'              => true,
                 'allow_remove'           => true,
