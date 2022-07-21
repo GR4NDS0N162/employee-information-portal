@@ -18,6 +18,10 @@ $this->inlineScript()
 <div class="card p-4"
      id="login-card">
     <h1 class="mb-3">Вход</h1>
+    <?php $loginForm->get('submit')->setAttributes([
+        'class' => 'btn btn-lg btn-outline-primary w-100',
+        'value' => 'Войти',
+    ]); ?>
     <?= $this->form()->openTag($loginForm); ?>
     <?= $this->formCollection()->render($loginForm); ?>
     <?= $this->form()->closeTag(); ?>
@@ -39,6 +43,10 @@ $this->inlineScript()
 <div class="card p-4"
      id="signup-card">
     <h1 class="mb-3">Регистрация</h1>
+    <?php $signUpForm->get('submit')->setAttributes([
+        'class' => 'btn btn-lg btn-outline-success w-100',
+        'value' => 'Зарегистрироваться',
+    ]); ?>
     <?= $this->form()->openTag($signUpForm); ?>
     <?= $this->formCollection()->render($signUpForm); ?>
     <?= $this->form()->closeTag(); ?>
@@ -56,6 +64,10 @@ $this->inlineScript()
 <div class="card p-4"
      id="recover-card">
     <h1 class="mb-3">Восстановление</h1>
+    <?php $recoverForm->get('submit')->setAttributes([
+        'class' => 'btn btn-lg btn-outline-danger w-100',
+        'value' => 'Восстановить',
+    ]); ?>
     <?= $this->form()->openTag($recoverForm); ?>
     <?= $this->formCollection()->render($recoverForm); ?>
     <?= $this->form()->closeTag(); ?>
