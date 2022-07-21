@@ -13,6 +13,11 @@ $this->inlineScript()
     ->appendFile($this->basePath('js/switch-forms.js'));
 ?>
 
+<?php $this->formRow()
+    ->setPartial('partial/form-floating-element',); ?>
+<?php $this->formCollection()
+    ->setWrapper('<div class="row gy-3" %4$s>%2$s%1$s%3$s</div>'); ?>
+
 <?php $loginForm->prepare(); ?>
 
 <div class="card p-4"
