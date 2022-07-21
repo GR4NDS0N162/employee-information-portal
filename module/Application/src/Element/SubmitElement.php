@@ -7,5 +7,6 @@ return [
     'type' => Submit::class,
     'attributes' => [
         'class' => 'btn w-100',
+        'value' => 'Отправить',
     ],
 ];
