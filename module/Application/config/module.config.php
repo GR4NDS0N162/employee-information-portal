@@ -229,6 +229,7 @@ return [
             'positionFieldsetHelper'       => 'Application\Helper\PositionFieldsetHelper',
             'positionElementHelper'        => 'Application\Helper\PositionElementHelper',
             'positionButtonFieldsetHelper' => 'Application\Helper\PositionButtonFieldsetHelper',
+            'positionButtonHelper'         => 'Application\Helper\PositionButtonHelper',
         ],
     ],
 ];

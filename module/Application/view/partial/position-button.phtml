@@ -1,0 +1,9 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ * @var Laminas\Form\Element\Button $element
+ */
+?>
+<?= $this->formButton()->openTag($element); ?>
+    <?= $element->getLabel(); ?>
+<?= $this->formButton()->closeTag(); ?>

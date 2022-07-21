@@ -29,7 +29,9 @@
             ->setElementHelper($this->positionElementHelper()
                 ->setPartial('partial/position-input'))
             ->setFieldsetHelper($this->positionButtonFieldsetHelper()
-                ->setWrapper('<div class="col-auto"><div%4$s>%2$s%1$s%3$s</div></div>')))
+                ->setWrapper('<div class="col-auto"><div%4$s>%2$s%1$s%3$s</div></div>')
+                ->setElementHelper($this->positionButtonHelper()
+                    ->setPartial('partial/position-button'))))
         ->render($positions); ?>
 
     <?= $this->formHidden($positionForm->get('csrf')); ?>
