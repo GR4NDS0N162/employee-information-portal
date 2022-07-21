@@ -21,16 +21,6 @@ return [
                     ],
                 ],
             ],
-            'application' => [
-                'type' => Segment::class,
-                'options' => [
-                    'route' => '/application[/:action]',
-                    'defaults' => [
-                        'controller' => Controller\LoginController::class,
-                        'action' => 'index',
-                    ],
-                ],
-            ],
         ],
     ],
     'controllers' => [
