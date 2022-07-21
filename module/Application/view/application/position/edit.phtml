@@ -24,14 +24,14 @@
     <?= $this->formCollection()
         ->setTemplateWrapper('<span class="d-none" data-template="%s"></span>')
         ->setWrapper('<div%4$s>%2$s%1$s%3$s</div>')
-        ->setFieldsetHelper($this->positionFieldsetHelper()
+        ->setFieldsetHelper($this->itemFieldsetHelper()
             ->setWrapper('<div class="col-12"><div%4$s>%2$s%1$s%3$s</div></div>')
-            ->setElementHelper($this->positionElementHelper()
-                ->setPartial('partial/position-input'))
-            ->setFieldsetHelper($this->positionButtonFieldsetHelper()
+            ->setElementHelper($this->itemElementHelper()
+                ->setPartial('partial/item-input'))
+            ->setFieldsetHelper($this->itemButtonFieldsetHelper()
                 ->setWrapper('<div class="col-auto"><div%4$s>%2$s%1$s%3$s</div></div>')
-                ->setElementHelper($this->positionButtonHelper()
-                    ->setPartial('partial/position-button'))))
+                ->setElementHelper($this->itemButtonHelper()
+                    ->setPartial('partial/item-button'))))
         ->render($positions); ?>
 
     <?= $this->formHidden($positionForm->get('csrf')); ?>

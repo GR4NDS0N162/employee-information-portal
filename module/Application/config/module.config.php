@@ -226,10 +226,10 @@ return [
     ],
     'view_helpers' => [
         'invokables' => [
-            'positionFieldsetHelper'       => 'Application\Helper\PositionFieldsetHelper',
-            'positionElementHelper'        => 'Application\Helper\PositionElementHelper',
-            'positionButtonFieldsetHelper' => 'Application\Helper\PositionButtonFieldsetHelper',
-            'positionButtonHelper'         => 'Application\Helper\PositionButtonHelper',
+            'itemFieldsetHelper'       => 'Application\Helper\ItemFieldsetHelper',
+            'itemElementHelper'        => 'Application\Helper\ItemElementHelper',
+            'itemButtonFieldsetHelper' => 'Application\Helper\ItemButtonFieldsetHelper',
+            'itemButtonHelper'         => 'Application\Helper\ItemButtonHelper',
         ],
     ],
 ];

@@ -6,6 +6,6 @@ namespace Application\Helper;
 
 use Laminas\Form\View\Helper\FormCollection;
 
-class PositionButtonFieldsetHelper extends FormCollection
+class ItemFieldsetHelper extends FormCollection
 {
 }

@@ -6,6 +6,6 @@ namespace Application\Helper;
 
 use Laminas\Form\View\Helper\FormRow;
 
-class PositionElementHelper extends FormRow
+class ItemElementHelper extends FormRow
 {
 }
