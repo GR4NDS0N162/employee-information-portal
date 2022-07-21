@@ -1,8 +1,43 @@
 <?php
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
+ * @var Application\Form\LoginForm $loginForm
+ * @var Application\Form\SignUpForm $signUpForm
+ * @var Application\Form\RecoverForm $recoverForm
  */
 
 $this->headLink()
     ->appendStylesheet($this->basePath('css/login-signup-recover.css'));
 ?>
+
+<?php $loginForm->prepare(); ?>
+
+<div class="card p-4"
+     id="login-card">
+    <h1 class="mb-3">Вход</h1>
+    <?= $this->form()->openTag($loginForm); ?>
+    <?= $this->formCollection()->render($loginForm); ?>
+    <?= $this->form()->closeTag(); ?>
+</div>
+
+
+<?php $signUpForm->prepare(); ?>
+
+<div class="card p-4"
+     id="signup-card">
+    <h1 class="mb-3">Регистрация</h1>
+    <?= $this->form()->openTag($signUpForm); ?>
+    <?= $this->formCollection()->render($signUpForm); ?>
+    <?= $this->form()->closeTag(); ?>
+</div>
+
+
+<?php $recoverForm->prepare(); ?>
+
+<div class="card p-4"
+     id="recover-card">
+    <h1 class="mb-3">Восстановление</h1>
+    <?= $this->form()->openTag($recoverForm); ?>
+    <?= $this->formCollection()->render($recoverForm); ?>
+    <?= $this->form()->closeTag(); ?>
+</div>
