@@ -2,9 +2,8 @@ html, body {
     height: 100%;
 }
 
-main {
+.container {
     max-width: 400px;
-    padding: 15px;
     text-align: center;
 }
 
