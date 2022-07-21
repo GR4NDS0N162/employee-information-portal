@@ -13,6 +13,14 @@ class LoginController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
+        $this->layout('layout/home-layout');
+
+        $headTitleName = 'Вход | Регистрация';
+
+        $this->layout()->setVariables([
+            'headTitleName' => $headTitleName,
+        ]);
+
         return $viewModel;
     }
 }
