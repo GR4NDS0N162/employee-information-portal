@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Controller;
 
+use Application\Form\PositionForm;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
@@ -43,6 +44,12 @@ class AdminController extends AbstractActionController
 
         $this->layout()->setVariables([
             'headTitleName' => $headTitleName,
+        ]);
+
+        $positionForm = new PositionForm();
+
+        $viewModel->setVariables([
+            'positionForm'=>$positionForm,
         ]);
 
         return $viewModel;
