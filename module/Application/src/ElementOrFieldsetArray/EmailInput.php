@@ -5,7 +5,7 @@ namespace Application\ElementOrFieldsetArray;
 use Laminas\Form\Element\Email;
 
 return [
-    'name' => 'email',
+    'name' => 'email-input',
     'type' => Email::class,
     'attributes' => [
         'class' => 'form-control',

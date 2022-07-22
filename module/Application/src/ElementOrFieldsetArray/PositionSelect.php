@@ -5,7 +5,7 @@ namespace Application\ElementOrFieldsetArray;
 use Laminas\Form\Element\Select;
 
 return [
-    'name' => 'position',
+    'name' => 'position-select',
     'type' => Select::class,
     'attributes' => [
         'class' => 'form-select',
