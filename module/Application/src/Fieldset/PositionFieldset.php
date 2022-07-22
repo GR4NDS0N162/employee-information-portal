@@ -10,7 +10,7 @@ class PositionFieldset extends Fieldset
     {
         parent::__construct();
 
-        $this->add(include __DIR__ . '/../Element/PositionElement.php');
-        $this->add(include __DIR__ . '/../Element/PositionButtonFieldset.php');
+        $this->add(include __DIR__ . '/../ElementOrFieldsetArray/PositionElement.php');
+        $this->add(include __DIR__ . '/../ElementOrFieldsetArray/PositionButtonFieldset.php');
     }
 }
