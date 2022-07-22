@@ -10,7 +10,7 @@ class PositionForm extends Form
     {
         parent::__construct();
 
-        $this->add(include __DIR__ . '/../Collection/PositionCollection.phtml');
+        $this->add(include __DIR__ . '/../Collection/PositionCollection.php');
         $this->add(include __DIR__ . '/../Element/SubmitElement.php');
     }
 }
