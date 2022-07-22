@@ -10,7 +10,15 @@ class RecoverForm extends Form
     {
         parent::__construct();
 
-        $this->add(include __DIR__ . '/../ElementOrFieldsetArray/EmailElement.php');
-        $this->add(include __DIR__ . '/../ElementOrFieldsetArray/SubmitElement.php');
+        $this->add(include __DIR__ . '/../ElementOrFieldsetArray/EmailInput.php');
+        $this->add(include __DIR__ . '/../ElementOrFieldsetArray/SubmitButton.php');
+
+        $this->get('submit-button')
+            ->setAttributes([
+                'class' => 'btn btn-lg btn-outline-danger w-100',
+            ])
+            ->setOptions([
+                'label' => 'Восстановить',
+            ]);
     }
 }

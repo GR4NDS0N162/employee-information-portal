@@ -10,8 +10,16 @@ class LoginForm extends Form
     {
         parent::__construct();
 
-        $this->add(include __DIR__ . '/../ElementOrFieldsetArray/EmailElement.php');
-        $this->add(include __DIR__ . '/../ElementOrFieldsetArray/PasswordElement.php');
-        $this->add(include __DIR__ . '/../ElementOrFieldsetArray/SubmitElement.php');
+        $this->add(include __DIR__ . '/../ElementOrFieldsetArray/EmailInput.php');
+        $this->add(include __DIR__ . '/../ElementOrFieldsetArray/PasswordInput.php');
+        $this->add(include __DIR__ . '/../ElementOrFieldsetArray/SubmitButton.php');
+
+        $this->get('submit-button')
+            ->setAttributes([
+                'class' => 'btn btn-lg btn-outline-primary w-100',
+            ])
+            ->setOptions([
+                'label' => 'Войти',
+            ]);
     }
 }

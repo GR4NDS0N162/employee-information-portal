@@ -11,6 +11,6 @@ class PositionForm extends Form
         parent::__construct();
 
         $this->add(include __DIR__ . '/../ElementOrFieldsetArray/PositionCollection.php');
-        $this->add(include __DIR__ . '/../ElementOrFieldsetArray/SubmitElement.php');
+        $this->add(include __DIR__ . '/../ElementOrFieldsetArray/SubmitButton.php');
     }
 }
