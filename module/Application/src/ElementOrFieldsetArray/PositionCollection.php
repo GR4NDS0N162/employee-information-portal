@@ -1,5 +1,7 @@
 <?php
 
+namespace Application\ElementOrFieldsetArray;
+
 use Application\Fieldset\PositionFieldset;
 use Laminas\Form\Element\Collection;
 

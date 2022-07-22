@@ -1,5 +1,7 @@
 <?php
 
+namespace Application\ElementOrFieldsetArray;
+
 use Laminas\Form\Element\Text;
 
 return [

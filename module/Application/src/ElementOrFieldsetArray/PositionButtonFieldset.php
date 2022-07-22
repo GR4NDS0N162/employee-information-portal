@@ -1,5 +1,7 @@
 <?php
 
+namespace Application\ElementOrFieldsetArray;
+
 use Application\Fieldset\PositionButtonFieldset;
 
 return [

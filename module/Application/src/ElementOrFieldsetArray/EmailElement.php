@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Element;
+namespace Application\ElementOrFieldsetArray;
 
 use Laminas\Form\Element\Email;
 
