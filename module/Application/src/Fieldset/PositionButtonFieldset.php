@@ -10,6 +10,6 @@ class PositionButtonFieldset extends Fieldset
     {
         parent::__construct();
 
-        $this->add(include __DIR__ . '/../Button/DeleteButton.phtml');
+        $this->add(include __DIR__ . '/../Button/DeleteButton.php');
     }
 }
