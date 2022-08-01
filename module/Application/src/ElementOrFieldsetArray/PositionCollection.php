@@ -9,7 +9,7 @@ return [
     'name' => 'positions',
     'type' => Collection::class,
     'attributes' => [
-        'class' => 'row gy-3',
+        'class' => 'row g-3',
     ],
     'options' => [
         'count' => 4,
