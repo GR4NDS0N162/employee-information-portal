@@ -10,6 +10,10 @@ class LoginForm extends Form
     {
         parent::__construct();
 
+        $this->setAttributes([
+            'class' => 'row g-3',
+        ]);
+
         $this->add(include __DIR__ . '/../ElementOrFieldsetArray/EmailInput.php');
         $this->add(include __DIR__ . '/../ElementOrFieldsetArray/PasswordInput.php');
         $this->add(include __DIR__ . '/../ElementOrFieldsetArray/SubmitButton.php');
