@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application;
 
+use Application\Helper;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
@@ -152,6 +153,20 @@ return [
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',
+        ],
+    ],
+    'view_helpers' => [
+        'aliases' => [
+            'itemHelper' => Helper\ItemHelper::class,
+            'buttonFieldsetHelper' => Helper\ButtonFieldsetHelper::class,
+            'buttonElementHelper' => Helper\ButtonElementHelper::class,
+            'inputItemHelper' => Helper\InputItemHelper::class,
+        ],
+        'factories' => [
+            Helper\ItemHelper::class => InvokableFactory::class,
+            Helper\ButtonFieldsetHelper::class => InvokableFactory::class,
+            Helper\ButtonElementHelper::class => InvokableFactory::class,
+            Helper\InputItemHelper::class => InvokableFactory::class,
         ],
     ],
 ];
