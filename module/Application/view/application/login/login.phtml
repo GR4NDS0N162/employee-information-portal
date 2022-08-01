@@ -11,6 +11,9 @@ $this->headLink()
 
 $this->inlineScript()
     ->appendFile($this->basePath('js/switch-forms.js'));
+
+$this->formRow()
+    ->setPartial('partial/form-floating-element');
 ?>
 
 <div class="card p-4"
