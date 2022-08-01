@@ -3,6 +3,27 @@
  * @var Laminas\View\Renderer\PhpRenderer $this
  * @var Application\Form\PositionForm $positionForm
  */
+
+$this->formRow()
+    ->setPartial('partial/col-12-form-element');
+
+$this->formCollection()
+    ->setTemplateWrapper('<span class="d-none" data-template="%s"></span>')
+    ->setWrapper('<div class="col-12"><div%4$s>%2$s%1$s%3$s</div></div>')
+    ->setFieldsetHelper(
+        $this->itemHelper()
+            ->setWrapper('<div class="col-12"><div%4$s>%2$s%1$s%3$s</div></div>')
+            ->setElementHelper(
+                $this->inputItemHelper()
+                    ->setPartial('partial/col-item-element'))
+            ->setFieldsetHelper(
+                $this->buttonFieldsetHelper()
+                    ->setWrapper('<div class="col-auto"><div%4$s>%2$s%1$s%3$s</div></div>')
+                    ->setElementHelper(
+                        $this->buttonElementHelper()
+                    )
+            )
+    );
 ?>
 
 <?= $this->form($positionForm); ?>
