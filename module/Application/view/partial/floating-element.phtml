@@ -1,0 +1,24 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ * @var Laminas\Form\Element $element
+ * @var string $label
+ * @var array $labelAttributes
+ * @var string $labelPosition
+ * @var bool $renderErrors
+ */
+
+use Laminas\Form\Element\Button;
+
+?>
+
+<div class="col-12">
+    <?php if ($element instanceof Button): ?>
+        <?= $this->formElement($element); ?>
+    <?php else: ?>
+        <div class="form-floating">
+            <?= $this->formElement($element); ?>
+            <?= $this->formLabel($element); ?>
+        </div>
+    <?php endif; ?>
+</div>

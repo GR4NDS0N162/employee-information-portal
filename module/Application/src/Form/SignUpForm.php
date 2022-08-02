@@ -1,0 +1,108 @@
+<?php
+
+namespace Application\Form;
+
+use Laminas\Form\Element;
+use Laminas\Form\Form;
+
+class SignUpForm extends Form
+{
+    public function __construct()
+    {
+        parent::__construct('signup-form');
+
+        $this->setAttribute('class','row gy-3');
+
+        $this->add([
+            'name' => 'email-input',
+            'type' => Element\Email::class,
+            'attributes' => [
+                'class' => 'form-control',
+                'placeholder' => 'name@example.com',
+                'required' => 'required',
+                'pattern' => '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$',
+            ],
+            'options' => [
+                'label' => 'E-mail',
+                'label_attributes' => [
+                    'class' => 'form-label',
+                ],
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'position-select',
+            'type' => Element\Select::class,
+            'attributes' => [
+                'class' => 'form-select',
+                'required' => 'required',
+            ],
+            'options' => [
+                'label' => 'Должность',
+                'label_attributes' => [
+                    'class' => 'form-label',
+                ],
+                'options' => [
+                    null => [
+                        'label' => 'Не выбрана',
+                        'disabled' => 'disabled',
+                        'selected' => 'selected',
+                    ],
+                    '1' => 'Уборщик',
+                    '2' => 'Фасовщик',
+                    '3' => 'Менеджер',
+                    '4' => 'Швейцар',
+                    '5' => 'Шеф',
+                    '6' => 'Экономист',
+                    '7' => 'Электрик',
+                    '8' => 'Юрист',
+                ],
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'password-input',
+            'type' => Element\Password::class,
+            'attributes' => [
+                'class' => 'form-control',
+                'placeholder' => 'qwerty123',
+                'required' => 'required',
+                'pattern' => '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,32}$',
+            ],
+            'options' => [
+                'label' => 'Пароль',
+                'label_attributes' => [
+                    'class' => 'form-label',
+                ],
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'password-check-input',
+            'type' => Element\Password::class,
+            'attributes' => [
+                'class' => 'form-control',
+                'placeholder' => 'qwerty123',
+                'required' => 'required',
+            ],
+            'options' => [
+                'label' => 'Подтверждение пароля',
+                'label_attributes' => [
+                    'class' => 'form-label',
+                ],
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'submit-button',
+            'type' => Element\Button::class,
+            'attributes' => [
+                'type' => 'submit',
+                'class' => 'btn btn-lg btn-outline-success w-100',
+            ],
+            'options' => [
+                'label' => 'Зарегистрироваться',
+            ],
+        ]);
+    }
+}

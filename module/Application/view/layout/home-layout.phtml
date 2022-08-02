@@ -22,6 +22,7 @@
         'type' => 'image/vnd.microsoft.icon',
         'href' => $this->basePath() . '/img/favicon.ico'
     ])
+        ->prependStylesheet($this->basePath('css/login-signup-recover.css'))
         ->prependStylesheet($this->basePath('css/main.css'))
         ->prependStylesheet($this->basePath('css/bootstrap.5.2.0-beta1.min.css'))
     ?>
@@ -34,6 +35,7 @@
     <?= $this->content ?>
 </div>
 <?= $this->inlineScript()
+    ->prependFile($this->basePath('js/switch-forms.js'))
     ->prependFile($this->basePath('js/bootstrap.bundle.min.js'))
     ->prependFile($this->basePath('js/jquery-3.6.0.min.js')) ?>
 </body>
