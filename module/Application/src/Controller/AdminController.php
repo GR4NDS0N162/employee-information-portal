@@ -15,9 +15,7 @@ class AdminController extends AbstractActionController
 
         $headTitleName = 'Список пользователей (Администратор)';
 
-        $this->layout()->setVariables([
-            'headTitleName' => $headTitleName,
-        ]);
+        $this->layout()->setVariable('headTitleName', $headTitleName);
 
         return $viewModel;
     }
@@ -28,9 +26,7 @@ class AdminController extends AbstractActionController
 
         $headTitleName = 'Редактирование пользователя (Администратор)';
 
-        $this->layout()->setVariables([
-            'headTitleName' => $headTitleName,
-        ]);
+        $this->layout()->setVariable('headTitleName', $headTitleName);
 
         return $viewModel;
     }
@@ -41,9 +37,7 @@ class AdminController extends AbstractActionController
 
         $headTitleName = 'Управление должностями (Администратор)';
 
-        $this->layout()->setVariables([
-            'headTitleName' => $headTitleName,
-        ]);
+        $this->layout()->setVariable('headTitleName', $headTitleName);
 
         return $viewModel;
     }

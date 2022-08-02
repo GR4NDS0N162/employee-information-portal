@@ -15,9 +15,7 @@ class UserController extends AbstractActionController
 
         $headTitleName = 'Просмотр профиля';
 
-        $this->layout()->setVariables([
-            'headTitleName' => $headTitleName,
-        ]);
+        $this->layout()->setVariable('headTitleName', $headTitleName);
 
         return $viewModel;
     }
@@ -28,9 +26,7 @@ class UserController extends AbstractActionController
 
         $headTitleName = 'Редактирование профиля';
 
-        $this->layout()->setVariables([
-            'headTitleName' => $headTitleName,
-        ]);
+        $this->layout()->setVariable('headTitleName', $headTitleName);
 
         return $viewModel;
     }
@@ -41,9 +37,7 @@ class UserController extends AbstractActionController
 
         $headTitleName = 'Список пользователей';
 
-        $this->layout()->setVariables([
-            'headTitleName' => $headTitleName,
-        ]);
+        $this->layout()->setVariable('headTitleName', $headTitleName);
 
         return $viewModel;
     }
@@ -54,9 +48,7 @@ class UserController extends AbstractActionController
 
         $headTitleName = 'Диалоги';
 
-        $this->layout()->setVariables([
-            'headTitleName' => $headTitleName,
-        ]);
+        $this->layout()->setVariable('headTitleName', $headTitleName);
 
         return $viewModel;
     }
@@ -67,9 +59,7 @@ class UserController extends AbstractActionController
 
         $headTitleName = 'Сообщения';
 
-        $this->layout()->setVariables([
-            'headTitleName' => $headTitleName,
-        ]);
+        $this->layout()->setVariable('headTitleName', $headTitleName);
 
         return $viewModel;
     }
