@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Controller;
 
+use Application\Form;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
@@ -51,6 +52,11 @@ class UserController extends AbstractActionController
         $headTitleName = 'Редактирование профиля';
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
+
+        $viewModel->setVariables([
+            'editProfileForm' => new Form\EditProfileForm(),
+            'changePasswordForm' => new Form\ChangePasswordForm(),
+        ]);
 
         return $viewModel;
     }

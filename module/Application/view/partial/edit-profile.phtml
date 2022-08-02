@@ -1,0 +1,28 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ * @var Laminas\Form\Element $element
+ * @var string $label
+ * @var array $labelAttributes
+ * @var string $labelPosition
+ * @var bool $renderErrors
+ */
+
+use Laminas\Form\Element\Button;
+
+?>
+
+<?php $classMap = [
+    'surname' => 'col-lg-4',
+    'name' => 'col-sm-6 col-lg-4',
+    'patronymic' => 'col-sm-6 col-lg-4',
+    'gender' => 'col-sm-6 col-lg-4',
+    'birthday' => 'col-sm-6 col-lg-4',
+    'skype' => 'col-lg-4',
+]; ?>
+
+<div class="col-12 <?= $classMap[$element->getName()]; ?>">
+    <?php if (!$element instanceof Button)
+        echo $this->formLabel($element); ?>
+    <?= $this->formElement($element); ?>
+</div>
