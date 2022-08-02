@@ -8,6 +8,7 @@ return [
     'name' => 'add-button',
     'type' => Button::class,
     'attributes' => [
-        'class' => 'btn btn-outline-primary w-100',
+        'class' => 'btn btn-lg btn-outline-primary w-100',
+        'onclick' => 'add_item()',
     ],
 ];

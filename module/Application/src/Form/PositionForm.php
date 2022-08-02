@@ -25,7 +25,7 @@ class PositionForm extends Form
 
         $this->get('submit-button')
             ->setAttributes([
-                'class' => 'btn btn-outline-success w-100',
+                'class' => 'btn btn-lg btn-outline-success w-100',
             ])
             ->setOptions([
                 'label' => 'Сохранить изменения',

@@ -12,7 +12,7 @@ return [
         'class' => 'row g-3',
     ],
     'options' => [
-        'count' => 4,
+        'count' => 0,
         'should_create_template' => true,
         'allow_add' => true,
         'allow_remove' => true,
