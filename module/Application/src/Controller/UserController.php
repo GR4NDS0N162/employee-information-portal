@@ -17,6 +17,30 @@ class UserController extends AbstractActionController
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
 
+        $user_info = [
+            'photo' => 'https://picsum.photos/900',
+            'surname' => 'Зубенко',
+            'name' => 'Михаил',
+            'patronymic' => 'Петрович',
+            'gender' => 'Мужской',
+            'birthday' => '16.10.1968',
+            'skype' => 'ivanivanov',
+            'phones' => [
+                ['value' => '+79283639473'],
+                ['value' => '+79462846274'],
+                ['value' => '+79204764782'],
+                ['value' => '+79347296067'],
+            ],
+            'emails' => [
+                ['value' => 'name@example.com'],
+                ['value' => 'name@example.com'],
+                ['value' => 'name@example.com'],
+                ['value' => 'name@example.com'],
+            ],
+        ];
+
+        $viewModel->setVariable('user_info', $user_info);
+
         return $viewModel;
     }
 

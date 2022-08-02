@@ -1,5 +1,73 @@
 <?php
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
+ * @var array $user_info
  */
 ?>
+<div class="row g-3">
+    <div class="col-12 col-lg-8">
+        <div class="row g-3">
+            <div class="col-12 text-center">
+                <img src="<?= $this->escapeHtml($user_info['photo']); ?>"
+                     class="user-photo-bg w-100 rounded-circle"
+                     alt="Фото пользователя">
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="card p-3">
+                    <h5 class="mb-2">Фамилия</h5>
+                    <p class="mb-0"><?= $this->escapeHtml($user_info['surname']); ?></p>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="card p-3">
+                    <h5 class="mb-2">Имя</h5>
+                    <p class="mb-0"><?= $this->escapeHtml($user_info['name']); ?></p>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="card p-3">
+                    <h5 class="mb-2">Отчество</h5>
+                    <p class="mb-0"><?= $this->escapeHtml($user_info['patronymic']); ?></p>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="card p-3">
+                    <h5 class="mb-2">Пол</h5>
+                    <p class="mb-0"><?= $this->escapeHtml($user_info['gender']); ?></p>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="card p-3">
+                    <h5 class="mb-2">Дата рождения</h5>
+                    <p class="mb-0"><?= $this->escapeHtml($user_info['birthday']); ?></p>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="card p-3">
+                    <h5 class="mb-2">Skype</h5>
+                    <p class="mb-0"><?= $this->escapeHtml($user_info['skype']); ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="row g-3">
+            <div class="col-12 col-md-4 col-lg-12">
+                <div class="card">
+                    <h5 class="m-3">Телефоны</h5>
+                    <ul class="list-group list-group-flush">
+                        <?= $this->partialLoop('partial/list-group', $user_info['phones']); ?>
+                    </ul>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <h5 class="m-3">E-mail-ы</h5>
+                    <ul class="list-group list-group-flush">
+                        <?= $this->partialLoop('partial/list-group', $user_info['emails']); ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
