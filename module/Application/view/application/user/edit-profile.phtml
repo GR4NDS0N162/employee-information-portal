@@ -3,26 +3,41 @@
  * @var Laminas\View\Renderer\PhpRenderer $this
  * @var Application\Form\EditProfileForm $editProfileForm
  * @var Application\Form\ChangePasswordForm $changePasswordForm
+ * @var Application\Form\EditPhoneForm $editPhoneForm
+ * @var Application\Form\EditEmailForm $editEmailForm
  */
+$this->inlineScript()
+    ->appendFile($this->basePath('js/collection-manipulation.js'));
 ?>
-<div class="row gy-3">
+<div class="row g-3">
     <div class="col-12">
-        <?php $this->formRow()->setPartial('partial/edit-profile'); ?>
-        <?= $this->form()->render($editProfileForm); ?>
-    </div>
-    <div class="col-12">
-        <div class="form-label">Телефоны</div>
         <div class="card p-3">
+            <?php $this->formRow()->setPartial('partial/edit-profile'); ?>
+            <?= $this->form()->render($editProfileForm); ?>
         </div>
     </div>
-    <div class="col-12">
-        <div class="form-label">E-mail-ы</div>
+
+    <?php $this->formRow()->setPartial('partial/collection-form'); ?>
+    <?php $this->formCollection()
+        ->setTemplateWrapper('<span class="d-none" data-template="%s"></span>')
+        ->setWrapper('<div class="col-12"><div%4$s>%2$s%1$s%3$s</div></div>'); ?>
+
+    <div class="col-12 col-lg-6">
         <div class="card p-3">
+            <div class="form-label">Телефоны</div>
+            <?= $this->form()->render($editPhoneForm); ?>
         </div>
     </div>
-    <div class="col-12">
-        <div class="form-label">Пароль</div>
+    <div class="col-12 col-lg-6">
         <div class="card p-3">
+            <div class="form-label">E-mail-ы</div>
+            <?= $this->form()->render($editEmailForm); ?>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="card p-3">
+            <div class="form-label">Пароль</div>
             <?php $this->formRow()->setPartial('partial/floating-element'); ?>
             <?= $this->form()->render($changePasswordForm); ?>
         </div>

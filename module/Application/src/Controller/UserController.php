@@ -56,6 +56,8 @@ class UserController extends AbstractActionController
         $viewModel->setVariables([
             'editProfileForm' => new Form\EditProfileForm(),
             'changePasswordForm' => new Form\ChangePasswordForm(),
+            'editPhoneForm' => new Form\EditPhoneForm(),
+            'editEmailForm' => new Form\EditEmailForm(),
         ]);
 
         return $viewModel;
