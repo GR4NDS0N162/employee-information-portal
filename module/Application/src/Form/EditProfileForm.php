@@ -11,7 +11,7 @@ class EditProfileForm extends Form
     {
         parent::__construct('edit-profile-form');
 
-        $this->setAttribute('class', 'row gy-3');
+        $this->setAttribute('class', 'row g-3');
 
         $this->add([
             'name' => 'photo',
