@@ -18,6 +18,47 @@ class AdminController extends AbstractActionController
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
 
+        $user_info = [
+            [
+                'isAdmin' => true,
+                'isActive' => true,
+                'photo' => 'https://picsum.photos/' . random_int(100, 999),
+                'fullname' => 'Зубенко Михаил Петрович',
+                'position' => 'Уборщик',
+                'gender' => 'Мужской',
+                'age' => 47,
+            ],
+            [
+                'isAdmin' => false,
+                'isActive' => true,
+                'photo' => 'https://picsum.photos/' . random_int(100, 999),
+                'fullname' => 'Егоров Владимир Егорович',
+                'position' => 'Бухгалтер',
+                'gender' => 'Мужской',
+                'age' => 31,
+            ],
+            [
+                'isAdmin' => true,
+                'isActive' => false,
+                'photo' => 'https://picsum.photos/' . random_int(100, 999),
+                'fullname' => 'Мельникова Алёна Вадимовна',
+                'position' => 'Юрист',
+                'gender' => 'Женский',
+                'age' => 23,
+            ],
+            [
+                'isAdmin' => false,
+                'isActive' => false,
+                'photo' => 'https://picsum.photos/' . random_int(100, 999),
+                'fullname' => 'Тимофеева Вероника Денисовна',
+                'position' => 'Менеджер',
+                'gender' => 'Женский',
+                'age' => 36,
+            ],
+        ];
+
+        $viewModel->setVariable('user_info', $user_info);
+
         return $viewModel;
     }
 
