@@ -33,7 +33,7 @@ class EditEmailForm extends Form
                 'class' => 'row g-3 collection-list',
             ],
             'options' => [
-                'count' => 0,
+                'count' => 1,
                 'should_create_template' => true,
                 'allow_add' => true,
                 'allow_remove' => true,
