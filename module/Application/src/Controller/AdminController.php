@@ -17,6 +17,7 @@ class AdminController extends AbstractActionController
         $headTitleName = 'Список пользователей (Администратор)';
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
+        $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
 
         $user_info = [
             [
@@ -70,6 +71,7 @@ class AdminController extends AbstractActionController
         $headTitleName = 'Редактирование пользователя (Администратор)';
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
+        $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
 
         $viewModel->setVariables([
             'editUserForm' => new Form\EditUserForm(),
@@ -88,6 +90,7 @@ class AdminController extends AbstractActionController
         $headTitleName = 'Управление должностями (Администратор)';
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
+        $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
 
         $viewModel->setVariable('editPositionForm', new Form\EditPositionForm());
 
