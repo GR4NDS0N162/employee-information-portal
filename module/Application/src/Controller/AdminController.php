@@ -21,6 +21,7 @@ class AdminController extends AbstractActionController
 
         $user_info = [
             [
+                'userId' => 1,
                 'isAdmin' => true,
                 'isActive' => true,
                 'photo' => 'https://picsum.photos/' . random_int(100, 999),
@@ -30,6 +31,7 @@ class AdminController extends AbstractActionController
                 'age' => 47,
             ],
             [
+                'userId' => 2,
                 'isAdmin' => false,
                 'isActive' => true,
                 'photo' => 'https://picsum.photos/' . random_int(100, 999),
@@ -39,6 +41,7 @@ class AdminController extends AbstractActionController
                 'age' => 31,
             ],
             [
+                'userId' => 3,
                 'isAdmin' => true,
                 'isActive' => false,
                 'photo' => 'https://picsum.photos/' . random_int(100, 999),
@@ -48,6 +51,7 @@ class AdminController extends AbstractActionController
                 'age' => 23,
             ],
             [
+                'userId' => 4,
                 'isAdmin' => false,
                 'isActive' => false,
                 'photo' => 'https://picsum.photos/' . random_int(100, 999),
