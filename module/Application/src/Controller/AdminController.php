@@ -58,6 +58,7 @@ class AdminController extends AbstractActionController
         ];
 
         $viewModel->setVariable('user_info', $user_info);
+        $viewModel->setVariable('adminFilterForm', new Form\AdminFilterForm());
 
         return $viewModel;
     }
