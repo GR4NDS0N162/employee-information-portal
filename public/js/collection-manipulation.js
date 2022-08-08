@@ -45,8 +45,6 @@ function delete_item(element)
     let formName = $(element).closest('form')[0].getAttribute('name');
     let currentCount = $('#' + formName + ' > div > div > .item').length;
 
-    console.log(formName)
-
     if (currentCount > 1)
         $(element).closest('.item').remove();
     else {
