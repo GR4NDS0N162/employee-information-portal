@@ -169,6 +169,8 @@ class UserController extends AbstractActionController
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
 
+        $viewModel->setVariable('newMessageForm', new Form\NewMessageForm());
+
         return $viewModel;
     }
 }

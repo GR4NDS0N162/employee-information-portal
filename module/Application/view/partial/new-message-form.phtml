@@ -1,0 +1,19 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ * @var Laminas\Form\Element $element
+ * @var string $label
+ * @var array $labelAttributes
+ * @var string $labelPosition
+ * @var bool $renderErrors
+ */
+?>
+
+<?php $classMap = [
+    'message' => 'col',
+    'submit-button' => 'col-auto',
+]; ?>
+
+<div class="<?= $classMap[$element->getName()]; ?>">
+    <?= $this->formElement()->render($element); ?>
+</div>
