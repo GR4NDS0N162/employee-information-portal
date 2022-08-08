@@ -103,6 +103,7 @@ class UserController extends AbstractActionController
         ];
 
         $viewModel->setVariable('user_info', $user_info);
+        $viewModel->setVariable('userFilterForm', new Form\UserFilterForm());
 
         return $viewModel;
     }

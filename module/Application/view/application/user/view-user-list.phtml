@@ -2,6 +2,7 @@
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
  * @var array $user_info
+ * @var Application\Form\UserFilterForm $userFilterForm
  */
 ?>
 <div class="row g-3">
@@ -37,6 +38,11 @@
     <div class="col-12">
         <div class="row g-3">
             <div class="col-12 col-lg-4 col col-xl-3">
+                <?php $this->formRow()->setPartial('partial/user-filter-form.phtml'); ?>
+                <?php $this->formCollection()
+                    ->setLabelWrapper('<label class="form-label">%s</label>')
+                    ->setWrapper('<div class="col-12"><div class="card p-3"><div%4$s>%2$s%1$s%3$s</div></div></div>') ?>
+                <?= $this->form()->render($userFilterForm); ?>
             </div>
             <div class="col">
                 <div class="row g-3">
