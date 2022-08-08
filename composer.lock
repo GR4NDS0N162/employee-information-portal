@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "413aa46025302038804d27ebaf8b1b59",
+    "content-hash": "9e2140ee498f48c4f8eb682bdc75704b",
     "packages": [
         {
             "name": "brick/varexporter",
@@ -1166,16 +1166,16 @@
         },
         {
             "name": "laminas/laminas-navigation",
-            "version": "2.13.2",
+            "version": "2.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-navigation.git",
-                "reference": "ca7c4df621bba21494b62722c46cd9326ca3e360"
+                "reference": "dfdb42d4eb4a9290950fbb674bb20718b4b9a4b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-navigation/zipball/ca7c4df621bba21494b62722c46cd9326ca3e360",
-                "reference": "ca7c4df621bba21494b62722c46cd9326ca3e360",
+                "url": "https://api.github.com/repos/laminas/laminas-navigation/zipball/dfdb42d4eb4a9290950fbb674bb20718b4b9a4b4",
+                "reference": "dfdb42d4eb4a9290950fbb674bb20718b4b9a4b4",
                 "shasum": ""
             },
             "require": {
@@ -1197,7 +1197,9 @@
                 "laminas/laminas-uri": "^2.9.1",
                 "laminas/laminas-view": "^2.14.2",
                 "phpspec/prophecy-phpunit": "^2.0.1",
-                "phpunit/phpunit": "^9.5.10"
+                "phpunit/phpunit": "^9.5.10",
+                "psalm/plugin-phpunit": "^0.17.0",
+                "vimeo/psalm": "^4.24"
             },
             "suggest": {
                 "laminas/laminas-config": "^3.7, to provide page configuration (optional, as arrays and Traversables are also allowed)",
@@ -1242,7 +1244,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2022-02-16T21:41:34+00:00"
+            "time": "2022-07-21T20:50:30+00:00"
         },
         {
             "name": "laminas/laminas-router",
