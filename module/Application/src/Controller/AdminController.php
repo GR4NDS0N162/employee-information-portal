@@ -89,6 +89,8 @@ class AdminController extends AbstractActionController
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
 
+        $viewModel->setVariable('editPositionForm', new Form\EditPositionForm());
+
         return $viewModel;
     }
 }

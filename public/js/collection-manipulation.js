@@ -4,11 +4,19 @@ const phoneTemplate = $('#edit-phone-form > div > div > span').data('template');
 let currentEmailIndex = $('#edit-email-form > div > div > div').length;
 const emailTemplate = $('#edit-email-form > div > div > span').data('template');
 
+let currentPositionIndex = $('#edit-position-form > div > div > div').length;
+const positionTemplate = $('#edit-position-form > div > div > span').data('template');
+
 const phoneNotification = document.createElement('div');
 phoneNotification.classList.add('col-12', 'notification', 'd-block');
 phoneNotification.innerText = 'Список телефонов пуст.';
 
+const positionNotification = document.createElement('div');
+positionNotification.classList.add('col-12', 'notification', 'd-block');
+positionNotification.innerText = 'Список должностей пуст.';
+
 $('#edit-phone-form > div > .collection-list').append(phoneNotification);
+$('#edit-position-form > div > .collection-list').append(positionNotification);
 
 function add_phone()
 {
@@ -24,17 +32,27 @@ function add_email()
     $('input[name=\'emails[' + currentEmailIndex++ + ']\']').focus();
 }
 
+function add_position()
+{
+    $('#edit-position-form > div > div').append(positionTemplate.replace(/__index__/g, currentPositionIndex));
+    $('input[name=\'positions[' + currentPositionIndex++ + ']\']').focus();
+
+    $('#edit-position-form > div > div > div.notification')[0].classList.replace('d-block', 'd-none');
+}
+
 function delete_item(element)
 {
     let formName = $(element).closest('form')[0].getAttribute('name');
-    let currentCount = $('#' + formName + ' > div > .collection-list > .item').length;
+    let currentCount = $('#' + formName + ' > div > div > .item').length;
+
+    console.log(formName)
 
     if (currentCount > 1)
-        $(element).closest('.col-12').remove();
+        $(element).closest('.item').remove();
     else {
-        if (formName == 'edit-phone-form') {
-            $('#edit-phone-form > div > div > div.notification')[0].classList.replace('d-none', 'd-block');
-            $(element).closest('.col-12').remove();
+        if (formName != 'edit-email-form') {
+            $('#' + formName + ' > div > div > .notification')[0].classList.replace('d-none', 'd-block');
+            $(element).closest('.item').remove();
         }
     }
 }
