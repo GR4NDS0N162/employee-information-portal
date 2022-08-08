@@ -2,6 +2,9 @@
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
  * @var Application\Form\NewMessageForm $newMessageForm
+ * @var array $messages
+ * @var array $user_info
+ * @var array $buddy_info
  */
 ?>
 <div class="row gy-3">
@@ -14,12 +17,12 @@
             <div class="col-12 col-md-auto">
                 <div class="row g-2 align-items-center">
                     <div class="col-auto order-md-1">
-                        <img src=" "
+                        <img src="<?= $this->escapeHtml($buddy_info['photo']); ?>"
                              class="buddy-photo img-fluid rounded"
                              alt="Фото пользователя">
                     </div>
                     <div class="col-auto order-md-0">
-                        <span class="h6"> </span>
+                        <span class="h6"><?= $this->escapeHtml($buddy_info['fullname']); ?></span>
                     </div>
                 </div>
             </div>
@@ -31,7 +34,11 @@
     </div>
     <div class="col-12">
         <div class="row gy-3">
-
+            <?= $this->partial('partial/message-list.phtml', [
+                'messages' => $messages,
+                'user_info' => $user_info,
+                'buddy_info' => $buddy_info,
+            ]); ?>
         </div>
     </div>
     <div class="col-12 d-flex justify-content-center">

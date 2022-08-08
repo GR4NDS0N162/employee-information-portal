@@ -171,6 +171,53 @@ class UserController extends AbstractActionController
 
         $viewModel->setVariable('newMessageForm', new Form\NewMessageForm());
 
+        $user_info = [
+            'fullname' => 'Иван Иванов',
+            'photo' => 'https://picsum.photos/' . random_int(100, 999),
+        ];
+
+        $buddy_info = [
+            'fullname' => 'Петя Петров',
+            'photo' => 'https://picsum.photos/' . random_int(100, 999),
+        ];
+
+        $messages = [
+            [
+                'isUserSender' => true,
+                'content' => 'Привет1',
+                'createdAt' => '16.05.2022 16:32',
+                'openedAt' => '16.05.2022 16:34',
+            ],
+            [
+                'isUserSender' => true,
+                'content' => 'Привет2',
+                'createdAt' => '16.05.2022 16:36',
+                'openedAt' => '16.05.2022 16:37',
+            ],
+            [
+                'isUserSender' => false,
+                'content' => 'Привет3',
+                'createdAt' => '16.05.2022 16:38',
+                'openedAt' => '16.05.2022 16:39',
+            ],
+            [
+                'isUserSender' => true,
+                'content' => 'Привет4',
+                'createdAt' => '16.05.2022 16:40',
+            ],
+            [
+                'isUserSender' => false,
+                'content' => 'Привет5',
+                'createdAt' => '16.05.2022 16:42',
+            ],
+        ];
+
+        $viewModel->setVariables([
+            'messages' => $messages,
+            'user_info' => $user_info,
+            'buddy_info' => $buddy_info,
+        ]);
+
         return $viewModel;
     }
 }
