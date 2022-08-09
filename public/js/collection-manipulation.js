@@ -21,7 +21,8 @@ $('#edit-position-form > div > .collection-list').append(positionNotification);
 function add_phone()
 {
     $('#edit-phone-form > div > div').append(phoneTemplate.replace(/__index__/g, currentPhoneIndex));
-    $('input[name=\'phones[' + currentPhoneIndex++ + ']\']').focus();
+    let item = $('input[name=\'phones[' + currentPhoneIndex++ + ']\']')[0];
+    item.focus();
 
     $('#edit-phone-form > div > div > div.notification')[0].classList.replace('d-block', 'd-none');
 }
@@ -29,13 +30,15 @@ function add_phone()
 function add_email()
 {
     $('#edit-email-form > div > div').append(emailTemplate.replace(/__index__/g, currentEmailIndex));
-    $('input[name=\'emails[' + currentEmailIndex++ + ']\']').focus();
+    let item = $('input[name=\'emails[' + currentEmailIndex++ + ']\']')[0];
+    item.focus();
 }
 
 function add_position()
 {
     $('#edit-position-form > div > div').append(positionTemplate.replace(/__index__/g, currentPositionIndex));
-    $('input[name=\'positions[' + currentPositionIndex++ + ']\']').focus();
+    let item = $('input[name=\'positions[' + currentPositionIndex++ + ']\']')[0];
+    item.focus();
 
     $('#edit-position-form > div > div > div.notification')[0].classList.replace('d-block', 'd-none');
 }
