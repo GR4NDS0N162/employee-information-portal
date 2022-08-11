@@ -13,7 +13,7 @@ abstract class EditListForm extends Form
         'attributes' => [
             'type' => 'button',
             'class' => 'btn btn-outline-primary w-100',
-            'onclick'=>'add_item(this)',
+            'onclick' => 'add_item(this)',
         ],
         'options' => [
             'label' => 'Добавить',
