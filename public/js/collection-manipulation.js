@@ -4,8 +4,9 @@ function add_item(button)
     let template = $(`#${formId} > div > div > span`).data('template');
     let container = $(`#${formId} > div > [name="list"]`);
 
-    let lastInputName = $(`#${formId} > div > [name="list"] > .item > div > input`).last()[0].getAttribute('name');
-    container.append(template.replace(/__index__/g, parseInt(lastInputName.match(/[0-9]+(?=])/)[0]) + 1));
+    let lastInput = $(`#${formId} > div > [name="list"] > .item > div > input`).last()[0];
+    let newIndex = (lastInput) ? parseInt(lastInput.getAttribute('name').match(/[0-9]+(?=])/)[0]) + 1 : 0;
+    container.append(template.replace(/__index__/g, newIndex));
 
     $(`#${formId} > div > [name="list"] > .item:last-child > div > input`).focus();
 }
