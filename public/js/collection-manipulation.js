@@ -9,11 +9,15 @@ function add_item(button)
     container.append(template.replace(/__index__/g, newIndex));
 }
 
+const cantBeEmpty = ['edit-email-form'];
+
 function delete_item(button)
 {
     let formId = button.closest('form').getAttribute('id');
     let currentCount = $(`#${formId} > div > div > .item`).length;
 
-    if (!(currentCount === 1 && formId === 'edit-email-form'))
+    if (!(currentCount === 1 && cantBeEmpty.indexOf(formId) !== -1))
         button.closest('.item').remove();
+    else
+        button.previousSibling.previousSibling.innerText = 'Список не может быть пустым.';
 }
