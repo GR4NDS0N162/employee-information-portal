@@ -17,7 +17,6 @@ class UserController extends AbstractActionController
         $headTitleName = 'Просмотр профиля';
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
-        $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
 
         $user_info = [
             'photo' => 'https://picsum.photos/900',
@@ -53,7 +52,6 @@ class UserController extends AbstractActionController
         $headTitleName = 'Редактирование профиля';
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
-        $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
 
         $viewModel->setVariables([
             'editProfileForm' => new Form\EditProfileForm(),
@@ -72,7 +70,6 @@ class UserController extends AbstractActionController
         $headTitleName = 'Список пользователей';
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
-        $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
 
         $user_info = [
             [
@@ -118,7 +115,6 @@ class UserController extends AbstractActionController
         $headTitleName = 'Диалоги';
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
-        $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
 
         $dialogs = [
             [
@@ -172,7 +168,6 @@ class UserController extends AbstractActionController
         $headTitleName = 'Сообщения';
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
-        $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
 
         $viewModel->setVariable('newMessageForm', new Form\NewMessageForm());
 
