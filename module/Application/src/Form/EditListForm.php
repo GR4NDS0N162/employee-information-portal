@@ -38,7 +38,8 @@ abstract class EditListForm extends Form
     {
         parent::__construct($name);
 
-        $this->setAttribute('class', 'row gy-3');
+        $this->setAttribute('class', 'row gy-3 needs-validation');
+        $this->setAttribute('novalidate', '');
 
         $this->add($this->addButton);
         $this->add($this->list);
