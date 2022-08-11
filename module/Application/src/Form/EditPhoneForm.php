@@ -15,8 +15,9 @@ class EditPhoneForm extends EditListForm
             'type' => Element\Tel::class,
             'attributes' => [
                 'class' => 'form-control',
-                'placeholder' => '+7(xxx)xxx-xx-xx',
+                'placeholder' => '+7xxxxxxxxxx',
                 'required' => 'required',
+                'pattern' => '^\+7[0-9]{10}$',
             ],
         ];
 
