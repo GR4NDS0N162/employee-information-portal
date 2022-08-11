@@ -27,3 +27,11 @@ body {
 .card-gray-bg > .card {
     background-color: #f5f5f5;
 }
+
+.notification {
+    display: none;
+}
+
+.notification:last-child {
+    display: block;
+}
