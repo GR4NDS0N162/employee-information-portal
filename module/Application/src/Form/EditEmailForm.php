@@ -11,6 +11,7 @@ class EditEmailForm extends EditListForm
     {
         $this->addButton['options']['label'] = 'Добавить e-mail';
 
+        $this->list['options']['count'] = 1;
         $this->list['options']['target_element'] = [
             'type' => Element\Email::class,
             'attributes' => [
