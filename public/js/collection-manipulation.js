@@ -47,5 +47,7 @@ function delete_item(button)
         input.setAttribute('name', `list[${currentIndex}]`);
 
         container[0].setAttribute('current-index', ++currentIndex);
+
+        button.closest('form').dispatchEvent(new Event('submit'));
     }
 }

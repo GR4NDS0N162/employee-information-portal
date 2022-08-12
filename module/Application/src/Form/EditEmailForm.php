@@ -15,7 +15,7 @@ class EditEmailForm extends EditListForm
         $this->list['options']['target_element'] = [
             'type' => Element\Email::class,
             'attributes' => [
-                'class' => 'form-control',
+                'class' => 'form-control validation-email',
                 'placeholder' => 'name@example.com',
                 'required' => 'required',
                 'pattern' => '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$',
