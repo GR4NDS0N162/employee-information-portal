@@ -5,7 +5,7 @@ function add_item(button)
     let template = $(`#${formId} .collection-list span`).data('template');
 
     if (!container[0].hasAttribute('current-index'))
-        calculateIndex(formId, container[0]);
+        calculateIndex(formId);
 
     let currentIndex = parseInt(container[0].getAttribute('current-index'));
     container.append(template.replace(/__index__/g, currentIndex));
@@ -13,11 +13,13 @@ function add_item(button)
     container[0].setAttribute('current-index', ++currentIndex);
 }
 
-function calculateIndex(formId, containerElement)
+function calculateIndex(...formsId)
 {
-    let lastInput = $(`#${formId} .collection-list > .item:last-child input`)[0];
-    let currentIndex = (!lastInput) ? 0 : parseInt(lastInput.getAttribute('name').match(/\d+(?=])/)[0]) + 1;
-    containerElement.setAttribute('current-index', currentIndex);
+    for (let formId of formsId) {
+        let lastInput = $(`#${formId} .collection-list > .item:last-child input`)[0];
+        let currentIndex = (!lastInput) ? 0 : parseInt(lastInput.getAttribute('name').match(/\d+(?=])/)[0]) + 1;
+        $(`#${formId} .collection-list`)[0].setAttribute('current-index', currentIndex);
+    }
 }
 
 const cantBeEmpty = ['edit-email-form'];
@@ -37,7 +39,7 @@ function delete_item(button)
         feedback.childNodes[0].nodeValue = 'Этот список не может быть пустым.';
 
         if (!container[0].hasAttribute('current-index'))
-            calculateIndex(formId, container[0]);
+            calculateIndex(formId);
 
         let currentIndex = parseInt(container[0].getAttribute('current-index'));
 
