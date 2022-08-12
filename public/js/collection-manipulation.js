@@ -34,7 +34,7 @@ function delete_item(button)
         let feedback = button.previousSibling.previousSibling;
         let input = feedback.previousSibling.previousSibling;
 
-        feedback.innerText = 'Этот список не может быть пустым.';
+        feedback.childNodes[0].nodeValue = 'Этот список не может быть пустым.';
 
         if (!container[0].hasAttribute('current-index'))
             calculateIndex(formId, container[0]);
