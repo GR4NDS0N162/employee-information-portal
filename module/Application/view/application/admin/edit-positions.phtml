@@ -4,7 +4,8 @@
  * @var Application\Form\EditPositionForm $editPositionForm
  */
 $this->inlineScript()
-    ->appendFile($this->basePath('js/collection-manipulation.js'));
+    ->appendFile($this->basePath('js/collection-manipulation.js'))
+    ->appendFile($this->basePath('js/edit-list-form-validation.js'));
 ?>
 
 <?php $this->formRow()->setPartial('partial/collection-form'); ?>
