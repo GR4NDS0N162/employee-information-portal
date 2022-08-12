@@ -24,7 +24,7 @@ abstract class EditListForm extends Form
         'name' => 'list',
         'type' => Element\Collection::class,
         'attributes' => [
-            'class' => 'row g-3',
+            'class' => 'row g-3 collection-list',
         ],
         'options' => [
             'count' => 0,

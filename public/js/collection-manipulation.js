@@ -1,8 +1,8 @@
 function add_item(button)
 {
     let formId = button.closest('form').getAttribute('id');
-    let container = $(`#${formId} [name="list"]`);
-    let template = $(`#${formId} [name="list"] span`).data('template');
+    let container = $(`#${formId} .collection-list`);
+    let template = $(`#${formId} .collection-list span`).data('template');
 
     if (!container[0].hasAttribute('current-index'))
         calculateIndex(formId, container[0]);
@@ -15,7 +15,7 @@ function add_item(button)
 
 function calculateIndex(formId, containerElement)
 {
-    let lastInput = $(`#${formId} [name="list"] > .item:last-child input`)[0];
+    let lastInput = $(`#${formId} .collection-list > .item:last-child input`)[0];
     let currentIndex = (!lastInput) ? 0 : parseInt(lastInput.getAttribute('name').match(/\d+(?=])/)[0]) + 1;
     containerElement.setAttribute('current-index', currentIndex);
 }
@@ -25,12 +25,12 @@ const cantBeEmpty = ['edit-email-form'];
 function delete_item(button)
 {
     let formId = button.closest('form').getAttribute('id');
-    let currentCount = $(`#${formId} [name="list"] .item`).length;
+    let currentCount = $(`#${formId} .collection-list .item`).length;
 
     if (!(currentCount === 1 && cantBeEmpty.indexOf(formId) !== -1))
         button.closest('.item').remove();
     else {
-        let container = $(`#${formId} [name="list"]`);
+        let container = $(`#${formId} .collection-list`);
         let feedback = button.previousSibling.previousSibling;
         let input = feedback.previousSibling.previousSibling;
 
