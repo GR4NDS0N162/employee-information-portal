@@ -2,7 +2,8 @@
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
  * @var Application\Form\EditProfileForm $editUserForm
- * @var Application\Form\ChangePasswordForm $changePasswordForm
+ * @var Application\Form\GeneratePasswordForm $generatePasswordForm
+ * @var Application\Form\SetPasswordForm $setPasswordForm
  * @var Application\Form\EditPhoneForm $editPhoneForm
  * @var Application\Form\EditEmailForm $editEmailForm
  */
@@ -42,7 +43,14 @@ $this->inlineScript()
         <div class="card p-3">
             <div class="form-label">Пароль</div>
             <?php $this->formRow()->setPartial('partial/floating-element'); ?>
-            <?= $this->form()->render($changePasswordForm); ?>
+            <div class="row gy-3">
+                <div class="col-12">
+                    <?= $this->form()->render($generatePasswordForm); ?>
+                </div>
+                <div class="col-12">
+                    <?= $this->form()->render($setPasswordForm); ?>
+                </div>
+            </div>
         </div>
     </div>
 </div>

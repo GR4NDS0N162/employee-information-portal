@@ -79,7 +79,8 @@ class AdminController extends AbstractActionController
 
         $viewModel->setVariables([
             'editUserForm' => new Form\EditUserForm(),
-            'changePasswordForm' => new Form\ChangePasswordForm(),
+            'generatePasswordForm' => new Form\GeneratePasswordForm(),
+            'setPasswordForm' => new Form\SetPasswordForm(),
             'editPhoneForm' => new Form\EditPhoneForm(),
             'editEmailForm' => new Form\EditEmailForm(),
         ]);
