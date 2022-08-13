@@ -41,15 +41,18 @@ function hangHandlers(item)
         'validation-pattern-phone': 'Введённое значение - не телефон.',
     };
 
-    let patternValidationMessage = validationMap[input.className.match(/validation[-a-z]+/)[0]];
+    let possibleAdditionalValidation = input.className.match(/validation[-a-z]+/);
 
-    if (patternValidationMessage)
+    if (possibleAdditionalValidation) {
+        let patternValidationMessage = validationMap[possibleAdditionalValidation[0]];
+
         input.addEventListener('input', function ()
         {
             if (input.validity.patternMismatch) {
                 feedback.childNodes[0].nodeValue = patternValidationMessage;
             }
         });
+    }
 
     input.dispatchEvent(new Event('focusout'));
 }
