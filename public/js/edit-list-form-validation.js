@@ -37,11 +37,11 @@ function hangHandlers(item)
     button.addEventListener('focusout', () => input.dispatchEvent(new Event('focusout')));
 
     let validationMap = {
-        'validation-email': 'Введённое значение - не электронный адрес.',
-        'validation-phone': 'Введённое значение - не телефон.',
+        'validation-pattern-email': 'Введённое значение - не электронный адрес.',
+        'validation-pattern-phone': 'Введённое значение - не телефон.',
     };
 
-    let patternValidationMessage = validationMap[input.className.match(/validation-[a-z]+/)[0]];
+    let patternValidationMessage = validationMap[input.className.match(/validation[-a-z]+/)[0]];
 
     if (patternValidationMessage)
         input.addEventListener('input', function ()

@@ -14,7 +14,7 @@ class EditPhoneForm extends EditListForm
         $this->list['options']['target_element'] = [
             'type' => Element\Tel::class,
             'attributes' => [
-                'class' => 'form-control validation-phone',
+                'class' => 'form-control validation-pattern-phone',
                 'placeholder' => '+7xxxxxxxxxx',
                 'required' => 'required',
                 'pattern' => '^\+7[0-9]{10}$',

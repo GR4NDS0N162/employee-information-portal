@@ -14,7 +14,7 @@ class EditPositionForm extends EditListForm
         $this->list['options']['target_element'] = [
             'type' => Element\Text::class,
             'attributes' => [
-                'class' => 'form-control validation-position',
+                'class' => 'form-control',
                 'placeholder' => 'Уборщик',
                 'required' => 'required',
             ],
