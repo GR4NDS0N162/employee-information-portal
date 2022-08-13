@@ -11,10 +11,11 @@ class LoginForm extends Form
     {
         parent::__construct('login-form');
 
-        $this->setAttribute('class','row gy-3');
+        $this->setAttribute('class', 'row gy-3 needs-validation');
+        $this->setAttribute('novalidate', '');
 
         $this->add([
-            'name' => 'email-input',
+            'name' => 'email',
             'type' => Element\Email::class,
             'attributes' => [
                 'class' => 'form-control',
@@ -31,7 +32,7 @@ class LoginForm extends Form
         ]);
 
         $this->add([
-            'name' => 'password-input',
+            'name' => 'current-password',
             'type' => Element\Password::class,
             'attributes' => [
                 'class' => 'form-control',

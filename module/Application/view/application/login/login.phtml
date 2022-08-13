@@ -7,9 +7,12 @@
  */
 
 $this->formRow()->setPartial('partial/floating-element');
+$this->inlineScript()
+    ->appendFile($this->basePath('js/password-form-validation.js'))
+    ->appendFile($this->basePath('js/login-signup-recover-validation.js'));
 ?>
 <div class="card p-4"
-       id="login-card">
+     id="login-card">
     <h1 class="mb-3">Вход</h1>
     <?= $this->form()->render($loginForm); ?>
     <div class="row gy-2 mt-2">

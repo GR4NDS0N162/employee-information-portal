@@ -11,10 +11,11 @@ class SignUpForm extends Form
     {
         parent::__construct('signup-form');
 
-        $this->setAttribute('class','row gy-3');
+        $this->setAttribute('class', 'row gy-3 needs-validation');
+        $this->setAttribute('novalidate', '');
 
         $this->add([
-            'name' => 'email-input',
+            'name' => 'email',
             'type' => Element\Email::class,
             'attributes' => [
                 'class' => 'form-control',
@@ -31,7 +32,7 @@ class SignUpForm extends Form
         ]);
 
         $this->add([
-            'name' => 'position-select',
+            'name' => 'position',
             'type' => Element\Select::class,
             'attributes' => [
                 'class' => 'form-select',
@@ -61,13 +62,16 @@ class SignUpForm extends Form
         ]);
 
         $this->add([
-            'name' => 'password-input',
+            'name' => 'new-password',
             'type' => Element\Password::class,
             'attributes' => [
                 'class' => 'form-control',
                 'placeholder' => 'qwerty123',
                 'required' => 'required',
-                'pattern' => '^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,32}$',
+                'autocomplete' => 'new-password',
+                'minlength' => 8,
+                'maxlength' => 32,
+                'pattern' => '^(?=.*?[а-яa-z])(?=.*?[А-ЯA-Z])(?=.*?[0-9])(?=.*?[!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~])[а-яa-zА-ЯA-Z0-9!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]*$',
             ],
             'options' => [
                 'label' => 'Пароль',
@@ -78,12 +82,13 @@ class SignUpForm extends Form
         ]);
 
         $this->add([
-            'name' => 'password-check-input',
+            'name' => 'password-check',
             'type' => Element\Password::class,
             'attributes' => [
                 'class' => 'form-control',
                 'placeholder' => 'qwerty123',
                 'required' => 'required',
+                'pattern' => '',
             ],
             'options' => [
                 'label' => 'Подтверждение пароля',
