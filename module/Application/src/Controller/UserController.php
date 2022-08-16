@@ -10,7 +10,7 @@ use Laminas\View\Model\ViewModel;
 
 class UserController extends AbstractActionController
 {
-    public function viewProfileAction()
+    public function viewProfileAction(): ViewModel
     {
         $viewModel = new ViewModel();
 
@@ -45,7 +45,7 @@ class UserController extends AbstractActionController
         return $viewModel;
     }
 
-    public function editProfileAction()
+    public function editProfileAction(): ViewModel
     {
         $viewModel = new ViewModel();
 
@@ -63,7 +63,7 @@ class UserController extends AbstractActionController
         return $viewModel;
     }
 
-    public function viewUserListAction()
+    public function viewUserListAction(): ViewModel
     {
         $viewModel = new ViewModel();
 
@@ -108,7 +108,7 @@ class UserController extends AbstractActionController
         return $viewModel;
     }
 
-    public function viewDialogListAction()
+    public function viewDialogListAction(): ViewModel
     {
         $viewModel = new ViewModel();
 
@@ -161,7 +161,7 @@ class UserController extends AbstractActionController
         return $viewModel;
     }
 
-    public function viewMessagesAction()
+    public function viewMessagesAction(): ViewModel
     {
         $viewModel = new ViewModel();
 

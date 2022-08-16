@@ -9,7 +9,7 @@ use Laminas\Form\Form;
 
 abstract class EditListForm extends Form
 {
-    protected $list = [
+    protected array $list = [
         'name'       => 'list',
         'type'       => Element\Collection::class,
         'attributes' => [

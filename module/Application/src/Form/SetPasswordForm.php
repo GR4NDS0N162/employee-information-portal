@@ -9,7 +9,7 @@ use Laminas\Form\Form;
 
 class SetPasswordForm extends Form
 {
-    protected $newPassword = [
+    protected array $newPassword = [
         'name'       => 'new-password',
         'type'       => Element\Password::class,
         'attributes' => [
@@ -29,7 +29,7 @@ class SetPasswordForm extends Form
         ],
     ];
 
-    protected $passwordCheck = [
+    protected array $passwordCheck = [
         'name'       => 'password-check',
         'type'       => Element\Password::class,
         'attributes' => [

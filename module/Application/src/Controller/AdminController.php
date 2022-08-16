@@ -10,7 +10,7 @@ use Laminas\View\Model\ViewModel;
 
 class AdminController extends AbstractActionController
 {
-    public function viewUserListAction()
+    public function viewUserListAction(): ViewModel
     {
         $viewModel = new ViewModel();
 
@@ -68,7 +68,7 @@ class AdminController extends AbstractActionController
         return $viewModel;
     }
 
-    public function editUserAction()
+    public function editUserAction(): ViewModel
     {
         $viewModel = new ViewModel();
 
@@ -88,7 +88,7 @@ class AdminController extends AbstractActionController
         return $viewModel;
     }
 
-    public function editPositionsAction()
+    public function editPositionsAction(): ViewModel
     {
         $viewModel = new ViewModel();
 
