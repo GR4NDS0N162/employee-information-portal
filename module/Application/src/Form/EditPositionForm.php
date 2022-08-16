@@ -9,7 +9,9 @@ use Laminas\Form\Form;
 
 class EditPositionForm extends EditListForm
 {
-    public function __construct()
+    public const DEFAULT_NAME = 'edit-position-form';
+
+    public function __construct($name = self::DEFAULT_NAME)
     {
         $this->list['options']['target_element'] = [
             'type'       => Element\Text::class,
@@ -20,7 +22,7 @@ class EditPositionForm extends EditListForm
             ],
         ];
 
-        parent::__construct('edit-position-form');
+        parent::__construct($name);
 
         $this->get('add-button')->setLabel('Добавить должность');
     }

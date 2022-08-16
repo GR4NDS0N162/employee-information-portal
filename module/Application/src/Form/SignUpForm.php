@@ -9,9 +9,11 @@ use Laminas\Form\Form;
 
 class SignUpForm extends Form
 {
-    public function __construct()
+    public const DEFAULT_NAME = 'signup-form';
+
+    public function __construct($name = self::DEFAULT_NAME)
     {
-        parent::__construct('signup-form');
+        parent::__construct($name);
 
         $this->setAttribute('class', 'row gy-3 needs-validation');
         $this->setAttribute('novalidate', '');

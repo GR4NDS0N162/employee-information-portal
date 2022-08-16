@@ -9,9 +9,11 @@ use Laminas\Form\Form;
 
 class DialogFilterForm extends Form
 {
-    public function __construct()
+    public const DEFAULT_NAME = 'dialog-filter-form';
+
+    public function __construct($name = self::DEFAULT_NAME)
     {
-        parent::__construct('user-filter-form');
+        parent::__construct($name);
 
         $this->setAttribute('class', 'row g-3');
 

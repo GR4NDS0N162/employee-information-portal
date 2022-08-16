@@ -9,9 +9,11 @@ use Laminas\Form\Form;
 
 class ChangePasswordForm extends SetPasswordForm
 {
-    public function __construct()
+    public const DEFAULT_NAME = 'change-password-form';
+
+    public function __construct($name = self::DEFAULT_NAME)
     {
-        parent::__construct('change-password-form');
+        parent::__construct($name);
 
         $this->add([
             'name'       => 'current-password',

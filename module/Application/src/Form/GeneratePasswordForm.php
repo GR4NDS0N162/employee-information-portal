@@ -9,9 +9,11 @@ use Laminas\Form\Form;
 
 class GeneratePasswordForm extends Form
 {
-    public function __construct()
+    public const DEFAULT_NAME = 'generate-password-form';
+
+    public function __construct($name = self::DEFAULT_NAME)
     {
-        parent::__construct('generate-password-form');
+        parent::__construct($name);
 
         $this->setAttribute('class', 'row gy-3');
 

@@ -9,9 +9,11 @@ use Laminas\Form\Form;
 
 class EditUserForm extends EditProfileForm
 {
-    public function __construct()
+    public const DEFAULT_NAME = 'edit-user-form';
+
+    public function __construct($name = self::DEFAULT_NAME)
     {
-        parent::__construct();
+        parent::__construct($name);
 
         $this->add([
             'name'       => 'position',

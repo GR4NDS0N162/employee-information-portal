@@ -9,7 +9,9 @@ use Laminas\Form\Form;
 
 class EditEmailForm extends EditListForm
 {
-    public function __construct()
+    public const DEFAULT_NAME = 'edit-email-form';
+
+    public function __construct($name = self::DEFAULT_NAME)
     {
         $this->list['options']['count'] = 1;
         $this->list['options']['target_element'] = [
@@ -22,7 +24,7 @@ class EditEmailForm extends EditListForm
             ],
         ];
 
-        parent::__construct('edit-email-form');
+        parent::__construct($name);
 
         $this->get('add-button')->setLabel('Добавить e-mail');
     }

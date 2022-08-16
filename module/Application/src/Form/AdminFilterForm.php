@@ -9,9 +9,11 @@ use Laminas\Form\Form;
 
 class AdminFilterForm extends UserFilterForm
 {
-    public function __construct()
+    public const DEFAULT_NAME = 'admin-filter-form';
+
+    public function __construct($name = self::DEFAULT_NAME)
     {
-        parent::__construct('admin-filter-form');
+        parent::__construct($name);
 
         $this->setPriority('submit-button', -100);
 

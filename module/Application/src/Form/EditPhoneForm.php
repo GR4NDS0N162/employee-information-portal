@@ -9,7 +9,9 @@ use Laminas\Form\Form;
 
 class EditPhoneForm extends EditListForm
 {
-    public function __construct()
+    public const DEFAULT_NAME = 'edit-phone-form';
+
+    public function __construct($name = self::DEFAULT_NAME)
     {
         $this->list['options']['target_element'] = [
             'type'       => Element\Tel::class,
@@ -21,7 +23,7 @@ class EditPhoneForm extends EditListForm
             ],
         ];
 
-        parent::__construct('edit-phone-form');
+        parent::__construct($name);
 
         $this->get('add-button')->setLabel('Добавить телефон');
     }

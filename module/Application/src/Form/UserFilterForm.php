@@ -9,7 +9,9 @@ use Laminas\Form\Form;
 
 class UserFilterForm extends Form
 {
-    public function __construct($name = 'user-filter-form')
+    public const DEFAULT_NAME = 'user-filter-form';
+
+    public function __construct($name = self::DEFAULT_NAME)
     {
         parent::__construct($name);
 

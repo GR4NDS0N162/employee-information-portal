@@ -46,7 +46,9 @@ class SetPasswordForm extends Form
         ],
     ];
 
-    public function __construct($name = 'set-password-form')
+    public const DEFAULT_NAME = 'set-password-form';
+
+    public function __construct($name = self::DEFAULT_NAME)
     {
         parent::__construct($name);
 
