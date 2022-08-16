@@ -14,13 +14,13 @@ class GeneratePasswordForm extends Form
         $this->setAttribute('class', 'row gy-3');
 
         $this->add([
-            'name' => 'submit-button',
-            'type' => Element\Button::class,
+            'name'       => 'submit-button',
+            'type'       => Element\Button::class,
             'attributes' => [
-                'type' => 'submit',
+                'type'  => 'submit',
                 'class' => 'btn btn-outline-primary w-100',
             ],
-            'options' => [
+            'options'    => [
                 'label' => 'Сгенерировать пароль и отправить на почту',
             ],
         ]);

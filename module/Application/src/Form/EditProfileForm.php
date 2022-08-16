@@ -14,14 +14,14 @@ class EditProfileForm extends Form
         $this->setAttribute('class', 'row g-3');
 
         $this->add([
-            'name' => 'photo',
-            'type' => Element\File::class,
+            'name'       => 'photo',
+            'type'       => Element\File::class,
             'attributes' => [
-                'class' => 'form-control',
+                'class'  => 'form-control',
                 'accept' => 'image/*',
             ],
-            'options' => [
-                'label' => 'Фото',
+            'options'    => [
+                'label'            => 'Фото',
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
@@ -29,14 +29,14 @@ class EditProfileForm extends Form
         ]);
 
         $this->add([
-            'name' => 'surname',
-            'type' => Element\Text::class,
+            'name'       => 'surname',
+            'type'       => Element\Text::class,
             'attributes' => [
-                'class' => 'form-control',
+                'class'       => 'form-control',
                 'placeholder' => 'Иванов',
             ],
-            'options' => [
-                'label' => 'Фамилия',
+            'options'    => [
+                'label'            => 'Фамилия',
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
@@ -44,14 +44,14 @@ class EditProfileForm extends Form
         ]);
 
         $this->add([
-            'name' => 'name',
-            'type' => Element\Text::class,
+            'name'       => 'name',
+            'type'       => Element\Text::class,
             'attributes' => [
-                'class' => 'form-control',
+                'class'       => 'form-control',
                 'placeholder' => 'Иван',
             ],
-            'options' => [
-                'label' => 'Имя',
+            'options'    => [
+                'label'            => 'Имя',
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
@@ -59,14 +59,14 @@ class EditProfileForm extends Form
         ]);
 
         $this->add([
-            'name' => 'patronymic',
-            'type' => Element\Text::class,
+            'name'       => 'patronymic',
+            'type'       => Element\Text::class,
             'attributes' => [
-                'class' => 'form-control',
+                'class'       => 'form-control',
                 'placeholder' => 'Иванович',
             ],
-            'options' => [
-                'label' => 'Отчество',
+            'options'    => [
+                'label'            => 'Отчество',
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
@@ -74,36 +74,36 @@ class EditProfileForm extends Form
         ]);
 
         $this->add([
-            'name' => 'gender',
-            'type' => Element\Select::class,
+            'name'       => 'gender',
+            'type'       => Element\Select::class,
             'attributes' => [
-                'class' => 'form-select',
+                'class'    => 'form-select',
                 'required' => 'required',
             ],
-            'options' => [
-                'label' => 'Пол',
+            'options'    => [
+                'label'            => 'Пол',
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
-                'options' => [
+                'options'          => [
                     null => [
-                        'label' => 'Не выбран',
+                        'label'    => 'Не выбран',
                         'selected' => 'selected',
                     ],
-                    '1' => 'Мужской',
-                    '2' => 'Женский',
+                    '1'  => 'Мужской',
+                    '2'  => 'Женский',
                 ],
             ],
         ]);
 
         $this->add([
-            'name' => 'birthday',
-            'type' => Element\Date::class,
+            'name'       => 'birthday',
+            'type'       => Element\Date::class,
             'attributes' => [
                 'class' => 'form-control',
             ],
-            'options' => [
-                'label' => 'Дата рождения',
+            'options'    => [
+                'label'            => 'Дата рождения',
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
@@ -111,14 +111,14 @@ class EditProfileForm extends Form
         ]);
 
         $this->add([
-            'name' => 'skype',
-            'type' => Element\Text::class,
+            'name'       => 'skype',
+            'type'       => Element\Text::class,
             'attributes' => [
-                'class' => 'form-control',
+                'class'       => 'form-control',
                 'placeholder' => 'ivanivanov',
             ],
-            'options' => [
-                'label' => 'Skype',
+            'options'    => [
+                'label'            => 'Skype',
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
@@ -126,13 +126,13 @@ class EditProfileForm extends Form
         ]);
 
         $this->add([
-            'name' => 'submit-button',
-            'type' => Element\Button::class,
+            'name'       => 'submit-button',
+            'type'       => Element\Button::class,
             'attributes' => [
-                'type' => 'submit',
+                'type'  => 'submit',
                 'class' => 'btn btn-outline-success w-100',
             ],
-            'options' => [
+            'options'    => [
                 'label' => 'Сохранить изменения',
             ],
         ]);

@@ -14,46 +14,46 @@ class AdminFilterForm extends UserFilterForm
         $this->setPriority('submit-button', -100);
 
         $this->add([
-            'name' => 'active',
-            'type' => Element\Select::class,
+            'name'       => 'active',
+            'type'       => Element\Select::class,
             'attributes' => [
                 'class' => 'form-select',
             ],
-            'options' => [
-                'label' => 'Активен',
+            'options'    => [
+                'label'            => 'Активен',
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
-                'options' => [
+                'options'          => [
                     null => 'Не выбран',
-                    '1' => [
-                        'value' => '1',
-                        'label' => 'Да',
+                    '1'  => [
+                        'value'    => '1',
+                        'label'    => 'Да',
                         'selected' => 'selected',
                     ],
-                    '2' => 'Нет',
+                    '2'  => 'Нет',
                 ],
             ],
         ]);
 
         $this->add([
-            'name' => 'admin',
-            'type' => Element\Select::class,
+            'name'       => 'admin',
+            'type'       => Element\Select::class,
             'attributes' => [
                 'class' => 'form-select',
             ],
-            'options' => [
-                'label' => 'Администратор',
+            'options'    => [
+                'label'            => 'Администратор',
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
-                'options' => [
+                'options'          => [
                     null => [
-                        'label' => 'Не выбран',
+                        'label'    => 'Не выбран',
                         'selected' => 'selected',
                     ],
-                    '1' => 'Да',
-                    '2' => 'Нет',
+                    '1'  => 'Да',
+                    '2'  => 'Нет',
                 ],
             ],
         ]);

@@ -12,11 +12,11 @@ class EditPositionForm extends EditListForm
         $this->addButton['options']['label'] = 'Добавить должность';
 
         $this->list['options']['target_element'] = [
-            'type' => Element\Text::class,
+            'type'       => Element\Text::class,
             'attributes' => [
-                'class' => 'form-control',
+                'class'       => 'form-control',
                 'placeholder' => 'Уборщик',
-                'required' => 'required',
+                'required'    => 'required',
             ],
         ];
 

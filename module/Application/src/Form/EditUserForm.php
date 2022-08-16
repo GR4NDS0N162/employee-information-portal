@@ -12,18 +12,18 @@ class EditUserForm extends EditProfileForm
         parent::__construct();
 
         $this->add([
-            'name' => 'position',
-            'type' => Element\Select::class,
+            'name'       => 'position',
+            'type'       => Element\Select::class,
             'attributes' => [
-                'class' => 'form-select',
+                'class'    => 'form-select',
                 'required' => 'required',
             ],
-            'options' => [
-                'label' => 'Должность',
+            'options'    => [
+                'label'            => 'Должность',
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
-                'options' => [
+                'options'          => [
                     '1' => 'Уборщик',
                     '2' => 'Фасовщик',
                     '3' => 'Менеджер',
@@ -37,8 +37,8 @@ class EditUserForm extends EditProfileForm
         ]);
 
         $this->add([
-            'name' => 'status',
-            'type' => StatusFieldset::class,
+            'name'       => 'status',
+            'type'       => StatusFieldset::class,
             'attributes' => [
                 'class' => 'row gy-1',
             ],

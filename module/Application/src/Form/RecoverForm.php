@@ -15,16 +15,16 @@ class RecoverForm extends Form
         $this->setAttribute('novalidate', '');
 
         $this->add([
-            'name' => 'email',
-            'type' => Element\Email::class,
+            'name'       => 'email',
+            'type'       => Element\Email::class,
             'attributes' => [
-                'class' => 'form-control',
+                'class'       => 'form-control',
                 'placeholder' => 'name@example.com',
-                'required' => 'required',
-                'pattern' => '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$',
+                'required'    => 'required',
+                'pattern'     => '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$',
             ],
-            'options' => [
-                'label' => 'E-mail',
+            'options'    => [
+                'label'            => 'E-mail',
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
@@ -32,13 +32,13 @@ class RecoverForm extends Form
         ]);
 
         $this->add([
-            'name' => 'submit-button',
-            'type' => Element\Button::class,
+            'name'       => 'submit-button',
+            'type'       => Element\Button::class,
             'attributes' => [
-                'type' => 'submit',
+                'type'  => 'submit',
                 'class' => 'btn btn-lg btn-outline-danger w-100',
             ],
-            'options' => [
+            'options'    => [
                 'label' => 'Восстановить',
             ],
         ]);

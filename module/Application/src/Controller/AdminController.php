@@ -21,44 +21,44 @@ class AdminController extends AbstractActionController
 
         $userInfo = [
             [
-                'userId' => 1,
-                'isAdmin' => true,
+                'userId'   => 1,
+                'isAdmin'  => true,
                 'isActive' => true,
-                'photo' => 'https://picsum.photos/' . random_int(100, 999),
+                'photo'    => 'https://picsum.photos/' . random_int(100, 999),
                 'fullname' => 'Зубенко Михаил Петрович',
                 'position' => 'Уборщик',
-                'gender' => 'Мужской',
-                'age' => 47,
+                'gender'   => 'Мужской',
+                'age'      => 47,
             ],
             [
-                'userId' => 2,
-                'isAdmin' => false,
+                'userId'   => 2,
+                'isAdmin'  => false,
                 'isActive' => true,
-                'photo' => 'https://picsum.photos/' . random_int(100, 999),
+                'photo'    => 'https://picsum.photos/' . random_int(100, 999),
                 'fullname' => 'Егоров Владимир Егорович',
                 'position' => 'Бухгалтер',
-                'gender' => 'Мужской',
-                'age' => 31,
+                'gender'   => 'Мужской',
+                'age'      => 31,
             ],
             [
-                'userId' => 3,
-                'isAdmin' => true,
+                'userId'   => 3,
+                'isAdmin'  => true,
                 'isActive' => false,
-                'photo' => 'https://picsum.photos/' . random_int(100, 999),
+                'photo'    => 'https://picsum.photos/' . random_int(100, 999),
                 'fullname' => 'Мельникова Алёна Вадимовна',
                 'position' => 'Юрист',
-                'gender' => 'Женский',
-                'age' => 23,
+                'gender'   => 'Женский',
+                'age'      => 23,
             ],
             [
-                'userId' => 4,
-                'isAdmin' => false,
+                'userId'   => 4,
+                'isAdmin'  => false,
                 'isActive' => false,
-                'photo' => 'https://picsum.photos/' . random_int(100, 999),
+                'photo'    => 'https://picsum.photos/' . random_int(100, 999),
                 'fullname' => 'Тимофеева Вероника Денисовна',
                 'position' => 'Менеджер',
-                'gender' => 'Женский',
-                'age' => 36,
+                'gender'   => 'Женский',
+                'age'      => 36,
             ],
         ];
 
@@ -78,11 +78,11 @@ class AdminController extends AbstractActionController
         $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
 
         $viewModel->setVariables([
-            'editUserForm' => new Form\EditUserForm(),
+            'editUserForm'         => new Form\EditUserForm(),
             'generatePasswordForm' => new Form\GeneratePasswordForm(),
-            'setPasswordForm' => new Form\SetPasswordForm(),
-            'editPhoneForm' => new Form\EditPhoneForm(),
-            'editEmailForm' => new Form\EditEmailForm(),
+            'setPasswordForm'      => new Form\SetPasswordForm(),
+            'editPhoneForm'        => new Form\EditPhoneForm(),
+            'editEmailForm'        => new Form\EditEmailForm(),
         ]);
 
         return $viewModel;

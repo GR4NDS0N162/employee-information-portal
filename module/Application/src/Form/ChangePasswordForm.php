@@ -14,16 +14,16 @@ class ChangePasswordForm extends SetPasswordForm
         parent::__construct('change-password-form');
 
         $this->add([
-            'name' => 'current-password',
-            'type' => Element\Password::class,
+            'name'       => 'current-password',
+            'type'       => Element\Password::class,
             'attributes' => [
-                'class' => 'form-control',
-                'placeholder' => 'qwerty123',
-                'required' => 'required',
+                'class'        => 'form-control',
+                'placeholder'  => 'qwerty123',
+                'required'     => 'required',
                 'autocomplete' => 'current-password',
             ],
-            'options' => [
-                'label' => 'Текущий пароль',
+            'options'    => [
+                'label'            => 'Текущий пароль',
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],

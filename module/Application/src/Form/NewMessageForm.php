@@ -14,23 +14,23 @@ class NewMessageForm extends Form
         $this->setAttribute('class', 'row gx-3');
 
         $this->add([
-            'name' => 'message',
-            'type' => Element\Text::class,
+            'name'       => 'message',
+            'type'       => Element\Text::class,
             'attributes' => [
-                'class' => 'form-control',
+                'class'       => 'form-control',
                 'placeholder' => 'Напишите сообщение...',
-                'required' => 'required',
+                'required'    => 'required',
             ],
         ]);
 
         $this->add([
-            'name' => 'submit-button',
-            'type' => Element\Button::class,
+            'name'       => 'submit-button',
+            'type'       => Element\Button::class,
             'attributes' => [
-                'type' => 'submit',
+                'type'  => 'submit',
                 'class' => 'btn btn-outline-success w-100',
             ],
-            'options' => [
+            'options'    => [
                 'label' => 'Отправить',
             ],
         ]);

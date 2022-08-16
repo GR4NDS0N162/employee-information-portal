@@ -8,29 +8,29 @@ use Laminas\Form\Form;
 abstract class EditListForm extends Form
 {
     protected $addButton = [
-        'name' => 'add-button',
-        'type' => Element\Button::class,
+        'name'       => 'add-button',
+        'type'       => Element\Button::class,
         'attributes' => [
-            'type' => 'button',
-            'class' => 'btn btn-outline-primary w-100',
+            'type'    => 'button',
+            'class'   => 'btn btn-outline-primary w-100',
             'onclick' => 'add_item(this)',
         ],
-        'options' => [
+        'options'    => [
             'label' => 'Добавить',
         ],
     ];
 
     protected $list = [
-        'name' => 'list',
-        'type' => Element\Collection::class,
+        'name'       => 'list',
+        'type'       => Element\Collection::class,
         'attributes' => [
             'class' => 'row g-3 collection-list',
         ],
-        'options' => [
-            'count' => 0,
+        'options'    => [
+            'count'                  => 0,
             'should_create_template' => true,
-            'allow_add' => true,
-            'allow_remove' => true,
+            'allow_add'              => true,
+            'allow_remove'           => true,
         ],
     ];
 
@@ -45,13 +45,13 @@ abstract class EditListForm extends Form
         $this->add($this->list);
 
         $this->add([
-            'name' => 'submit-button',
-            'type' => Element\Button::class,
+            'name'       => 'submit-button',
+            'type'       => Element\Button::class,
             'attributes' => [
-                'type' => 'submit',
+                'type'  => 'submit',
                 'class' => 'btn btn-outline-success w-100',
             ],
-            'options' => [
+            'options'    => [
                 'label' => 'Сохранить изменения',
             ],
         ]);

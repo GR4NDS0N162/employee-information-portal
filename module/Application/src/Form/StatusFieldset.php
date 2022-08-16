@@ -12,15 +12,15 @@ class StatusFieldset extends Fieldset
         parent::__construct('status');
 
         $this->add([
-            'name' => 'admin',
-            'type' => Checkbox::class,
+            'name'       => 'admin',
+            'type'       => Checkbox::class,
             'attributes' => [
                 'class' => 'form-check-input',
-                'id' => uniqid('checkbox_', true),
+                'id'    => uniqid('checkbox_', true),
             ],
-            'options' => [
-                'label' => 'Администратор',
-                'label_attributes' => [
+            'options'    => [
+                'label'              => 'Администратор',
+                'label_attributes'   => [
                     'class' => 'form-check-label',
                 ],
                 'use_hidden_element' => false,
@@ -28,15 +28,15 @@ class StatusFieldset extends Fieldset
         ]);
 
         $this->add([
-            'name' => 'active',
-            'type' => Checkbox::class,
+            'name'       => 'active',
+            'type'       => Checkbox::class,
             'attributes' => [
                 'class' => 'form-check-input',
-                'id' => uniqid('checkbox_', true),
+                'id'    => uniqid('checkbox_', true),
             ],
-            'options' => [
-                'label' => 'Активен',
-                'label_attributes' => [
+            'options'    => [
+                'label'              => 'Активен',
+                'label_attributes'   => [
                     'class' => 'form-check-label',
                 ],
                 'use_hidden_element' => false,

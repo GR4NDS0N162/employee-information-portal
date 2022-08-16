@@ -14,76 +14,76 @@ class UserFilterForm extends Form
         $this->setAttribute('class', 'row g-3');
 
         $this->add([
-            'name' => 'position',
-            'type' => Element\Select::class,
+            'name'       => 'position',
+            'type'       => Element\Select::class,
             'attributes' => [
                 'class' => 'form-select',
             ],
-            'options' => [
-                'label' => 'Должность',
+            'options'    => [
+                'label'            => 'Должность',
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
-                'options' => [
+                'options'          => [
                     null => [
-                        'label' => 'Не выбрана',
+                        'label'    => 'Не выбрана',
                         'selected' => 'selected',
                     ],
-                    '1' => 'Уборщик',
-                    '2' => 'Фасовщик',
-                    '3' => 'Менеджер',
-                    '4' => 'Швейцар',
-                    '5' => 'Шеф',
-                    '6' => 'Экономист',
-                    '7' => 'Электрик',
-                    '8' => 'Юрист',
+                    '1'  => 'Уборщик',
+                    '2'  => 'Фасовщик',
+                    '3'  => 'Менеджер',
+                    '4'  => 'Швейцар',
+                    '5'  => 'Шеф',
+                    '6'  => 'Экономист',
+                    '7'  => 'Электрик',
+                    '8'  => 'Юрист',
                 ],
             ],
         ]);
 
         $this->add([
-            'name' => 'gender',
-            'type' => Element\Select::class,
+            'name'       => 'gender',
+            'type'       => Element\Select::class,
             'attributes' => [
                 'class' => 'form-select',
             ],
-            'options' => [
-                'label' => 'Пол',
+            'options'    => [
+                'label'            => 'Пол',
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
-                'options' => [
+                'options'          => [
                     null => [
-                        'label' => 'Не выбран',
+                        'label'    => 'Не выбран',
                         'selected' => 'selected',
                     ],
-                    '1' => 'Мужской',
-                    '2' => 'Женский',
+                    '1'  => 'Мужской',
+                    '2'  => 'Женский',
                 ],
             ],
         ]);
 
         $this->add([
-            'name' => 'age',
-            'type' => AgeFilterFieldset::class,
+            'name'       => 'age',
+            'type'       => AgeFilterFieldset::class,
             'attributes' => [
                 'class' => 'row gx-3',
             ],
-            'options' => [
+            'options'    => [
                 'label' => 'Возраст',
             ],
         ]);
 
         $this->add([
-            'name' => 'fullname-phone-email',
-            'type' => Element\Textarea::class,
+            'name'       => 'fullname-phone-email',
+            'type'       => Element\Textarea::class,
             'attributes' => [
-                'class' => 'form-control',
-                'rows' => '3',
+                'class'       => 'form-control',
+                'rows'        => '3',
                 'placeholder' => 'Иванов Иван Иванович, +79283627374, example@name.com',
             ],
-            'options' => [
-                'label' => 'ФИО, телефон, email',
+            'options'    => [
+                'label'            => 'ФИО, телефон, email',
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
@@ -91,13 +91,13 @@ class UserFilterForm extends Form
         ]);
 
         $this->add([
-            'name' => 'submit-button',
-            'type' => Element\Button::class,
+            'name'       => 'submit-button',
+            'type'       => Element\Button::class,
             'attributes' => [
-                'type' => 'submit',
+                'type'  => 'submit',
                 'class' => 'btn btn-outline-success w-100',
             ],
-            'options' => [
+            'options'    => [
                 'label' => 'Применить фильтры',
             ],
         ]);

@@ -12,25 +12,25 @@ class AgeFilterFieldset extends Fieldset
         parent::__construct('age');
 
         $this->add([
-            'name' => 'min',
-            'type' => Number::class,
+            'name'       => 'min',
+            'type'       => Number::class,
             'attributes' => [
-                'class' => 'form-control',
+                'class'       => 'form-control',
                 'placeholder' => 1,
             ],
-            'options' => [
+            'options'    => [
                 'label' => 'От',
             ],
         ]);
 
         $this->add([
-            'name' => 'max',
-            'type' => Number::class,
+            'name'       => 'max',
+            'type'       => Number::class,
             'attributes' => [
-                'class' => 'form-control',
+                'class'       => 'form-control',
                 'placeholder' => 99,
             ],
-            'options' => [
+            'options'    => [
                 'label' => 'До',
             ],
         ]);

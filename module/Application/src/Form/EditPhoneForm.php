@@ -12,12 +12,12 @@ class EditPhoneForm extends EditListForm
         $this->addButton['options']['label'] = 'Добавить телефон';
 
         $this->list['options']['target_element'] = [
-            'type' => Element\Tel::class,
+            'type'       => Element\Tel::class,
             'attributes' => [
-                'class' => 'form-control validation-pattern-phone',
+                'class'       => 'form-control validation-pattern-phone',
                 'placeholder' => '+7xxxxxxxxxx',
-                'required' => 'required',
-                'pattern' => '^\+7[0-9]{10}$',
+                'required'    => 'required',
+                'pattern'     => '^\+7[0-9]{10}$',
             ],
         ];
 
