@@ -9,9 +9,9 @@ use Laminas\Form\Form;
 
 class UserFilterForm extends Form
 {
-    public function __construct()
+    public function __construct($name = 'user-filter-form')
     {
-        parent::__construct('user-filter-form');
+        parent::__construct($name);
 
         $this->setAttribute('class', 'row g-3');
 
