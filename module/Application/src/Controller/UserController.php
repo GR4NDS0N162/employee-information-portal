@@ -18,7 +18,7 @@ class UserController extends AbstractActionController
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
 
-        $user_info = [
+        $userInfo = [
             'photo' => 'https://picsum.photos/900',
             'surname' => 'Зубенко',
             'name' => 'Михаил',
@@ -40,7 +40,7 @@ class UserController extends AbstractActionController
             ],
         ];
 
-        $viewModel->setVariable('user_info', $user_info);
+        $viewModel->setVariable('userInfo', $userInfo);
 
         return $viewModel;
     }
@@ -71,7 +71,7 @@ class UserController extends AbstractActionController
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
 
-        $user_info = [
+        $userInfo = [
             [
                 'photo' => 'https://picsum.photos/' . random_int(100, 999),
                 'fullname' => 'Зубенко Михаил Петрович',
@@ -102,7 +102,7 @@ class UserController extends AbstractActionController
             ],
         ];
 
-        $viewModel->setVariable('user_info', $user_info);
+        $viewModel->setVariable('userInfo', $userInfo);
         $viewModel->setVariable('userFilterForm', new Form\UserFilterForm());
 
         return $viewModel;
@@ -171,12 +171,12 @@ class UserController extends AbstractActionController
 
         $viewModel->setVariable('newMessageForm', new Form\NewMessageForm());
 
-        $user_info = [
+        $userInfo = [
             'fullname' => 'Иван Иванов',
             'photo' => 'https://picsum.photos/' . random_int(100, 999),
         ];
 
-        $buddy_info = [
+        $buddyInfo = [
             'fullname' => 'Петя Петров',
             'photo' => 'https://picsum.photos/' . random_int(100, 999),
         ];
@@ -214,8 +214,8 @@ class UserController extends AbstractActionController
 
         $viewModel->setVariables([
             'messages' => $messages,
-            'user_info' => $user_info,
-            'buddy_info' => $buddy_info,
+            'userInfo' => $userInfo,
+            'buddyInfo' => $buddyInfo,
         ]);
 
         return $viewModel;

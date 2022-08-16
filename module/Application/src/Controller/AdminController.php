@@ -19,7 +19,7 @@ class AdminController extends AbstractActionController
         $this->layout()->setVariable('headTitleName', $headTitleName);
         $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
 
-        $user_info = [
+        $userInfo = [
             [
                 'userId' => 1,
                 'isAdmin' => true,
@@ -62,7 +62,7 @@ class AdminController extends AbstractActionController
             ],
         ];
 
-        $viewModel->setVariable('user_info', $user_info);
+        $viewModel->setVariable('userInfo', $userInfo);
         $viewModel->setVariable('adminFilterForm', new Form\AdminFilterForm());
 
         return $viewModel;
