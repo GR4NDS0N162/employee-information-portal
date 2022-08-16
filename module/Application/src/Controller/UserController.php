@@ -19,7 +19,7 @@ class UserController extends AbstractActionController
         $this->layout()->setVariable('headTitleName', $headTitleName);
 
         $userInfo = [
-            'photo'      => 'https://picsum.photos/900',
+            'photo'      => PhotoUrlGenerator::generate(),
             'surname'    => 'Зубенко',
             'name'       => 'Михаил',
             'patronymic' => 'Петрович',
@@ -73,28 +73,28 @@ class UserController extends AbstractActionController
 
         $userInfo = [
             [
-                'photo'    => 'https://picsum.photos/' . random_int(100, 999),
+                'photo'    => PhotoUrlGenerator::generate(),
                 'fullname' => 'Зубенко Михаил Петрович',
                 'position' => 'Уборщик',
                 'gender'   => 'Мужской',
                 'age'      => 47,
             ],
             [
-                'photo'    => 'https://picsum.photos/' . random_int(100, 999),
+                'photo'    => PhotoUrlGenerator::generate(),
                 'fullname' => 'Егоров Владимир Егорович',
                 'position' => 'Бухгалтер',
                 'gender'   => 'Мужской',
                 'age'      => 31,
             ],
             [
-                'photo'    => 'https://picsum.photos/' . random_int(100, 999),
+                'photo'    => PhotoUrlGenerator::generate(),
                 'fullname' => 'Мельникова Алёна Вадимовна',
                 'position' => 'Юрист',
                 'gender'   => 'Женский',
                 'age'      => 23,
             ],
             [
-                'photo'    => 'https://picsum.photos/' . random_int(100, 999),
+                'photo'    => PhotoUrlGenerator::generate(),
                 'fullname' => 'Тимофеева Вероника Денисовна',
                 'position' => 'Менеджер',
                 'gender'   => 'Женский',
@@ -120,7 +120,7 @@ class UserController extends AbstractActionController
             [
                 'userId'    => 1,
                 'hasDialog' => true,
-                'photo'     => 'https://picsum.photos/' . random_int(100, 999),
+                'photo'     => PhotoUrlGenerator::generate(),
                 'fullname'  => 'Зубенко Михаил Петрович',
                 'position'  => 'Уборщик',
                 'gender'    => 'Мужской',
@@ -129,7 +129,7 @@ class UserController extends AbstractActionController
             [
                 'userId'    => 2,
                 'hasDialog' => true,
-                'photo'     => 'https://picsum.photos/' . random_int(100, 999),
+                'photo'     => PhotoUrlGenerator::generate(),
                 'fullname'  => 'Егоров Владимир Егорович',
                 'position'  => 'Бухгалтер',
                 'gender'    => 'Мужской',
@@ -138,7 +138,7 @@ class UserController extends AbstractActionController
             [
                 'userId'    => 3,
                 'hasDialog' => false,
-                'photo'     => 'https://picsum.photos/' . random_int(100, 999),
+                'photo'     => PhotoUrlGenerator::generate(),
                 'fullname'  => 'Мельникова Алёна Вадимовна',
                 'position'  => 'Юрист',
                 'gender'    => 'Женский',
@@ -147,7 +147,7 @@ class UserController extends AbstractActionController
             [
                 'userId'    => 4,
                 'hasDialog' => false,
-                'photo'     => 'https://picsum.photos/' . random_int(100, 999),
+                'photo'     => PhotoUrlGenerator::generate(),
                 'fullname'  => 'Тимофеева Вероника Денисовна',
                 'position'  => 'Менеджер',
                 'gender'    => 'Женский',
@@ -173,12 +173,12 @@ class UserController extends AbstractActionController
 
         $userInfo = [
             'fullname' => 'Иван Иванов',
-            'photo'    => 'https://picsum.photos/' . random_int(100, 999),
+            'photo'    => PhotoUrlGenerator::generate(),
         ];
 
         $buddyInfo = [
             'fullname' => 'Петя Петров',
-            'photo'    => 'https://picsum.photos/' . random_int(100, 999),
+            'photo'    => PhotoUrlGenerator::generate(),
         ];
 
         $messages = [
