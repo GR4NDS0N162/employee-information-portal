@@ -112,6 +112,8 @@ class SignUpForm extends Form
             'options'    => [
                 'label' => 'Зарегистрироваться',
             ],
+        ], [
+            'priority' => -10 ** 9,
         ]);
     }
 }

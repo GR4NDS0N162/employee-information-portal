@@ -37,6 +37,8 @@ class NewMessageForm extends Form
             'options'    => [
                 'label' => 'Отправить',
             ],
+        ], [
+            'priority' => -10 ** 9,
         ]);
     }
 }

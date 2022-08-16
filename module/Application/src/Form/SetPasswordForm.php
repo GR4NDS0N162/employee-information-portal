@@ -67,6 +67,8 @@ class SetPasswordForm extends Form
             'options'    => [
                 'label' => 'Установить пароль',
             ],
+        ], [
+            'priority' => -10 ** 9,
         ]);
     }
 }

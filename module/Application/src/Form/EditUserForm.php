@@ -48,7 +48,6 @@ class EditUserForm extends EditProfileForm
             ],
         ]);
 
-        $this->setPriority('submit-button', -100);
         $this->setPriority('status', -90);
         $this->setPriority('skype', -80);
         $this->setPriority('position', -70);

@@ -30,7 +30,9 @@ class ChangePasswordForm extends SetPasswordForm
                     'class' => 'form-label',
                 ],
             ],
-        ], ['priority' => 100]);
+        ], [
+            'priority' => 100,
+        ]);
 
         $this->get('submit-button')->setLabel('Изменить пароль');
     }

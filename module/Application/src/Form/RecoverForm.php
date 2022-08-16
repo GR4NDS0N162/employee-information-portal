@@ -45,6 +45,8 @@ class RecoverForm extends Form
             'options'    => [
                 'label' => 'Восстановить',
             ],
+        ], [
+            'priority' => -10 ** 9,
         ]);
     }
 }

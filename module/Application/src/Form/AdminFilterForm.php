@@ -15,8 +15,6 @@ class AdminFilterForm extends UserFilterForm
     {
         parent::__construct($name);
 
-        $this->setPriority('submit-button', -100);
-
         $this->add([
             'name'       => 'active',
             'type'       => Element\Select::class,

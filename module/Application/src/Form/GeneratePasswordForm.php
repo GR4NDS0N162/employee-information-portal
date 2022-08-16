@@ -27,6 +27,8 @@ class GeneratePasswordForm extends Form
             'options'    => [
                 'label' => 'Сгенерировать пароль и отправить на почту',
             ],
+        ], [
+            'priority' => -10 ** 9,
         ]);
     }
 }

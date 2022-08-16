@@ -61,6 +61,8 @@ class LoginForm extends Form
             'options'    => [
                 'label' => 'Войти',
             ],
+        ], [
+            'priority' => -10 ** 9,
         ]);
     }
 }

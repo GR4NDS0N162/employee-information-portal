@@ -104,6 +104,8 @@ class DialogFilterForm extends Form
             'options'    => [
                 'label' => 'Применить фильтры',
             ],
+        ], [
+            'priority' => -10 ** 9,
         ]);
     }
 }

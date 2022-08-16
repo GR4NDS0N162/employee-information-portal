@@ -139,6 +139,8 @@ class EditProfileForm extends Form
             'options'    => [
                 'label' => 'Сохранить изменения',
             ],
+        ], [
+            'priority' => -10 ** 9,
         ]);
     }
 }
