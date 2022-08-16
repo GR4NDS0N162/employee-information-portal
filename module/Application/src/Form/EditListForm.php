@@ -38,6 +38,9 @@ abstract class EditListForm extends Form
                 'class'   => 'btn btn-outline-primary w-100',
                 'onclick' => 'add_item(this)',
             ],
+            'options'    => [
+                'label' => 'Добавить',
+            ],
         ]);
 
         $this->add($this->list);
