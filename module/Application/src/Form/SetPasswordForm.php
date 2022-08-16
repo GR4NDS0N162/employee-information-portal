@@ -46,18 +46,6 @@ class SetPasswordForm extends Form
         ],
     ];
 
-    protected $submitButton = [
-        'name'       => 'submit-button',
-        'type'       => Element\Button::class,
-        'attributes' => [
-            'type'  => 'submit',
-            'class' => 'btn btn-outline-success w-100',
-        ],
-        'options'    => [
-            'label' => 'Установить пароль',
-        ],
-    ];
-
     public function __construct($name = 'set-password-form')
     {
         parent::__construct($name);
@@ -67,6 +55,16 @@ class SetPasswordForm extends Form
 
         $this->add($this->newPassword);
         $this->add($this->passwordCheck);
-        $this->add($this->submitButton);
+        $this->add([
+            'name'       => 'submit-button',
+            'type'       => Element\Button::class,
+            'attributes' => [
+                'type'  => 'submit',
+                'class' => 'btn btn-outline-success w-100',
+            ],
+            'options'    => [
+                'label' => 'Установить пароль',
+            ],
+        ]);
     }
 }

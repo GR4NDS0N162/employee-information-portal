@@ -11,8 +11,6 @@ class EditPositionForm extends EditListForm
 {
     public function __construct()
     {
-        $this->addButton['options']['label'] = 'Добавить должность';
-
         $this->list['options']['target_element'] = [
             'type'       => Element\Text::class,
             'attributes' => [
@@ -23,5 +21,7 @@ class EditPositionForm extends EditListForm
         ];
 
         parent::__construct('edit-position-form');
+
+        $this->get('add-button')->setLabel('Добавить должность');
     }
 }

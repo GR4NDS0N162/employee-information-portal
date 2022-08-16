@@ -11,8 +11,6 @@ class EditEmailForm extends EditListForm
 {
     public function __construct()
     {
-        $this->addButton['options']['label'] = 'Добавить e-mail';
-
         $this->list['options']['count'] = 1;
         $this->list['options']['target_element'] = [
             'type'       => Element\Email::class,
@@ -25,5 +23,7 @@ class EditEmailForm extends EditListForm
         ];
 
         parent::__construct('edit-email-form');
+
+        $this->get('add-button')->setLabel('Добавить e-mail');
     }
 }

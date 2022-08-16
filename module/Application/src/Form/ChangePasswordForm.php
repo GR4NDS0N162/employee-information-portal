@@ -11,8 +11,6 @@ class ChangePasswordForm extends SetPasswordForm
 {
     public function __construct()
     {
-        $this->submitButton['options']['label'] = 'Изменить пароль';
-
         parent::__construct('change-password-form');
 
         $this->add([
@@ -31,5 +29,7 @@ class ChangePasswordForm extends SetPasswordForm
                 ],
             ],
         ], ['priority' => 100]);
+
+        $this->get('submit-button')->setLabel('Изменить пароль');
     }
 }

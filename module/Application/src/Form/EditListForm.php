@@ -9,19 +9,6 @@ use Laminas\Form\Form;
 
 abstract class EditListForm extends Form
 {
-    protected $addButton = [
-        'name'       => 'add-button',
-        'type'       => Element\Button::class,
-        'attributes' => [
-            'type'    => 'button',
-            'class'   => 'btn btn-outline-primary w-100',
-            'onclick' => 'add_item(this)',
-        ],
-        'options'    => [
-            'label' => 'Добавить',
-        ],
-    ];
-
     protected $list = [
         'name'       => 'list',
         'type'       => Element\Collection::class,
@@ -43,7 +30,16 @@ abstract class EditListForm extends Form
         $this->setAttribute('class', 'row gy-3 needs-validation');
         $this->setAttribute('novalidate', '');
 
-        $this->add($this->addButton);
+        $this->add([
+            'name'       => 'add-button',
+            'type'       => Element\Button::class,
+            'attributes' => [
+                'type'    => 'button',
+                'class'   => 'btn btn-outline-primary w-100',
+                'onclick' => 'add_item(this)',
+            ],
+        ]);
+
         $this->add($this->list);
 
         $this->add([

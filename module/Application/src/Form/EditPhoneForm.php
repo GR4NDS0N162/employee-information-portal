@@ -11,8 +11,6 @@ class EditPhoneForm extends EditListForm
 {
     public function __construct()
     {
-        $this->addButton['options']['label'] = 'Добавить телефон';
-
         $this->list['options']['target_element'] = [
             'type'       => Element\Tel::class,
             'attributes' => [
@@ -24,5 +22,7 @@ class EditPhoneForm extends EditListForm
         ];
 
         parent::__construct('edit-phone-form');
+
+        $this->get('add-button')->setLabel('Добавить телефон');
     }
 }
