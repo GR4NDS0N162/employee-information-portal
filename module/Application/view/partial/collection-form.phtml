@@ -12,7 +12,7 @@
 <?php if ($element->getAttribute('type') != 'button' && $element->getAttribute('type') != 'submit'): ?>
     <div class="col-12 item">
         <div class="input-group">
-            <?= $this->formElement($element); ?>
+            <?= $this->formElement()->render($element); ?>
             <div class="invalid-feedback order-last">Поле не валидно.</div>
             <button class="btn btn-outline-danger"
                     type="button"
@@ -49,6 +49,6 @@
     </div>
 <?php else: ?>
     <div class="col-12">
-        <?= $this->formElement($element); ?>
+        <?= $this->formElement()->render($element); ?>
     </div>
 <?php endif; ?>
