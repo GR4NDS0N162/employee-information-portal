@@ -6,54 +6,40 @@ namespace Application\Form;
 
 class PositionOptionList
 {
+    private const positions = [
+        '1' => 'Уборщик',
+        '2' => 'Фасовщик',
+        '3' => 'Менеджер',
+        '4' => 'Швейцар',
+        '5' => 'Шеф',
+        '6' => 'Экономист',
+        '7' => 'Электрик',
+        '8' => 'Юрист',
+    ];
+
     public static function getList(): array
     {
-        return [
-            '1' => 'Уборщик',
-            '2' => 'Фасовщик',
-            '3' => 'Менеджер',
-            '4' => 'Швейцар',
-            '5' => 'Шеф',
-            '6' => 'Экономист',
-            '7' => 'Электрик',
-            '8' => 'Юрист',
-        ];
+        return self::positions;
     }
 
     public static function getEnabledList(): array
     {
-        return [
+        return array_merge([
             null => [
                 'label'    => 'Не выбрана',
                 'selected' => 'selected',
             ],
-            '1'  => 'Уборщик',
-            '2'  => 'Фасовщик',
-            '3'  => 'Менеджер',
-            '4'  => 'Швейцар',
-            '5'  => 'Шеф',
-            '6'  => 'Экономист',
-            '7'  => 'Электрик',
-            '8'  => 'Юрист',
-        ];
+        ], self::positions);
     }
 
     public static function getDisabledList(): array
     {
-        return [
+        return array_merge([
             null => [
                 'label'    => 'Не выбрана',
                 'disabled' => 'disabled',
                 'selected' => 'selected',
             ],
-            '1'  => 'Уборщик',
-            '2'  => 'Фасовщик',
-            '3'  => 'Менеджер',
-            '4'  => 'Швейцар',
-            '5'  => 'Шеф',
-            '6'  => 'Экономист',
-            '7'  => 'Электрик',
-            '8'  => 'Юрист',
-        ];
+        ], self::positions);
     }
 }
