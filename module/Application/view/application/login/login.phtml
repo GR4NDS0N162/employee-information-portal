@@ -6,7 +6,7 @@
  * @var Application\Form\RecoverForm $recoverForm
  */
 
-$this->formRow()->setPartial('partial/floating-element');
+$this->formRow()->setPartial('partial/floating-element.phtml');
 $this->inlineScript()
     ->appendFile($this->basePath('js/password-form-validation.js'))
     ->appendFile($this->basePath('js/login-signup-recover-validation.js'));

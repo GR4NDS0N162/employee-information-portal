@@ -14,12 +14,12 @@ $this->inlineScript()
 <div class="row g-3">
     <div class="col-12">
         <div class="card p-3">
-            <?php $this->formRow()->setPartial('partial/edit-profile'); ?>
+            <?php $this->formRow()->setPartial('partial/edit-profile.phtml'); ?>
             <?= $this->form()->render($editProfileForm); ?>
         </div>
     </div>
 
-    <?php $this->formRow()->setPartial('partial/collection-form'); ?>
+    <?php $this->formRow()->setPartial('partial/collection-form.phtml'); ?>
     <?php $this->formCollection()
         ->setTemplateWrapper('<span class="d-none" data-template="%s"></span><div class="col-12 notification">Список пуст.</div>')
         ->setWrapper('<div class="col-12"><div%4$s>%3$s%2$s%1$s</div></div>'); ?>
@@ -40,7 +40,7 @@ $this->inlineScript()
     <div class="col-12">
         <div class="card p-3">
             <div class="form-label">Пароль</div>
-            <?php $this->formRow()->setPartial('partial/floating-element'); ?>
+            <?php $this->formRow()->setPartial('partial/floating-element.phtml'); ?>
             <?= $this->form()->render($changePasswordForm); ?>
         </div>
     </div>

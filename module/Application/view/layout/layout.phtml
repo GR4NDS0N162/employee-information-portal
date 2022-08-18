@@ -51,7 +51,7 @@
                     <!-- TODO: Не забудь поменять дефолтный навбар с админского на пользовательский. -->
                     <?= $this->navigation(($navbar) ?: 'Laminas\Navigation\Admin')->menu()
                         ->setUlClass('nav navbar-nav')
-                        ->setPartial('partial/menu')
+                        ->setPartial('partial/menu.phtml')
                         ->render() ?>
                 </div>
             </nav>
