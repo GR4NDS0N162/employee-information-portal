@@ -22,7 +22,6 @@ use Laminas\Form\Element\Button;
 ]; ?>
 
 <div class="<?= $classMap[$element->getName()]; ?>">
-    <?php if (!$element instanceof Button)
-        echo $this->formLabel($element); ?>
+    <?= (!$element instanceof Button) ? $this->formLabel($element) : ''; ?>
     <?= $this->formElement()->render($element); ?>
 </div>
