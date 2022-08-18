@@ -7,10 +7,14 @@ const newPasswordFeedback = $(`input[name="new-password"] ~ .invalid-feedback`)[
 const passwordCheckInput = $(`input[name="password-check"]`)[0];
 const passwordCheckFeedback = $(`input[name="password-check"] ~ .invalid-feedback`)[0];
 
-currentPasswordInput.addEventListener('focusout', function (e)
-{
-    onFocusout(currentPasswordInput, currentPasswordFeedback);
-});
+if (currentPasswordInput) {
+    currentPasswordInput.addEventListener('focusout', function (e)
+    {
+        onFocusout(currentPasswordInput, currentPasswordFeedback);
+    });
+
+    currentPasswordInput.dispatchEvent(new Event('focusout'));
+}
 
 newPasswordInput.addEventListener('focusout', function (e)
 {
@@ -29,7 +33,6 @@ function onFocusout(input, feedback)
     }
 }
 
-currentPasswordInput.dispatchEvent(new Event('focusout'));
 newPasswordInput.dispatchEvent(new Event('focusout'));
 passwordCheckInput.dispatchEvent(new Event('focusout'));
 
