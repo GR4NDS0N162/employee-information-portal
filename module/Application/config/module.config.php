@@ -9,70 +9,70 @@ use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
-    'router' => [
+    'router'       => [
         'routes' => [
-            'home' => [
-                'type' => Literal::class,
+            'home'  => [
+                'type'    => Literal::class,
                 'options' => [
-                    'route' => '/',
+                    'route'    => '/',
                     'defaults' => [
                         'controller' => Controller\LoginController::class,
-                        'action' => 'login',
+                        'action'     => 'login',
                     ],
                 ],
             ],
-            'user' => [
-                'type' => Literal::class,
-                'options' => [
-                    'route' => '/user',
+            'user'  => [
+                'type'          => Literal::class,
+                'options'       => [
+                    'route'    => '/user',
                     'defaults' => [
                         'controller' => Controller\UserController::class,
                     ],
                 ],
                 'may_terminate' => false,
-                'child_routes' => [
-                    'view-profile' => [
-                        'type' => Literal::class,
+                'child_routes'  => [
+                    'view-profile'     => [
+                        'type'    => Literal::class,
                         'options' => [
-                            'route' => '/view',
+                            'route'    => '/view',
                             'defaults' => [
                                 'action' => 'view-profile',
                             ],
                         ],
                     ],
-                    'edit-profile' => [
-                        'type' => Literal::class,
+                    'edit-profile'     => [
+                        'type'    => Literal::class,
                         'options' => [
-                            'route' => '/edit',
+                            'route'    => '/edit',
                             'defaults' => [
                                 'action' => 'edit-profile',
                             ],
                         ],
                     ],
-                    'view-user-list' => [
-                        'type' => Literal::class,
+                    'view-user-list'   => [
+                        'type'    => Literal::class,
                         'options' => [
-                            'route' => '/list',
+                            'route'    => '/list',
                             'defaults' => [
                                 'action' => 'view-user-list',
                             ],
                         ],
                     ],
                     'view-dialog-list' => [
-                        'type' => Literal::class,
-                        'options' => [
-                            'route' => '/im',
+                        'type'          => Literal::class,
+                        'options'       => [
+                            'route'    => '/im',
                             'defaults' => [
                                 'action' => 'view-dialog-list',
                             ],
                         ],
                         'may_terminate' => true,
-                        'child_routes' => [
+                        'child_routes'  => [
                             'view-messages' => [
-                                'type' => Segment::class,
+                                'type'    => Segment::class,
                                 'options' => [
-                                    'route' => '/:id',
-                                    'defaults' => [
+                                    'route'       => '/:id',
+                                    'defaults'    => [
                                         'action' => 'view-messages',
                                     ],
                                     'constraints' => [
@@ -85,30 +85,30 @@ return [
                 ],
             ],
             'admin' => [
-                'type' => Literal::class,
-                'options' => [
-                    'route' => '/admin',
+                'type'          => Literal::class,
+                'options'       => [
+                    'route'    => '/admin',
                     'defaults' => [
                         'controller' => Controller\AdminController::class,
                     ],
                 ],
                 'may_terminate' => false,
-                'child_routes' => [
+                'child_routes'  => [
                     'view-user-list' => [
-                        'type' => Literal::class,
-                        'options' => [
-                            'route' => '/list',
+                        'type'          => Literal::class,
+                        'options'       => [
+                            'route'    => '/list',
                             'defaults' => [
                                 'action' => 'view-user-list',
                             ],
                         ],
                         'may_terminate' => true,
-                        'child_routes' => [
+                        'child_routes'  => [
                             'edit-user' => [
-                                'type' => Segment::class,
+                                'type'    => Segment::class,
                                 'options' => [
-                                    'route' => '/:id',
-                                    'defaults' => [
+                                    'route'       => '/:id',
+                                    'defaults'    => [
                                         'action' => 'edit-user',
                                     ],
                                     'constraints' => [
@@ -118,10 +118,10 @@ return [
                             ],
                         ],
                     ],
-                    'edit-position' => [
-                        'type' => Literal::class,
+                    'edit-position'  => [
+                        'type'    => Literal::class,
                         'options' => [
-                            'route' => '/positions',
+                            'route'    => '/positions',
                             'defaults' => [
                                 'action' => 'edit-positions',
                             ],
@@ -131,7 +131,7 @@ return [
             ],
         ],
     ],
-    'navigation' => [
+    'navigation'   => [
         'default' => [
             [
                 'label' => 'Профиль',
@@ -156,7 +156,7 @@ return [
                 'route' => 'user/view-dialog-list',
             ],
         ],
-        'admin' => [
+        'admin'   => [
             [
                 'label' => 'Профиль',
                 'route' => 'user/view-profile',
@@ -195,26 +195,26 @@ return [
             ],
         ],
     ],
-    'controllers' => [
+    'controllers'  => [
         'factories' => [
             Controller\LoginController::class => InvokableFactory::class,
-            Controller\UserController::class => InvokableFactory::class,
+            Controller\UserController::class  => InvokableFactory::class,
             Controller\AdminController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [
         'display_not_found_reason' => true,
-        'display_exceptions' => true,
-        'doctype' => 'HTML5',
-        'not_found_template' => 'error/404',
-        'exception_template' => 'error/index',
-        'template_map' => [
-            'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
+        'display_exceptions'       => true,
+        'doctype'                  => 'HTML5',
+        'not_found_template'       => 'error/404',
+        'exception_template'       => 'error/index',
+        'template_map'             => [
+            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'application/login/login' => __DIR__ . '/../view/application/login/login.phtml',
-            'error/404' => __DIR__ . '/../view/error/404.phtml',
-            'error/index' => __DIR__ . '/../view/error/index.phtml',
+            'error/404'               => __DIR__ . '/../view/error/404.phtml',
+            'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ],
-        'template_path_stack' => [
+        'template_path_stack'      => [
             __DIR__ . '/../view',
         ],
     ],
