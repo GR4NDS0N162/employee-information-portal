@@ -63,7 +63,8 @@ return [
                         'options'       => [
                             'route'    => '/im',
                             'defaults' => [
-                                'action' => 'view-dialog-list',
+                                'controller' => Controller\MessengerController::class,
+                                'action'     => 'view-dialog-list',
                             ],
                         ],
                         'may_terminate' => true,
@@ -197,9 +198,10 @@ return [
     ],
     'controllers'  => [
         'factories' => [
-            Controller\LoginController::class => InvokableFactory::class,
-            Controller\UserController::class  => InvokableFactory::class,
-            Controller\AdminController::class => InvokableFactory::class,
+            Controller\LoginController::class     => InvokableFactory::class,
+            Controller\UserController::class      => InvokableFactory::class,
+            Controller\AdminController::class     => InvokableFactory::class,
+            Controller\MessengerController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [
