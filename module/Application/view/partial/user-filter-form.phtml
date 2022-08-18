@@ -13,13 +13,16 @@ use Laminas\Form\Element;
 ?>
 
 <?php $classMap = [
-    'position'             => 'col-12',
-    'gender'               => 'col-12',
-    'age[min]'             => 'col-6',
-    'age[max]'             => 'col-6',
+    'position' => 'col-12',
+    'gender'   => 'col-12',
+
+    'age[min]' => 'col-6',
+    'age[max]' => 'col-6',
+
     'fullname-phone-email' => 'col-12',
-    'active'               => 'col-12',
-    'admin'                => 'col-12',
+
+    'active' => 'col-12',
+    'admin'  => 'col-12',
 ]; ?>
 
 <?php if ($element->getAttribute('type') == 'number'): ?>
