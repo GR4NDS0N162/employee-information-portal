@@ -22,6 +22,7 @@
     },
     "autoload": {
         "psr-4": {
+            "Messenger\\": "module/Messenger/src/",
             "Application\\": "module/Application/src/"
         }
     },
