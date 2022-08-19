@@ -11,9 +11,15 @@ class LaminasDbSqlRepository implements DialogRepositoryInterface
 {
     private $db;
 
-    public function __construct($db)
+    private $hydrator;
+
+    private $dialogPrototype;
+
+    public function __construct($db, $hydrator, $dialogPrototype)
     {
         $this->db = $db;
+        $this->hydrator = $hydrator;
+        $this->dialogPrototype = $dialogPrototype;
     }
 
     public function findAllDialogs()
@@ -27,10 +33,7 @@ class LaminasDbSqlRepository implements DialogRepositoryInterface
             return [];
         }
 
-        $resultSet = new HydratingResultSet(
-            new ReflectionHydrator(),
-            new Dialog()
-        );
+        $resultSet = new HydratingResultSet($this->hydrator, $this->dialogPrototype);
         $resultSet->initialize($result);
         return $resultSet;
     }
