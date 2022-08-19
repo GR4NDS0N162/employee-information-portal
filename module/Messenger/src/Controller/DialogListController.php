@@ -6,30 +6,16 @@ use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use Messenger\Model\DialogRepositoryInterface;
 
-/**
- *
- */
 class DialogListController extends AbstractActionController
 {
-    /**
-     * @var DialogRepositoryInterface
-     */
-    private DialogRepositoryInterface $dialogRepository;
+    private $dialogRepository;
 
-    /**
-     * @param DialogRepositoryInterface $dialogRepository
-     */
-    public function __construct(DialogRepositoryInterface $dialogRepository)
+    public function __construct($dialogRepository)
     {
         $this->dialogRepository = $dialogRepository;
     }
 
-    /**
-     * Default action if none provided
-     *
-     * @return ViewModel
-     */
-    public function indexAction(): ViewModel
+    public function indexAction()
     {
         return new ViewModel([
             'dialogs' => $this->dialogRepository->findAllDialogs(),

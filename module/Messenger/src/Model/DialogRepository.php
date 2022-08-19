@@ -24,10 +24,7 @@ class DialogRepository implements DialogRepositoryInterface
         ],
     ];
 
-    /**
-     * @return Dialog[]
-     */
-    public function findAllDialogs(): array
+    public function findAllDialogs()
     {
         return array_map(function ($dialog) {
             return new Dialog(
@@ -36,11 +33,7 @@ class DialogRepository implements DialogRepositoryInterface
         }, $this->data);
     }
 
-    /**
-     * @param $id
-     * @return Dialog
-     */
-    public function findDialog($id): Dialog
+    public function findDialog($id)
     {
         if (!isset($this->data[$id])) {
             throw new DomainException(sprintf('Dialog by id "%s" not found', $id));
