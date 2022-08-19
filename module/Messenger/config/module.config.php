@@ -7,12 +7,20 @@ use Laminas\Router\Http\Literal;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
-    'controllers'  => [
+    'service_manager' => [
+        'aliases'   => [
+            Model\DialogRepositoryInterface::class => Model\DialogRepository::class,
+        ],
         'factories' => [
-            Controller\DialogListController::class => InvokableFactory::class,
+            Model\DialogRepository::class => InvokableFactory::class,
         ],
     ],
-    'router'       => [
+    'controllers'     => [
+        'factories' => [
+            Controller\DialogListController::class => Factory\DialogListControllerFactory::class,
+        ],
+    ],
+    'router'          => [
         'routes' => [
             'messenger' => [
                 'type'    => Literal::class,
@@ -26,7 +34,7 @@ return [
             ],
         ],
     ],
-    'view_manager' => [
+    'view_manager'    => [
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],
