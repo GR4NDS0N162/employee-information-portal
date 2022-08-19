@@ -6,18 +6,18 @@ namespace Messenger\Model;
 class DialogRepository implements DialogRepositoryInterface
 {
     /**
-     * @return mixed
+     * @return Dialog[]
      */
-    public function findAllDialogs()
+    public function findAllDialogs(): array
     {
         // TODO: Implement findAllDialogs() method.
     }
 
     /**
      * @param $id
-     * @return mixed
+     * @return Dialog
      */
-    public function findDialog($id)
+    public function findDialog($id): Dialog
     {
         // TODO: Implement findDialog() method.
     }

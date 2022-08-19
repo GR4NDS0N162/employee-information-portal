@@ -9,13 +9,13 @@ namespace Messenger\Model;
 interface DialogRepositoryInterface
 {
     /**
-     * @return mixed
+     * @return Dialog[]
      */
-    public function findAllDialogs();
+    public function findAllDialogs(): array;
 
     /**
      * @param $id
-     * @return mixed
+     * @return Dialog
      */
-    public function findDialog($id);
+    public function findDialog($id): Dialog;
 }
