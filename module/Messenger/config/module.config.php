@@ -8,7 +8,7 @@ use Laminas\ServiceManager\Factory\InvokableFactory;
 return [
     'service_manager' => [
         'aliases'   => [
-            Model\DialogRepositoryInterface::class => Model\DialogRepository::class,
+            Model\DialogRepositoryInterface::class => Model\LaminasDbSqlRepository::class,
         ],
         'factories' => [
             Model\DialogRepository::class => InvokableFactory::class,
