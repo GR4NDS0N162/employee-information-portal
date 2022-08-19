@@ -17,8 +17,10 @@ class DialogListController extends AbstractActionController
 
     public function indexAction()
     {
+        $userId = 1;
+
         return new ViewModel([
-            'dialogs' => $this->dialogRepository->findAllDialogs(),
+            'dialogs' => $this->dialogRepository->findDialogsOfUser($userId),
         ]);
     }
 }
