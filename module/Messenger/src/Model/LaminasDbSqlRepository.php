@@ -42,6 +42,27 @@ class LaminasDbSqlRepository implements DialogRepositoryInterface
 
     public function findDialogsOfUser($userId)
     {
+        $sql = new Sql($this->db);
+
+        $selectD = $sql->select()
+            ->columns([
+                'id' => 'dialog_id',
+            ])
+            ->from(['m' => 'member'])
+            ->where(['m.user_id = ?' => $userId]);
+
+        $resultSelect = $selectD;
+
+        $statement = $sql->prepareStatementForSqlObject($resultSelect);
+        $result = $statement->execute();
+
+        if (!$result instanceof ResultInterface || !$result->isQueryResult()) {
+            return [];
+        }
+
+        $resultSet = new HydratingResultSet($this->hydrator, $this->dialogPrototype);
+        $resultSet->initialize($result);
+        return $resultSet;
     }
 
     public function findDialog($id)
