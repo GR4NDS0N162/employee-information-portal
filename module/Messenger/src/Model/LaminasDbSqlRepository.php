@@ -5,8 +5,10 @@ namespace Messenger\Model;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\Driver\ResultInterface;
 use Laminas\Db\ResultSet\HydratingResultSet;
+use Laminas\Db\ResultSet\ResultSet;
+use Laminas\Db\Sql\Predicate\Expression;
+use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Sql;
-use Laminas\Hydrator\ReflectionHydrator;
 use RuntimeException;
 
 class LaminasDbSqlRepository implements DialogRepositoryInterface
@@ -40,18 +42,74 @@ class LaminasDbSqlRepository implements DialogRepositoryInterface
         return $resultSet;
     }
 
+    /**
+     * @param $sql Sql
+     * @param $select Select
+     * @param $callback callable
+     * @return array
+     */
+    public static function getArray($sql, $select, $callback)
+    {
+        $resultSetArray = self::getResultSetArray($sql, $select);
+
+        return array_map($callback, $resultSetArray);
+    }
+
+    /**
+     * @param $sql Sql
+     * @param $select Select
+     * @param $callback callable
+     * @return array
+     */
+    public static function getResultSetArray($sql, $select)
+    {
+        $stmt = $sql->prepareStatementForSqlObject($select);
+        $result = $stmt->execute();
+
+        if (!($result instanceof ResultInterface && $result->isQueryResult())) {
+            die('no data');
+        }
+
+        $resultSet = new ResultSet();
+        $resultSet->initialize($result);
+        return $resultSet->toArray();
+    }
+
     public function findDialogsOfUser($userId)
     {
         $sql = new Sql($this->db);
 
-        $selectD = $sql->select()
-            ->columns([
-                'id' => 'dialog_id',
-            ])
-            ->from(['m' => 'member'])
-            ->where(['m.user_id = ?' => $userId]);
+        $dialogOfUser = $sql->select()
+            ->columns(['dialog_id'])
+            ->from('member')
+            ->where(['user_id = ' . $userId]);
 
-        $resultSelect = $selectD;
+        $dialogOfUserArray = self::getArray(
+            $sql, $dialogOfUser,
+            function ($arr) {
+                return $arr['dialog_id'];
+            });
+
+        $resultSelect = $sql->select()
+            ->columns([
+                'id'              => 'dialog_id',
+                'buddyId'         => 'id',
+                'buddyPhoto'      => 'image',
+                'buddySurname'    => 'surname',
+                'buddyName'       => 'name',
+                'buddyPatronymic' => 'patronymic',
+                'buddyPosition'   => 'position_id',
+                'buddyAge'        => 'birthday',
+                'buddyGender'     => 'gender',
+            ], false)
+            ->from('user')
+            ->join('member',
+                new Expression(
+                    'id = user_id AND user_id != ? AND dialog_id IN (' . implode(', ', $dialogOfUserArray) . ')',
+                    [$userId]
+                ),
+                [],
+                Select::JOIN_LEFT);
 
         $statement = $sql->prepareStatementForSqlObject($resultSelect);
         $result = $statement->execute();

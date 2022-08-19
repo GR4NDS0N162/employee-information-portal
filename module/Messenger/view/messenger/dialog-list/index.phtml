@@ -1,7 +1,39 @@
 <h1>Dialogs</h1>
 
 <?php foreach ($this->dialogs as $dialog): ?>
-    <article>
-        <h1 id="post<?= $dialog->getId() ?>"><?= $dialog->getId() ?></h1>
-    </article>
+    <?php
+    /**
+     * @var Messenger\Model\Dialog $dialog
+     */
+    ?>
+    <div class="card">
+        <h1><?= ($dialog->getId()) ?: 'null' ?></h1>
+        <div class="card">
+            <?= ($dialog->getBuddyId()) ?: 'null' ?>
+        </div>
+        <div class="card">
+            <?= ($dialog->getBuddyPhoto()) ?: 'null' ?>
+        </div>
+        <div class="card">
+            <?= ($dialog->getBuddySurname()) ?: 'null' ?>
+        </div>
+        <div class="card">
+            <?= ($dialog->getBuddyName()) ?: 'null' ?>
+        </div>
+        <div class="card">
+            <?= ($dialog->getBuddyPatronymic()) ?: 'null' ?>
+        </div>
+        <div class="card">
+            <?= ($dialog->getBuddyPosition()) ?: 'null' ?>
+        </div>
+        <div class="card">
+            <?= ($dialog->getBuddyAge()) ?: 'null' ?>
+        </div>
+        <div class="card">
+            <?= ($dialog->getBuddyGender()) ?: 'null' ?>
+        </div>
+        <div class="card">
+            <?= ($dialog->getIsExists()) ?: 'null' ?>
+        </div>
+    </div>
 <?php endforeach ?>
