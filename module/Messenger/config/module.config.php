@@ -7,12 +7,12 @@ use Laminas\Router\Http\Literal;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
-    'controllers' => [
+    'controllers'  => [
         'factories' => [
             Controller\DialogListController::class => InvokableFactory::class,
         ],
     ],
-    'router'      => [
+    'router'       => [
         'routes' => [
             'messenger' => [
                 'type'    => Literal::class,
@@ -24,6 +24,11 @@ return [
                     ],
                 ],
             ],
+        ],
+    ],
+    'view_manager' => [
+        'template_path_stack' => [
+            __DIR__ . '/../view',
         ],
     ],
 ];
