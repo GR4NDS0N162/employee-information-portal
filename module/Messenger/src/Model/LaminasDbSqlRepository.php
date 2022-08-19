@@ -2,10 +2,12 @@
 
 namespace Messenger\Model;
 
+use InvalidArgumentException;
 use Laminas\Db\Adapter\Driver\ResultInterface;
 use Laminas\Db\ResultSet\HydratingResultSet;
 use Laminas\Db\Sql\Sql;
 use Laminas\Hydrator\ReflectionHydrator;
+use RuntimeException;
 
 class LaminasDbSqlRepository implements DialogRepositoryInterface
 {
@@ -40,6 +42,31 @@ class LaminasDbSqlRepository implements DialogRepositoryInterface
 
     public function findDialog($id)
     {
-        // TODO: Implement findDialog() method.
+        $sql = new Sql($this->db);
+        $select = $sql->select('dialog');
+        $select->where(['id = ?' => $id]);
+
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+        if (!$result instanceof ResultInterface || !$result->isQueryResult()) {
+            throw new RuntimeException(sprintf(
+                'Failed retrieving dialog with identifier "%s"; unknown database error.',
+                $id
+            ));
+        }
+
+        $resultSet = new HydratingResultSet($this->hydrator, $this->dialogPrototype);
+        $resultSet->initialize($result);
+        $dialog = $resultSet->current();
+
+        if (!$dialog) {
+            throw new InvalidArgumentException(sprintf(
+                'Dialog with identifier "%s" not found.',
+                $id
+            ));
+        }
+
+        return $dialog;
     }
 }
