@@ -1,0 +1,7 @@
+<h1>Dialogs</h1>
+
+<?php foreach ($this->dialogs as $dialog): ?>
+    <article>
+        <h1 id="post<?= $dialog->getId() ?>"><?= $dialog->getId() ?></h1>
+    </article>
+<?php endforeach ?>
