@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Messenger\Model;
 
+use DomainException;
+
 class DialogRepository implements DialogRepositoryInterface
 {
     private $data = [
@@ -28,7 +30,11 @@ class DialogRepository implements DialogRepositoryInterface
      */
     public function findAllDialogs(): array
     {
-        // TODO: Implement findAllDialogs() method.
+        return array_map(function ($dialog) {
+            return new Dialog(
+                $dialog['id']
+            );
+        }, $this->data);
     }
 
     /**
@@ -37,6 +43,12 @@ class DialogRepository implements DialogRepositoryInterface
      */
     public function findDialog($id): Dialog
     {
-        // TODO: Implement findDialog() method.
+        if (!isset($this->data[$id])) {
+            throw new DomainException(sprintf('Dialog by id "%s" not found', $id));
+        }
+
+        return new Dialog(
+            $this->data[$id]['id']
+        );
     }
 }
