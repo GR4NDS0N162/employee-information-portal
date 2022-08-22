@@ -3,6 +3,7 @@
 namespace Home\Controller;
 
 use Home\Model\PositionRepositoryInterface;
+use Home\Model\UserRepositoryInterface;
 use Laminas\Mvc\Controller\AbstractActionController;
 
 class HomeController extends AbstractActionController
@@ -13,10 +14,17 @@ class HomeController extends AbstractActionController
     private $positionRepository;
 
     /**
-     * @param PositionRepositoryInterface $positionRepository
+     * @var UserRepositoryInterface
      */
-    public function __construct($positionRepository)
+    private $userRepository;
+
+    /**
+     * @param PositionRepositoryInterface $positionRepository
+     * @param UserRepositoryInterface $userRepository
+     */
+    public function __construct($positionRepository, $userRepository)
     {
         $this->positionRepository = $positionRepository;
+        $this->userRepository = $userRepository;
     }
 }

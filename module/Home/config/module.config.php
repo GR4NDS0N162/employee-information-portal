@@ -8,6 +8,7 @@ return [
     'service_manager' => [
         'aliases'   => [
             Model\PositionRepositoryInterface::class => Model\PositionRepository::class,
+            Model\UserRepositoryInterface::class     => Model\UserRepository::class,
         ],
         'factories' => [
             Model\PositionRepository::class => Factory\PositionRepositoryFactory::class,
