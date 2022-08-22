@@ -27,6 +27,11 @@ class SignUpForm extends Form
 
     public function init()
     {
+        $this->setAttributes([
+            'class'      => 'row gy-3 needs-validation',
+            'novalidate' => '',
+        ]);
+
         $this->add([
             'name'       => 'email',
             'type'       => Email::class,
