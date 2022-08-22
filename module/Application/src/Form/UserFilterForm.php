@@ -43,14 +43,7 @@ class UserFilterForm extends Form
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
-                'options'          => [
-                    null => [
-                        'label'    => 'Не выбран',
-                        'selected' => 'selected',
-                    ],
-                    '1'  => 'Мужской',
-                    '2'  => 'Женский',
-                ],
+                'options'          => OptionList::getGenderList(),
             ],
         ]);
 
