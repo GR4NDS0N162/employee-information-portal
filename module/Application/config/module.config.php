@@ -11,16 +11,6 @@ use Laminas\ServiceManager\Factory\InvokableFactory;
 return [
     'router'       => [
         'routes' => [
-            'home'  => [
-                'type'    => Literal::class,
-                'options' => [
-                    'route'    => '/',
-                    'defaults' => [
-                        'controller' => Controller\LoginController::class,
-                        'action'     => 'login',
-                    ],
-                ],
-            ],
             'user'  => [
                 'type'          => Literal::class,
                 'options'       => [

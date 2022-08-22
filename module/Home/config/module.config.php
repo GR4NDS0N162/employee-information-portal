@@ -2,6 +2,8 @@
 
 namespace Home;
 
+use Laminas\Router\Http\Literal;
+
 return [
     'service_manager' => [
         'aliases'   => [
@@ -16,6 +18,16 @@ return [
     ],
     'router'          => [
         'routes' => [
+            'home' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/',
+                    'defaults' => [
+                        'controller' => Controller\HomeController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'view_manager'    => [
