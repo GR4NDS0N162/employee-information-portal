@@ -3,6 +3,9 @@
 namespace User\Model;
 
 use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\Adapter\Driver\ResultInterface;
+use Laminas\Db\ResultSet\HydratingResultSet;
+use Laminas\Db\Sql\Sql;
 use Laminas\Hydrator\HydratorInterface;
 
 class ListRepository implements ListRepositoryInterface
@@ -36,6 +39,25 @@ class ListRepository implements ListRepositoryInterface
 
     public function findItemsOfUser($userId, $table)
     {
-        // TODO: Implement findItemsOfUser() method.
+        $sql = new Sql($this->db);
+
+        $select = $sql->select()
+            ->columns([
+                'userId' => 'user_id',
+                'value',
+            ], false)
+            ->from($table)
+            ->where(['user_id = ' . $userId]);
+
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+        if (!$result instanceof ResultInterface || !$result->isQueryResult()) {
+            return [];
+        }
+
+        $resultSet = new HydratingResultSet($this->hydrator, $this->listItemPrototype);
+        $resultSet->initialize($result);
+        return $resultSet;
     }
 }
