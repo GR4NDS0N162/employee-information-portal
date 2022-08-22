@@ -10,6 +10,7 @@ use Home\Model\PositionRepositoryInterface;
 use Home\Model\UserCommandInterface;
 use Home\Model\UserRepositoryInterface;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
 
 class HomeController extends AbstractActionController
 {
@@ -74,5 +75,14 @@ class HomeController extends AbstractActionController
         $this->loginForm = $loginForm;
         $this->signUpForm = $signUpForm;
         $this->recoverForm = $recoverForm;
+    }
+
+    public function indexAction()
+    {
+        return new ViewModel([
+            'loginForm'   => $this->loginForm,
+            'signUpForm'  => $this->signUpForm,
+            'recoverForm' => $this->recoverForm,
+        ]);
     }
 }
