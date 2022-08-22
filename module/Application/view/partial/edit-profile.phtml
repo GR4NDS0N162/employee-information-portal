@@ -13,6 +13,8 @@ use Laminas\Form\Element\Button;
 ?>
 
 <?php $classMap = [
+    'photo' => 'col-12',
+
     'surname'    => 'col-12 col-lg-4',
     'name'       => 'col-12 col-sm-6 col-lg-4',
     'patronymic' => 'col-12 col-sm-6 col-lg-4',
@@ -21,6 +23,8 @@ use Laminas\Form\Element\Button;
     'birthday' => 'col-12 col-sm-6 col-lg-4',
 
     'skype' => 'col-12 col-lg-4',
+
+    'submit-button' => 'col-12',
 ]; ?>
 
 <div class="<?= $classMap[$element->getName()]; ?>">
