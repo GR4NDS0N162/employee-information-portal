@@ -84,32 +84,46 @@ class LaminasDbSqlRepository implements DialogRepositoryInterface
             ->from('member')
             ->where(['user_id = ' . $userId]);
 
-        $dialogOfUserArray = self::getArray(
-            $sql, $dialogOfUser,
-            function ($arr) {
-                return $arr['dialog_id'];
-            });
+        $dialogOfUserArray = implode(', ',
+            self::getArray(
+                $sql, $dialogOfUser,
+                function ($arr) {
+                    return $arr['dialog_id'];
+                }
+            )
+        );
 
         $resultSelect = $sql->select()
             ->columns([
-                'id'              => 'dialog_id',
-                'buddyId'         => 'id',
-                'buddyPhoto'      => 'image',
-                'buddySurname'    => 'surname',
-                'buddyName'       => 'name',
-                'buddyPatronymic' => 'patronymic',
-                'buddyPosition'   => 'position_id',
-                'buddyAge'        => 'birthday',
-                'buddyGender'     => 'gender',
+                'id'              => 'm.dialog_id',
+                'buddyId'         => 'u.id',
+                'buddyPhoto'      => 'u.image',
+                'buddySurname'    => 'u.surname',
+                'buddyName'       => 'u.name',
+                'buddyPatronymic' => 'u.patronymic',
+                'buddyPosition'   => 'p.name',
+                'buddyAge'        => new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW())'),
+                'buddyGender'     => new Expression(
+                    'CASE 
+                        WHEN u.gender = 1 
+                            THEN "Мужской" 
+                        WHEN u.gender = 2 
+                            THEN "Женский" 
+                        ELSE "Не выбран" 
+                    END'),
             ], false)
-            ->from('user')
-            ->join('member',
+            ->from(['u' => 'user'])
+            ->join(['m' => 'member'],
                 new Expression(
-                    'id = user_id AND user_id != ? AND dialog_id IN (' . implode(', ', $dialogOfUserArray) . ')',
+                    'u.id = m.user_id 
+                    AND m.user_id != ? 
+                    AND m.dialog_id IN (' . $dialogOfUserArray . ')',
                     [$userId]
                 ),
-                [],
-                Select::JOIN_LEFT);
+                [], Select::JOIN_LEFT)
+            ->join(['p' => 'position'],
+                new Expression('u.position_id = p.id'),
+                []);
 
         $statement = $sql->prepareStatementForSqlObject($resultSelect);
         $result = $statement->execute();
