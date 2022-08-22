@@ -17,6 +17,20 @@ class OptionList
         '8' => 'Юрист',
     ];
 
+    private const genders = [
+        null => [
+            'label'    => 'Не выбран',
+            'selected' => 'selected',
+        ],
+        1    => 'Мужской',
+        2    => 'Женский',
+    ];
+
+    public static function getGenderList()
+    {
+        return self::genders;
+    }
+
     public static function getPositionList(): array
     {
         return self::positions;
