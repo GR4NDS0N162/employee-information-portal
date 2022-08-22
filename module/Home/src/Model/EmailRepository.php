@@ -2,8 +2,13 @@
 
 namespace Home\Model;
 
+use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\Adapter\Driver\ResultInterface;
+use Laminas\Db\ResultSet\HydratingResultSet;
+use Laminas\Db\Sql\Sql;
 use Laminas\Hydrator\HydratorInterface;
+use RuntimeException;
 
 class EmailRepository implements EmailRepositoryInterface
 {
@@ -36,6 +41,31 @@ class EmailRepository implements EmailRepositoryInterface
 
     public function findEmail($address)
     {
-        // TODO: Implement findEmail() method.
+        $sql = new Sql($this->db);
+        $select = $sql->select('email');
+        $select->where(['address = ?' => $address]);
+
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+        if (!$result instanceof ResultInterface || !$result->isQueryResult()) {
+            throw new RuntimeException(sprintf(
+                'Failed retrieving email with address "%s"; unknown database error.',
+                $address
+            ));
+        }
+
+        $resultSet = new HydratingResultSet($this->hydrator, $this->emailPrototype);
+        $resultSet->initialize($result);
+        $email = $resultSet->current();
+
+        if (!$email) {
+            throw new InvalidArgumentException(sprintf(
+                'Email with address "%s" not found.',
+                $address
+            ));
+        }
+
+        return $email;
     }
 }
