@@ -4,6 +4,7 @@ namespace User\Controller;
 
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
+use User\Model\ListRepositoryInterface;
 use User\Model\ProfileRepositoryInterface;
 
 class ProfileController extends AbstractActionController
@@ -14,11 +15,18 @@ class ProfileController extends AbstractActionController
     private $profileRepository;
 
     /**
-     * @param ProfileRepositoryInterface $profileRepository
+     * @var ListRepositoryInterface
      */
-    public function __construct($profileRepository)
+    private $listRepository;
+
+    /**
+     * @param ProfileRepositoryInterface $profileRepository
+     * @param ListRepositoryInterface $listRepository
+     */
+    public function __construct($profileRepository, $listRepository)
     {
         $this->profileRepository = $profileRepository;
+        $this->listRepository = $listRepository;
     }
 
     public function indexAction()
@@ -27,6 +35,8 @@ class ProfileController extends AbstractActionController
 
         return new ViewModel([
             'profile' => $this->profileRepository->findProfile($userId),
+            'phones'  => $this->listRepository->findItemsOfUser($userId, 'phone'),
+            'emails'  => $this->listRepository->findItemsOfUser($userId, 'email'),
         ]);
     }
 }

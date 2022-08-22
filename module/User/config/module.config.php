@@ -9,9 +9,11 @@ return [
     'service_manager' => [
         'aliases'   => [
             Model\ProfileRepositoryInterface::class => Model\ProfileRepository::class,
+            Model\ListRepositoryInterface::class    => Model\ListRepository::class,
         ],
         'factories' => [
             Model\ProfileRepository::class => Factory\ProfileRepositoryFactory::class,
+            Model\ListRepository::class    => Factory\ListRepositoryFactory::class,
         ],
     ],
     'controllers'     => [
