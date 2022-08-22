@@ -19,3 +19,13 @@ $signUpForm = $this->signUpForm;
  * @var Home\Form\RecoverForm $recoverForm
  */
 $recoverForm = $this->recoverForm;
+
+$loginForm->setAttribute('action', $this->url());
+$loginForm->prepare();
+
+$signUpForm->setAttribute('action', $this->url());
+$signUpForm->prepare();
+
+$recoverForm->setAttribute('action', $this->url());
+$recoverForm->prepare();
+?>
