@@ -41,7 +41,19 @@ class PositionRepository implements PositionRepositoryInterface
 
     public function findAllPositions()
     {
-        // TODO: Implement findAllPositions() method.
+
+        $sql = new Sql($this->db);
+        $select = $sql->select('position');
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+        if (!$result instanceof ResultInterface || !$result->isQueryResult()) {
+            return [];
+        }
+
+        $resultSet = new HydratingResultSet($this->hydrator, $this->positionPrototype);
+        $resultSet->initialize($result);
+        return $resultSet;
     }
 
     public function findPosition($id)
