@@ -6,6 +6,11 @@ use Laminas\Router\Http\Literal;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
+    'form_elements'   => [
+        'factories' => [
+            Form\SignUpForm::class => Factory\SignUpFormFactory::class,
+        ],
+    ],
     'service_manager' => [
         'aliases'   => [
             Model\PositionRepositoryInterface::class => Model\PositionRepository::class,
