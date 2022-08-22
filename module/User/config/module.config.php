@@ -8,8 +8,10 @@ use Laminas\ServiceManager\Factory\InvokableFactory;
 return [
     'service_manager' => [
         'aliases'   => [
+            Model\ProfileRepositoryInterface::class => Model\ProfileRepository::class,
         ],
         'factories' => [
+            Model\ProfileRepository::class => Factory\ProfileRepositoryFactory::class,
         ],
     ],
     'controllers'     => [
