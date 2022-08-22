@@ -16,7 +16,16 @@ class DialogRepositoryFactory implements FactoryInterface
         return new DialogRepository(
             $container->get(AdapterInterface::class),
             new ReflectionHydrator(),
-            new Dialog('','','','','', '', '', '', '')
+            new Dialog(
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                '',
+                ''
+            )
         );
     }
 }

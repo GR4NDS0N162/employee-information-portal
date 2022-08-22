@@ -15,8 +15,6 @@ class Dialog
     private $buddyAge;
     private $buddyGender;
 
-    private $isExists;
-
     public function __construct(
         $buddyId,
         $buddyPhoto,
@@ -26,7 +24,6 @@ class Dialog
         $buddyPosition,
         $buddyAge,
         $buddyGender,
-        $isExists,
         $id = null)
     {
         $this->id = $id;
@@ -38,7 +35,6 @@ class Dialog
         $this->buddyPosition = $buddyPosition;
         $this->buddyAge = $buddyAge;
         $this->buddyGender = $buddyGender;
-        $this->isExists = $isExists;
     }
 
     public function getId()
@@ -84,10 +80,5 @@ class Dialog
     public function getBuddyGender()
     {
         return $this->buddyGender;
-    }
-
-    public function getIsExists()
-    {
-        return $this->isExists;
     }
 }
