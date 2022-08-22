@@ -13,7 +13,7 @@ class Profile
     private $birthday;
     private $skype;
 
-    public function __construct($id, $photo, $surname, $name, $patronymic, $gender, $birthday, $skype)
+    public function __construct($photo, $surname, $name, $patronymic, $gender, $birthday, $skype, $id = null)
     {
         $this->id = $id;
         $this->photo = $photo;
