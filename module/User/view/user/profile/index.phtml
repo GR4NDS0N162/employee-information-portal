@@ -9,6 +9,16 @@
  * @var User\Model\Profile $profile
  */
 $profile = $this->profile;
+
+/**
+ * @var User\Model\ListItem[] $phones
+ */
+$phones = $this->phones;
+
+/**
+ * @var User\Model\ListItem[] $emails
+ */
+$emails = $this->emails;
 ?>
 
 <?php $genderMap = [
@@ -74,6 +84,10 @@ $profile = $this->profile;
                 <div class="card">
                     <h5 class="m-3">Телефоны</h5>
                     <ul class="list-group list-group-flush">
+                        <li class="list-group-item emptiness-notification">Список пуст.</li>
+                        <?php foreach ($phones as $item): ?>
+                            <li class="list-group-item"><?= $item->getValue() ?></li>
+                        <?php endforeach; ?>
                     </ul>
                 </div>
             </div>
@@ -81,6 +95,10 @@ $profile = $this->profile;
                 <div class="card">
                     <h5 class="m-3">E-mail-ы</h5>
                     <ul class="list-group list-group-flush">
+                        <li class="list-group-item emptiness-notification">Список пуст.</li>
+                        <?php foreach ($emails as $item): ?>
+                            <li class="list-group-item"><?= $item->getValue() ?></li>
+                        <?php endforeach; ?>
                     </ul>
                 </div>
             </div>
