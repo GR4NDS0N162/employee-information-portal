@@ -35,11 +35,3 @@ body {
 .notification:last-child {
     display: block;
 }
-
-.emptiness-notification {
-    display: none;
-}
-
-.emptiness-notification:last-child {
-    display: block;
-}
