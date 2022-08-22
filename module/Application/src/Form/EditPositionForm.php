@@ -13,17 +13,18 @@ class EditPositionForm extends EditListForm
 
     public function __construct($name = self::DEFAULT_NAME)
     {
-        $this->list['options']['target_element'] = [
-            'type'       => Element\Text::class,
-            'attributes' => [
-                'class'       => 'form-control',
-                'placeholder' => 'Уборщик',
-                'required'    => 'required',
-            ],
-        ];
-
         parent::__construct($name);
 
         $this->get('add-button')->setLabel('Добавить должность');
+
+        $this->get('list')
+            ->setTargetElement([
+                'type'       => Element\Text::class,
+                'attributes' => [
+                    'class'       => 'form-control',
+                    'placeholder' => 'Уборщик',
+                    'required'    => 'required',
+                ],
+            ]);
     }
 }
