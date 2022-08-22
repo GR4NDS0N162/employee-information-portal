@@ -42,8 +42,20 @@ class ProfileRepository implements ProfileRepositoryInterface
     public function findProfile($id)
     {
         $sql = new Sql($this->db);
-        $select = $sql->select('user');
-        $select->where(['id = ?' => $id]);
+
+        $select = $sql->select()
+            ->columns([
+                'id'         => 'u.id',
+                'photo'      => 'u.image',
+                'surname'    => 'u.surname',
+                'name'       => 'u.name',
+                'patronymic' => 'u.patronymic',
+                'gender'     => 'u.gender',
+                'birthday'   => 'u.birthday',
+                'skype'      => 'u.skype',
+            ], false)
+            ->from(['u' => 'user'])
+            ->where(['u.id = ' . $id]);
 
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
