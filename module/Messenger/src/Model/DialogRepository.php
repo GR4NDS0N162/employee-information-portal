@@ -11,7 +11,7 @@ use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Sql;
 use RuntimeException;
 
-class LaminasDbSqlRepository implements DialogRepositoryInterface
+class DialogRepository implements DialogRepositoryInterface
 {
     private $db;
 

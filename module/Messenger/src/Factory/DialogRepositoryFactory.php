@@ -7,13 +7,13 @@ use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Hydrator\ReflectionHydrator;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Messenger\Model\Dialog;
-use Messenger\Model\LaminasDbSqlRepository;
+use Messenger\Model\DialogRepository;
 
-class LaminasDbSqlRepositoryFactory implements FactoryInterface
+class DialogRepositoryFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
-        return new LaminasDbSqlRepository(
+        return new DialogRepository(
             $container->get(AdapterInterface::class),
             new ReflectionHydrator(),
             new Dialog('','','','','', '', '', '', '')
