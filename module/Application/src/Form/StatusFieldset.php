@@ -46,5 +46,13 @@ class StatusFieldset extends Fieldset
                 'use_hidden_element' => false,
             ],
         ]);
+
+        $classMap = [
+            'admin'  => 'col-12 col-md-6',
+            'active' => 'col-12 col-md-6',
+        ];
+
+        foreach ($classMap as $name => $class)
+            $this->get($name)->setAttribute('delimiter_class', $class);
     }
 }

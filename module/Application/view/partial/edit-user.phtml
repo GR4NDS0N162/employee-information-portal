@@ -12,26 +12,7 @@ use Laminas\Form\Element;
 
 ?>
 
-<?php $classMap = [
-    'photo' => 'col-12',
-
-    'surname'    => 'col-12 col-xl-4',
-    'name'       => 'col-12 col-xl-4',
-    'patronymic' => 'col-12 col-xl-4',
-
-    'gender'   => 'col-12 col-sm-6',
-    'birthday' => 'col-12 col-sm-6',
-
-    'skype'    => 'col-12 col-lg-6',
-    'position' => 'col-12 col-lg-6',
-
-    'status[admin]'  => 'col-12 col-md-6',
-    'status[active]' => 'col-12 col-md-6',
-
-    'submit-button' => 'col-12',
-]; ?>
-
-<div class="<?= $classMap[$element->getName()]; ?>">
+<div class="<?= $element->getAttribute('delimiter_class'); ?>">
     <?php if ($element instanceof Element\Button): ?>
         <?= $this->formElement()->render($element); ?>
 

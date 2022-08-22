@@ -12,28 +12,13 @@ use Laminas\Form\Element;
 
 ?>
 
-<?php $classMap = [
-    'position' => 'col-12',
-    'gender'   => 'col-12',
-
-    'age[min]' => 'col-6',
-    'age[max]' => 'col-6',
-
-    'fullname-phone-email' => 'col-12',
-
-    'active' => 'col-12',
-    'admin'  => 'col-12',
-]; ?>
-
-<?php if ($element->getAttribute('type') == 'number'): ?>
-    <div class="<?= $classMap[$element->getName()]; ?>">
+<div class="<?= $element->getAttribute('delimiter_class'); ?>">
+    <?php if ($element->getAttribute('type') == 'number'): ?>
         <div class="input-group">
             <span class="input-group-text"><?= $this->escapeHtml($label); ?></span>
             <?= $this->formElement()->render($element); ?>
         </div>
-    </div>
-<?php else: ?>
-    <div class="<?= $classMap[$element->getName()]; ?>">
+    <?php else: ?>
         <?php if ($element instanceof Element\Button): ?>
             <?= $this->formElement()->render($element); ?>
 
@@ -49,5 +34,5 @@ use Laminas\Form\Element;
                 <?= $this->formLabel($element); ?>
             </div>
         <?php endif; ?>
-    </div>
-<?php endif; ?>
+    <?php endif; ?>
+</div>
