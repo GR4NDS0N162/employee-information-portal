@@ -3,6 +3,7 @@
 namespace Home\Factory;
 
 use Home\Controller\HomeController;
+use Home\Model\EmailRepositoryInterface;
 use Home\Model\PositionRepositoryInterface;
 use Home\Model\UserRepositoryInterface;
 use Interop\Container\ContainerInterface;
@@ -15,6 +16,7 @@ class HomeControllerFactory implements FactoryInterface
         return new HomeController(
             $container->get(PositionRepositoryInterface::class),
             $container->get(UserRepositoryInterface::class),
+            $container->get(EmailRepositoryInterface::class),
         );
     }
 }
