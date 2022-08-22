@@ -1,0 +1,78 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+?>
+
+<?php
+/**
+ * @var User\Model\Profile $profile
+ */
+$profile = $this->profile;
+?>
+
+<div class="row g-3">
+    <div class="col-12 col-lg-8">
+        <div class="row g-3">
+            <div class="col-12 text-center">
+                <img src="<?= $this->escapeHtml($profile->getPhoto()); ?>"
+                     class="user-photo-bg w-100 rounded-circle"
+                     alt="Фото пользователя">
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="card p-3">
+                    <h5 class="mb-2">Фамилия</h5>
+                    <p class="mb-0"><?= $this->escapeHtml($profile->getSurname()); ?></p>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="card p-3">
+                    <h5 class="mb-2">Имя</h5>
+                    <p class="mb-0"><?= $this->escapeHtml($profile->getName()); ?></p>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="card p-3">
+                    <h5 class="mb-2">Отчество</h5>
+                    <p class="mb-0"><?= $this->escapeHtml($profile->getPatronymic()); ?></p>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="card p-3">
+                    <h5 class="mb-2">Пол</h5>
+                    <p class="mb-0"><?= $this->escapeHtml($profile->getGender()); ?></p>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="card p-3">
+                    <h5 class="mb-2">Дата рождения</h5>
+                    <p class="mb-0"><?= $this->escapeHtml($profile->getBirthday()); ?></p>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="card p-3">
+                    <h5 class="mb-2">Skype</h5>
+                    <p class="mb-0"><?= $this->escapeHtml($profile->getSkype()); ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="row g-3">
+            <div class="col-12 col-md-4 col-lg-12">
+                <div class="card">
+                    <h5 class="m-3">Телефоны</h5>
+                    <ul class="list-group list-group-flush">
+                    </ul>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <h5 class="m-3">E-mail-ы</h5>
+                    <ul class="list-group list-group-flush">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
