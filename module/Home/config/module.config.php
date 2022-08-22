@@ -11,6 +11,7 @@ return [
     ],
     'controllers'     => [
         'factories' => [
+            Controller\HomeController::class => Factory\HomeControllerFactory::class,
         ],
     ],
     'router'          => [
