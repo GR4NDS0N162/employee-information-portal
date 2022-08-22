@@ -7,6 +7,7 @@ use Laminas\Router\Http\Literal;
 return [
     'service_manager' => [
         'aliases'   => [
+            Model\PositionRepositoryInterface::class => Model\PositionRepository::class,
         ],
         'factories' => [
             Model\PositionRepository::class => Factory\PositionRepositoryFactory::class,
