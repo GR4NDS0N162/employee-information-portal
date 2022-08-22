@@ -18,4 +18,5 @@ return [
     'Application',
     'Messenger',
     'User',
+    'Home',
 ];
