@@ -13,18 +13,19 @@ class EditPhoneForm extends EditListForm
 
     public function __construct($name = self::DEFAULT_NAME)
     {
-        $this->list['options']['target_element'] = [
-            'type'       => Element\Tel::class,
-            'attributes' => [
-                'class'       => 'form-control validation-pattern-phone',
-                'placeholder' => '+7xxxxxxxxxx',
-                'required'    => 'required',
-                'pattern'     => '^\+7[0-9]{10}$',
-            ],
-        ];
-
         parent::__construct($name);
 
         $this->get('add-button')->setLabel('Добавить телефон');
+
+        $this->get('list')
+            ->setTargetElement([
+                'type'       => Element\Tel::class,
+                'attributes' => [
+                    'class'       => 'form-control validation-pattern-phone',
+                    'placeholder' => '+7xxxxxxxxxx',
+                    'required'    => 'required',
+                    'pattern'     => '^\+7[0-9]{10}$',
+                ],
+            ]);
     }
 }
