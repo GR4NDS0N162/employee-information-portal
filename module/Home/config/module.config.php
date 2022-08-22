@@ -11,6 +11,7 @@ return [
         ],
         'factories' => [
             Model\PositionRepository::class => Factory\PositionRepositoryFactory::class,
+            Model\UserRepository::class     => Factory\UserRepositoryFactory::class,
         ],
     ],
     'controllers'     => [
