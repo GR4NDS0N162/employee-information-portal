@@ -39,6 +39,25 @@ class EditUserForm extends EditProfileForm
             ],
         ]);
 
+        $classMap = [
+            'photo' => 'col-12',
+
+            'surname'    => 'col-12 col-xl-4',
+            'name'       => 'col-12 col-xl-4',
+            'patronymic' => 'col-12 col-xl-4',
+
+            'gender'   => 'col-12 col-sm-6',
+            'birthday' => 'col-12 col-sm-6',
+
+            'skype'    => 'col-12 col-lg-6',
+            'position' => 'col-12 col-lg-6',
+
+            'submit-button' => 'col-12',
+        ];
+
+        foreach ($classMap as $name => $class)
+            $this->get($name)->setAttribute('delimiter_class', $class);
+
         $this->setPriority('status', -90);
         $this->setPriority('skype', -80);
         $this->setPriority('position', -70);

@@ -9,11 +9,6 @@
  */
 ?>
 
-<?php $classMap = [
-    'message'       => 'col',
-    'submit-button' => 'col-auto',
-]; ?>
-
-<div class="<?= $classMap[$element->getName()]; ?>">
+<div class="<?= $element->getAttribute('delimiter_class'); ?>">
     <?= $this->formElement()->render($element); ?>
 </div>

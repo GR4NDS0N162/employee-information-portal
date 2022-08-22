@@ -44,5 +44,13 @@ class AdminFilterForm extends UserFilterForm
                 'options'          => OptionList::getAdminFilterOptions(),
             ],
         ]);
+
+        $classMap = [
+            'active' => 'col-12',
+            'admin'  => 'col-12',
+        ];
+
+        foreach ($classMap as $name => $class)
+            $this->get($name)->setAttribute('delimiter_class', $class);
     }
 }
