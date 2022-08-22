@@ -3,6 +3,7 @@
 namespace Home;
 
 use Laminas\Router\Http\Literal;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
     'service_manager' => [
@@ -10,11 +11,13 @@ return [
             Model\PositionRepositoryInterface::class => Model\PositionRepository::class,
             Model\UserRepositoryInterface::class     => Model\UserRepository::class,
             Model\EmailRepositoryInterface::class    => Model\EmailRepository::class,
+            Model\UserCommandInterface::class        => Model\UserCommand::class,
         ],
         'factories' => [
             Model\PositionRepository::class => Factory\PositionRepositoryFactory::class,
             Model\UserRepository::class     => Factory\UserRepositoryFactory::class,
             Model\EmailRepository::class    => Factory\EmailRepositoryFactory::class,
+            Model\UserCommand::class        => InvokableFactory::class,
         ],
     ],
     'controllers'     => [

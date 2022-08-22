@@ -7,6 +7,7 @@ use Home\Form\RecoverForm;
 use Home\Form\SignUpForm;
 use Home\Model\EmailRepositoryInterface;
 use Home\Model\PositionRepositoryInterface;
+use Home\Model\UserCommandInterface;
 use Home\Model\UserRepositoryInterface;
 use Laminas\Mvc\Controller\AbstractActionController;
 
@@ -28,6 +29,11 @@ class HomeController extends AbstractActionController
     private $emailRepository;
 
     /**
+     * @var UserCommandInterface
+     */
+    private $userCommand;
+
+    /**
      * @var LoginForm
      */
     private $loginForm;
@@ -46,6 +52,7 @@ class HomeController extends AbstractActionController
      * @param PositionRepositoryInterface $positionRepository
      * @param UserRepositoryInterface $userRepository
      * @param EmailRepositoryInterface $emailRepository
+     * @param UserCommandInterface $userCommand
      * @param LoginForm $loginForm
      * @param SignUpForm $signUpForm
      * @param RecoverForm $recoverForm
@@ -54,6 +61,7 @@ class HomeController extends AbstractActionController
         $positionRepository,
         $userRepository,
         $emailRepository,
+        $userCommand,
         $loginForm,
         $signUpForm,
         $recoverForm
@@ -62,6 +70,7 @@ class HomeController extends AbstractActionController
         $this->positionRepository = $positionRepository;
         $this->userRepository = $userRepository;
         $this->emailRepository = $emailRepository;
+        $this->userCommand = $userCommand;
         $this->loginForm = $loginForm;
         $this->signUpForm = $signUpForm;
         $this->recoverForm = $recoverForm;
