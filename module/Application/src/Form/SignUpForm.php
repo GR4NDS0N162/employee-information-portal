@@ -47,7 +47,7 @@ class SignUpForm extends Form
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
-                'options'          => PositionOptionList::getDisabledList(),
+                'options'          => OptionList::getDisabledPositionList(),
             ],
         ]);
 

@@ -28,7 +28,7 @@ class DialogFilterForm extends Form
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
-                'options'          => PositionOptionList::getEnabledList(),
+                'options'          => OptionList::getEnabledPositionList(),
             ],
         ]);
 

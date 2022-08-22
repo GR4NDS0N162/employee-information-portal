@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Form;
 
-class PositionOptionList
+class OptionList
 {
     private const positions = [
         '1' => 'Уборщик',
@@ -17,12 +17,12 @@ class PositionOptionList
         '8' => 'Юрист',
     ];
 
-    public static function getList(): array
+    public static function getPositionList(): array
     {
         return self::positions;
     }
 
-    public static function getEnabledList(): array
+    public static function getEnabledPositionList(): array
     {
         return array_merge([
             null => [
@@ -32,7 +32,7 @@ class PositionOptionList
         ], self::positions);
     }
 
-    public static function getDisabledList(): array
+    public static function getDisabledPositionList(): array
     {
         return array_merge([
             null => [

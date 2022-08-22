@@ -27,7 +27,7 @@ class EditUserForm extends EditProfileForm
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
-                'options'          => PositionOptionList::getList(),
+                'options'          => OptionList::getPositionList(),
             ],
         ]);
 
