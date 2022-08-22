@@ -31,6 +31,31 @@ class OptionList
         return self::genders;
     }
 
+    public static function getActiveFilterOptions()
+    {
+        return [
+            null => 'Не выбран',
+            1    => [
+                'value'    => '1',
+                'label'    => 'Да',
+                'selected' => 'selected',
+            ],
+            2    => 'Нет',
+        ];
+    }
+
+    public static function getAdminFilterOptions()
+    {
+        return [
+            null => [
+                'label'    => 'Не выбран',
+                'selected' => 'selected',
+            ],
+            1    => 'Да',
+            2    => 'Нет',
+        ];
+    }
+
     public static function getPositionList(): array
     {
         return self::positions;
