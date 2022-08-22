@@ -8,6 +8,9 @@ use Messenger\Model\DialogRepositoryInterface;
 
 class DialogListController extends AbstractActionController
 {
+    /**
+     * @var DialogRepositoryInterface
+     */
     private $dialogRepository;
 
     public function __construct($dialogRepository)
