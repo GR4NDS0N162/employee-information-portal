@@ -1,39 +1,62 @@
-<h1>Dialogs</h1>
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+?>
 
-<?php foreach ($this->dialogs as $dialog): ?>
-    <?php
-    /**
-     * @var Messenger\Model\Dialog $dialog
-     */
-    ?>
-    <div class="card">
-        <h1><?= ($dialog->getId()) ?: 'null' ?></h1>
-        <div class="card">
-            <?= ($dialog->getBuddyId()) ?: 'null' ?>
-        </div>
-        <div class="card">
-            <?= ($dialog->getBuddyPhoto()) ?: 'null' ?>
-        </div>
-        <div class="card">
-            <?= ($dialog->getBuddySurname()) ?: 'null' ?>
-        </div>
-        <div class="card">
-            <?= ($dialog->getBuddyName()) ?: 'null' ?>
-        </div>
-        <div class="card">
-            <?= ($dialog->getBuddyPatronymic()) ?: 'null' ?>
-        </div>
-        <div class="card">
-            <?= ($dialog->getBuddyPosition()) ?: 'null' ?>
-        </div>
-        <div class="card">
-            <?= ($dialog->getBuddyAge()) ?: 'null' ?>
-        </div>
-        <div class="card">
-            <?= ($dialog->getBuddyGender()) ?: 'null' ?>
-        </div>
-        <div class="card">
-            <?= ($dialog->getIsExists()) ?: 'null' ?>
+<div class="row g-3">
+    <div class="col-12 col-lg-4 col col-xl-3">
+    </div>
+    <div class="col">
+        <div class="row g-3">
+            <?php foreach ($this->dialogs as $dialog): ?>
+                <?php /**
+                 * @var Messenger\Model\Dialog $dialog
+                 */ ?>
+                <div class="col-12<?= (!$dialog->getId()) ? ' card-gray-bg' : ''; ?>">
+                    <div class="card p-3">
+                        <div class="row g-3">
+                            <div class="col-auto">
+                                <img src="<?= $this->escapeHtml($dialog->getBuddyPhoto()); ?>"
+                                     class="user-photo img-fluid rounded"
+                                     alt="Фото пользователя">
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="h6 full-name"><?= $this->escapeHtml(
+                                                $dialog->getBuddySurname() . ' ' .
+                                                $dialog->getBuddyName() . ' ' .
+                                                $dialog->getBuddyPatronymic()
+                                            ); ?></p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <span class="text-secondary">Должность:</span>
+                                        <span class="position"><?= $this->escapeHtml($dialog->getBuddyPosition()); ?></span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <span class="text-secondary">Возраст:</span>
+                                        <span class="age"><?= $this->escapeHtml($dialog->getBuddyAge()); ?></span> лет
+                                    </div>
+                                    <div class="col-auto">
+                                        <span class="text-secondary">Пол:</span>
+                                        <span class="gender"><?= $this->escapeHtml($dialog->getBuddyGender()); ?></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto d-flex align-items-center">
+                                <?php if ($dialog->getId()): ?>
+                                    <a href="<?= $this->url('user/view-dialog-list/view-messages', ['id' => $dialog->getBuddyId()]); ?>"
+                                       class="btn btn-primary">К диалогу</a>
+                                <?php else: ?>
+                                    <a href="<?= $this->url('user/view-dialog-list/view-messages', ['id' => $dialog->getBuddyId()]); ?>"
+                                       class="btn btn-success">Создать диалог</a>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
-<?php endforeach ?>
+</div>
