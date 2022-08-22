@@ -13,6 +13,7 @@ return [
         'factories' => [
             Model\PositionRepository::class => Factory\PositionRepositoryFactory::class,
             Model\UserRepository::class     => Factory\UserRepositoryFactory::class,
+            Model\EmailRepository::class    => Factory\EmailRepositoryFactory::class,
         ],
     ],
     'controllers'     => [
