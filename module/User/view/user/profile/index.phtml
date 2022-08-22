@@ -11,48 +11,59 @@
 $profile = $this->profile;
 ?>
 
+<?php $genderMap = [
+    null => 'Не указан',
+    '1'  => 'Мужской',
+    '2'  => 'Женский',
+]; ?>
+
 <div class="row g-3">
     <div class="col-12 col-lg-8">
         <div class="row g-3">
             <div class="col-12 text-center">
-                <img src="<?= $this->escapeHtml($profile->getPhoto()); ?>"
+                <img src="<?= $this->escapeHtml($profile->getPhoto() ?: $this->basePath('img/no_userphoto.jpeg')); ?>"
                      class="user-photo-bg w-100 rounded-circle"
                      alt="Фото пользователя">
             </div>
             <div class="col-12 col-md-6">
                 <div class="card p-3">
                     <h5 class="mb-2">Фамилия</h5>
-                    <p class="mb-0"><?= $this->escapeHtml($profile->getSurname()); ?></p>
+                    <p class="mb-0"><?= $this->escapeHtml($profile->getSurname() ?: "Не указана"); ?></p>
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="card p-3">
                     <h5 class="mb-2">Имя</h5>
-                    <p class="mb-0"><?= $this->escapeHtml($profile->getName()); ?></p>
+                    <p class="mb-0"><?= $this->escapeHtml($profile->getName() ?: "Не указано"); ?></p>
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="card p-3">
                     <h5 class="mb-2">Отчество</h5>
-                    <p class="mb-0"><?= $this->escapeHtml($profile->getPatronymic()); ?></p>
+                    <p class="mb-0"><?= $this->escapeHtml($profile->getPatronymic() ?: "Не указано"); ?></p>
                 </div>
             </div>
             <div class="col-12 col-sm-6">
                 <div class="card p-3">
                     <h5 class="mb-2">Пол</h5>
-                    <p class="mb-0"><?= $this->escapeHtml($profile->getGender()); ?></p>
+                    <p class="mb-0"><?= $this->escapeHtml($genderMap[$profile->getGender()]); ?></p>
                 </div>
             </div>
             <div class="col-12 col-sm-6">
                 <div class="card p-3">
                     <h5 class="mb-2">Дата рождения</h5>
-                    <p class="mb-0"><?= $this->escapeHtml($profile->getBirthday()); ?></p>
+                    <?php if ($profile->getBirthday()) {
+                        $date = date_parse($profile->getBirthday());
+                        $birthday = sprintf('%02s.%02s.%04s', $date['day'], $date['month'], $date['year']);
+                    } else
+                        $birthday = 'Не указана'; ?>
+                    <p class="mb-0"><?= $this->escapeHtml($birthday); ?></p>
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <div class="card p-3">
                     <h5 class="mb-2">Skype</h5>
-                    <p class="mb-0"><?= $this->escapeHtml($profile->getSkype()); ?></p>
+                    <p class="mb-0"><?= $this->escapeHtml($profile->getSkype() ?: "Не указан"); ?></p>
                 </div>
             </div>
         </div>
