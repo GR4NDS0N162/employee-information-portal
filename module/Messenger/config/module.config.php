@@ -11,7 +11,6 @@ return [
             Model\DialogRepositoryInterface::class => Model\LaminasDbSqlRepository::class,
         ],
         'factories' => [
-            Model\DialogRepository::class       => InvokableFactory::class,
             Model\LaminasDbSqlRepository::class => Factory\LaminasDbSqlRepositoryFactory::class,
         ],
     ],
