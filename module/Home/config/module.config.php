@@ -9,6 +9,7 @@ return [
         'aliases'   => [
         ],
         'factories' => [
+            Model\PositionRepository::class => Factory\PositionRepositoryFactory::class,
         ],
     ],
     'controllers'     => [
