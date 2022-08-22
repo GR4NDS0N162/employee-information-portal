@@ -26,15 +26,7 @@ class AdminFilterForm extends UserFilterForm
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
-                'options'          => [
-                    null => 'Не выбран',
-                    '1'  => [
-                        'value'    => '1',
-                        'label'    => 'Да',
-                        'selected' => 'selected',
-                    ],
-                    '2'  => 'Нет',
-                ],
+                'options'          => OptionList::getActiveFilterOptions(),
             ],
         ]);
 
@@ -49,14 +41,7 @@ class AdminFilterForm extends UserFilterForm
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
-                'options'          => [
-                    null => [
-                        'label'    => 'Не выбран',
-                        'selected' => 'selected',
-                    ],
-                    '1'  => 'Да',
-                    '2'  => 'Нет',
-                ],
+                'options'          => OptionList::getAdminFilterOptions(),
             ],
         ]);
     }
