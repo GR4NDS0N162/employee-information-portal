@@ -20,13 +20,13 @@ $signUpForm = $this->signUpForm;
  */
 $recoverForm = $this->recoverForm;
 
-$loginForm->setAttribute('action', $this->url());
+$loginForm->setAttribute('action', $this->url('home/login'));
 $loginForm->prepare();
 
-$signUpForm->setAttribute('action', $this->url());
+$signUpForm->setAttribute('action', $this->url('home/signup'));
 $signUpForm->prepare();
 
-$recoverForm->setAttribute('action', $this->url());
+$recoverForm->setAttribute('action', $this->url('home/recover'));
 $recoverForm->prepare();
 
 $this->formRow()->setPartial('partial/floating-element.phtml');

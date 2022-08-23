@@ -33,12 +33,42 @@ return [
     'router'          => [
         'routes' => [
             'home' => [
-                'type'    => Literal::class,
-                'options' => [
+                'type'          => Literal::class,
+                'options'       => [
                     'route'    => '/',
                     'defaults' => [
                         'controller' => Controller\HomeController::class,
                         'action'     => 'index',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes'  => [
+                    'login'   => [
+                        'type'    => Literal::class,
+                        'options' => [
+                            'route'    => 'login',
+                            'defaults' => [
+                                'action' => 'login',
+                            ],
+                        ],
+                    ],
+                    'signup'  => [
+                        'type'    => Literal::class,
+                        'options' => [
+                            'route'    => 'signup',
+                            'defaults' => [
+                                'action' => 'signup',
+                            ],
+                        ],
+                    ],
+                    'recover' => [
+                        'type'    => Literal::class,
+                        'options' => [
+                            'route'    => 'recover',
+                            'defaults' => [
+                                'action' => 'recover',
+                            ],
+                        ],
                     ],
                 ],
             ],

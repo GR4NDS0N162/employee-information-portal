@@ -85,4 +85,16 @@ class HomeController extends AbstractActionController
             'recoverForm' => $this->recoverForm,
         ]);
     }
+
+    public function loginAction()
+    {
+    }
+
+    public function signUpAction()
+    {
+    }
+
+    public function recoverAction()
+    {
+    }
 }
