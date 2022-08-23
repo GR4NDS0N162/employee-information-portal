@@ -3,6 +3,9 @@
 namespace User\Model;
 
 use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\Adapter\Driver\ResultInterface;
+use Laminas\Db\ResultSet\HydratingResultSet;
+use Laminas\Db\Sql\Sql;
 use Laminas\Hydrator\HydratorInterface;
 
 class EmailRepository implements EmailRepositoryInterface
@@ -36,6 +39,24 @@ class EmailRepository implements EmailRepositoryInterface
 
     public function findEmailsOfUser($userId)
     {
-        // TODO: Implement findEmailsOfUser() method.
+        $sql = new Sql($this->db);
+
+        $select = $sql->select('email');
+        $select->columns([
+            'address',
+            'userId' => 'user_id',
+        ]);
+        $select->where(['user_id = ?' => $userId]);
+
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+        if (!$result instanceof ResultInterface || !$result->isQueryResult()) {
+            return [];
+        }
+
+        $resultSet = new HydratingResultSet($this->hydrator, $this->emailPrototype);
+        $resultSet->initialize($result);
+        return $resultSet;
     }
 }

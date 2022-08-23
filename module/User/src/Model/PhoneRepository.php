@@ -3,6 +3,9 @@
 namespace User\Model;
 
 use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\Adapter\Driver\ResultInterface;
+use Laminas\Db\ResultSet\HydratingResultSet;
+use Laminas\Db\Sql\Sql;
 use Laminas\Hydrator\HydratorInterface;
 
 class PhoneRepository implements PhoneRepositoryInterface
@@ -36,6 +39,24 @@ class PhoneRepository implements PhoneRepositoryInterface
 
     public function findPhonesOfUser($userId)
     {
-        // TODO: Implement findPhonesOfUser() method.
+        $sql = new Sql($this->db);
+
+        $select = $sql->select('phone');
+        $select->columns([
+            'number',
+            'userId' => 'user_id',
+        ]);
+        $select->where(['user_id = ?' => $userId]);
+
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+        if (!$result instanceof ResultInterface || !$result->isQueryResult()) {
+            return [];
+        }
+
+        $resultSet = new HydratingResultSet($this->hydrator, $this->phonePrototype);
+        $resultSet->initialize($result);
+        return $resultSet;
     }
 }
