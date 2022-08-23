@@ -19,7 +19,7 @@ class UserCommand implements UserCommandInterface
         $this->db = $db;
     }
 
-    public function insertUser($user)
+    public function insertUser($user, $email)
     {
         // TODO: Implement insertUser() method.
     }
