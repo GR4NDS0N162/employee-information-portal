@@ -2,8 +2,13 @@
 
 namespace User\Model;
 
+use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\Adapter\Driver\ResultInterface;
+use Laminas\Db\ResultSet\HydratingResultSet;
+use Laminas\Db\Sql\Sql;
 use Laminas\Hydrator\HydratorInterface;
+use RuntimeException;
 
 class ProfileRepository implements ProfileRepositoryInterface
 {
@@ -36,6 +41,42 @@ class ProfileRepository implements ProfileRepositoryInterface
 
     public function findProfile($id)
     {
-        // TODO: Implement findProfile() method.
+        $sql = new Sql($this->db);
+        $select = $sql->select('user');
+        $select->columns([
+            'id',
+            'password',
+            'surname',
+            'name',
+            'patronymic',
+            'gender',
+            'birthday',
+            'image',
+            'skype',
+        ]);
+        $select->where(['id = ?' => $id]);
+
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+        if (!$result instanceof ResultInterface || !$result->isQueryResult()) {
+            throw new RuntimeException(sprintf(
+                'Failed retrieving profile with identifier "%d"; unknown database error.',
+                $id
+            ));
+        }
+
+        $resultSet = new HydratingResultSet($this->hydrator, $this->profilePrototype);
+        $resultSet->initialize($result);
+        $profile = $resultSet->current();
+
+        if (!$profile) {
+            throw new InvalidArgumentException(sprintf(
+                'Profile with identifier "%d" not found.',
+                $id
+            ));
+        }
+
+        return $profile;
     }
 }
