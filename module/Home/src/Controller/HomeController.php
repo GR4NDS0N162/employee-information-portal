@@ -116,7 +116,7 @@ class HomeController extends AbstractActionController
         );
 
         try {
-            $post = $this->userCommand->insertUser($user, $email);
+            $this->userCommand->insertUser($user, $email);
         } catch (Exception $ex) {
             throw $ex;
         }
