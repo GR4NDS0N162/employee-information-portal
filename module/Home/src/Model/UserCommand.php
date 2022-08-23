@@ -12,11 +12,17 @@ class UserCommand implements UserCommandInterface
     private $db;
 
     /**
+     * @var EmailRepositoryInterface
+     */
+    private $emailRepository;
+
+    /**
      * @param AdapterInterface $db
      */
-    public function __construct($db)
+    public function __construct($db, $emailRepository)
     {
         $this->db = $db;
+        $this->emailRepository = $emailRepository;
     }
 
     public function insertUser($user, $email)

@@ -2,6 +2,7 @@
 
 namespace Home\Factory;
 
+use Home\Model\EmailRepositoryInterface;
 use Home\Model\UserCommand;
 use Interop\Container\ContainerInterface;
 use Laminas\Db\Adapter\AdapterInterface;
@@ -13,6 +14,7 @@ class UserCommandFactory implements FactoryInterface
     {
         return new UserCommand(
             $container->get(AdapterInterface::class),
+            $container->get(EmailRepositoryInterface::class),
         );
     }
 }
