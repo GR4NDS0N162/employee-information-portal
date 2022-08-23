@@ -14,11 +14,13 @@ return [
             Model\PhoneRepositoryInterface::class   => Model\PhoneRepository::class,
             Model\EmailRepositoryInterface::class   => Model\EmailRepository::class,
             Model\ProfileRepositoryInterface::class => Model\ProfileRepository::class,
+            Model\ProfileCommandInterface::class    => Model\ProfileCommand::class,
         ],
         'factories' => [
             Model\PhoneRepository::class   => Factory\PhoneRepositoryFactory::class,
             Model\EmailRepository::class   => Factory\EmailRepositoryFactory::class,
             Model\ProfileRepository::class => Factory\ProfileRepositoryFactory::class,
+            Model\ProfileCommand::class    => Factory\ProfileCommandFactory::class,
         ],
     ],
     'controllers'     => [
