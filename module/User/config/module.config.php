@@ -29,12 +29,24 @@ return [
     'router'          => [
         'routes' => [
             'profile' => [
-                'type'    => Literal::class,
-                'options' => [
+                'type'          => Literal::class,
+                'options'       => [
                     'route'    => '/profile',
                     'defaults' => [
                         'controller' => Controller\ProfileController::class,
                         'action'     => 'index',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes'  => [
+                    'edit' => [
+                        'type'    => Literal::class,
+                        'options' => [
+                            'route'    => '/edit',
+                            'defaults' => [
+                                'action' => 'edit',
+                            ],
+                        ],
                     ],
                 ],
             ],

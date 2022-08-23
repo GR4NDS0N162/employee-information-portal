@@ -56,4 +56,9 @@ class ProfileController extends AbstractActionController
             'profile' => $this->profileRepository->findProfile(self::userId),
         ]);
     }
+
+    public function editAction()
+    {
+        // TODO: Implement editAction() method.
+    }
 }
