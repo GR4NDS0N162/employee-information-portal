@@ -7,6 +7,7 @@ use Laminas\Router\Http\Literal;
 return [
     'form_elements'   => [
         'factories' => [
+            Form\ProfileInfoForm::class => Factory\ProfileInfoFormFactory::class,
         ],
     ],
     'service_manager' => [
