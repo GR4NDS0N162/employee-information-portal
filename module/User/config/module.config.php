@@ -11,8 +11,12 @@ return [
     ],
     'service_manager' => [
         'aliases'   => [
+            Model\PhoneRepositoryInterface::class => Model\PhoneRepository::class,
+            Model\EmailRepositoryInterface::class => Model\EmailRepository::class,
         ],
         'factories' => [
+            Model\PhoneRepository::class => Factory\PhoneRepositoryFactory::class,
+            Model\EmailRepository::class => Factory\EmailRepositoryFactory::class,
         ],
     ],
     'controllers'     => [
