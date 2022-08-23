@@ -91,21 +91,23 @@ class HomeController extends AbstractActionController
 
     public function loginAction()
     {
+        $form = $this->loginForm;
     }
 
     public function signUpAction()
     {
+        $form = $this->signUpForm;
         $request = $this->getRequest();
 
         if (!$request->isPost())
             return $this->redirect()->toRoute('home');
 
-        $this->signUpForm->setData($request->getPost());
+        $form->setData($request->getPost());
 
-        if (!$this->signUpForm->isValid())
+        if (!$form->isValid())
             return $this->redirect()->toRoute('home');
 
-        $data = $this->signUpForm->getData();
+        $data = $form->getData();
 
         $email = new Email($data['email']);
         $user = new User(
@@ -126,17 +128,18 @@ class HomeController extends AbstractActionController
 
     public function recoverAction()
     {
+        $form = $this->recoverForm;
         $request = $this->getRequest();
 
         if (!$request->isPost())
             return $this->redirect()->toRoute('home');
 
-        $this->signUpForm->setData($request->getPost());
+        $form->setData($request->getPost());
 
-        if (!$this->signUpForm->isValid())
+        if (!$form->isValid())
             return $this->redirect()->toRoute('home');
 
-        $data = $this->signUpForm->getData();
+        $data = $form->getData();
         $email = new Email($data['email']);
 
         try {
