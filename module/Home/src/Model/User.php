@@ -15,9 +15,14 @@ class User
     private $password;
 
     /**
-     * @var non-empty-string
+     * @var non-empty-string|null
      */
     private $tempPassword;
+
+    /**
+     * @var non-empty-string|null
+     */
+    private $tpCreatedAt;
 
     /**
      * @var positive-int
@@ -26,15 +31,17 @@ class User
 
     /**
      * @param string $password
-     * @param string $tempPassword
+     * @param string|null $tempPassword
+     * @param string|null $tpCreatedAt
      * @param int $positionId
      * @param int|null $id
      */
-    public function __construct($password, $tempPassword, $positionId, $id = null)
+    public function __construct($password, $positionId, $tempPassword = null, $tpCreatedAt = null, $id = null)
     {
         $this->id = $id;
         $this->password = $password;
         $this->tempPassword = $tempPassword;
+        $this->tpCreatedAt = $tpCreatedAt;
         $this->positionId = $positionId;
     }
 
@@ -55,11 +62,19 @@ class User
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getTempPassword()
     {
         return $this->tempPassword;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTpCreatedAt()
+    {
+        return $this->tpCreatedAt;
     }
 
     /**

@@ -16,7 +16,7 @@ class UserRepositoryFactory implements FactoryInterface
         return new UserRepository(
             $container->get(AdapterInterface::class),
             new ReflectionHydrator(),
-            new User('', '', 0),
+            new User('', ''),
         );
     }
 }
