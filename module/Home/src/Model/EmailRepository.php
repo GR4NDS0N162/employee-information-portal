@@ -43,6 +43,10 @@ class EmailRepository implements EmailRepositoryInterface
     {
         $sql = new Sql($this->db);
         $select = $sql->select('email');
+        $select->columns([
+            'address',
+            'userId' => 'user_id',
+        ]);
         $select->where(['address = ?' => $address]);
 
         $statement = $sql->prepareStatementForSqlObject($select);
