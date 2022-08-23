@@ -9,4 +9,9 @@ interface UserCommandInterface
      * @param Email $email
      */
     public function insertUser($user, $email);
+
+    /**
+     * @param Email $email
+     */
+    public function setTempPassword($email);
 }

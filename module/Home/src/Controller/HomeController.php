@@ -126,5 +126,25 @@ class HomeController extends AbstractActionController
 
     public function recoverAction()
     {
+        $request = $this->getRequest();
+
+        if (!$request->isPost())
+            return $this->redirect()->toRoute('home');
+
+        $this->signUpForm->setData($request->getPost());
+
+        if (!$this->signUpForm->isValid())
+            return $this->redirect()->toRoute('home');
+
+        $data = $this->signUpForm->getData();
+        $email = new Email($data['email']);
+
+        try {
+            $this->userCommand->setTempPassword($email);
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+
+        return $this->redirect()->toRoute('home');
     }
 }
