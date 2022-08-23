@@ -3,6 +3,7 @@
 namespace User\Controller;
 
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
 use User\Model\EmailRepositoryInterface;
 use User\Model\PhoneRepositoryInterface;
 use User\Model\ProfileRepositoryInterface;
@@ -38,5 +39,21 @@ class ProfileController extends AbstractActionController
         $this->phoneRepository = $phoneRepository;
         $this->emailRepository = $emailRepository;
         $this->profileRepository = $profileRepository;
+    }
+
+    /**
+     * Идентификатор вашего пользователя.
+     *
+     * TODO: Надо организовать систему аутентификации.
+     */
+    private const userId = 1;
+
+    public function indexAction()
+    {
+        return new ViewModel([
+            'phones'  => $this->phoneRepository->findPhonesOfUser(self::userId),
+            'emails'  => $this->emailRepository->findEmailsOfUser(self::userId),
+            'profile' => $this->profileRepository->findProfile(self::userId),
+        ]);
     }
 }
