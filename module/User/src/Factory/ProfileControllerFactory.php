@@ -7,6 +7,7 @@ use Laminas\ServiceManager\Factory\FactoryInterface;
 use User\Controller\ProfileController;
 use User\Model\EmailRepositoryInterface;
 use User\Model\PhoneRepositoryInterface;
+use User\Model\ProfileRepositoryInterface;
 
 class ProfileControllerFactory implements FactoryInterface
 {
@@ -15,6 +16,7 @@ class ProfileControllerFactory implements FactoryInterface
         return new ProfileController(
             $container->get(PhoneRepositoryInterface::class),
             $container->get(EmailRepositoryInterface::class),
+            $container->get(ProfileRepositoryInterface::class),
         );
     }
 }
