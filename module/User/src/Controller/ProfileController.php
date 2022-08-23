@@ -4,8 +4,10 @@ namespace User\Controller;
 
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
+use User\Form\ProfileInfoForm;
 use User\Model\EmailRepositoryInterface;
 use User\Model\PhoneRepositoryInterface;
+use User\Model\ProfileCommandInterface;
 use User\Model\ProfileRepositoryInterface;
 
 class ProfileController extends AbstractActionController
@@ -26,19 +28,35 @@ class ProfileController extends AbstractActionController
     private $profileRepository;
 
     /**
+     * @var ProfileInfoForm
+     */
+    private $profileInfoForm;
+
+    /**
+     * @var ProfileCommandInterface
+     */
+    private $profileCommand;
+
+    /**
      * @param PhoneRepositoryInterface $phoneRepository
      * @param EmailRepositoryInterface $emailRepository
      * @param ProfileRepositoryInterface $profileRepository
+     * @param ProfileInfoForm $profileInfoForm
+     * @param ProfileCommandInterface $profileCommand
      */
     public function __construct(
         $phoneRepository,
         $emailRepository,
-        $profileRepository
+        $profileRepository,
+        $profileInfoForm,
+        $profileCommand
     )
     {
         $this->phoneRepository = $phoneRepository;
         $this->emailRepository = $emailRepository;
         $this->profileRepository = $profileRepository;
+        $this->profileInfoForm = $profileInfoForm;
+        $this->profileCommand = $profileCommand;
     }
 
     /**
