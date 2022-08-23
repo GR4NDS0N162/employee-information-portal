@@ -7,6 +7,7 @@ use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Adapter\Driver\ResultInterface;
 use Laminas\Db\Sql\Insert;
 use Laminas\Db\Sql\Sql;
+use Laminas\Db\Sql\Update;
 use RuntimeException;
 
 class UserCommand implements UserCommandInterface
@@ -81,6 +82,36 @@ class UserCommand implements UserCommandInterface
         if ($foundEmail) {
             throw new InvalidArgumentException(sprintf(
                 'User with email %s already exists in the system',
+                $email->getAddress()
+            ));
+        }
+    }
+
+    public function setTempPassword($email)
+    {
+        try {
+            $foundEmail = $this->emailRepository->findEmail($email->getAddress());
+            $foundUser = $this->userRepository->findUser($foundEmail->getUserId());
+
+            $update = new Update('user');
+            $update->set([
+                'temp_password' => 'Anypassword1.', // TODO: Organize password generation.
+                'tp_created_at' => date('Y-m-d H:i:s'),
+            ]);
+            $update->where(['id = ?' => $foundUser->getId()]);
+
+            $sql = new Sql($this->db);
+            $statement = $sql->prepareStatementForSqlObject($update);
+            $result = $statement->execute();
+
+            if (!$result instanceof ResultInterface) {
+                throw new RuntimeException(
+                    'Database error occurred during user update operation'
+                );
+            }
+        } catch (InvalidArgumentException $ex) {
+            throw new InvalidArgumentException(sprintf(
+                'A user with an email %s does not exist',
                 $email->getAddress()
             ));
         }
