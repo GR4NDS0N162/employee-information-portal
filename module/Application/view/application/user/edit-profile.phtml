@@ -8,6 +8,11 @@ $this->inlineScript()
     ->appendFile($this->basePath('js/collection-manipulation.js'))
     ->appendFile($this->basePath('js/password-form-validation.js'))
     ->appendFile($this->basePath('js/edit-list-form-validation.js'));
+
+/**
+ * @var Application\Form\ProfileForm $profileForm
+ */
+$profileForm = $this->profileForm;
 ?>
 <div class="row g-3">
     <div class="col-12">
