@@ -7,7 +7,14 @@ use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
-    'router'       => [
+    'form_elements' => [
+        'aliases'   => [
+        ],
+        'factories' => [
+            Form\ProfileForm::class => InvokableFactory::class,
+        ],
+    ],
+    'router'        => [
         'routes' => [
             'home'  => [
                 'type'    => Literal::class,
@@ -130,7 +137,7 @@ return [
             ],
         ],
     ],
-    'navigation'   => [
+    'navigation'    => [
         'default' => [
             [
                 'label' => 'Профиль',
@@ -194,15 +201,15 @@ return [
             ],
         ],
     ],
-    'controllers'  => [
+    'controllers'   => [
         'factories' => [
             Controller\LoginController::class     => InvokableFactory::class,
-            Controller\UserController::class      => InvokableFactory::class,
+            Controller\UserController::class      => Factory\UserControllerFactory::class,
             Controller\AdminController::class     => InvokableFactory::class,
             Controller\MessengerController::class => InvokableFactory::class,
         ],
     ],
-    'view_manager' => [
+    'view_manager'  => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
         'doctype'                  => 'HTML5',

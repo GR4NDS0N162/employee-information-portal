@@ -3,12 +3,26 @@
 namespace Application\Controller;
 
 use Application\Form;
+use Application\Form\ProfileForm;
 use Application\Model\PhotoUrlGenerator;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
 class UserController extends AbstractActionController
 {
+    /**
+     * @var ProfileForm
+     */
+    private $profileForm;
+
+    /**
+     * @param ProfileForm $profileForm
+     */
+    public function __construct($profileForm)
+    {
+        $this->profileForm = $profileForm;
+    }
+
     public function viewProfileAction(): ViewModel
     {
         $viewModel = new ViewModel();
@@ -53,7 +67,7 @@ class UserController extends AbstractActionController
         $this->layout()->setVariable('headTitleName', $headTitleName);
 
         $viewModel->setVariables([
-            'profileForm'        => new Form\ProfileForm(),
+            'profileForm'        => $this->profileForm,
             'editProfileForm'    => new Form\EditProfileForm(),
             'changePasswordForm' => new Form\ChangePasswordForm(),
         ]);
