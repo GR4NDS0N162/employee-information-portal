@@ -2,6 +2,7 @@
 
 namespace Application\Form;
 
+use Application\Form\Options\PositionOptions;
 use Laminas\Form\Element;
 use Laminas\Form\Form;
 
@@ -25,7 +26,7 @@ class EditUserForm extends EditProfileForm
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
-                'options'          => OptionList::getPositionList(),
+                'options'          => PositionOptions::getOptions(),
             ],
         ]);
 

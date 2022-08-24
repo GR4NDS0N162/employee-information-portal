@@ -2,6 +2,7 @@
 
 namespace Application\Form;
 
+use Application\Form\Options\PositionOptions;
 use Laminas\Form\Element;
 use Laminas\Form\Form;
 
@@ -45,7 +46,7 @@ class SignUpForm extends Form
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
-                'options'          => OptionList::getDisabledPositionList(),
+                'options'          => PositionOptions::getDisabledOptions(),
             ],
         ]);
 

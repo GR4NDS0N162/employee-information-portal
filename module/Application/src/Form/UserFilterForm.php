@@ -2,6 +2,8 @@
 
 namespace Application\Form;
 
+use Application\Form\Options\GenderOptions;
+use Application\Form\Options\PositionOptions;
 use Laminas\Form\Element;
 use Laminas\Form\Form;
 
@@ -26,7 +28,7 @@ class UserFilterForm extends Form
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
-                'options'          => OptionList::getEnabledPositionList(),
+                'options'          => PositionOptions::getEnabledOptions(),
             ],
         ]);
 
@@ -41,7 +43,7 @@ class UserFilterForm extends Form
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
-                'options'          => OptionList::getGenderList(),
+                'options'          => GenderOptions::getOptions(),
             ],
         ]);
 

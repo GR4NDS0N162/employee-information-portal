@@ -2,6 +2,7 @@
 
 namespace Application\Form;
 
+use Application\Form\Options\YesNoOptions;
 use Laminas\Form\Element;
 use Laminas\Form\Form;
 
@@ -24,7 +25,7 @@ class AdminFilterForm extends UserFilterForm
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
-                'options'          => OptionList::getActiveFilterOptions(),
+                'options'          => YesNoOptions::getActiveOptions(),
             ],
         ]);
 
@@ -39,7 +40,7 @@ class AdminFilterForm extends UserFilterForm
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
-                'options'          => OptionList::getAdminFilterOptions(),
+                'options'          => YesNoOptions::getAdminOptions(),
             ],
         ]);
 
