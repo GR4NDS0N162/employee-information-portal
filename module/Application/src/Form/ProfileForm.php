@@ -23,5 +23,10 @@ class ProfileForm extends Form
                 'class' => 'btn btn-outline-success w-100',
             ],
         ]);
+
+        FieldsetMapper::setMapping($this, [
+            'profile' => 'col-12',
+            'submit'  => 'col-12',
+        ]);
     }
 }

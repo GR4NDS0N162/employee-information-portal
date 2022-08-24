@@ -2,6 +2,7 @@
 
 namespace Application\Fieldset;
 
+use Application\Form\FieldsetMapper;
 use Laminas\Form\Element\Button;
 use Laminas\Form\Element\Collection;
 use Laminas\Form\Element\Email;
@@ -45,6 +46,11 @@ class EmailsFieldset extends Fieldset
                 'should_create_template' => true,
                 'template_placeholder'   => '__index__',
             ],
+        ]);
+
+        FieldsetMapper::setMapping($this, [
+            'add'  => 'col-12',
+            'list' => 'col-12',
         ]);
     }
 }
