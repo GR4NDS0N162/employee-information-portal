@@ -7,6 +7,8 @@ use Laminas\Form\Form;
 
 class SetPasswordForm extends Form
 {
+    public const DEFAULT_NAME = 'set-password-form';
+
     protected array $newPassword = [
         'name'       => 'new-password',
         'type'       => Element\Password::class,
@@ -43,8 +45,6 @@ class SetPasswordForm extends Form
             ],
         ],
     ];
-
-    public const DEFAULT_NAME = 'set-password-form';
 
     public function __construct($name = self::DEFAULT_NAME)
     {
