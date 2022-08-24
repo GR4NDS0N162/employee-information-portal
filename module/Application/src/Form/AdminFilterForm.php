@@ -4,7 +4,6 @@ namespace Application\Form;
 
 use Application\Form\Options\YesNoOptions;
 use Laminas\Form\Element;
-use Laminas\Form\Form;
 
 class AdminFilterForm extends UserFilterForm
 {

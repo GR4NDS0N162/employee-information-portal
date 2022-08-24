@@ -3,7 +3,6 @@
 namespace Application\Form;
 
 use Laminas\Form\Element;
-use Laminas\Form\Form;
 
 class ChangePasswordForm extends SetPasswordForm
 {
