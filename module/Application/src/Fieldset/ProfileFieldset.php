@@ -110,6 +110,46 @@ class ProfileFieldset extends Fieldset
             ],
         ]);
 
+        $this->add([
+            'name'       => 'emails',
+            'type'       => Element\Collection::class,
+            'attributes' => [
+                'class' => 'row gy-3',
+            ],
+            'options'    => [
+                'label'                  => 'E-mail-ы',
+                'label_attributes'       => self::DEFAULT_LABEL_ATTRIBUTES,
+                'target_element'         => [
+                    'type' => EmailFieldset::class,
+                ],
+                'count'                  => 1,
+                'allow_add'              => true,
+                'allow_remove'           => true,
+                'should_create_template' => true,
+                'template_placeholder'   => '__index__',
+            ],
+        ]);
+
+        $this->add([
+            'name'       => 'phones',
+            'type'       => Element\Collection::class,
+            'attributes' => [
+                'class' => 'row gy-3',
+            ],
+            'options'    => [
+                'label'                  => 'Телефоны',
+                'label_attributes'       => self::DEFAULT_LABEL_ATTRIBUTES,
+                'target_element'         => [
+                    'type' => PhoneFieldset::class,
+                ],
+                'count'                  => 0,
+                'allow_add'              => true,
+                'allow_remove'           => true,
+                'should_create_template' => true,
+                'template_placeholder'   => '__index__',
+            ],
+        ]);
+
         FieldsetMapper::setMapping($this, [
             'id'         => 'd-none',
             'image'      => 'col-12',
