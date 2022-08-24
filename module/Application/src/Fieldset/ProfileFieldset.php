@@ -2,7 +2,6 @@
 
 namespace Application\Fieldset;
 
-use Application\Form\FieldsetMapper;
 use Application\Form\Options\GenderOptions;
 use Laminas\Form\Element;
 use Laminas\Form\Fieldset;
@@ -118,17 +117,6 @@ class ProfileFieldset extends Fieldset
         $this->add([
             'name' => 'phones',
             'type' => PhonesFieldset::class,
-        ]);
-
-        FieldsetMapper::setMapping($this, [
-            'id'         => 'd-none',
-            'image'      => 'col-12',
-            'surname'    => 'col-12 col-lg-4',
-            'name'       => 'col-12 col-sm-6 col-lg-4',
-            'patronymic' => 'col-12 col-sm-6 col-lg-4',
-            'gender'     => 'col-12 col-sm-6 col-lg-4',
-            'birthday'   => 'col-12 col-sm-6 col-lg-4',
-            'skype'      => 'col-12 col-lg-4',
         ]);
     }
 }
