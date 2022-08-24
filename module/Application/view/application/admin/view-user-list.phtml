@@ -9,7 +9,18 @@
     <div class="col-12">
         <div class="row align-items-center justify-content-between g-3">
             <div class="col-auto">
-                <p class="h5 mb-0">Показаны: 1-20 из 79</p>
+                <?php
+                $userCount = count($userInfo);
+                $maxCount = 20;
+                $page = 1;
+                ?>
+                <p class="h5 mb-0">
+                    <?= sprintf('Показаны: %d-%d из %d',
+                        (1 + ($page - 1) * $maxCount),
+                        min($page * $maxCount, $userCount),
+                        $userCount,
+                    ); ?>
+                </p>
             </div>
             <div class="col-auto">
                 <div class="dropdown">
