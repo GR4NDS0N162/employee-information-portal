@@ -3,8 +3,6 @@
  * @var Laminas\View\Renderer\PhpRenderer $this
  * @var Application\Form\EditProfileForm $editProfileForm
  * @var Application\Form\ChangePasswordForm $changePasswordForm
- * @var Application\Form\EditPhoneForm $editPhoneForm
- * @var Application\Form\EditEmailForm $editEmailForm
  */
 $this->inlineScript()
     ->appendFile($this->basePath('js/collection-manipulation.js'))
@@ -23,19 +21,6 @@ $this->inlineScript()
     <?php $this->formCollection()
         ->setTemplateWrapper('<span class="d-none" data-template="%s"></span><div class="col-12 notification">Список пуст.</div>')
         ->setWrapper('<div class="col-12"><div%4$s>%3$s%2$s%1$s</div></div>'); ?>
-
-    <div class="col-12 col-lg-6">
-        <div class="card p-3">
-            <div class="form-label">Телефоны</div>
-            <?= $this->form()->render($editPhoneForm); ?>
-        </div>
-    </div>
-    <div class="col-12 col-lg-6">
-        <div class="card p-3">
-            <div class="form-label">E-mail-ы</div>
-            <?= $this->form()->render($editEmailForm); ?>
-        </div>
-    </div>
 
     <div class="col-12">
         <div class="card p-3">
