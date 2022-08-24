@@ -37,12 +37,9 @@ class AgeFilterFieldset extends Fieldset
             ],
         ]);
 
-        $classMap = [
+        FieldsetMapper::setMapping($this, [
             'min' => 'col-6',
             'max' => 'col-6',
-        ];
-
-        foreach ($classMap as $name => $class)
-            $this->get($name)->setAttribute('delimiter_class', $class);
+        ]);
     }
 }

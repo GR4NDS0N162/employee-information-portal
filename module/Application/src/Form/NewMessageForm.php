@@ -39,12 +39,9 @@ class NewMessageForm extends Form
             'priority' => -10 ** 9,
         ]);
 
-        $classMap = [
+        FieldsetMapper::setMapping($this, [
             'message'       => 'col',
             'submit-button' => 'col-auto',
-        ];
-
-        foreach ($classMap as $name => $class)
-            $this->get($name)->setAttribute('delimiter_class', $class);
+        ]);
     }
 }

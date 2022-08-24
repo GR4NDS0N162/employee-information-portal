@@ -88,14 +88,10 @@ class UserFilterForm extends Form
             'priority' => -10 ** 9,
         ]);
 
-        $classMap = [
-            'position' => 'col-12',
-            'gender'   => 'col-12',
-
+        FieldsetMapper::setMapping($this, [
+            'position'             => 'col-12',
+            'gender'               => 'col-12',
             'fullname-phone-email' => 'col-12',
-        ];
-
-        foreach ($classMap as $name => $class)
-            $this->get($name)->setAttribute('delimiter_class', $class);
+        ]);
     }
 }

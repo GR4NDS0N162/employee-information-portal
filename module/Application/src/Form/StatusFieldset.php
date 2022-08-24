@@ -45,12 +45,9 @@ class StatusFieldset extends Fieldset
             ],
         ]);
 
-        $classMap = [
+        FieldsetMapper::setMapping($this, [
             'admin'  => 'col-12 col-md-6',
             'active' => 'col-12 col-md-6',
-        ];
-
-        foreach ($classMap as $name => $class)
-            $this->get($name)->setAttribute('delimiter_class', $class);
+        ]);
     }
 }

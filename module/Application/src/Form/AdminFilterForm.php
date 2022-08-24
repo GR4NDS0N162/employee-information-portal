@@ -44,12 +44,9 @@ class AdminFilterForm extends UserFilterForm
             ],
         ]);
 
-        $classMap = [
+        FieldsetMapper::setMapping($this, [
             'active' => 'col-12',
             'admin'  => 'col-12',
-        ];
-
-        foreach ($classMap as $name => $class)
-            $this->get($name)->setAttribute('delimiter_class', $class);
+        ]);
     }
 }

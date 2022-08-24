@@ -135,22 +135,15 @@ class EditProfileForm extends Form
             'priority' => -10 ** 9,
         ]);
 
-        $classMap = [
-            'photo' => 'col-12',
-
-            'surname'    => 'col-12 col-lg-4',
-            'name'       => 'col-12 col-sm-6 col-lg-4',
-            'patronymic' => 'col-12 col-sm-6 col-lg-4',
-
-            'gender'   => 'col-12 col-sm-6 col-lg-4',
-            'birthday' => 'col-12 col-sm-6 col-lg-4',
-
-            'skype' => 'col-12 col-lg-4',
-
+        FieldsetMapper::setMapping($this, [
+            'photo'         => 'col-12',
+            'surname'       => 'col-12 col-lg-4',
+            'name'          => 'col-12 col-sm-6 col-lg-4',
+            'patronymic'    => 'col-12 col-sm-6 col-lg-4',
+            'gender'        => 'col-12 col-sm-6 col-lg-4',
+            'birthday'      => 'col-12 col-sm-6 col-lg-4',
+            'skype'         => 'col-12 col-lg-4',
             'submit-button' => 'col-12',
-        ];
-
-        foreach ($classMap as $name => $class)
-            $this->get($name)->setAttribute('delimiter_class', $class);
+        ]);
     }
 }
