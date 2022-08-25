@@ -17,10 +17,6 @@ $profileForm = $this->profileForm;
 <div class="row g-3">
     <div class="col-12">
         <div class="card p-3">
-            <?php $this->formCollection()
-                ->setTemplateWrapper('<span class="d-none" data-template="%s"></span>')
-                ->setLabelWrapper('<div class="form-label">%s</div>')
-                ->setWrapper('%2$s<div%4$s>%3$s%1$s</div>'); ?>
             <?= $this->userForm()->render($profileForm); ?>
         </div>
     </div>
