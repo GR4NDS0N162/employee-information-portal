@@ -137,6 +137,7 @@ class ProfileFieldset extends Fieldset
                 'class' => 'row gy-3',
             ],
             'options'    => [
+                'label'                  => 'E-mail-ы',
                 'count'                  => 1,
                 'allow_add'              => true,
                 'allow_remove'           => true,
@@ -158,6 +159,7 @@ class ProfileFieldset extends Fieldset
                 'class' => 'row gy-3',
             ],
             'options'    => [
+                'label'                  => 'Телефоны',
                 'count'                  => 0,
                 'allow_add'              => true,
                 'allow_remove'           => true,
