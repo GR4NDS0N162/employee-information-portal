@@ -132,7 +132,7 @@ class ProfileFieldset extends Fieldset
             'name'       => 'emails',
             'type'       => Element\Collection::class,
             'attributes' => [
-                'class' => 'row gy-3',
+                'class' => 'row g-3',
             ],
             'options'    => [
                 'label'                  => 'E-mail-ы',
@@ -144,7 +144,7 @@ class ProfileFieldset extends Fieldset
                 'target_element'         => [
                     'type'       => EmailFieldset::class,
                     'attributes' => [
-                        'class' => 'row g-3',
+                        'class' => 'input-group',
                     ],
                 ],
             ],
@@ -154,7 +154,7 @@ class ProfileFieldset extends Fieldset
             'name'       => 'phones',
             'type'       => Element\Collection::class,
             'attributes' => [
-                'class' => 'row gy-3',
+                'class' => 'row g-3',
             ],
             'options'    => [
                 'label'                  => 'Телефоны',
@@ -166,7 +166,7 @@ class ProfileFieldset extends Fieldset
                 'target_element'         => [
                     'type'       => PhoneFieldset::class,
                     'attributes' => [
-                        'class' => 'row g-3',
+                        'class' => 'input-group',
                     ],
                 ],
             ],
