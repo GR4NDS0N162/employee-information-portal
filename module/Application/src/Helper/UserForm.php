@@ -7,7 +7,7 @@ use Laminas\Form\FormInterface;
 use Laminas\Form\View\Helper\Form;
 use Laminas\View\Renderer\PhpRenderer;
 
-class UserFormHelper extends Form
+class UserForm extends Form
 {
     public function render(FormInterface $form): string
     {

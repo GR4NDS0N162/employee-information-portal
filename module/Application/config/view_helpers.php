@@ -6,13 +6,13 @@ use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
     'aliases'   => [
-        'userFormHelper'       => Helper\UserFormHelper::class,
-        'userCollectionHelper' => Helper\UserCollectionHelper::class,
-        'userFormRow'          => Helper\UserFormRow::class,
+        'userForm'           => Helper\UserForm::class,
+        'userFormCollection' => Helper\UserFormCollection::class,
+        'userFormRow'        => Helper\UserFormRow::class,
     ],
     'factories' => [
-        Helper\UserFormHelper::class       => InvokableFactory::class,
-        Helper\UserCollectionHelper::class => InvokableFactory::class,
-        Helper\UserFormRow::class          => InvokableFactory::class,
+        Helper\UserForm::class           => InvokableFactory::class,
+        Helper\UserFormCollection::class => InvokableFactory::class,
+        Helper\UserFormRow::class        => InvokableFactory::class,
     ],
 ];

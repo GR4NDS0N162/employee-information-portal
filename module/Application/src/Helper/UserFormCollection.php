@@ -9,7 +9,7 @@ use Laminas\Form\LabelAwareInterface;
 use Laminas\Form\View\Helper\FormCollection;
 use Laminas\View\Helper\Doctype;
 
-class UserCollectionHelper extends FormCollection
+class UserFormCollection extends FormCollection
 {
     /** @var array */
     private $doctypesAllowedToHaveNameAttribute = [
