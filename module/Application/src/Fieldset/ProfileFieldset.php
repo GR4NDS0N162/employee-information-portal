@@ -2,11 +2,9 @@
 
 namespace Application\Fieldset;
 
-use Application\Form\FieldsetMapper;
 use Application\Form\Options\GenderOptions;
 use Application\Model\Profile;
 use Laminas\Form\Element;
-use Laminas\Form\Element\Email;
 use Laminas\Form\Fieldset;
 use Laminas\Hydrator\ClassMethodsHydrator;
 
@@ -172,19 +170,6 @@ class ProfileFieldset extends Fieldset
                     ],
                 ],
             ],
-        ]);
-
-        FieldsetMapper::setMapping($this, [
-            'id'         => 'col-12',
-            'image'      => 'col-12',
-            'surname'    => 'col-12',
-            'name'       => 'col-12',
-            'patronymic' => 'col-12',
-            'gender'     => 'col-12',
-            'birthday'   => 'col-12',
-            'skype'      => 'col-12',
-            'emails'     => 'col-12',
-            'phones'     => 'col-12',
         ]);
     }
 }

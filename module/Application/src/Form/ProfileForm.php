@@ -10,10 +10,15 @@ class ProfileForm extends Form
 {
     public function init()
     {
+        $this->setAttribute('class', 'row g-3');
+
         $this->add([
-            'name'    => 'profile',
-            'type'    => ProfileFieldset::class,
-            'options' => [
+            'name'       => 'profile',
+            'type'       => ProfileFieldset::class,
+            'attributes' => [
+                'class' => 'row g-3',
+            ],
+            'options'    => [
                 'use_as_base_fieldset' => true,
             ],
         ]);
@@ -25,11 +30,6 @@ class ProfileForm extends Form
                 'value' => 'Сохранить изменения',
                 'class' => 'btn btn-outline-success w-100',
             ],
-        ]);
-
-        FieldsetMapper::setMapping($this, [
-            'profile' => 'col-12',
-            'submit'  => 'col-12',
         ]);
     }
 }
