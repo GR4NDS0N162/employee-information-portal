@@ -3,7 +3,6 @@
 namespace Application\Controller;
 
 use Application\Form;
-use Application\Form\ProfileForm;
 use Application\Model\Email;
 use Application\Model\Phone;
 use Application\Model\PhotoUrlGenerator;
@@ -14,62 +13,29 @@ use Laminas\View\Model\ViewModel;
 class UserController extends AbstractActionController
 {
     /**
-     * @var ProfileForm
+     * @var Form\ProfileForm
      */
     private $profileForm;
 
     /**
-     * @param ProfileForm $profileForm
+     * @var Form\ViewProfileForm
      */
-    public function __construct($profileForm)
+    private $viewProfileForm;
+
+    /**
+     * @var Profile
+     */
+    private $profilePrototype;
+
+    /**
+     * @param Form\ProfileForm     $profileForm
+     * @param Form\ViewProfileForm $viewProfileForm
+     */
+    public function __construct($profileForm, $viewProfileForm)
     {
         $this->profileForm = $profileForm;
-    }
-
-    public function viewProfileAction(): ViewModel
-    {
-        $viewModel = new ViewModel();
-
-        $headTitleName = 'Просмотр профиля';
-
-        $this->layout()->setVariable('headTitleName', $headTitleName);
-
-        $userInfo = [
-            'photo'      => PhotoUrlGenerator::generate(),
-            'surname'    => 'Зубенко',
-            'name'       => 'Михаил',
-            'patronymic' => 'Петрович',
-            'gender'     => 'Мужской',
-            'birthday'   => '16.10.1968',
-            'skype'      => 'ivanivanov',
-            'phones'     => [
-                ['value' => '+79283639473'],
-                ['value' => '+79462846274'],
-                ['value' => '+79204764782'],
-                ['value' => '+79347296067'],
-            ],
-            'emails'     => [
-                ['value' => 'name@example.com'],
-                ['value' => 'name@example.com'],
-                ['value' => 'name@example.com'],
-                ['value' => 'name@example.com'],
-            ],
-        ];
-
-        $viewModel->setVariable('userInfo', $userInfo);
-
-        return $viewModel;
-    }
-
-    public function editProfileAction(): ViewModel
-    {
-        $viewModel = new ViewModel();
-
-        $headTitleName = 'Редактирование профиля';
-
-        $this->layout()->setVariable('headTitleName', $headTitleName);
-
-        $profile = new Profile(
+        $this->viewProfileForm = $viewProfileForm;
+        $this->profilePrototype = new Profile(
             null,
             null,
             null,
@@ -93,7 +59,32 @@ class UserController extends AbstractActionController
                 new Phone('3'),
             ],
         );
-        $this->profileForm->bind($profile);
+    }
+
+    public function viewProfileAction(): ViewModel
+    {
+        $viewModel = new ViewModel();
+
+        $headTitleName = 'Просмотр профиля';
+
+        $this->layout()->setVariable('headTitleName', $headTitleName);
+
+        $this->viewProfileForm->bind($this->profilePrototype);
+
+        $viewModel->setVariable('viewProfileForm', $this->viewProfileForm);
+
+        return $viewModel;
+    }
+
+    public function editProfileAction(): ViewModel
+    {
+        $viewModel = new ViewModel();
+
+        $headTitleName = 'Редактирование профиля';
+
+        $this->layout()->setVariable('headTitleName', $headTitleName);
+
+        $this->profileForm->bind($this->profilePrototype);
 
         $viewModel->setVariables([
             'profileForm'        => $this->profileForm,

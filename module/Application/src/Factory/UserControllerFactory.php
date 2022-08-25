@@ -4,6 +4,7 @@ namespace Application\Factory;
 
 use Application\Controller\UserController;
 use Application\Form\ProfileForm;
+use Application\Form\ViewProfileForm;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 
@@ -15,6 +16,7 @@ class UserControllerFactory implements FactoryInterface
 
         return new UserController(
             $formManager->get(ProfileForm::class),
+            $formManager->get(ViewProfileForm::class),
         );
     }
 }
