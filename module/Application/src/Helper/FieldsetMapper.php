@@ -1,17 +1,12 @@
 <?php
 
-namespace Application\Form;
+namespace Application\Helper;
 
 use Laminas\Form\FieldsetInterface;
 
 class FieldsetMapper
 {
-    /**
-     * @param $fieldset FieldsetInterface
-     * @param $map array
-     * @return void
-     */
-    public static function setMapping($fieldset, $map)
+    public static function setMapping(FieldsetInterface $fieldset, array $map)
     {
         foreach ($map as $name => $class) {
             if ($fieldset->has($name)) {
