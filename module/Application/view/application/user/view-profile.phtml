@@ -7,4 +7,9 @@ $viewProfileForm = $this->viewProfileForm;
 /** @var Application\Form\ViewProfileForm $viewProfileForm */
 ?>
 
-<?= $this->userForm()->render($viewProfileForm); ?>
+<?= preg_replace(
+    [
+        '/<button.*button>/',
+        '/<input.*type="(submit|button)".*>/',
+    ],
+    '', $this->userForm()->render($viewProfileForm)); ?>
