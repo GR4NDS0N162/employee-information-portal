@@ -5,6 +5,7 @@ namespace Application\Fieldset;
 use Application\Form\FieldsetMapper;
 use Application\Form\Options\GenderOptions;
 use Laminas\Form\Element;
+use Laminas\Form\Element\Email;
 use Laminas\Form\Fieldset;
 
 class ProfileFieldset extends Fieldset
@@ -111,13 +112,45 @@ class ProfileFieldset extends Fieldset
         ]);
 
         $this->add([
-            'name' => 'emails',
-            'type' => EmailsFieldset::class,
+            'name'       => 'emails',
+            'type'       => Element\Collection::class,
+            'attributes' => [
+                'class' => 'row gy-3',
+            ],
+            'options'    => [
+                'count'                  => 1,
+                'allow_add'              => true,
+                'allow_remove'           => true,
+                'should_create_template' => true,
+                'template_placeholder'   => '__index__',
+                'target_element'         => [
+                    'type'       => EmailFieldset::class,
+                    'attributes' => [
+                        'class' => 'row g-3',
+                    ],
+                ],
+            ],
         ]);
 
         $this->add([
-            'name' => 'phones',
-            'type' => PhonesFieldset::class,
+            'name'       => 'phones',
+            'type'       => Element\Collection::class,
+            'attributes' => [
+                'class' => 'row gy-3',
+            ],
+            'options'    => [
+                'count'                  => 0,
+                'allow_add'              => true,
+                'allow_remove'           => true,
+                'should_create_template' => true,
+                'template_placeholder'   => '__index__',
+                'target_element'         => [
+                    'type'       => PhoneFieldset::class,
+                    'attributes' => [
+                        'class' => 'row g-3',
+                    ],
+                ],
+            ],
         ]);
 
         FieldsetMapper::setMapping($this, [
