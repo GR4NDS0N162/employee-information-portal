@@ -1,14 +1,51 @@
 <?php
-/** @var Laminas\View\Renderer\PhpRenderer $this */
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
 
-/** @var Laminas\Form\ElementInterface $element */
+use Application\Helper\FieldsetMapper;
+use Laminas\Form\Element;
+
 $element = $this->element;
-/** @var string|null $label */
+/** @var Laminas\Form\ElementInterface $element */
 $label = $this->label;
-/** @var array|null $labelAttributes */
+/** @var string|null $label */
 $labelAttributes = $this->labelAttributes;
-/** @var string|null $labelPosition */
+/** @var array|null $labelAttributes */
 $labelPosition = $this->labelPosition;
-/** @var bool $renderErrors */
+/** @var string|null $labelPosition */
 $renderErrors = $this->renderErrors;
+/** @var bool $renderErrors */
 ?>
+
+<?php if ($element->hasAttribute(FieldsetMapper::KEY)): ?>
+<div class="<?= $element->getAttribute(FieldsetMapper::KEY); ?>">
+    <?php endif; ?>
+
+    <?php if ($element instanceof Element\Button or $element instanceof Element\Submit): ?>
+        <?= $this->formElement()->render($element); ?>
+
+    <?php elseif ($element instanceof Element\File): ?>
+        <?= $this->formLabel($element); ?>
+        <?= $this->formElement()->render($element); ?>
+
+    <?php elseif ($element instanceof Element\Checkbox): ?>
+        <?= $this->formElement()->render($element); ?>
+        <?= $this->formLabel($element); ?>
+
+    <?php else: ?>
+
+        <?php if ($element->getLabel() !== null): ?>
+            <div class="form-floating">
+                <?= $this->formElement()->render($element); ?>
+                <?= $this->formLabel($element); ?>
+            </div>
+        <?php else: ?>
+            <?= $this->formElement()->render($element); ?>
+        <?php endif; ?>
+
+    <?php endif; ?>
+
+    <?php if ($element->hasAttribute(FieldsetMapper::KEY)): ?>
+</div>
+<?php endif; ?>
