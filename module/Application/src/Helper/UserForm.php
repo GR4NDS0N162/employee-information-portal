@@ -23,10 +23,10 @@ class UserForm extends Form
         foreach ($form as $elementOrFieldset) {
             switch (true) {
                 case $elementOrFieldset instanceof FieldsetInterface:
-                    $formContent .= $renderer->formCollection($elementOrFieldset);
+                    $formContent .= $renderer->userFormCollection($elementOrFieldset);
                     break;
                 default:
-                    $formContent .= $renderer->formRow($elementOrFieldset);
+                    $formContent .= $renderer->userFormRow($elementOrFieldset);
                     break;
             }
         }
