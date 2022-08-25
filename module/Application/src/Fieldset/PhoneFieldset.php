@@ -5,10 +5,10 @@ namespace Application\Fieldset;
 use Application\Form\FieldsetMapper;
 use Laminas\Form\Element\Button;
 use Laminas\Form\Element\Collection;
-use Laminas\Form\Element\Email;
+use Laminas\Form\Element\Tel;
 use Laminas\Form\Fieldset;
 
-class EmailsFieldset extends Fieldset
+class PhoneFieldset extends Fieldset
 {
     public function init()
     {
@@ -20,7 +20,7 @@ class EmailsFieldset extends Fieldset
                 'class' => 'btn btn-outline-primary w-100',
             ],
             'options'    => [
-                'label' => 'Добавить e-mail',
+                'label' => 'Добавить телефон',
             ],
         ]);
 
@@ -32,15 +32,15 @@ class EmailsFieldset extends Fieldset
             ],
             'options'    => [
                 'target_element'         => [
-                    'type'       => Email::class,
+                    'type'       => Tel::class,
                     'attributes' => [
                         'class'       => 'form-control',
-                        'placeholder' => 'name@example.com',
+                        'placeholder' => '+7xxxxxxxxxx',
                         'required'    => 'required',
-                        'pattern'     => '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$',
+                        'pattern'     => '^\+7[0-9]{10}$',
                     ],
                 ],
-                'count'                  => 1,
+                'count'                  => 0,
                 'allow_add'              => true,
                 'allow_remove'           => true,
                 'should_create_template' => true,
