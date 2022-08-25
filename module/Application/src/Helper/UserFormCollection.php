@@ -27,7 +27,7 @@ class UserFormCollection extends FormCollection
     {
         return sprintf('<div class="%2$s">%1$s</div>',
             parent::render($element),
-            $element->getAttribute('delimiter_class'),
+            $element->getAttribute(FieldsetMapper::KEY),
         );
     }
 }
