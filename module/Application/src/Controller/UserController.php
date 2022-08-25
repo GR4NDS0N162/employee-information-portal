@@ -4,7 +4,10 @@ namespace Application\Controller;
 
 use Application\Form;
 use Application\Form\ProfileForm;
+use Application\Model\Email;
+use Application\Model\Phone;
 use Application\Model\PhotoUrlGenerator;
+use Application\Model\Profile;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
@@ -65,6 +68,32 @@ class UserController extends AbstractActionController
         $headTitleName = 'Редактирование профиля';
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
+
+        $profile = new Profile(
+            null,
+            null,
+            null,
+            null,
+            'Внуков',
+            'Кирилл',
+            'Денисович',
+            1,
+            '2003-05-19',
+            null,
+            'gr4nds0n162',
+            [
+                new Email('1'),
+                new Email('2'),
+                new Email('3'),
+                new Email('4'),
+            ],
+            [
+                new Phone('1'),
+                new Phone('2'),
+                new Phone('3'),
+            ],
+        );
+        $this->profileForm->bind($profile);
 
         $viewModel->setVariables([
             'profileForm'        => $this->profileForm,
