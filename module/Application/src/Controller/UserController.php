@@ -45,7 +45,7 @@ class UserController extends AbstractActionController
             'Денисович',
             1,
             '2003-05-19',
-            null,
+            '/img/favicon.ico',
             'gr4nds0n162',
             [
                 new Email('1'),
@@ -70,6 +70,7 @@ class UserController extends AbstractActionController
         $this->layout()->setVariable('headTitleName', $headTitleName);
 
         $this->viewProfileForm->bind($this->profilePrototype);
+        $this->viewProfileForm->get('profile')->get('image')->setAttribute('src', $this->profilePrototype->getImage());
 
         $viewModel->setVariable('viewProfileForm', $this->viewProfileForm);
 
