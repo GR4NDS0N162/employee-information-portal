@@ -2,16 +2,21 @@
 
 namespace Application\Fieldset;
 
-use Laminas\Form\Element\Tel;
+use Application\Model\Phone;
+use Laminas\Form\Element;
 use Laminas\Form\Fieldset;
+use Laminas\Hydrator\ClassMethodsHydrator;
 
 class PhoneFieldset extends Fieldset
 {
     public function init()
     {
+        $this->setHydrator(new ClassMethodsHydrator(false, true));
+        $this->setObject(new Phone(''));
+
         $this->add([
             'name'       => 'number',
-            'type'       => Tel::class,
+            'type'       => Element\Tel::class,
             'attributes' => [
                 'class'       => 'form-control',
                 'placeholder' => '+7xxxxxxxxxx',

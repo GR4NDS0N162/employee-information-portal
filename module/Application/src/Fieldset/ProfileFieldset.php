@@ -4,9 +4,11 @@ namespace Application\Fieldset;
 
 use Application\Form\FieldsetMapper;
 use Application\Form\Options\GenderOptions;
+use Application\Model\Profile;
 use Laminas\Form\Element;
 use Laminas\Form\Element\Email;
 use Laminas\Form\Fieldset;
+use Laminas\Hydrator\ClassMethodsHydrator;
 
 class ProfileFieldset extends Fieldset
 {
@@ -16,6 +18,23 @@ class ProfileFieldset extends Fieldset
 
     public function init()
     {
+        $this->setHydrator(new ClassMethodsHydrator(false, true));
+        $this->setObject(new Profile(
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+        ));
+
         $this->add([
             'name' => 'id',
             'type' => Element\Hidden::class,
