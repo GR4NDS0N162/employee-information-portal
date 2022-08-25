@@ -11,8 +11,11 @@ class ProfileForm extends Form
     public function init()
     {
         $this->add([
-            'name' => 'profile',
-            'type' => ProfileFieldset::class,
+            'name'    => 'profile',
+            'type'    => ProfileFieldset::class,
+            'options' => [
+                'use_as_base_fieldset' => true,
+            ],
         ]);
 
         $this->add([
