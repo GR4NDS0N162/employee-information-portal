@@ -41,7 +41,7 @@ class AdminController extends AbstractActionController
         $this->positionForm = $positionForm;
         $this->userForm = $userForm;
         $this->profilePrototype = new Profile(
-            null,
+            'Anypassword1.',
             null,
             null,
             null,
