@@ -44,7 +44,7 @@ class AdminController extends AbstractActionController
             'Anypassword1.',
             null,
             null,
-            null,
+            4,
             'Внуков',
             'Кирилл',
             'Денисович',
