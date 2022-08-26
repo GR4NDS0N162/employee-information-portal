@@ -1,53 +1,40 @@
+for (const button of $(`button[name="add"]`)) {
+    button.addEventListener('click', () => add_item(button));
+
+    let container = button.previousSibling;
+    let count = container.childNodes.length;
+
+    let currentIndex = (count <= 2) ? 0 : count - 2;
+
+    container.setAttribute('current-index', currentIndex);
+}
+
 function add_item(button)
 {
-    let formId = button.closest('form').getAttribute('id');
-    let container = $(`#${formId} .collection-list`);
-    let template = $(`#${formId} .collection-list span`).data('template');
+    let container = button.previousSibling;
+    let template = container.childNodes[0];
+    template = template.getAttribute('data-template');
 
-    if (!container[0].hasAttribute('current-index'))
-        calculateIndex(formId);
+    let currentIndex = container.getAttribute('current-index');
+    container.appendChild(new DOMParser().parseFromString(
+        template.replace(/__index__/g, currentIndex),
+        "text/html").body.firstElementChild);
 
-    let currentIndex = parseInt(container[0].getAttribute('current-index'));
-    container.append(template.replace(/__index__/g, currentIndex));
-
-    container[0].setAttribute('current-index', ++currentIndex);
+    container.setAttribute('current-index', parseInt(currentIndex, 10) + 1);
 }
-
-function calculateIndex(...formsId)
-{
-    for (let formId of formsId) {
-        let lastInput = $(`#${formId} .collection-list > .item:last-child input`)[0];
-        let currentIndex = (!lastInput) ? 0 : parseInt(lastInput.getAttribute('name').match(/\d+(?=])/)[0]) + 1;
-        $(`#${formId} .collection-list`)[0].setAttribute('current-index', currentIndex);
-    }
-}
-
-const cantBeEmpty = ['edit-email-form'];
 
 function delete_item(button)
 {
-    let formId = button.closest('form').getAttribute('id');
-    let currentCount = $(`#${formId} .collection-list .item`).length;
+    let btnName = button.getAttribute('name');
+    let container = button.closest(`[current-index]`);
+    let element = container.querySelector(
+        `[name="${btnName.slice(0, btnName.length - '[delete]'.length)}"]`
+    ).parentNode;
 
-    if (!(currentCount === 1 && cantBeEmpty.indexOf(formId) !== -1))
-        button.closest('.item').remove();
-    else {
-        let container = $(`#${formId} .collection-list`);
-        let feedback = button.previousSibling.previousSibling;
-        let input = feedback.previousSibling.previousSibling;
-
-        feedback.childNodes[0].nodeValue = 'Этот список не может быть пустым.';
-
-        if (!container[0].hasAttribute('current-index'))
-            calculateIndex(formId);
-
-        let currentIndex = parseInt(container[0].getAttribute('current-index'));
-
-        input.value = '';
-        input.setAttribute('name', `list[${currentIndex}]`);
-
-        container[0].setAttribute('current-index', ++currentIndex);
-
-        button.closest('form').dispatchEvent(new Event('submit'));
+    if (!container.classList.contains('non-empty-collection')
+        || container.childElementCount > 3) {
+        container.removeChild(element);
+    } else {
+        // TODO: Обработать попытку очистки не пустой коллекции.
     }
 }
