@@ -4,6 +4,7 @@ namespace Application\Factory;
 
 use Application\Controller\AdminController;
 use Application\Form\PositionForm;
+use Application\Form\UserForm;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 
@@ -15,6 +16,7 @@ class AdminControllerFactory implements FactoryInterface
 
         return new AdminController(
             $formManager->get(PositionForm::class),
+            $formManager->get(UserForm::class),
         );
     }
 }

@@ -14,11 +14,18 @@ class AdminController extends AbstractActionController
      */
     private $positionForm;
 
+    /**
+     * @var Form\UserForm
+     */
+    private $userForm;
+
     public function __construct(
-        Form\PositionForm $positionForm
+        Form\PositionForm $positionForm,
+        Form\UserForm     $userForm
     )
     {
         $this->positionForm = $positionForm;
+        $this->userForm = $userForm;
     }
 
     public function viewUserListAction(): ViewModel
@@ -89,7 +96,7 @@ class AdminController extends AbstractActionController
         $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
 
         $viewModel->setVariables([
-            'editUserForm'         => new Form\EditUserForm(),
+            'userForm'             => $this->userForm,
             'generatePasswordForm' => new Form\GeneratePasswordForm(),
             'setPasswordForm'      => new Form\SetPasswordForm(),
         ]);
