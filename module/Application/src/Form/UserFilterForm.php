@@ -2,6 +2,7 @@
 
 namespace Application\Form;
 
+use Application\Fieldset\AgeFilterFieldset;
 use Application\Form\Options\GenderOptions;
 use Application\Form\Options\PositionOptions;
 use Application\Helper\FieldsetMapper;

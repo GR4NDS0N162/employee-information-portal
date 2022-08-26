@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Form;
+namespace Application\Fieldset;
 
 use Laminas\Form\Element\Number;
 use Laminas\Form\Fieldset;

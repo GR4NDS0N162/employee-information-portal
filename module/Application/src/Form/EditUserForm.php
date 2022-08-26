@@ -2,6 +2,7 @@
 
 namespace Application\Form;
 
+use Application\Fieldset\StatusFieldset;
 use Application\Form\Options\PositionOptions;
 use Laminas\Form\Element;
 
