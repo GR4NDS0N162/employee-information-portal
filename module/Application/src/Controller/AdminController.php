@@ -7,6 +7,7 @@ use Application\Model\Email;
 use Application\Model\Phone;
 use Application\Model\PhotoUrlGenerator;
 use Application\Model\Profile;
+use Application\Model\User;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
@@ -26,6 +27,11 @@ class AdminController extends AbstractActionController
      * @var Profile
      */
     private $profilePrototype;
+
+    /**
+     * @var User
+     */
+    private $userPrototype;
 
     public function __construct(
         Form\PositionForm $positionForm,
@@ -57,6 +63,25 @@ class AdminController extends AbstractActionController
                 new Phone('2'),
                 new Phone('3'),
             ],
+        );
+        $this->userPrototype = new User(
+            $this->profilePrototype->getPassword(),
+            $this->profilePrototype->getTempPassword(),
+            $this->profilePrototype->getTpCreatedAt(),
+            $this->profilePrototype->getPositionId(),
+            $this->profilePrototype->getSurname(),
+            $this->profilePrototype->getName(),
+            $this->profilePrototype->getPatronymic(),
+            $this->profilePrototype->getGender(),
+            $this->profilePrototype->getBirthday(),
+            $this->profilePrototype->getImage(),
+            $this->profilePrototype->getSkype(),
+            $this->profilePrototype->getEmails(),
+            $this->profilePrototype->getPhones(),
+            [
+                'admin'  => true,
+                'active' => false,
+            ]
         );
     }
 
@@ -127,7 +152,7 @@ class AdminController extends AbstractActionController
         $this->layout()->setVariable('headTitleName', $headTitleName);
         $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
 
-        $this->userForm->bind($this->profilePrototype);
+        $this->userForm->bind($this->userPrototype);
 
         $viewModel->setVariables([
             'userForm'             => $this->userForm,
