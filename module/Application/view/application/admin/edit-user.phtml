@@ -1,34 +1,19 @@
 <?php
 /**
- * @var Laminas\View\Renderer\PhpRenderer     $this
- * @var Application\Form\GeneratePasswordForm $generatePasswordForm
- * @var Application\Form\SetPasswordForm      $setPasswordForm
+ * @var Laminas\View\Renderer\PhpRenderer $this
  */
+
+use Application\Form\UserForm;
+
 $this->inlineScript()
     ->appendFile($this->basePath('js/collection-manipulation.js'))
     ->appendFile($this->basePath('js/password-form-validation.js'))
     ->appendFile($this->basePath('js/edit-list-form-validation.js'));
 
+/** @var UserForm $userForm */
 $userForm = $this->userForm;
 ?>
-<div class="row g-3">
-    <div class="col-12">
-        <div class="card p-3">
-            <?= $this->userForm()->render($userForm); ?>
-        </div>
-    </div>
 
-    <div class="col-12">
-        <div class="card p-3">
-            <div class="form-label">Пароль</div>
-            <div class="row gy-3">
-                <div class="col-12">
-                    <?= $this->userForm()->render($generatePasswordForm); ?>
-                </div>
-                <div class="col-12">
-                    <?= $this->userForm()->render($setPasswordForm); ?>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="card p-3">
+    <?= $this->userForm()->render($userForm); ?>
 </div>
