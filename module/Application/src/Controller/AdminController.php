@@ -68,7 +68,7 @@ class AdminController extends AbstractActionController
             $this->profilePrototype->getPassword(),
             $this->profilePrototype->getTempPassword(),
             $this->profilePrototype->getTpCreatedAt(),
-            $this->profilePrototype->getPositionId(),
+            $this->profilePrototype->getPosition(),
             $this->profilePrototype->getSurname(),
             $this->profilePrototype->getName(),
             $this->profilePrototype->getPatronymic(),

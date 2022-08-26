@@ -8,7 +8,7 @@ class Profile
     private $password;
     private $tempPassword;
     private $tpCreatedAt;
-    private $positionId;
+    private $position;
     private $surname;
     private $name;
     private $patronymic;
@@ -22,7 +22,7 @@ class Profile
     public function __construct($password,
                                 $tempPassword,
                                 $tpCreatedAt,
-                                $positionId,
+                                $position,
                                 $surname,
                                 $name,
                                 $patronymic,
@@ -38,7 +38,7 @@ class Profile
         $this->password = $password;
         $this->tempPassword = $tempPassword;
         $this->tpCreatedAt = $tpCreatedAt;
-        $this->positionId = $positionId;
+        $this->position = $position;
         $this->surname = $surname;
         $this->name = $name;
         $this->patronymic = $patronymic;
@@ -70,9 +70,9 @@ class Profile
         return $this->tpCreatedAt;
     }
 
-    public function getPositionId()
+    public function getPosition()
     {
-        return $this->positionId;
+        return $this->position;
     }
 
     public function getSurname()
