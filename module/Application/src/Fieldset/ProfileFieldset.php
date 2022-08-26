@@ -132,7 +132,7 @@ class ProfileFieldset extends Fieldset
             'name'       => 'emails',
             'type'       => Element\Collection::class,
             'attributes' => [
-                'class' => 'row g-3',
+                'class' => 'row g-3 non-empty-collection',
             ],
             'options'    => [
                 'label'                  => 'E-mail-ы',

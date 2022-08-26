@@ -17,19 +17,18 @@ class PositionFieldset extends Fieldset
         $this->setObject(new Position(''));
 
         $this->add([
-            'name' => 'id',
-            'type' => Element\Hidden::class,
-        ]);
-
-        $this->add([
             'name'       => 'name',
             'type'       => Element\Text::class,
             'attributes' => [
                 'class'       => 'form-control',
-                'placeholder' => '+7xxxxxxxxxx',
+                'placeholder' => 'Уборщик',
                 'required'    => 'required',
-                'pattern'     => '^\+7[0-9]{10}$',
             ],
+        ]);
+
+        $this->add([
+            'name' => 'id',
+            'type' => Element\Hidden::class,
         ]);
 
         $this->add(include __DIR__ . '/../ElementArray/DeleteButton.php');
