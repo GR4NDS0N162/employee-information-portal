@@ -8,6 +8,10 @@ use Laminas\View\Model\ViewModel;
 
 class LoginController extends AbstractActionController
 {
+    public function __construct()
+    {
+    }
+
     public function loginAction(): ViewModel
     {
         $viewModel = new ViewModel();

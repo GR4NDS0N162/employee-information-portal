@@ -2,13 +2,11 @@
 
 namespace Application;
 
-use Laminas\ServiceManager\Factory\InvokableFactory;
-
 return [
     'factories' => [
-        Controller\LoginController::class     => InvokableFactory::class,
+        Controller\LoginController::class     => Factory\LoginControllerFactory::class,
         Controller\UserController::class      => Factory\UserControllerFactory::class,
         Controller\AdminController::class     => Factory\AdminControllerFactory::class,
-        Controller\MessengerController::class => InvokableFactory::class,
+        Controller\MessengerController::class => Factory\MessengerControllerFactory::class,
     ],
 ];
