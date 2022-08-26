@@ -8,11 +8,13 @@ $this->inlineScript()
     ->appendFile($this->basePath('js/collection-manipulation.js'))
     ->appendFile($this->basePath('js/password-form-validation.js'))
     ->appendFile($this->basePath('js/edit-list-form-validation.js'));
+
+$userForm = $this->userForm;
 ?>
 <div class="row g-3">
     <div class="col-12">
         <div class="card p-3">
-            <?= $this->userForm()->render($editUserForm); ?>
+            <?= $this->userForm()->render($userForm); ?>
         </div>
     </div>
 
