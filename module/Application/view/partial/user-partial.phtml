@@ -42,9 +42,10 @@ $renderErrors = $this->renderErrors;
             <?= $this->formElement()->render($element); ?>
 
         <?php elseif ($element instanceof Element\Checkbox): ?>
-            <?= $this->formElement()->render($element); ?>
-            <?= $this->formLabel($element); ?>
-
+            <div class="form-check">
+                <?= $this->formElement()->render($element); ?>
+                <?= $this->formLabel($element); ?>
+            </div>
 
         <?php elseif ($element instanceof Element\Number and strlen($label) <= 5): ?>
             <div class="input-group">
