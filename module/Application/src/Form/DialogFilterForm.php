@@ -4,6 +4,7 @@ namespace Application\Form;
 
 use Application\Form\Options\GenderOptions;
 use Application\Form\Options\PositionOptions;
+use Application\Helper\FieldsetMapper;
 use Laminas\Form\Element;
 use Laminas\Form\Form;
 
@@ -86,6 +87,22 @@ class DialogFilterForm extends Form
             ],
         ], [
             'priority' => -10 ** 9,
+        ]);
+
+        FieldsetMapper::setAttributes($this, [
+            'children' => [
+                'position'       => 'col-12',
+                'gender'         => 'col-12',
+                'age'            => [
+                    'value'    => 'col-12',
+                    'children' => [
+                        'min' => 'col-6',
+                        'max' => 'col-6',
+                    ],
+                ],
+                'fullname-phone' => 'col-12',
+                'submit-button'  => 'col-12',
+            ],
         ]);
     }
 }

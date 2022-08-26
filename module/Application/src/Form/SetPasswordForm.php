@@ -2,6 +2,7 @@
 
 namespace Application\Form;
 
+use Application\Helper\FieldsetMapper;
 use Laminas\Form\Element;
 use Laminas\Form\Form;
 
@@ -65,6 +66,14 @@ class SetPasswordForm extends Form
             ],
         ], [
             'priority' => -10 ** 9,
+        ]);
+
+        FieldsetMapper::setAttributes($this, [
+            'children' => [
+                'new-password'   => 'col-12',
+                'password-check' => 'col-12',
+                'submit-button'  => 'col-12',
+            ],
         ]);
     }
 }

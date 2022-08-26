@@ -2,6 +2,7 @@
 
 namespace Application\Form;
 
+use Application\Helper\FieldsetMapper;
 use Laminas\Form\Element;
 
 class ChangePasswordForm extends SetPasswordForm
@@ -32,5 +33,14 @@ class ChangePasswordForm extends SetPasswordForm
         ]);
 
         $this->get('submit-button')->setLabel('Изменить пароль');
+
+        FieldsetMapper::setAttributes($this, [
+            'children' => [
+                'current-password' => 'col-12',
+                'new-password'     => 'col-12',
+                'password-check'   => 'col-12',
+                'submit-button'    => 'col-12',
+            ],
+        ]);
     }
 }

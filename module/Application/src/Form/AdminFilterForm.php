@@ -3,6 +3,7 @@
 namespace Application\Form;
 
 use Application\Form\Options\YesNoOptions;
+use Application\Helper\FieldsetMapper;
 use Laminas\Form\Element;
 
 class AdminFilterForm extends UserFilterForm
@@ -43,9 +44,11 @@ class AdminFilterForm extends UserFilterForm
             ],
         ]);
 
-        FieldsetMapper::setMapping($this, [
-            'active' => 'col-12',
-            'admin'  => 'col-12',
+        FieldsetMapper::setAttributes($this, [
+            'children' => [
+                'active' => 'col-12',
+                'admin'  => 'col-12',
+            ],
         ]);
     }
 }

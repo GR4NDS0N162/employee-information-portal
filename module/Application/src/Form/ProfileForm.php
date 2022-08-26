@@ -34,7 +34,6 @@ class ProfileForm extends Form
         ]);
 
         FieldsetMapper::setAttributes($this, [
-            'value'    => 'col-12',
             'children' => [
                 'profile' => [
                     'value'    => 'col-12',

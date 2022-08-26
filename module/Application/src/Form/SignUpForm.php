@@ -3,6 +3,7 @@
 namespace Application\Form;
 
 use Application\Form\Options\PositionOptions;
+use Application\Helper\FieldsetMapper;
 use Laminas\Form\Element;
 use Laminas\Form\Form;
 
@@ -99,6 +100,16 @@ class SignUpForm extends Form
             ],
         ], [
             'priority' => -10 ** 9,
+        ]);
+
+        FieldsetMapper::setAttributes($this, [
+            'children' => [
+                'email'          => 'col-12',
+                'position'       => 'col-12',
+                'new-password'   => 'col-12',
+                'password-check' => 'col-12',
+                'submit-button'  => 'col-12',
+            ],
         ]);
     }
 }

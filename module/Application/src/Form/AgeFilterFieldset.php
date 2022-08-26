@@ -36,10 +36,5 @@ class AgeFilterFieldset extends Fieldset
                 'label' => 'До',
             ],
         ]);
-
-        FieldsetMapper::setMapping($this, [
-            'min' => 'col-6',
-            'max' => 'col-6',
-        ]);
     }
 }

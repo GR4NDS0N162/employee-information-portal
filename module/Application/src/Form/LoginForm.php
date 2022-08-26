@@ -2,6 +2,7 @@
 
 namespace Application\Form;
 
+use Application\Helper\FieldsetMapper;
 use Laminas\Form\Element;
 use Laminas\Form\Form;
 
@@ -61,6 +62,14 @@ class LoginForm extends Form
             ],
         ], [
             'priority' => -10 ** 9,
+        ]);
+
+        FieldsetMapper::setAttributes($this, [
+            'children' => [
+                'email'            => 'col-12',
+                'current-password' => 'col-12',
+                'submit-button'    => 'col-12',
+            ],
         ]);
     }
 }

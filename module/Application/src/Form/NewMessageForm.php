@@ -2,6 +2,7 @@
 
 namespace Application\Form;
 
+use Application\Helper\FieldsetMapper;
 use Laminas\Form\Element;
 use Laminas\Form\Form;
 
@@ -39,9 +40,11 @@ class NewMessageForm extends Form
             'priority' => -10 ** 9,
         ]);
 
-        FieldsetMapper::setMapping($this, [
-            'message'       => 'col',
-            'submit-button' => 'col-auto',
+        FieldsetMapper::setAttributes($this, [
+            'children' => [
+                'message'       => 'col',
+                'submit-button' => 'col-auto',
+            ]
         ]);
     }
 }

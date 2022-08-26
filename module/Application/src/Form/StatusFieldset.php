@@ -44,10 +44,5 @@ class StatusFieldset extends Fieldset
                 'use_hidden_element' => false,
             ],
         ]);
-
-        FieldsetMapper::setMapping($this, [
-            'admin'  => 'col-12 col-md-6',
-            'active' => 'col-12 col-md-6',
-        ]);
     }
 }

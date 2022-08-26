@@ -2,6 +2,7 @@
 
 namespace Application\Form;
 
+use Application\Helper\FieldsetMapper;
 use Laminas\Form\Element;
 use Laminas\Form\Form;
 
@@ -27,6 +28,12 @@ class GeneratePasswordForm extends Form
             ],
         ], [
             'priority' => -10 ** 9,
+        ]);
+
+        FieldsetMapper::setAttributes($this, [
+            'children' => [
+                'submit-button' => 'col-12',
+            ],
         ]);
     }
 }
