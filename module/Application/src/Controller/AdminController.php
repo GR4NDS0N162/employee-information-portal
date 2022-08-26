@@ -9,6 +9,18 @@ use Laminas\View\Model\ViewModel;
 
 class AdminController extends AbstractActionController
 {
+    /**
+     * @var Form\PositionForm
+     */
+    private $positionForm;
+
+    public function __construct(
+        Form\PositionForm $positionForm
+    )
+    {
+        $this->positionForm = $positionForm;
+    }
+
     public function viewUserListAction(): ViewModel
     {
         $viewModel = new ViewModel();
@@ -96,7 +108,7 @@ class AdminController extends AbstractActionController
         $this->layout()->setVariable('headTitleName', $headTitleName);
         $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
 
-        $viewModel->setVariable('editPositionForm', new Form\EditPositionForm());
+        $viewModel->setVariable('positionForm', $this->positionForm);
 
         return $viewModel;
     }

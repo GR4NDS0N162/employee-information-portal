@@ -8,7 +8,7 @@ return [
     'factories' => [
         Controller\LoginController::class     => InvokableFactory::class,
         Controller\UserController::class      => Factory\UserControllerFactory::class,
-        Controller\AdminController::class     => InvokableFactory::class,
+        Controller\AdminController::class     => Factory\AdminControllerFactory::class,
         Controller\MessengerController::class => InvokableFactory::class,
     ],
 ];
