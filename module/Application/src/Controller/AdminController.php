@@ -92,8 +92,6 @@ class AdminController extends AbstractActionController
             'editUserForm'         => new Form\EditUserForm(),
             'generatePasswordForm' => new Form\GeneratePasswordForm(),
             'setPasswordForm'      => new Form\SetPasswordForm(),
-            'editPhoneForm'        => new Form\EditPhoneForm(),
-            'editEmailForm'        => new Form\EditEmailForm(),
         ]);
 
         return $viewModel;
