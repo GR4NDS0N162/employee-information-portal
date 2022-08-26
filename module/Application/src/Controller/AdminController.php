@@ -14,12 +14,12 @@ use Laminas\View\Model\ViewModel;
 class AdminController extends AbstractActionController
 {
     /**
-     * @var Form\PositionForm
+     * @var \Application\Form\Admin\PositionForm
      */
     private $positionForm;
 
     /**
-     * @var Form\UserForm
+     * @var \Application\Form\Admin\UserForm
      */
     private $userForm;
 
@@ -34,8 +34,8 @@ class AdminController extends AbstractActionController
     private $userPrototype;
 
     public function __construct(
-        Form\PositionForm $positionForm,
-        Form\UserForm     $userForm
+        Form\Admin\PositionForm $positionForm,
+        Form\Admin\UserForm     $userForm
     )
     {
         $this->positionForm = $positionForm;
@@ -138,7 +138,7 @@ class AdminController extends AbstractActionController
         ];
 
         $viewModel->setVariable('userInfo', $userInfo);
-        $viewModel->setVariable('adminFilterForm', new Form\AdminFilterForm());
+        $viewModel->setVariable('adminFilterForm', new Form\Admin\AdminFilterForm());
 
         return $viewModel;
     }
@@ -155,7 +155,7 @@ class AdminController extends AbstractActionController
         $this->userForm->bind($this->userPrototype);
 
         $viewModel->setVariables([
-            'userForm'             => $this->userForm,
+            'userForm' => $this->userForm,
         ]);
 
         return $viewModel;

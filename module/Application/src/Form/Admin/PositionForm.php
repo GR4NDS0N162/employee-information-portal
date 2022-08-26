@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Form;
+namespace Application\Form\Admin;
 
 use Application\Fieldset\PositionFieldset;
 use Application\Helper\FieldsetMapper;

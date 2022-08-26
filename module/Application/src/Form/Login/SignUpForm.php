@@ -1,14 +1,15 @@
 <?php
 
-namespace Application\Form;
+namespace Application\Form\Login;
 
+use Application\Form\Options\PositionOptions;
 use Application\Helper\FieldsetMapper;
 use Laminas\Form\Element;
 use Laminas\Form\Form;
 
-class ChangePasswordForm extends Form
+class SignUpForm extends Form
 {
-    public const DEFAULT_NAME = 'change-password-form';
+    public const DEFAULT_NAME = 'signup-form';
 
     public function __construct($name = self::DEFAULT_NAME)
     {
@@ -18,19 +19,35 @@ class ChangePasswordForm extends Form
         $this->setAttribute('novalidate', '');
 
         $this->add([
-            'name'       => 'current-password',
-            'type'       => Element\Password::class,
+            'name'       => 'email',
+            'type'       => Element\Email::class,
             'attributes' => [
-                'class'        => 'form-control',
-                'placeholder'  => 'qwerty123',
-                'required'     => 'required',
-                'autocomplete' => 'current-password',
+                'class'       => 'form-control',
+                'placeholder' => 'name@example.com',
+                'required'    => 'required',
+                'pattern'     => '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$',
             ],
             'options'    => [
-                'label'            => 'Текущий пароль',
+                'label'            => 'E-mail',
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
+            ],
+        ]);
+
+        $this->add([
+            'name'       => 'position',
+            'type'       => Element\Select::class,
+            'attributes' => [
+                'class'    => 'form-select',
+                'required' => 'required',
+            ],
+            'options'    => [
+                'label'            => 'Должность',
+                'label_attributes' => [
+                    'class' => 'form-label',
+                ],
+                'options'          => PositionOptions::getDisabledOptions(),
             ],
         ]);
 
@@ -47,7 +64,7 @@ class ChangePasswordForm extends Form
                 'pattern'      => '^(?=.*?[а-яa-z])(?=.*?[А-ЯA-Z])(?=.*?[0-9])(?=.*?[!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~])[а-яa-zА-ЯA-Z0-9!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]*$',
             ],
             'options'    => [
-                'label'            => 'Новый пароль',
+                'label'            => 'Пароль',
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
@@ -76,19 +93,22 @@ class ChangePasswordForm extends Form
             'type'       => Element\Button::class,
             'attributes' => [
                 'type'  => 'submit',
-                'class' => 'btn btn-outline-success w-100',
+                'class' => 'btn btn-lg btn-outline-success w-100',
             ],
             'options'    => [
-                'label' => 'Изменить пароль',
+                'label' => 'Зарегистрироваться',
             ],
+        ], [
+            'priority' => -10 ** 9,
         ]);
 
         FieldsetMapper::setAttributes($this, [
             'children' => [
-                'current-password' => 'col-12',
-                'new-password'     => 'col-12',
-                'password-check'   => 'col-12',
-                'submit-button'    => 'col-12',
+                'email'          => 'col-12',
+                'position'       => 'col-12',
+                'new-password'   => 'col-12',
+                'password-check' => 'col-12',
+                'submit-button'  => 'col-12',
             ],
         ]);
     }

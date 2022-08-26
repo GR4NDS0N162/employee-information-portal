@@ -13,12 +13,12 @@ use Laminas\View\Model\ViewModel;
 class UserController extends AbstractActionController
 {
     /**
-     * @var Form\ProfileForm
+     * @var \Application\Form\User\ProfileForm
      */
     private $profileForm;
 
     /**
-     * @var Form\ViewProfileForm
+     * @var \Application\Form\User\ViewProfileForm
      */
     private $viewProfileForm;
 
@@ -28,8 +28,8 @@ class UserController extends AbstractActionController
     private $profilePrototype;
 
     /**
-     * @param Form\ProfileForm     $profileForm
-     * @param Form\ViewProfileForm $viewProfileForm
+     * @param \Application\Form\User\ProfileForm     $profileForm
+     * @param \Application\Form\User\ViewProfileForm $viewProfileForm
      */
     public function __construct($profileForm, $viewProfileForm)
     {
@@ -89,7 +89,7 @@ class UserController extends AbstractActionController
 
         $viewModel->setVariables([
             'profileForm'        => $this->profileForm,
-            'changePasswordForm' => new Form\ChangePasswordForm(),
+            'changePasswordForm' => new Form\User\ChangePasswordForm(),
         ]);
 
         return $viewModel;
@@ -135,7 +135,7 @@ class UserController extends AbstractActionController
         ];
 
         $viewModel->setVariable('userInfo', $userInfo);
-        $viewModel->setVariable('userFilterForm', new Form\UserFilterForm());
+        $viewModel->setVariable('userFilterForm', new Form\User\UserFilterForm());
 
         return $viewModel;
     }

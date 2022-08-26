@@ -3,14 +3,12 @@
  * @var Laminas\View\Renderer\PhpRenderer $this
  */
 
-use Application\Form\UserForm;
-
 $this->inlineScript()
     ->appendFile($this->basePath('js/collection-manipulation.js'))
     ->appendFile($this->basePath('js/password-form-validation.js'))
     ->appendFile($this->basePath('js/edit-list-form-validation.js'));
 
-/** @var UserForm $userForm */
+/** @var \Application\Form\Admin\UserForm $userForm */
 $userForm = $this->userForm;
 ?>
 

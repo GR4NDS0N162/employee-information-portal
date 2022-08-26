@@ -1,8 +1,9 @@
 <?php
 
-namespace Application\Form;
+namespace Application\Form\Admin;
 
 use Application\Form\Options\YesNoOptions;
+use Application\Form\User\UserFilterForm;
 use Application\Helper\FieldsetMapper;
 use Laminas\Form\Element;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Form;
+namespace Application\Form\Messenger;
 
 use Application\Helper\FieldsetMapper;
 use Laminas\Form\Element;

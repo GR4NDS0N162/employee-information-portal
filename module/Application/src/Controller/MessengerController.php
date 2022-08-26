@@ -57,7 +57,7 @@ class MessengerController extends AbstractActionController
         ];
 
         $viewModel->setVariable('dialogs', $dialogs);
-        $viewModel->setVariable('dialogFilterForm', new Form\DialogFilterForm());
+        $viewModel->setVariable('dialogFilterForm', new Form\Messenger\DialogFilterForm());
 
         return $viewModel;
     }
@@ -70,7 +70,7 @@ class MessengerController extends AbstractActionController
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
 
-        $viewModel->setVariable('newMessageForm', new Form\NewMessageForm());
+        $viewModel->setVariable('newMessageForm', new Form\Messenger\NewMessageForm());
 
         $userInfo = [
             'fullname' => 'Иван Иванов',

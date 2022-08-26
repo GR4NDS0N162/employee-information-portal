@@ -3,8 +3,8 @@
 namespace Application\Factory;
 
 use Application\Controller\AdminController;
-use Application\Form\PositionForm;
-use Application\Form\UserForm;
+use Application\Form\Admin\PositionForm;
+use Application\Form\Admin\UserForm;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Form;
+namespace Application\Form\User;
 
 use Application\Fieldset\AgeFilterFieldset;
 use Application\Form\Options\GenderOptions;

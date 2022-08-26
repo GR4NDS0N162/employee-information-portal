@@ -1,7 +1,7 @@
 <?php
 /**
- * @var Laminas\View\Renderer\PhpRenderer $this
- * @var Application\Form\ChangePasswordForm $changePasswordForm
+ * @var Laminas\View\Renderer\PhpRenderer         $this
+ * @var \Application\Form\User\ChangePasswordForm $changePasswordForm
  */
 $this->inlineScript()
     ->appendFile($this->basePath('js/collection-manipulation.js'))
@@ -9,7 +9,7 @@ $this->inlineScript()
     ->appendFile($this->basePath('js/edit-list-form-validation.js'));
 
 /**
- * @var Application\Form\ProfileForm $profileForm
+ * @var \Application\Form\User\ProfileForm $profileForm
  */
 $profileForm = $this->profileForm;
 ?>

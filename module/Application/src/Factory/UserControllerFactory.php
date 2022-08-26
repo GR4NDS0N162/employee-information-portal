@@ -3,8 +3,8 @@
 namespace Application\Factory;
 
 use Application\Controller\UserController;
-use Application\Form\ProfileForm;
-use Application\Form\ViewProfileForm;
+use Application\Form\User\ProfileForm;
+use Application\Form\User\ViewProfileForm;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 

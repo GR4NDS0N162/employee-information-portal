@@ -8,9 +8,9 @@ return [
     'aliases'   => [
     ],
     'factories' => [
-        Form\UserForm::class        => InvokableFactory::class,
-        Form\ProfileForm::class     => InvokableFactory::class,
-        Form\ViewProfileForm::class => InvokableFactory::class,
-        Form\PositionForm::class    => InvokableFactory::class,
+        Form\Admin\UserForm::class       => InvokableFactory::class,
+        Form\User\ProfileForm::class     => InvokableFactory::class,
+        Form\User\ViewProfileForm::class => InvokableFactory::class,
+        Form\Admin\PositionForm::class   => InvokableFactory::class,
     ],
 ];
