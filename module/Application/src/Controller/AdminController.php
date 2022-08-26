@@ -3,7 +3,10 @@
 namespace Application\Controller;
 
 use Application\Form;
+use Application\Model\Email;
+use Application\Model\Phone;
 use Application\Model\PhotoUrlGenerator;
+use Application\Model\Profile;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
@@ -19,6 +22,11 @@ class AdminController extends AbstractActionController
      */
     private $userForm;
 
+    /**
+     * @var Profile
+     */
+    private $profilePrototype;
+
     public function __construct(
         Form\PositionForm $positionForm,
         Form\UserForm     $userForm
@@ -26,6 +34,30 @@ class AdminController extends AbstractActionController
     {
         $this->positionForm = $positionForm;
         $this->userForm = $userForm;
+        $this->profilePrototype = new Profile(
+            null,
+            null,
+            null,
+            null,
+            'Внуков',
+            'Кирилл',
+            'Денисович',
+            1,
+            '2003-05-19',
+            '/img/favicon.ico',
+            'gr4nds0n162',
+            [
+                new Email('1'),
+                new Email('2'),
+                new Email('3'),
+                new Email('4'),
+            ],
+            [
+                new Phone('1'),
+                new Phone('2'),
+                new Phone('3'),
+            ],
+        );
     }
 
     public function viewUserListAction(): ViewModel
@@ -94,6 +126,8 @@ class AdminController extends AbstractActionController
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
         $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
+
+        $this->userForm->bind($this->profilePrototype);
 
         $viewModel->setVariables([
             'userForm'             => $this->userForm,
