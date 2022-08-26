@@ -3,9 +3,15 @@
  * @var Laminas\View\Renderer\PhpRenderer $this
  * @var Application\Form\EditPositionForm $editPositionForm
  */
+
+use Application\Form\PositionForm;
+
 $this->inlineScript()
     ->appendFile($this->basePath('js/collection-manipulation.js'))
     ->appendFile($this->basePath('js/edit-list-form-validation.js'));
+
+/** @var PositionForm $positionForm */
+$positionForm = $this->positionForm;
 ?>
 
-<?= $this->userForm()->render($editPositionForm); ?>
+<?= $this->userForm()->render($positionForm); ?>
