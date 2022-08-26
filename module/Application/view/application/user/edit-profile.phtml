@@ -21,16 +21,10 @@ $profileForm = $this->profileForm;
         </div>
     </div>
 
-    <?php $this->formRow()->setPartial('partial/collection-form.phtml'); ?>
-    <?php $this->formCollection()
-        ->setTemplateWrapper('<span class="d-none" data-template="%s"></span><div class="col-12 notification">Список пуст.</div>')
-        ->setWrapper('<div class="col-12"><div%4$s>%3$s%2$s%1$s</div></div>'); ?>
-
     <div class="col-12">
         <div class="card p-3">
             <div class="form-label">Пароль</div>
-            <?php $this->formRow()->setPartial('partial/floating-element.phtml'); ?>
-            <?= $this->form()->render($changePasswordForm); ?>
+            <?= $this->userForm()->render($changePasswordForm); ?>
         </div>
     </div>
 </div>

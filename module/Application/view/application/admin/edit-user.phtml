@@ -1,11 +1,9 @@
 <?php
 /**
- * @var Laminas\View\Renderer\PhpRenderer $this
- * @var Application\Form\EditProfileForm $editUserForm
+ * @var Laminas\View\Renderer\PhpRenderer     $this
+ * @var Application\Form\EditProfileForm      $editUserForm
  * @var Application\Form\GeneratePasswordForm $generatePasswordForm
- * @var Application\Form\SetPasswordForm $setPasswordForm
- * @var Application\Form\EditPhoneForm $editPhoneForm
- * @var Application\Form\EditEmailForm $editEmailForm
+ * @var Application\Form\SetPasswordForm      $setPasswordForm
  */
 $this->inlineScript()
     ->appendFile($this->basePath('js/collection-manipulation.js'))
@@ -15,41 +13,19 @@ $this->inlineScript()
 <div class="row g-3">
     <div class="col-12">
         <div class="card p-3">
-            <?php $this->formRow()->setPartial('partial/edit-user.phtml'); ?>
-            <?php $this->formCollection()
-                ->setWrapper('<div class="col-12"><div%4$s>%2$s%1$s%3$s</div></div>'); ?>
-            <?= $this->form()->render($editUserForm); ?>
-        </div>
-    </div>
-
-    <?php $this->formRow()->setPartial('partial/collection-form.phtml'); ?>
-    <?php $this->formCollection()
-        ->setTemplateWrapper('<span class="d-none" data-template="%s"></span><div class="col-12 notification">Список пуст.</div>')
-        ->setWrapper('<div class="col-12"><div%4$s>%3$s%2$s%1$s</div></div>'); ?>
-
-    <div class="col-12 col-lg-6">
-        <div class="card p-3">
-            <div class="form-label">Телефоны</div>
-            <?= $this->form()->render($editPhoneForm); ?>
-        </div>
-    </div>
-    <div class="col-12 col-lg-6">
-        <div class="card p-3">
-            <div class="form-label">E-mail-ы</div>
-            <?= $this->form()->render($editEmailForm); ?>
+            <?= $this->userForm()->render($editUserForm); ?>
         </div>
     </div>
 
     <div class="col-12">
         <div class="card p-3">
             <div class="form-label">Пароль</div>
-            <?php $this->formRow()->setPartial('partial/floating-element.phtml'); ?>
             <div class="row gy-3">
                 <div class="col-12">
-                    <?= $this->form()->render($generatePasswordForm); ?>
+                    <?= $this->userForm()->render($generatePasswordForm); ?>
                 </div>
                 <div class="col-12">
-                    <?= $this->form()->render($setPasswordForm); ?>
+                    <?= $this->userForm()->render($setPasswordForm); ?>
                 </div>
             </div>
         </div>

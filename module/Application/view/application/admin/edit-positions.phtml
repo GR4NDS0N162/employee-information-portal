@@ -8,8 +8,4 @@ $this->inlineScript()
     ->appendFile($this->basePath('js/edit-list-form-validation.js'));
 ?>
 
-<?php $this->formRow()->setPartial('partial/collection-form.phtml'); ?>
-<?php $this->formCollection()
-    ->setTemplateWrapper('<span class="d-none" data-template="%s"></span><div class="col-12 notification">Список пуст.</div>')
-    ->setWrapper('<div class="col-12"><div%4$s>%3$s%2$s%1$s</div></div>'); ?>
-<?= $this->form()->render($editPositionForm); ?>
+<?= $this->userForm()->render($editPositionForm); ?>
