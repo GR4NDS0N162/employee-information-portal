@@ -2,7 +2,7 @@
 
 namespace Application\Fieldset;
 
-use Application\Form\Options\PositionOptions;
+use Application\Model\Options\PositionOptions;
 use Laminas\Form\Element\Select;
 use Laminas\Form\Element\Text;
 

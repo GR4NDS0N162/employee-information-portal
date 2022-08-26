@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Form\Options;
+namespace Application\Model\Options;
 
 class GenderOptions
 {

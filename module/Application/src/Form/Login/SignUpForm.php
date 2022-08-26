@@ -2,8 +2,8 @@
 
 namespace Application\Form\Login;
 
-use Application\Form\Options\PositionOptions;
 use Application\Helper\FieldsetMapper;
+use Application\Model\Options\PositionOptions;
 use Laminas\Form\Element;
 use Laminas\Form\Form;
 

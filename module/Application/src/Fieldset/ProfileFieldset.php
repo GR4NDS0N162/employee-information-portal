@@ -2,7 +2,7 @@
 
 namespace Application\Fieldset;
 
-use Application\Form\Options\GenderOptions;
+use Application\Model\Options\GenderOptions;
 use Application\Model\Profile;
 use Laminas\Form\Element;
 use Laminas\Form\Fieldset;

@@ -3,9 +3,9 @@
 namespace Application\Form\Messenger;
 
 use Application\Fieldset\AgeFilterFieldset;
-use Application\Form\Options\GenderOptions;
-use Application\Form\Options\PositionOptions;
 use Application\Helper\FieldsetMapper;
+use Application\Model\Options\GenderOptions;
+use Application\Model\Options\PositionOptions;
 use Laminas\Form\Element;
 use Laminas\Form\Form;
 

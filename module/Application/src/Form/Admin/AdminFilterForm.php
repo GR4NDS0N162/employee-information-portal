@@ -2,9 +2,9 @@
 
 namespace Application\Form\Admin;
 
-use Application\Form\Options\YesNoOptions;
 use Application\Form\User\UserFilterForm;
 use Application\Helper\FieldsetMapper;
+use Application\Model\Options\YesNoOptions;
 use Laminas\Form\Element;
 
 class AdminFilterForm extends UserFilterForm
