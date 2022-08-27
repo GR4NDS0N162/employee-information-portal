@@ -23,39 +23,40 @@ $renderErrors = $this->renderErrors;
     <?php endif; ?>
 
     <?php if (
-        !isset($label)
-        or $element instanceof Element\Button
+        $element instanceof Element\Button
         or $element instanceof Element\Submit
         or $element instanceof Element\Image
+        or $element instanceof Element\Hidden
     ): ?>
         <?= $this->formElement()->render($element); ?>
+    <?php elseif (!isset($label)): ?>
+        <?= $this->formElement()->render($element); ?>
+        <div class="invalid-feedback order-last">Поле не валидно.</div>
     <?php else: ?>
 
         <?php if ($element instanceof Element\Number and strlen($label) <= 5): ?>
-            <div class="input-group">
+            <div class="input-group has-validation">
                 <span class="input-group-text"><?= $this->escapeHtml($label); ?></span>
                 <?= $this->formElement()->render($element); ?>
+                <div class="invalid-feedback order-last">Поле не валидно.</div>
             </div>
 
         <?php elseif ($element instanceof Element\File or $element instanceof Element\Textarea): ?>
             <?= $this->formLabel($element); ?>
             <?= $this->formElement()->render($element); ?>
+            <div class="invalid-feedback order-last">Поле не валидно.</div>
 
         <?php elseif ($element instanceof Element\Checkbox): ?>
             <div class="form-check">
                 <?= $this->formElement()->render($element); ?>
                 <?= $this->formLabel($element); ?>
-            </div>
-
-        <?php elseif ($element instanceof Element\Number and strlen($label) <= 5): ?>
-            <div class="input-group">
-                <span class="input-group-text"><?= $this->escapeHtml($label); ?></span>
-                <?= $this->formElement()->render($element); ?>
+                <div class="invalid-feedback order-last">Поле не валидно.</div>
             </div>
 
         <?php else: ?>
             <div class="form-floating">
                 <?= $this->formElement()->render($element); ?>
+                <div class="invalid-feedback order-last">Поле не валидно.</div>
                 <?= $this->formLabel($element); ?>
             </div>
         <?php endif; ?>

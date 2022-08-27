@@ -65,6 +65,7 @@
     </div>
 </div>
 <?= $this->inlineScript()
+    ->prependFile($this->basePath('js/enable-form-validation.js'))
     ->prependFile($this->basePath('js/bootstrap.bundle.min.js'))
     ->prependFile($this->basePath('js/jquery-3.6.0.min.js')) ?>
 </body>

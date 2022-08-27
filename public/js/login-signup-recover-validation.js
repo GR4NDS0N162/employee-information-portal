@@ -1,15 +1,3 @@
-for (let form of $(`form`)) {
-    form.addEventListener('submit', function (e)
-    {
-        if (!form.checkValidity()) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-
-        form.classList.add('was-validated');
-    }, false);
-}
-
 const positionInput = $(`select[name="position"]`)[0];
 const positionFeedback = $(`select[name="position"] ~ .invalid-feedback`)[0];
 
@@ -21,7 +9,7 @@ positionInput.addEventListener('focusout', function (e)
 const emailInputs = $(`input[name="email"]`);
 
 for (let input of emailInputs) {
-    let feedback = input.nextSibling.nextSibling.nextSibling.nextSibling;
+    let feedback = input.nextSibling.nextSibling;
 
     input.addEventListener('focusout', function (e)
     {
