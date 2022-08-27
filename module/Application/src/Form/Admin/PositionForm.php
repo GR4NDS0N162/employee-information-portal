@@ -14,7 +14,8 @@ class PositionForm extends Form
     {
         parent::init();
 
-        $this->setAttribute('class', 'row g-3');
+        $this->setAttribute('class', 'row g-3 needs-validation');
+        $this->setAttribute('novalidate', true);
 
         $this->add([
             'name'       => 'positions',

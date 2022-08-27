@@ -12,7 +12,8 @@ class UserForm extends Form
 {
     public function init()
     {
-        $this->setAttribute('class', 'row g-3');
+        $this->setAttribute('class', 'row g-3 needs-validation');
+        $this->setAttribute('novalidate', true);
 
         $this->add([
             'name'       => 'user',

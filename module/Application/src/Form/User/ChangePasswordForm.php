@@ -15,7 +15,7 @@ class ChangePasswordForm extends Form
         parent::__construct($name);
 
         $this->setAttribute('class', 'row gy-3 needs-validation');
-        $this->setAttribute('novalidate', '');
+        $this->setAttribute('novalidate', true);
 
         $this->add([
             'name'       => 'current-password',

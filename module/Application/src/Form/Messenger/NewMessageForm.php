@@ -14,7 +14,8 @@ class NewMessageForm extends Form
     {
         parent::__construct($name);
 
-        $this->setAttribute('class', 'row gx-3');
+        $this->setAttribute('class', 'row gx-3 needs-validation');
+        $this->setAttribute('novalidate', true);
 
         $this->add([
             'name'       => 'message',

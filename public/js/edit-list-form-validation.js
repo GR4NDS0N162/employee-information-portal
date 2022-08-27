@@ -1,20 +1,9 @@
-if ($('#edit-email-form')[0]) {
-    calculateIndex('edit-email-form');
-
-    for (let item of $('#edit-email-form .item')) {
-        hangHandlers(item);
-    }
-}
-
 const listObserver = new MutationObserver(function (mutationsList)
 {
     for (let mutation of mutationsList) {
         if (mutation.type === 'childList') {
             for (let addedNode of mutation.addedNodes) {
-                if (addedNode.nodeName === '#text')
-                    continue;
-
-                if (addedNode.classList.contains('item'))
+                if (addedNode.nodeName !== '#text')
                     hangHandlers(addedNode);
             }
         }
@@ -23,9 +12,9 @@ const listObserver = new MutationObserver(function (mutationsList)
 
 function hangHandlers(item)
 {
-    let input = item.childNodes[1].childNodes[1];
-    let feedback = item.childNodes[1].childNodes[3];
-    let button = item.childNodes[1].childNodes[5];
+    let input = item.childNodes[0].childNodes[1];
+    let feedback = item.childNodes[0].childNodes[3];
+    let button = item.childNodes[0].childNodes[5];
 
     input.addEventListener('focusout', function ()
     {
@@ -54,10 +43,15 @@ function hangHandlers(item)
         });
     }
 
+    input.dispatchEvent(new Event('input'));
     input.dispatchEvent(new Event('focusout'));
 }
 
-for (let list of $(`form .collection-list`)) {
+for (let item of $(`[current-index] > div[class!="notification"]`)) {
+    hangHandlers(item);
+}
+
+for (let list of $(`[current-index]`)) {
     listObserver.observe(list, {
         subtree: true,
         childList: true,
@@ -66,16 +60,4 @@ for (let list of $(`form .collection-list`)) {
         characterData: true,
         characterDataOldValue: true,
     });
-
-    let form = list.closest('form');
-
-    form.addEventListener('submit', function (e)
-    {
-        if (!form.checkValidity()) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-
-        form.classList.add('was-validated');
-    }, false);
 }
