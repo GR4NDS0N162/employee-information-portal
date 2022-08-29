@@ -1,20 +1,14 @@
 const positionInput = $(`select[name="position"]`)[0];
 const positionFeedback = $(`select[name="position"] ~ .invalid-feedback`)[0];
 
-positionInput.addEventListener('focusout', function (e)
-{
-    onFocusout(positionInput, positionFeedback);
-});
+hangOnFocusout(positionInput, positionFeedback);
 
 const emailInputs = $(`input[name="email"]`);
 
-for (let input of emailInputs) {
-    let feedback = input.nextSibling.nextSibling;
+for (const input of emailInputs) {
+    const feedback = input.nextSibling.nextSibling;
 
-    input.addEventListener('focusout', function (e)
-    {
-        onFocusout(input, feedback);
-    });
+    hangOnFocusout(input, feedback);
 
     input.addEventListener('input', function ()
     {
@@ -24,5 +18,6 @@ for (let input of emailInputs) {
     });
 }
 
-for (let field of $(`input, select`))
-    field.dispatchEvent(new Event('focusout'));
+for (const field of $(`input, select`)) {
+    dispatchOnFocusout(field);
+}
