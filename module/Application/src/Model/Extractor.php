@@ -10,12 +10,16 @@ use Laminas\Hydrator\HydratorInterface;
 
 class Extractor
 {
-    public static function extractArray(
-        Sql               $sql,
-        Select            $select,
-        HydratorInterface $hydrator,
-                          $prototype
-    ) {
+    /**
+     * @param Sql               $sql
+     * @param Select            $select
+     * @param HydratorInterface $hydrator
+     * @param                   $prototype
+     *
+     * @return array|HydratingResultSet
+     */
+    public static function extractArray($sql, $select, $hydrator, $prototype)
+    {
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
 
