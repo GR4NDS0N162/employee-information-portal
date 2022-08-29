@@ -18,16 +18,18 @@ class FieldsetMapper
      */
     public static function setAttributes(ElementInterface $element, $config)
     {
-        if (empty($config))
+        if (empty($config)) {
             return;
+        }
 
         if (is_string($config)) {
             $element->setAttribute(self::KEY, $config);
             return;
         }
 
-        if (is_string($config['value']) and !empty($config['value']))
+        if (is_string($config['value']) and !empty($config['value'])) {
             $element->setAttribute(self::KEY, $config['value']);
+        }
 
         if (($element instanceof Collection) and !empty($config['target_element'])) {
             self::setAttributes($element->getTargetElement(), $config['target_element']);
@@ -47,10 +49,11 @@ class FieldsetMapper
     {
         if ($element instanceof FieldsetInterface) {
             foreach ($element->getFieldsets() as $item) {
-                if ($item instanceof Collection)
+                if ($item instanceof Collection) {
                     self::setDisabled($item->getTargetElement());
-                else
+                } else {
                     self::setDisabled($item);
+                }
             }
             foreach ($element->getElements() as $item) {
                 $item->setAttribute('disabled', true);
