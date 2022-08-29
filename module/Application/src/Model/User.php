@@ -40,77 +40,12 @@ class User extends Profile
         $this->status = $status;
     }
 
-    public function getId()
+    public function getPositionId(): int
     {
-        return $this->id;
+        return $this->positionId;
     }
 
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    public function getTempPassword()
-    {
-        return $this->tempPassword;
-    }
-
-    public function getTpCreatedAt()
-    {
-        return $this->tpCreatedAt;
-    }
-
-    public function getPosition()
-    {
-        return $this->position;
-    }
-
-    public function getSurname()
-    {
-        return $this->surname;
-    }
-
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function getPatronymic()
-    {
-        return $this->patronymic;
-    }
-
-    public function getGender()
-    {
-        return $this->gender;
-    }
-
-    public function getBirthday()
-    {
-        return $this->birthday;
-    }
-
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    public function getSkype()
-    {
-        return $this->skype;
-    }
-
-    public function getEmails()
-    {
-        return $this->emails;
-    }
-
-    public function getPhones()
-    {
-        return $this->phones;
-    }
-
-    public function getStatus()
+    public function getStatus(): array
     {
         return $this->status;
     }
