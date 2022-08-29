@@ -3,6 +3,8 @@
 namespace Application\Controller;
 
 use Application\Form;
+use Application\Form\User\ProfileForm;
+use Application\Form\User\ViewProfileForm;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\Phone;
 use Application\Model\Entity\Profile;
@@ -15,12 +17,12 @@ class UserController extends AbstractActionController
     public const maxPageCount = 20;
 
     /**
-     * @var \Application\Form\User\ProfileForm
+     * @var ProfileForm
      */
     private $profileForm;
 
     /**
-     * @var \Application\Form\User\ViewProfileForm
+     * @var ViewProfileForm
      */
     private $viewProfileForm;
 
@@ -29,12 +31,10 @@ class UserController extends AbstractActionController
      */
     private $profilePrototype;
 
-    /**
-     * @param \Application\Form\User\ProfileForm     $profileForm
-     * @param \Application\Form\User\ViewProfileForm $viewProfileForm
-     */
-    public function __construct($profileForm, $viewProfileForm)
-    {
+    public function __construct(
+        ProfileForm     $profileForm,
+        ViewProfileForm $viewProfileForm
+    ) {
         $this->profileForm = $profileForm;
         $this->viewProfileForm = $viewProfileForm;
         $this->profilePrototype = new Profile(

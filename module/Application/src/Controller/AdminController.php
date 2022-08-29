@@ -3,6 +3,8 @@
 namespace Application\Controller;
 
 use Application\Form;
+use Application\Form\Admin\PositionForm;
+use Application\Form\Admin\UserForm;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\Phone;
 use Application\Model\Entity\User;
@@ -15,12 +17,12 @@ class AdminController extends AbstractActionController
     public const maxPageCount = 20;
 
     /**
-     * @var \Application\Form\Admin\PositionForm
+     * @var PositionForm
      */
     private $positionForm;
 
     /**
-     * @var \Application\Form\Admin\UserForm
+     * @var UserForm
      */
     private $userForm;
 
@@ -30,8 +32,8 @@ class AdminController extends AbstractActionController
     private $userPrototype;
 
     public function __construct(
-        Form\Admin\PositionForm $positionForm,
-        Form\Admin\UserForm     $userForm
+        PositionForm $positionForm,
+        UserForm     $userForm
     ) {
         $this->positionForm = $positionForm;
         $this->userForm = $userForm;
