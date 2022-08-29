@@ -2,9 +2,7 @@ for (const button of $(`button[name="add"]`)) {
     button.addEventListener('click', () => add_item(button));
 
     let container = button.previousSibling;
-    let count = container.childNodes.length;
-
-    let currentIndex = (count <= 2) ? 0 : count - 2;
+    let currentIndex = container.childNodes.length - 2;
 
     container.setAttribute('current-index', currentIndex);
 }
