@@ -10,6 +10,7 @@ return [
         Model\EmailRepositoryInterface::class    => Model\Repository\EmailRepository::class,
         Model\PositionRepositoryInterface::class => Model\Repository\PositionRepository::class,
         Model\UserRepositoryInterface::class     => Model\Repository\UserRepository::class,
+        Model\UserCommandInterface::class        => Model\Command\UserCommand::class,
     ],
     'factories' => [
         Model\Options\PositionOptions::class => OptionsRepository\PositionOptionsFactory::class,
