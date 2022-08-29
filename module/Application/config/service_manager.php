@@ -2,6 +2,7 @@
 
 namespace Application;
 
+use Application\Factory\Command as FactoryCommand;
 use Application\Factory\Options as OptionsRepository;
 use Application\Factory\Repository as FactoryRepository;
 
@@ -13,6 +14,8 @@ return [
         Model\UserCommandInterface::class        => Model\Command\UserCommand::class,
     ],
     'factories' => [
+        Model\Command\UserCommand::class => FactoryCommand\UserCommandFactory::class,
+
         Model\Options\PositionOptions::class => OptionsRepository\PositionOptionsFactory::class,
 
         Model\Repository\EmailRepository::class    => FactoryRepository\EmailRepositoryFactory::class,
