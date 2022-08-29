@@ -5,6 +5,7 @@ namespace Application\Model\Repository;
 use Application\Model\Entity\Position;
 use Application\Model\PositionRepositoryInterface;
 use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\Sql\Sql;
 use Laminas\Hydrator\HydratorInterface;
 
 class PositionRepository implements PositionRepositoryInterface
@@ -36,6 +37,19 @@ class PositionRepository implements PositionRepositoryInterface
 
     public function findAllPositions(): array
     {
-        // TODO: Implement findAllPositions() method.
+        $sql = new Sql($this->db);
+
+        $select = $sql->select('position');
+        $select->columns([
+            'id',
+            'name',
+        ]);
+
+        return Extractor::extractArray(
+            $sql,
+            $select,
+            $this->hydrator,
+            $this->positionPrototype
+        );
     }
 }
