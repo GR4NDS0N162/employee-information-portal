@@ -2,6 +2,7 @@
 
 namespace Application\Factory\Repository;
 
+use Application\Model\Entity\User;
 use Application\Model\Repository\UserRepository;
 use Interop\Container\ContainerInterface;
 use Laminas\Db\Adapter\AdapterInterface;
@@ -15,6 +16,7 @@ class UserRepositoryFactory implements FactoryInterface
         return new UserRepository(
             $container->get(AdapterInterface::class),
             new ReflectionHydrator(),
+            new User(),
         );
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Application\Factory\Repository;
 
+use Application\Model\Entity\Email;
 use Application\Model\Repository\EmailRepository;
 use Interop\Container\ContainerInterface;
 use Laminas\Db\Adapter\AdapterInterface;
@@ -15,6 +16,7 @@ class EmailRepositoryFactory implements FactoryInterface
         return new EmailRepository(
             $container->get(AdapterInterface::class),
             new ReflectionHydrator(),
+            new Email(''),
         );
     }
 }
