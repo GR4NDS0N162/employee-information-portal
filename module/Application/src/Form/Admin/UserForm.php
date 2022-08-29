@@ -72,7 +72,7 @@ class UserForm extends Form
                             'value'          => 'col-12 col-lg-6',
                             'target_element' => 'col-12',
                         ],
-                        'position'   => 'col-12',
+                        'positionId' => 'col-12',
                         'password'   => 'col-12',
                         'status'     => [
                             'value'    => 'col-12',

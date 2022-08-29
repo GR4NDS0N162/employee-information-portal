@@ -16,7 +16,7 @@ class UserFieldset extends ProfileFieldset
         $this->setPriority('phones', -100);
 
         $this->add([
-            'name'       => 'position',
+            'name'       => 'positionId',
             'type'       => Select::class,
             'attributes' => [
                 'class'    => 'form-select',
