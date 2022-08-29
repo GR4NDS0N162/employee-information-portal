@@ -8,13 +8,6 @@ use Laminas\Form\Form;
 
 class LoginForm extends Form
 {
-    public const DEFAULT_NAME = 'login-form';
-
-    public function __construct($name = self::DEFAULT_NAME)
-    {
-        parent::__construct($name);
-    }
-
     public function init()
     {
         parent::init();

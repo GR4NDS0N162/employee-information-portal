@@ -8,13 +8,6 @@ use Laminas\Form\Form;
 
 class RecoverForm extends Form
 {
-    public const DEFAULT_NAME = 'recover-form';
-
-    public function __construct($name = self::DEFAULT_NAME)
-    {
-        parent::__construct($name);
-    }
-
     public function init()
     {
         parent::init();

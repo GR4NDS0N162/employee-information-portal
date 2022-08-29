@@ -11,13 +11,6 @@ use Laminas\Form\Form;
 
 class DialogFilterForm extends Form
 {
-    public const DEFAULT_NAME = 'dialog-filter-form';
-
-    public function __construct($name = self::DEFAULT_NAME)
-    {
-        parent::__construct($name);
-    }
-
     public function init()
     {
         parent::init();
