@@ -36,7 +36,7 @@ class PositionRepository implements PositionRepositoryInterface
         $this->positionPrototype = $positionPrototype;
     }
 
-    public function findAllPositions(): array
+    public function findAllPositions()
     {
         $sql = new Sql($this->db);
 
