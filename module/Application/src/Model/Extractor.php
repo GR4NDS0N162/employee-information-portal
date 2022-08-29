@@ -34,6 +34,18 @@ class Extractor
         return $resultSet;
     }
 
+    /**
+     * @param Sql               $sql
+     * @param Select            $select
+     * @param HydratorInterface $hydrator
+     * @param                   $prototype
+     * @param string            $runtimeExceptionMessage
+     * @param string            $invalidArgumentExceptionMessage
+     *
+     * @return object
+     * @throws RuntimeException
+     * @throws InvalidArgumentException
+     */
     public static function extractValue(
         Sql               $sql,
         Select            $select,
@@ -41,7 +53,7 @@ class Extractor
                           $prototype,
         string            $runtimeExceptionMessage,
         string            $invalidArgumentExceptionMessage
-    ): object {
+    ) {
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
 
