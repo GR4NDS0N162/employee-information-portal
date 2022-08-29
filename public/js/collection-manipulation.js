@@ -23,16 +23,22 @@ function add_item(button)
 
 function delete_item(button)
 {
-    let btnName = button.getAttribute('name');
-    let container = button.closest(`[current-index]`);
-    let element = container.querySelector(
+    const btnName = button.getAttribute('name');
+    const container = button.closest(`[current-index]`);
+    const element = container.querySelector(
         `[name="${btnName.slice(0, btnName.length - '[delete]'.length)}"]`
     ).parentNode;
 
-    if (!container.classList.contains('non-empty-collection')
-        || container.childElementCount > 3) {
+    if (
+        !container.classList.contains('non-empty-collection') ||
+        container.childElementCount > 3
+    ) {
         container.removeChild(element);
     } else {
-        // TODO: Обработать попытку очистки не пустой коллекции.
+        const feedback = button.previousSibling.previousSibling;
+        const input = feedback.previousSibling.previousSibling;
+
+        feedback.childNodes[0].nodeValue = 'Этот список не может быть пустым.';
+        input.classList.add('is-invalid');
     }
 }

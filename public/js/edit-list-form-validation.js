@@ -17,7 +17,13 @@ function hangHandlers(item)
     const button = item.childNodes[0].childNodes[5];
 
     hangOnFocusout(input, feedback);
-    button.addEventListener('focusout', () => dispatchOnFocusout(input));
+    button.addEventListener('focusout', () =>
+    {
+        input.classList.remove('is-invalid');
+
+        dispatchOnFocusout(input);
+        dispatchOnInput(input);
+    });
 
 
     const validationMap = {
