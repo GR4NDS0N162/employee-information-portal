@@ -4,14 +4,14 @@ namespace Application\Model;
 
 class Phone
 {
-    private $number;
+    private string $number;
 
-    public function __construct($number)
+    public function __construct(string $number)
     {
         $this->number = $number;
     }
 
-    public function getNumber()
+    public function getNumber(): string
     {
         return $this->number;
     }

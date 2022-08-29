@@ -4,20 +4,20 @@ namespace Application\Model;
 
 class Profile
 {
-    private $id;
-    private $password;
-    private $tempPassword;
-    private $tpCreatedAt;
+    protected ?int $id;
+    protected string $password;
+    protected ?string $tempPassword;
+    protected ?string $tpCreatedAt;
     private $position;
-    private $surname;
-    private $name;
-    private $patronymic;
-    private $gender;
-    private $birthday;
-    private $image;
-    private $skype;
-    private $emails;
-    private $phones;
+    protected ?string $surname;
+    protected ?string $name;
+    protected ?string $patronymic;
+    protected ?int $gender;
+    protected ?string $birthday;
+    protected ?string $image;
+    protected ?string $skype;
+    protected array $emails;
+    protected array $phones;
 
     public function __construct($password,
                                 $tempPassword,

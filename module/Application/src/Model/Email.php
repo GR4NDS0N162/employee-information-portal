@@ -4,14 +4,14 @@ namespace Application\Model;
 
 class Email
 {
-    private $address;
+    private string $address;
 
-    public function __construct($address)
+    public function __construct(string $address)
     {
         $this->address = $address;
     }
 
-    public function getAddress()
+    public function getAddress(): string
     {
         return $this->address;
     }
