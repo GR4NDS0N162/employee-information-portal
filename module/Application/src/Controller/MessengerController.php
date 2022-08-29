@@ -9,10 +9,6 @@ use Laminas\View\Model\ViewModel;
 
 class MessengerController extends AbstractActionController
 {
-    public function __construct()
-    {
-    }
-
     public function viewDialogListAction(): ViewModel
     {
         $viewModel = new ViewModel();
