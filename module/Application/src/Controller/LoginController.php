@@ -33,7 +33,7 @@ class LoginController extends AbstractActionController
         $this->recoverForm = $recoverForm;
     }
 
-    public function loginAction(): ViewModel
+    public function indexAction(): ViewModel
     {
         $viewModel = new ViewModel();
 

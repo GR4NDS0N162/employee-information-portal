@@ -13,7 +13,7 @@ return [
                 'route'    => '/',
                 'defaults' => [
                     'controller' => Controller\LoginController::class,
-                    'action'     => 'login',
+                    'action'     => 'index',
                 ],
             ],
         ],
