@@ -12,30 +12,25 @@ const listObserver = new MutationObserver(function (mutationsList)
 
 function hangHandlers(item)
 {
-    let input = item.childNodes[0].childNodes[1];
-    let feedback = item.childNodes[0].childNodes[3];
-    let button = item.childNodes[0].childNodes[5];
+    const input = item.childNodes[0].childNodes[1];
+    const feedback = item.childNodes[0].childNodes[3];
+    const button = item.childNodes[0].childNodes[5];
 
-    input.addEventListener('focusout', function ()
-    {
-        if (input.validity.valueMissing) {
-            feedback.childNodes[0].nodeValue = 'Поле не должно оставаться пустым.';
-        }
-    });
+    hangOnFocusout(input, feedback);
+    button.addEventListener('focusout', () => dispatchOnFocusout(input));
 
-    button.addEventListener('focusout', () => input.dispatchEvent(new Event('focusout')));
 
-    let validationMap = {
+    const validationMap = {
         'validation-pattern-email': 'Введённое значение - не электронный адрес.',
         'validation-pattern-phone': 'Введённое значение - не телефон.',
     };
 
-    let possibleAdditionalValidation = input.className.match(/validation[-a-z]+/);
+    const possibleAdditionalValidation = input.className.match(/validation[-a-z]+/);
 
     if (possibleAdditionalValidation) {
-        let patternValidationMessage = validationMap[possibleAdditionalValidation[0]];
+        const patternValidationMessage = validationMap[possibleAdditionalValidation[0]];
 
-        input.addEventListener('input', function ()
+        input.addEventListener('input', () =>
         {
             if (input.validity.patternMismatch) {
                 feedback.childNodes[0].nodeValue = patternValidationMessage;
@@ -43,15 +38,15 @@ function hangHandlers(item)
         });
     }
 
-    input.dispatchEvent(new Event('input'));
-    input.dispatchEvent(new Event('focusout'));
+    dispatchOnInput(input);
+    dispatchOnFocusout(input);
 }
 
-for (let item of $(`[current-index] > div[class!="notification"]`)) {
+for (const item of $(`[current-index] > div[class!="notification"]`)) {
     hangHandlers(item);
 }
 
-for (let list of $(`[current-index]`)) {
+for (const list of $(`[current-index]`)) {
     listObserver.observe(list, {
         subtree: true,
         childList: true,
