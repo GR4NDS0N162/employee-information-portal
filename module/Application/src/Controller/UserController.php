@@ -38,8 +38,18 @@ class UserController extends AbstractActionController
         $this->profileForm = $profileForm;
         $this->viewProfileForm = $viewProfileForm;
         $this->profilePrototype = new Profile(
-            null,
-            null,
+            '',
+            [
+                new Email('cfhsoft@verizon.net'),
+                new Email('isotopian@att.net'),
+                new Email('camenisch@comcast.net'),
+                new Email('wetter@mac.com'),
+            ],
+            [
+                new Phone('+79283748264'),
+                new Phone('+79365839604'),
+                new Phone('+79305847200'),
+            ],
             null,
             null,
             'Внуков',
@@ -49,17 +59,6 @@ class UserController extends AbstractActionController
             '2003-05-19',
             '/img/favicon.ico',
             'gr4nds0n162',
-            [
-                new Email('1'),
-                new Email('2'),
-                new Email('3'),
-                new Email('4'),
-            ],
-            [
-                new Phone('1'),
-                new Phone('2'),
-                new Phone('3'),
-            ],
         );
     }
 

@@ -26,11 +26,6 @@ class AdminController extends AbstractActionController
     private $userForm;
 
     /**
-     * @var Profile
-     */
-    private $profilePrototype;
-
-    /**
      * @var User
      */
     private $userPrototype;
@@ -42,11 +37,26 @@ class AdminController extends AbstractActionController
     {
         $this->positionForm = $positionForm;
         $this->userForm = $userForm;
-        $this->profilePrototype = new Profile(
-            'Anypassword1.',
-            null,
-            null,
+        $this->userPrototype = new User(
             4,
+            [
+                'admin'  => true,
+                'active' => false,
+            ],
+            'Anypassword1.',
+            [
+                new Email('cfhsoft@verizon.net'),
+                new Email('isotopian@att.net'),
+                new Email('camenisch@comcast.net'),
+                new Email('wetter@mac.com'),
+            ],
+            [
+                new Phone('+79283748264'),
+                new Phone('+79365839604'),
+                new Phone('+79305847200'),
+            ],
+            null,
+            null,
             'Внуков',
             'Кирилл',
             'Денисович',
@@ -54,36 +64,6 @@ class AdminController extends AbstractActionController
             '2003-05-19',
             '/img/favicon.ico',
             'gr4nds0n162',
-            [
-                new Email('1'),
-                new Email('2'),
-                new Email('3'),
-                new Email('4'),
-            ],
-            [
-                new Phone('1'),
-                new Phone('2'),
-                new Phone('3'),
-            ],
-        );
-        $this->userPrototype = new User(
-            $this->profilePrototype->getPassword(),
-            $this->profilePrototype->getTempPassword(),
-            $this->profilePrototype->getTpCreatedAt(),
-            $this->profilePrototype->getPosition(),
-            $this->profilePrototype->getSurname(),
-            $this->profilePrototype->getName(),
-            $this->profilePrototype->getPatronymic(),
-            $this->profilePrototype->getGender(),
-            $this->profilePrototype->getBirthday(),
-            $this->profilePrototype->getImage(),
-            $this->profilePrototype->getSkype(),
-            $this->profilePrototype->getEmails(),
-            $this->profilePrototype->getPhones(),
-            [
-                'admin'  => true,
-                'active' => false,
-            ]
         );
     }
 
