@@ -2,23 +2,10 @@
 
 namespace Application\Model;
 
-class User
+class User extends Profile
 {
-    private $id;
-    private $password;
-    private $tempPassword;
-    private $tpCreatedAt;
-    private $position;
-    private $surname;
-    private $name;
-    private $patronymic;
-    private $gender;
-    private $birthday;
-    private $image;
-    private $skype;
-    private $emails;
-    private $phones;
-    private $status;
+    protected int $positionId;
+    protected array $status;
 
     public function __construct($password,
                                 $tempPassword,
