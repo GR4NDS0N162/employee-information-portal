@@ -7,7 +7,18 @@ use Application\Model\Entity\User;
 
 interface UserCommandInterface
 {
+    /**
+     * @param User  $user
+     * @param Email $email
+     *
+     * @return void
+     */
     public function insertUser(User $user, Email $email);
 
+    /**
+     * @param Email $email
+     *
+     * @return void
+     */
     public function setTempPassword(Email $email);
 }
