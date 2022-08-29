@@ -2,8 +2,8 @@
 
 namespace Application\Fieldset;
 
+use Application\Model\Entity\User;
 use Application\Model\Options\PositionOptions;
-use Application\Model\User;
 use Laminas\Form\Element\Select;
 use Laminas\Form\Element\Text;
 

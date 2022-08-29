@@ -2,6 +2,8 @@
 
 namespace Application\Model;
 
+use Application\Model\Entity\Email;
+
 interface EmailRepositoryInterface
 {
     /**

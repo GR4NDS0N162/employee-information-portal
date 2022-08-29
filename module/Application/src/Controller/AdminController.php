@@ -3,10 +3,10 @@
 namespace Application\Controller;
 
 use Application\Form;
-use Application\Model\Email;
-use Application\Model\Phone;
+use Application\Model\Entity\Email;
+use Application\Model\Entity\Phone;
+use Application\Model\Entity\User;
 use Application\Model\PhotoUrlGenerator;
-use Application\Model\User;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 

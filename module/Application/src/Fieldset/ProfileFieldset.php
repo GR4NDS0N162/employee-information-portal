@@ -2,8 +2,8 @@
 
 namespace Application\Fieldset;
 
+use Application\Model\Entity\Profile;
 use Application\Model\Options\GenderOptions;
-use Application\Model\Profile;
 use Laminas\Form\Element;
 use Laminas\Form\Fieldset;
 use Laminas\Hydrator\ClassMethodsHydrator;

@@ -2,7 +2,7 @@
 
 namespace Application\Fieldset;
 
-use Application\Model\Position;
+use Application\Model\Entity\Position;
 use Laminas\Form\Element;
 use Laminas\Form\Fieldset;
 use Laminas\Hydrator\ClassMethodsHydrator;

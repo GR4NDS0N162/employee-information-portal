@@ -2,7 +2,7 @@
 
 namespace Application\Fieldset;
 
-use Application\Model\Email;
+use Application\Model\Entity\Email;
 use Laminas\Form\Element;
 use Laminas\Form\Fieldset;
 use Laminas\Hydrator\ClassMethodsHydrator;
