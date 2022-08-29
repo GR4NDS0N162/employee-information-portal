@@ -27,29 +27,47 @@ class PositionOptions
         $this->repository = $repository;
     }
 
-    public static function getOptions()
+    public function getOptions(): array
     {
-        return self::positions;
+        $positions = [];
+
+        foreach ($this->repository->findAllPositions() as $position) {
+            $positions[$position->getId()] = $position->getName();
+        }
+
+        return $positions;
     }
 
-    public static function getEnabledOptions()
+    public function getEnabledOptions(): array
     {
-        return array_merge([
+        $positions = [
             null => [
                 'label'    => 'Не выбрана',
                 'selected' => 'selected',
             ],
-        ], self::positions);
+        ];
+
+        foreach ($this->repository->findAllPositions() as $position) {
+            $positions[$position->getId()] = $position->getName();
+        }
+
+        return $positions;
     }
 
-    public static function getDisabledOptions()
+    public function getDisabledOptions(): array
     {
-        return array_merge([
+        $positions = [
             null => [
                 'label'    => 'Не выбрана',
                 'disabled' => 'disabled',
                 'selected' => 'selected',
             ],
-        ], self::positions);
+        ];
+
+        foreach ($this->repository->findAllPositions() as $position) {
+            $positions[$position->getId()] = $position->getName();
+        }
+
+        return $positions;
     }
 }
