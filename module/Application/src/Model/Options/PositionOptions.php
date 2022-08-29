@@ -2,6 +2,8 @@
 
 namespace Application\Model\Options;
 
+use Application\Model\PositionRepositoryInterface;
+
 class PositionOptions
 {
     private const positions = [
@@ -14,6 +16,16 @@ class PositionOptions
         '7' => 'Электрик',
         '8' => 'Юрист',
     ];
+
+    /**
+     * @var PositionRepositoryInterface
+     */
+    private $repository;
+
+    public function __construct(PositionRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
 
     public static function getOptions()
     {
