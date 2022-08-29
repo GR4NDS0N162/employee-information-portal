@@ -13,4 +13,11 @@ interface EmailRepositoryInterface
      * @return Email[]|HydratingResultSet
      */
     public function findEmailsOfUser(int $userId);
+
+    /**
+     * @param string $address
+     *
+     * @return Email
+     */
+    public function findEmail(string $address): Email;
 }

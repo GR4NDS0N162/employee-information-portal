@@ -38,4 +38,9 @@ class EmailRepository implements EmailRepositoryInterface
     {
         // TODO: Implement findEmailsOfUser() method.
     }
+
+    public function findEmail(string $address): Email
+    {
+        // TODO: Implement findEmail() method.
+    }
 }
