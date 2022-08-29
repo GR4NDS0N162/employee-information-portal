@@ -32,8 +32,7 @@ class Profile
         ?string $image = null,
         ?string $skype = null,
         ?int    $id = null
-    )
-    {
+    ) {
         $this->id = $id;
         $this->password = $password;
         $this->tempPassword = $tempPassword;

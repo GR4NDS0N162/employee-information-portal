@@ -27,16 +27,16 @@ class FieldsetMapper
             return;
         }
 
-        if (is_string($config['value']) and !empty($config['value'])) {
+        if (is_string($config['value']) && !empty($config['value'])) {
             $element->setAttribute(self::KEY, $config['value']);
         }
 
-        if (($element instanceof Collection) and !empty($config['target_element'])) {
+        if (($element instanceof Collection) && !empty($config['target_element'])) {
             self::setAttributes($element->getTargetElement(), $config['target_element']);
             return;
         }
 
-        if (($element instanceof FieldsetInterface) and is_array($config['children'])) {
+        if (($element instanceof FieldsetInterface) && is_array($config['children'])) {
             foreach ($config['children'] as $childName => $childConfig) {
                 if ($element->has($childName)) {
                     self::setAttributes($element->get($childName), $childConfig);

@@ -32,8 +32,7 @@ class AdminController extends AbstractActionController
     public function __construct(
         Form\Admin\PositionForm $positionForm,
         Form\Admin\UserForm     $userForm
-    )
-    {
+    ) {
         $this->positionForm = $positionForm;
         $this->userForm = $userForm;
         $this->userPrototype = new User(

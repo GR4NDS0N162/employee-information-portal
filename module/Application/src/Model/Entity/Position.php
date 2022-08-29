@@ -10,8 +10,7 @@ class Position
     public function __construct(
         string $name = '',
         ?int   $id = null
-    )
-    {
+    ) {
         $this->id = $id;
         $this->name = $name;
     }
