@@ -10,6 +10,15 @@ $this->formRow()->setPartial('partial/floating-element.phtml');
 $this->inlineScript()
     ->appendFile($this->basePath('js/password-form-validation.js'))
     ->appendFile($this->basePath('js/login-signup-recover-validation.js'));
+
+$loginForm->setAttribute('action', $this->url('home/login'));
+$loginForm->prepare();
+
+$signUpForm->setAttribute('action', $this->url('home/signup'));
+$signUpForm->prepare();
+
+$recoverForm->setAttribute('action', $this->url('home/recover'));
+$recoverForm->prepare();
 ?>
 <div class="card p-4"
      id="login-card">
