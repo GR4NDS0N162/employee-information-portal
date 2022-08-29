@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Factory;
+namespace Application\Factory\Controller;
 
 use Application\Controller\AdminController;
 use Application\Form\Admin\PositionForm;
