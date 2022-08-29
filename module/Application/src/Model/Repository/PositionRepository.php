@@ -3,6 +3,7 @@
 namespace Application\Model\Repository;
 
 use Application\Model\Entity\Position;
+use Application\Model\Extractor;
 use Application\Model\PositionRepositoryInterface;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Sql;

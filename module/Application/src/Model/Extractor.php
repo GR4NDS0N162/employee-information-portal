@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Model\Repository;
+namespace Application\Model;
 
 use Laminas\Db\Adapter\Driver\ResultInterface;
 use Laminas\Db\ResultSet\HydratingResultSet;
