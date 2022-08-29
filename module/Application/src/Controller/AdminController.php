@@ -6,7 +6,6 @@ use Application\Form;
 use Application\Model\Email;
 use Application\Model\Phone;
 use Application\Model\PhotoUrlGenerator;
-use Application\Model\Profile;
 use Application\Model\User;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
