@@ -8,7 +8,6 @@ class Profile
     protected string $password;
     protected ?string $tempPassword;
     protected ?string $tpCreatedAt;
-    private $position;
     protected ?string $surname;
     protected ?string $name;
     protected ?string $patronymic;
@@ -38,7 +37,6 @@ class Profile
         $this->password = $password;
         $this->tempPassword = $tempPassword;
         $this->tpCreatedAt = $tpCreatedAt;
-        $this->position = $position;
         $this->surname = $surname;
         $this->name = $name;
         $this->patronymic = $patronymic;
@@ -68,11 +66,6 @@ class Profile
     public function getTpCreatedAt()
     {
         return $this->tpCreatedAt;
-    }
-
-    public function getPosition()
-    {
-        return $this->position;
     }
 
     public function getSurname()
