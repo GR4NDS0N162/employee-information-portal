@@ -18,20 +18,21 @@ class Profile
     protected array $emails;
     protected array $phones;
 
-    public function __construct($password,
-                                $tempPassword,
-                                $tpCreatedAt,
-                                $position,
-                                $surname,
-                                $name,
-                                $patronymic,
-                                $gender,
-                                $birthday,
-                                $image,
-                                $skype,
-                                $emails,
-                                $phones,
-                                $id = null)
+    public function __construct(
+        string  $password = '',
+        array   $emails = [],
+        array   $phones = [],
+        ?string $tempPassword = null,
+        ?string $tpCreatedAt = null,
+        ?string $surname = null,
+        ?string $name = null,
+        ?string $patronymic = null,
+        ?int    $gender = null,
+        ?string $birthday = null,
+        ?string $image = null,
+        ?string $skype = null,
+        ?int    $id = null
+    )
     {
         $this->id = $id;
         $this->password = $password;
