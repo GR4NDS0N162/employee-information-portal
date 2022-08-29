@@ -3,6 +3,7 @@
 namespace Application\Controller;
 
 use Application\Form;
+use Application\Form\Admin\AdminFilterForm;
 use Application\Form\Admin\PositionForm;
 use Application\Form\Admin\UserForm;
 use Application\Model\Entity\Email;
@@ -27,16 +28,23 @@ class AdminController extends AbstractActionController
     private $userForm;
 
     /**
+     * @var AdminFilterForm
+     */
+    private $adminFilterForm;
+
+    /**
      * @var User
      */
     private $userPrototype;
 
     public function __construct(
-        PositionForm $positionForm,
-        UserForm     $userForm
+        PositionForm    $positionForm,
+        UserForm        $userForm,
+        AdminFilterForm $adminFilterForm
     ) {
         $this->positionForm = $positionForm;
         $this->userForm = $userForm;
+        $this->adminFilterForm = $adminFilterForm;
         $this->userPrototype = new User(
             4,
             [
@@ -123,7 +131,7 @@ class AdminController extends AbstractActionController
             'userInfo'        => $userInfo,
             'maxPageCount'    => self::maxPageCount,
             'page'            => 1,
-            'adminFilterForm' => new Form\Admin\AdminFilterForm(),
+            'adminFilterForm' => $this->adminFilterForm,
         ]);
 
         return $viewModel;

@@ -3,12 +3,32 @@
 namespace Application\Controller;
 
 use Application\Form;
+use Application\Form\Messenger\DialogFilterForm;
+use Application\Form\Messenger\NewMessageForm;
 use Application\Model\PhotoUrlGenerator;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
 class MessengerController extends AbstractActionController
 {
+    /**
+     * @var DialogFilterForm
+     */
+    private $dialogFilterForm;
+
+    /**
+     * @var NewMessageForm
+     */
+    private $newMessageForm;
+
+    public function __construct(
+        DialogFilterForm $dialogFilterForm,
+        NewMessageForm   $newMessageForm
+    ) {
+        $this->dialogFilterForm = $dialogFilterForm;
+        $this->newMessageForm = $newMessageForm;
+    }
+
     public function viewDialogListAction(): ViewModel
     {
         $viewModel = new ViewModel();
@@ -57,7 +77,7 @@ class MessengerController extends AbstractActionController
         ];
 
         $viewModel->setVariable('dialogs', $dialogs);
-        $viewModel->setVariable('dialogFilterForm', new Form\Messenger\DialogFilterForm());
+        $viewModel->setVariable('dialogFilterForm', $this->dialogFilterForm);
 
         return $viewModel;
     }
@@ -70,7 +90,7 @@ class MessengerController extends AbstractActionController
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
 
-        $viewModel->setVariable('newMessageForm', new Form\Messenger\NewMessageForm());
+        $viewModel->setVariable('newMessageForm', $this->newMessageForm);
 
         $userInfo = [
             'fullname' => 'Иван Иванов',

@@ -3,6 +3,7 @@
 namespace Application\Controller;
 
 use Application\Form;
+use Application\Form\User\ChangePasswordForm;
 use Application\Form\User\ProfileForm;
 use Application\Form\User\UserFilterForm;
 use Application\Form\User\ViewProfileForm;
@@ -37,14 +38,21 @@ class UserController extends AbstractActionController
      */
     private $profilePrototype;
 
+    /**
+     * @var ChangePasswordForm
+     */
+    private $changePasswordForm;
+
     public function __construct(
-        ProfileForm     $profileForm,
-        ViewProfileForm $viewProfileForm,
-        UserFilterForm  $userFilterForm
+        ProfileForm        $profileForm,
+        ViewProfileForm    $viewProfileForm,
+        UserFilterForm     $userFilterForm,
+        ChangePasswordForm $changePasswordForm
     ) {
         $this->profileForm = $profileForm;
         $this->viewProfileForm = $viewProfileForm;
         $this->userFilterForm = $userFilterForm;
+        $this->changePasswordForm = $changePasswordForm;
         $this->profilePrototype = new Profile(
             '',
             [
@@ -98,7 +106,7 @@ class UserController extends AbstractActionController
 
         $viewModel->setVariables([
             'profileForm'        => $this->profileForm,
-            'changePasswordForm' => new Form\User\ChangePasswordForm(),
+            'changePasswordForm' => $this->changePasswordForm,
         ]);
 
         return $viewModel;

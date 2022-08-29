@@ -11,6 +11,18 @@ use Laminas\Form\Form;
 
 class DialogFilterForm extends Form
 {
+    /**
+     * @var PositionOptions
+     */
+    private $positionOptions;
+
+    public function __construct(PositionOptions $positionOptions)
+    {
+        parent::__construct();
+
+        $this->positionOptions = $positionOptions;
+    }
+
     public function init()
     {
         parent::init();
@@ -29,7 +41,7 @@ class DialogFilterForm extends Form
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
-                'options'          => PositionOptions::getEnabledOptions(),
+                'options'          => $this->positionOptions->getEnabledOptions(),
             ],
         ]);
 

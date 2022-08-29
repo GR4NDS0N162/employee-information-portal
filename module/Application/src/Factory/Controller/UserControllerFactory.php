@@ -3,6 +3,7 @@
 namespace Application\Factory\Controller;
 
 use Application\Controller\UserController;
+use Application\Form\User\ChangePasswordForm;
 use Application\Form\User\ProfileForm;
 use Application\Form\User\UserFilterForm;
 use Application\Form\User\ViewProfileForm;
@@ -19,6 +20,7 @@ class UserControllerFactory implements FactoryInterface
             $formManager->get(ProfileForm::class),
             $formManager->get(ViewProfileForm::class),
             $formManager->get(UserFilterForm::class),
+            $formManager->get(ChangePasswordForm::class),
         );
     }
 }

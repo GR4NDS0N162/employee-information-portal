@@ -3,6 +3,7 @@
 namespace Application\Factory\Controller;
 
 use Application\Controller\AdminController;
+use Application\Form\Admin\AdminFilterForm;
 use Application\Form\Admin\PositionForm;
 use Application\Form\Admin\UserForm;
 use Interop\Container\ContainerInterface;
@@ -17,6 +18,7 @@ class AdminControllerFactory implements FactoryInterface
         return new AdminController(
             $formManager->get(PositionForm::class),
             $formManager->get(UserForm::class),
+            $formManager->get(AdminFilterForm::class),
         );
     }
 }
