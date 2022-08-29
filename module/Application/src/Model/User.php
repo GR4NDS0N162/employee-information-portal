@@ -23,8 +23,7 @@ class User extends Profile
         ?string $image = null,
         ?string $skype = null,
         ?int    $id = null
-    )
-    {
+    ) {
         parent::__construct(
             $password,
             $emails,
