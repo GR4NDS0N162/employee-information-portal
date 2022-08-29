@@ -112,4 +112,9 @@ class Profile
     {
         return $this->phones;
     }
+
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
+    }
 }

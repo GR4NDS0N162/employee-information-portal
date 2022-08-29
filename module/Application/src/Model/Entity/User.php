@@ -53,4 +53,9 @@ class User extends Profile
     {
         return $this->status;
     }
+
+    public function setPositionId(int $positionId): void
+    {
+        $this->positionId = $positionId;
+    }
 }
