@@ -13,6 +13,8 @@ use Laminas\View\Model\ViewModel;
 
 class AdminController extends AbstractActionController
 {
+    public const maxPageCount = 20;
+
     /**
      * @var \Application\Form\Admin\PositionForm
      */
@@ -137,8 +139,12 @@ class AdminController extends AbstractActionController
             ],
         ];
 
-        $viewModel->setVariable('userInfo', $userInfo);
-        $viewModel->setVariable('adminFilterForm', new Form\Admin\AdminFilterForm());
+        $viewModel->setVariables([
+            'userInfo'        => $userInfo,
+            'maxPageCount'    => self::maxPageCount,
+            'page'            => 1,
+            'adminFilterForm' => new Form\Admin\AdminFilterForm(),
+        ]);
 
         return $viewModel;
     }

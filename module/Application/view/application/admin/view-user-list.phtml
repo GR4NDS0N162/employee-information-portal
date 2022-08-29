@@ -2,6 +2,8 @@
 /**
  * @var Laminas\View\Renderer\PhpRenderer       $this
  * @var array                                   $userInfo
+ * @var int                                     $maxPageCount
+ * @var int                                     $page
  * @var \Application\Form\Admin\AdminFilterForm $adminFilterForm
  */
 ?>
@@ -9,15 +11,11 @@
     <div class="col-12">
         <div class="row align-items-center justify-content-between g-3">
             <div class="col-auto">
-                <?php
-                $userCount = count($userInfo);
-                $maxCount = 20;
-                $page = 1;
-                ?>
                 <p class="h5 mb-0">
+                    <?php $userCount = count($userInfo); ?>
                     <?= sprintf('Показаны: %d-%d из %d',
-                        (1 + ($page - 1) * $maxCount),
-                        min($page * $maxCount, $userCount),
+                        (1 + ($page - 1) * $maxPageCount),
+                        min($page * $maxPageCount, $userCount),
                         $userCount,
                     ); ?>
                 </p>

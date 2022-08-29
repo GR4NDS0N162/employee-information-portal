@@ -12,6 +12,8 @@ use Laminas\View\Model\ViewModel;
 
 class UserController extends AbstractActionController
 {
+    public const maxPageCount = 20;
+
     /**
      * @var \Application\Form\User\ProfileForm
      */
@@ -134,8 +136,12 @@ class UserController extends AbstractActionController
             ],
         ];
 
-        $viewModel->setVariable('userInfo', $userInfo);
-        $viewModel->setVariable('userFilterForm', new Form\User\UserFilterForm());
+        $viewModel->setVariables([
+            'userInfo'       => $userInfo,
+            'maxPageCount'   => self::maxPageCount,
+            'page'           => 1,
+            'userFilterForm' => new Form\User\UserFilterForm(),
+        ]);
 
         return $viewModel;
     }
