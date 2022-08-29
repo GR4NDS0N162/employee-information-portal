@@ -11,18 +11,15 @@ use Laminas\Form\Form;
 
 class UserFilterForm extends Form
 {
-    public const DEFAULT_NAME = 'user-filter-form';
-
     /**
      * @var PositionOptions
      */
     private $positionOptions;
 
     public function __construct(
-        PositionOptions $positionOptions,
-                        $name = self::DEFAULT_NAME
+        PositionOptions $positionOptions
     ) {
-        parent::__construct($name);
+        parent::__construct();
 
         $this->positionOptions = $positionOptions;
     }

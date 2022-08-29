@@ -9,18 +9,15 @@ use Laminas\Form\Form;
 
 class SignUpForm extends Form
 {
-    public const DEFAULT_NAME = 'signup-form';
-
     /**
      * @var PositionOptions
      */
     private $positionOptions;
 
     public function __construct(
-        PositionOptions $positionOptions,
-                        $name = self::DEFAULT_NAME
+        PositionOptions $positionOptions
     ) {
-        parent::__construct($name);
+        parent::__construct();
 
         $this->positionOptions = $positionOptions;
     }
