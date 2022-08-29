@@ -24,9 +24,9 @@ $renderErrors = $this->renderErrors;
 
     <?php if (
         $element instanceof Element\Button
-        or $element instanceof Element\Submit
-        or $element instanceof Element\Image
-        or $element instanceof Element\Hidden
+        || $element instanceof Element\Submit
+        || $element instanceof Element\Image
+        || $element instanceof Element\Hidden
     ): ?>
         <?= $this->formElement()->render($element); ?>
     <?php elseif (!isset($label)): ?>
@@ -34,14 +34,14 @@ $renderErrors = $this->renderErrors;
         <div class="invalid-feedback order-last">Поле не валидно.</div>
     <?php else: ?>
 
-        <?php if ($element instanceof Element\Number and strlen($label) <= 5): ?>
+        <?php if ($element instanceof Element\Number && strlen($label) <= 5): ?>
             <div class="input-group has-validation">
                 <span class="input-group-text"><?= $this->escapeHtml($label); ?></span>
                 <?= $this->formElement()->render($element); ?>
                 <div class="invalid-feedback order-last">Поле не валидно.</div>
             </div>
 
-        <?php elseif ($element instanceof Element\File or $element instanceof Element\Textarea): ?>
+        <?php elseif ($element instanceof Element\File || $element instanceof Element\Textarea): ?>
             <?= $this->formLabel($element); ?>
             <?= $this->formElement()->render($element); ?>
             <div class="invalid-feedback order-last">Поле не валидно.</div>
