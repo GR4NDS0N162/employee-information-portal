@@ -4,6 +4,7 @@ namespace Application\Controller;
 
 use Application\Form;
 use Application\Form\User\ProfileForm;
+use Application\Form\User\UserFilterForm;
 use Application\Form\User\ViewProfileForm;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\Phone;
@@ -27,16 +28,23 @@ class UserController extends AbstractActionController
     private $viewProfileForm;
 
     /**
+     * @var UserFilterForm
+     */
+    private $userFilterForm;
+
+    /**
      * @var Profile
      */
     private $profilePrototype;
 
     public function __construct(
         ProfileForm     $profileForm,
-        ViewProfileForm $viewProfileForm
+        ViewProfileForm $viewProfileForm,
+        UserFilterForm  $userFilterForm
     ) {
         $this->profileForm = $profileForm;
         $this->viewProfileForm = $viewProfileForm;
+        $this->userFilterForm = $userFilterForm;
         $this->profilePrototype = new Profile(
             '',
             [
@@ -139,7 +147,7 @@ class UserController extends AbstractActionController
             'userInfo'       => $userInfo,
             'maxPageCount'   => self::maxPageCount,
             'page'           => 1,
-            'userFilterForm' => new Form\User\UserFilterForm(),
+            'userFilterForm' => $this->userFilterForm,
         ]);
 
         return $viewModel;
