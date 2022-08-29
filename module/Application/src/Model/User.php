@@ -7,36 +7,41 @@ class User extends Profile
     protected int $positionId;
     protected array $status;
 
-    public function __construct($password,
-                                $tempPassword,
-                                $tpCreatedAt,
-                                $position,
-                                $surname,
-                                $name,
-                                $patronymic,
-                                $gender,
-                                $birthday,
-                                $image,
-                                $skype,
-                                $emails,
-                                $phones,
-                                $status,
-                                $id = null)
+    public function __construct(
+        int     $positionId = 0,
+        array   $status = [],
+        string  $password = '',
+        array   $emails = [],
+        array   $phones = [],
+        ?string $tempPassword = null,
+        ?string $tpCreatedAt = null,
+        ?string $surname = null,
+        ?string $name = null,
+        ?string $patronymic = null,
+        ?int    $gender = null,
+        ?string $birthday = null,
+        ?string $image = null,
+        ?string $skype = null,
+        ?int    $id = null
+    )
     {
-        $this->id = $id;
-        $this->password = $password;
-        $this->tempPassword = $tempPassword;
-        $this->tpCreatedAt = $tpCreatedAt;
-        $this->position = $position;
-        $this->surname = $surname;
-        $this->name = $name;
-        $this->patronymic = $patronymic;
-        $this->gender = $gender;
-        $this->birthday = $birthday;
-        $this->image = $image;
-        $this->skype = $skype;
-        $this->emails = $emails;
-        $this->phones = $phones;
+        parent::__construct(
+            $password,
+            $emails,
+            $phones,
+            $tempPassword,
+            $tpCreatedAt,
+            $surname,
+            $name,
+            $patronymic,
+            $gender,
+            $birthday,
+            $image,
+            $skype,
+            $id
+        );
+
+        $this->positionId = $positionId;
         $this->status = $status;
     }
 
