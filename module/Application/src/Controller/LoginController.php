@@ -3,6 +3,7 @@
 namespace Application\Controller;
 
 use Application\Form;
+use Application\Model\UserCommandInterface;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
@@ -23,14 +24,21 @@ class LoginController extends AbstractActionController
      */
     private $recoverForm;
 
+    /**
+     * @var UserCommandInterface
+     */
+    private $userCommand;
+
     public function __construct(
         Form\Login\LoginForm   $loginForm,
         Form\Login\SignUpForm  $signUpForm,
-        Form\Login\RecoverForm $recoverForm
+        Form\Login\RecoverForm $recoverForm,
+        UserCommandInterface   $userCommand
     ) {
         $this->loginForm = $loginForm;
         $this->signUpForm = $signUpForm;
         $this->recoverForm = $recoverForm;
+        $this->userCommand = $userCommand;
     }
 
     public function indexAction(): ViewModel

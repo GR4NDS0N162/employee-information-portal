@@ -6,6 +6,7 @@ use Application\Controller\LoginController;
 use Application\Form\Login\LoginForm;
 use Application\Form\Login\RecoverForm;
 use Application\Form\Login\SignUpForm;
+use Application\Model\UserCommandInterface;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 
@@ -19,6 +20,7 @@ class LoginControllerFactory implements FactoryInterface
             $formManager->get(LoginForm::class),
             $formManager->get(SignUpForm::class),
             $formManager->get(RecoverForm::class),
+            $container->get(UserCommandInterface::class),
         );
     }
 }
