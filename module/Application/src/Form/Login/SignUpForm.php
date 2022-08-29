@@ -11,9 +11,18 @@ class SignUpForm extends Form
 {
     public const DEFAULT_NAME = 'signup-form';
 
-    public function __construct($name = self::DEFAULT_NAME)
-    {
+    /**
+     * @var PositionOptions
+     */
+    private $positionOptions;
+
+    public function __construct(
+        PositionOptions $positionOptions,
+                        $name = self::DEFAULT_NAME
+    ) {
         parent::__construct($name);
+
+        $this->positionOptions = $positionOptions;
 
         $this->setAttribute('class', 'row gy-3 needs-validation');
         $this->setAttribute('novalidate', true);

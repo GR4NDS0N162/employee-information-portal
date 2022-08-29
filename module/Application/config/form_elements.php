@@ -15,7 +15,7 @@ return [
         Form\Admin\AdminFilterForm::class => InvokableFactory::class,
 
         Form\Login\LoginForm::class   => InvokableFactory::class,
-        Form\Login\SignUpForm::class  => InvokableFactory::class,
+        Form\Login\SignUpForm::class  => Factory\Form\SignUpFormFactory::class,
         Form\Login\RecoverForm::class => InvokableFactory::class,
 
         Form\Messenger\NewMessageForm::class   => InvokableFactory::class,
