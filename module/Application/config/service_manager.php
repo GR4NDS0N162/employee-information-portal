@@ -2,9 +2,9 @@
 
 namespace Application;
 
-use Application\Factory\Command as FactoryCommand;
-use Application\Factory\Options as OptionsRepository;
-use Application\Factory\Repository as FactoryRepository;
+use Application\Factory\Command as CommandFactory;
+use Application\Factory\Options as OptionsFactory;
+use Application\Factory\Repository as RepositoryFactory;
 
 return [
     'aliases'   => [
@@ -14,12 +14,12 @@ return [
         Model\UserCommandInterface::class        => Model\Command\UserCommand::class,
     ],
     'factories' => [
-        Model\Command\UserCommand::class => FactoryCommand\UserCommandFactory::class,
+        Model\Command\UserCommand::class => CommandFactory\UserCommandFactory::class,
 
-        Model\Options\PositionOptions::class => OptionsRepository\PositionOptionsFactory::class,
+        Model\Options\PositionOptions::class => OptionsFactory\PositionOptionsFactory::class,
 
-        Model\Repository\EmailRepository::class    => FactoryRepository\EmailRepositoryFactory::class,
-        Model\Repository\PositionRepository::class => FactoryRepository\PositionRepositoryFactory::class,
-        Model\Repository\UserRepository::class     => FactoryRepository\UserRepositoryFactory::class,
+        Model\Repository\EmailRepository::class    => RepositoryFactory\EmailRepositoryFactory::class,
+        Model\Repository\PositionRepository::class => RepositoryFactory\PositionRepositoryFactory::class,
+        Model\Repository\UserRepository::class     => RepositoryFactory\UserRepositoryFactory::class,
     ],
 ];
