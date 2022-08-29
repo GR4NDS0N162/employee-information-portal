@@ -13,6 +13,8 @@ class ViewForm extends UserForm
                 '/<button.*button>/',
                 '/<input.*type="(submit|button)".*>/',
             ],
-            '', parent::render($form));
+            '',
+            parent::render($form)
+        );
     }
 }
