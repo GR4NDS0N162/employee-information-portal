@@ -51,4 +51,16 @@ class LoginController extends AbstractActionController
 
         return $viewModel;
     }
+
+    public function loginAction()
+    {
+    }
+
+    public function signUpAction()
+    {
+    }
+
+    public function recoverAction()
+    {
+    }
 }
