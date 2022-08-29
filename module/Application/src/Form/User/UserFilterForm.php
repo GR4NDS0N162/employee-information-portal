@@ -25,6 +25,11 @@ class UserFilterForm extends Form
         parent::__construct($name);
 
         $this->positionOptions = $positionOptions;
+    }
+
+    public function init()
+    {
+        parent::init();
 
         $this->setAttribute('class', 'row g-3 needs-validation');
         $this->setAttribute('novalidate', true);

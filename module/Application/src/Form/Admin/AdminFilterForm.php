@@ -14,6 +14,11 @@ class AdminFilterForm extends UserFilterForm
     public function __construct($name = self::DEFAULT_NAME)
     {
         parent::__construct($name);
+    }
+
+    public function init()
+    {
+        parent::init();
 
         $this->add([
             'name'       => 'active',

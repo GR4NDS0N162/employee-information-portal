@@ -13,6 +13,11 @@ class ChangePasswordForm extends Form
     public function __construct($name = self::DEFAULT_NAME)
     {
         parent::__construct($name);
+    }
+
+    public function init()
+    {
+        parent::init();
 
         $this->setAttribute('class', 'row gy-3 needs-validation');
         $this->setAttribute('novalidate', true);

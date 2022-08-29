@@ -16,6 +16,11 @@ class DialogFilterForm extends Form
     public function __construct($name = self::DEFAULT_NAME)
     {
         parent::__construct($name);
+    }
+
+    public function init()
+    {
+        parent::init();
 
         $this->setAttribute('class', 'row g-3 needs-validation');
         $this->setAttribute('novalidate', true);

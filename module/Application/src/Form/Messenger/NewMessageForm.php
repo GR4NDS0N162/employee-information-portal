@@ -13,6 +13,11 @@ class NewMessageForm extends Form
     public function __construct($name = self::DEFAULT_NAME)
     {
         parent::__construct($name);
+    }
+
+    public function init()
+    {
+        parent::init();
 
         $this->setAttribute('class', 'row gx-3');
 
