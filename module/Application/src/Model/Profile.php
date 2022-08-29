@@ -48,67 +48,67 @@ class Profile
         $this->phones = $phones;
     }
 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
     }
 
-    public function getTempPassword()
+    public function getTempPassword(): ?string
     {
         return $this->tempPassword;
     }
 
-    public function getTpCreatedAt()
+    public function getTpCreatedAt(): ?string
     {
         return $this->tpCreatedAt;
     }
 
-    public function getSurname()
+    public function getSurname(): ?string
     {
         return $this->surname;
     }
 
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function getPatronymic()
+    public function getPatronymic(): ?string
     {
         return $this->patronymic;
     }
 
-    public function getGender()
+    public function getGender(): ?int
     {
         return $this->gender;
     }
 
-    public function getBirthday()
+    public function getBirthday(): ?string
     {
         return $this->birthday;
     }
 
-    public function getImage()
+    public function getImage(): ?string
     {
         return $this->image;
     }
 
-    public function getSkype()
+    public function getSkype(): ?string
     {
         return $this->skype;
     }
 
-    public function getEmails()
+    public function getEmails(): array
     {
         return $this->emails;
     }
 
-    public function getPhones()
+    public function getPhones(): array
     {
         return $this->phones;
     }
