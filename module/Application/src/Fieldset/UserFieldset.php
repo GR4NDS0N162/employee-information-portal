@@ -9,6 +9,21 @@ use Laminas\Form\Element\Text;
 
 class UserFieldset extends ProfileFieldset
 {
+    /**
+     * @var PositionOptions
+     */
+    private $positionOptions;
+
+    public function __construct(
+        PositionOptions $positionOptions,
+                        $name = null,
+        array           $options = []
+    ) {
+        parent::__construct($name, $options);
+
+        $this->positionOptions = $positionOptions;
+    }
+
     public function init()
     {
         parent::init();
@@ -30,7 +45,7 @@ class UserFieldset extends ProfileFieldset
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
-                'options'          => PositionOptions::getOptions(),
+                'options'          => $this->positionOptions->getOptions(),
             ],
         ]);
 

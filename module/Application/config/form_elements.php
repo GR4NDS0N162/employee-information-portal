@@ -8,6 +8,8 @@ return [
     'aliases'   => [
     ],
     'factories' => [
+        Fieldset\UserFieldset::class => Factory\Fieldset\UserFieldsetFactory::class,
+
         Form\Admin\UserForm::class        => InvokableFactory::class,
         Form\Admin\PositionForm::class    => InvokableFactory::class,
         Form\Admin\AdminFilterForm::class => InvokableFactory::class,
