@@ -13,9 +13,18 @@ class UserFilterForm extends Form
 {
     public const DEFAULT_NAME = 'user-filter-form';
 
-    public function __construct($name = self::DEFAULT_NAME)
-    {
+    /**
+     * @var PositionOptions
+     */
+    private $positionOptions;
+
+    public function __construct(
+        PositionOptions $positionOptions,
+                        $name = self::DEFAULT_NAME
+    ) {
         parent::__construct($name);
+
+        $this->positionOptions = $positionOptions;
 
         $this->setAttribute('class', 'row g-3 needs-validation');
         $this->setAttribute('novalidate', true);
@@ -31,7 +40,7 @@ class UserFilterForm extends Form
                 'label_attributes' => [
                     'class' => 'form-label',
                 ],
-                'options'          => PositionOptions::getEnabledOptions(),
+                'options'          => $this->positionOptions->getEnabledOptions(),
             ],
         ]);
 
