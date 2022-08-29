@@ -34,7 +34,7 @@ class EmailRepository implements EmailRepositoryInterface
         $this->emailPrototype = $emailPrototype;
     }
 
-    public function findEmailsOfUser(int $userId): array
+    public function findEmailsOfUser(int $userId)
     {
         // TODO: Implement findEmailsOfUser() method.
     }
