@@ -60,4 +60,22 @@ class StatusRepository implements StatusRepositoryInterface
             $this->statusPrototype,
         );
     }
+
+    public function findStatusesOfUser(int $userId)
+    {
+        $sql = new Sql($this->db);
+        $select = $sql->select('user_status');
+        $select->columns([
+            'userId'   => 'user_id',
+            'statusId' => 'status_id',
+        ]);
+        $select->where(['user_id = ?' => $userId]);
+
+        return Executer::extractArray(
+            $sql,
+            $select,
+            $this->hydrator,
+            $this->userStatusPrototype,
+        );
+    }
 }
