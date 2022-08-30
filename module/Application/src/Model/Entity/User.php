@@ -58,4 +58,9 @@ class User extends Profile
     {
         return $this->status;
     }
+
+    public function setStatus(array $status): void
+    {
+        $this->status = $status;
+    }
 }
