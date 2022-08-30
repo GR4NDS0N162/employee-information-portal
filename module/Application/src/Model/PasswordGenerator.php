@@ -2,8 +2,16 @@
 
 namespace Application\Model;
 
+use Exception;
+
 class PasswordGenerator
 {
+    /**
+     * @param int $length
+     *
+     * @return string
+     * @throws Exception
+     */
     public static function generate($length = 8)
     {
         $chars = [
