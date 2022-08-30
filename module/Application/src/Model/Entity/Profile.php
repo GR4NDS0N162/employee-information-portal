@@ -117,4 +117,20 @@ class Profile
     {
         $this->password = $password;
     }
+
+    /**
+     * @param Email[] $emails
+     */
+    public function setEmails(array $emails): void
+    {
+        $this->emails = $emails;
+    }
+
+    /**
+     * @param Phone[] $phones
+     */
+    public function setPhones(array $phones): void
+    {
+        $this->phones = $phones;
+    }
 }
