@@ -6,6 +6,7 @@ use Application\Model\EmailRepositoryInterface;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\User;
 use Application\Model\Executer;
+use Application\Model\PhoneRepositoryInterface;
 use Application\Model\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
@@ -35,16 +36,23 @@ class UserRepository implements UserRepositoryInterface
      */
     private $emailRepository;
 
+    /**
+     * @var PhoneRepositoryInterface
+     */
+    private $phoneRepository;
+
     public function __construct(
         AdapterInterface         $db,
         HydratorInterface        $hydrator,
         User                     $userPrototype,
-        EmailRepositoryInterface $emailRepository
+        EmailRepositoryInterface $emailRepository,
+        PhoneRepositoryInterface $phoneRepository
     ) {
         $this->db = $db;
         $this->hydrator = $hydrator;
         $this->userPrototype = $userPrototype;
         $this->emailRepository = $emailRepository;
+        $this->phoneRepository = $phoneRepository;
     }
 
     public function findUser($identifier): User
