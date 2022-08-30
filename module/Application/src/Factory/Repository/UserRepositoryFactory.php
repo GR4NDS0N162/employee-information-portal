@@ -6,6 +6,7 @@ use Application\Model\EmailRepositoryInterface;
 use Application\Model\Entity\User;
 use Application\Model\PhoneRepositoryInterface;
 use Application\Model\Repository\UserRepository;
+use Application\Model\StatusRepositoryInterface;
 use Interop\Container\ContainerInterface;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Hydrator\ReflectionHydrator;
@@ -21,6 +22,7 @@ class UserRepositoryFactory implements FactoryInterface
             new User(),
             $container->get(EmailRepositoryInterface::class),
             $container->get(PhoneRepositoryInterface::class),
+            $container->get(StatusRepositoryInterface::class),
         );
     }
 }
