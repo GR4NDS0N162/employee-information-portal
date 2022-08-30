@@ -47,6 +47,9 @@ class PositionOptions
         return $positions;
     }
 
+    /**
+     * @return array
+     */
     public function getDisabledOptions()
     {
         $positions = [

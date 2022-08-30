@@ -4,6 +4,9 @@ namespace Application\Model\Options;
 
 class YesNoOptions
 {
+    /**
+     * @return array
+     */
     public static function getActiveOptions()
     {
         return [
@@ -17,6 +20,9 @@ class YesNoOptions
         ];
     }
 
+    /**
+     * @return array
+     */
     public static function getAdminOptions()
     {
         return [
