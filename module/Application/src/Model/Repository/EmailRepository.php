@@ -5,20 +5,27 @@ namespace Application\Model\Repository;
 use Application\Model\EmailRepositoryInterface;
 use Application\Model\Entity\Email;
 use Application\Model\Executer;
+use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Sql;
+use Laminas\Hydrator\HydratorInterface;
 use RuntimeException;
 
 class EmailRepository implements EmailRepositoryInterface
 {
     private $db;
     private $hydrator;
-    private $emailPrototype;
+    private $prototype;
 
-    public function __construct($db, $hydrator, $emailPrototype)
+    /**
+     * @param AdapterInterface  $db
+     * @param HydratorInterface $hydrator
+     * @param Email             $prototype
+     */
+    public function __construct($db, $hydrator, $prototype)
     {
         $this->db = $db;
         $this->hydrator = $hydrator;
-        $this->emailPrototype = $emailPrototype;
+        $this->prototype = $prototype;
     }
 
     public function findEmailsOfUser($userId)
@@ -35,7 +42,7 @@ class EmailRepository implements EmailRepositoryInterface
             $sql,
             $select,
             $this->hydrator,
-            $this->emailPrototype,
+            $this->prototype,
         );
     }
 
@@ -53,7 +60,7 @@ class EmailRepository implements EmailRepositoryInterface
             $sql,
             $select,
             $this->hydrator,
-            $this->emailPrototype,
+            $this->prototype,
             sprintf(
                 'Failed retrieving email with address "%s"; unknown database error.',
                 $address
