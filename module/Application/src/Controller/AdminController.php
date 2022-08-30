@@ -7,6 +7,7 @@ use Application\Form\Admin\AdminFilterForm;
 use Application\Form\Admin\PositionForm;
 use Application\Form\Admin\UserForm;
 use Application\Model\PhotoUrlGenerator;
+use Application\Model\UserCommandInterface;
 use Application\Model\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
@@ -36,16 +37,23 @@ class AdminController extends AbstractActionController
      */
     private $userRepository;
 
+    /**
+     * @var UserCommandInterface
+     */
+    private $userCommand;
+
     public function __construct(
         PositionForm            $positionForm,
         UserForm                $userForm,
         AdminFilterForm         $adminFilterForm,
-        UserRepositoryInterface $userRepository
+        UserRepositoryInterface $userRepository,
+        UserCommandInterface    $userCommand
     ) {
         $this->positionForm = $positionForm;
         $this->userForm = $userForm;
         $this->adminFilterForm = $adminFilterForm;
         $this->userRepository = $userRepository;
+        $this->userCommand = $userCommand;
     }
 
     public function viewUserListAction(): ViewModel
