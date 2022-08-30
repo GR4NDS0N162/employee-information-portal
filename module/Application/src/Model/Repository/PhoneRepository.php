@@ -3,8 +3,10 @@
 namespace Application\Model\Repository;
 
 use Application\Model\Entity\Phone;
+use Application\Model\Executer;
 use Application\Model\PhoneRepositoryInterface;
 use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\Sql\Sql;
 use Laminas\Hydrator\HydratorInterface;
 
 class PhoneRepository implements PhoneRepositoryInterface
@@ -36,6 +38,19 @@ class PhoneRepository implements PhoneRepositoryInterface
 
     public function findPhonesOfUser(int $userId)
     {
-        // TODO: Implement findPhonesOfUser() method.
+        $sql = new Sql($this->db);
+        $select = $sql->select('phone');
+        $select->columns([
+            'number',
+            'userId' => 'user_id',
+        ]);
+        $select->where(['userId = ?' => $userId]);
+
+        return Executer::extractArray(
+            $sql,
+            $select,
+            $this->hydrator,
+            $this->phonePrototype,
+        );
     }
 }
