@@ -33,4 +33,9 @@ class UserRepository implements UserRepositoryInterface
         $this->hydrator = $hydrator;
         $this->userPrototype = $userPrototype;
     }
+
+    public function findUser($identifier): User
+    {
+        // TODO: Implement findUser() method.
+    }
 }
