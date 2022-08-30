@@ -16,7 +16,7 @@ class EmailRepositoryFactory implements FactoryInterface
         return new EmailRepository(
             $container->get(AdapterInterface::class),
             new ReflectionHydrator(),
-            new Email(''),
+            new Email(),
         );
     }
 }
