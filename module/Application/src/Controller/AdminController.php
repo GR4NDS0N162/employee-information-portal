@@ -6,9 +6,6 @@ use Application\Form;
 use Application\Form\Admin\AdminFilterForm;
 use Application\Form\Admin\PositionForm;
 use Application\Form\Admin\UserForm;
-use Application\Model\Entity\Email;
-use Application\Model\Entity\Phone;
-use Application\Model\Entity\User;
 use Application\Model\PhotoUrlGenerator;
 use Application\Model\UserRepositoryInterface;
 use Laminas\Mvc\Controller\AbstractActionController;
@@ -38,11 +35,6 @@ class AdminController extends AbstractActionController
      */
     private $userRepository;
 
-    /**
-     * @var User
-     */
-    private $userPrototype;
-
     public function __construct(
         PositionForm            $positionForm,
         UserForm                $userForm,
@@ -53,34 +45,6 @@ class AdminController extends AbstractActionController
         $this->userForm = $userForm;
         $this->adminFilterForm = $adminFilterForm;
         $this->userRepository = $userRepository;
-        $this->userPrototype = new User(
-            4,
-            [
-                'admin'  => true,
-                'active' => false,
-            ],
-            'Anypassword1.',
-            [
-                new Email('cfhsoft@verizon.net'),
-                new Email('isotopian@att.net'),
-                new Email('camenisch@comcast.net'),
-                new Email('wetter@mac.com'),
-            ],
-            [
-                new Phone('+79283748264'),
-                new Phone('+79365839604'),
-                new Phone('+79305847200'),
-            ],
-            null,
-            null,
-            'Внуков',
-            'Кирилл',
-            'Денисович',
-            1,
-            '2003-05-19',
-            '/img/favicon.ico',
-            'gr4nds0n162',
-        );
     }
 
     public function viewUserListAction(): ViewModel
@@ -154,7 +118,7 @@ class AdminController extends AbstractActionController
         $this->layout()->setVariable('headTitleName', $headTitleName);
         $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
 
-        $this->userForm->bind($this->userPrototype);
+        $this->userForm->bind($this->userRepository->findUser(1));
 
         $viewModel->setVariables([
             'userForm' => $this->userForm,
