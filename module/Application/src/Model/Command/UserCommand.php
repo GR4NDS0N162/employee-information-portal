@@ -12,7 +12,6 @@ use Application\Model\UserRepositoryInterface;
 use Exception;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
-use Laminas\Db\Adapter\Driver\ResultInterface;
 use Laminas\Db\Sql\Sql;
 use RuntimeException;
 
@@ -101,14 +100,6 @@ class UserCommand implements UserCommandInterface
         ]);
         $update->where(['id = ?' => $foundUser->getId()]);
 
-        $sql = new Sql($this->db);
-        $statement = $sql->prepareStatementForSqlObject($update);
-        $result = $statement->execute();
-
-        if (!$result instanceof ResultInterface) {
-            throw new RuntimeException(
-                'Database error occurred during user update operation'
-            );
-        }
+        Executer::executeSql($sql, $update);
     }
 }
