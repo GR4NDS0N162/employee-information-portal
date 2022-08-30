@@ -3,6 +3,7 @@
 namespace Application\Factory\Repository;
 
 use Application\Model\Entity\Status;
+use Application\Model\Entity\UserStatus;
 use Application\Model\Repository\StatusRepository;
 use Interop\Container\ContainerInterface;
 use Laminas\Db\Adapter\AdapterInterface;
@@ -17,6 +18,7 @@ class StatusRepositoryFactory implements FactoryInterface
             $container->get(AdapterInterface::class),
             new ReflectionHydrator(),
             new Status(),
+            new UserStatus(),
         );
     }
 }

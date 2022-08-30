@@ -3,6 +3,7 @@
 namespace Application\Model\Repository;
 
 use Application\Model\Entity\Status;
+use Application\Model\Entity\UserStatus;
 use Application\Model\Executer;
 use Application\Model\StatusRepositoryInterface;
 use Laminas\Db\Adapter\AdapterInterface;
@@ -26,14 +27,21 @@ class StatusRepository implements StatusRepositoryInterface
      */
     private $statusPrototype;
 
+    /**
+     * @var UserStatus
+     */
+    private $userStatusPrototype;
+
     public function __construct(
         AdapterInterface  $db,
         HydratorInterface $hydrator,
-        Status            $statusPrototype
+        Status            $statusPrototype,
+        UserStatus        $userStatusPrototype
     ) {
         $this->db = $db;
         $this->hydrator = $hydrator;
         $this->statusPrototype = $statusPrototype;
+        $this->userStatusPrototype = $userStatusPrototype;
     }
 
     public function findAllStatuses()
