@@ -6,10 +6,13 @@ use Application\Model\EmailRepositoryInterface;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\User;
 use Application\Model\Executer;
+use Application\Model\PasswordGenerator;
 use Application\Model\UserCommandInterface;
 use Application\Model\UserRepositoryInterface;
+use Exception;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\Adapter\Driver\ResultInterface;
 use Laminas\Db\Sql\Sql;
 use RuntimeException;
 
@@ -93,8 +96,33 @@ class UserCommand implements UserCommandInterface
         }
     }
 
+    /**
+     * @inheritdoc
+     * @throws RuntimeException
+     * @throws InvalidArgumentException
+     * @throws Exception
+     */
     public function setTempPassword(Email $email)
     {
-        // TODO: Implement setTempPassword() method.
+        $foundEmail = $this->emailRepository->findEmail($email->getAddress());
+        $foundUser = $this->userRepository->findUser($foundEmail);
+
+        $sql = new Sql($this->db);
+        $update = $sql->update('user');
+        $update->set([
+            'temp_password' => PasswordGenerator::generate(),
+            'tp_created_at' => date('Y-m-d H:i:s'),
+        ]);
+        $update->where(['id = ?' => $foundUser->getId()]);
+
+        $sql = new Sql($this->db);
+        $statement = $sql->prepareStatementForSqlObject($update);
+        $result = $statement->execute();
+
+        if (!$result instanceof ResultInterface) {
+            throw new RuntimeException(
+                'Database error occurred during user update operation'
+            );
+        }
     }
 }
