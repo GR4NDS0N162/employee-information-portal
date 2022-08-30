@@ -5,11 +5,11 @@ namespace Application\Model\Command;
 use Application\Model\EmailRepositoryInterface;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\User;
+use Application\Model\Executer;
 use Application\Model\UserCommandInterface;
 use Application\Model\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
-use Laminas\Db\Adapter\Driver\ResultInterface;
 use Laminas\Db\Sql\Sql;
 use RuntimeException;
 
@@ -58,16 +58,14 @@ class UserCommand implements UserCommandInterface
                 'position_id' => $user->getPositionId(),
             ]);
 
-            $statement = $sql->prepareStatementForSqlObject($insert);
-            $result = $statement->execute();
-
-            if (!$result instanceof ResultInterface) {
-                throw new RuntimeException(
-                    'Database error occurred during user insert operation.'
-                );
-            }
-
-            $id = $result->getGeneratedValue();
+            $id = Executer::insertValues(
+                $sql,
+                $insert,
+                sprintf(
+                    'Database error occurred during insert operation of the user with address %1$s.',
+                    $email->getAddress()
+                )
+            );
 
             $insert = $sql->insert('email');
             $insert->values([
@@ -75,14 +73,14 @@ class UserCommand implements UserCommandInterface
                 'user_id' => $id,
             ]);
 
-            $statement = $sql->prepareStatementForSqlObject($insert);
-            $result = $statement->execute();
-
-            if (!$result instanceof ResultInterface) {
-                throw new RuntimeException(
-                    'Database error occurred during email insert operation'
-                );
-            }
+            Executer::insertValues(
+                $sql,
+                $insert,
+                sprintf(
+                    'Database error occurred during email insert operation with address %1$s.',
+                    $email->getAddress()
+                )
+            );
         }
 
         if (!empty($foundEmail)) {
