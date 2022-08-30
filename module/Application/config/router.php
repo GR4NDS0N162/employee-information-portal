@@ -103,7 +103,7 @@ return [
                                     'action' => 'view-messages',
                                 ],
                                 'constraints' => [
-                                    'id' => '\d+',
+                                    'id' => '[1-9]\d*',
                                 ],
                             ],
                         ],
@@ -139,7 +139,7 @@ return [
                                     'action' => 'edit-user',
                                 ],
                                 'constraints' => [
-                                    'id' => '\d+',
+                                    'id' => '[1-9]\d*',
                                 ],
                             ],
                         ],
