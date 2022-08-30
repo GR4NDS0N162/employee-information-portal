@@ -98,7 +98,7 @@ return [
                         'view-messages' => [
                             'type'    => Segment::class,
                             'options' => [
-                                'route'       => '/:id',
+                                'route'       => '/[:id]',
                                 'defaults'    => [
                                     'action' => 'view-messages',
                                 ],
@@ -134,7 +134,7 @@ return [
                         'edit-user' => [
                             'type'    => Segment::class,
                             'options' => [
-                                'route'       => '/:id',
+                                'route'       => '/[:id]',
                                 'defaults'    => [
                                     'action' => 'edit-user',
                                 ],
