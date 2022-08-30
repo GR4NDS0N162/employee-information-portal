@@ -115,9 +115,9 @@ class UserController extends AbstractActionController
 
         $this->profileForm->setData($request->getPost());
 
-//        if (!$this->profileForm->isValid()) {
-//            return $viewModel;
-//        }
+        if (!$this->profileForm->isValid()) {
+            return $viewModel;
+        }
 
         $user = $this->userCommand->updateUser($user);
         return $this->redirect()->toRoute('user/view-profile');
