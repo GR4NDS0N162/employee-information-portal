@@ -10,6 +10,7 @@ use Application\Model\Entity\Email;
 use Application\Model\Entity\Phone;
 use Application\Model\Entity\User;
 use Application\Model\PhotoUrlGenerator;
+use Application\Model\UserRepositoryInterface;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
@@ -33,18 +34,25 @@ class AdminController extends AbstractActionController
     private $adminFilterForm;
 
     /**
+     * @var UserRepositoryInterface
+     */
+    private $userRepository;
+
+    /**
      * @var User
      */
     private $userPrototype;
 
     public function __construct(
-        PositionForm    $positionForm,
-        UserForm        $userForm,
-        AdminFilterForm $adminFilterForm
+        PositionForm            $positionForm,
+        UserForm                $userForm,
+        AdminFilterForm         $adminFilterForm,
+        UserRepositoryInterface $userRepository
     ) {
         $this->positionForm = $positionForm;
         $this->userForm = $userForm;
         $this->adminFilterForm = $adminFilterForm;
+        $this->userRepository = $userRepository;
         $this->userPrototype = new User(
             4,
             [
