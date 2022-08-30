@@ -3,8 +3,10 @@
 namespace Application\Form\User;
 
 use Application\Helper\FieldsetMapper;
+use Application\Model\Entity\User;
 use Laminas\Form\Element;
 use Laminas\Form\Form;
+use Laminas\Hydrator\ClassMethodsHydrator;
 
 class ChangePasswordForm extends Form
 {
@@ -14,6 +16,14 @@ class ChangePasswordForm extends Form
 
         $this->setAttribute('class', 'row gy-3 needs-validation');
         $this->setAttribute('novalidate', true);
+
+        $this->setHydrator(new ClassMethodsHydrator(false, true));
+        $this->setObject(new User());
+
+        $this->add([
+            'name' => 'id',
+            'type' => Element\Hidden::class,
+        ]);
 
         $this->add([
             'name'       => 'current-password',
@@ -83,6 +93,7 @@ class ChangePasswordForm extends Form
 
         FieldsetMapper::setAttributes($this, [
             'children' => [
+                'id'               => 'd-none',
                 'current-password' => 'col-12',
                 'new-password'     => 'col-12',
                 'password-check'   => 'col-12',
