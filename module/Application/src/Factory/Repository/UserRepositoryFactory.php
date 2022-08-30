@@ -2,6 +2,7 @@
 
 namespace Application\Factory\Repository;
 
+use Application\Model\EmailRepositoryInterface;
 use Application\Model\Entity\User;
 use Application\Model\Repository\UserRepository;
 use Interop\Container\ContainerInterface;
@@ -17,6 +18,7 @@ class UserRepositoryFactory implements FactoryInterface
             $container->get(AdapterInterface::class),
             new ReflectionHydrator(),
             new User(),
+            $container->get(EmailRepositoryInterface::class),
         );
     }
 }

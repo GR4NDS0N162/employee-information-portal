@@ -2,6 +2,7 @@
 
 namespace Application\Model\Repository;
 
+use Application\Model\EmailRepositoryInterface;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\User;
 use Application\Model\Executer;
@@ -29,14 +30,21 @@ class UserRepository implements UserRepositoryInterface
      */
     private $userPrototype;
 
+    /**
+     * @var EmailRepositoryInterface
+     */
+    private $emailRepository;
+
     public function __construct(
-        AdapterInterface  $db,
-        HydratorInterface $hydrator,
-        User              $userPrototype
+        AdapterInterface         $db,
+        HydratorInterface        $hydrator,
+        User                     $userPrototype,
+        EmailRepositoryInterface $emailRepository
     ) {
         $this->db = $db;
         $this->hydrator = $hydrator;
         $this->userPrototype = $userPrototype;
+        $this->emailRepository = $emailRepository;
     }
 
     public function findUser($identifier): User
