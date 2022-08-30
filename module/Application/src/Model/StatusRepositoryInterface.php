@@ -4,26 +4,25 @@ namespace Application\Model;
 
 use Application\Model\Entity\Status;
 use Application\Model\Entity\UserStatus;
-use Laminas\Db\ResultSet\HydratingResultSet;
 
 interface StatusRepositoryInterface
 {
     /**
-     * @return Status[]|HydratingResultSet
+     * @return Status[]
      */
     public function findAllStatuses();
 
     /**
      * @param int $userId
      *
-     * @return UserStatus[]|HydratingResultSet
+     * @return UserStatus[]
      */
     public function findStatusesOfUser(int $userId);
 
     /**
      * @param int $userId
      *
-     * @return array
+     * @return bool[]
      */
-    public function generateStatusMapOfUser(int $userId): array;
+    public function generateStatusMapOfUser(int $userId);
 }

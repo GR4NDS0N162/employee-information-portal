@@ -12,5 +12,5 @@ interface UserRepositoryInterface
      *
      * @return User
      */
-    public function findUser($identifier): User;
+    public function findUser($identifier);
 }

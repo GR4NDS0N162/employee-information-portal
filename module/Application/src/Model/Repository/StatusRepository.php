@@ -44,6 +44,9 @@ class StatusRepository implements StatusRepositoryInterface
         $this->userStatusPrototype = $userStatusPrototype;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function findAllStatuses()
     {
         $sql = new Sql($this->db);
@@ -61,6 +64,9 @@ class StatusRepository implements StatusRepositoryInterface
         );
     }
 
+    /**
+     * @inheritdoc
+     */
     public function findStatusesOfUser(int $userId)
     {
         $sql = new Sql($this->db);
@@ -79,9 +85,12 @@ class StatusRepository implements StatusRepositoryInterface
         );
     }
 
-    public function generateStatusMapOfUser(int $userId): array
+    /**
+     * @inheritdoc
+     */
+    public function generateStatusMapOfUser(int $userId)
     {
-        $userStatuses = $this->findStatusesOfUser($userId)->toArray();
+        $userStatuses = $this->findStatusesOfUser($userId);
 
         $statusMap = [];
         foreach ($this->findAllStatuses() as $status) {

@@ -63,7 +63,7 @@ class UserRepository implements UserRepositoryInterface
         $this->statusRepository = $statusRepository;
     }
 
-    public function findUser($identifier): User
+    public function findUser($identifier)
     {
         $sql = new Sql($this->db);
         $select = $sql->select('user');

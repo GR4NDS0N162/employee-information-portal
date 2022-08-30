@@ -61,7 +61,7 @@ class EmailRepository implements EmailRepositoryInterface
      * @throws RuntimeException
      * @throws InvalidArgumentException
      */
-    public function findEmail(string $address): Email
+    public function findEmail(string $address)
     {
         $sql = new Sql($this->db);
         $select = $sql->select('email');

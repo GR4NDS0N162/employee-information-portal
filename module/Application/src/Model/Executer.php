@@ -31,24 +31,32 @@ class Executer
      * @param HydratorInterface $hydrator
      * @param                   $prototype
      *
-     * @return array|HydratingResultSet
+     * @return array
      */
     public static function extractArray(
         Sql               $sql,
         Select            $select,
         HydratorInterface $hydrator,
                           $prototype
-    ) {
+    )
+    {
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
 
+        $return = [];
+
         if (!$result instanceof ResultInterface || !$result->isQueryResult()) {
-            return [];
+            return $return;
         }
 
         $resultSet = new HydratingResultSet($hydrator, $prototype);
         $resultSet->initialize($result);
-        return $resultSet;
+
+        foreach ($resultSet as $obj) {
+            $return[] = $obj;
+        }
+
+        return $return;
     }
 
     /**
