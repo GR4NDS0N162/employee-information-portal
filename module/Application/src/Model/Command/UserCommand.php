@@ -102,4 +102,32 @@ class UserCommand implements UserCommandInterface
 
         Executer::executeSql($sql, $update);
     }
+
+    public function updateUser(User $user): User
+    {
+        if (empty($user->getId())) {
+            throw new RuntimeException('Cannot update user; missing identifier');
+        }
+
+        $sql = new Sql($this->db);
+        $update = $sql->update('user');
+        $update->set([
+            'password'      => $user->getPassword(),
+            'temp_password' => $user->getTempPassword(),
+            'tp_created_at' => $user->getTpCreatedAt(),
+            'position_id'   => $user->getPositionId(),
+            'surname'       => $user->getSurname(),
+            'name'          => $user->getName(),
+            'patronymic'    => $user->getPatronymic(),
+            'gender'        => $user->getGender(),
+            'birthday'      => $user->getBirthday(),
+            'image'         => $user->getImage(),
+            'skype'         => $user->getSkype(),
+        ]);
+        $update->where(['id = ?' => $user->getId()]);
+
+        Executer::executeSql($sql, $update);
+
+        return $user;
+    }
 }

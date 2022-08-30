@@ -21,4 +21,11 @@ interface UserCommandInterface
      * @return void
      */
     public function setTempPassword(Email $email);
+
+    /**
+     * @param User $user
+     *
+     * @return User
+     */
+    public function updateUser(User $user): User;
 }
