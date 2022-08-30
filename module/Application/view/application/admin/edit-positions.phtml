@@ -1,0 +1,16 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+
+use Application\Form\Admin\PositionForm;
+
+$this->inlineScript()
+    ->appendFile($this->basePath('js/collection-manipulation.js'))
+    ->appendFile($this->basePath('js/edit-list-form-validation.js'));
+
+/** @var PositionForm $positionForm */
+$positionForm = $this->positionForm;
+?>
+
+<?= $this->userForm()->render($positionForm); ?>

@@ -1,0 +1,17 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+
+$this->inlineScript()
+    ->appendFile($this->basePath('js/collection-manipulation.js'))
+    ->appendFile($this->basePath('js/password-form-validation.js'))
+    ->appendFile($this->basePath('js/edit-list-form-validation.js'));
+
+/** @var \Application\Form\Admin\UserForm $userForm */
+$userForm = $this->userForm;
+?>
+
+<div class="card p-3">
+    <?= $this->userForm()->render($userForm); ?>
+</div>

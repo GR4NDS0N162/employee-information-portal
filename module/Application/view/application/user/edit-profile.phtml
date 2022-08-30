@@ -1,0 +1,28 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer         $this
+ * @var \Application\Form\User\ChangePasswordForm $changePasswordForm
+ */
+$this->inlineScript()
+    ->appendFile($this->basePath('js/collection-manipulation.js'))
+    ->appendFile($this->basePath('js/password-form-validation.js'))
+    ->appendFile($this->basePath('js/edit-list-form-validation.js'));
+
+/**
+ * @var \Application\Form\User\ProfileForm $profileForm
+ */
+$profileForm = $this->profileForm;
+?>
+<div class="row g-3">
+    <div class="col-12">
+        <div class="card p-3">
+            <?= $this->userForm()->render($profileForm); ?>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card p-3">
+            <div class="form-label">Пароль</div>
+            <?= $this->userForm()->render($changePasswordForm); ?>
+        </div>
+    </div>
+</div>

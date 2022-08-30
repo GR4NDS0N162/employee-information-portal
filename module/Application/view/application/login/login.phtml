@@ -1,0 +1,52 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer   $this
+ * @var \Application\Form\Login\LoginForm   $loginForm
+ * @var \Application\Form\Login\SignUpForm  $signUpForm
+ * @var \Application\Form\Login\RecoverForm $recoverForm
+ */
+
+$this->formRow()->setPartial('partial/floating-element.phtml');
+$this->inlineScript()
+    ->appendFile($this->basePath('js/password-form-validation.js'))
+    ->appendFile($this->basePath('js/login-signup-recover-validation.js'));
+?>
+<div class="card p-4"
+     id="login-card">
+    <h1 class="mb-3">Вход</h1>
+    <?= $this->userForm()->render($loginForm); ?>
+    <div class="row gy-2 mt-2">
+        <div class="col-12">
+            <span>Нет аккаунта?</span>
+            <button class="p-0 border-0 bg-transparent text-success signup-show">Зарегистрироваться</button>
+        </div>
+        <div class="col-12">
+            <span>Забыли пароль?</span>
+            <button class="p-0 border-0 bg-transparent text-danger recover-show">Восстановить</button>
+        </div>
+    </div>
+</div>
+
+<div class="card p-4"
+     id="signup-card">
+    <h1 class="mb-3">Регистрация</h1>
+    <?= $this->userForm()->render($signUpForm); ?>
+    <div class="row gy-2 mt-2">
+        <div class="col-12">
+            <span>Уже есть аккаунт?</span>
+            <button class="p-0 border-0 bg-transparent text-primary login-show">Войти</button>
+        </div>
+    </div>
+</div>
+
+<div class="card p-4"
+     id="recover-card">
+    <h1 class="mb-3">Восстановление</h1>
+    <?= $this->userForm()->render($recoverForm); ?>
+    <div class="row gy-2 mt-2">
+        <div class="col-12">
+            <span>Вспомнили пароль?</span>
+            <button class="p-0 border-0 bg-transparent text-primary login-show">Войти</button>
+        </div>
+    </div>
+</div>

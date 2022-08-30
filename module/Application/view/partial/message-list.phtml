@@ -1,0 +1,44 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+?>
+
+<?php foreach (array_reverse($this->messages) as $message): ?>
+    <div class="col-12">
+        <div class="row g-3">
+            <div class="col-auto">
+                <img src="<?= $this->escapeHtml(($message['isUserSender']) ?
+                    $this->userInfo['photo'] :
+                    $this->buddyInfo['photo']); ?>"
+                     class="message-avatar img-fluid rounded"
+                     alt="Фото пользователя"></div>
+            <div class="col">
+                <div class="row g-1">
+                    <div class="col-12">
+                        <div class="row gx-2">
+                            <div class="col-auto">
+                                <span class="h6"><?= $this->escapeHtml(($message['isUserSender']) ?
+                                        $this->userInfo['fullname'] :
+                                        $this->buddyInfo['fullname']); ?></span>
+                            </div>
+                            <div class="col-auto">
+                                <span class="small"><?= $this->escapeHtml($message['createdAt']); ?></span>
+                            </div>
+                            <?php if ($message['openedAt']): ?>
+                                <div class="col-auto">
+                                    <span class="small text-muted"><?= $this->escapeHtml($message['openedAt']); ?></span>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p class="m-0">
+                            <?= $this->escapeHtml($message['content']); ?>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>

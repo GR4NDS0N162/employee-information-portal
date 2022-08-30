@@ -1,0 +1,19 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer            $this
+ * @var \Application\Form\Messenger\DialogFilterForm $dialogFilterForm
+ * @var array                                        $dialogs
+ */
+?>
+<div class="row g-3">
+    <div class="col-12 col-lg-4 col col-xl-3">
+        <div class="card p-3">
+            <?= $this->userForm()->render($dialogFilterForm); ?>
+        </div>
+    </div>
+    <div class="col">
+        <div class="row g-3">
+            <?= $this->partialLoop('partial/dialog-list.phtml', $dialogs); ?>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+
+use Application\Helper\FieldsetMapper;
+use Laminas\Form\Element;
+
+$element = $this->element;
+/** @var Laminas\Form\ElementInterface $element */
+$label = $this->label;
+/** @var string|null $label */
+$labelAttributes = $this->labelAttributes;
+/** @var array|null $labelAttributes */
+$labelPosition = $this->labelPosition;
+/** @var string|null $labelPosition */
+$renderErrors = $this->renderErrors;
+/** @var bool $renderErrors */
+?>
+
+<?php if ($element->hasAttribute(FieldsetMapper::KEY)): ?>
+<div class="<?= $element->getAttribute(FieldsetMapper::KEY); ?>">
+    <?php endif; ?>
+
+    <?php if (
+        $element instanceof Element\Button
+        || $element instanceof Element\Submit
+        || $element instanceof Element\Image
+        || $element instanceof Element\Hidden
+    ): ?>
+        <?= $this->formElement()->render($element); ?>
+    <?php elseif (!isset($label)): ?>
+        <?= $this->formElement()->render($element); ?>
+        <div class="invalid-feedback order-last">Поле не валидно.</div>
+    <?php else: ?>
+
+        <?php if ($element instanceof Element\Number && strlen($label) <= 5): ?>
+            <div class="input-group has-validation">
+                <span class="input-group-text"><?= $this->escapeHtml($label); ?></span>
+                <?= $this->formElement()->render($element); ?>
+                <div class="invalid-feedback order-last">Поле не валидно.</div>
+            </div>
+
+        <?php elseif ($element instanceof Element\File || $element instanceof Element\Textarea): ?>
+            <?= $this->formLabel($element); ?>
+            <?= $this->formElement()->render($element); ?>
+            <div class="invalid-feedback order-last">Поле не валидно.</div>
+
+        <?php elseif ($element instanceof Element\Checkbox): ?>
+            <div class="form-check">
+                <?= $this->formElement()->render($element); ?>
+                <?= $this->formLabel($element); ?>
+                <div class="invalid-feedback order-last">Поле не валидно.</div>
+            </div>
+
+        <?php else: ?>
+            <div class="form-floating">
+                <?= $this->formElement()->render($element); ?>
+                <div class="invalid-feedback order-last">Поле не валидно.</div>
+                <?= $this->formLabel($element); ?>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+
+    <?php if ($element->hasAttribute(FieldsetMapper::KEY)): ?>
+</div>
+<?php endif; ?>

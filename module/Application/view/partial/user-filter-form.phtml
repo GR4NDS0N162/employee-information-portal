@@ -1,0 +1,38 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ * @var Laminas\Form\ElementInterface     $element
+ * @var string|null                       $label
+ * @var array|null                        $labelAttributes
+ * @var string|null                       $labelPosition
+ * @var bool                              $renderErrors
+ */
+
+use Laminas\Form\Element;
+
+?>
+
+<div class="<?= $element->getAttribute('delimiter_class'); ?>">
+    <?php if ($element->getAttribute('type') == 'number'): ?>
+        <div class="input-group">
+            <span class="input-group-text"><?= $this->escapeHtml($label); ?></span>
+            <?= $this->formElement()->render($element); ?>
+        </div>
+    <?php else: ?>
+        <?php if ($element instanceof Element\Button): ?>
+            <?= $this->formElement()->render($element); ?>
+
+        <?php elseif ($element instanceof Element\Textarea): ?>
+            <div class="card p-3">
+                <?= $this->formLabel($element); ?>
+                <?= $this->formElement()->render($element); ?>
+            </div>
+
+        <?php else: ?>
+            <div class="form-floating">
+                <?= $this->formElement()->render($element); ?>
+                <?= $this->formLabel($element); ?>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+</div>

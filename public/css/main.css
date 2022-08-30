@@ -5,6 +5,11 @@ body {
 
 .user-photo {
     max-width: 70px;
+    min-width: 70px;
+}
+
+.user-photo-bg {
+    max-width: 350px;
 }
 
 .buddy-photo {
@@ -21,4 +26,12 @@ body {
 
 .card-gray-bg > .card {
     background-color: #f5f5f5;
+}
+
+.notification {
+    display: none;
+}
+
+.notification:last-child {
+    display: block;
 }
