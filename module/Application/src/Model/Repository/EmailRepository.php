@@ -40,7 +40,20 @@ class EmailRepository implements EmailRepositoryInterface
 
     public function findEmailsOfUser(int $userId)
     {
-        // TODO: Implement findEmailsOfUser() method.
+        $sql = new Sql($this->db);
+        $select = $sql->select('email');
+        $select->columns([
+            'address',
+            'userId' => 'user_id',
+        ]);
+        $select->where(['userId = ?' => $userId]);
+
+        return Executer::extractArray(
+            $sql,
+            $select,
+            $this->hydrator,
+            $this->emailPrototype,
+        );
     }
 
     /**
