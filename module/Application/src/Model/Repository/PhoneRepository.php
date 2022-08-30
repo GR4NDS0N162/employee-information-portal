@@ -44,7 +44,7 @@ class PhoneRepository implements PhoneRepositoryInterface
             'number',
             'userId' => 'user_id',
         ]);
-        $select->where(['userId = ?' => $userId]);
+        $select->where(['user_id = ?' => $userId]);
 
         return Executer::extractArray(
             $sql,

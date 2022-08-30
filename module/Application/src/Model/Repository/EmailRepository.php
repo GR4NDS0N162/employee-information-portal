@@ -46,7 +46,7 @@ class EmailRepository implements EmailRepositoryInterface
             'address',
             'userId' => 'user_id',
         ]);
-        $select->where(['userId = ?' => $userId]);
+        $select->where(['user_id = ?' => $userId]);
 
         return Executer::extractArray(
             $sql,
