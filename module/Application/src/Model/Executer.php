@@ -56,8 +56,8 @@ class Executer
         Select            $select,
         HydratorInterface $hydrator,
                           $prototype,
-        string            $runtimeExceptionMessage,
-        string            $invalidArgumentExceptionMessage
+        string            $runtimeExceptionMessage = 'Failed to retrieve the object; unknown database error.',
+        string            $invalidArgumentExceptionMessage = 'Object not found.'
     ): object {
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
@@ -88,7 +88,7 @@ class Executer
     public static function insertValues(
         Sql    $sql,
         Insert $insert,
-        string $runtimeExceptionMessage
+        string $runtimeExceptionMessage = 'Database error occurred during insert operation.'
     ) {
         $statement = $sql->prepareStatementForSqlObject($insert);
         $result = $statement->execute();
