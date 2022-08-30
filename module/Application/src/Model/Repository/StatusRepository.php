@@ -33,4 +33,9 @@ class StatusRepository implements StatusRepositoryInterface
         $this->hydrator = $hydrator;
         $this->statusPrototype = $statusPrototype;
     }
+
+    public function findAllStatuses()
+    {
+        // TODO: Implement findAllStatuses() method.
+    }
 }
