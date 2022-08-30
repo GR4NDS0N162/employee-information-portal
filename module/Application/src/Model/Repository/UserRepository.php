@@ -136,9 +136,11 @@ class UserRepository implements UserRepositoryInterface
 
         $emails = $this->emailRepository->findEmailsOfUser($user->getId());
         $phones = $this->phoneRepository->findPhonesOfUser($user->getId());
+        $statusMap = $this->statusRepository->generateStatusMapOfUser($user->getId());
 
         $user->setEmails($emails);
         $user->setPhones($phones);
+        $user->setStatus($statusMap);
 
         return $user;
     }
