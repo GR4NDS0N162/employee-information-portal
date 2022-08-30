@@ -111,6 +111,8 @@ class AdminController extends AbstractActionController
 
     public function editUserAction(): ViewModel
     {
+        $userId = (int)$this->params()->fromRoute('id');
+
         $viewModel = new ViewModel();
 
         $headTitleName = 'Редактирование пользователя (Администратор)';
@@ -118,7 +120,7 @@ class AdminController extends AbstractActionController
         $this->layout()->setVariable('headTitleName', $headTitleName);
         $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
 
-        $this->userForm->bind($this->userRepository->findUser(1));
+        $this->userForm->bind($this->userRepository->findUser($userId));
 
         $viewModel->setVariables([
             'userForm' => $this->userForm,
