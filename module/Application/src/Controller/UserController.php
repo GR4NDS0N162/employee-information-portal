@@ -18,6 +18,7 @@ use Laminas\View\Model\ViewModel;
 class UserController extends AbstractActionController
 {
     public const maxPageCount = 20;
+    public const userId = 1;
 
     /**
      * @var ProfileForm
@@ -33,11 +34,6 @@ class UserController extends AbstractActionController
      * @var UserFilterForm
      */
     private $userFilterForm;
-
-    /**
-     * @var Profile
-     */
-    private $profilePrototype;
 
     /**
      * @var ChangePasswordForm
@@ -61,29 +57,6 @@ class UserController extends AbstractActionController
         $this->userFilterForm = $userFilterForm;
         $this->changePasswordForm = $changePasswordForm;
         $this->userRepository = $userRepository;
-        $this->profilePrototype = new Profile(
-            '',
-            [
-                new Email('cfhsoft@verizon.net'),
-                new Email('isotopian@att.net'),
-                new Email('camenisch@comcast.net'),
-                new Email('wetter@mac.com'),
-            ],
-            [
-                new Phone('+79283748264'),
-                new Phone('+79365839604'),
-                new Phone('+79305847200'),
-            ],
-            null,
-            null,
-            'Внуков',
-            'Кирилл',
-            'Денисович',
-            1,
-            '2003-05-19',
-            '/img/favicon.ico',
-            'gr4nds0n162',
-        );
     }
 
     public function viewProfileAction(): ViewModel
@@ -94,8 +67,9 @@ class UserController extends AbstractActionController
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
 
-        $this->viewProfileForm->bind($this->profilePrototype);
-        $this->viewProfileForm->get('profile')->get('image')->setAttribute('src', $this->profilePrototype->getImage());
+        $user = $this->userRepository->findUser(self::userId);
+        $this->viewProfileForm->bind($user);
+        $this->viewProfileForm->get('profile')->get('image')->setAttribute('src', $user->getImage());
 
         $viewModel->setVariable('viewProfileForm', $this->viewProfileForm);
 
@@ -110,7 +84,9 @@ class UserController extends AbstractActionController
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
 
-        $this->profileForm->bind($this->profilePrototype);
+        $user = $this->userRepository->findUser(self::userId);
+        $this->profileForm->bind($user);
+        $this->changePasswordForm->bind($user);
 
         $viewModel->setVariables([
             'profileForm'        => $this->profileForm,
