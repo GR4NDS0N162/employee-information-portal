@@ -3,33 +3,22 @@
 namespace Application\Controller;
 
 use Application\Form;
-use Application\Form\Messenger\DialogFilterForm;
-use Application\Form\Messenger\NewMessageForm;
 use Application\Model\PhotoUrlGenerator;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
 class MessengerController extends AbstractActionController
 {
-    /**
-     * @var DialogFilterForm
-     */
     private $dialogFilterForm;
-
-    /**
-     * @var NewMessageForm
-     */
     private $newMessageForm;
 
-    public function __construct(
-        DialogFilterForm $dialogFilterForm,
-        NewMessageForm   $newMessageForm
-    ) {
+    public function __construct($dialogFilterForm, $newMessageForm)
+    {
         $this->dialogFilterForm = $dialogFilterForm;
         $this->newMessageForm = $newMessageForm;
     }
 
-    public function viewDialogListAction(): ViewModel
+    public function viewDialogListAction()
     {
         $viewModel = new ViewModel();
 
@@ -82,7 +71,7 @@ class MessengerController extends AbstractActionController
         return $viewModel;
     }
 
-    public function viewMessagesAction(): ViewModel
+    public function viewMessagesAction()
     {
         $viewModel = new ViewModel();
 

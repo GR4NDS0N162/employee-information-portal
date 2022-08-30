@@ -3,12 +3,7 @@
 namespace Application\Controller;
 
 use Application\Form;
-use Application\Form\Admin\AdminFilterForm;
-use Application\Form\Admin\PositionForm;
-use Application\Form\Admin\UserForm;
 use Application\Model\PhotoUrlGenerator;
-use Application\Model\UserCommandInterface;
-use Application\Model\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
@@ -17,38 +12,14 @@ class AdminController extends AbstractActionController
 {
     public const maxPageCount = 20;
 
-    /**
-     * @var PositionForm
-     */
     private $positionForm;
-
-    /**
-     * @var UserForm
-     */
     private $userForm;
-
-    /**
-     * @var AdminFilterForm
-     */
     private $adminFilterForm;
-
-    /**
-     * @var UserRepositoryInterface
-     */
     private $userRepository;
-
-    /**
-     * @var UserCommandInterface
-     */
     private $userCommand;
 
-    public function __construct(
-        PositionForm            $positionForm,
-        UserForm                $userForm,
-        AdminFilterForm         $adminFilterForm,
-        UserRepositoryInterface $userRepository,
-        UserCommandInterface    $userCommand
-    ) {
+    public function __construct($positionForm, $userForm, $adminFilterForm, $userRepository, $userCommand)
+    {
         $this->positionForm = $positionForm;
         $this->userForm = $userForm;
         $this->adminFilterForm = $adminFilterForm;
@@ -56,7 +27,7 @@ class AdminController extends AbstractActionController
         $this->userCommand = $userCommand;
     }
 
-    public function viewUserListAction(): ViewModel
+    public function viewUserListAction()
     {
         $viewModel = new ViewModel();
 
@@ -155,7 +126,7 @@ class AdminController extends AbstractActionController
         return $this->redirect()->toRoute('admin/view-user-list');
     }
 
-    public function editPositionsAction(): ViewModel
+    public function editPositionsAction()
     {
         $viewModel = new ViewModel();
 

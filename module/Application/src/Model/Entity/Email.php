@@ -4,23 +4,23 @@ namespace Application\Model\Entity;
 
 class Email
 {
-    private string $address;
-    private ?int $userId;
+    private $address;
+    private $userId;
 
     public function __construct(
-        string $address = '',
-        ?int   $userId = null
+        $address = '',
+        $userId = null
     ) {
         $this->address = $address;
         $this->userId = $userId;
     }
 
-    public function getAddress(): string
+    public function getAddress()
     {
         return $this->address;
     }
 
-    public function getUserId(): ?int
+    public function getUserId()
     {
         return $this->userId;
     }

@@ -2,14 +2,9 @@
 
 namespace Application\Model;
 
-use Exception;
-
 class PasswordGenerator
 {
-    /**
-     * @throws Exception
-     */
-    public static function generate(int $length = 8): string
+    public static function generate($length = 8)
     {
         $chars = [
             [

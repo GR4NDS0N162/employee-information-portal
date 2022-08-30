@@ -5,39 +5,22 @@ namespace Application\Controller;
 use Application\Form;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\User;
-use Application\Model\UserCommandInterface;
 use Exception;
-use Laminas\Http\Response;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
 class LoginController extends AbstractActionController
 {
-    /**
-     * @var Form\Login\LoginForm
-     */
     private $loginForm;
-
-    /**
-     * @var Form\Login\SignUpForm
-     */
     private $signUpForm;
-
-    /**
-     * @var Form\Login\RecoverForm
-     */
     private $recoverForm;
-
-    /**
-     * @var UserCommandInterface
-     */
     private $userCommand;
 
     public function __construct(
-        Form\Login\LoginForm   $loginForm,
-        Form\Login\SignUpForm  $signUpForm,
-        Form\Login\RecoverForm $recoverForm,
-        UserCommandInterface   $userCommand
+        $loginForm,
+        $signUpForm,
+        $recoverForm,
+        $userCommand
     ) {
         $this->loginForm = $loginForm;
         $this->signUpForm = $signUpForm;
@@ -45,7 +28,7 @@ class LoginController extends AbstractActionController
         $this->userCommand = $userCommand;
     }
 
-    public function indexAction(): ViewModel
+    public function indexAction()
     {
         $viewModel = new ViewModel();
 
@@ -68,7 +51,7 @@ class LoginController extends AbstractActionController
     {
     }
 
-    public function signUpAction(): Response
+    public function signUpAction()
     {
         $request = $this->getRequest();
 
@@ -96,7 +79,7 @@ class LoginController extends AbstractActionController
         return $this->redirect()->toRoute('user\view-profile');
     }
 
-    public function recoverAction(): Response
+    public function recoverAction()
     {
         $request = $this->getRequest();
 

@@ -4,23 +4,23 @@ namespace Application\Model\Entity;
 
 class Status
 {
-    private int $id;
-    private string $name;
+    private $id;
+    private $name;
 
     public function __construct(
-        int    $id = 0,
-        string $name = ''
+        $id = 0,
+        $name = ''
     ) {
         $this->id = $id;
         $this->name = $name;
     }
 
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }

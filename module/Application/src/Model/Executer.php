@@ -5,15 +5,12 @@ namespace Application\Model;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\Driver\ResultInterface;
 use Laminas\Db\ResultSet\HydratingResultSet;
-use Laminas\Db\Sql\AbstractPreparableSql;
 use Laminas\Db\Sql\Combine;
 use Laminas\Db\Sql\Delete;
 use Laminas\Db\Sql\Insert;
 use Laminas\Db\Sql\InsertIgnore;
 use Laminas\Db\Sql\Select;
-use Laminas\Db\Sql\Sql;
 use Laminas\Db\Sql\Update;
-use Laminas\Hydrator\HydratorInterface;
 use RuntimeException;
 
 class Executer
@@ -25,20 +22,7 @@ class Executer
     const SELECT = 'select';
     const UPDATE = 'update';
 
-    /**
-     * @param Sql               $sql
-     * @param Select            $select
-     * @param HydratorInterface $hydrator
-     * @param                   $prototype
-     *
-     * @return array
-     */
-    public static function extractArray(
-        Sql               $sql,
-        Select            $select,
-        HydratorInterface $hydrator,
-                          $prototype
-    )
+    public static function extractArray($sql, $select, $hydrator, $prototype)
     {
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
@@ -59,26 +43,14 @@ class Executer
         return $return;
     }
 
-    /**
-     * @param Sql               $sql
-     * @param Select            $select
-     * @param HydratorInterface $hydrator
-     * @param                   $prototype
-     * @param string            $runtimeExceptionMessage
-     * @param string            $invalidArgumentExceptionMessage
-     *
-     * @return object
-     * @throws RuntimeException
-     * @throws InvalidArgumentException
-     */
     public static function extractValue(
-        Sql               $sql,
-        Select            $select,
-        HydratorInterface $hydrator,
-                          $prototype,
-        string            $runtimeExceptionMessage = 'Failed to retrieve the object; unknown database error.',
-        string            $invalidArgumentExceptionMessage = 'Object not found.'
-    ): object {
+        $sql,
+        $select,
+        $hydrator,
+        $prototype,
+        $runtimeExceptionMessage = 'Failed to retrieve the object; unknown database error.',
+        $invalidArgumentExceptionMessage = 'Object not found.'
+    ) {
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
 
@@ -97,20 +69,11 @@ class Executer
         return $object;
     }
 
-    /**
-     * @param Sql                   $sql
-     * @param AbstractPreparableSql $preparable
-     * @param string                $operationDescription
-     * @param string                $runtimeExceptionFormat
-     *
-     * @return mixed|null
-     * @throws RuntimeException
-     */
     public static function executeSql(
-        Sql                   $sql,
-        AbstractPreparableSql $preparable,
-        string                $operationDescription = 'sql',
-        string                $runtimeExceptionFormat = 'Database error occurred during %s operation.'
+        $sql,
+        $preparable,
+        $operationDescription = 'sql',
+        $runtimeExceptionFormat = 'Database error occurred during %s operation.'
     ) {
         $statement = $sql->prepareStatementForSqlObject($preparable);
         $result = $statement->execute();

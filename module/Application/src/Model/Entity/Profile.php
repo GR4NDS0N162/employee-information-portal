@@ -7,42 +7,34 @@ use Laminas\Db\ResultSet\HydratingResultSet;
 
 class Profile
 {
-    protected ?int $id;
-    protected string $password;
-    protected ?string $tempPassword;
-    protected ?string $tpCreatedAt;
-    protected ?string $surname;
-    protected ?string $name;
-    protected ?string $patronymic;
-    protected ?int $gender;
-    protected ?string $birthday;
-    protected ?string $image;
-    protected ?string $skype;
-
-    /**
-     * @var Email[]|HydratingResultSet
-     */
+    protected $id;
+    protected $password;
+    protected $tempPassword;
+    protected $tpCreatedAt;
+    protected $surname;
+    protected $name;
+    protected $patronymic;
+    protected $gender;
+    protected $birthday;
+    protected $image;
+    protected $skype;
     protected $emails;
-
-    /**
-     * @var Phone[]|HydratingResultSet
-     */
     protected $phones;
 
     public function __construct(
-        string  $password = '',
-                $emails = [],
-                $phones = [],
-        ?string $tempPassword = null,
-        ?string $tpCreatedAt = null,
-        ?string $surname = null,
-        ?string $name = null,
-        ?string $patronymic = null,
-        ?int    $gender = null,
-        ?string $birthday = null,
-        ?string $image = null,
-        ?string $skype = null,
-        ?int    $id = null
+        $password = '',
+        $emails = [],
+        $phones = [],
+        $tempPassword = null,
+        $tpCreatedAt = null,
+        $surname = null,
+        $name = null,
+        $patronymic = null,
+        $gender = null,
+        $birthday = null,
+        $image = null,
+        $skype = null,
+        $id = null
     ) {
         $this->id = $id;
         $this->password = $password;
@@ -59,62 +51,62 @@ class Profile
         $this->phones = $phones;
     }
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getPassword(): string
+    public function getPassword()
     {
         return $this->password;
     }
 
-    public function setPassword(string $password): void
+    public function setPassword($password)
     {
         $this->password = $password;
     }
 
-    public function getTempPassword(): ?string
+    public function getTempPassword()
     {
         return $this->tempPassword;
     }
 
-    public function getTpCreatedAt(): ?string
+    public function getTpCreatedAt()
     {
         return $this->tpCreatedAt;
     }
 
-    public function getSurname(): ?string
+    public function getSurname()
     {
         return $this->surname;
     }
 
-    public function getName(): ?string
+    public function getName()
     {
         return $this->name;
     }
 
-    public function getPatronymic(): ?string
+    public function getPatronymic()
     {
         return $this->patronymic;
     }
 
-    public function getGender(): ?int
+    public function getGender()
     {
         return $this->gender;
     }
 
-    public function getBirthday(): ?string
+    public function getBirthday()
     {
         return $this->birthday;
     }
 
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }
 
-    public function getSkype(): ?string
+    public function getSkype()
     {
         return $this->skype;
     }
@@ -124,7 +116,7 @@ class Profile
         return $this->emails;
     }
 
-    public function setEmails($emails): void
+    public function setEmails($emails)
     {
         if (is_array($emails) || $emails instanceof HydratingResultSet) {
             $this->emails = $emails;
@@ -147,7 +139,7 @@ class Profile
         return $this->phones;
     }
 
-    public function setPhones($phones): void
+    public function setPhones($phones)
     {
         if (is_array($phones) || $phones instanceof HydratingResultSet) {
             $this->phones = $phones;

@@ -5,40 +5,23 @@ namespace Application\Model\Repository;
 use Application\Model\EmailRepositoryInterface;
 use Application\Model\Entity\Email;
 use Application\Model\Executer;
-use InvalidArgumentException;
-use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Sql;
-use Laminas\Hydrator\HydratorInterface;
 use RuntimeException;
 
 class EmailRepository implements EmailRepositoryInterface
 {
-    /**
-     * @var AdapterInterface
-     */
     private $db;
-
-    /**
-     * @var HydratorInterface
-     */
     private $hydrator;
-
-    /**
-     * @var Email
-     */
     private $emailPrototype;
 
-    public function __construct(
-        AdapterInterface  $db,
-        HydratorInterface $hydrator,
-        Email             $emailPrototype
-    ) {
+    public function __construct($db, $hydrator, $emailPrototype)
+    {
         $this->db = $db;
         $this->hydrator = $hydrator;
         $this->emailPrototype = $emailPrototype;
     }
 
-    public function findEmailsOfUser(int $userId)
+    public function findEmailsOfUser($userId)
     {
         $sql = new Sql($this->db);
         $select = $sql->select('email');
@@ -56,12 +39,7 @@ class EmailRepository implements EmailRepositoryInterface
         );
     }
 
-    /**
-     * @inheritdoc
-     * @throws RuntimeException
-     * @throws InvalidArgumentException
-     */
-    public function findEmail(string $address)
+    public function findEmail($address)
     {
         $sql = new Sql($this->db);
         $select = $sql->select('email');

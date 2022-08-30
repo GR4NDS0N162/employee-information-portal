@@ -3,13 +3,7 @@
 namespace Application\Controller;
 
 use Application\Form;
-use Application\Form\User\ChangePasswordForm;
-use Application\Form\User\ProfileForm;
-use Application\Form\User\UserFilterForm;
-use Application\Form\User\ViewProfileForm;
 use Application\Model\PhotoUrlGenerator;
-use Application\Model\UserCommandInterface;
-use Application\Model\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
@@ -19,44 +13,15 @@ class UserController extends AbstractActionController
     public const maxPageCount = 20;
     public const userId = 1;
 
-    /**
-     * @var ProfileForm
-     */
     private $profileForm;
-
-    /**
-     * @var ViewProfileForm
-     */
     private $viewProfileForm;
-
-    /**
-     * @var UserFilterForm
-     */
     private $userFilterForm;
-
-    /**
-     * @var ChangePasswordForm
-     */
     private $changePasswordForm;
-
-    /**
-     * @var UserRepositoryInterface
-     */
     private $userRepository;
-
-    /**
-     * @var UserCommandInterface
-     */
     private $userCommand;
 
-    public function __construct(
-        ProfileForm             $profileForm,
-        ViewProfileForm         $viewProfileForm,
-        UserFilterForm          $userFilterForm,
-        ChangePasswordForm      $changePasswordForm,
-        UserRepositoryInterface $userRepository,
-        UserCommandInterface    $userCommand
-    ) {
+    public function __construct($profileForm, $viewProfileForm, $userFilterForm, $changePasswordForm, $userRepository, $userCommand)
+    {
         $this->profileForm = $profileForm;
         $this->viewProfileForm = $viewProfileForm;
         $this->userFilterForm = $userFilterForm;
@@ -65,7 +30,7 @@ class UserController extends AbstractActionController
         $this->userCommand = $userCommand;
     }
 
-    public function viewProfileAction(): ViewModel
+    public function viewProfileAction()
     {
         $viewModel = new ViewModel();
 
@@ -123,7 +88,7 @@ class UserController extends AbstractActionController
         return $this->redirect()->toRoute('user/view-profile');
     }
 
-    public function viewUserListAction(): ViewModel
+    public function viewUserListAction()
     {
         $viewModel = new ViewModel();
 

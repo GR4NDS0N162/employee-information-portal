@@ -4,23 +4,23 @@ namespace Application\Model\Entity;
 
 class Position
 {
-    private ?int $id;
-    private string $name;
+    private $id;
+    private $name;
 
     public function __construct(
-        string $name = '',
-        ?int   $id = null
+        $name = '',
+        $id = null
     ) {
         $this->id = $id;
         $this->name = $name;
     }
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }

@@ -4,25 +4,25 @@ namespace Application\Model\Entity;
 
 class User extends Profile
 {
-    protected int $positionId;
-    protected array $status;
+    protected $positionId;
+    protected $status;
 
     public function __construct(
-        int     $positionId = 0,
-        array   $status = [],
-        string  $password = '',
-        array   $emails = [],
-        array   $phones = [],
-        ?string $tempPassword = null,
-        ?string $tpCreatedAt = null,
-        ?string $surname = null,
-        ?string $name = null,
-        ?string $patronymic = null,
-        ?int    $gender = null,
-        ?string $birthday = null,
-        ?string $image = null,
-        ?string $skype = null,
-        ?int    $id = null
+        $positionId = 0,
+        $status = [],
+        $password = '',
+        $emails = [],
+        $phones = [],
+        $tempPassword = null,
+        $tpCreatedAt = null,
+        $surname = null,
+        $name = null,
+        $patronymic = null,
+        $gender = null,
+        $birthday = null,
+        $image = null,
+        $skype = null,
+        $id = null
     ) {
         parent::__construct(
             $password,
@@ -44,22 +44,22 @@ class User extends Profile
         $this->status = $status;
     }
 
-    public function getPositionId(): int
+    public function getPositionId()
     {
         return $this->positionId;
     }
 
-    public function setPositionId(int $positionId): void
+    public function setPositionId($positionId)
     {
         $this->positionId = $positionId;
     }
 
-    public function getStatus(): array
+    public function getStatus()
     {
         return $this->status;
     }
 
-    public function setStatus(array $status): void
+    public function setStatus($status)
     {
         $this->status = $status;
     }

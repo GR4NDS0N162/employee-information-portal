@@ -2,51 +2,25 @@
 
 namespace Application\Model\Repository;
 
-use Application\Model\Entity\Status;
-use Application\Model\Entity\UserStatus;
 use Application\Model\Executer;
 use Application\Model\StatusRepositoryInterface;
-use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Sql;
-use Laminas\Hydrator\HydratorInterface;
 
 class StatusRepository implements StatusRepositoryInterface
 {
-    /**
-     * @var AdapterInterface
-     */
     private $db;
-
-    /**
-     * @var HydratorInterface
-     */
     private $hydrator;
-
-    /**
-     * @var Status
-     */
     private $statusPrototype;
-
-    /**
-     * @var UserStatus
-     */
     private $userStatusPrototype;
 
-    public function __construct(
-        AdapterInterface  $db,
-        HydratorInterface $hydrator,
-        Status            $statusPrototype,
-        UserStatus        $userStatusPrototype
-    ) {
+    public function __construct($db, $hydrator, $statusPrototype, $userStatusPrototype)
+    {
         $this->db = $db;
         $this->hydrator = $hydrator;
         $this->statusPrototype = $statusPrototype;
         $this->userStatusPrototype = $userStatusPrototype;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function findAllStatuses()
     {
         $sql = new Sql($this->db);
@@ -64,10 +38,7 @@ class StatusRepository implements StatusRepositoryInterface
         );
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function findStatusesOfUser(int $userId)
+    public function findStatusesOfUser($userId)
     {
         $sql = new Sql($this->db);
         $select = $sql->select('user_status');
@@ -85,10 +56,7 @@ class StatusRepository implements StatusRepositoryInterface
         );
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function generateStatusMapOfUser(int $userId)
+    public function generateStatusMapOfUser($userId)
     {
         $userStatuses = $this->findStatusesOfUser($userId);
 

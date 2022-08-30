@@ -4,23 +4,23 @@ namespace Application\Model\Entity;
 
 class Phone
 {
-    private string $number;
-    private ?int $userId;
+    private $number;
+    private $userId;
 
     public function __construct(
-        string $number = '',
-        ?int   $userId = null
+        $number = '',
+        $userId = null
     ) {
         $this->number = $number;
         $this->userId = $userId;
     }
 
-    public function getNumber(): string
+    public function getNumber()
     {
         return $this->number;
     }
 
-    public function getUserId(): ?int
+    public function getUserId()
     {
         return $this->userId;
     }

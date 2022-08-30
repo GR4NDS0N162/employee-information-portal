@@ -2,30 +2,11 @@
 
 namespace Application\Model;
 
-use Application\Model\Entity\Email;
-use Application\Model\Entity\User;
-
 interface UserCommandInterface
 {
-    /**
-     * @param User  $user
-     * @param Email $email
-     *
-     * @return void
-     */
-    public function insertUser(User $user, Email $email);
+    public function insertUser($user, $email);
 
-    /**
-     * @param Email $email
-     *
-     * @return void
-     */
-    public function setTempPassword(Email $email);
+    public function setTempPassword($email);
 
-    /**
-     * @param User $user
-     *
-     * @return User
-     */
-    public function updateUser(User $user): User;
+    public function updateUser($user);
 }

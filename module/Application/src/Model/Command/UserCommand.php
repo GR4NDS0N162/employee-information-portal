@@ -2,52 +2,27 @@
 
 namespace Application\Model\Command;
 
-use Application\Model\EmailRepositoryInterface;
-use Application\Model\Entity\Email;
-use Application\Model\Entity\User;
 use Application\Model\Executer;
 use Application\Model\PasswordGenerator;
 use Application\Model\UserCommandInterface;
-use Application\Model\UserRepositoryInterface;
-use Exception;
 use InvalidArgumentException;
-use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Sql;
 use RuntimeException;
 
 class UserCommand implements UserCommandInterface
 {
-    /**
-     * @var AdapterInterface
-     */
     private $db;
-
-    /**
-     * @var EmailRepositoryInterface
-     */
     private $emailRepository;
-
-    /**
-     * @var UserRepositoryInterface
-     */
     private $userRepository;
 
-    public function __construct(
-        AdapterInterface         $db,
-        EmailRepositoryInterface $emailRepository,
-        UserRepositoryInterface  $userRepository
-    ) {
+    public function __construct($db, $emailRepository, $userRepository)
+    {
         $this->db = $db;
         $this->emailRepository = $emailRepository;
         $this->userRepository = $userRepository;
     }
 
-    /**
-     * @inheritdoc
-     * @throws RuntimeException
-     * @throws InvalidArgumentException
-     */
-    public function insertUser(User $user, Email $email)
+    public function insertUser($user, $email)
     {
         try {
             $foundEmail = $this->emailRepository->findEmail($email->getAddress());
@@ -81,13 +56,7 @@ class UserCommand implements UserCommandInterface
         }
     }
 
-    /**
-     * @inheritdoc
-     * @throws RuntimeException
-     * @throws InvalidArgumentException
-     * @throws Exception
-     */
-    public function setTempPassword(Email $email)
+    public function setTempPassword($email)
     {
         $foundEmail = $this->emailRepository->findEmail($email->getAddress());
         $foundUser = $this->userRepository->findUser($foundEmail);
@@ -103,7 +72,7 @@ class UserCommand implements UserCommandInterface
         Executer::executeSql($sql, $update);
     }
 
-    public function updateUser(User $user): User
+    public function updateUser($user)
     {
         if (empty($user->getId())) {
             throw new RuntimeException('Cannot update user; missing identifier');

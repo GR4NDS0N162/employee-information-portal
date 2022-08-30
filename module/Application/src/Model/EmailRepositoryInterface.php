@@ -2,21 +2,9 @@
 
 namespace Application\Model;
 
-use Application\Model\Entity\Email;
-
 interface EmailRepositoryInterface
 {
-    /**
-     * @param integer $userId
-     *
-     * @return Email[]
-     */
-    public function findEmailsOfUser(int $userId);
+    public function findEmailsOfUser($userId);
 
-    /**
-     * @param string $address
-     *
-     * @return Email
-     */
-    public function findEmail(string $address);
+    public function findEmail($address);
 }

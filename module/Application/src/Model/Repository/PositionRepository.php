@@ -2,35 +2,18 @@
 
 namespace Application\Model\Repository;
 
-use Application\Model\Entity\Position;
 use Application\Model\Executer;
 use Application\Model\PositionRepositoryInterface;
-use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Sql;
-use Laminas\Hydrator\HydratorInterface;
 
 class PositionRepository implements PositionRepositoryInterface
 {
-    /**
-     * @var AdapterInterface
-     */
     private $db;
-
-    /**
-     * @var HydratorInterface
-     */
     private $hydrator;
-
-    /**
-     * @var Position
-     */
     private $positionPrototype;
 
-    public function __construct(
-        AdapterInterface  $db,
-        HydratorInterface $hydrator,
-        Position          $positionPrototype
-    ) {
+    public function __construct($db, $hydrator, $positionPrototype)
+    {
         $this->db = $db;
         $this->hydrator = $hydrator;
         $this->positionPrototype = $positionPrototype;

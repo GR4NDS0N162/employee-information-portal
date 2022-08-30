@@ -2,21 +2,16 @@
 
 namespace Application\Model\Options;
 
-use Application\Model\PositionRepositoryInterface;
-
 class PositionOptions
 {
-    /**
-     * @var PositionRepositoryInterface
-     */
     private $repository;
 
-    public function __construct(PositionRepositoryInterface $repository)
+    public function __construct($repository)
     {
         $this->repository = $repository;
     }
 
-    public function getOptions(): array
+    public function getOptions()
     {
         $positions = [];
 
@@ -27,7 +22,7 @@ class PositionOptions
         return $positions;
     }
 
-    public function getEnabledOptions(): array
+    public function getEnabledOptions()
     {
         $positions = [
             null => [
@@ -43,7 +38,7 @@ class PositionOptions
         return $positions;
     }
 
-    public function getDisabledOptions(): array
+    public function getDisabledOptions()
     {
         $positions = [
             null => [
