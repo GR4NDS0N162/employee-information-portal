@@ -137,7 +137,7 @@ class AdminController extends AbstractActionController
             'navbar'        => 'Laminas\Navigation\Admin',
         ]);
 
-        $this->userForm->bind($this->userRepository->findUser($userId));
+        $this->userForm->bind($user);
         $viewModel = new ViewModel(['userForm' => $this->userForm]);
 
         $request = $this->getRequest();
