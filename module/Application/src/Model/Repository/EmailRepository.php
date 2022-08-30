@@ -6,9 +6,13 @@ use Application\Model\EmailRepositoryInterface;
 use Application\Model\Entity\Email;
 use Application\Model\Executer;
 use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\Adapter\Driver\ResultInterface;
+use Laminas\Db\ResultSet\HydratingResultSet;
 use Laminas\Db\Sql\Sql;
 use Laminas\Hydrator\HydratorInterface;
+use Laminas\Hydrator\Strategy\CollectionStrategy;
 use RuntimeException;
+use stdClass;
 
 class EmailRepository implements EmailRepositoryInterface
 {
@@ -38,12 +42,24 @@ class EmailRepository implements EmailRepositoryInterface
         ]);
         $select->where(['user_id = ?' => $userId]);
 
-        return Executer::extractArray(
-            $sql,
-            $select,
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+
+        if (!$result instanceof ResultInterface || !$result->isQueryResult()) {
+            return []; // TODO: Отладить этот случай.
+//            throw new RuntimeException(
+//                'Failed retrieving object; unknown database error.'
+//            );
+        }
+
+        $resultSet = new HydratingResultSet($this->hydrator, $this->prototype);
+        $resultSet->initialize($result);
+
+        $strategy = new CollectionStrategy(
             $this->hydrator,
-            $this->prototype,
+            get_class($this->prototype) ?: stdClass::class
         );
+        return $strategy->hydrate($resultSet->toArray());
     }
 
     public function findEmail($address)
