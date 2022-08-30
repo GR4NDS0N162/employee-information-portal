@@ -8,6 +8,7 @@ use Application\Form\Admin\PositionForm;
 use Application\Form\Admin\UserForm;
 use Application\Model\PhotoUrlGenerator;
 use Application\Model\UserRepositoryInterface;
+use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
@@ -117,20 +118,32 @@ class AdminController extends AbstractActionController
             return $this->redirect()->toRoute('admin/view-user-list');
         }
 
-        $viewModel = new ViewModel();
+        try {
+            $user = $this->userRepository->findUser($userId);
+        } catch (InvalidArgumentException $ex) {
+            return $this->redirect()->toRoute('admin/view-user-list');
+        }
 
-        $headTitleName = 'Редактирование пользователя (Администратор)';
-
-        $this->layout()->setVariable('headTitleName', $headTitleName);
-        $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
-
-        $this->userForm->bind($this->userRepository->findUser($userId));
-
-        $viewModel->setVariables([
-            'userForm' => $this->userForm,
+        $this->layout()->setVariables([
+            'headTitleName' => 'Редактирование пользователя (Администратор)',
+            'navbar'        => 'Laminas\Navigation\Admin',
         ]);
 
-        return $viewModel;
+        $this->userForm->bind($this->userRepository->findUser($userId));
+        $viewModel = new ViewModel(['userForm' => $this->userForm]);
+
+        $request = $this->getRequest();
+        if (!$request->isPost()) {
+            return $viewModel;
+        }
+
+        $this->userForm->setData($request->getPost());
+
+        if (!$this->userForm->isValid()) {
+            return $viewModel;
+        }
+
+        return $this->redirect()->toRoute('admin/view-user-list');
     }
 
     public function editPositionsAction(): ViewModel
