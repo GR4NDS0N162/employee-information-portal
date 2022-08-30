@@ -87,13 +87,13 @@ class UserController extends AbstractActionController
         $userId = self::userId;
 
         if (empty($userId)) {
-            return $this->redirect()->toRoute('user/view');
+            return $this->redirect()->toRoute('user/view-profile');
         }
 
         try {
             $user = $this->userRepository->findUser($userId);
         } catch (InvalidArgumentException $ex) {
-            return $this->redirect()->toRoute('user/view');
+            return $this->redirect()->toRoute('user/view-profile');
         }
 
         $this->layout()->setVariables([
@@ -115,12 +115,12 @@ class UserController extends AbstractActionController
 
         $this->profileForm->setData($request->getPost());
 
-        if (!$this->profileForm->isValid()) {
-            return $viewModel;
-        }
+//        if (!$this->profileForm->isValid()) {
+//            return $viewModel;
+//        }
 
         $user = $this->userCommand->updateUser($user);
-        return $this->redirect()->toRoute('user/view');
+        return $this->redirect()->toRoute('user/view-profile');
     }
 
     public function viewUserListAction(): ViewModel
