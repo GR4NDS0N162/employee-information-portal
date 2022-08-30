@@ -19,4 +19,11 @@ interface StatusRepositoryInterface
      * @return UserStatus[]|HydratingResultSet
      */
     public function findStatusesOfUser(int $userId);
+
+    /**
+     * @param int $userId
+     *
+     * @return array
+     */
+    public function generateStatusMapOfUser(int $userId): array;
 }

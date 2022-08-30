@@ -78,4 +78,22 @@ class StatusRepository implements StatusRepositoryInterface
             $this->userStatusPrototype,
         );
     }
+
+    public function generateStatusMapOfUser(int $userId): array
+    {
+        $userStatuses = $this->findStatusesOfUser($userId)->toArray();
+
+        $statusMap = [];
+        foreach ($this->findAllStatuses() as $status) {
+            $statusMap[$status->getName()] = in_array(
+                [
+                    'statusId' => $status->getId(),
+                    'userId'   => $userId,
+                ],
+                $userStatuses
+            );
+        }
+
+        return $statusMap;
+    }
 }
