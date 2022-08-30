@@ -8,7 +8,7 @@ class Phone
     private ?int $userId;
 
     public function __construct(
-        string $number,
+        string $number = '',
         ?int   $userId = null
     ) {
         $this->number = $number;
