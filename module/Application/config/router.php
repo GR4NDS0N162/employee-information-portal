@@ -67,11 +67,23 @@ return [
                     ],
                 ],
                 'edit-profile'     => [
-                    'type'    => Literal::class,
-                    'options' => [
+                    'type'          => Literal::class,
+                    'options'       => [
                         'route'    => '/edit',
                         'defaults' => [
                             'action' => 'edit-profile',
+                        ],
+                    ],
+                    'may_terminate' => true,
+                    'child_routes'  => [
+                        'profile-form' => [
+                            'type'    => Literal::class,
+                            'options' => [
+                                'route'    => '/profileform',
+                                'defaults' => [
+                                    'action' => 'profile-form',
+                                ],
+                            ],
                         ],
                     ],
                 ],
