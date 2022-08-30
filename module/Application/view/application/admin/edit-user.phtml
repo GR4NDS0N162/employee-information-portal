@@ -12,6 +12,8 @@ $this->inlineScript()
 
 /** @var UserForm $userForm */
 $userForm = $this->userForm;
+$userForm->setAttribute('action', $this->url('admin/view-user-list/edit-user', [], true));
+$userForm->prepare();
 ?>
 
 <div class="card p-3">
