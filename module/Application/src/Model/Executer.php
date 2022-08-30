@@ -10,7 +10,7 @@ use Laminas\Db\Sql\Sql;
 use Laminas\Hydrator\HydratorInterface;
 use RuntimeException;
 
-class Extractor
+class Executer
 {
     /**
      * @param Sql               $sql

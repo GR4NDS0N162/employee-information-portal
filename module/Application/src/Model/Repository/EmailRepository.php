@@ -4,7 +4,7 @@ namespace Application\Model\Repository;
 
 use Application\Model\EmailRepositoryInterface;
 use Application\Model\Entity\Email;
-use Application\Model\Extractor;
+use Application\Model\Executer;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Sql;
@@ -58,7 +58,7 @@ class EmailRepository implements EmailRepositoryInterface
         ]);
         $select->where(['address = ?' => $address]);
 
-        $email = Extractor::extractValue(
+        $email = Executer::extractValue(
             $sql,
             $select,
             $this->hydrator,

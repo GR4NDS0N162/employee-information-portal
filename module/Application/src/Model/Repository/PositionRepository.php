@@ -3,7 +3,7 @@
 namespace Application\Model\Repository;
 
 use Application\Model\Entity\Position;
-use Application\Model\Extractor;
+use Application\Model\Executer;
 use Application\Model\PositionRepositoryInterface;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Sql;
@@ -46,7 +46,7 @@ class PositionRepository implements PositionRepositoryInterface
             'name',
         ]);
 
-        return Extractor::extractArray(
+        return Executer::extractArray(
             $sql,
             $select,
             $this->hydrator,
