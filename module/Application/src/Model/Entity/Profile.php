@@ -2,6 +2,9 @@
 
 namespace Application\Model\Entity;
 
+use InvalidArgumentException;
+use Laminas\Db\ResultSet\HydratingResultSet;
+
 class Profile
 {
     protected ?int $id;
@@ -15,13 +18,21 @@ class Profile
     protected ?string $birthday;
     protected ?string $image;
     protected ?string $skype;
-    protected array $emails;
-    protected array $phones;
+
+    /**
+     * @var Email[]|HydratingResultSet
+     */
+    protected $emails;
+
+    /**
+     * @var Phone[]|HydratingResultSet
+     */
+    protected $phones;
 
     public function __construct(
         string  $password = '',
-        array   $emails = [],
-        array   $phones = [],
+                $emails = [],
+                $phones = [],
         ?string $tempPassword = null,
         ?string $tpCreatedAt = null,
         ?string $surname = null,
@@ -103,12 +114,12 @@ class Profile
         return $this->skype;
     }
 
-    public function getEmails(): array
+    public function getEmails()
     {
         return $this->emails;
     }
 
-    public function getPhones(): array
+    public function getPhones()
     {
         return $this->phones;
     }
@@ -118,19 +129,39 @@ class Profile
         $this->password = $password;
     }
 
-    /**
-     * @param Email[] $emails
-     */
-    public function setEmails(array $emails): void
+    public function setEmails($emails): void
     {
-        $this->emails = $emails;
+        if (is_array($emails) || $emails instanceof HydratingResultSet) {
+            $this->emails = $emails;
+        } else {
+            throw new InvalidArgumentException(
+                sprintf(
+                    'Type of parameter $emails must be compatible with %2$s, %1$s used.',
+                    get_class($emails),
+                    implode(' or ', [
+                        get_class(new Email()) . '[]',
+                        get_class(new HydratingResultSet()),
+                    ])
+                )
+            );
+        }
     }
 
-    /**
-     * @param Phone[] $phones
-     */
-    public function setPhones(array $phones): void
+    public function setPhones($phones): void
     {
-        $this->phones = $phones;
+        if (is_array($phones) || $phones instanceof HydratingResultSet) {
+            $this->phones = $phones;
+        } else {
+            throw new InvalidArgumentException(
+                sprintf(
+                    'Type of parameter $phones must be compatible with %2$s, %1$s used.',
+                    get_class($phones),
+                    implode(' or ', [
+                        get_class(new Phone()) . '[]',
+                        get_class(new HydratingResultSet()),
+                    ])
+                )
+            );
+        }
     }
 }
