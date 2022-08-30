@@ -20,8 +20,12 @@ class Executer
      *
      * @return array|HydratingResultSet
      */
-    public static function extractArray($sql, $select, $hydrator, $prototype)
-    {
+    public static function extractArray(
+        Sql               $sql,
+        Select            $select,
+        HydratorInterface $hydrator,
+                          $prototype
+    ) {
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
 
@@ -53,7 +57,7 @@ class Executer
                           $prototype,
         string            $runtimeExceptionMessage,
         string            $invalidArgumentExceptionMessage
-    ) {
+    ): object {
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
 
