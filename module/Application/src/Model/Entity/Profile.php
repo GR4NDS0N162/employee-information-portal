@@ -69,6 +69,11 @@ class Profile
         return $this->password;
     }
 
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
+    }
+
     public function getTempPassword(): ?string
     {
         return $this->tempPassword;
@@ -119,16 +124,6 @@ class Profile
         return $this->emails;
     }
 
-    public function getPhones()
-    {
-        return $this->phones;
-    }
-
-    public function setPassword(string $password): void
-    {
-        $this->password = $password;
-    }
-
     public function setEmails($emails): void
     {
         if (is_array($emails) || $emails instanceof HydratingResultSet) {
@@ -145,6 +140,11 @@ class Profile
                 )
             );
         }
+    }
+
+    public function getPhones()
+    {
+        return $this->phones;
     }
 
     public function setPhones($phones): void

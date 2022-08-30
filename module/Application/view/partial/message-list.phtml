@@ -8,9 +8,11 @@
     <div class="col-12">
         <div class="row g-3">
             <div class="col-auto">
-                <img src="<?= $this->escapeHtml(($message['isUserSender']) ?
-                    $this->userInfo['photo'] :
-                    $this->buddyInfo['photo']); ?>"
+                <img src="<?= $this->escapeHtml(
+                    ($message['isUserSender']) ?
+                        $this->userInfo['photo'] :
+                        $this->buddyInfo['photo']
+                ); ?>"
                      class="message-avatar img-fluid rounded"
                      alt="Фото пользователя"></div>
             <div class="col">
@@ -18,9 +20,11 @@
                     <div class="col-12">
                         <div class="row gx-2">
                             <div class="col-auto">
-                                <span class="h6"><?= $this->escapeHtml(($message['isUserSender']) ?
-                                        $this->userInfo['fullname'] :
-                                        $this->buddyInfo['fullname']); ?></span>
+                                <span class="h6"><?= $this->escapeHtml(
+                                        ($message['isUserSender']) ?
+                                            $this->userInfo['fullname'] :
+                                            $this->buddyInfo['fullname']
+                                    ); ?></span>
                             </div>
                             <div class="col-auto">
                                 <span class="small"><?= $this->escapeHtml($message['createdAt']); ?></span>

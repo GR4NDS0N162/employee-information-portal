@@ -49,13 +49,13 @@ class User extends Profile
         return $this->positionId;
     }
 
-    public function getStatus(): array
-    {
-        return $this->status;
-    }
-
     public function setPositionId(int $positionId): void
     {
         $this->positionId = $positionId;
+    }
+
+    public function getStatus(): array
+    {
+        return $this->status;
     }
 }

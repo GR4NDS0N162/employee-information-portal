@@ -1,10 +1,14 @@
 <?php
 /**
- * @var Laminas\View\Renderer\PhpRenderer   $this
- * @var \Application\Form\Login\LoginForm   $loginForm
- * @var \Application\Form\Login\SignUpForm  $signUpForm
- * @var \Application\Form\Login\RecoverForm $recoverForm
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ * @var LoginForm                         $loginForm
+ * @var SignUpForm                        $signUpForm
+ * @var RecoverForm                       $recoverForm
  */
+
+use Application\Form\Login\LoginForm;
+use Application\Form\Login\RecoverForm;
+use Application\Form\Login\SignUpForm;
 
 $this->formRow()->setPartial('partial/floating-element.phtml');
 $this->inlineScript()
