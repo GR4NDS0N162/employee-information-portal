@@ -61,14 +61,7 @@ class UserCommand implements UserCommandInterface
                 'position_id' => $user->getPositionId(),
             ]);
 
-            $id = Executer::insertValues(
-                $sql,
-                $insert,
-                sprintf(
-                    'Database error occurred during insert operation of the user with address %1$s.',
-                    $email->getAddress()
-                )
-            );
+            $id = Executer::executeSql($sql, $insert);
 
             $insert = $sql->insert('email');
             $insert->values([
@@ -76,14 +69,7 @@ class UserCommand implements UserCommandInterface
                 'user_id' => $id,
             ]);
 
-            Executer::insertValues(
-                $sql,
-                $insert,
-                sprintf(
-                    'Database error occurred during email insert operation with address %1$s.',
-                    $email->getAddress()
-                )
-            );
+            Executer::executeSql($sql, $insert);
         }
 
         if (!empty($foundEmail)) {
