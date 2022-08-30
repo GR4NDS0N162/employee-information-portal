@@ -151,6 +151,7 @@ class AdminController extends AbstractActionController
             return $viewModel;
         }
 
+        $user = $this->userCommand->updateUser($user);
         return $this->redirect()->toRoute('admin/view-user-list');
     }
 
