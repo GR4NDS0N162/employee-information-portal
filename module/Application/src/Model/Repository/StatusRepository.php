@@ -3,8 +3,10 @@
 namespace Application\Model\Repository;
 
 use Application\Model\Entity\Status;
+use Application\Model\Executer;
 use Application\Model\StatusRepositoryInterface;
 use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\Sql\Sql;
 use Laminas\Hydrator\HydratorInterface;
 
 class StatusRepository implements StatusRepositoryInterface
@@ -36,6 +38,18 @@ class StatusRepository implements StatusRepositoryInterface
 
     public function findAllStatuses()
     {
-        // TODO: Implement findAllStatuses() method.
+        $sql = new Sql($this->db);
+        $select = $sql->select('status');
+        $select->columns([
+            'id',
+            'name',
+        ]);
+
+        return Executer::extractArray(
+            $sql,
+            $select,
+            $this->hydrator,
+            $this->statusPrototype,
+        );
     }
 }
