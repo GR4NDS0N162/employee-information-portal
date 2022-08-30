@@ -10,6 +10,7 @@ use Application\Form\User\ViewProfileForm;
 use Application\Model\PhotoUrlGenerator;
 use Application\Model\UserCommandInterface;
 use Application\Model\UserRepositoryInterface;
+use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
@@ -81,24 +82,45 @@ class UserController extends AbstractActionController
         return $viewModel;
     }
 
-    public function editProfileAction(): ViewModel
+    public function editProfileAction()
     {
-        $viewModel = new ViewModel();
+        $userId = self::userId;
 
-        $headTitleName = 'Редактирование профиля';
+        if (empty($userId)) {
+            return $this->redirect()->toRoute('user/view');
+        }
 
-        $this->layout()->setVariable('headTitleName', $headTitleName);
+        try {
+            $user = $this->userRepository->findUser($userId);
+        } catch (InvalidArgumentException $ex) {
+            return $this->redirect()->toRoute('user/view');
+        }
 
-        $user = $this->userRepository->findUser(self::userId);
+        $this->layout()->setVariables([
+            'headTitleName' => 'Редактирование профиля',
+            'navbar'        => 'Laminas\Navigation\Admin',
+        ]);
+
         $this->profileForm->bind($user);
         $this->changePasswordForm->bind($user);
-
-        $viewModel->setVariables([
+        $viewModel = new ViewModel([
             'profileForm'        => $this->profileForm,
             'changePasswordForm' => $this->changePasswordForm,
         ]);
 
-        return $viewModel;
+        $request = $this->getRequest();
+        if (!$request->isPost()) {
+            return $viewModel;
+        }
+
+        $this->profileForm->setData($request->getPost());
+
+        if (!$this->profileForm->isValid()) {
+            return $viewModel;
+        }
+
+        $user = $this->userCommand->updateUser($user);
+        return $this->redirect()->toRoute('user/view');
     }
 
     public function viewUserListAction(): ViewModel
