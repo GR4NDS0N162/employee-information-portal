@@ -8,6 +8,7 @@ use Application\Form\User\ProfileForm;
 use Application\Form\User\UserFilterForm;
 use Application\Form\User\ViewProfileForm;
 use Application\Model\PhotoUrlGenerator;
+use Application\Model\UserCommandInterface;
 use Application\Model\UserRepositoryInterface;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
@@ -42,18 +43,25 @@ class UserController extends AbstractActionController
      */
     private $userRepository;
 
+    /**
+     * @var UserCommandInterface
+     */
+    private $userCommand;
+
     public function __construct(
         ProfileForm             $profileForm,
         ViewProfileForm         $viewProfileForm,
         UserFilterForm          $userFilterForm,
         ChangePasswordForm      $changePasswordForm,
-        UserRepositoryInterface $userRepository
+        UserRepositoryInterface $userRepository,
+        UserCommandInterface    $userCommand
     ) {
         $this->profileForm = $profileForm;
         $this->viewProfileForm = $viewProfileForm;
         $this->userFilterForm = $userFilterForm;
         $this->changePasswordForm = $changePasswordForm;
         $this->userRepository = $userRepository;
+        $this->userCommand = $userCommand;
     }
 
     public function viewProfileAction(): ViewModel
