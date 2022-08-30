@@ -11,6 +11,7 @@ use Application\Model\Entity\Email;
 use Application\Model\Entity\Phone;
 use Application\Model\Entity\Profile;
 use Application\Model\PhotoUrlGenerator;
+use Application\Model\UserRepositoryInterface;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
@@ -43,16 +44,23 @@ class UserController extends AbstractActionController
      */
     private $changePasswordForm;
 
+    /**
+     * @var UserRepositoryInterface
+     */
+    private $userRepository;
+
     public function __construct(
-        ProfileForm        $profileForm,
-        ViewProfileForm    $viewProfileForm,
-        UserFilterForm     $userFilterForm,
-        ChangePasswordForm $changePasswordForm
+        ProfileForm             $profileForm,
+        ViewProfileForm         $viewProfileForm,
+        UserFilterForm          $userFilterForm,
+        ChangePasswordForm      $changePasswordForm,
+        UserRepositoryInterface $userRepository
     ) {
         $this->profileForm = $profileForm;
         $this->viewProfileForm = $viewProfileForm;
         $this->userFilterForm = $userFilterForm;
         $this->changePasswordForm = $changePasswordForm;
+        $this->userRepository = $userRepository;
         $this->profilePrototype = new Profile(
             '',
             [
