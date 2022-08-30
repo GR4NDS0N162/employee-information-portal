@@ -8,7 +8,7 @@ class Email
     private ?int $userId;
 
     public function __construct(
-        string $address,
+        string $address = '',
         ?int   $userId = null
     ) {
         $this->address = $address;
