@@ -5,6 +5,7 @@ namespace Application\Model;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\Driver\ResultInterface;
 use Laminas\Db\ResultSet\HydratingResultSet;
+use Laminas\Db\Sql\Insert;
 use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Sql;
 use Laminas\Hydrator\HydratorInterface;
@@ -74,5 +75,28 @@ class Executer
         }
 
         return $object;
+    }
+
+    /**
+     * @param Sql    $sql
+     * @param Insert $insert
+     * @param string $runtimeExceptionMessage
+     *
+     * @return mixed|null
+     * @throws RuntimeException
+     */
+    public static function insertValues(
+        Sql    $sql,
+        Insert $insert,
+        string $runtimeExceptionMessage
+    ) {
+        $statement = $sql->prepareStatementForSqlObject($insert);
+        $result = $statement->execute();
+
+        if (!$result instanceof ResultInterface) {
+            throw new RuntimeException($runtimeExceptionMessage);
+        }
+
+        return $result->getGeneratedValue();
     }
 }
