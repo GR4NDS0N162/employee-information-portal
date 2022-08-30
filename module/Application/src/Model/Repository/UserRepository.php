@@ -126,6 +126,12 @@ class UserRepository implements UserRepositoryInterface
             throw new RuntimeException($runtimeExceptionMessage);
         }
 
+        $emails = $this->emailRepository->findEmailsOfUser($user->getId());
+        $phones = $this->phoneRepository->findPhonesOfUser($user->getId());
+
+        $user->setEmails($emails);
+        $user->setPhones($phones);
+
         return $user;
     }
 }
