@@ -2,15 +2,26 @@
 
 namespace Application\Model\Options;
 
+use Application\Model\PositionRepositoryInterface;
+
 class PositionOptions
 {
+    /**
+     * @var PositionRepositoryInterface
+     */
     private $repository;
 
+    /**
+     * @param PositionRepositoryInterface $repository
+     */
     public function __construct($repository)
     {
         $this->repository = $repository;
     }
 
+    /**
+     * @return string[]
+     */
     public function getOptions()
     {
         $positions = [];
@@ -22,14 +33,12 @@ class PositionOptions
         return $positions;
     }
 
+    /**
+     * @return string[]
+     */
     public function getEnabledOptions()
     {
-        $positions = [
-            null => [
-                'label'    => 'Не выбрана',
-                'selected' => 'selected',
-            ],
-        ];
+        $positions = [null => 'Не выбрана'];
 
         foreach ($this->repository->findAllPositions() as $position) {
             $positions[$position->getId()] = $position->getName();
