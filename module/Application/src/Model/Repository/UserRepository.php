@@ -4,26 +4,25 @@ namespace Application\Model\Repository;
 
 use Application\Model\Entity\Email;
 use Application\Model\Entity\User;
-use Application\Model\Executer;
 use Application\Model\UserRepositoryInterface;
 use InvalidArgumentException;
-use Laminas\Db\Sql\Sql;
+use Laminas\Db\Sql\Select;
 use RuntimeException;
 
 class UserRepository implements UserRepositoryInterface
 {
     private $db;
     private $hydrator;
-    private $userPrototype;
+    private $prototype;
     private $emailRepository;
     private $phoneRepository;
     private $statusRepository;
 
-    public function __construct($db, $hydrator, $userPrototype, $emailRepository, $phoneRepository, $statusRepository)
+    public function __construct($db, $hydrator, $prototype, $emailRepository, $phoneRepository, $statusRepository)
     {
         $this->db = $db;
         $this->hydrator = $hydrator;
-        $this->userPrototype = $userPrototype;
+        $this->prototype = $prototype;
         $this->emailRepository = $emailRepository;
         $this->phoneRepository = $phoneRepository;
         $this->statusRepository = $statusRepository;
@@ -31,8 +30,7 @@ class UserRepository implements UserRepositoryInterface
 
     public function findUser($identifier)
     {
-        $sql = new Sql($this->db);
-        $select = $sql->select('user');
+        $select = new Select('user');
         $select->columns([
             'id',
             'password',
@@ -76,28 +74,24 @@ class UserRepository implements UserRepositoryInterface
             );
         }
 
-        $user = Executer::extractValue(
-            $sql,
-            $select,
-            $this->hydrator,
-            $this->userPrototype,
-            $runtimeExceptionMessage,
-            $invalidArgumentExceptionMessage,
-        );
+        $user = Extracter::extractValue($select, $this->db, $this->hydrator, $this->prototype);
 
         if (!$user instanceof User) {
             if (is_integer($identifier)) {
-                $runtimeExceptionMessage = sprintf(
-                    'Failed retrieving user with id "%d"; unknown repository error',
-                    $identifier
+                throw new RuntimeException(
+                    sprintf(
+                        'Failed retrieving user with id "%d"; unknown repository error',
+                        $identifier
+                    )
                 );
             } else {
-                $runtimeExceptionMessage = sprintf(
-                    'Failed retrieving user with email address "%s"; unknown repository error',
-                    $identifier->getAddress()
+                throw new RuntimeException(
+                    sprintf(
+                        'Failed retrieving user with email address "%s"; unknown repository error',
+                        $identifier->getAddress()
+                    )
                 );
             }
-            throw new RuntimeException($runtimeExceptionMessage);
         }
 
         $emails = $this->emailRepository->findEmailsOfUser($user->getId());

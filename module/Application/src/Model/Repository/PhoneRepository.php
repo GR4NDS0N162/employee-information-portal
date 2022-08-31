@@ -2,38 +2,48 @@
 
 namespace Application\Model\Repository;
 
-use Application\Model\Executer;
+use Application\Model\Entity\Phone;
 use Application\Model\PhoneRepositoryInterface;
-use Laminas\Db\Sql\Sql;
+use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\Sql\Select;
+use Laminas\Hydrator\HydratorInterface;
 
 class PhoneRepository implements PhoneRepositoryInterface
 {
+    /**
+     * @var AdapterInterface
+     */
     private $db;
+    /**
+     * @var HydratorInterface
+     */
     private $hydrator;
-    private $phonePrototype;
+    /**
+     * @var Phone
+     */
+    private $prototype;
 
-    public function __construct($db, $hydrator, $phonePrototype)
+    /**
+     * @param AdapterInterface  $db
+     * @param HydratorInterface $hydrator
+     * @param Phone             $prototype
+     */
+    public function __construct($db, $hydrator, $prototype)
     {
         $this->db = $db;
         $this->hydrator = $hydrator;
-        $this->phonePrototype = $phonePrototype;
+        $this->prototype = $prototype;
     }
 
     public function findPhonesOfUser($userId)
     {
-        $sql = new Sql($this->db);
-        $select = $sql->select('phone');
+        $select = new Select('phone');
         $select->columns([
             'number',
             'userId' => 'user_id',
         ]);
         $select->where(['user_id = ?' => $userId]);
 
-        return Executer::extractArray(
-            $sql,
-            $select,
-            $this->hydrator,
-            $this->phonePrototype,
-        );
+        return Extracter::extractValues($select, $this->db, $this->hydrator, $this->prototype);
     }
 }
