@@ -4,6 +4,7 @@ namespace Application\Controller;
 
 use Application\Form\User as Form;
 use Application\Model\Command\UserCommandInterface;
+use Application\Model\Entity\ChangePassword;
 use Application\Model\PhotoUrlGenerator;
 use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
@@ -100,7 +101,7 @@ class UserController extends AbstractActionController
         ]);
 
         $this->profileForm->bind($foundUser);
-        $this->changePasswordForm->bind($foundUser);
+        $this->changePasswordForm->bind(new ChangePassword($foundUser->getId()));
 
         return $viewModel;
     }
