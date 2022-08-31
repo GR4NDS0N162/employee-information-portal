@@ -6,6 +6,7 @@ use Application\Controller\AdminController;
 use Application\Form\Admin\AdminFilterForm;
 use Application\Form\Admin\PositionForm;
 use Application\Form\Admin\UserForm;
+use Application\Model\Command\PositionCommandInterface;
 use Application\Model\Command\UserCommandInterface;
 use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
@@ -25,6 +26,7 @@ class AdminControllerFactory implements FactoryInterface
             $container->get(UserRepositoryInterface::class),
             $container->get(PositionRepositoryInterface::class),
             $container->get(UserCommandInterface::class),
+            $container->get(PositionCommandInterface::class),
         );
     }
 }

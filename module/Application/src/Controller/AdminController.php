@@ -3,6 +3,7 @@
 namespace Application\Controller;
 
 use Application\Form\Admin as Form;
+use Application\Model\Command\PositionCommandInterface;
 use Application\Model\Command\UserCommandInterface;
 use Application\Model\Entity\PositionList;
 use Application\Model\PhotoUrlGenerator;
@@ -40,6 +41,10 @@ class AdminController extends AbstractActionController
      * @var UserCommandInterface
      */
     private $userCommand;
+    /**
+     * @var PositionCommandInterface
+     */
+    private $positionCommand;
 
     /**
      * @param Form\PositionForm           $positionForm
@@ -48,15 +53,24 @@ class AdminController extends AbstractActionController
      * @param UserRepositoryInterface     $userRepository
      * @param PositionRepositoryInterface $positionRepository
      * @param UserCommandInterface        $userCommand
+     * @param PositionCommandInterface    $positionCommand
      */
-    public function __construct($positionForm, $userForm, $adminFilterForm, $userRepository, $positionRepository, $userCommand)
-    {
+    public function __construct(
+        $positionForm,
+        $userForm,
+        $adminFilterForm,
+        $userRepository,
+        $positionRepository,
+        $userCommand,
+        $positionCommand
+    ) {
         $this->positionForm = $positionForm;
         $this->userForm = $userForm;
         $this->adminFilterForm = $adminFilterForm;
         $this->userRepository = $userRepository;
         $this->positionRepository = $positionRepository;
         $this->userCommand = $userCommand;
+        $this->positionCommand = $positionCommand;
     }
 
     public function viewUserListAction()
