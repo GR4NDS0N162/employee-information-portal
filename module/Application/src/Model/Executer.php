@@ -2,14 +2,15 @@
 
 namespace Application\Model;
 
-use InvalidArgumentException;
+use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Adapter\Driver\ResultInterface;
-use Laminas\Db\ResultSet\HydratingResultSet;
 use Laminas\Db\Sql\Combine;
 use Laminas\Db\Sql\Delete;
 use Laminas\Db\Sql\Insert;
 use Laminas\Db\Sql\InsertIgnore;
+use Laminas\Db\Sql\PreparableSqlInterface;
 use Laminas\Db\Sql\Select;
+use Laminas\Db\Sql\Sql;
 use Laminas\Db\Sql\Update;
 use RuntimeException;
 
@@ -22,12 +23,21 @@ class Executer
     const SELECT = 'select';
     const UPDATE = 'update';
 
+    /**
+     * @param PreparableSqlInterface $preparable
+     * @param AdapterInterface       $db
+     * @param string                 $operationDescription
+     * @param string                 $runtimeExceptionFormat
+     *
+     * @return mixed|null
+     */
     public static function executeSql(
-        $sql,
         $preparable,
+        $db,
         $operationDescription = 'sql',
         $runtimeExceptionFormat = 'Database error occurred during %s operation.'
     ) {
+        $sql = new Sql($db);
         $statement = $sql->prepareStatementForSqlObject($preparable);
         $result = $statement->execute();
 
