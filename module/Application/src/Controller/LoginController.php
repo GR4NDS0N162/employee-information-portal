@@ -2,20 +2,39 @@
 
 namespace Application\Controller;
 
-use Application\Form;
+use Application\Form\Login;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\User;
+use Application\Model\UserCommandInterface;
 use Exception;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
 class LoginController extends AbstractActionController
 {
+    /**
+     * @var Login\LoginForm
+     */
     private $loginForm;
+    /**
+     * @var Login\SignUpForm
+     */
     private $signUpForm;
+    /**
+     * @var Login\RecoverForm
+     */
     private $recoverForm;
+    /**
+     * @var UserCommandInterface
+     */
     private $userCommand;
 
+    /**
+     * @param Login\LoginForm      $loginForm
+     * @param Login\SignUpForm     $signUpForm
+     * @param Login\RecoverForm    $recoverForm
+     * @param UserCommandInterface $userCommand
+     */
     public function __construct(
         $loginForm,
         $signUpForm,
