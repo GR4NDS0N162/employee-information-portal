@@ -26,7 +26,7 @@ class ChangePassword implements InputFilterAwareInterface
      */
     private $passwordCheck;
     /**
-     * @var InputFilterInterface
+     * @var InputFilter
      */
     private $inputFilter;
 
