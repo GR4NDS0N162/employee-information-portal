@@ -2,9 +2,8 @@
 
 namespace Application\Form\Admin;
 
-use Application\Fieldset\PositionFieldset;
+use Application\Fieldset\PositionListFieldset;
 use Application\Helper\FieldsetMapper;
-use Laminas\Form\Element\Collection;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Form;
 
@@ -18,24 +17,13 @@ class PositionForm extends Form
         $this->setAttribute('novalidate', true);
 
         $this->add([
-            'name'       => 'positions',
-            'type'       => Collection::class,
+            'name'       => 'position-list',
+            'type'       => PositionListFieldset::class,
             'attributes' => [
-                'class' => 'row g-3',
+                'class' => 'row g-3 align-items-start',
             ],
             'options'    => [
-                'label'                  => 'Должности',
-                'count'                  => 0,
-                'allow_add'              => true,
-                'allow_remove'           => true,
-                'should_create_template' => true,
-                'template_placeholder'   => '__index__',
-                'target_element'         => [
-                    'type'       => PositionFieldset::class,
-                    'attributes' => [
-                        'class' => 'input-group',
-                    ],
-                ],
+                'use_as_base_fieldset' => true,
             ],
         ]);
 
@@ -50,11 +38,16 @@ class PositionForm extends Form
 
         FieldsetMapper::setAttributes($this, [
             'children' => [
-                'positions' => [
-                    'value'          => 'col-12',
-                    'target_element' => 'col-12',
+                'position-list' => [
+                    'value'    => 'col-12',
+                    'children' => [
+                        'list' => [
+                            'value'          => 'col-12',
+                            'target_element' => 'col-12',
+                        ],
+                    ],
                 ],
-                'submit'    => 'col-12',
+                'submit'        => 'col-12',
             ],
         ]);
     }
