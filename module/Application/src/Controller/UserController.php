@@ -118,7 +118,7 @@ class UserController extends AbstractActionController
             return $viewModel;
         }
 
-        $user = $this->userCommand->updateUser($user);
+        $this->userCommand->updateUser($user);
         return $this->redirect()->toRoute('user/view-profile');
     }
 
