@@ -2,22 +2,53 @@
 
 namespace Application\Model\Repository;
 
+use Application\Model\EmailRepositoryInterface;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\User;
+use Application\Model\PhoneRepositoryInterface;
+use Application\Model\StatusRepositoryInterface;
 use Application\Model\UserRepositoryInterface;
 use InvalidArgumentException;
+use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Select;
+use Laminas\Hydrator\HydratorInterface;
 use RuntimeException;
 
 class UserRepository implements UserRepositoryInterface
 {
+    /**
+     * @var AdapterInterface
+     */
     private $db;
+    /**
+     * @var HydratorInterface
+     */
     private $hydrator;
+    /**
+     * @var User
+     */
     private $prototype;
+    /**
+     * @var EmailRepositoryInterface
+     */
     private $emailRepository;
+    /**
+     * @var PhoneRepositoryInterface
+     */
     private $phoneRepository;
+    /**
+     * @var StatusRepositoryInterface
+     */
     private $statusRepository;
 
+    /**
+     * @param AdapterInterface          $db
+     * @param HydratorInterface         $hydrator
+     * @param User                      $prototype
+     * @param EmailRepositoryInterface  $emailRepository
+     * @param PhoneRepositoryInterface  $phoneRepository
+     * @param StatusRepositoryInterface $statusRepository
+     */
     public function __construct($db, $hydrator, $prototype, $emailRepository, $phoneRepository, $statusRepository)
     {
         $this->db = $db;
