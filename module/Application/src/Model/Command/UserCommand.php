@@ -2,11 +2,10 @@
 
 namespace Application\Model\Command;
 
-use Application\Model\EmailRepositoryInterface;
 use Application\Model\Executer;
 use Application\Model\PasswordGenerator;
-use Application\Model\UserCommandInterface;
-use Application\Model\UserRepositoryInterface;
+use Application\Model\Repository\EmailRepositoryInterface;
+use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Sql;

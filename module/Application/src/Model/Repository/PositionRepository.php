@@ -3,7 +3,6 @@
 namespace Application\Model\Repository;
 
 use Application\Model\Entity\Position;
-use Application\Model\PositionRepositoryInterface;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Select;
 use Laminas\Hydrator\HydratorInterface;

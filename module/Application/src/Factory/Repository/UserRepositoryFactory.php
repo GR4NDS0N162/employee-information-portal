@@ -2,12 +2,12 @@
 
 namespace Application\Factory\Repository;
 
-use Application\Model\EmailRepositoryInterface;
 use Application\Model\Entity\User;
-use Application\Model\PhoneRepositoryInterface;
+use Application\Model\Repository\EmailRepositoryInterface;
+use Application\Model\Repository\PhoneRepositoryInterface;
+use Application\Model\Repository\StatusRepositoryInterface;
 use Application\Model\Repository\UserRepository;
-use Application\Model\StatusRepositoryInterface;
-use Application\Model\UserStatusRepositoryInterface;
+use Application\Model\Repository\UserStatusRepositoryInterface;
 use Interop\Container\ContainerInterface;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Hydrator\ReflectionHydrator;

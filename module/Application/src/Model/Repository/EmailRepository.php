@@ -2,7 +2,6 @@
 
 namespace Application\Model\Repository;
 
-use Application\Model\EmailRepositoryInterface;
 use Application\Model\Entity\Email;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Select;

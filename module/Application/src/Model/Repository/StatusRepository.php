@@ -2,7 +2,6 @@
 
 namespace Application\Model\Repository;
 
-use Application\Model\StatusRepositoryInterface;
 use Laminas\Db\Sql\Sql;
 
 class StatusRepository implements StatusRepositoryInterface

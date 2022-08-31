@@ -2,7 +2,7 @@
 
 namespace Application\Model\Options;
 
-use Application\Model\PositionRepositoryInterface;
+use Application\Model\Repository\PositionRepositoryInterface;
 
 class PositionOptions
 {

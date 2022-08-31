@@ -6,7 +6,7 @@ use Application\Controller\LoginController;
 use Application\Form\Login\LoginForm;
 use Application\Form\Login\RecoverForm;
 use Application\Form\Login\SignUpForm;
-use Application\Model\UserCommandInterface;
+use Application\Model\Command\UserCommandInterface;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 

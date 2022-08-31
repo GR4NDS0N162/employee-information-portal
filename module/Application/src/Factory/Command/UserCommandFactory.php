@@ -3,8 +3,8 @@
 namespace Application\Factory\Command;
 
 use Application\Model\Command\UserCommand;
-use Application\Model\EmailRepositoryInterface;
-use Application\Model\UserRepositoryInterface;
+use Application\Model\Repository\EmailRepositoryInterface;
+use Application\Model\Repository\UserRepositoryInterface;
 use Interop\Container\ContainerInterface;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;

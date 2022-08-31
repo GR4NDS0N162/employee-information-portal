@@ -7,8 +7,8 @@ use Application\Form\User\ChangePasswordForm;
 use Application\Form\User\ProfileForm;
 use Application\Form\User\UserFilterForm;
 use Application\Form\User\ViewProfileForm;
-use Application\Model\UserCommandInterface;
-use Application\Model\UserRepositoryInterface;
+use Application\Model\Command\UserCommandInterface;
+use Application\Model\Repository\UserRepositoryInterface;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 

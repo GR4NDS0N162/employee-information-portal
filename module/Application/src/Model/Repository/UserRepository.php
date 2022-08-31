@@ -2,14 +2,9 @@
 
 namespace Application\Model\Repository;
 
-use Application\Model\EmailRepositoryInterface;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\User;
 use Application\Model\Entity\UserStatus;
-use Application\Model\PhoneRepositoryInterface;
-use Application\Model\StatusRepositoryInterface;
-use Application\Model\UserRepositoryInterface;
-use Application\Model\UserStatusRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Select;

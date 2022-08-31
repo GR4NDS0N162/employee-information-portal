@@ -3,9 +3,9 @@
 namespace Application\Controller;
 
 use Application\Form\Login;
+use Application\Model\Command\UserCommandInterface;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\User;
-use Application\Model\UserCommandInterface;
 use Exception;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;

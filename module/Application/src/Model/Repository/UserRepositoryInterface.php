@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Model;
+namespace Application\Model\Repository;
 
 use Application\Model\Entity\Email;
 use Application\Model\Entity\User;

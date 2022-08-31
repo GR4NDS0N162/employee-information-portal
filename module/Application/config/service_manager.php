@@ -8,13 +8,13 @@ use Application\Factory\Repository as RepositoryFactory;
 
 return [
     'aliases'   => [
-        Model\EmailRepositoryInterface::class      => Model\Repository\EmailRepository::class,
-        Model\PhoneRepositoryInterface::class      => Model\Repository\PhoneRepository::class,
-        Model\PositionRepositoryInterface::class   => Model\Repository\PositionRepository::class,
-        Model\StatusRepositoryInterface::class     => Model\Repository\StatusRepository::class,
-        Model\UserRepositoryInterface::class       => Model\Repository\UserRepository::class,
-        Model\UserStatusRepositoryInterface::class => Model\Repository\UserStatusRepository::class,
-        Model\UserCommandInterface::class          => Model\Command\UserCommand::class,
+        Model\Repository\EmailRepositoryInterface::class      => Model\Repository\EmailRepository::class,
+        Model\Repository\PhoneRepositoryInterface::class      => Model\Repository\PhoneRepository::class,
+        Model\Repository\PositionRepositoryInterface::class   => Model\Repository\PositionRepository::class,
+        Model\Repository\StatusRepositoryInterface::class     => Model\Repository\StatusRepository::class,
+        Model\Repository\UserRepositoryInterface::class       => Model\Repository\UserRepository::class,
+        Model\Repository\UserStatusRepositoryInterface::class => Model\Repository\UserStatusRepository::class,
+        Model\Command\UserCommandInterface::class             => Model\Command\UserCommand::class,
     ],
     'factories' => [
         Model\Command\UserCommand::class => CommandFactory\UserCommandFactory::class,
