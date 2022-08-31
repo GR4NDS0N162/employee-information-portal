@@ -6,7 +6,6 @@ use Application\Form\Login;
 use Application\Model\Command\UserCommandInterface;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\User;
-use Exception;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
@@ -96,23 +95,20 @@ class LoginController extends AbstractActionController
     {
         $request = $this->getRequest();
 
-        if (!$request->isPost())
+        if (!$request->isPost()) {
             return $this->redirect()->toRoute('home');
+        }
 
         $this->recoverForm->setData($request->getPost());
 
-        if (!$this->recoverForm->isValid())
+        if (!$this->recoverForm->isValid()) {
             return $this->redirect()->toRoute('home');
+        }
 
         $data = $this->recoverForm->getData();
         $email = new Email($data['email']);
 
-        try {
-            $this->userCommand->setTempPassword($email);
-        } catch (Exception $ex) {
-            throw $ex;
-        }
-
+        $this->userCommand->setTempPassword($email);
         return $this->redirect()->toRoute('home');
     }
 }
