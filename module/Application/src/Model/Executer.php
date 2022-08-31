@@ -22,53 +22,6 @@ class Executer
     const SELECT = 'select';
     const UPDATE = 'update';
 
-    public static function extractArray($sql, $select, $hydrator, $prototype)
-    {
-        $statement = $sql->prepareStatementForSqlObject($select);
-        $result = $statement->execute();
-
-        $return = [];
-
-        if (!$result instanceof ResultInterface || !$result->isQueryResult()) {
-            return $return;
-        }
-
-        $resultSet = new HydratingResultSet($hydrator, $prototype);
-        $resultSet->initialize($result);
-
-        foreach ($resultSet as $obj) {
-            $return[] = $obj;
-        }
-
-        return $return;
-    }
-
-    public static function extractValue(
-        $sql,
-        $select,
-        $hydrator,
-        $prototype,
-        $runtimeExceptionMessage = 'Failed to retrieve the object; unknown database error.',
-        $invalidArgumentExceptionMessage = 'Object not found.'
-    ) {
-        $statement = $sql->prepareStatementForSqlObject($select);
-        $result = $statement->execute();
-
-        if (!$result instanceof ResultInterface || !$result->isQueryResult()) {
-            throw new RuntimeException($runtimeExceptionMessage);
-        }
-
-        $resultSet = new HydratingResultSet($hydrator, $prototype);
-        $resultSet->initialize($result);
-        $object = $resultSet->current();
-
-        if (!$object) {
-            throw new InvalidArgumentException($invalidArgumentExceptionMessage);
-        }
-
-        return $object;
-    }
-
     public static function executeSql(
         $sql,
         $preparable,
