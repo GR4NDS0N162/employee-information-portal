@@ -69,6 +69,11 @@ class UserRepository implements UserRepositoryInterface
         $this->userStatusRepository = $userStatusRepository;
     }
 
+    public function findProfile($identifier)
+    {
+        return $this->findUser($identifier);
+    }
+
     public function findUser($identifier)
     {
         if (is_int($identifier)) {
