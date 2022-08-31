@@ -29,6 +29,7 @@ class ChangePasswordFieldset extends Fieldset
                 'class'        => 'form-control',
                 'placeholder'  => 'qwerty123',
                 'required'     => 'required',
+                'maxlength'    => 32,
                 'autocomplete' => 'current-password',
             ],
             'options'    => [
