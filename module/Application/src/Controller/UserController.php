@@ -111,6 +111,24 @@ class UserController extends AbstractActionController
 
     public function changePasswordFormAction()
     {
+        $request = $this->getRequest();
+
+        if (!$request->isPost()) {
+            return $this->redirect()->toRoute('user/edit-profile');
+        }
+
+        $this->changePasswordForm->setData($request->getPost());
+
+        if (!$this->changePasswordForm->isValid()) {
+            return $this->redirect()->toRoute('user/edit-profile');
+        }
+
+        $data = $this->changePasswordForm->getData();
+        $userId = (int)$data['id'];
+        $newPassword = (string)$data['new-password'];
+
+        $this->userCommand->changePassword($userId, $newPassword);
+        return $this->redirect()->toRoute('user/edit-profile');
     }
 
     public function viewUserListAction()
