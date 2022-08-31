@@ -198,6 +198,8 @@ class UserRepository implements UserRepositoryInterface
 
     public function findUserByEmail($email)
     {
-        // TODO: Implement findUserByEmail() method.
+        $foundEmail = $this->emailRepository->findEmail($email->getAddress());
+
+        return $this->findUserById($foundEmail->getUserId());
     }
 }
