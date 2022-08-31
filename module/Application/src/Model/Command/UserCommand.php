@@ -8,7 +8,9 @@ use Application\Model\Repository\EmailRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\Sql\Insert;
 use Laminas\Db\Sql\Sql;
+use Laminas\Db\Sql\Update;
 use RuntimeException;
 
 class UserCommand implements UserCommandInterface
@@ -43,23 +45,21 @@ class UserCommand implements UserCommandInterface
         try {
             $foundEmail = $this->emailRepository->findEmail($email->getAddress());
         } catch (InvalidArgumentException $ex) {
-            $sql = new Sql($this->db);
-
-            $insert = $sql->insert('user');
+            $insert = new Insert('user');
             $insert->values([
                 'password'    => $user->getPassword(),
                 'position_id' => $user->getPositionId(),
             ]);
 
-            $id = Executer::executeSql($sql, $insert);
+            $id = Executer::executeSql($insert, $this->db);
 
-            $insert = $sql->insert('email');
+            $insert = new Insert('email');
             $insert->values([
                 'address' => $email->getAddress(),
                 'user_id' => $id,
             ]);
 
-            Executer::executeSql($sql, $insert);
+            Executer::executeSql($insert, $this->db);
         }
 
         if (!empty($foundEmail)) {
@@ -77,15 +77,14 @@ class UserCommand implements UserCommandInterface
         $foundEmail = $this->emailRepository->findEmail($email->getAddress());
         $foundUser = $this->userRepository->findUser($foundEmail);
 
-        $sql = new Sql($this->db);
-        $update = $sql->update('user');
+        $update = new Update('user');
         $update->set([
             'temp_password' => PasswordGenerator::generate(),
             'tp_created_at' => date('Y-m-d H:i:s'),
         ]);
         $update->where(['id = ?' => $foundUser->getId()]);
 
-        Executer::executeSql($sql, $update);
+        Executer::executeSql($update, $this->db);
     }
 
     public function updateUser($user)
@@ -111,8 +110,6 @@ class UserCommand implements UserCommandInterface
         ]);
         $update->where(['id = ?' => $user->getId()]);
 
-        Executer::executeSql($sql, $update);
-
-        return $user;
+        Executer::executeSql($update, $this->db);
     }
 }
