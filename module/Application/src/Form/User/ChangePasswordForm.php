@@ -3,7 +3,7 @@
 namespace Application\Form\User;
 
 use Application\Helper\FieldsetMapper;
-use Application\Model\Entity\User;
+use Application\Model\Entity\ChangePassword;
 use Laminas\Form\Element;
 use Laminas\Form\Form;
 use Laminas\Hydrator\ClassMethodsHydrator;
@@ -18,7 +18,7 @@ class ChangePasswordForm extends Form
         $this->setAttribute('novalidate', true);
 
         $this->setHydrator(new ClassMethodsHydrator(false, true));
-        $this->setObject(new User());
+        $this->setObject(new ChangePassword());
 
         $this->add([
             'name' => 'id',
