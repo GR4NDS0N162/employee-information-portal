@@ -86,22 +86,23 @@ class UserController extends AbstractActionController
     {
         try {
             $foundUser = $this->userRepository->findUser(self::userId);
+            $changePassword = new ChangePassword($foundUser->getId());
         } catch (InvalidArgumentException $ex) {
             return $this->redirect()->toRoute('home');
         }
-
-        $viewModel = new ViewModel([
-            'profileForm'        => $this->profileForm,
-            'changePasswordForm' => $this->changePasswordForm,
-        ]);
 
         $this->layout()->setVariables([
             'headTitleName' => 'Редактирование профиля',
             'navbar'        => 'Laminas\Navigation\Admin',
         ]);
 
+        $viewModel = new ViewModel([
+            'profileForm'        => $this->profileForm,
+            'changePasswordForm' => $this->changePasswordForm,
+        ]);
+
         $this->profileForm->bind($foundUser);
-        $this->changePasswordForm->bind(new ChangePassword($foundUser->getId()));
+        $this->changePasswordForm->bind($changePassword);
 
         return $viewModel;
     }
