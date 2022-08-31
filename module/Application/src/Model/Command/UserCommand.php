@@ -119,9 +119,12 @@ class UserCommand implements UserCommandInterface
 
         $update = new Update('user');
         $update->set([
-            'password' => $foundUser->getPassword(),
+            'password' => $newPassword,
         ]);
-        $update->where(['id = ?' => $foundUser->getId()]);
+        $update->where([
+            'id = ?'       => $foundUser->getId(),
+            'password = ?' => $currentPassword,
+        ]);
 
         Executer::executeSql($update, $this->db);
     }
