@@ -16,6 +16,14 @@ interface UserCommandInterface
     public function insertUser($user, $email);
 
     /**
+     * @param int    $userId
+     * @param string $newPassword
+     *
+     * @return void
+     */
+    public function changePassword($userId, $newPassword);
+
+    /**
      * @param Email $email
      *
      * @return void
