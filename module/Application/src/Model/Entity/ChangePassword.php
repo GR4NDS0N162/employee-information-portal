@@ -143,11 +143,9 @@ class ChangePassword implements InputFilterAwareInterface
             'required'   => true,
             'validators' => [
                 [
-                    'name'    => StringLength::class,
+                    'name'    => 'Identical',
                     'options' => [
-                        'encoding' => 'UTF-8',
-                        'min'      => 8,
-                        'max'      => 32,
+                        'token' => 'newPassword',
                     ],
                 ],
             ],
