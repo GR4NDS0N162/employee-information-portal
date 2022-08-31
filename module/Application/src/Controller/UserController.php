@@ -66,17 +66,17 @@ class UserController extends AbstractActionController
 
     public function viewProfileAction()
     {
-        $viewModel = new ViewModel();
+        $viewModel = new ViewModel([
+            'viewProfileForm' => $this->viewProfileForm,
+        ]);
 
-        $headTitleName = 'Просмотр профиля';
-
-        $this->layout()->setVariable('headTitleName', $headTitleName);
+        $this->layout()->setVariables([
+            'headTitleName' => 'Просмотр профиля',
+        ]);
 
         $user = $this->userRepository->findUser(self::userId);
         $this->viewProfileForm->bind($user);
         $this->viewProfileForm->get('profile')->get('image')->setAttribute('src', $user->getImage());
-
-        $viewModel->setVariable('viewProfileForm', $this->viewProfileForm);
 
         return $viewModel;
     }
