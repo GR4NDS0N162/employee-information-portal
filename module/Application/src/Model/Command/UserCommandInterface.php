@@ -17,11 +17,12 @@ interface UserCommandInterface
 
     /**
      * @param int    $userId
+     * @param string $currentPassword
      * @param string $newPassword
      *
      * @return void
      */
-    public function changePassword($userId, $newPassword);
+    public function changePassword($userId, $currentPassword, $newPassword);
 
     /**
      * @param Email $email

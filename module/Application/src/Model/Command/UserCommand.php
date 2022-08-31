@@ -113,7 +113,7 @@ class UserCommand implements UserCommandInterface
         Executer::executeSql($update, $this->db);
     }
 
-    public function changePassword($userId, $newPassword)
+    public function changePassword($userId, $currentPassword, $newPassword)
     {
         $foundUser = $this->userRepository->findUser($userId);
 

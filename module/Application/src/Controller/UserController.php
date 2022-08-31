@@ -125,9 +125,10 @@ class UserController extends AbstractActionController
 
         $data = $this->changePasswordForm->getData();
         $userId = (int)$data['id'];
+        $currentPassword = (string)$data['current-password'];
         $newPassword = (string)$data['new-password'];
 
-        $this->userCommand->changePassword($userId, $newPassword);
+        $this->userCommand->changePassword($userId, $currentPassword, $newPassword);
         return $this->redirect()->toRoute('user/edit-profile');
     }
 
