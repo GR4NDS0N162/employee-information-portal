@@ -4,15 +4,9 @@ namespace Application\Model\Repository;
 
 use Application\Model\EmailRepositoryInterface;
 use Application\Model\Entity\Email;
-use Application\Model\Executer;
 use Laminas\Db\Adapter\AdapterInterface;
-use Laminas\Db\Adapter\Driver\ResultInterface;
-use Laminas\Db\ResultSet\HydratingResultSet;
-use Laminas\Db\Sql\Sql;
+use Laminas\Db\Sql\Select;
 use Laminas\Hydrator\HydratorInterface;
-use Laminas\Hydrator\Strategy\CollectionStrategy;
-use RuntimeException;
-use stdClass;
 
 class EmailRepository implements EmailRepositoryInterface
 {
@@ -34,68 +28,25 @@ class EmailRepository implements EmailRepositoryInterface
 
     public function findEmailsOfUser($userId)
     {
-        $sql = new Sql($this->db);
-        $select = $sql->select('email');
+        $select = new Select('email');
         $select->columns([
             'address',
             'userId' => 'user_id',
         ]);
         $select->where(['user_id = ?' => $userId]);
 
-        $statement = $sql->prepareStatementForSqlObject($select);
-        $result = $statement->execute();
-
-        if (!$result instanceof ResultInterface || !$result->isQueryResult()) {
-            return []; // TODO: Отладить этот случай.
-//            throw new RuntimeException(
-//                'Failed retrieving object; unknown database error.'
-//            );
-        }
-
-        $resultSet = new HydratingResultSet($this->hydrator, $this->prototype);
-        $resultSet->initialize($result);
-
-        $strategy = new CollectionStrategy(
-            $this->hydrator,
-            get_class($this->prototype) ?: stdClass::class
-        );
-        return $strategy->hydrate($resultSet->toArray());
+        return Extracter::extractValues($select, $this->db, $this->hydrator, $this->prototype);
     }
 
     public function findEmail($address)
     {
-        $sql = new Sql($this->db);
-        $select = $sql->select('email');
+        $select = new Select('email');
         $select->columns([
             'address',
             'userId' => 'user_id',
         ]);
         $select->where(['address = ?' => $address]);
 
-        $email = Executer::extractValue(
-            $sql,
-            $select,
-            $this->hydrator,
-            $this->prototype,
-            sprintf(
-                'Failed retrieving email with address "%s"; unknown database error.',
-                $address
-            ),
-            sprintf(
-                'Email with address "%s" not found.',
-                $address
-            ),
-        );
-
-        if ($email instanceof Email) {
-            return $email;
-        }
-
-        throw new RuntimeException(
-            sprintf(
-                'Failed retrieving email with address "%s"; unknown repository error.',
-                $address
-            )
-        );
+        return Extracter::extractValue($select, $this->db, $this->hydrator, $this->prototype);
     }
 }
