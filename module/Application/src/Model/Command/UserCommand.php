@@ -115,6 +115,14 @@ class UserCommand implements UserCommandInterface
 
     public function changePassword($userId, $newPassword)
     {
-        // TODO: Implement changePassword() method.
+        $foundUser = $this->userRepository->findUser($userId);
+
+        $update = new Update('user');
+        $update->set([
+            'password' => $foundUser->getPassword(),
+        ]);
+        $update->where(['id = ?' => $foundUser->getId()]);
+
+        Executer::executeSql($update, $this->db);
     }
 }
