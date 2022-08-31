@@ -60,38 +60,6 @@ if ((newPasswordInput && newPasswordFeedback) &&
     });
 }
 
-function hangOnFocusout(input, feedback)
-{
-    input.addEventListener('focusout', () =>
-    {
-        if (input.validity.valueMissing) {
-            feedback.childNodes[0].nodeValue = 'Поле не должно оставаться пустым.';
-        }
-    });
-}
-
-function hangOnKeydown(input, feedback)
-{
-    input.addEventListener('keydown', () =>
-    {
-        const maxlength = parseInt(input.getAttribute('maxlength'));
-
-        if (input.value.length >= maxlength) {
-            feedback.childNodes[0].nodeValue = `Максимальная длина - ${maxlength}.`;
-        }
-    });
-}
-
-function dispatchOnFocusout(input)
-{
-    input.dispatchEvent(new Event('focusout'));
-}
-
-function dispatchOnInput(input)
-{
-    input.dispatchEvent(new Event('input'));
-}
-
 function validateOnInputPasswordInput(input, feedback)
 {
     const minlength = input.getAttribute('minlength');
