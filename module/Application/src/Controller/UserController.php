@@ -83,43 +83,26 @@ class UserController extends AbstractActionController
 
     public function editProfileAction()
     {
-        $userId = self::userId;
-
-        if (empty($userId)) {
-            return $this->redirect()->toRoute('user/view-profile');
-        }
-
         try {
-            $user = $this->userRepository->findUser($userId);
+            $foundUser = $this->userRepository->findUser(self::userId);
         } catch (InvalidArgumentException $ex) {
-            return $this->redirect()->toRoute('user/view-profile');
+            return $this->redirect()->toRoute('home');
         }
+
+        $viewModel = new ViewModel([
+            'profileForm'        => $this->profileForm,
+            'changePasswordForm' => $this->changePasswordForm,
+        ]);
 
         $this->layout()->setVariables([
             'headTitleName' => 'Редактирование профиля',
             'navbar'        => 'Laminas\Navigation\Admin',
         ]);
 
-        $this->profileForm->bind($user);
-        $this->changePasswordForm->bind($user);
-        $viewModel = new ViewModel([
-            'profileForm'        => $this->profileForm,
-            'changePasswordForm' => $this->changePasswordForm,
-        ]);
+        $this->profileForm->bind($foundUser);
+        $this->changePasswordForm->bind($foundUser);
 
-        $request = $this->getRequest();
-        if (!$request->isPost()) {
-            return $viewModel;
-        }
-
-        $this->profileForm->setData($request->getPost());
-
-        if (!$this->profileForm->isValid()) {
-            return $viewModel;
-        }
-
-        $this->userCommand->updateUser($user);
-        return $this->redirect()->toRoute('user/view-profile');
+        return $viewModel;
     }
 
     public function viewUserListAction()
