@@ -49,19 +49,14 @@ class LoginController extends AbstractActionController
 
     public function indexAction()
     {
-        $viewModel = new ViewModel();
-
-        $this->layout('layout/home-layout');
-
-        $headTitleName = 'Вход | Регистрация';
-
-        $this->layout()->setVariable('headTitleName', $headTitleName);
-
-        $viewModel->setVariables([
+        $viewModel = new ViewModel([
             'loginForm'   => $this->loginForm,
             'signUpForm'  => $this->signUpForm,
             'recoverForm' => $this->recoverForm,
         ]);
+
+        $this->layout('layout/home-layout');
+        $this->layout()->setVariable('headTitleName', 'Вход | Регистрация');
 
         return $viewModel;
     }
