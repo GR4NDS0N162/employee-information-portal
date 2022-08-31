@@ -2,8 +2,10 @@
 
 namespace Application\Controller;
 
-use Application\Form;
+use Application\Form\Admin as Form;
+use Application\Model\Command\UserCommandInterface;
 use Application\Model\PhotoUrlGenerator;
+use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
@@ -12,12 +14,34 @@ class AdminController extends AbstractActionController
 {
     public const maxPageCount = 20;
 
+    /**
+     * @var Form\PositionForm
+     */
     private $positionForm;
+    /**
+     * @var Form\UserForm
+     */
     private $userForm;
+    /**
+     * @var Form\AdminFilterForm
+     */
     private $adminFilterForm;
+    /**
+     * @var UserRepositoryInterface
+     */
     private $userRepository;
+    /**
+     * @var UserCommandInterface
+     */
     private $userCommand;
 
+    /**
+     * @param Form\PositionForm       $positionForm
+     * @param Form\UserForm           $userForm
+     * @param Form\AdminFilterForm    $adminFilterForm
+     * @param UserRepositoryInterface $userRepository
+     * @param UserCommandInterface    $userCommand
+     */
     public function __construct($positionForm, $userForm, $adminFilterForm, $userRepository, $userCommand)
     {
         $this->positionForm = $positionForm;
