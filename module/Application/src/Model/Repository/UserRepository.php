@@ -110,4 +110,14 @@ class UserRepository implements UserRepositoryInterface
 
         return $user;
     }
+
+    public function findUserById($id)
+    {
+        // TODO: Implement findUserById() method.
+    }
+
+    public function findUserByEmail($email)
+    {
+        // TODO: Implement findUserByEmail() method.
+    }
 }
