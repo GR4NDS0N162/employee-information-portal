@@ -1,7 +1,6 @@
 <?php
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
- * @var ChangePasswordForm                $changePasswordForm
  */
 
 use Application\Form\User\ChangePasswordForm;
@@ -16,6 +15,11 @@ $this->inlineScript()
 $profileForm = $this->profileForm;
 $profileForm->setAttribute('action', $this->url('user/edit-profile/profile-form', [], true));
 $profileForm->prepare();
+
+/** @var ChangePasswordForm $changePasswordForm */
+$changePasswordForm = $this->changePasswordForm;
+$changePasswordForm->setAttribute('action', $this->url('user/edit-profile/change-password-form', [], true));
+$changePasswordForm->prepare();
 ?>
 <div class="row g-3">
     <div class="col-12">
