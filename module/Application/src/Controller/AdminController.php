@@ -178,12 +178,25 @@ class AdminController extends AbstractActionController
             'headTitleName' => 'Управление должностями (Администратор)',
             'navbar'        => 'Laminas\Navigation\Admin'
         ]);
-        $viewModel = new ViewModel();
 
-        $positionList = new PositionList($this->positionRepository->findAllPositions());
+        $list = $this->positionRepository->findAllPositions();
+        $positionList = new PositionList($list);
         $this->positionForm->bind($positionList);
 
-        $viewModel->setVariable('positionForm', $this->positionForm);
+        $viewModel = new ViewModel(['positionForm' => $this->positionForm]);
+
+        $request = $this->getRequest();
+        if (!$request->isPost()) {
+            return $viewModel;
+        }
+
+        $this->positionForm->setData($request->getPost());
+
+        if (!$this->positionForm->isValid()) {
+            return $viewModel;
+        }
+
+        // TODO: Обнови таблицу с должностями.
 
         return $viewModel;
     }
