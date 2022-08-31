@@ -2,8 +2,8 @@
 
 namespace Application\Model;
 
+use Application\Model\Entity\Email;
 use Application\Model\Entity\User;
-use Laminas\Form\Element\Email;
 
 interface UserRepositoryInterface
 {
