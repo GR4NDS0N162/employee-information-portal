@@ -2,7 +2,14 @@
 
 namespace Application\Model\Entity;
 
-class UserStatus
+use DomainException;
+use Laminas\Filter\ToInt;
+use Laminas\InputFilter\InputFilter;
+use Laminas\InputFilter\InputFilterAwareInterface;
+use Laminas\InputFilter\InputFilterInterface;
+use Laminas\Validator\GreaterThan;
+
+class UserStatus implements InputFilterAwareInterface
 {
     /**
      * @var int|null
@@ -12,6 +19,10 @@ class UserStatus
      * @var int
      */
     private $statusId;
+    /**
+     * @var InputFilter
+     */
+    private $inputFilter;
 
     /**
      * @param int|null $userId
@@ -39,5 +50,57 @@ class UserStatus
     public function getStatusId()
     {
         return $this->statusId;
+    }
+
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        throw new DomainException(
+            sprintf(
+                '%s does not allow injection of an alternate input filter',
+                __CLASS__
+            )
+        );
+    }
+
+    public function getInputFilter()
+    {
+        if ($this->inputFilter) {
+            return $this->inputFilter;
+        }
+
+        $inputFilter = new InputFilter();
+
+        $inputFilter->add([
+            'name'       => 'userId',
+            'filters'    => [
+                ['name' => ToInt::class],
+            ],
+            'validators' => [
+                [
+                    'name'    => GreaterThan::class,
+                    'options' => [
+                        'min' => 0,
+                    ],
+                ],
+            ],
+        ]);
+
+        $inputFilter->add([
+            'name'       => 'statusId',
+            'filters'    => [
+                ['name' => ToInt::class],
+            ],
+            'validators' => [
+                [
+                    'name'    => GreaterThan::class,
+                    'options' => [
+                        'min' => 0,
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->inputFilter = $inputFilter;
+        return $this->inputFilter;
     }
 }
