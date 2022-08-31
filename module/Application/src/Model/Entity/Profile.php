@@ -2,7 +2,18 @@
 
 namespace Application\Model\Entity;
 
-class Profile
+use DomainException;
+use Laminas\Filter\ToInt;
+use Laminas\InputFilter\InputFilter;
+use Laminas\InputFilter\InputFilterAwareInterface;
+use Laminas\InputFilter\InputFilterInterface;
+use Laminas\Validator\Between;
+use Laminas\Validator\Date;
+use Laminas\Validator\GreaterThan;
+use Laminas\Validator\Regex;
+use Laminas\Validator\StringLength;
+
+class Profile implements InputFilterAwareInterface
 {
     /**
      * @var int|null
@@ -56,6 +67,10 @@ class Profile
      * @var Phone[]
      */
     protected $phones;
+    /**
+     * @var InputFilter
+     */
+    private $inputFilter;
 
     /**
      * @param string      $password
@@ -234,5 +249,190 @@ class Profile
     public function setPhones($phones)
     {
         $this->phones = $phones;
+    }
+
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        throw new DomainException(
+            sprintf(
+                '%s does not allow injection of an alternate input filter',
+                __CLASS__
+            )
+        );
+    }
+
+    public function getInputFilter()
+    {
+        if ($this->inputFilter) {
+            return $this->inputFilter;
+        }
+
+        $inputFilter = new InputFilter();
+
+        $inputFilter->add([
+            'name'       => 'id',
+            'required'   => true,
+            'filters'    => [
+                ['name' => ToInt::class],
+            ],
+            'validators' => [
+                [
+                    'name'    => GreaterThan::class,
+                    'options' => [
+                        'min' => 0,
+                    ],
+                ],
+            ],
+        ]);
+
+        $inputFilter->add([
+            'name'       => 'password',
+            'required'   => true,
+            'validators' => [
+                [
+                    'name'    => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'min'      => 8,
+                        'max'      => 32,
+                    ],
+                ],
+                [
+                    'name'    => Regex::class,
+                    'options' => [
+                        'pattern' => '/^(?=.*?[а-яa-z])(?=.*?[А-ЯA-Z])(?=.*?[0-9])(?=.*?[!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~])[а-яa-zА-ЯA-Z0-9!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]*$/',
+                    ],
+                ],
+            ],
+        ]);
+
+        $inputFilter->add([
+            'name'       => 'tempPassword',
+            'validators' => [
+                [
+                    'name'    => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'min'      => 8,
+                        'max'      => 32,
+                    ],
+                ],
+                [
+                    'name'    => Regex::class,
+                    'options' => [
+                        'pattern' => '/^(?=.*?[а-яa-z])(?=.*?[А-ЯA-Z])(?=.*?[0-9])(?=.*?[!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~])[а-яa-zА-ЯA-Z0-9!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]*$/',
+                    ],
+                ],
+            ],
+        ]);
+
+        $inputFilter->add([
+            'name'       => 'tpCreatedAt',
+            'validators' => [
+                [
+                    'name'    => Date::class,
+                    'options' => [
+                        'format' => 'Y-m-d H:i:s',
+                    ],
+                ],
+            ],
+        ]);
+
+        $inputFilter->add([
+            'name'       => 'surname',
+            'validators' => [
+                [
+                    'name'    => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'max'      => 60,
+                    ],
+                ],
+            ],
+        ]);
+
+        $inputFilter->add([
+            'name'       => 'name',
+            'validators' => [
+                [
+                    'name'    => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'max'      => 60,
+                    ],
+                ],
+            ],
+        ]);
+
+        $inputFilter->add([
+            'name'       => 'patronymic',
+            'validators' => [
+                [
+                    'name'    => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'max'      => 60,
+                    ],
+                ],
+            ],
+        ]);
+
+        $inputFilter->add([
+            'name'       => 'gender',
+            'filters'    => [
+                ['name' => ToInt::class],
+            ],
+            'validators' => [
+                [
+                    'name'    => Between::class,
+                    'options' => [
+                        'min'       => -127,
+                        'max'       => 128,
+                        'inclusive' => true,
+                    ],
+                ],
+            ],
+        ]);
+
+        $inputFilter->add([
+            'name'       => 'birthday',
+            'validators' => [
+                [
+                    'name'    => Date::class,
+                    'options' => [
+                        'format' => 'Y-m-d',
+                    ],
+                ],
+            ],
+        ]);
+
+        $inputFilter->add([
+            'name'       => 'image',
+            'validators' => [
+                [
+                    'name'    => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'max'      => 255,
+                    ],
+                ],
+            ],
+        ]);
+
+        $inputFilter->add([
+            'name'       => 'skype',
+            'validators' => [
+                [
+                    'name'    => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'max'      => 32,
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->inputFilter = $inputFilter;
+        return $this->inputFilter;
     }
 }

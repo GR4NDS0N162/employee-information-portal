@@ -2,6 +2,10 @@
 
 namespace Application\Model\Entity;
 
+use Laminas\Filter\ToInt;
+use Laminas\InputFilter\InputFilter;
+use Laminas\Validator\GreaterThan;
+
 class User extends Profile
 {
     /**
@@ -12,6 +16,10 @@ class User extends Profile
      * @var bool[]
      */
     protected $status;
+    /**
+     * @var InputFilter
+     */
+    private $inputFilter;
 
     /**
      * @param int         $positionId
@@ -97,5 +105,33 @@ class User extends Profile
     public function setStatus($status)
     {
         $this->status = $status;
+    }
+
+    public function getInputFilter()
+    {
+        if ($this->inputFilter) {
+            return $this->inputFilter;
+        }
+
+        $inputFilter = parent::getInputFilter();
+
+        $inputFilter->add([
+            'name'       => 'positionId',
+            'required'   => true,
+            'filters'    => [
+                ['name' => ToInt::class],
+            ],
+            'validators' => [
+                [
+                    'name'    => GreaterThan::class,
+                    'options' => [
+                        'min' => 0,
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->inputFilter = $inputFilter;
+        return $this->inputFilter;
     }
 }
