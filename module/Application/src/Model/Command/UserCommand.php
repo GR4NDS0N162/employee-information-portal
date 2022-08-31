@@ -2,19 +2,36 @@
 
 namespace Application\Model\Command;
 
+use Application\Model\EmailRepositoryInterface;
 use Application\Model\Executer;
 use Application\Model\PasswordGenerator;
 use Application\Model\UserCommandInterface;
+use Application\Model\UserRepositoryInterface;
 use InvalidArgumentException;
+use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Sql;
 use RuntimeException;
 
 class UserCommand implements UserCommandInterface
 {
+    /**
+     * @var AdapterInterface
+     */
     private $db;
+    /**
+     * @var EmailRepositoryInterface
+     */
     private $emailRepository;
+    /**
+     * @var UserRepositoryInterface
+     */
     private $userRepository;
 
+    /**
+     * @param AdapterInterface         $db
+     * @param EmailRepositoryInterface $emailRepository
+     * @param UserRepositoryInterface  $userRepository
+     */
     public function __construct($db, $emailRepository, $userRepository)
     {
         $this->db = $db;
