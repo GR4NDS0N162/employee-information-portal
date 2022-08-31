@@ -3,6 +3,7 @@
 namespace Application\Model\Entity;
 
 use DomainException;
+use Laminas\Filter\ToInt;
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
@@ -97,6 +98,29 @@ class ChangePassword implements InputFilterAwareInterface
         }
 
         $inputFilter = new InputFilter();
+
+        $inputFilter->add([
+            'name'     => 'id',
+            'required' => true,
+            'filters'  => [
+                ['name' => ToInt::class],
+            ],
+        ]);
+
+        $inputFilter->add([
+            'name'     => 'currentPassword',
+            'required' => true,
+        ]);
+
+        $inputFilter->add([
+            'name'     => 'newPassword',
+            'required' => true,
+        ]);
+
+        $inputFilter->add([
+            'name'     => 'passwordCheck',
+            'required' => true,
+        ]);
 
         $this->inputFilter = $inputFilter;
         return $this->inputFilter;
