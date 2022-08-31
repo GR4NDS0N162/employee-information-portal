@@ -5,6 +5,7 @@ namespace Application\Controller;
 use Application\Form\Admin as Form;
 use Application\Model\Command\UserCommandInterface;
 use Application\Model\PhotoUrlGenerator;
+use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
@@ -31,23 +32,29 @@ class AdminController extends AbstractActionController
      */
     private $userRepository;
     /**
+     * @var PositionRepositoryInterface
+     */
+    private $positionRepository;
+    /**
      * @var UserCommandInterface
      */
     private $userCommand;
 
     /**
-     * @param Form\PositionForm       $positionForm
-     * @param Form\UserForm           $userForm
-     * @param Form\AdminFilterForm    $adminFilterForm
-     * @param UserRepositoryInterface $userRepository
-     * @param UserCommandInterface    $userCommand
+     * @param Form\PositionForm           $positionForm
+     * @param Form\UserForm               $userForm
+     * @param Form\AdminFilterForm        $adminFilterForm
+     * @param UserRepositoryInterface     $userRepository
+     * @param PositionRepositoryInterface $positionRepository
+     * @param UserCommandInterface        $userCommand
      */
-    public function __construct($positionForm, $userForm, $adminFilterForm, $userRepository, $userCommand)
+    public function __construct($positionForm, $userForm, $adminFilterForm, $userRepository, $positionRepository, $userCommand)
     {
         $this->positionForm = $positionForm;
         $this->userForm = $userForm;
         $this->adminFilterForm = $adminFilterForm;
         $this->userRepository = $userRepository;
+        $this->positionRepository = $positionRepository;
         $this->userCommand = $userCommand;
     }
 
