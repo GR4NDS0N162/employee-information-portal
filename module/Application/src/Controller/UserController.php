@@ -2,7 +2,7 @@
 
 namespace Application\Controller;
 
-use Application\Form\User;
+use Application\Form\User as Form;
 use Application\Model\Command\UserCommandInterface;
 use Application\Model\PhotoUrlGenerator;
 use Application\Model\Repository\UserRepositoryInterface;
@@ -16,19 +16,19 @@ class UserController extends AbstractActionController
     public const userId = 1;
 
     /**
-     * @var User\ProfileForm
+     * @var Form\ProfileForm
      */
     private $profileForm;
     /**
-     * @var User\ViewProfileForm
+     * @var Form\ViewProfileForm
      */
     private $viewProfileForm;
     /**
-     * @var User\UserFilterForm
+     * @var Form\UserFilterForm
      */
     private $userFilterForm;
     /**
-     * @var User\ChangePasswordForm
+     * @var Form\ChangePasswordForm
      */
     private $changePasswordForm;
     /**
@@ -41,10 +41,10 @@ class UserController extends AbstractActionController
     private $userCommand;
 
     /**
-     * @param User\ProfileForm        $profileForm
-     * @param User\ViewProfileForm    $viewProfileForm
-     * @param User\UserFilterForm     $userFilterForm
-     * @param User\ChangePasswordForm $changePasswordForm
+     * @param Form\ProfileForm        $profileForm
+     * @param Form\ViewProfileForm    $viewProfileForm
+     * @param Form\UserFilterForm     $userFilterForm
+     * @param Form\ChangePasswordForm $changePasswordForm
      * @param UserRepositoryInterface $userRepository
      * @param UserCommandInterface    $userCommand
      */
