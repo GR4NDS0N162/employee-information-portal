@@ -174,12 +174,11 @@ class AdminController extends AbstractActionController
 
     public function editPositionsAction()
     {
+        $this->layout()->setVariables([
+            'headTitleName' => 'Управление должностями (Администратор)',
+            'navbar'        => 'Laminas\Navigation\Admin'
+        ]);
         $viewModel = new ViewModel();
-
-        $headTitleName = 'Управление должностями (Администратор)';
-
-        $this->layout()->setVariable('headTitleName', $headTitleName);
-        $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
 
         $positionList = new PositionList($this->positionRepository->findAllPositions());
         $this->positionForm->bind($positionList);
