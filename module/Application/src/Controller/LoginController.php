@@ -69,28 +69,27 @@ class LoginController extends AbstractActionController
     {
         $request = $this->getRequest();
 
-        if (!$request->isPost())
+        if (!$request->isPost()) {
             return $this->redirect()->toRoute('home');
+        }
 
         $this->signUpForm->setData($request->getPost());
 
-        if (!$this->signUpForm->isValid())
+        if (!$this->signUpForm->isValid()) {
             return $this->redirect()->toRoute('home');
+        }
 
         $data = $this->signUpForm->getData();
 
         $email = new Email($data['email']);
-        $user = new User();
-        $user->setPositionId($data['position']);
-        $user->setPassword($data['new-password']);
+        $user = new User(
+            $data['position'],
+            [],
+            $data['new-password'],
+        );
 
-        try {
-            $this->userCommand->insertUser($user, $email);
-        } catch (Exception $ex) {
-            throw $ex;
-        }
-
-        return $this->redirect()->toRoute('user\view-profile');
+        $this->userCommand->insertUser($user, $email);
+        return $this->redirect()->toRoute('user/view-profile');
     }
 
     public function recoverAction()
