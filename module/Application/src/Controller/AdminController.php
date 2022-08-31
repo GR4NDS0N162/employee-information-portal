@@ -4,6 +4,7 @@ namespace Application\Controller;
 
 use Application\Form\Admin as Form;
 use Application\Model\Command\UserCommandInterface;
+use Application\Model\Entity\PositionList;
 use Application\Model\PhotoUrlGenerator;
 use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
@@ -165,6 +166,9 @@ class AdminController extends AbstractActionController
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
         $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
+
+        $positionList = new PositionList($this->positionRepository->findAllPositions());
+        $this->positionForm->bind($positionList);
 
         $viewModel->setVariable('positionForm', $this->positionForm);
 
