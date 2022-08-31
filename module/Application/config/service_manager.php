@@ -15,9 +15,11 @@ return [
         Model\Repository\UserRepositoryInterface::class       => Model\Repository\UserRepository::class,
         Model\Repository\UserStatusRepositoryInterface::class => Model\Repository\UserStatusRepository::class,
         Model\Command\UserCommandInterface::class             => Model\Command\UserCommand::class,
+        Model\Command\PositionCommandInterface::class         => Model\Command\PositionCommand::class,
     ],
     'factories' => [
-        Model\Command\UserCommand::class => CommandFactory\UserCommandFactory::class,
+        Model\Command\UserCommand::class     => CommandFactory\UserCommandFactory::class,
+        Model\Command\PositionCommand::class => CommandFactory\PositionCommandFactory::class,
 
         Model\Options\PositionOptions::class => OptionsFactory\PositionOptionsFactory::class,
 
