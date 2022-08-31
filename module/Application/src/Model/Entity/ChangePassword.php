@@ -2,7 +2,12 @@
 
 namespace Application\Model\Entity;
 
-class ChangePassword
+use DomainException;
+use Laminas\InputFilter\InputFilter;
+use Laminas\InputFilter\InputFilterAwareInterface;
+use Laminas\InputFilter\InputFilterInterface;
+
+class ChangePassword implements InputFilterAwareInterface
 {
     /**
      * @var int|null
@@ -20,6 +25,10 @@ class ChangePassword
      * @var string
      */
     private $passwordCheck;
+    /**
+     * @var InputFilterInterface
+     */
+    private $inputFilter;
 
     /**
      * @param int|null $id
@@ -69,5 +78,27 @@ class ChangePassword
     public function getPasswordCheck()
     {
         return $this->passwordCheck;
+    }
+
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        throw new DomainException(
+            sprintf(
+                '%s does not allow injection of an alternate input filter',
+                __CLASS__
+            )
+        );
+    }
+
+    public function getInputFilter()
+    {
+        if ($this->inputFilter) {
+            return $this->inputFilter;
+        }
+
+        $inputFilter = new InputFilter();
+
+        $this->inputFilter = $inputFilter;
+        return $this->inputFilter;
     }
 }
