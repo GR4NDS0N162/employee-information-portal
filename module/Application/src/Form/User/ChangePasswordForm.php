@@ -44,10 +44,10 @@ class ChangePasswordForm extends Form
                 'change-password' => [
                     'value'    => 'col-12',
                     'children' => [
-                        'id'               => 'd-none',
-                        'current-password' => 'col-12',
-                        'new-password'     => 'col-12',
-                        'password-check'   => 'col-12',
+                        'id'              => 'd-none',
+                        'currentPassword' => 'col-12',
+                        'newPassword'     => 'col-12',
+                        'passwordCheck'   => 'col-12',
                     ],
                 ],
                 'submit-button'   => 'col-12',

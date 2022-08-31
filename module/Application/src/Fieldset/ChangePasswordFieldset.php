@@ -23,7 +23,7 @@ class ChangePasswordFieldset extends Fieldset
         ]);
 
         $this->add([
-            'name'       => 'current-password',
+            'name'       => 'currentPassword',
             'type'       => Password::class,
             'attributes' => [
                 'class'        => 'form-control',
@@ -40,7 +40,7 @@ class ChangePasswordFieldset extends Fieldset
         ]);
 
         $this->add([
-            'name'       => 'new-password',
+            'name'       => 'newPassword',
             'type'       => Password::class,
             'attributes' => [
                 'class'        => 'form-control',
@@ -60,7 +60,7 @@ class ChangePasswordFieldset extends Fieldset
         ]);
 
         $this->add([
-            'name'       => 'password-check',
+            'name'       => 'passwordCheck',
             'type'       => Password::class,
             'attributes' => [
                 'class'       => 'form-control',
