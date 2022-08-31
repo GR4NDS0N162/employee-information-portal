@@ -67,17 +67,12 @@ class UserController extends AbstractActionController
 
     public function viewProfileAction()
     {
-        $viewModel = new ViewModel([
-            'viewProfileForm' => $this->viewProfileForm,
-        ]);
+        $this->layout()->setVariables(['headTitleName' => 'Просмотр профиля']);
+        $viewModel = new ViewModel(['viewProfileForm' => $this->viewProfileForm]);
 
-        $this->layout()->setVariables([
-            'headTitleName' => 'Просмотр профиля',
-        ]);
-
-        $user = $this->userRepository->findUser(self::userId);
-        $this->viewProfileForm->bind($user);
-        $this->viewProfileForm->get('profile')->get('image')->setAttribute('src', $user->getImage());
+        $profile = $this->userRepository->findProfile(self::userId);
+        $this->viewProfileForm->bind($profile);
+        $this->viewProfileForm->get('profile')->get('image')->setAttribute('src', $profile->getImage());
 
         return $viewModel;
     }
@@ -87,19 +82,18 @@ class UserController extends AbstractActionController
         $this->layout()->setVariables(['headTitleName' => 'Редактирование профиля']);
 
         try {
-            $foundUser = $this->userRepository->findUser(self::userId);
-            $changePassword = new ChangePassword($foundUser->getId());
+            $foundProfile = $this->userRepository->findProfile(self::userId);
+            $changePassword = new ChangePassword($foundProfile->getId());
         } catch (InvalidArgumentException $ex) {
             return $this->redirect()->toRoute('home');
         }
-
 
         $viewModel = new ViewModel([
             'profileForm'        => $this->profileForm,
             'changePasswordForm' => $this->changePasswordForm,
         ]);
 
-        $this->profileForm->bind($foundUser);
+        $this->profileForm->bind($foundProfile);
         $this->changePasswordForm->bind($changePassword);
 
         return $viewModel;
