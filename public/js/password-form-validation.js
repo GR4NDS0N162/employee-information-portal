@@ -1,11 +1,11 @@
-const currentPasswordInput = $(`input[name="current-password"]`)[0];
-const currentPasswordFeedback = $(`input[name="current-password"] ~ .invalid-feedback`)[0];
+const currentPasswordInput = $(`input[name="change-password[current-password]"]`)[0];
+const currentPasswordFeedback = $(`input[name="change-password[current-password]"] ~ .invalid-feedback`)[0];
 
-const newPasswordInput = $(`input[name="new-password"]`)[0];
-const newPasswordFeedback = $(`input[name="new-password"] ~ .invalid-feedback`)[0];
+const newPasswordInput = $(`input[name="change-password[new-password]"]`)[0];
+const newPasswordFeedback = $(`input[name="change-password[new-password]"] ~ .invalid-feedback`)[0];
 
-const passwordCheckInput = $(`input[name="password-check"]`)[0];
-const passwordCheckFeedback = $(`input[name="password-check"] ~ .invalid-feedback`)[0];
+const passwordCheckInput = $(`input[name="change-password[password-check]"]`)[0];
+const passwordCheckFeedback = $(`input[name="change-password[password-check]"] ~ .invalid-feedback`)[0];
 
 const passwordInput = $(`input[name="user[password]"]`)[0];
 const passwordFeedback = $(`input[name="user[password]"] ~ .invalid-feedback`)[0];
