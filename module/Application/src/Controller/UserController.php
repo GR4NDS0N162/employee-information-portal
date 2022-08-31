@@ -105,6 +105,14 @@ class UserController extends AbstractActionController
         return $viewModel;
     }
 
+    public function profileFormAction()
+    {
+    }
+
+    public function changePasswordFormAction()
+    {
+    }
+
     public function viewUserListAction()
     {
         $viewModel = new ViewModel();

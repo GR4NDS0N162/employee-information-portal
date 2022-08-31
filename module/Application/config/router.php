@@ -76,12 +76,21 @@ return [
                     ],
                     'may_terminate' => true,
                     'child_routes'  => [
-                        'profile-form' => [
+                        'profile-form'         => [
                             'type'    => Literal::class,
                             'options' => [
-                                'route'    => '/profileform',
+                                'route'    => '/profile-form',
                                 'defaults' => [
                                     'action' => 'profile-form',
+                                ],
+                            ],
+                        ],
+                        'change-password-form' => [
+                            'type'    => Literal::class,
+                            'options' => [
+                                'route'    => '/change-password-form',
+                                'defaults' => [
+                                    'action' => 'change-password-form',
                                 ],
                             ],
                         ],
