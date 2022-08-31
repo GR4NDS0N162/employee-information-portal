@@ -84,6 +84,8 @@ class UserController extends AbstractActionController
 
     public function editProfileAction()
     {
+        $this->layout()->setVariables(['headTitleName' => 'Редактирование профиля']);
+
         try {
             $foundUser = $this->userRepository->findUser(self::userId);
             $changePassword = new ChangePassword($foundUser->getId());
@@ -91,10 +93,6 @@ class UserController extends AbstractActionController
             return $this->redirect()->toRoute('home');
         }
 
-        $this->layout()->setVariables([
-            'headTitleName' => 'Редактирование профиля',
-            'navbar'        => 'Laminas\Navigation\Admin',
-        ]);
 
         $viewModel = new ViewModel([
             'profileForm'        => $this->profileForm,
