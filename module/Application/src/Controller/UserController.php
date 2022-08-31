@@ -2,8 +2,10 @@
 
 namespace Application\Controller;
 
-use Application\Form;
+use Application\Form\User;
+use Application\Model\Command\UserCommandInterface;
 use Application\Model\PhotoUrlGenerator;
+use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
@@ -13,15 +15,47 @@ class UserController extends AbstractActionController
     public const maxPageCount = 20;
     public const userId = 1;
 
+    /**
+     * @var User\ProfileForm
+     */
     private $profileForm;
+    /**
+     * @var User\ViewProfileForm
+     */
     private $viewProfileForm;
+    /**
+     * @var User\UserFilterForm
+     */
     private $userFilterForm;
+    /**
+     * @var User\ChangePasswordForm
+     */
     private $changePasswordForm;
+    /**
+     * @var UserRepositoryInterface
+     */
     private $userRepository;
+    /**
+     * @var UserCommandInterface
+     */
     private $userCommand;
 
-    public function __construct($profileForm, $viewProfileForm, $userFilterForm, $changePasswordForm, $userRepository, $userCommand)
-    {
+    /**
+     * @param User\ProfileForm        $profileForm
+     * @param User\ViewProfileForm    $viewProfileForm
+     * @param User\UserFilterForm     $userFilterForm
+     * @param User\ChangePasswordForm $changePasswordForm
+     * @param UserRepositoryInterface $userRepository
+     * @param UserCommandInterface    $userCommand
+     */
+    public function __construct(
+        $profileForm,
+        $viewProfileForm,
+        $userFilterForm,
+        $changePasswordForm,
+        $userRepository,
+        $userCommand
+    ) {
         $this->profileForm = $profileForm;
         $this->viewProfileForm = $viewProfileForm;
         $this->userFilterForm = $userFilterForm;
