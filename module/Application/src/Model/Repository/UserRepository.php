@@ -8,6 +8,7 @@ use Application\Model\Entity\User;
 use Application\Model\PhoneRepositoryInterface;
 use Application\Model\StatusRepositoryInterface;
 use Application\Model\UserRepositoryInterface;
+use Application\Model\UserStatusRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Select;
@@ -40,23 +41,36 @@ class UserRepository implements UserRepositoryInterface
      * @var StatusRepositoryInterface
      */
     private $statusRepository;
+    /**
+     * @var UserStatusRepositoryInterface
+     */
+    private $userStatusRepository;
 
     /**
-     * @param AdapterInterface          $db
-     * @param HydratorInterface         $hydrator
-     * @param User                      $prototype
-     * @param EmailRepositoryInterface  $emailRepository
-     * @param PhoneRepositoryInterface  $phoneRepository
-     * @param StatusRepositoryInterface $statusRepository
+     * @param AdapterInterface              $db
+     * @param HydratorInterface             $hydrator
+     * @param User                          $prototype
+     * @param EmailRepositoryInterface      $emailRepository
+     * @param PhoneRepositoryInterface      $phoneRepository
+     * @param StatusRepositoryInterface     $statusRepository
+     * @param UserStatusRepositoryInterface $userStatusRepository
      */
-    public function __construct($db, $hydrator, $prototype, $emailRepository, $phoneRepository, $statusRepository)
-    {
+    public function __construct(
+        $db,
+        $hydrator,
+        $prototype,
+        $emailRepository,
+        $phoneRepository,
+        $statusRepository,
+        $userStatusRepository
+    ) {
         $this->db = $db;
         $this->hydrator = $hydrator;
         $this->prototype = $prototype;
         $this->emailRepository = $emailRepository;
         $this->phoneRepository = $phoneRepository;
         $this->statusRepository = $statusRepository;
+        $this->userStatusRepository = $userStatusRepository;
     }
 
     public function findUser($identifier)
