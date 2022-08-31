@@ -7,6 +7,7 @@ use Laminas\Filter\ToInt;
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
+use Laminas\Validator\StringLength;
 
 class ChangePassword implements InputFilterAwareInterface
 {
@@ -108,18 +109,48 @@ class ChangePassword implements InputFilterAwareInterface
         ]);
 
         $inputFilter->add([
-            'name'     => 'currentPassword',
-            'required' => true,
+            'name'       => 'currentPassword',
+            'required'   => true,
+            'validators' => [
+                [
+                    'name'    => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'min'      => 1,
+                        'max'      => 32,
+                    ],
+                ],
+            ],
         ]);
 
         $inputFilter->add([
-            'name'     => 'newPassword',
-            'required' => true,
+            'name'       => 'newPassword',
+            'required'   => true,
+            'validators' => [
+                [
+                    'name'    => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'min'      => 8,
+                        'max'      => 32,
+                    ],
+                ],
+            ],
         ]);
 
         $inputFilter->add([
-            'name'     => 'passwordCheck',
-            'required' => true,
+            'name'       => 'passwordCheck',
+            'required'   => true,
+            'validators' => [
+                [
+                    'name'    => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'min'      => 8,
+                        'max'      => 32,
+                    ],
+                ],
+            ],
         ]);
 
         $this->inputFilter = $inputFilter;
