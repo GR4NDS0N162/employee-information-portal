@@ -84,7 +84,7 @@ class LoginController extends AbstractActionController
         $user = new User(
             $data['position'],
             [],
-            $data['new-password'],
+            $data['new_password'],
         );
 
         $this->userCommand->insertUser($user, $email);
