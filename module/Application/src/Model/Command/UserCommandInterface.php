@@ -2,6 +2,7 @@
 
 namespace Application\Model\Command;
 
+use Application\Model\Entity\ChangePassword;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\User;
 
@@ -16,11 +17,11 @@ interface UserCommandInterface
     public function insertUser($user, $email);
 
     /**
-     * @param array $values
+     * @param ChangePassword $changePassword
      *
      * @return void
      */
-    public function changePassword($values);
+    public function changePassword($changePassword);
 
     /**
      * @param Email $email
