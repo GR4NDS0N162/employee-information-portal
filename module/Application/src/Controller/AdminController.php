@@ -5,14 +5,11 @@ namespace Application\Controller;
 use Application\Form\Admin as Form;
 use Application\Model\Command\PositionCommandInterface;
 use Application\Model\Command\UserCommandInterface;
-use Application\Model\Entity\Position;
 use Application\Model\Entity\PositionList;
 use Application\Model\PhotoUrlGenerator;
 use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
-use Laminas\Hydrator\ReflectionHydrator;
-use Laminas\Hydrator\Strategy\CollectionStrategy;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
@@ -199,22 +196,10 @@ class AdminController extends AbstractActionController
             return $viewModel;
         }
 
-        $inputFilter = $this->positionForm->getInputFilter();
-        $baseFieldset = $this->positionForm->getBaseFieldset();
-        $values = $inputFilter->getValues()[$baseFieldset->getName()];
-
-        $hydrator = new ReflectionHydrator();
-        $hydrator->addStrategy(
-            'list',
-            new CollectionStrategy(
-                new ReflectionHydrator(),
-                Position::class
-            )
+        $this->positionCommand->updatePositions(
+            $this->positionForm->getObject()
         );
-        $newPositionList = new PositionList();
-        $hydrator->hydrate($values, $newPositionList);
-        // TODO: Обнови таблицу с должностями.
 
-        return $viewModel;
+        return $this->redirect()->toRoute('admin/edit-position');
     }
 }
