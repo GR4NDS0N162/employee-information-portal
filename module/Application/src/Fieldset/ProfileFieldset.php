@@ -16,8 +16,13 @@ class ProfileFieldset extends Fieldset
 
     public function init()
     {
-        $this->setHydrator(new ClassMethodsHydrator(false, true));
-        $this->setObject(new Profile());
+        parent::init();
+
+        $object = new Profile();
+        $this->setObject($object);
+
+        $hydrator = new ClassMethodsHydrator(true, true);
+        $this->setHydrator($hydrator);
 
         $this->add([
             'name' => 'id',

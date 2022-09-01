@@ -13,10 +13,11 @@ class PositionListFieldset extends Fieldset
     {
         parent::init();
 
-        $hydrator = new ClassMethodsHydrator(true, true);
+        $object = new PositionList();
+        $this->setObject($object);
 
+        $hydrator = new ClassMethodsHydrator(true, true);
         $this->setHydrator($hydrator);
-        $this->setObject(new PositionList());
 
         $this->add([
             'name'       => 'list',

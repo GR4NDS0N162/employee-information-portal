@@ -11,8 +11,13 @@ class PhoneFieldset extends Fieldset
 {
     public function init()
     {
-        $this->setHydrator(new ClassMethodsHydrator(false, true));
-        $this->setObject(new Phone(''));
+        parent::init();
+
+        $object = new Phone();
+        $this->setObject($object);
+
+        $hydrator = new ClassMethodsHydrator(true, true);
+        $this->setHydrator($hydrator);
 
         $this->add([
             'name'       => 'number',

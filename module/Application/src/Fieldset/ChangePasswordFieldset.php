@@ -14,8 +14,11 @@ class ChangePasswordFieldset extends Fieldset
     {
         parent::init();
 
-        $this->setHydrator(new ClassMethodsHydrator(false, true));
-        $this->setObject(new ChangePassword());
+        $object = new ChangePassword();
+        $this->setObject($object);
+
+        $hydrator = new ClassMethodsHydrator(true, true);
+        $this->setHydrator($hydrator);
 
         $this->add([
             'name' => 'id',
