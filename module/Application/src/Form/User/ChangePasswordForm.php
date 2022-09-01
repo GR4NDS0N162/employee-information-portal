@@ -17,7 +17,7 @@ class ChangePasswordForm extends Form
         $this->setAttribute('novalidate', true);
 
         $this->add([
-            'name'       => 'change-password',
+            'name'       => 'change_password',
             'type'       => ChangePasswordFieldset::class,
             'attributes' => [
                 'class' => 'row g-3 align-items-start',
@@ -28,7 +28,7 @@ class ChangePasswordForm extends Form
         ]);
 
         $this->add([
-            'name'       => 'submit-button',
+            'name'       => 'submit_button',
             'type'       => Element\Button::class,
             'attributes' => [
                 'type'  => 'submit',
@@ -41,16 +41,16 @@ class ChangePasswordForm extends Form
 
         FieldsetMapper::setAttributes($this, [
             'children' => [
-                'change-password' => [
+                'change_password' => [
                     'value'    => 'col-12',
                     'children' => [
-                        'id'              => 'd-none',
-                        'currentPassword' => 'col-12',
-                        'newPassword'     => 'col-12',
-                        'passwordCheck'   => 'col-12',
+                        'id'               => 'd-none',
+                        'current_password' => 'col-12',
+                        'new_password'     => 'col-12',
+                        'password_check'   => 'col-12',
                     ],
                 ],
-                'submit-button'   => 'col-12',
+                'submit_button'   => 'col-12',
             ],
         ]);
     }

@@ -22,10 +22,10 @@ class ChangePasswordFieldset extends Fieldset
 
         $hydrator = new ClassMethodsHydrator(true, true);
         FieldsetMapper::setStrategies($hydrator, [
-            'id'              => new NullableStrategy(ScalarTypeStrategy::createToInt(), true),
-            'currentPassword' => ScalarTypeStrategy::createToString(),
-            'newPassword'     => ScalarTypeStrategy::createToString(),
-            'passwordCheck'   => ScalarTypeStrategy::createToString(),
+            'id'               => new NullableStrategy(ScalarTypeStrategy::createToInt(), true),
+            'current_password' => ScalarTypeStrategy::createToString(),
+            'new_password'     => ScalarTypeStrategy::createToString(),
+            'password_check'   => ScalarTypeStrategy::createToString(),
         ]);
         $this->setHydrator($hydrator);
 
@@ -35,7 +35,7 @@ class ChangePasswordFieldset extends Fieldset
         ]);
 
         $this->add([
-            'name'       => 'currentPassword',
+            'name'       => 'current_password',
             'type'       => Password::class,
             'attributes' => [
                 'class'        => 'form-control',
@@ -53,7 +53,7 @@ class ChangePasswordFieldset extends Fieldset
         ]);
 
         $this->add([
-            'name'       => 'newPassword',
+            'name'       => 'new_password',
             'type'       => Password::class,
             'attributes' => [
                 'class'        => 'form-control',
@@ -73,7 +73,7 @@ class ChangePasswordFieldset extends Fieldset
         ]);
 
         $this->add([
-            'name'       => 'passwordCheck',
+            'name'       => 'password_check',
             'type'       => Password::class,
             'attributes' => [
                 'class'       => 'form-control',
