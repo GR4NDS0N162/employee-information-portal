@@ -41,6 +41,7 @@ class PositionRepository implements PositionRepositoryInterface
             'id',
             'name',
         ]);
+        $select->order(['name ASC']);
 
         return Extracter::extractValues($select, $this->db, $this->hydrator, $this->prototype);
     }
