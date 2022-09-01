@@ -16,15 +16,15 @@ class Phone implements InputFilterAwareInterface
     /**
      * @var string
      */
-    private string $number;
+    private $number;
     /**
      * @var int|null
      */
-    private ?int $userId;
+    private $userId;
     /**
      * @var InputFilterInterface
      */
-    private InputFilterInterface $inputFilter;
+    private $inputFilter;
 
     /**
      * @param string   $number
@@ -86,7 +86,7 @@ class Phone implements InputFilterAwareInterface
         return $this->inputFilter;
     }
 
-    public function setInputFilter(InputFilterInterface $inputFilter)
+    public function setInputFilter($inputFilter)
     {
         throw new DomainException(
             sprintf(

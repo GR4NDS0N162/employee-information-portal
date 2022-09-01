@@ -18,59 +18,59 @@ class Profile implements InputFilterAwareInterface
     /**
      * @var int|null
      */
-    protected ?int $id;
+    protected $id;
     /**
      * @var string
      */
-    protected string $password;
+    protected $password;
     /**
      * @var string|null
      */
-    protected ?string $tempPassword;
+    protected $tempPassword;
     /**
      * @var string|null
      */
-    protected ?string $tpCreatedAt;
+    protected $tpCreatedAt;
     /**
      * @var string|null
      */
-    protected ?string $surname;
+    protected $surname;
     /**
      * @var string|null
      */
-    protected ?string $name;
+    protected $name;
     /**
      * @var string|null
      */
-    protected ?string $patronymic;
+    protected $patronymic;
     /**
      * @var int|null
      */
-    protected ?int $gender;
+    protected $gender;
     /**
      * @var string|null
      */
-    protected ?string $birthday;
+    protected $birthday;
     /**
      * @var string|null
      */
-    protected ?string $image;
+    protected $image;
     /**
      * @var string|null
      */
-    protected ?string $skype;
+    protected $skype;
     /**
      * @var Email[]
      */
-    protected array $emails;
+    protected $emails;
     /**
      * @var Phone[]
      */
-    protected array $phones;
+    protected $phones;
     /**
      * @var InputFilterInterface
      */
-    private InputFilterInterface $inputFilter;
+    private $inputFilter;
 
     /**
      * @param string      $password
@@ -293,7 +293,7 @@ class Profile implements InputFilterAwareInterface
         return $this->inputFilter;
     }
 
-    public function setInputFilter(InputFilterInterface $inputFilter)
+    public function setInputFilter($inputFilter)
     {
         throw new DomainException(
             sprintf(

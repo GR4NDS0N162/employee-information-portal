@@ -15,15 +15,15 @@ class Status implements InputFilterAwareInterface
     /**
      * @var int|null
      */
-    private ?int $id;
+    private $id;
     /**
      * @var string
      */
-    private string $name;
+    private $name;
     /**
      * @var InputFilterInterface
      */
-    private InputFilterInterface $inputFilter;
+    private $inputFilter;
 
     /**
      * @param string   $name
@@ -79,7 +79,7 @@ class Status implements InputFilterAwareInterface
         return $this->inputFilter;
     }
 
-    public function setInputFilter(InputFilterInterface $inputFilter)
+    public function setInputFilter($inputFilter)
     {
         throw new DomainException(
             sprintf(

@@ -14,15 +14,15 @@ class UserStatus implements InputFilterAwareInterface
     /**
      * @var int|null
      */
-    private ?int $userId;
+    private $userId;
     /**
      * @var int
      */
-    private int $statusId;
+    private $statusId;
     /**
      * @var InputFilterInterface
      */
-    private InputFilterInterface $inputFilter;
+    private $inputFilter;
 
     /**
      * @param int|null $userId
@@ -79,7 +79,7 @@ class UserStatus implements InputFilterAwareInterface
         return $this->inputFilter;
     }
 
-    public function setInputFilter(InputFilterInterface $inputFilter)
+    public function setInputFilter($inputFilter)
     {
         throw new DomainException(
             sprintf(

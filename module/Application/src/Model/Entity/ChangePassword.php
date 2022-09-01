@@ -14,23 +14,23 @@ class ChangePassword implements InputFilterAwareInterface
     /**
      * @var int|null
      */
-    private ?int $id;
+    private $id;
     /**
      * @var string
      */
-    private string $currentPassword;
+    private $currentPassword;
     /**
      * @var string
      */
-    private string $newPassword;
+    private $newPassword;
     /**
      * @var string
      */
-    private string $passwordCheck;
+    private $passwordCheck;
     /**
      * @var InputFilterInterface
      */
-    private InputFilterInterface $inputFilter;
+    private $inputFilter;
 
     /**
      * @param int|null $id
@@ -114,7 +114,7 @@ class ChangePassword implements InputFilterAwareInterface
         return $this->inputFilter;
     }
 
-    public function setInputFilter(InputFilterInterface $inputFilter)
+    public function setInputFilter($inputFilter)
     {
         throw new DomainException(
             sprintf(

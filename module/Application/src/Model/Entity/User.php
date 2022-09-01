@@ -11,15 +11,15 @@ class User extends Profile
     /**
      * @var int
      */
-    protected int $positionId;
+    protected $positionId;
     /**
      * @var bool[]
      */
-    protected array $status;
+    protected $status;
     /**
      * @var InputFilterInterface
      */
-    private InputFilterInterface $inputFilter;
+    private $inputFilter;
 
     /**
      * @param int         $positionId

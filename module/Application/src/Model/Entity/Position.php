@@ -15,28 +15,28 @@ class Position implements InputFilterAwareInterface
     /**
      * @var int|null
      */
-    private ?int $id;
+    private $id;
     /**
      * @var string
      */
-    private string $name;
+    private $name;
     /**
      * @var InputFilterInterface
      */
-    private InputFilterInterface $inputFilter;
+    private $inputFilter;
 
     /**
      * @param string   $name
      * @param int|null $id
      */
-    public function __construct(string $name = '', int $id = null)
+    public function __construct($name = '', $id = null)
     {
         $this->id = $id;
         $this->name = $name;
         $this->inputFilter = $this->getInputFilter();
     }
 
-    public function getInputFilter(): InputFilterInterface
+    public function getInputFilter()
     {
         if (isset($this->inputFilter)) {
             return $this->inputFilter;
@@ -77,7 +77,7 @@ class Position implements InputFilterAwareInterface
         return $this->inputFilter;
     }
 
-    public function setInputFilter(InputFilterInterface $inputFilter): InputFilterAwareInterface
+    public function setInputFilter($inputFilter)
     {
         throw new DomainException(
             sprintf(
@@ -90,7 +90,7 @@ class Position implements InputFilterAwareInterface
     /**
      * @return int|null
      */
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
@@ -98,7 +98,7 @@ class Position implements InputFilterAwareInterface
     /**
      * @param int|null $id
      */
-    public function setId(?int $id)
+    public function setId($id)
     {
         $this->id = $id;
     }
@@ -106,7 +106,7 @@ class Position implements InputFilterAwareInterface
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
@@ -114,7 +114,7 @@ class Position implements InputFilterAwareInterface
     /**
      * @param string $name
      */
-    public function setName(string $name)
+    public function setName($name)
     {
         $this->name = $name;
     }
