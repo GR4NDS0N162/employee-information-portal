@@ -2,6 +2,7 @@
 
 namespace Application\Model\Command;
 
+use Application\Model\Entity\Position;
 use Application\Model\Entity\PositionList;
 
 interface PositionCommandInterface
@@ -19,4 +20,18 @@ interface PositionCommandInterface
      * @return void
      */
     public function deletePositionById($id);
+
+    /**
+     * @param Position $position
+     *
+     * @return void
+     */
+    public function addPosition($position);
+
+    /**
+     * @param Position $position
+     *
+     * @return void
+     */
+    public function updatePosition($position);
 }

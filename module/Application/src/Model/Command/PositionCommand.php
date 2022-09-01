@@ -6,6 +6,8 @@ use Application\Model\Executer;
 use Application\Model\Repository\PositionRepositoryInterface;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Delete;
+use Laminas\Db\Sql\Insert;
+use Laminas\Db\Sql\Update;
 
 class PositionCommand implements PositionCommandInterface
 {
@@ -60,5 +62,22 @@ class PositionCommand implements PositionCommandInterface
         $delete->where(['id = ?' => $id]);
 
         Executer::executeSql($delete, $this->db);
+    }
+
+    public function addPosition($position)
+    {
+        $insert = new Insert('position');
+        $insert->values(['name' => $position->getName()]);
+
+        Executer::executeSql($insert, $this->db);
+    }
+
+    public function updatePosition($position)
+    {
+        $update = new Update('position');
+        $update->set(['name' => $position->getName()]);
+        $update->where(['id' => $position->getId()]);
+
+        Executer::executeSql($update, $this->db);
     }
 }
