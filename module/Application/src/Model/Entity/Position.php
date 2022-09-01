@@ -36,6 +36,16 @@ class Position implements InputFilterAwareInterface
         $this->inputFilter = $this->getInputFilter();
     }
 
+    public function __get($prop)
+    {
+        return $this->$prop;
+    }
+
+    public function __isset($prop): bool
+    {
+        return isset($this->$prop);
+    }
+
     public function getInputFilter()
     {
         if (isset($this->inputFilter)) {
