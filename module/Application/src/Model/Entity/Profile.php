@@ -18,59 +18,59 @@ class Profile implements InputFilterAwareInterface
     /**
      * @var int|null
      */
-    protected $id;
+    protected ?int $id;
     /**
      * @var string
      */
-    protected $password;
+    protected string $password;
     /**
      * @var string|null
      */
-    protected $tempPassword;
+    protected ?string $tempPassword;
     /**
      * @var string|null
      */
-    protected $tpCreatedAt;
+    protected ?string $tpCreatedAt;
     /**
      * @var string|null
      */
-    protected $surname;
+    protected ?string $surname;
     /**
      * @var string|null
      */
-    protected $name;
+    protected ?string $name;
     /**
      * @var string|null
      */
-    protected $patronymic;
+    protected ?string $patronymic;
     /**
      * @var int|null
      */
-    protected $gender;
+    protected ?int $gender;
     /**
      * @var string|null
      */
-    protected $birthday;
+    protected ?string $birthday;
     /**
      * @var string|null
      */
-    protected $image;
+    protected ?string $image;
     /**
      * @var string|null
      */
-    protected $skype;
+    protected ?string $skype;
     /**
      * @var Email[]
      */
-    protected $emails;
+    protected array $emails;
     /**
      * @var Phone[]
      */
-    protected $phones;
+    protected array $phones;
     /**
-     * @var InputFilter
+     * @var InputFilterInterface
      */
-    private $inputFilter;
+    private InputFilterInterface $inputFilter;
 
     /**
      * @param string      $password
@@ -115,145 +115,12 @@ class Profile implements InputFilterAwareInterface
         $this->skype = $skype;
         $this->emails = $emails;
         $this->phones = $phones;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * @param $password
-     *
-     * @return void
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getTempPassword()
-    {
-        return $this->tempPassword;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getTpCreatedAt()
-    {
-        return $this->tpCreatedAt;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getSurname()
-    {
-        return $this->surname;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getPatronymic()
-    {
-        return $this->patronymic;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getGender()
-    {
-        return $this->gender;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getBirthday()
-    {
-        return $this->birthday;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getSkype()
-    {
-        return $this->skype;
-    }
-
-    /**
-     * @return Email[]
-     */
-    public function getEmails()
-    {
-        return $this->emails;
-    }
-
-    /**
-     * @param $emails
-     *
-     * @return void
-     */
-    public function setEmails($emails)
-    {
-        $this->emails = $emails;
-    }
-
-    /**
-     * @return Phone[]
-     */
-    public function getPhones()
-    {
-        return $this->phones;
-    }
-
-    /**
-     * @param $phones
-     *
-     * @return void
-     */
-    public function setPhones($phones)
-    {
-        $this->phones = $phones;
+        $this->inputFilter = $this->getInputFilter();
     }
 
     public function getInputFilter()
     {
-        if ($this->inputFilter) {
+        if (isset($this->inputFilter)) {
             return $this->inputFilter;
         }
 
@@ -434,5 +301,139 @@ class Profile implements InputFilterAwareInterface
                 __CLASS__
             )
         );
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param $password
+     *
+     * @return void
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTempPassword()
+    {
+        return $this->tempPassword;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTpCreatedAt()
+    {
+        return $this->tpCreatedAt;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSurname()
+    {
+        return $this->surname;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPatronymic()
+    {
+        return $this->patronymic;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getBirthday()
+    {
+        return $this->birthday;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSkype()
+    {
+        return $this->skype;
+    }
+
+    /**
+     * @return Email[]
+     */
+    public function getEmails()
+    {
+        return $this->emails;
+    }
+
+    /**
+     * @param $emails
+     *
+     * @return void
+     */
+    public function setEmails($emails)
+    {
+        $this->emails = $emails;
+    }
+
+    /**
+     * @return Phone[]
+     */
+    public function getPhones()
+    {
+        return $this->phones;
+    }
+
+    /**
+     * @param $phones
+     *
+     * @return void
+     */
+    public function setPhones($phones)
+    {
+        $this->phones = $phones;
     }
 }

@@ -14,23 +14,23 @@ class ChangePassword implements InputFilterAwareInterface
     /**
      * @var int|null
      */
-    private $id;
+    private ?int $id;
     /**
      * @var string
      */
-    private $currentPassword;
+    private string $currentPassword;
     /**
      * @var string
      */
-    private $newPassword;
+    private string $newPassword;
     /**
      * @var string
      */
-    private $passwordCheck;
+    private string $passwordCheck;
     /**
-     * @var InputFilter
+     * @var InputFilterInterface
      */
-    private $inputFilter;
+    private InputFilterInterface $inputFilter;
 
     /**
      * @param int|null $id
@@ -48,43 +48,12 @@ class ChangePassword implements InputFilterAwareInterface
         $this->currentPassword = $currentPassword;
         $this->newPassword = $newPassword;
         $this->passwordCheck = $passwordCheck;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCurrentPassword()
-    {
-        return $this->currentPassword;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNewPassword()
-    {
-        return $this->newPassword;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPasswordCheck()
-    {
-        return $this->passwordCheck;
+        $this->inputFilter = $this->getInputFilter();
     }
 
     public function getInputFilter()
     {
-        if ($this->inputFilter) {
+        if (isset($this->inputFilter)) {
             return $this->inputFilter;
         }
 
@@ -153,5 +122,37 @@ class ChangePassword implements InputFilterAwareInterface
                 __CLASS__
             )
         );
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCurrentPassword()
+    {
+        return $this->currentPassword;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNewPassword()
+    {
+        return $this->newPassword;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPasswordCheck()
+    {
+        return $this->passwordCheck;
     }
 }

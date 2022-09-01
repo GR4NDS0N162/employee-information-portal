@@ -15,15 +15,15 @@ class Position implements InputFilterAwareInterface
     /**
      * @var int|null
      */
-    private $id;
+    private ?int $id;
     /**
      * @var string
      */
-    private $name;
+    private string $name;
     /**
      * @var InputFilterInterface
      */
-    private $inputFilter;
+    private InputFilterInterface $inputFilter;
 
     /**
      * @param string   $name
@@ -34,38 +34,6 @@ class Position implements InputFilterAwareInterface
         $this->id = $id;
         $this->name = $name;
         $this->inputFilter = $this->getInputFilter();
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int|null $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
     }
 
     public function getInputFilter()
@@ -117,5 +85,37 @@ class Position implements InputFilterAwareInterface
                 __CLASS__
             )
         );
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int|null $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 }

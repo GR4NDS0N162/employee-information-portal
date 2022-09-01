@@ -3,7 +3,7 @@
 namespace Application\Model\Entity;
 
 use Laminas\Filter\ToInt;
-use Laminas\InputFilter\InputFilter;
+use Laminas\InputFilter\InputFilterInterface;
 use Laminas\Validator\GreaterThan;
 
 class User extends Profile
@@ -11,15 +11,15 @@ class User extends Profile
     /**
      * @var int
      */
-    protected $positionId;
+    protected int $positionId;
     /**
      * @var bool[]
      */
-    protected $status;
+    protected array $status;
     /**
-     * @var InputFilter
+     * @var InputFilterInterface
      */
-    private $inputFilter;
+    private InputFilterInterface $inputFilter;
 
     /**
      * @param int         $positionId
@@ -73,6 +73,35 @@ class User extends Profile
 
         $this->positionId = $positionId;
         $this->status = $status;
+        $this->inputFilter = $this->getInputFilter();
+    }
+
+    public function getInputFilter()
+    {
+        if (isset($this->inputFilter)) {
+            return $this->inputFilter;
+        }
+
+        $inputFilter = parent::getInputFilter();
+
+        $inputFilter->add([
+            'name'       => 'positionId',
+            'required'   => true,
+            'filters'    => [
+                ['name' => ToInt::class],
+            ],
+            'validators' => [
+                [
+                    'name'    => GreaterThan::class,
+                    'options' => [
+                        'min' => 0,
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->inputFilter = $inputFilter;
+        return $this->inputFilter;
     }
 
     /**
@@ -105,33 +134,5 @@ class User extends Profile
     public function setStatus($status)
     {
         $this->status = $status;
-    }
-
-    public function getInputFilter()
-    {
-        if ($this->inputFilter) {
-            return $this->inputFilter;
-        }
-
-        $inputFilter = parent::getInputFilter();
-
-        $inputFilter->add([
-            'name'       => 'positionId',
-            'required'   => true,
-            'filters'    => [
-                ['name' => ToInt::class],
-            ],
-            'validators' => [
-                [
-                    'name'    => GreaterThan::class,
-                    'options' => [
-                        'min' => 0,
-                    ],
-                ],
-            ],
-        ]);
-
-        $this->inputFilter = $inputFilter;
-        return $this->inputFilter;
     }
 }

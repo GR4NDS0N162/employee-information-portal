@@ -15,15 +15,15 @@ class Status implements InputFilterAwareInterface
     /**
      * @var int|null
      */
-    private $id;
+    private ?int $id;
     /**
      * @var string
      */
-    private $name;
+    private string $name;
     /**
-     * @var InputFilter
+     * @var InputFilterInterface
      */
-    private $inputFilter;
+    private InputFilterInterface $inputFilter;
 
     /**
      * @param string   $name
@@ -35,27 +35,12 @@ class Status implements InputFilterAwareInterface
     ) {
         $this->id = $id;
         $this->name = $name;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
+        $this->inputFilter = $this->getInputFilter();
     }
 
     public function getInputFilter()
     {
-        if ($this->inputFilter) {
+        if (isset($this->inputFilter)) {
             return $this->inputFilter;
         }
 
@@ -102,5 +87,21 @@ class Status implements InputFilterAwareInterface
                 __CLASS__
             )
         );
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 }

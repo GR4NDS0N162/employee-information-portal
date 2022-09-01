@@ -13,11 +13,11 @@ class PositionList implements InputFilterAwareInterface
     /**
      * @var Position[]
      */
-    private $list;
+    private array $list;
     /**
      * @var InputFilterInterface
      */
-    private $inputFilter;
+    private InputFilterInterface $inputFilter;
 
     /**
      * @param Position[] $list
@@ -26,22 +26,6 @@ class PositionList implements InputFilterAwareInterface
     {
         $this->list = $list;
         $this->inputFilter = $this->getInputFilter();
-    }
-
-    /**
-     * @return Position[]
-     */
-    public function getList()
-    {
-        return $this->list;
-    }
-
-    /**
-     * @param Position[] $list
-     */
-    public function setList($list)
-    {
-        $this->list = $list;
     }
 
     public function getInputFilter()
@@ -71,5 +55,21 @@ class PositionList implements InputFilterAwareInterface
                 __CLASS__
             )
         );
+    }
+
+    /**
+     * @return Position[]
+     */
+    public function getList()
+    {
+        return $this->list;
+    }
+
+    /**
+     * @param Position[] $list
+     */
+    public function setList($list)
+    {
+        $this->list = $list;
     }
 }

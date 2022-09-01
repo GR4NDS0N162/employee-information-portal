@@ -16,15 +16,15 @@ class Email implements InputFilterAwareInterface
     /**
      * @var string
      */
-    private $address;
+    private string $address;
     /**
      * @var int|null
      */
-    private $userId;
+    private ?int $userId;
     /**
-     * @var InputFilter
+     * @var InputFilterInterface
      */
-    private $inputFilter;
+    private InputFilterInterface $inputFilter;
 
     /**
      * @param string   $address
@@ -36,27 +36,12 @@ class Email implements InputFilterAwareInterface
     ) {
         $this->address = $address;
         $this->userId = $userId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAddress()
-    {
-        return $this->address;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getUserId()
-    {
-        return $this->userId;
+        $this->inputFilter = $this->getInputFilter();
     }
 
     public function getInputFilter()
     {
-        if ($this->inputFilter) {
+        if (isset($this->inputFilter)) {
             return $this->inputFilter;
         }
 
@@ -109,5 +94,21 @@ class Email implements InputFilterAwareInterface
                 __CLASS__
             )
         );
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getUserId()
+    {
+        return $this->userId;
     }
 }

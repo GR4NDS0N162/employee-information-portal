@@ -14,15 +14,15 @@ class UserStatus implements InputFilterAwareInterface
     /**
      * @var int|null
      */
-    private $userId;
+    private ?int $userId;
     /**
      * @var int
      */
-    private $statusId;
+    private int $statusId;
     /**
-     * @var InputFilter
+     * @var InputFilterInterface
      */
-    private $inputFilter;
+    private InputFilterInterface $inputFilter;
 
     /**
      * @param int|null $userId
@@ -34,27 +34,12 @@ class UserStatus implements InputFilterAwareInterface
     ) {
         $this->userId = $userId;
         $this->statusId = $statusId;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
-     * @return int
-     */
-    public function getStatusId()
-    {
-        return $this->statusId;
+        $this->inputFilter = $this->getInputFilter();
     }
 
     public function getInputFilter()
     {
-        if ($this->inputFilter) {
+        if (isset($this->inputFilter)) {
             return $this->inputFilter;
         }
 
@@ -102,5 +87,21 @@ class UserStatus implements InputFilterAwareInterface
                 __CLASS__
             )
         );
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatusId()
+    {
+        return $this->statusId;
     }
 }
