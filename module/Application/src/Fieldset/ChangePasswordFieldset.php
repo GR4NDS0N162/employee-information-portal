@@ -20,12 +20,12 @@ class ChangePasswordFieldset extends Fieldset
         $object = new ChangePassword();
         $this->setObject($object);
 
-        $hydrator = new ClassMethodsHydrator(true, true);
+        $hydrator = new ClassMethodsHydrator(false, true);
         FieldsetMapper::setStrategies($hydrator, [
-            'id'               => new NullableStrategy(ScalarTypeStrategy::createToInt(), true),
-            'current_password' => ScalarTypeStrategy::createToString(),
-            'new_password'     => ScalarTypeStrategy::createToString(),
-            'password_check'   => ScalarTypeStrategy::createToString(),
+            'id'              => new NullableStrategy(ScalarTypeStrategy::createToInt(), true),
+            'currentPassword' => ScalarTypeStrategy::createToString(),
+            'newPassword'     => ScalarTypeStrategy::createToString(),
+            'passwordCheck'   => ScalarTypeStrategy::createToString(),
         ]);
         $this->setHydrator($hydrator);
 
@@ -35,7 +35,7 @@ class ChangePasswordFieldset extends Fieldset
         ]);
 
         $this->add([
-            'name'       => 'current_password',
+            'name'       => 'currentPassword',
             'type'       => Password::class,
             'attributes' => [
                 'class'        => 'form-control',
@@ -53,7 +53,7 @@ class ChangePasswordFieldset extends Fieldset
         ]);
 
         $this->add([
-            'name'       => 'new_password',
+            'name'       => 'newPassword',
             'type'       => Password::class,
             'attributes' => [
                 'class'        => 'form-control',
@@ -73,13 +73,12 @@ class ChangePasswordFieldset extends Fieldset
         ]);
 
         $this->add([
-            'name'       => 'password_check',
+            'name'       => 'passwordCheck',
             'type'       => Password::class,
             'attributes' => [
                 'class'       => 'form-control',
                 'placeholder' => 'qwerty123',
                 'required'    => 'required',
-                'pattern'     => '',
             ],
             'options'    => [
                 'label'            => 'Подтверждение пароля',
