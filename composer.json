@@ -18,7 +18,8 @@
         "laminas/laminas-form": "^3.2",
         "laminas/laminas-i18n": "*",
         "laminas/laminas-navigation": "^2.14",
-        "laminas/laminas-db": "^2.15"
+        "laminas/laminas-db": "^2.15",
+        "laminas/laminas-hydrator": "^4.2.0"
     },
     "autoload": {
         "psr-4": {
