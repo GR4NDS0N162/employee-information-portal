@@ -38,20 +38,17 @@ class PositionCommand implements PositionCommandInterface
         $oldIdList = array_column($oldList, 'id');
         $newIdList = array_column($newList, 'id');
 
-        $deleteList = [];
         foreach ($oldList as $position) {
             if (!in_array($position->getId(), $newIdList)) {
-                $deleteList[] = $position;
+                $this->deletePositionById($position->getId());
             }
         }
 
-        $addList = [];
-        $editList = [];
         foreach ($newList as $position) {
             if (in_array($position->getId(), $oldIdList)) {
-                $editList[] = $position;
+                $this->updatePosition($position);
             } else {
-                $addList[] = $position;
+                $this->addPosition($position);
             }
         }
     }
