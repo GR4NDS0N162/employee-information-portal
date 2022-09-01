@@ -70,7 +70,7 @@ class Position implements InputFilterAwareInterface
 
     public function getInputFilter()
     {
-        if ($this->inputFilter) {
+        if (isset($this->inputFilter)) {
             return $this->inputFilter;
         }
 
