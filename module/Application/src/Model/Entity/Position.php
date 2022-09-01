@@ -33,6 +33,7 @@ class Position implements InputFilterAwareInterface
     {
         $this->id = $id;
         $this->name = $name;
+        $this->inputFilter = $this->getInputFilter();
     }
 
     /**

@@ -25,6 +25,7 @@ class PositionList implements InputFilterAwareInterface
     public function __construct($list = [])
     {
         $this->list = $list;
+        $this->inputFilter = $this->getInputFilter();
     }
 
     /**
