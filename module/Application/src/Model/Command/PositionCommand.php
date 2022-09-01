@@ -25,4 +25,9 @@ class PositionCommand implements PositionCommandInterface
         $this->db = $db;
         $this->positionRepository = $positionRepository;
     }
+
+    public function updatePositions($positionList)
+    {
+        // TODO: Implement updatePositions() method.
+    }
 }
