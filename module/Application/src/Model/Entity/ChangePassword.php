@@ -3,9 +3,11 @@
 namespace Application\Model\Entity;
 
 use DomainException;
+use Laminas\Filter;
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
+use Laminas\Validator;
 
 class ChangePassword implements InputFilterAwareInterface
 {
@@ -59,7 +61,9 @@ class ChangePassword implements InputFilterAwareInterface
 
         $inputFilter->add([
             'name'       => 'id',
+            'required'   => true,
             'filters'    => [
+                ['name' => Filter\ToInt::class],
             ],
             'validators' => [
             ],
@@ -67,6 +71,7 @@ class ChangePassword implements InputFilterAwareInterface
 
         $inputFilter->add([
             'name'       => 'currentPassword',
+            'required'   => true,
             'filters'    => [
             ],
             'validators' => [
@@ -75,17 +80,45 @@ class ChangePassword implements InputFilterAwareInterface
 
         $inputFilter->add([
             'name'       => 'newPassword',
+            'required'   => true,
             'filters'    => [
             ],
             'validators' => [
+                [
+                    'name'    => Validator\StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'min'      => 8,
+                        'max'      => 32,
+                    ],
+                ],
+                [
+                    'name'    => Validator\Regex::class,
+                    'options' => [
+                        'pattern' => '/^'
+                            . '(?=.*?[а-яa-z])'
+                            . '(?=.*?[А-ЯA-Z])'
+                            . '(?=.*?[0-9])'
+                            . '(?=.*?[!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~])'
+                            . '[а-яa-zА-ЯA-Z0-9!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]*'
+                            . '$/',
+                    ],
+                ],
             ],
         ]);
 
         $inputFilter->add([
             'name'       => 'passwordCheck',
+            'required'   => true,
             'filters'    => [
             ],
             'validators' => [
+                [
+                    'name'    => Validator\Identical::class,
+                    'options' => [
+                        'token' => 'newPassword',
+                    ],
+                ],
             ],
         ]);
 
