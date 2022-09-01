@@ -63,7 +63,7 @@ class SignUpForm extends Form
         ]);
 
         $this->add([
-            'name'       => 'new-password',
+            'name'       => 'new_password',
             'type'       => Element\Password::class,
             'attributes' => [
                 'class'        => 'form-control',
@@ -83,7 +83,7 @@ class SignUpForm extends Form
         ]);
 
         $this->add([
-            'name'       => 'password-check',
+            'name'       => 'password_check',
             'type'       => Element\Password::class,
             'attributes' => [
                 'class'       => 'form-control',
@@ -100,7 +100,7 @@ class SignUpForm extends Form
         ]);
 
         $this->add([
-            'name'       => 'submit-button',
+            'name'       => 'submit_button',
             'type'       => Element\Button::class,
             'attributes' => [
                 'type'  => 'submit',
@@ -117,9 +117,9 @@ class SignUpForm extends Form
             'children' => [
                 'email'          => 'col-12',
                 'position'       => 'col-12',
-                'new-password'   => 'col-12',
-                'password-check' => 'col-12',
-                'submit-button'  => 'col-12',
+                'new_password'   => 'col-12',
+                'password_check' => 'col-12',
+                'submit_button'  => 'col-12',
             ],
         ]);
     }

@@ -33,7 +33,7 @@ class LoginForm extends Form
         ]);
 
         $this->add([
-            'name'       => 'current-password',
+            'name'       => 'current_password',
             'type'       => Element\Password::class,
             'attributes' => [
                 'class'       => 'form-control',
@@ -49,7 +49,7 @@ class LoginForm extends Form
         ]);
 
         $this->add([
-            'name'       => 'submit-button',
+            'name'       => 'submit_button',
             'type'       => Element\Button::class,
             'attributes' => [
                 'type'  => 'submit',
@@ -65,8 +65,8 @@ class LoginForm extends Form
         FieldsetMapper::setAttributes($this, [
             'children' => [
                 'email'            => 'col-12',
-                'current-password' => 'col-12',
-                'submit-button'    => 'col-12',
+                'current_password' => 'col-12',
+                'submit_button'    => 'col-12',
             ],
         ]);
     }
