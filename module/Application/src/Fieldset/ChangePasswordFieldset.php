@@ -2,11 +2,14 @@
 
 namespace Application\Fieldset;
 
+use Application\Helper\FieldsetMapper;
 use Application\Model\Entity\ChangePassword;
 use Laminas\Form\Element\Hidden;
 use Laminas\Form\Element\Password;
 use Laminas\Form\Fieldset;
 use Laminas\Hydrator\ClassMethodsHydrator;
+use Laminas\Hydrator\Strategy\NullableStrategy;
+use Laminas\Hydrator\Strategy\ScalarTypeStrategy;
 
 class ChangePasswordFieldset extends Fieldset
 {
@@ -18,6 +21,12 @@ class ChangePasswordFieldset extends Fieldset
         $this->setObject($object);
 
         $hydrator = new ClassMethodsHydrator(true, true);
+        FieldsetMapper::setStrategies($hydrator, [
+            'id'              => new NullableStrategy(ScalarTypeStrategy::createToInt(), true),
+            'currentPassword' => ScalarTypeStrategy::createToString(),
+            'newPassword'     => ScalarTypeStrategy::createToString(),
+            'passwordCheck'   => ScalarTypeStrategy::createToString(),
+        ]);
         $this->setHydrator($hydrator);
 
         $this->add([
