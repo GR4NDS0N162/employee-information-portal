@@ -29,10 +29,8 @@ class Position implements InputFilterAwareInterface
      * @param string   $name
      * @param int|null $id
      */
-    public function __construct(
-        $name = '',
-        $id = null
-    ) {
+    public function __construct($name = '', $id = null)
+    {
         $this->id = $id;
         $this->name = $name;
     }
