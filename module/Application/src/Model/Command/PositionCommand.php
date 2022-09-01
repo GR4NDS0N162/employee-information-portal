@@ -30,7 +30,28 @@ class PositionCommand implements PositionCommandInterface
 
     public function updatePositions($positionList)
     {
-        // TODO: Implement updatePositions() method.
+        $oldList = $this->positionRepository->findAllPositions();
+        $newList = $positionList->getList();
+
+        $oldIdList = array_column($oldList, 'id');
+        $newIdList = array_column($newList, 'id');
+
+        $deleteList = [];
+        foreach ($oldList as $position) {
+            if (!in_array($position->getId(), $newIdList)) {
+                $deleteList[] = $position;
+            }
+        }
+
+        $addList = [];
+        $editList = [];
+        foreach ($newList as $position) {
+            if (in_array($position->getId(), $oldIdList)) {
+                $editList[] = $position;
+            } else {
+                $addList[] = $position;
+            }
+        }
     }
 
     public function deletePositionById($id)
