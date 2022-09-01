@@ -3,11 +3,9 @@
 namespace Application\Model\Entity;
 
 use DomainException;
-use Laminas\Filter\ToInt;
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
-use Laminas\Validator\StringLength;
 
 class ChangePassword implements InputFilterAwareInterface
 {
