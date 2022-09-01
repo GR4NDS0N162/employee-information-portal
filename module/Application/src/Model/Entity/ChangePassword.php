@@ -80,11 +80,27 @@ class ChangePassword implements InputFilterAwareInterface
     }
 
     /**
+     * @param int|null $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
      * @return string
      */
     public function getCurrentPassword()
     {
         return $this->currentPassword;
+    }
+
+    /**
+     * @param string $currentPassword
+     */
+    public function setCurrentPassword($currentPassword)
+    {
+        $this->currentPassword = $currentPassword;
     }
 
     /**
@@ -96,10 +112,26 @@ class ChangePassword implements InputFilterAwareInterface
     }
 
     /**
+     * @param string $newPassword
+     */
+    public function setNewPassword($newPassword)
+    {
+        $this->newPassword = $newPassword;
+    }
+
+    /**
      * @return string
      */
     public function getPasswordCheck()
     {
         return $this->passwordCheck;
+    }
+
+    /**
+     * @param string $passwordCheck
+     */
+    public function setPasswordCheck($passwordCheck)
+    {
+        $this->passwordCheck = $passwordCheck;
     }
 }
