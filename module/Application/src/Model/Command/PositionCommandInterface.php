@@ -12,4 +12,11 @@ interface PositionCommandInterface
      * @return void
      */
     public function updatePositions($positionList);
+
+    /**
+     * @param int $id
+     *
+     * @return void
+     */
+    public function deletePositionById($id);
 }

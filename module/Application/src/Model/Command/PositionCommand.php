@@ -2,8 +2,10 @@
 
 namespace Application\Model\Command;
 
+use Application\Model\Executer;
 use Application\Model\Repository\PositionRepositoryInterface;
 use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\Sql\Delete;
 
 class PositionCommand implements PositionCommandInterface
 {
@@ -29,5 +31,13 @@ class PositionCommand implements PositionCommandInterface
     public function updatePositions($positionList)
     {
         // TODO: Implement updatePositions() method.
+    }
+
+    public function deletePositionById($id)
+    {
+        $delete = new Delete('position');
+        $delete->where(['id = ?' => $id]);
+
+        Executer::executeSql($delete, $this->db);
     }
 }
