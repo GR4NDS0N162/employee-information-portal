@@ -29,14 +29,14 @@ class Position implements InputFilterAwareInterface
      * @param string   $name
      * @param int|null $id
      */
-    public function __construct($name = '', $id = null)
+    public function __construct(string $name = '', int $id = null)
     {
         $this->id = $id;
         $this->name = $name;
         $this->inputFilter = $this->getInputFilter();
     }
 
-    public function getInputFilter()
+    public function getInputFilter(): InputFilterInterface
     {
         if (isset($this->inputFilter)) {
             return $this->inputFilter;
@@ -77,7 +77,7 @@ class Position implements InputFilterAwareInterface
         return $this->inputFilter;
     }
 
-    public function setInputFilter(InputFilterInterface $inputFilter)
+    public function setInputFilter(InputFilterInterface $inputFilter): InputFilterAwareInterface
     {
         throw new DomainException(
             sprintf(
@@ -90,7 +90,7 @@ class Position implements InputFilterAwareInterface
     /**
      * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -98,7 +98,7 @@ class Position implements InputFilterAwareInterface
     /**
      * @param int|null $id
      */
-    public function setId($id)
+    public function setId(?int $id)
     {
         $this->id = $id;
     }
@@ -106,7 +106,7 @@ class Position implements InputFilterAwareInterface
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -114,7 +114,7 @@ class Position implements InputFilterAwareInterface
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }

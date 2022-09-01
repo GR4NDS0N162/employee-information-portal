@@ -22,13 +22,13 @@ class PositionList implements InputFilterAwareInterface
     /**
      * @param Position[] $list
      */
-    public function __construct($list = [])
+    public function __construct(array $list = [])
     {
         $this->list = $list;
         $this->inputFilter = $this->getInputFilter();
     }
 
-    public function getInputFilter()
+    public function getInputFilter(): InputFilterInterface
     {
         if (isset($this->inputFilter)) {
             return $this->inputFilter;
@@ -47,7 +47,7 @@ class PositionList implements InputFilterAwareInterface
         return $this->inputFilter;
     }
 
-    public function setInputFilter(InputFilterInterface $inputFilter)
+    public function setInputFilter(InputFilterInterface $inputFilter): InputFilterAwareInterface
     {
         throw new DomainException(
             sprintf(
@@ -60,7 +60,7 @@ class PositionList implements InputFilterAwareInterface
     /**
      * @return Position[]
      */
-    public function getList()
+    public function getList(): array
     {
         return $this->list;
     }
@@ -68,7 +68,7 @@ class PositionList implements InputFilterAwareInterface
     /**
      * @param Position[] $list
      */
-    public function setList($list)
+    public function setList(array $list)
     {
         $this->list = $list;
     }
