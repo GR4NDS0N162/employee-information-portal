@@ -21,7 +21,7 @@ class Position implements InputFilterAwareInterface
      */
     private $name;
     /**
-     * @var InputFilter
+     * @var InputFilterInterface
      */
     private $inputFilter;
 

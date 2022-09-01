@@ -15,7 +15,7 @@ class PositionList implements InputFilterAwareInterface
      */
     private $list;
     /**
-     * @var InputFilter
+     * @var InputFilterInterface
      */
     private $inputFilter;
 
