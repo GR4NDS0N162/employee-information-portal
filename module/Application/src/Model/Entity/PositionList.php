@@ -35,6 +35,14 @@ class PositionList implements InputFilterAwareInterface
         return $this->list;
     }
 
+    /**
+     * @param Position[] $list
+     */
+    public function setList($list)
+    {
+        $this->list = $list;
+    }
+
     public function getInputFilter()
     {
         if ($this->inputFilter) {
