@@ -39,7 +39,9 @@ class PositionList implements InputFilterAwareInterface
         $inputFilter->add([
             'name'       => 'list',
             'validators' => [
-                ['name' => IsCountable::class,],
+                [
+                    'name' => IsCountable::class,
+                ],
             ],
         ]);
 
