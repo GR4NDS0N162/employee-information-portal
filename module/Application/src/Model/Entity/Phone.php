@@ -54,16 +54,6 @@ class Phone implements InputFilterAwareInterface
         return $this->userId;
     }
 
-    public function setInputFilter(InputFilterInterface $inputFilter)
-    {
-        throw new DomainException(
-            sprintf(
-                '%s does not allow injection of an alternate input filter',
-                __CLASS__
-            )
-        );
-    }
-
     public function getInputFilter()
     {
         if ($this->inputFilter) {
@@ -109,5 +99,15 @@ class Phone implements InputFilterAwareInterface
 
         $this->inputFilter = $inputFilter;
         return $this->inputFilter;
+    }
+
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        throw new DomainException(
+            sprintf(
+                '%s does not allow injection of an alternate input filter',
+                __CLASS__
+            )
+        );
     }
 }

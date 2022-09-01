@@ -82,16 +82,6 @@ class ChangePassword implements InputFilterAwareInterface
         return $this->passwordCheck;
     }
 
-    public function setInputFilter(InputFilterInterface $inputFilter)
-    {
-        throw new DomainException(
-            sprintf(
-                '%s does not allow injection of an alternate input filter',
-                __CLASS__
-            )
-        );
-    }
-
     public function getInputFilter()
     {
         if ($this->inputFilter) {
@@ -153,5 +143,15 @@ class ChangePassword implements InputFilterAwareInterface
 
         $this->inputFilter = $inputFilter;
         return $this->inputFilter;
+    }
+
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        throw new DomainException(
+            sprintf(
+                '%s does not allow injection of an alternate input filter',
+                __CLASS__
+            )
+        );
     }
 }

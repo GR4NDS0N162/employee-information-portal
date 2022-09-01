@@ -2,8 +2,6 @@
 
 namespace Application\Model;
 
-use Exception;
-
 class PasswordGenerator
 {
     /**
