@@ -59,57 +59,6 @@ class ChangePassword implements InputFilterAwareInterface
 
         $inputFilter = new InputFilter();
 
-        $inputFilter->add([
-            'name'     => 'id',
-            'required' => true,
-            'filters'  => [
-                ['name' => ToInt::class],
-            ],
-        ]);
-
-        $inputFilter->add([
-            'name'       => 'currentPassword',
-            'required'   => true,
-            'validators' => [
-                [
-                    'name'    => StringLength::class,
-                    'options' => [
-                        'encoding' => 'UTF-8',
-                        'min'      => 1,
-                        'max'      => 32,
-                    ],
-                ],
-            ],
-        ]);
-
-        $inputFilter->add([
-            'name'       => 'newPassword',
-            'required'   => true,
-            'validators' => [
-                [
-                    'name'    => StringLength::class,
-                    'options' => [
-                        'encoding' => 'UTF-8',
-                        'min'      => 8,
-                        'max'      => 32,
-                    ],
-                ],
-            ],
-        ]);
-
-        $inputFilter->add([
-            'name'       => 'passwordCheck',
-            'required'   => true,
-            'validators' => [
-                [
-                    'name'    => 'Identical',
-                    'options' => [
-                        'token' => 'newPassword',
-                    ],
-                ],
-            ],
-        ]);
-
         $this->inputFilter = $inputFilter;
         return $this->inputFilter;
     }
