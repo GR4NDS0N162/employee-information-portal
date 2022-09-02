@@ -16,15 +16,7 @@ class PositionFieldset extends Fieldset
     {
         parent::init();
 
-        $object = new Position();
-        $this->setObject($object);
-
-        $hydrator = new ClassMethodsHydrator(true, true);
-        FieldsetMapper::setStrategies($hydrator, [
-            'id'   => new NullableStrategy(ScalarTypeStrategy::createToInt(), true),
-            'name' => ScalarTypeStrategy::createToString(),
-        ]);
-        $this->setHydrator($hydrator);
+        $this->setObject(new Position());
 
         $this->add([
             'name'       => 'name',

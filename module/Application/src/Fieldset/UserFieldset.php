@@ -6,7 +6,6 @@ use Application\Model\Entity\User;
 use Application\Model\Options\PositionOptions;
 use Laminas\Form\Element\Select;
 use Laminas\Form\Element\Text;
-use Laminas\Hydrator\ClassMethodsHydrator;
 
 class UserFieldset extends ProfileFieldset
 {
@@ -29,11 +28,7 @@ class UserFieldset extends ProfileFieldset
     {
         parent::init();
 
-        $object = new User();
-        $this->setObject($object);
-
-        $hydrator = new ClassMethodsHydrator(true, true);
-        $this->setHydrator($hydrator);
+        $this->setObject(new User());
 
         $this->setPriority('emails', -100);
         $this->setPriority('phones', -100);

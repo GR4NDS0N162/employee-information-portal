@@ -13,11 +13,7 @@ class EmailFieldset extends Fieldset
     {
         parent::init();
 
-        $object = new Email();
-        $this->setObject($object);
-
-        $hydrator = new ClassMethodsHydrator(true, true);
-        $this->setHydrator($hydrator);
+        $this->setObject(new Email());
 
         $this->add([
             'name'       => 'address',
