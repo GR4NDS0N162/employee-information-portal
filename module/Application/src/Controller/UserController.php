@@ -104,6 +104,21 @@ class UserController extends AbstractActionController
 
     public function profileFormAction()
     {
+        $request = $this->getRequest();
+
+        if (!$request->isPost()) {
+            return $this->redirect()->toRoute('user/edit-profile');
+        }
+
+        $this->profileForm->setData($request->getPost());
+
+        if (!$this->profileForm->isValid()) {
+            return $this->redirect()->toRoute('user/edit-profile');
+        }
+
+        // TODO: Измени профиль используя данные из формы
+
+        return $this->redirect()->toRoute('user/view-profile');
     }
 
     public function changePasswordFormAction()
