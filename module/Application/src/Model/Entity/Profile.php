@@ -162,6 +162,7 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
         ]);
         $this->inputFilter->add([
             'name'       => 'tempPassword',
+            'required'   => false,
             'validators' => [
                 [
                     'name'    => StringLength::class,
@@ -181,6 +182,7 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
         ]);
         $this->inputFilter->add([
             'name'       => 'tpCreatedAt',
+            'required'   => false,
             'validators' => [
                 [
                     'name'    => Date::class,
@@ -192,6 +194,7 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
         ]);
         $this->inputFilter->add([
             'name'       => 'surname',
+            'required'   => false,
             'validators' => [
                 [
                     'name'    => StringLength::class,
@@ -204,6 +207,7 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
         ]);
         $this->inputFilter->add([
             'name'       => 'name',
+            'required'   => false,
             'validators' => [
                 [
                     'name'    => StringLength::class,
@@ -216,6 +220,7 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
         ]);
         $this->inputFilter->add([
             'name'       => 'patronymic',
+            'required'   => false,
             'validators' => [
                 [
                     'name'    => StringLength::class,
@@ -228,6 +233,7 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
         ]);
         $this->inputFilter->add([
             'name'       => 'gender',
+            'required'   => false,
             'filters'    => [
                 ['name' => ToInt::class],
             ],
@@ -244,6 +250,7 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
         ]);
         $this->inputFilter->add([
             'name'       => 'birthday',
+            'required'   => false,
             'validators' => [
                 [
                     'name'    => Date::class,
@@ -255,6 +262,7 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
         ]);
         $this->inputFilter->add([
             'name'       => 'image',
+            'required'   => false,
             'validators' => [
                 [
                     'name'    => StringLength::class,
@@ -267,6 +275,7 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
         ]);
         $this->inputFilter->add([
             'name'       => 'skype',
+            'required'   => false,
             'validators' => [
                 [
                     'name'    => StringLength::class,
