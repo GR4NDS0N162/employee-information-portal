@@ -108,7 +108,12 @@ class UserController extends AbstractActionController
             return $this->redirect()->toRoute('user/edit-profile');
         }
 
-        $this->profileForm->setData($request->getPost());
+        $postData = array_merge_recursive(
+            $request->getPost()->toArray(),
+            $request->getFiles()->toArray()
+        );
+
+        $this->profileForm->setData($postData);
 
         if (!$this->profileForm->isValid()) {
             return $this->redirect()->toRoute('user/edit-profile');
