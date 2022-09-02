@@ -4,12 +4,17 @@ namespace Application\Model\Entity;
 
 use DomainException;
 use Laminas\Filter;
+use Laminas\Hydrator\ClassMethodsHydrator;
+use Laminas\Hydrator\HydratorAwareInterface;
+use Laminas\Hydrator\HydratorInterface;
+use Laminas\Hydrator\Strategy\NullableStrategy;
+use Laminas\Hydrator\Strategy\ScalarTypeStrategy;
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
 use Laminas\Validator;
 
-class ChangePassword implements InputFilterAwareInterface
+class ChangePassword implements InputFilterAwareInterface, HydratorAwareInterface
 {
     /**
      * @var int|null
@@ -31,6 +36,10 @@ class ChangePassword implements InputFilterAwareInterface
      * @var InputFilterInterface
      */
     private $inputFilter;
+    /**
+     * @var HydratorInterface
+     */
+    private $hydrator;
 
     /**
      * @param int|null $id
@@ -48,18 +57,15 @@ class ChangePassword implements InputFilterAwareInterface
         $this->currentPassword = $currentPassword;
         $this->newPassword = $newPassword;
         $this->passwordCheck = $passwordCheck;
-        $this->inputFilter = $this->getInputFilter();
-    }
 
-    public function getInputFilter()
-    {
-        if (isset($this->inputFilter)) {
-            return $this->inputFilter;
-        }
+        $this->hydrator = new ClassMethodsHydrator(false);
+        $this->hydrator->addStrategy('id', new NullableStrategy(ScalarTypeStrategy::createToInt(), true));
+        $this->hydrator->addStrategy('currentPassword', ScalarTypeStrategy::createToString());
+        $this->hydrator->addStrategy('newPassword', ScalarTypeStrategy::createToString());
+        $this->hydrator->addStrategy('passwordCheck', ScalarTypeStrategy::createToString());
 
-        $inputFilter = new InputFilter();
-
-        $inputFilter->add([
+        $this->inputFilter = new InputFilter();
+        $this->inputFilter->add([
             'name'       => 'id',
             'required'   => true,
             'filters'    => [
@@ -68,8 +74,7 @@ class ChangePassword implements InputFilterAwareInterface
             'validators' => [
             ],
         ]);
-
-        $inputFilter->add([
+        $this->inputFilter->add([
             'name'       => 'currentPassword',
             'required'   => true,
             'filters'    => [
@@ -77,8 +82,7 @@ class ChangePassword implements InputFilterAwareInterface
             'validators' => [
             ],
         ]);
-
-        $inputFilter->add([
+        $this->inputFilter->add([
             'name'       => 'newPassword',
             'required'   => true,
             'filters'    => [
@@ -106,8 +110,7 @@ class ChangePassword implements InputFilterAwareInterface
                 ],
             ],
         ]);
-
-        $inputFilter->add([
+        $this->inputFilter->add([
             'name'       => 'passwordCheck',
             'required'   => true,
             'filters'    => [
@@ -121,8 +124,10 @@ class ChangePassword implements InputFilterAwareInterface
                 ],
             ],
         ]);
+    }
 
-        $this->inputFilter = $inputFilter;
+    public function getInputFilter()
+    {
         return $this->inputFilter;
     }
 
@@ -198,5 +203,15 @@ class ChangePassword implements InputFilterAwareInterface
     public function setPasswordCheck($passwordCheck)
     {
         $this->passwordCheck = $passwordCheck;
+    }
+
+    public function getHydrator(): ?HydratorInterface
+    {
+        return $this->hydrator;
+    }
+
+    public function setHydrator(HydratorInterface $hydrator): void
+    {
+        $this->hydrator = $hydrator;
     }
 }
