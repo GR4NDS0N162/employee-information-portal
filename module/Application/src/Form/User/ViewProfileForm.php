@@ -11,7 +11,7 @@ class ViewProfileForm extends ProfileForm
     {
         parent::init();
 
-        $this->get('profile')->remove('image');
+        $this->get('profile')->remove('imageFile');
         $this->get('profile')->add([
             'name'       => 'image',
             'type'       => Element\Image::class,

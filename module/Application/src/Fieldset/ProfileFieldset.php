@@ -25,7 +25,7 @@ class ProfileFieldset extends Fieldset
         ]);
 
         $this->add([
-            'name'       => 'image',
+            'name'       => 'imageFile',
             'type'       => Element\File::class,
             'attributes' => [
                 'class'  => 'form-control',
