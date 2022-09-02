@@ -312,6 +312,14 @@ class Profile implements InputFilterAwareInterface
     }
 
     /**
+     * @param int|null $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
      * @return string
      */
     public function getPassword()
@@ -338,11 +346,27 @@ class Profile implements InputFilterAwareInterface
     }
 
     /**
+     * @param string|null $tempPassword
+     */
+    public function setTempPassword($tempPassword)
+    {
+        $this->tempPassword = $tempPassword;
+    }
+
+    /**
      * @return string|null
      */
     public function getTpCreatedAt()
     {
         return $this->tpCreatedAt;
+    }
+
+    /**
+     * @param string|null $tpCreatedAt
+     */
+    public function setTpCreatedAt($tpCreatedAt)
+    {
+        $this->tpCreatedAt = $tpCreatedAt;
     }
 
     /**
@@ -354,11 +378,27 @@ class Profile implements InputFilterAwareInterface
     }
 
     /**
+     * @param string|null $surname
+     */
+    public function setSurname($surname)
+    {
+        $this->surname = $surname;
+    }
+
+    /**
      * @return string|null
      */
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @param string|null $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 
     /**
@@ -370,11 +410,27 @@ class Profile implements InputFilterAwareInterface
     }
 
     /**
+     * @param string|null $patronymic
+     */
+    public function setPatronymic($patronymic)
+    {
+        $this->patronymic = $patronymic;
+    }
+
+    /**
      * @return int|null
      */
     public function getGender()
     {
         return $this->gender;
+    }
+
+    /**
+     * @param int|null $gender
+     */
+    public function setGender(?int $gender)
+    {
+        $this->gender = $gender;
     }
 
     /**
@@ -386,6 +442,14 @@ class Profile implements InputFilterAwareInterface
     }
 
     /**
+     * @param string|null $birthday
+     */
+    public function setBirthday($birthday)
+    {
+        $this->birthday = $birthday;
+    }
+
+    /**
      * @return string|null
      */
     public function getImage()
@@ -394,11 +458,27 @@ class Profile implements InputFilterAwareInterface
     }
 
     /**
+     * @param string|null $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    /**
      * @return string|null
      */
     public function getSkype()
     {
         return $this->skype;
+    }
+
+    /**
+     * @param string|null $skype
+     */
+    public function setSkype($skype)
+    {
+        $this->skype = $skype;
     }
 
     /**

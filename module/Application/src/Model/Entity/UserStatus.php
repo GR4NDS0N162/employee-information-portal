@@ -98,10 +98,26 @@ class UserStatus implements InputFilterAwareInterface
     }
 
     /**
+     * @param int|null $userId
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+    }
+
+    /**
      * @return int
      */
     public function getStatusId()
     {
         return $this->statusId;
+    }
+
+    /**
+     * @param int $statusId
+     */
+    public function setStatusId($statusId)
+    {
+        $this->statusId = $statusId;
     }
 }

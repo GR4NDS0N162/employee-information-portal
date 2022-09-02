@@ -105,10 +105,26 @@ class Email implements InputFilterAwareInterface
     }
 
     /**
+     * @param string $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    /**
      * @return int|null
      */
     public function getUserId()
     {
         return $this->userId;
+    }
+
+    /**
+     * @param int|null $userId
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
     }
 }

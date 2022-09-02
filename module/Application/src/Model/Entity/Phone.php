@@ -105,10 +105,26 @@ class Phone implements InputFilterAwareInterface
     }
 
     /**
+     * @param string $number
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
+    }
+
+    /**
      * @return int|null
      */
     public function getUserId()
     {
         return $this->userId;
+    }
+
+    /**
+     * @param int|null $userId
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
     }
 }
