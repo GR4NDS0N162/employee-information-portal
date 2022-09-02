@@ -268,7 +268,7 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
         $this->hydrator->addStrategy('surname', new NullableStrategy(ScalarTypeStrategy::createToString()));
         $this->hydrator->addStrategy('name', new NullableStrategy(ScalarTypeStrategy::createToString()));
         $this->hydrator->addStrategy('patronymic', new NullableStrategy(ScalarTypeStrategy::createToString()));
-        $this->hydrator->addStrategy('gender', new NullableStrategy(ScalarTypeStrategy::createToString()));
+        $this->hydrator->addStrategy('gender', new NullableStrategy(ScalarTypeStrategy::createToInt()));
         $this->hydrator->addStrategy('birthday', new NullableStrategy(ScalarTypeStrategy::createToString()));
         $this->hydrator->addStrategy('image', new NullableStrategy(ScalarTypeStrategy::createToString()));
         $this->hydrator->addStrategy('skype', new NullableStrategy(ScalarTypeStrategy::createToString()));
