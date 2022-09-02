@@ -67,6 +67,7 @@ class Phone implements InputFilterAwareInterface, HydratorAwareInterface
         ]);
         $this->inputFilter->add([
             'name'       => 'userId',
+            'required'   => false,
             'filters'    => [
                 ['name' => ToInt::class],
             ],
