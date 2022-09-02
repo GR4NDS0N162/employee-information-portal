@@ -42,22 +42,9 @@ class Position implements InputFilterAwareInterface, HydratorAwareInterface
     {
         $this->id = $id;
         $this->name = $name;
-        $this->inputFilter = $this->getInputFilter();
 
-        $this->hydrator = new ClassMethodsHydrator(false);
-        $this->hydrator->addStrategy('id', new NullableStrategy(ScalarTypeStrategy::createToInt(), true));
-        $this->hydrator->addStrategy('name', ScalarTypeStrategy::createToString());
-    }
-
-    public function getInputFilter()
-    {
-        if (isset($this->inputFilter)) {
-            return $this->inputFilter;
-        }
-
-        $inputFilter = new InputFilter();
-
-        $inputFilter->add([
+        $this->inputFilter = new InputFilter();
+        $this->inputFilter->add([
             'name'       => 'id',
             'filters'    => [
                 ['name' => ToInt::class],
@@ -71,8 +58,7 @@ class Position implements InputFilterAwareInterface, HydratorAwareInterface
                 ],
             ],
         ]);
-
-        $inputFilter->add([
+        $this->inputFilter->add([
             'name'       => 'name',
             'required'   => true,
             'validators' => [
@@ -86,7 +72,13 @@ class Position implements InputFilterAwareInterface, HydratorAwareInterface
             ],
         ]);
 
-        $this->inputFilter = $inputFilter;
+        $this->hydrator = new ClassMethodsHydrator(false);
+        $this->hydrator->addStrategy('id', new NullableStrategy(ScalarTypeStrategy::createToInt(), true));
+        $this->hydrator->addStrategy('name', ScalarTypeStrategy::createToString());
+    }
+
+    public function getInputFilter()
+    {
         return $this->inputFilter;
     }
 

@@ -45,37 +45,9 @@ class Phone implements InputFilterAwareInterface, HydratorAwareInterface
     ) {
         $this->number = $number;
         $this->userId = $userId;
-        $this->inputFilter = $this->getInputFilter();
 
-        $this->hydrator = new ClassMethodsHydrator(false);
-        $this->hydrator->addStrategy('number', ScalarTypeStrategy::createToString());
-        $this->hydrator->addStrategy('userId', new NullableStrategy(ScalarTypeStrategy::createToInt(), true));
-    }
-
-    public function getInputFilter()
-    {
-        if (isset($this->inputFilter)) {
-            return $this->inputFilter;
-        }
-
-        $inputFilter = new InputFilter();
-
-        $inputFilter->add([
-            'name'       => 'userId',
-            'filters'    => [
-                ['name' => ToInt::class],
-            ],
-            'validators' => [
-                [
-                    'name'    => GreaterThan::class,
-                    'options' => [
-                        'min' => 0,
-                    ],
-                ],
-            ],
-        ]);
-
-        $inputFilter->add([
+        $this->inputFilter = new InputFilter();
+        $this->inputFilter->add([
             'name'       => 'number',
             'required'   => true,
             'validators' => [
@@ -94,8 +66,28 @@ class Phone implements InputFilterAwareInterface, HydratorAwareInterface
                 ],
             ],
         ]);
+        $this->inputFilter->add([
+            'name'       => 'userId',
+            'filters'    => [
+                ['name' => ToInt::class],
+            ],
+            'validators' => [
+                [
+                    'name'    => GreaterThan::class,
+                    'options' => [
+                        'min' => 0,
+                    ],
+                ],
+            ],
+        ]);
 
-        $this->inputFilter = $inputFilter;
+        $this->hydrator = new ClassMethodsHydrator(false);
+        $this->hydrator->addStrategy('number', ScalarTypeStrategy::createToString());
+        $this->hydrator->addStrategy('userId', new NullableStrategy(ScalarTypeStrategy::createToInt(), true));
+    }
+
+    public function getInputFilter()
+    {
         return $this->inputFilter;
     }
 

@@ -2,9 +2,9 @@
 
 namespace Application\Model\Entity;
 
+use DomainException;
 use Laminas\Filter\ToInt;
 use Laminas\Hydrator\Strategy\ScalarTypeStrategy;
-use Laminas\InputFilter\InputFilterInterface;
 use Laminas\Validator\GreaterThan;
 
 class User extends Profile
@@ -17,10 +17,6 @@ class User extends Profile
      * @var bool[]
      */
     protected $status;
-    /**
-     * @var InputFilterInterface
-     */
-    private $inputFilter;
 
     /**
      * @param int         $positionId
@@ -74,20 +70,8 @@ class User extends Profile
 
         $this->positionId = $positionId;
         $this->status = $status;
-        $this->inputFilter = $this->getInputFilter();
 
-        $this->hydrator->addStrategy('positionId', ScalarTypeStrategy::createToInt());
-    }
-
-    public function getInputFilter()
-    {
-        if (isset($this->inputFilter)) {
-            return $this->inputFilter;
-        }
-
-        $inputFilter = parent::getInputFilter();
-
-        $inputFilter->add([
+        $this->inputFilter->add([
             'name'       => 'positionId',
             'required'   => true,
             'filters'    => [
@@ -103,8 +87,17 @@ class User extends Profile
             ],
         ]);
 
-        $this->inputFilter = $inputFilter;
-        return $this->inputFilter;
+        $this->hydrator->addStrategy('positionId', ScalarTypeStrategy::createToInt());
+    }
+
+    public function setInputFilter($inputFilter)
+    {
+        throw new DomainException(
+            sprintf(
+                '%s does not allow injection of an alternate input filter',
+                __CLASS__
+            )
+        );
     }
 
     /**

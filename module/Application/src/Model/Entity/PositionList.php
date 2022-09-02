@@ -33,27 +33,9 @@ class PositionList implements InputFilterAwareInterface, HydratorAwareInterface
     public function __construct($list = [])
     {
         $this->list = $list;
-        $this->inputFilter = $this->getInputFilter();
 
-        $this->hydrator = new ClassMethodsHydrator(false);
-        $this->hydrator->addStrategy(
-            'list',
-            new CollectionStrategy(
-                (new Position())->getHydrator(),
-                Position::class
-            )
-        );
-    }
-
-    public function getInputFilter()
-    {
-        if (isset($this->inputFilter)) {
-            return $this->inputFilter;
-        }
-
-        $inputFilter = new InputFilter();
-
-        $inputFilter->add([
+        $this->inputFilter = new InputFilter();
+        $this->inputFilter->add([
             'name'       => 'list',
             'required'   => false,
             'validators' => [
@@ -63,16 +45,12 @@ class PositionList implements InputFilterAwareInterface, HydratorAwareInterface
             ],
         ]);
 
-        $this->inputFilter = $inputFilter;
-        return $this->inputFilter;
-    }
-
-    public function setInputFilter($inputFilter)
-    {
-        throw new DomainException(
-            sprintf(
-                '%s does not allow injection of an alternate input filter',
-                __CLASS__
+        $this->hydrator = new ClassMethodsHydrator(false);
+        $this->hydrator->addStrategy(
+            'list',
+            new CollectionStrategy(
+                (new Position())->getHydrator(),
+                Position::class
             )
         );
     }
@@ -85,6 +63,21 @@ class PositionList implements InputFilterAwareInterface, HydratorAwareInterface
     public function setHydrator(HydratorInterface $hydrator): void
     {
         $this->hydrator = $hydrator;
+    }
+
+    public function getInputFilter()
+    {
+        return $this->inputFilter;
+    }
+
+    public function setInputFilter($inputFilter)
+    {
+        throw new DomainException(
+            sprintf(
+                '%s does not allow injection of an alternate input filter',
+                __CLASS__
+            )
+        );
     }
 
     /**
