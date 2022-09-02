@@ -24,10 +24,6 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
      */
     protected $id;
     /**
-     * @var string
-     */
-    protected $password;
-    /**
      * @var string|null
      */
     protected $tempPassword;
@@ -96,7 +92,6 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
      * @param int|null    $id
      */
     public function __construct(
-        $password = '',
         $emails = [],
         $phones = [],
         $tempPassword = null,
@@ -111,7 +106,6 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
         $id = null
     ) {
         $this->id = $id;
-        $this->password = $password;
         $this->tempPassword = $tempPassword;
         $this->tpCreatedAt = $tpCreatedAt;
         $this->surname = $surname;
@@ -136,26 +130,6 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
                     'name'    => GreaterThan::class,
                     'options' => [
                         'min' => 0,
-                    ],
-                ],
-            ],
-        ]);
-        $this->inputFilter->add([
-            'name'       => 'password',
-            'required'   => true,
-            'validators' => [
-                [
-                    'name'    => StringLength::class,
-                    'options' => [
-                        'encoding' => 'UTF-8',
-                        'min'      => 8,
-                        'max'      => 32,
-                    ],
-                ],
-                [
-                    'name'    => Regex::class,
-                    'options' => [
-                        'pattern' => '/^(?=.*?[а-яa-z])(?=.*?[А-ЯA-Z])(?=.*?[0-9])(?=.*?[!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~])[а-яa-zА-ЯA-Z0-9!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]*$/',
                     ],
                 ],
             ],
@@ -289,7 +263,6 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
 
         $this->hydrator = new ClassMethodsHydrator(false);
         $this->hydrator->addStrategy('id', new NullableStrategy(ScalarTypeStrategy::createToInt(), true));
-        $this->hydrator->addStrategy('password', ScalarTypeStrategy::createToString());
         $this->hydrator->addStrategy('tempPassword', new NullableStrategy(ScalarTypeStrategy::createToString()));
         $this->hydrator->addStrategy('tpCreatedAt', new NullableStrategy(ScalarTypeStrategy::createToString()));
         $this->hydrator->addStrategy('surname', new NullableStrategy(ScalarTypeStrategy::createToString()));
@@ -335,24 +308,6 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
     public function setId($id)
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * @param $password
-     *
-     * @return void
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
     }
 
     /**

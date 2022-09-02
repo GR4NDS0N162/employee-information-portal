@@ -5,9 +5,15 @@ namespace Application\Model\Entity;
 use Laminas\Filter\ToInt;
 use Laminas\Hydrator\Strategy\ScalarTypeStrategy;
 use Laminas\Validator\GreaterThan;
+use Laminas\Validator\Regex;
+use Laminas\Validator\StringLength;
 
 class User extends Profile
 {
+    /**
+     * @var string
+     */
+    protected $password;
     /**
      * @var int
      */
@@ -35,9 +41,9 @@ class User extends Profile
      * @param int|null    $id
      */
     public function __construct(
+        $password = '',
         $positionId = 0,
         $status = [],
-        $password = '',
         $emails = [],
         $phones = [],
         $tempPassword = null,
@@ -52,7 +58,6 @@ class User extends Profile
         $id = null
     ) {
         parent::__construct(
-            $password,
             $emails,
             $phones,
             $tempPassword,
@@ -67,9 +72,30 @@ class User extends Profile
             $id
         );
 
+        $this->password = $password;
         $this->positionId = $positionId;
         $this->status = $status;
 
+        $this->inputFilter->add([
+            'name'       => 'password',
+            'required'   => true,
+            'validators' => [
+                [
+                    'name'    => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'min'      => 8,
+                        'max'      => 32,
+                    ],
+                ],
+                [
+                    'name'    => Regex::class,
+                    'options' => [
+                        'pattern' => '/^(?=.*?[а-яa-z])(?=.*?[А-ЯA-Z])(?=.*?[0-9])(?=.*?[!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~])[а-яa-zА-ЯA-Z0-9!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]*$/',
+                    ],
+                ],
+            ],
+        ]);
         $this->inputFilter->add([
             'name'       => 'positionId',
             'required'   => true,
@@ -86,6 +112,7 @@ class User extends Profile
             ],
         ]);
 
+        $this->hydrator->addStrategy('password', ScalarTypeStrategy::createToString());
         $this->hydrator->addStrategy('positionId', ScalarTypeStrategy::createToInt());
     }
 
@@ -124,5 +151,23 @@ class User extends Profile
     public function setStatus($status)
     {
         $this->status = $status;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param $password
+     *
+     * @return void
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
     }
 }
