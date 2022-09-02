@@ -61,14 +61,6 @@ class PositionCommand implements PositionCommandInterface
         Executer::executeSql($delete, $this->db);
     }
 
-    public function addPosition($position)
-    {
-        $insert = new Insert('position');
-        $insert->values(['name' => $position->getName()]);
-
-        Executer::executeSql($insert, $this->db);
-    }
-
     public function updatePosition($position)
     {
         $update = new Update('position');
@@ -76,5 +68,13 @@ class PositionCommand implements PositionCommandInterface
         $update->where(['id' => $position->getId()]);
 
         Executer::executeSql($update, $this->db);
+    }
+
+    public function addPosition($position)
+    {
+        $insert = new Insert('position');
+        $insert->values(['name' => $position->getName()]);
+
+        Executer::executeSql($insert, $this->db);
     }
 }
