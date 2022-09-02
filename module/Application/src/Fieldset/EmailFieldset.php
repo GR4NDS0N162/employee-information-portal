@@ -5,7 +5,6 @@ namespace Application\Fieldset;
 use Application\Model\Entity\Email;
 use Laminas\Form\Element;
 use Laminas\Form\Fieldset;
-use Laminas\Hydrator\ClassMethodsHydrator;
 
 class EmailFieldset extends Fieldset
 {

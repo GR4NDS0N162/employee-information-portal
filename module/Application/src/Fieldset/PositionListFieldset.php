@@ -5,7 +5,6 @@ namespace Application\Fieldset;
 use Application\Model\Entity\PositionList;
 use Laminas\Form\Element\Collection;
 use Laminas\Form\Fieldset;
-use Laminas\Hydrator\ClassMethodsHydrator;
 
 class PositionListFieldset extends Fieldset
 {

@@ -5,7 +5,6 @@ namespace Application\Fieldset;
 use Application\Model\Entity\Phone;
 use Laminas\Form\Element;
 use Laminas\Form\Fieldset;
-use Laminas\Hydrator\ClassMethodsHydrator;
 
 class PhoneFieldset extends Fieldset
 {

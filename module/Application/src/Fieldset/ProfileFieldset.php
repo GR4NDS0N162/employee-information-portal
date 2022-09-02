@@ -6,7 +6,6 @@ use Application\Model\Entity\Profile;
 use Application\Model\Options\GenderOptions;
 use Laminas\Form\Element;
 use Laminas\Form\Fieldset;
-use Laminas\Hydrator\ClassMethodsHydrator;
 
 class ProfileFieldset extends Fieldset
 {

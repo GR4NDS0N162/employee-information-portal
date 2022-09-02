@@ -2,13 +2,9 @@
 
 namespace Application\Fieldset;
 
-use Application\Helper\FieldsetMapper;
 use Application\Model\Entity\Position;
 use Laminas\Form\Element;
 use Laminas\Form\Fieldset;
-use Laminas\Hydrator\ClassMethodsHydrator;
-use Laminas\Hydrator\Strategy\NullableStrategy;
-use Laminas\Hydrator\Strategy\ScalarTypeStrategy;
 
 class PositionFieldset extends Fieldset
 {
