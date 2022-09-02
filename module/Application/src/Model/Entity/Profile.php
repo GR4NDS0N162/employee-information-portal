@@ -14,6 +14,7 @@ use Laminas\InputFilter\InputFilterInterface;
 use Laminas\Validator\Between;
 use Laminas\Validator\Date;
 use Laminas\Validator\GreaterThan;
+use Laminas\Validator\IsCountable;
 use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
 
@@ -257,6 +258,24 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
                         'encoding' => 'UTF-8',
                         'max'      => 32,
                     ],
+                ],
+            ],
+        ]);
+        $this->inputFilter->add([
+            'name'       => 'emails',
+            'required'   => true,
+            'validators' => [
+                [
+                    'name' => IsCountable::class,
+                ],
+            ],
+        ]);
+        $this->inputFilter->add([
+            'name'       => 'phones',
+            'required'   => false,
+            'validators' => [
+                [
+                    'name' => IsCountable::class,
                 ],
             ],
         ]);
