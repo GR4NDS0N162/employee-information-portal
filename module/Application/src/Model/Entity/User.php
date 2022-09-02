@@ -2,7 +2,6 @@
 
 namespace Application\Model\Entity;
 
-use DomainException;
 use Laminas\Filter\ToInt;
 use Laminas\Hydrator\Strategy\ScalarTypeStrategy;
 use Laminas\Validator\GreaterThan;
@@ -92,12 +91,7 @@ class User extends Profile
 
     public function setInputFilter($inputFilter)
     {
-        throw new DomainException(
-            sprintf(
-                '%s does not allow injection of an alternate input filter',
-                __CLASS__
-            )
-        );
+        $this->inputFilter = $inputFilter;
     }
 
     /**

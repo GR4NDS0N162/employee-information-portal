@@ -2,7 +2,6 @@
 
 namespace Application\Model\Entity;
 
-use DomainException;
 use Laminas\Filter\ToInt;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\Hydrator\HydratorAwareInterface;
@@ -93,12 +92,7 @@ class Phone implements InputFilterAwareInterface, HydratorAwareInterface
 
     public function setInputFilter($inputFilter)
     {
-        throw new DomainException(
-            sprintf(
-                '%s does not allow injection of an alternate input filter',
-                __CLASS__
-            )
-        );
+        $this->inputFilter = $inputFilter;
     }
 
     public function getHydrator(): ?HydratorInterface

@@ -2,7 +2,6 @@
 
 namespace Application\Model\Entity;
 
-use DomainException;
 use Laminas\Filter;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\Hydrator\HydratorAwareInterface;
@@ -133,12 +132,7 @@ class ChangePassword implements InputFilterAwareInterface, HydratorAwareInterfac
 
     public function setInputFilter($inputFilter)
     {
-        throw new DomainException(
-            sprintf(
-                '%s does not allow injection of an alternate input filter',
-                __CLASS__
-            )
-        );
+        $this->inputFilter = $inputFilter;
     }
 
     /**

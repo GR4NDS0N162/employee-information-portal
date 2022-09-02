@@ -2,7 +2,6 @@
 
 namespace Application\Model\Entity;
 
-use DomainException;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\Hydrator\HydratorAwareInterface;
 use Laminas\Hydrator\HydratorInterface;
@@ -65,12 +64,7 @@ class PositionList implements InputFilterAwareInterface, HydratorAwareInterface
 
     public function setInputFilter($inputFilter)
     {
-        throw new DomainException(
-            sprintf(
-                '%s does not allow injection of an alternate input filter',
-                __CLASS__
-            )
-        );
+        $this->inputFilter = $inputFilter;
     }
 
     /**
