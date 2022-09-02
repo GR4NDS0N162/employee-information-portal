@@ -33,7 +33,7 @@ class RecoverForm extends Form
         ]);
 
         $this->add([
-            'name'       => 'submit_button',
+            'name'       => 'submitButton',
             'type'       => Element\Button::class,
             'attributes' => [
                 'type'  => 'submit',
@@ -48,8 +48,8 @@ class RecoverForm extends Form
 
         FieldsetMapper::setAttributes($this, [
             'children' => [
-                'email'         => 'col-12',
-                'submit_button' => 'col-12',
+                'email'        => 'col-12',
+                'submitButton' => 'col-12',
             ],
         ]);
     }

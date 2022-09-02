@@ -1,5 +1,5 @@
-const positionInput = $(`select[name="position"]`)[0];
-const positionFeedback = $(`select[name="position"] ~ .invalid-feedback`)[0];
+const positionInput = $(`select[name="positionId"]`)[0];
+const positionFeedback = $(`select[name="positionId"] ~ .invalid-feedback`)[0];
 
 hangOnFocusout(positionInput, positionFeedback);
 

@@ -47,7 +47,7 @@ class SignUpForm extends Form
         ]);
 
         $this->add([
-            'name'       => 'position',
+            'name'       => 'positionId',
             'type'       => Element\Select::class,
             'attributes' => [
                 'class'    => 'form-select',
@@ -63,7 +63,7 @@ class SignUpForm extends Form
         ]);
 
         $this->add([
-            'name'       => 'new_password',
+            'name'       => 'newPassword',
             'type'       => Element\Password::class,
             'attributes' => [
                 'class'        => 'form-control',
@@ -83,7 +83,7 @@ class SignUpForm extends Form
         ]);
 
         $this->add([
-            'name'       => 'password_check',
+            'name'       => 'passwordCheck',
             'type'       => Element\Password::class,
             'attributes' => [
                 'class'       => 'form-control',
@@ -100,7 +100,7 @@ class SignUpForm extends Form
         ]);
 
         $this->add([
-            'name'       => 'submit_button',
+            'name'       => 'submitButton',
             'type'       => Element\Button::class,
             'attributes' => [
                 'type'  => 'submit',
@@ -115,11 +115,11 @@ class SignUpForm extends Form
 
         FieldsetMapper::setAttributes($this, [
             'children' => [
-                'email'          => 'col-12',
-                'position'       => 'col-12',
-                'new_password'   => 'col-12',
-                'password_check' => 'col-12',
-                'submit_button'  => 'col-12',
+                'email'         => 'col-12',
+                'positionId'    => 'col-12',
+                'newPassword'   => 'col-12',
+                'passwordCheck' => 'col-12',
+                'submitButton'  => 'col-12',
             ],
         ]);
     }
