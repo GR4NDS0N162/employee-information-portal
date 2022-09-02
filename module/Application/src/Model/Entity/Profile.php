@@ -292,20 +292,6 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
         $this->hydrator->addStrategy('birthday', new NullableStrategy(ScalarTypeStrategy::createToString()));
         $this->hydrator->addStrategy('image', new NullableStrategy(ScalarTypeStrategy::createToString()));
         $this->hydrator->addStrategy('skype', new NullableStrategy(ScalarTypeStrategy::createToString()));
-        $this->hydrator->addStrategy(
-            'emails',
-            new CollectionStrategy(
-                (new Email())->getHydrator(),
-                Email::class
-            )
-        );
-        $this->hydrator->addStrategy(
-            'phones',
-            new CollectionStrategy(
-                (new Phone())->getHydrator(),
-                Phone::class
-            )
-        );
     }
 
     public function getHydrator(): ?HydratorInterface

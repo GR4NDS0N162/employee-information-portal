@@ -46,13 +46,6 @@ class PositionList implements InputFilterAwareInterface, HydratorAwareInterface
         ]);
 
         $this->hydrator = new ClassMethodsHydrator(false);
-        $this->hydrator->addStrategy(
-            'list',
-            new CollectionStrategy(
-                (new Position())->getHydrator(),
-                Position::class
-            )
-        );
     }
 
     public function getHydrator(): ?HydratorInterface
