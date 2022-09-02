@@ -4,6 +4,11 @@ namespace Application\Model\Entity;
 
 use DomainException;
 use Laminas\Filter\ToInt;
+use Laminas\Hydrator\ClassMethodsHydrator;
+use Laminas\Hydrator\HydratorAwareInterface;
+use Laminas\Hydrator\HydratorInterface;
+use Laminas\Hydrator\Strategy\NullableStrategy;
+use Laminas\Hydrator\Strategy\ScalarTypeStrategy;
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
@@ -11,7 +16,7 @@ use Laminas\Validator\GreaterThan;
 use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
 
-class Phone implements InputFilterAwareInterface
+class Phone implements InputFilterAwareInterface, HydratorAwareInterface
 {
     /**
      * @var string
@@ -25,6 +30,10 @@ class Phone implements InputFilterAwareInterface
      * @var InputFilterInterface
      */
     private $inputFilter;
+    /**
+     * @var HydratorInterface
+     */
+    private $hydrator;
 
     /**
      * @param string   $number
@@ -37,6 +46,10 @@ class Phone implements InputFilterAwareInterface
         $this->number = $number;
         $this->userId = $userId;
         $this->inputFilter = $this->getInputFilter();
+
+        $this->hydrator = new ClassMethodsHydrator(false);
+        $this->hydrator->addStrategy('number', ScalarTypeStrategy::createToString());
+        $this->hydrator->addStrategy('userId', new NullableStrategy(ScalarTypeStrategy::createToInt(), true));
     }
 
     public function getInputFilter()
@@ -94,6 +107,16 @@ class Phone implements InputFilterAwareInterface
                 __CLASS__
             )
         );
+    }
+
+    public function getHydrator(): ?HydratorInterface
+    {
+        return $this->hydrator;
+    }
+
+    public function setHydrator(HydratorInterface $hydrator): void
+    {
+        $this->hydrator = $hydrator;
     }
 
     /**

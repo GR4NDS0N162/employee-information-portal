@@ -4,6 +4,12 @@ namespace Application\Model\Entity;
 
 use DomainException;
 use Laminas\Filter\ToInt;
+use Laminas\Hydrator\ClassMethodsHydrator;
+use Laminas\Hydrator\HydratorAwareInterface;
+use Laminas\Hydrator\HydratorInterface;
+use Laminas\Hydrator\Strategy\CollectionStrategy;
+use Laminas\Hydrator\Strategy\NullableStrategy;
+use Laminas\Hydrator\Strategy\ScalarTypeStrategy;
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
@@ -13,7 +19,7 @@ use Laminas\Validator\GreaterThan;
 use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
 
-class Profile implements InputFilterAwareInterface
+class Profile implements InputFilterAwareInterface, HydratorAwareInterface
 {
     /**
      * @var int|null
@@ -68,6 +74,10 @@ class Profile implements InputFilterAwareInterface
      */
     protected $phones;
     /**
+     * @var HydratorInterface
+     */
+    protected $hydrator;
+    /**
      * @var InputFilterInterface
      */
     private $inputFilter;
@@ -116,6 +126,33 @@ class Profile implements InputFilterAwareInterface
         $this->emails = $emails;
         $this->phones = $phones;
         $this->inputFilter = $this->getInputFilter();
+
+        $this->hydrator = new ClassMethodsHydrator(false);
+        $this->hydrator->addStrategy('id', new NullableStrategy(ScalarTypeStrategy::createToInt(), true));
+        $this->hydrator->addStrategy('password', ScalarTypeStrategy::createToString());
+        $this->hydrator->addStrategy('tempPassword', new NullableStrategy(ScalarTypeStrategy::createToString()));
+        $this->hydrator->addStrategy('tpCreatedAt', new NullableStrategy(ScalarTypeStrategy::createToString()));
+        $this->hydrator->addStrategy('surname', new NullableStrategy(ScalarTypeStrategy::createToString()));
+        $this->hydrator->addStrategy('name', new NullableStrategy(ScalarTypeStrategy::createToString()));
+        $this->hydrator->addStrategy('patronymic', new NullableStrategy(ScalarTypeStrategy::createToString()));
+        $this->hydrator->addStrategy('gender', new NullableStrategy(ScalarTypeStrategy::createToString()));
+        $this->hydrator->addStrategy('birthday', new NullableStrategy(ScalarTypeStrategy::createToString()));
+        $this->hydrator->addStrategy('image', new NullableStrategy(ScalarTypeStrategy::createToString()));
+        $this->hydrator->addStrategy('skype', new NullableStrategy(ScalarTypeStrategy::createToString()));
+        $this->hydrator->addStrategy(
+            'emails',
+            new CollectionStrategy(
+                (new Email())->getHydrator(),
+                Email::class
+            )
+        );
+        $this->hydrator->addStrategy(
+            'phones',
+            new CollectionStrategy(
+                (new Phone())->getHydrator(),
+                Phone::class
+            )
+        );
     }
 
     public function getInputFilter()
@@ -301,6 +338,16 @@ class Profile implements InputFilterAwareInterface
                 __CLASS__
             )
         );
+    }
+
+    public function getHydrator(): ?HydratorInterface
+    {
+        return $this->hydrator;
+    }
+
+    public function setHydrator(HydratorInterface $hydrator): void
+    {
+        $this->hydrator = $hydrator;
     }
 
     /**

@@ -4,12 +4,17 @@ namespace Application\Model\Entity;
 
 use DomainException;
 use Laminas\Filter\ToInt;
+use Laminas\Hydrator\ClassMethodsHydrator;
+use Laminas\Hydrator\HydratorAwareInterface;
+use Laminas\Hydrator\HydratorInterface;
+use Laminas\Hydrator\Strategy\NullableStrategy;
+use Laminas\Hydrator\Strategy\ScalarTypeStrategy;
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
 use Laminas\Validator\GreaterThan;
 
-class UserStatus implements InputFilterAwareInterface
+class UserStatus implements InputFilterAwareInterface, HydratorAwareInterface
 {
     /**
      * @var int|null
@@ -23,6 +28,10 @@ class UserStatus implements InputFilterAwareInterface
      * @var InputFilterInterface
      */
     private $inputFilter;
+    /**
+     * @var HydratorInterface
+     */
+    private $hydrator;
 
     /**
      * @param int|null $userId
@@ -35,6 +44,10 @@ class UserStatus implements InputFilterAwareInterface
         $this->userId = $userId;
         $this->statusId = $statusId;
         $this->inputFilter = $this->getInputFilter();
+
+        $this->hydrator = new ClassMethodsHydrator(false);
+        $this->hydrator->addStrategy('userId', new NullableStrategy(ScalarTypeStrategy::createToInt(), true));
+        $this->hydrator->addStrategy('statusId', ScalarTypeStrategy::createToInt());
     }
 
     public function getInputFilter()
@@ -87,6 +100,16 @@ class UserStatus implements InputFilterAwareInterface
                 __CLASS__
             )
         );
+    }
+
+    public function getHydrator(): ?HydratorInterface
+    {
+        return $this->hydrator;
+    }
+
+    public function setHydrator(HydratorInterface $hydrator): void
+    {
+        $this->hydrator = $hydrator;
     }
 
     /**

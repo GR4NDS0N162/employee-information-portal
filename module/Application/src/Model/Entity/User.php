@@ -3,6 +3,7 @@
 namespace Application\Model\Entity;
 
 use Laminas\Filter\ToInt;
+use Laminas\Hydrator\Strategy\ScalarTypeStrategy;
 use Laminas\InputFilter\InputFilterInterface;
 use Laminas\Validator\GreaterThan;
 
@@ -74,6 +75,8 @@ class User extends Profile
         $this->positionId = $positionId;
         $this->status = $status;
         $this->inputFilter = $this->getInputFilter();
+
+        $this->hydrator->addStrategy('positionId', ScalarTypeStrategy::createToInt());
     }
 
     public function getInputFilter()

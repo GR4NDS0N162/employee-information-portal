@@ -3,12 +3,16 @@
 namespace Application\Model\Entity;
 
 use DomainException;
+use Laminas\Hydrator\ClassMethodsHydrator;
+use Laminas\Hydrator\HydratorAwareInterface;
+use Laminas\Hydrator\HydratorInterface;
+use Laminas\Hydrator\Strategy\CollectionStrategy;
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
 use Laminas\Validator\IsCountable;
 
-class PositionList implements InputFilterAwareInterface
+class PositionList implements InputFilterAwareInterface, HydratorAwareInterface
 {
     /**
      * @var Position[]
@@ -18,6 +22,10 @@ class PositionList implements InputFilterAwareInterface
      * @var InputFilterInterface
      */
     private $inputFilter;
+    /**
+     * @var HydratorInterface
+     */
+    private $hydrator;
 
     /**
      * @param Position[] $list
@@ -26,6 +34,15 @@ class PositionList implements InputFilterAwareInterface
     {
         $this->list = $list;
         $this->inputFilter = $this->getInputFilter();
+
+        $this->hydrator = new ClassMethodsHydrator(false);
+        $this->hydrator->addStrategy(
+            'list',
+            new CollectionStrategy(
+                (new Position())->getHydrator(),
+                Position::class
+            )
+        );
     }
 
     public function getInputFilter()
@@ -58,6 +75,16 @@ class PositionList implements InputFilterAwareInterface
                 __CLASS__
             )
         );
+    }
+
+    public function getHydrator(): ?HydratorInterface
+    {
+        return $this->hydrator;
+    }
+
+    public function setHydrator(HydratorInterface $hydrator): void
+    {
+        $this->hydrator = $hydrator;
     }
 
     /**
