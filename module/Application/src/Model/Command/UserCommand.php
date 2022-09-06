@@ -157,6 +157,11 @@ class UserCommand implements UserCommandInterface
 
         Executer::executeSql($update, $this->db);
 
-        // TODO: Реализовать обновление списка емейлов и телефонов.
+        $this->emailCommand->updateEmails(
+            $this->emailRepository->findEmailsOfUser($profile->getId()),
+            $profile->getEmails()
+        );
+
+        // TODO: Реализовать обновление списка телефонов.
     }
 }
