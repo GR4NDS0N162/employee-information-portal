@@ -25,6 +25,11 @@ class EmailFieldset extends Fieldset
             ],
         ]);
 
+        $this->add([
+            'name' => 'userId',
+            'type' => Element\Hidden::class,
+        ]);
+
         $this->add(include __DIR__ . '/../ElementArray/DeleteButton.php');
     }
 }
