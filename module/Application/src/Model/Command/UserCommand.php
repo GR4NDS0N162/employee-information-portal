@@ -124,4 +124,27 @@ class UserCommand implements UserCommandInterface
 
         Executer::executeSql($update, $this->db);
     }
+
+    public function updateProfile($profile)
+    {
+        if (empty($profile->getId())) {
+            throw new RuntimeException('Cannot update profile; missing identifier');
+        }
+
+        $update = new Update('user');
+        $update->set([
+            'surname'    => $profile->getSurname(),
+            'name'       => $profile->getName(),
+            'patronymic' => $profile->getPatronymic(),
+            'gender'     => $profile->getGender(),
+            'birthday'   => $profile->getBirthday(),
+            'image'      => $profile->getImage(),
+            'skype'      => $profile->getSkype(),
+        ]);
+        $update->where(['id = ?' => $profile->getId()]);
+
+        Executer::executeSql($update, $this->db);
+
+        // TODO: Реализовать обновление списка емейлов и телефонов.
+    }
 }

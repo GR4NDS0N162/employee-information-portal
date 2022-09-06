@@ -4,6 +4,7 @@ namespace Application\Model\Command;
 
 use Application\Model\Entity\ChangePassword;
 use Application\Model\Entity\Email;
+use Application\Model\Entity\Profile;
 use Application\Model\Entity\User;
 
 interface UserCommandInterface
@@ -36,4 +37,11 @@ interface UserCommandInterface
      * @return void
      */
     public function updateUser($user);
+
+    /**
+     * @param Profile $profile
+     *
+     * @return void
+     */
+    public function updateProfile($profile);
 }
