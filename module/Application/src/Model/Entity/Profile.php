@@ -235,19 +235,7 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
                 ],
             ],
         ]);
-        $this->inputFilter->add([
-            'name'       => 'image',
-            'required'   => false,
-            'validators' => [
-                [
-                    'name'    => StringLength::class,
-                    'options' => [
-                        'encoding' => 'UTF-8',
-                        'max'      => 255,
-                    ],
-                ],
-            ],
-        ]);
+        // TODO: Добавить inputFilter для фото пользователя
         $this->inputFilter->add([
             'name'       => 'skype',
             'required'   => false,
@@ -289,7 +277,7 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
         $this->hydrator->addStrategy('patronymic', new NullableStrategy(ScalarTypeStrategy::createToString()));
         $this->hydrator->addStrategy('gender', new NullableStrategy(ScalarTypeStrategy::createToInt()));
         $this->hydrator->addStrategy('birthday', new NullableStrategy(ScalarTypeStrategy::createToString()));
-        $this->hydrator->addStrategy('image', new NullableStrategy(ScalarTypeStrategy::createToString()));
+        // TODO: Добавить подходящую стратегию для фото пользователя
         $this->hydrator->addStrategy('skype', new NullableStrategy(ScalarTypeStrategy::createToString()));
     }
 
