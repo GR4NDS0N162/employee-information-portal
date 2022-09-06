@@ -2,6 +2,7 @@
 
 namespace Application\Model\Command;
 
+use Application\Model\Entity\Email;
 use Application\Model\Executer;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Delete;
@@ -27,15 +28,15 @@ class EmailCommand implements EmailCommandInterface
         $oldAddressList = array_column($oldList, 'address');
         $newAddressList = array_column($newList, 'address');
 
-        foreach ($oldList as $email) {
-            if (!in_array($email->getAddress(), $newAddressList)) {
-                $this->deleteEmailByAddress($email->getAddress());
+        foreach ($oldAddressList as $address) {
+            if (!in_array($address, $newAddressList)) {
+                $this->deleteEmailByAddress($address);
             }
         }
 
-        foreach ($newList as $email) {
-            if (!in_array($email->getAddress(), $oldAddressList)) {
-                $this->addEmail($email);
+        foreach ($newAddressList as $address) {
+            if (!in_array($address, $oldAddressList)) {
+                $this->addEmail(new Email($address, $userId));
             }
         }
     }
