@@ -28,15 +28,15 @@ class PhoneCommand implements PhoneCommandInterface
         $oldNumberList = array_column($oldList, 'number');
         $newNumberList = array_column($newList, 'number');
 
-        foreach ($oldList as $phone) {
-            if (!in_array($phone->getNumber(), $newNumberList)) {
-                $this->deletePhoneByNumber($phone->getNumber());
+        foreach ($oldNumberList as $number) {
+            if (!in_array($number, $newNumberList)) {
+                $this->deletePhoneByNumber($number);
             }
         }
 
-        foreach ($newList as $phone) {
-            if (!in_array($phone->getNumber(), $oldNumberList)) {
-                $this->addPhone($phone);
+        foreach ($newNumberList as $number) {
+            if (!in_array($number, $oldNumberList)) {
+                $this->addPhone(new Phone($number, $userId));
             }
         }
     }
