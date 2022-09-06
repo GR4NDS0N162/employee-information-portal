@@ -16,10 +16,14 @@ return [
         Model\Repository\UserStatusRepositoryInterface::class => Model\Repository\UserStatusRepository::class,
         Model\Command\UserCommandInterface::class             => Model\Command\UserCommand::class,
         Model\Command\PositionCommandInterface::class         => Model\Command\PositionCommand::class,
+        Model\Command\EmailCommandInterface::class            => Model\Command\EmailCommand::class,
+        Model\Command\PhoneCommandInterface::class            => Model\Command\PhoneCommand::class,
     ],
     'factories' => [
         Model\Command\UserCommand::class     => CommandFactory\UserCommandFactory::class,
         Model\Command\PositionCommand::class => CommandFactory\PositionCommandFactory::class,
+        Model\Command\EmailCommand::class    => CommandFactory\EmailCommandFactory::class,
+        Model\Command\PhoneCommand::class    => CommandFactory\PhoneCommandFactory::class,
 
         Model\Options\PositionOptions::class => OptionsFactory\PositionOptionsFactory::class,
 
