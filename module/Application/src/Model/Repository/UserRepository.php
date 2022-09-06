@@ -91,7 +91,7 @@ class UserRepository implements UserRepositoryInterface
         }
     }
 
-    public function findUserById($id)
+    private function findUserById($id)
     {
         $select = new Select('user');
         $select->columns([
@@ -136,7 +136,7 @@ class UserRepository implements UserRepositoryInterface
         return $user;
     }
 
-    public function findUserByEmail($email)
+    private function findUserByEmail($email)
     {
         $foundEmail = $this->emailRepository->findEmail($email->getAddress());
 
