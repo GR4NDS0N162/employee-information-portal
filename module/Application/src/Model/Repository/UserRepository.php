@@ -117,21 +117,7 @@ class UserRepository implements UserRepositoryInterface
             );
         }
 
-        $userStatuses = $this->userStatusRepository->findStatusesOfUser($user->getId());
-        $statusMap = [];
-        foreach ($this->statusRepository->findAllStatuses() as $status) {
-            $statusMap[$status->getName()] = in_array(
-                new UserStatus($status->getId(), $user->getId()),
-                $userStatuses
-            );
-        }
-
-        $emails = $this->emailRepository->findEmailsOfUser($user->getId());
-        $phones = $this->phoneRepository->findPhonesOfUser($user->getId());
-
-        $user->setStatus($statusMap);
-        $user->setEmails($emails);
-        $user->setPhones($phones);
+        $this->pullExtraInfo($user);
 
         return $user;
     }
@@ -166,23 +152,35 @@ class UserRepository implements UserRepositoryInterface
         $users = Extracter::extractValues($select, $this->db, $this->hydrator, $this->prototype);
 
         foreach ($users as $user) {
-            $userStatuses = $this->userStatusRepository->findStatusesOfUser($user->getId());
-            $statusMap = [];
-            foreach ($this->statusRepository->findAllStatuses() as $status) {
-                $statusMap[$status->getName()] = in_array(
-                    new UserStatus($status->getId(), $user->getId()),
-                    $userStatuses
-                );
-            }
-
-            $emails = $this->emailRepository->findEmailsOfUser($user->getId());
-            $phones = $this->phoneRepository->findPhonesOfUser($user->getId());
-
-            $user->setStatus($statusMap);
-            $user->setEmails($emails);
-            $user->setPhones($phones);
+            $this->pullExtraInfo($user);
         }
 
         return $users;
+    }
+
+    /**
+     * @param User $user
+     *
+     * @return User
+     */
+    private function pullExtraInfo($user)
+    {
+        $userStatuses = $this->userStatusRepository->findStatusesOfUser($user->getId());
+        $statusMap = [];
+        foreach ($this->statusRepository->findAllStatuses() as $status) {
+            $statusMap[$status->getName()] = in_array(
+                new UserStatus($status->getId(), $user->getId()),
+                $userStatuses
+            );
+        }
+
+        $emails = $this->emailRepository->findEmailsOfUser($user->getId());
+        $phones = $this->phoneRepository->findPhonesOfUser($user->getId());
+
+        $user->setStatus($statusMap);
+        $user->setEmails($emails);
+        $user->setPhones($phones);
+
+        return $user;
     }
 }
