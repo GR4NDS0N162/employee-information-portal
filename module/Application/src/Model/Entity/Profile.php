@@ -48,6 +48,10 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
      */
     protected $image;
     /**
+     * @var array|null
+     */
+    protected $imageFile;
+    /**
      * @var string|null
      */
     protected $skype;
@@ -94,7 +98,8 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
         $image = null,
         $skype = null,
         $id = null
-    ) {
+    )
+    {
         $this->id = $id;
         $this->surname = $surname;
         $this->name = $name;
@@ -102,6 +107,13 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
         $this->gender = $gender;
         $this->birthday = $birthday;
         $this->image = $image;
+        $this->imageFile = [
+            'name'     => '',
+            'type'     => '',
+            'tmp_name' => '',
+            'error'    => 4,
+            'size'     => 0,
+        ];
         $this->skype = $skype;
         $this->emails = $emails;
         $this->phones = $phones;
@@ -416,5 +428,21 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
     public function setPhones($phones)
     {
         $this->phones = $phones;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param array|null $imageFile
+     */
+    public function setImageFile($imageFile)
+    {
+        $this->imageFile = $imageFile;
     }
 }
