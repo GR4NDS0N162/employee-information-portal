@@ -2,6 +2,8 @@
 
 namespace Application\Factory\Command;
 
+use Application\Model\Command\EmailCommandInterface;
+use Application\Model\Command\PhoneCommandInterface;
 use Application\Model\Command\UserCommand;
 use Application\Model\Repository\EmailRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
@@ -17,6 +19,8 @@ class UserCommandFactory implements FactoryInterface
             $container->get(AdapterInterface::class),
             $container->get(EmailRepositoryInterface::class),
             $container->get(UserRepositoryInterface::class),
+            $container->get(EmailCommandInterface::class),
+            $container->get(PhoneCommandInterface::class),
         );
     }
 }
