@@ -116,11 +116,6 @@ class User extends Profile
         $this->hydrator->addStrategy('positionId', ScalarTypeStrategy::createToInt());
     }
 
-    public function setInputFilter($inputFilter)
-    {
-        $this->inputFilter = $inputFilter;
-    }
-
     /**
      * @return int
      */
