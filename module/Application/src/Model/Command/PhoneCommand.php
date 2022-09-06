@@ -23,7 +23,7 @@ class PhoneCommand implements PhoneCommandInterface
         $this->db = $db;
     }
 
-    public function updatePhones($oldList, $newList)
+    public function updatePhones($userId, $oldList, $newList)
     {
         $oldNumberList = array_column($oldList, 'number');
         $newNumberList = array_column($newList, 'number');
