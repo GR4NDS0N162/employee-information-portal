@@ -169,6 +169,10 @@ class UserCommand implements UserCommandInterface
             $profile->getEmails()
         );
 
-        // TODO: Реализовать обновление списка телефонов.
+        $this->phoneCommand->updatePhones(
+            $profile->getId(),
+            $this->phoneRepository->findPhonesOfUser($profile->getId()),
+            $profile->getPhones()
+        );
     }
 }
