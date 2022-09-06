@@ -5,7 +5,6 @@ namespace Application\Controller;
 use Application\Form\User as Form;
 use Application\Model\Command\UserCommandInterface;
 use Application\Model\Entity\ChangePassword;
-use Application\Model\PhotoUrlGenerator;
 use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
@@ -153,39 +152,8 @@ class UserController extends AbstractActionController
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
 
-        $userInfo = [
-            [
-                'photo'    => PhotoUrlGenerator::generate(),
-                'fullname' => 'Зубенко Михаил Петрович',
-                'position' => 'Уборщик',
-                'gender'   => 'Мужской',
-                'age'      => 47,
-            ],
-            [
-                'photo'    => PhotoUrlGenerator::generate(),
-                'fullname' => 'Егоров Владимир Егорович',
-                'position' => 'Бухгалтер',
-                'gender'   => 'Мужской',
-                'age'      => 31,
-            ],
-            [
-                'photo'    => PhotoUrlGenerator::generate(),
-                'fullname' => 'Мельникова Алёна Вадимовна',
-                'position' => 'Юрист',
-                'gender'   => 'Женский',
-                'age'      => 23,
-            ],
-            [
-                'photo'    => PhotoUrlGenerator::generate(),
-                'fullname' => 'Тимофеева Вероника Денисовна',
-                'position' => 'Менеджер',
-                'gender'   => 'Женский',
-                'age'      => 36,
-            ],
-        ];
-
         $viewModel->setVariables([
-            'userInfo'       => $userInfo,
+            'userInfo'       => $this->userRepository->findUsers(),
             'maxPageCount'   => self::maxPageCount,
             'page'           => 1,
             'userFilterForm' => $this->userFilterForm,
