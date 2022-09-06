@@ -22,7 +22,7 @@ class EmailCommand implements EmailCommandInterface
         $this->db = $db;
     }
 
-    public function updateEmails($oldList, $newList)
+    public function updateEmails($userId, $oldList, $newList)
     {
         // TODO: Implement updateEmails() method.
     }

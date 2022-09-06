@@ -158,6 +158,7 @@ class UserCommand implements UserCommandInterface
         Executer::executeSql($update, $this->db);
 
         $this->emailCommand->updateEmails(
+            $profile->getId(),
             $this->emailRepository->findEmailsOfUser($profile->getId()),
             $profile->getEmails()
         );

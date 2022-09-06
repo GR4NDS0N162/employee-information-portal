@@ -7,12 +7,13 @@ use Application\Model\Entity\Email;
 interface EmailCommandInterface
 {
     /**
+     * @param int     $userId
      * @param Email[] $oldList
      * @param Email[] $newList
      *
      * @return void
      */
-    public function updateEmails($oldList, $newList);
+    public function updateEmails($userId, $oldList, $newList);
 
     /**
      * @param string $address
