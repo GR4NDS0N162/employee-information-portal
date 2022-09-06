@@ -96,15 +96,15 @@ class UserCommand implements UserCommandInterface
         $sql = new Sql($this->db);
         $update = $sql->update('user');
         $update->set([
-            'password'      => $user->getPassword(),
-            'position_id'   => $user->getPositionId(),
-            'surname'       => $user->getSurname(),
-            'name'          => $user->getName(),
-            'patronymic'    => $user->getPatronymic(),
-            'gender'        => $user->getGender(),
-            'birthday'      => $user->getBirthday(),
-            'image'         => $user->getImage(),
-            'skype'         => $user->getSkype(),
+            'password'    => $user->getPassword(),
+            'position_id' => $user->getPositionId(),
+            'surname'     => $user->getSurname(),
+            'name'        => $user->getName(),
+            'patronymic'  => $user->getPatronymic(),
+            'gender'      => $user->getGender(),
+            'birthday'    => $user->getBirthday(),
+            'image'       => $user->getImage(),
+            'skype'       => $user->getSkype(),
         ]);
         $update->where(['id = ?' => $user->getId()]);
 
