@@ -2,7 +2,9 @@
 
 namespace Application\Model\Command;
 
+use Application\Model\Executer;
 use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\Sql\Delete;
 
 class EmailCommand implements EmailCommandInterface
 {
@@ -26,7 +28,10 @@ class EmailCommand implements EmailCommandInterface
 
     public function deleteEmailByAddress($address)
     {
-        // TODO: Implement deleteEmailByAddress() method.
+        $delete = new Delete('email');
+        $delete->where(['address = ?' => $address]);
+
+        Executer::executeSql($delete, $this->db);
     }
 
     public function addEmail($email)
