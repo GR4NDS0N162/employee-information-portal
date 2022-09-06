@@ -25,7 +25,20 @@ class PhoneCommand implements PhoneCommandInterface
 
     public function updatePhones($oldList, $newList)
     {
-        // TODO: Implement updatePhones() method.
+        $oldNumberList = array_column($oldList, 'number');
+        $newNumberList = array_column($newList, 'number');
+
+        foreach ($oldList as $phone) {
+            if (!in_array($phone->getNumber(), $newNumberList)) {
+                $this->deletePhoneByNumber($phone->getNumber());
+            }
+        }
+
+        foreach ($newList as $phone) {
+            if (!in_array($phone->getNumber(), $oldNumberList)) {
+                $this->addPhone($phone);
+            }
+        }
     }
 
     /**
