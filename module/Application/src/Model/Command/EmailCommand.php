@@ -5,6 +5,7 @@ namespace Application\Model\Command;
 use Application\Model\Executer;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Delete;
+use Laminas\Db\Sql\Insert;
 
 class EmailCommand implements EmailCommandInterface
 {
@@ -36,6 +37,12 @@ class EmailCommand implements EmailCommandInterface
 
     public function addEmail($email)
     {
-        // TODO: Implement addEmail() method.
+        $insert = new Insert('email');
+        $insert->values([
+            'user_id' => $email->getUserId(),
+            'address' => $email->getAddress(),
+        ]);
+
+        Executer::executeSql($insert, $this->db);
     }
 }
