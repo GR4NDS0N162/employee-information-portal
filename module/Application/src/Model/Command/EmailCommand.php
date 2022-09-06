@@ -24,7 +24,20 @@ class EmailCommand implements EmailCommandInterface
 
     public function updateEmails($userId, $oldList, $newList)
     {
-        // TODO: Implement updateEmails() method.
+        $oldAddressList = array_column($oldList, 'address');
+        $newAddressList = array_column($newList, 'address');
+
+        foreach ($oldList as $email) {
+            if (!in_array($email->getAddress(), $newAddressList)) {
+                $this->deleteEmailByAddress($email->getAddress());
+            }
+        }
+
+        foreach ($newList as $email) {
+            if (!in_array($email->getAddress(), $oldAddressList)) {
+                $this->addEmail($email);
+            }
+        }
     }
 
     public function deleteEmailByAddress($address)
