@@ -119,7 +119,7 @@ class UserController extends AbstractActionController
             return $this->redirect()->toRoute('user/edit-profile');
         }
 
-        // TODO: Измени профиль используя данные из формы
+        $this->userCommand->updateProfile($this->profileForm->getObject());
 
         return $this->redirect()->toRoute('user/view-profile');
     }
