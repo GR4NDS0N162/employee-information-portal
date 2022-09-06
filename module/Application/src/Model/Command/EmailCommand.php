@@ -41,7 +41,7 @@ class EmailCommand implements EmailCommandInterface
         }
     }
 
-    public function deleteEmailByAddress($address)
+    private function deleteEmailByAddress($address)
     {
         $delete = new Delete('email');
         $delete->where(['address = ?' => $address]);
@@ -49,7 +49,7 @@ class EmailCommand implements EmailCommandInterface
         Executer::executeSql($delete, $this->db);
     }
 
-    public function addEmail($email)
+    private function addEmail($email)
     {
         $insert = new Insert('email');
         $insert->values([
