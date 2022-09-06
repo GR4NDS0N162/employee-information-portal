@@ -97,8 +97,6 @@ class UserCommand implements UserCommandInterface
         $update = $sql->update('user');
         $update->set([
             'password'      => $user->getPassword(),
-            'temp_password' => $user->getTempPassword(),
-            'tp_created_at' => $user->getTpCreatedAt(),
             'position_id'   => $user->getPositionId(),
             'surname'       => $user->getSurname(),
             'name'          => $user->getName(),

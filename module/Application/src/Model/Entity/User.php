@@ -46,8 +46,6 @@ class User extends Profile
         $status = [],
         $emails = [],
         $phones = [],
-        $tempPassword = null,
-        $tpCreatedAt = null,
         $surname = null,
         $name = null,
         $patronymic = null,
@@ -60,8 +58,6 @@ class User extends Profile
         parent::__construct(
             $emails,
             $phones,
-            $tempPassword,
-            $tpCreatedAt,
             $surname,
             $name,
             $patronymic,

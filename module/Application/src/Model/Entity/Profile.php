@@ -15,7 +15,6 @@ use Laminas\Validator\Between;
 use Laminas\Validator\Date;
 use Laminas\Validator\GreaterThan;
 use Laminas\Validator\IsCountable;
-use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
 
 class Profile implements InputFilterAwareInterface, HydratorAwareInterface
@@ -24,14 +23,6 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
      * @var int|null
      */
     protected $id;
-    /**
-     * @var string|null
-     */
-    protected $tempPassword;
-    /**
-     * @var string|null
-     */
-    protected $tpCreatedAt;
     /**
      * @var string|null
      */
@@ -95,8 +86,6 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
     public function __construct(
         $emails = [],
         $phones = [],
-        $tempPassword = null,
-        $tpCreatedAt = null,
         $surname = null,
         $name = null,
         $patronymic = null,
@@ -107,8 +96,6 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
         $id = null
     ) {
         $this->id = $id;
-        $this->tempPassword = $tempPassword;
-        $this->tpCreatedAt = $tpCreatedAt;
         $this->surname = $surname;
         $this->name = $name;
         $this->patronymic = $patronymic;
@@ -131,38 +118,6 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
                     'name'    => GreaterThan::class,
                     'options' => [
                         'min' => 0,
-                    ],
-                ],
-            ],
-        ]);
-        $this->inputFilter->add([
-            'name'       => 'tempPassword',
-            'required'   => false,
-            'validators' => [
-                [
-                    'name'    => StringLength::class,
-                    'options' => [
-                        'encoding' => 'UTF-8',
-                        'min'      => 8,
-                        'max'      => 32,
-                    ],
-                ],
-                [
-                    'name'    => Regex::class,
-                    'options' => [
-                        'pattern' => '/^(?=.*?[а-яa-z])(?=.*?[А-ЯA-Z])(?=.*?[0-9])(?=.*?[!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~])[а-яa-zА-ЯA-Z0-9!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]*$/',
-                    ],
-                ],
-            ],
-        ]);
-        $this->inputFilter->add([
-            'name'       => 'tpCreatedAt',
-            'required'   => false,
-            'validators' => [
-                [
-                    'name'    => Date::class,
-                    'options' => [
-                        'format' => 'Y-m-d H:i:s',
                     ],
                 ],
             ],
@@ -270,8 +225,6 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
 
         $this->hydrator = new ClassMethodsHydrator(false);
         $this->hydrator->addStrategy('id', new NullableStrategy(ScalarTypeStrategy::createToInt(), true));
-        $this->hydrator->addStrategy('tempPassword', new NullableStrategy(ScalarTypeStrategy::createToString()));
-        $this->hydrator->addStrategy('tpCreatedAt', new NullableStrategy(ScalarTypeStrategy::createToString()));
         $this->hydrator->addStrategy('surname', new NullableStrategy(ScalarTypeStrategy::createToString()));
         $this->hydrator->addStrategy('name', new NullableStrategy(ScalarTypeStrategy::createToString()));
         $this->hydrator->addStrategy('patronymic', new NullableStrategy(ScalarTypeStrategy::createToString()));
@@ -315,38 +268,6 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
     public function setId($id)
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getTempPassword()
-    {
-        return $this->tempPassword;
-    }
-
-    /**
-     * @param string|null $tempPassword
-     */
-    public function setTempPassword($tempPassword)
-    {
-        $this->tempPassword = $tempPassword;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getTpCreatedAt()
-    {
-        return $this->tpCreatedAt;
-    }
-
-    /**
-     * @param string|null $tpCreatedAt
-     */
-    public function setTpCreatedAt($tpCreatedAt)
-    {
-        $this->tpCreatedAt = $tpCreatedAt;
     }
 
     /**
