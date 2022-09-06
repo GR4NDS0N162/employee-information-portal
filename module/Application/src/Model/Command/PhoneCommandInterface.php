@@ -13,18 +13,4 @@ interface PhoneCommandInterface
      * @return void
      */
     public function updatePhones($oldList, $newList);
-
-    /**
-     * @param string $number
-     *
-     * @return void
-     */
-    public function deletePhoneByNumber($number);
-
-    /**
-     * @param Phone $phone
-     *
-     * @return void
-     */
-    public function addPhone($phone);
 }
