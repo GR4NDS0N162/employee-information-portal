@@ -142,4 +142,47 @@ class UserRepository implements UserRepositoryInterface
 
         return $this->findUserById($foundEmail->getUserId());
     }
+
+    public function findUsers($where = [], $order = [])
+    {
+        $select = new Select('user');
+        $select->columns([
+            'id',
+            'password',
+            'tempPassword' => 'temp_password',
+            'tpCreatedAt'  => 'tp_created_at',
+            'positionId'   => 'position_id',
+            'surname',
+            'name',
+            'patronymic',
+            'gender',
+            'birthday',
+            'image',
+            'skype',
+        ]);
+        $select->where($where);
+        $select->order($order);
+
+        $users = Extracter::extractValues($select, $this->db, $this->hydrator, $this->prototype);
+
+        foreach ($users as $user) {
+            $userStatuses = $this->userStatusRepository->findStatusesOfUser($user->getId());
+            $statusMap = [];
+            foreach ($this->statusRepository->findAllStatuses() as $status) {
+                $statusMap[$status->getName()] = in_array(
+                    new UserStatus($status->getId(), $user->getId()),
+                    $userStatuses
+                );
+            }
+
+            $emails = $this->emailRepository->findEmailsOfUser($user->getId());
+            $phones = $this->phoneRepository->findPhonesOfUser($user->getId());
+
+            $user->setStatus($statusMap);
+            $user->setEmails($emails);
+            $user->setPhones($phones);
+        }
+
+        return $users;
+    }
 }
