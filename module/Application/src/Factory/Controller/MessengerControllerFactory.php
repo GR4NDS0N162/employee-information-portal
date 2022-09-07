@@ -5,6 +5,7 @@ namespace Application\Factory\Controller;
 use Application\Controller\MessengerController;
 use Application\Form\Messenger\DialogFilterForm;
 use Application\Form\Messenger\NewMessageForm;
+use Application\Model\Repository\DialogRepositoryInterface;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 
@@ -17,6 +18,7 @@ class MessengerControllerFactory implements FactoryInterface
         return new MessengerController(
             $formManager->get(DialogFilterForm::class),
             $formManager->get(NewMessageForm::class),
+            $container->get(DialogRepositoryInterface::class),
         );
     }
 }
