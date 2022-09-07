@@ -31,6 +31,16 @@ class Dialog implements HydratorAwareInterface
         $this->id = $id;
         $this->buddyId = $buddyId;
     }
+    
+    public function __get($prop)
+    {
+        return $this->$prop;
+    }
+
+    public function __isset($prop): bool
+    {
+        return isset($this->$prop);
+    }
 
     public function setId($id)
     {
