@@ -34,44 +34,7 @@ class MessengerController extends AbstractActionController
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
 
-        $dialogs = [
-            [
-                'userId'    => 1,
-                'hasDialog' => true,
-                'photo'     => PhotoUrlGenerator::generate(),
-                'fullname'  => 'Зубенко Михаил Петрович',
-                'position'  => 'Уборщик',
-                'gender'    => 'Мужской',
-                'age'       => 47,
-            ],
-            [
-                'userId'    => 2,
-                'hasDialog' => true,
-                'photo'     => PhotoUrlGenerator::generate(),
-                'fullname'  => 'Егоров Владимир Егорович',
-                'position'  => 'Бухгалтер',
-                'gender'    => 'Мужской',
-                'age'       => 31,
-            ],
-            [
-                'userId'    => 3,
-                'hasDialog' => false,
-                'photo'     => PhotoUrlGenerator::generate(),
-                'fullname'  => 'Мельникова Алёна Вадимовна',
-                'position'  => 'Юрист',
-                'gender'    => 'Женский',
-                'age'       => 23,
-            ],
-            [
-                'userId'    => 4,
-                'hasDialog' => false,
-                'photo'     => PhotoUrlGenerator::generate(),
-                'fullname'  => 'Тимофеева Вероника Денисовна',
-                'position'  => 'Менеджер',
-                'gender'    => 'Женский',
-                'age'       => 36,
-            ],
-        ];
+        $dialogs = $this->dialogRepository->getDialogList(self::userId);
 
         $viewModel->setVariable('dialogs', $dialogs);
         $viewModel->setVariable('dialogFilterForm', $this->dialogFilterForm);
