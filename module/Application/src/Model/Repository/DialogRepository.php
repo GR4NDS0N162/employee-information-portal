@@ -28,4 +28,9 @@ class DialogRepository implements DialogRepositoryInterface
         $this->db = $db;
         $this->prototype = $prototype;
     }
+
+    public function getDialogList($userId)
+    {
+        // TODO: Implement getDialogList() method.
+    }
 }
