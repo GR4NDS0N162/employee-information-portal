@@ -16,16 +16,44 @@ class UserInfoRepository implements UserInfoRepositoryInterface
      * @var  UserInfo|HydratorAwareInterface
      */
     private $prototype;
+    /**
+     * @var EmailRepositoryInterface
+     */
+    private $emailRepository;
+    /**
+     * @var PhoneRepositoryInterface
+     */
+    private $phoneRepository;
+    /**
+     * @var StatusRepositoryInterface
+     */
+    private $statusRepository;
+    /**
+     * @var UserStatusRepositoryInterface
+     */
+    private $userStatusRepository;
 
     /**
      * @param AdapterInterface                $db
      * @param UserInfo|HydratorAwareInterface $prototype
+     * @param EmailRepositoryInterface        $emailRepository
+     * @param PhoneRepositoryInterface        $phoneRepository
+     * @param StatusRepositoryInterface       $statusRepository
+     * @param UserStatusRepositoryInterface   $userStatusRepository
      */
     public function __construct(
         $db,
-        $prototype
+        $prototype,
+        $emailRepository,
+        $phoneRepository,
+        $statusRepository,
+        $userStatusRepository
     ) {
         $this->db = $db;
         $this->prototype = $prototype;
+        $this->emailRepository = $emailRepository;
+        $this->phoneRepository = $phoneRepository;
+        $this->statusRepository = $statusRepository;
+        $this->userStatusRepository = $userStatusRepository;
     }
 }
