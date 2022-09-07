@@ -56,4 +56,9 @@ class UserInfoRepository implements UserInfoRepositoryInterface
         $this->statusRepository = $statusRepository;
         $this->userStatusRepository = $userStatusRepository;
     }
+
+    public function findUsersInfo($where = [], $order = [])
+    {
+        // TODO: Implement findUsersInfo() method.
+    }
 }
