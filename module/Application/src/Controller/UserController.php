@@ -5,6 +5,7 @@ namespace Application\Controller;
 use Application\Form\User as Form;
 use Application\Model\Command\UserCommandInterface;
 use Application\Model\Entity\ChangePassword;
+use Application\Model\Repository\UserInfoRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
@@ -36,6 +37,10 @@ class UserController extends AbstractActionController
      */
     private $userRepository;
     /**
+     * @var UserInfoRepositoryInterface
+     */
+    private $userInfoRepository;
+    /**
      * @var UserCommandInterface
      */
     private $userCommand;
@@ -54,6 +59,7 @@ class UserController extends AbstractActionController
         $userFilterForm,
         $changePasswordForm,
         $userRepository,
+        $userInfoRepository,
         $userCommand
     ) {
         $this->profileForm = $profileForm;
@@ -61,6 +67,7 @@ class UserController extends AbstractActionController
         $this->userFilterForm = $userFilterForm;
         $this->changePasswordForm = $changePasswordForm;
         $this->userRepository = $userRepository;
+        $this->userInfoRepository = $userInfoRepository;
         $this->userCommand = $userCommand;
     }
 
