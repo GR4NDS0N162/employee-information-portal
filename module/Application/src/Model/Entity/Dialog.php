@@ -31,7 +31,7 @@ class Dialog implements HydratorAwareInterface
         $this->id = $id;
         $this->buddyId = $buddyId;
     }
-    
+
     public function __get($prop)
     {
         return $this->$prop;
@@ -42,24 +42,24 @@ class Dialog implements HydratorAwareInterface
         return isset($this->$prop);
     }
 
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
     public function getId()
     {
         return $this->id;
     }
 
-    public function setBuddyId($buddyId)
+    public function setId($id)
     {
-        $this->buddyId = $buddyId;
+        $this->id = $id;
     }
 
     public function getBuddyId()
     {
         return $this->buddyId;
+    }
+
+    public function setBuddyId($buddyId)
+    {
+        $this->buddyId = $buddyId;
     }
 
     public function getHydrator(): ?HydratorInterface
