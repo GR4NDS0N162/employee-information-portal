@@ -44,6 +44,7 @@ class MessengerController extends AbstractActionController
 
         $viewModel->setVariable('dialogs', $dialogs);
         $viewModel->setVariable('dialogFilterForm', $this->dialogFilterForm);
+        $viewModel->setVariable('userRepository', $this->userRepository);
 
         return $viewModel;
     }
