@@ -28,8 +28,9 @@ interface UserRepositoryInterface
     /**
      * @param Where|Closure|string|array|PredicateInterface $where
      * @param string|array|Expression                       $order
+     * @param int[]                                         $limit
      *
      * @return User[]
      */
-    public function findUsers($where = [], $order = []);
+    public function findUsers($where = [], $order = [], $limit = []);
 }

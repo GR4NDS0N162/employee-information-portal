@@ -129,7 +129,7 @@ class UserRepository implements UserRepositoryInterface
         return $this->findUserById($foundEmail->getUserId());
     }
 
-    public function findUsers($where = [], $order = [])
+    public function findUsers($where = [], $order = [], $limit = [])
     {
         $select = new Select('user');
         $select->columns([
@@ -148,6 +148,12 @@ class UserRepository implements UserRepositoryInterface
         ]);
         $select->where($where);
         $select->order($order);
+        if (isset($limit['limit'])) {
+            $select->limit($limit['limit']);
+        }
+        if (isset($limit['offset'])) {
+            $select->offset($limit['offset']);
+        }
 
         $users = Extracter::extractValues($select, $this->db, $this->hydrator, $this->prototype);
 
