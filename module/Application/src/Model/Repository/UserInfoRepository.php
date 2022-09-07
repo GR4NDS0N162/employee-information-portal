@@ -32,10 +32,15 @@ class UserInfoRepository implements UserInfoRepositoryInterface
      * @var UserStatusRepositoryInterface
      */
     private $userStatusRepository;
+    /**
+     * @var UserRepositoryInterface
+     */
+    private $userRepository;
 
     /**
      * @param AdapterInterface                $db
      * @param UserInfo|HydratorAwareInterface $prototype
+     * @param UserRepositoryInterface         $userRepository
      * @param EmailRepositoryInterface        $emailRepository
      * @param PhoneRepositoryInterface        $phoneRepository
      * @param StatusRepositoryInterface       $statusRepository
@@ -44,6 +49,7 @@ class UserInfoRepository implements UserInfoRepositoryInterface
     public function __construct(
         $db,
         $prototype,
+        $userRepository,
         $emailRepository,
         $phoneRepository,
         $statusRepository,
@@ -51,6 +57,7 @@ class UserInfoRepository implements UserInfoRepositoryInterface
     ) {
         $this->db = $db;
         $this->prototype = $prototype;
+        $this->userRepository = $userRepository;
         $this->emailRepository = $emailRepository;
         $this->phoneRepository = $phoneRepository;
         $this->statusRepository = $statusRepository;
