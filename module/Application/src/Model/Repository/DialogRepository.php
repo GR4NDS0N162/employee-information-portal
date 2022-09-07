@@ -81,7 +81,18 @@ class DialogRepository implements DialogRepositoryInterface
             );
         }
 
-        // TODO: Добавить диалоги, которые пользователь может создать.
+        $possibleBuddies = $this->userRepository->findUsers([
+            'id != ?' => $userId,
+            new Expression(
+                'id NOT IN (' .
+                implode(', ', array_column($dialogsOfUser, 'buddyId'))
+                . ')'
+            ),
+        ]);
+
+        foreach ($possibleBuddies as $buddy) {
+            $dialogsOfUser[] = new Dialog($buddy->getId());
+        }
 
         return $dialogsOfUser;
     }
