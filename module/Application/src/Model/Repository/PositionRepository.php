@@ -45,4 +45,16 @@ class PositionRepository implements PositionRepositoryInterface
 
         return Extracter::extractValues($select, $this->db, $this->hydrator, $this->prototype);
     }
+
+    public function findPositionById($id)
+    {
+        $select = new Select('position');
+        $select->columns([
+            'id',
+            'name',
+        ]);
+        $select->where(['id = ?' => $id]);
+
+        return Extracter::extractValue($select, $this->db, $this->hydrator, $this->prototype);
+    }
 }

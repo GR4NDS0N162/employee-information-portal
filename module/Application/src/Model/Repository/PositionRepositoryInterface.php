@@ -10,4 +10,11 @@ interface PositionRepositoryInterface
      * @return Position[]
      */
     public function findAllPositions();
+
+    /**
+     * @param int $id
+     *
+     * @return Position
+     */
+    public function findPositionById($id);
 }
