@@ -45,4 +45,84 @@ class UserInfo
         $this->gender = $gender;
         $this->image = $image;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getFullName()
+    {
+        return $this->fullName;
+    }
+
+    /**
+     * @param string|null $fullName
+     */
+    public function setFullName($fullName)
+    {
+        $this->fullName = $fullName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param string $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getAge()
+    {
+        return $this->age;
+    }
+
+    /**
+     * @param int|null $age
+     */
+    public function setAge($age)
+    {
+        $this->age = $age;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param int|null $gender
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string|null $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
 }
