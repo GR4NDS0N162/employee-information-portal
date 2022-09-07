@@ -2,7 +2,10 @@
 
 namespace Application\Model\Entity;
 
-class UserInfo
+use Laminas\Hydrator\HydratorAwareInterface;
+use Laminas\Hydrator\HydratorInterface;
+
+class UserInfo implements HydratorAwareInterface
 {
     /**
      * @var string|null
@@ -24,6 +27,10 @@ class UserInfo
      * @var string|null
      */
     private $image;
+    /**
+     * @var HydratorInterface
+     */
+    private $hydrator;
 
     /**
      * @param string|null $fullName
@@ -124,5 +131,15 @@ class UserInfo
     public function setImage($image)
     {
         $this->image = $image;
+    }
+
+    public function getHydrator(): ?HydratorInterface
+    {
+        return $this->hydrator;
+    }
+
+    public function setHydrator(HydratorInterface $hydrator): void
+    {
+        $this->hydrator = $hydrator;
     }
 }
