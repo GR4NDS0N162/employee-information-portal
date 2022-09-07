@@ -81,14 +81,20 @@ class DialogRepository implements DialogRepositoryInterface
             );
         }
 
-        $possibleBuddies = $this->userRepository->findUsers([
-            'id != ?' => $userId,
-            new Expression(
-                'id NOT IN (' .
-                implode(', ', array_column($dialogsOfUser, 'buddyId'))
-                . ')'
-            ),
-        ]);
+        $buddiesId = implode(', ', array_column($dialogsOfUser, 'buddyId'));
+
+        $possibleBuddies = $this->userRepository->findUsers();
+
+        if ($buddiesId != '') {
+            $possibleBuddies = $this->userRepository->findUsers([
+                'id != ?' => $userId,
+                new Expression(
+                    'id NOT IN (' .
+                    $buddiesId
+                    . ')'
+                ),
+            ]);
+        }
 
         foreach ($possibleBuddies as $buddy) {
             $dialogsOfUser[] = new Dialog($buddy->getId());
