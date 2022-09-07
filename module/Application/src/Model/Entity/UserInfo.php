@@ -10,7 +10,15 @@ class UserInfo implements HydratorAwareInterface
     /**
      * @var string|null
      */
-    private $fullName;
+    protected $surname;
+    /**
+     * @var string|null
+     */
+    protected $name;
+    /**
+     * @var string|null
+     */
+    protected $patronymic;
     /**
      * @var string
      */
@@ -33,20 +41,26 @@ class UserInfo implements HydratorAwareInterface
     private $hydrator;
 
     /**
-     * @param string|null $fullName
+     * @param string|null $surname
+     * @param string|null $name
+     * @param string|null $patronymic
      * @param string      $position
      * @param int|null    $age
      * @param int|null    $gender
      * @param string|null $image
      */
     public function __construct(
-        $fullName = null,
+        $surname = null,
+        $name = null,
+        $patronymic = null,
         $position = '',
         $age = null,
         $gender = null,
         $image = null
     ) {
-        $this->fullName = $fullName;
+        $this->surname = $surname;
+        $this->name = $name;
+        $this->patronymic = $patronymic;
         $this->position = $position;
         $this->age = $age;
         $this->gender = $gender;
