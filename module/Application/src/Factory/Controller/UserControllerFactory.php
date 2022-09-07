@@ -8,7 +8,7 @@ use Application\Form\User\ProfileForm;
 use Application\Form\User\UserFilterForm;
 use Application\Form\User\ViewProfileForm;
 use Application\Model\Command\UserCommandInterface;
-use Application\Model\Repository\UserInfoRepositoryInterface;
+use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
@@ -25,7 +25,7 @@ class UserControllerFactory implements FactoryInterface
             $formManager->get(UserFilterForm::class),
             $formManager->get(ChangePasswordForm::class),
             $container->get(UserRepositoryInterface::class),
-            $container->get(UserInfoRepositoryInterface::class),
+            $container->get(PositionRepositoryInterface::class),
             $container->get(UserCommandInterface::class),
         );
     }

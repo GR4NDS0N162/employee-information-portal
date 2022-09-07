@@ -5,7 +5,7 @@ namespace Application\Controller;
 use Application\Form\User as Form;
 use Application\Model\Command\UserCommandInterface;
 use Application\Model\Entity\ChangePassword;
-use Application\Model\Repository\UserInfoRepositoryInterface;
+use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
@@ -37,21 +37,22 @@ class UserController extends AbstractActionController
      */
     private $userRepository;
     /**
-     * @var UserInfoRepositoryInterface
+     * @var PositionRepositoryInterface
      */
-    private $userInfoRepository;
+    private $positionRepository;
     /**
      * @var UserCommandInterface
      */
     private $userCommand;
 
     /**
-     * @param Form\ProfileForm        $profileForm
-     * @param Form\ViewProfileForm    $viewProfileForm
-     * @param Form\UserFilterForm     $userFilterForm
-     * @param Form\ChangePasswordForm $changePasswordForm
-     * @param UserRepositoryInterface $userRepository
-     * @param UserCommandInterface    $userCommand
+     * @param Form\ProfileForm            $profileForm
+     * @param Form\ViewProfileForm        $viewProfileForm
+     * @param Form\UserFilterForm         $userFilterForm
+     * @param Form\ChangePasswordForm     $changePasswordForm
+     * @param UserRepositoryInterface     $userRepository
+     * @param PositionRepositoryInterface $positionRepository
+     * @param UserCommandInterface        $userCommand
      */
     public function __construct(
         $profileForm,
@@ -59,7 +60,7 @@ class UserController extends AbstractActionController
         $userFilterForm,
         $changePasswordForm,
         $userRepository,
-        $userInfoRepository,
+        $positionRepository,
         $userCommand
     ) {
         $this->profileForm = $profileForm;
@@ -67,7 +68,7 @@ class UserController extends AbstractActionController
         $this->userFilterForm = $userFilterForm;
         $this->changePasswordForm = $changePasswordForm;
         $this->userRepository = $userRepository;
-        $this->userInfoRepository = $userInfoRepository;
+        $this->positionRepository = $positionRepository;
         $this->userCommand = $userCommand;
     }
 
