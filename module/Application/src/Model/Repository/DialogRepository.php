@@ -16,17 +16,24 @@ class DialogRepository implements DialogRepositoryInterface
      * @var Dialog|HydratorAwareInterface
      */
     private $prototype;
+    /**
+     * @var UserRepositoryInterface
+     */
+    private $userRepository;
 
     /**
      * @param AdapterInterface              $db
      * @param Dialog|HydratorAwareInterface $prototype
+     * @param UserRepositoryInterface       $userRepository
      */
     public function __construct(
         $db,
-        $prototype
+        $prototype,
+        $userRepository
     ) {
         $this->db = $db;
         $this->prototype = $prototype;
+        $this->userRepository = $userRepository;
     }
 
     public function getDialogList($userId)
