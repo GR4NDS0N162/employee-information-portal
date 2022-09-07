@@ -73,11 +73,8 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
     protected $inputFilter;
 
     /**
-     * @param string      $password
      * @param Email[]     $emails
      * @param Phone[]     $phones
-     * @param string|null $tempPassword
-     * @param string|null $tpCreatedAt
      * @param string|null $surname
      * @param string|null $name
      * @param string|null $patronymic
@@ -98,8 +95,7 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
         $image = null,
         $skype = null,
         $id = null
-    )
-    {
+    ) {
         $this->id = $id;
         $this->surname = $surname;
         $this->name = $name;
