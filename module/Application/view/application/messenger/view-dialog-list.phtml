@@ -2,7 +2,7 @@
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
  * @var DialogFilterForm                  $dialogFilterForm
- * @var array                             $dialogs
+ * @var Application\Model\Entity\Dialog[] $dialogs
  */
 
 use Application\Form\Messenger\DialogFilterForm;
@@ -16,7 +16,9 @@ use Application\Form\Messenger\DialogFilterForm;
     </div>
     <div class="col">
         <div class="row g-3">
-            <?= $this->partialLoop('partial/dialog-list.phtml', $dialogs); ?>
+            <?php foreach ($dialogs as $dialog): ?>
+                <?php // TODO: Добавить отображение карточки диалога. ?>
+            <?php endforeach; ?>
         </div>
     </div>
 </div>
