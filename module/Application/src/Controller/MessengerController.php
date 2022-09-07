@@ -10,6 +10,8 @@ use Laminas\View\Model\ViewModel;
 
 class MessengerController extends AbstractActionController
 {
+    public const userId = 1;
+
     private $dialogFilterForm;
     private $newMessageForm;
     /**
