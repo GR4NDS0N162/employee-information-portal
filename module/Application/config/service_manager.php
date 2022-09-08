@@ -16,6 +16,7 @@ return [
         Model\Repository\UserStatusRepositoryInterface::class => Model\Repository\UserStatusRepository::class,
         Model\Repository\UserInfoRepositoryInterface::class   => Model\Repository\UserInfoRepository::class,
         Model\Repository\DialogRepositoryInterface::class     => Model\Repository\DialogRepository::class,
+        Model\Repository\MessageRepositoryInterface::class    => Model\Repository\MessageRepository::class,
         Model\Command\UserCommandInterface::class             => Model\Command\UserCommand::class,
         Model\Command\PositionCommandInterface::class         => Model\Command\PositionCommand::class,
         Model\Command\EmailCommandInterface::class            => Model\Command\EmailCommand::class,
@@ -37,5 +38,6 @@ return [
         Model\Repository\UserStatusRepository::class => RepositoryFactory\UserStatusRepositoryFactory::class,
         Model\Repository\UserInfoRepository::class   => RepositoryFactory\UserInfoRepositoryFactory::class,
         Model\Repository\DialogRepository::class     => RepositoryFactory\DialogRepositoryFactory::class,
+        Model\Repository\MessageRepository::class    => RepositoryFactory\MessageRepositoryFactory::class,
     ],
 ];
