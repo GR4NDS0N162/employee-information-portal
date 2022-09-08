@@ -18,4 +18,9 @@ class DialogCommand implements DialogCommandInterface
     {
         $this->db = $db;
     }
+
+    public function createDialog($userId, $buddyId)
+    {
+        // TODO: Implement createDialog() method.
+    }
 }
