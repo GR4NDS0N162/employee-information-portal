@@ -70,6 +70,12 @@ class MessengerController extends AbstractActionController
 
     public function viewMessagesAction()
     {
+        $buddyId = (int)$this->params()->fromRoute('id', 0);
+
+        if ($buddyId === 0) {
+            return $this->redirect()->toRoute('user/view-dialog-list');
+        }
+
         $viewModel = new ViewModel();
 
         $this->layout()->setVariable('headTitleName', 'Сообщения');
