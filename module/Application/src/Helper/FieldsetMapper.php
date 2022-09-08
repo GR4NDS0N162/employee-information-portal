@@ -28,11 +28,19 @@ class FieldsetMapper
             return;
         }
 
-        if (is_string($config['value']) && !empty($config['value'])) {
+        if (
+            isset($config['value']) &&
+            is_string($config['value']) &&
+            !empty($config['value'])
+        ) {
             $element->setAttribute(self::KEY, $config['value']);
         }
 
-        if (($element instanceof Collection) && !empty($config['target_element'])) {
+        if (
+            ($element instanceof Collection) &&
+            isset($config['target_element']) &&
+            !empty($config['target_element'])
+        ) {
             self::setAttributes($element->getTargetElement(), $config['target_element']);
             return;
         }
