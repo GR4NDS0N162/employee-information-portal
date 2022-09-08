@@ -32,7 +32,6 @@ class MessageRepository implements MessageRepositoryInterface
     public function findMessagesOfDialog(
         $dialogId,
         $where = [],
-        $order = [],
         $limit = null,
         $offset = null
     ) {
