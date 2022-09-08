@@ -6,6 +6,7 @@ use Application\Controller\MessengerController;
 use Application\Form\Messenger\DialogFilterForm;
 use Application\Form\Messenger\NewMessageForm;
 use Application\Model\Repository\DialogRepositoryInterface;
+use Application\Model\Repository\MessageRepositoryInterface;
 use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use Interop\Container\ContainerInterface;
@@ -23,6 +24,7 @@ class MessengerControllerFactory implements FactoryInterface
             $container->get(DialogRepositoryInterface::class),
             $container->get(UserRepositoryInterface::class),
             $container->get(PositionRepositoryInterface::class),
+            $container->get(MessageRepositoryInterface::class),
         );
     }
 }

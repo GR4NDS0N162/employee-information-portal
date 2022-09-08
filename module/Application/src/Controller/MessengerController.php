@@ -5,6 +5,7 @@ namespace Application\Controller;
 use Application\Form;
 use Application\Model\PhotoUrlGenerator;
 use Application\Model\Repository\DialogRepositoryInterface;
+use Application\Model\Repository\MessageRepositoryInterface;
 use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use Laminas\Mvc\Controller\AbstractActionController;
@@ -28,19 +29,25 @@ class MessengerController extends AbstractActionController
      * @var PositionRepositoryInterface
      */
     private $positionRepository;
+    /**
+     * @var MessageRepositoryInterface
+     */
+    private $messageRepository;
 
     public function __construct(
         $dialogFilterForm,
         $newMessageForm,
         $dialogRepository,
         $userRepository,
-        $positionRepository
+        $positionRepository,
+        $messageRepository
     ) {
         $this->dialogFilterForm = $dialogFilterForm;
         $this->newMessageForm = $newMessageForm;
         $this->dialogRepository = $dialogRepository;
         $this->userRepository = $userRepository;
         $this->positionRepository = $positionRepository;
+        $this->messageRepository = $messageRepository;
     }
 
     public function viewDialogListAction()
