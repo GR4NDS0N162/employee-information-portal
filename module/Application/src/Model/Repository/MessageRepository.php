@@ -43,7 +43,7 @@ class MessageRepository implements MessageRepositoryInterface
             'createdAt' => 'created_at',
             'openedAt'  => 'opened_at',
             'content',
-        ]);
+        ], false);
         $select->where(['dialog_id = ?' => $dialogId]);
         $select->join('content', 'id = message_id');
         $select->order(['created_at DESC']);
