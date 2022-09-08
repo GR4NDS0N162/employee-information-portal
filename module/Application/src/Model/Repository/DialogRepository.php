@@ -53,7 +53,7 @@ class DialogRepository implements DialogRepositoryInterface
         $commonDialogsId = array_intersect($userDialogsId, $buddyDialogsId);
 
         if (empty($commonDialogsId)) {
-            // TODO: Создай диалог и возврати значение.
+            return $this->dialogCommand->createDialog($userId, $buddyId);
         }
 
         return $commonDialogsId[0];
