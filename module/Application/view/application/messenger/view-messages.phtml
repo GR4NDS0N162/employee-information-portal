@@ -39,11 +39,52 @@ use Application\Model\Repository\UserRepositoryInterface;
     </div>
     <div class="col-12">
         <div class="row gy-3">
-            <?= $this->partial('partial/message-list.phtml', [
-                'messages'  => $messages,
-                'userInfo'  => $userInfo,
-                'buddyInfo' => $buddyInfo,
-            ]); ?>
+            <?php foreach ($messages as $message): ?>
+                <?php if ($message->getUserId() == $userInfo->getId()) {
+                    $user = $userInfo;
+                } else {
+                    $user = $buddyInfo;
+                } ?>
+                <div class="col-12">
+                    <div class="row g-3">
+                        <div class="col-auto">
+                            <img src="<?= $this->escapeHtml($user->getImage() ?: '/img/headshot-1024x1024.jpg'); ?>"
+                                 class="message-avatar img-fluid rounded"
+                                 alt="Фото пользователя">
+                        </div>
+                        <div class="col">
+                            <div class="row g-1">
+                                <div class="col-12">
+                                    <div class="row gx-2">
+                                        <div class="col-auto">
+                                <span class="h6"><?= $this->escapeHtml(
+                                        implode(' ', [
+                                            $user->getSurname() ?: '—',
+                                            $user->getName() ?: '—',
+                                            $user->getPatronymic() ?: '—',
+                                        ])
+                                    ); ?></span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <span class="small"><?= $this->escapeHtml($message->getCreatedAt()); ?></span>
+                                        </div>
+                                        <?php if ($message->getOpenedAt()): ?>
+                                            <div class="col-auto">
+                                                <span class="small text-muted"><?= $this->escapeHtml($message->getOpenedAt()); ?></span>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <p class="m-0">
+                                        <?= $this->escapeHtml($message->getContent()); ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
     <div class="col-12 d-flex justify-content-center">
