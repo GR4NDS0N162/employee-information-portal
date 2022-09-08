@@ -38,11 +38,11 @@ class Message
      * @param string      $content
      */
     public function __construct(
-        $dialogId,
-        $userId,
-        $createdAt,
-        $openedAt,
-        $content,
+        $dialogId = 0,
+        $userId = 0,
+        $createdAt = '',
+        $openedAt = null,
+        $content = '',
         $id = null
     ) {
         $this->id = $id;
