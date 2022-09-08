@@ -29,8 +29,13 @@ class MessengerController extends AbstractActionController
      */
     private $positionRepository;
 
-    public function __construct($dialogFilterForm, $newMessageForm, $dialogRepository, $userRepository, $positionRepository)
-    {
+    public function __construct(
+        $dialogFilterForm,
+        $newMessageForm,
+        $dialogRepository,
+        $userRepository,
+        $positionRepository
+    ) {
         $this->dialogFilterForm = $dialogFilterForm;
         $this->newMessageForm = $newMessageForm;
         $this->dialogRepository = $dialogRepository;
@@ -42,16 +47,16 @@ class MessengerController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
-        $headTitleName = 'Диалоги';
-
-        $this->layout()->setVariable('headTitleName', $headTitleName);
+        $this->layout()->setVariable('headTitleName', 'Диалоги');
 
         $dialogs = $this->dialogRepository->getDialogList(self::userId);
 
-        $viewModel->setVariable('dialogs', $dialogs);
-        $viewModel->setVariable('dialogFilterForm', $this->dialogFilterForm);
-        $viewModel->setVariable('userRepository', $this->userRepository);
-        $viewModel->setVariable('positionRepository', $this->positionRepository);
+        $viewModel->setVariables([
+            'dialogs'            => $dialogs,
+            'dialogFilterForm'   => $this->dialogFilterForm,
+            'userRepository'     => $this->userRepository,
+            'positionRepository' => $this->positionRepository,
+        ]);
 
         return $viewModel;
     }
@@ -60,11 +65,7 @@ class MessengerController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
-        $headTitleName = 'Сообщения';
-
-        $this->layout()->setVariable('headTitleName', $headTitleName);
-
-        $viewModel->setVariable('newMessageForm', $this->newMessageForm);
+        $this->layout()->setVariable('headTitleName', 'Сообщения');
 
         $userInfo = [
             'fullname' => 'Иван Иванов',
@@ -108,9 +109,10 @@ class MessengerController extends AbstractActionController
         ];
 
         $viewModel->setVariables([
-            'messages'  => $messages,
-            'userInfo'  => $userInfo,
-            'buddyInfo' => $buddyInfo,
+            'newMessageForm' => $this->newMessageForm,
+            'messages'       => $messages,
+            'userInfo'       => $userInfo,
+            'buddyInfo'      => $buddyInfo,
         ]);
 
         return $viewModel;
