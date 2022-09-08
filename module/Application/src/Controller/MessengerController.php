@@ -3,7 +3,6 @@
 namespace Application\Controller;
 
 use Application\Form;
-use Application\Model\PhotoUrlGenerator;
 use Application\Model\Repository\DialogRepositoryInterface;
 use Application\Model\Repository\MessageRepositoryInterface;
 use Application\Model\Repository\PositionRepositoryInterface;
@@ -82,37 +81,9 @@ class MessengerController extends AbstractActionController
 
         $userInfo = $this->userRepository->findUser(self::userId);
         $buddyInfo = $this->userRepository->findUser($buddyId);
-
-        $messages = [
-            [
-                'isUserSender' => true,
-                'content'      => 'Привет1',
-                'createdAt'    => '16.05.2022 16:32',
-                'openedAt'     => '16.05.2022 16:34',
-            ],
-            [
-                'isUserSender' => true,
-                'content'      => 'Привет2',
-                'createdAt'    => '16.05.2022 16:36',
-                'openedAt'     => '16.05.2022 16:37',
-            ],
-            [
-                'isUserSender' => false,
-                'content'      => 'Привет3',
-                'createdAt'    => '16.05.2022 16:38',
-                'openedAt'     => '16.05.2022 16:39',
-            ],
-            [
-                'isUserSender' => true,
-                'content'      => 'Привет4',
-                'createdAt'    => '16.05.2022 16:40',
-            ],
-            [
-                'isUserSender' => false,
-                'content'      => 'Привет5',
-                'createdAt'    => '16.05.2022 16:42',
-            ],
-        ];
+        $messages = $this->messageRepository->findMessagesOfDialog(
+            $this->dialogRepository->getDialogId(self::userId, $buddyId)
+        );
 
         $viewModel->setVariables([
             'newMessageForm' => $this->newMessageForm,
