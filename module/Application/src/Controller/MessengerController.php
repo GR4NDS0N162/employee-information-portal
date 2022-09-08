@@ -80,15 +80,8 @@ class MessengerController extends AbstractActionController
 
         $this->layout()->setVariable('headTitleName', 'Сообщения');
 
-        $userInfo = [
-            'fullname' => 'Иван Иванов',
-            'photo'    => PhotoUrlGenerator::generate(),
-        ];
-
-        $buddyInfo = [
-            'fullname' => 'Петя Петров',
-            'photo'    => PhotoUrlGenerator::generate(),
-        ];
+        $userInfo = $this->userRepository->findUser(self::userId);
+        $buddyInfo = $this->userRepository->findUser($buddyId);
 
         $messages = [
             [
