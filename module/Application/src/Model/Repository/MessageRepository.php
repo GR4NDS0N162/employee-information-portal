@@ -46,7 +46,7 @@ class MessageRepository implements MessageRepositoryInterface
         ], false);
         $select->where(['dialog_id = ?' => $dialogId]);
         $select->join('content', 'id = message_id');
-        $select->order(['created_at DESC']);
+        $select->order(['created_at DESC', 'id DESC']);
 
         /** @var Message[] $messages */
         $messages = Extracter::extractValues(
