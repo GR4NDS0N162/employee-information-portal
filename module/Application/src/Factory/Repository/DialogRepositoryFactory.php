@@ -2,6 +2,7 @@
 
 namespace Application\Factory\Repository;
 
+use Application\Model\Command\DialogCommandInterface;
 use Application\Model\Entity\Dialog;
 use Application\Model\Repository\DialogRepository;
 use Application\Model\Repository\UserRepositoryInterface;
@@ -17,6 +18,7 @@ class DialogRepositoryFactory implements FactoryInterface
             $container->get(AdapterInterface::class),
             new Dialog(),
             $container->get(UserRepositoryInterface::class),
+            $container->get(DialogCommandInterface::class),
         );
     }
 }

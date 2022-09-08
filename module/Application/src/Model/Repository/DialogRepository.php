@@ -2,6 +2,7 @@
 
 namespace Application\Model\Repository;
 
+use Application\Model\Command\DialogCommandInterface;
 use Application\Model\Entity\Dialog;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Predicate\Expression;
@@ -22,6 +23,10 @@ class DialogRepository implements DialogRepositoryInterface
      * @var UserRepositoryInterface
      */
     private $userRepository;
+    /**
+     * @var DialogCommandInterface
+     */
+    private $dialogCommand;
 
     /**
      * @param AdapterInterface              $db
@@ -31,11 +36,27 @@ class DialogRepository implements DialogRepositoryInterface
     public function __construct(
         $db,
         $prototype,
-        $userRepository
+        $userRepository,
+        $dialogCommand
     ) {
         $this->db = $db;
         $this->prototype = $prototype;
         $this->userRepository = $userRepository;
+        $this->dialogCommand = $dialogCommand;
+    }
+
+    public function getDialogId($userId, $buddyId)
+    {
+        $userDialogsId = array_column($this->getDialogList($userId), 'id');
+        $buddyDialogsId = array_column($this->getDialogList($buddyId), 'id');
+
+        $commonDialogsId = array_intersect($userDialogsId, $buddyDialogsId);
+
+        if (empty($commonDialogsId)) {
+            // TODO: Создай диалог и возврати значение.
+        }
+
+        return $commonDialogsId[0];
     }
 
     public function getDialogList($userId)
@@ -101,19 +122,5 @@ class DialogRepository implements DialogRepositoryInterface
         }
 
         return $dialogsOfUser;
-    }
-
-    public function getDialogId($userId, $buddyId)
-    {
-        $userDialogsId = array_column($this->getDialogList($userId), 'id');
-        $buddyDialogsId = array_column($this->getDialogList($buddyId), 'id');
-
-        $commonDialogsId = array_intersect($userDialogsId, $buddyDialogsId);
-
-        if (empty($commonDialogsId)) {
-            // TODO: Создай диалог и возврати значение.
-        }
-
-        return $commonDialogsId[0];
     }
 }
