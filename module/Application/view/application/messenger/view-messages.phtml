@@ -23,12 +23,18 @@ use Application\Model\Repository\UserRepositoryInterface;
             <div class="col-12 col-md-auto">
                 <div class="row g-2 align-items-center">
                     <div class="col-auto order-md-1">
-                        <img src="<?= $this->escapeHtml($buddyInfo['photo']); ?>"
+                        <img src="<?= $this->escapeHtml($buddyInfo->getImage() ?: '/img/headshot-1024x1024.jpg'); ?>"
                              class="buddy-photo img-fluid rounded"
                              alt="Фото пользователя">
                     </div>
                     <div class="col-auto order-md-0">
-                        <span class="h6"><?= $this->escapeHtml($buddyInfo['fullname']); ?></span>
+                        <span class="h6"><?= $this->escapeHtml(
+                                implode(' ', [
+                                    $buddyInfo->getSurname() ?: '—',
+                                    $buddyInfo->getName() ?: '—',
+                                    $buddyInfo->getPatronymic() ?: '—',
+                                ])
+                            ); ?></span>
                     </div>
                 </div>
             </div>
