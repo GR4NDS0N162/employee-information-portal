@@ -2,7 +2,13 @@
 
 namespace Application\Model\Entity;
 
-class Message
+use Laminas\Hydrator\ClassMethodsHydrator;
+use Laminas\Hydrator\HydratorAwareInterface;
+use Laminas\Hydrator\HydratorInterface;
+use Laminas\Hydrator\Strategy\NullableStrategy;
+use Laminas\Hydrator\Strategy\ScalarTypeStrategy;
+
+class Message implements HydratorAwareInterface
 {
     /**
      * @var int|null
@@ -28,6 +34,10 @@ class Message
      * @var string
      */
     private $content;
+    /**
+     * @var HydratorInterface
+     */
+    private $hydrator;
 
     /**
      * @param int|null    $id
@@ -51,6 +61,14 @@ class Message
         $this->createdAt = $createdAt;
         $this->openedAt = $openedAt;
         $this->content = $content;
+
+        $this->hydrator = new ClassMethodsHydrator(false);
+        $this->hydrator->addStrategy('id', new NullableStrategy(ScalarTypeStrategy::createToInt(), true));
+        $this->hydrator->addStrategy('userId', ScalarTypeStrategy::createToInt());
+        $this->hydrator->addStrategy('dialogId', ScalarTypeStrategy::createToInt());
+        $this->hydrator->addStrategy('createdAt', ScalarTypeStrategy::createToString());
+        $this->hydrator->addStrategy('openedAt', new NullableStrategy(ScalarTypeStrategy::createToString()));
+        $this->hydrator->addStrategy('content', ScalarTypeStrategy::createToString());
     }
 
     public function getId()
@@ -113,4 +131,13 @@ class Message
         $this->content = $content;
     }
 
+    public function getHydrator(): ?HydratorInterface
+    {
+        return $this->hydrator;
+    }
+
+    public function setHydrator(HydratorInterface $hydrator): void
+    {
+        $this->hydrator = $hydrator;
+    }
 }
