@@ -105,6 +105,15 @@ class DialogRepository implements DialogRepositoryInterface
 
     public function getDialogId($userId, $buddyId)
     {
-        // TODO: Implement getDialogId() method.
+        $userDialogsId = array_column($this->getDialogList($userId), 'id');
+        $buddyDialogsId = array_column($this->getDialogList($buddyId), 'id');
+
+        $commonDialogsId = array_intersect($userDialogsId, $buddyDialogsId);
+
+        if (empty($commonDialogsId)) {
+            // TODO: Создай диалог и возврати значение.
+        }
+
+        return $commonDialogsId[0];
     }
 }
