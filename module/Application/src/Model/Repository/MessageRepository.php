@@ -28,4 +28,14 @@ class MessageRepository implements MessageRepositoryInterface
         $this->db = $db;
         $this->prototype = $prototype;
     }
+
+    public function findMessagesOfDialog(
+        $dialogId,
+        $where = [],
+        $order = [],
+        $limit = null,
+        $offset = null
+    ) {
+        // TODO: Implement findMessagesOfDialog() method.
+    }
 }
