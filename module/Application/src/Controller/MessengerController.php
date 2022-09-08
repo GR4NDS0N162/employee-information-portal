@@ -118,6 +118,7 @@ class MessengerController extends AbstractActionController
         $viewModel->setVariables([
             'newMessageForm' => $this->newMessageForm,
             'messages'       => $messages,
+            'userRepository' => $this->userRepository,
             'userInfo'       => $userInfo,
             'buddyInfo'      => $buddyInfo,
         ]);
