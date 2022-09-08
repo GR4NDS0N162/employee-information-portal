@@ -32,11 +32,9 @@ class MessageRepository implements MessageRepositoryInterface
 
     public function findMessagesOfDialog(
         $dialogId,
-        $where = [],
         $limit = null,
         $offset = null
-    )
-    {
+    ) {
         $select = new Select('message');
         $select->columns([
             'id',
