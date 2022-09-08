@@ -25,12 +25,14 @@ return [
         Command\PositionCommandInterface::class => Command\PositionCommand::class,
         Command\EmailCommandInterface::class    => Command\EmailCommand::class,
         Command\PhoneCommandInterface::class    => Command\PhoneCommand::class,
+        Command\DialogCommandInterface::class   => Command\DialogCommand::class,
     ],
     'factories' => [
         Command\UserCommand::class     => CommandFactory\UserCommandFactory::class,
         Command\PositionCommand::class => CommandFactory\PositionCommandFactory::class,
         Command\EmailCommand::class    => CommandFactory\EmailCommandFactory::class,
         Command\PhoneCommand::class    => CommandFactory\PhoneCommandFactory::class,
+        Command\DialogCommand::class   => CommandFactory\DialogCommandFactory::class,
 
         Options\PositionOptions::class => OptionsFactory\PositionOptionsFactory::class,
 
