@@ -102,4 +102,9 @@ class DialogRepository implements DialogRepositoryInterface
 
         return $dialogsOfUser;
     }
+
+    public function getDialogId($userId, $buddyId)
+    {
+        // TODO: Implement getDialogId() method.
+    }
 }

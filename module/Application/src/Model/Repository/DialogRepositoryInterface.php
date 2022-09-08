@@ -12,4 +12,12 @@ interface DialogRepositoryInterface
      * @return Dialog[]
      */
     public function getDialogList($userId);
+
+    /**
+     * @param int $userId
+     * @param int $buddyId
+     *
+     * @return int
+     */
+    public function getDialogId($userId, $buddyId);
 }
