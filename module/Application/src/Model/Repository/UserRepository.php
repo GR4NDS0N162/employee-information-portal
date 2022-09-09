@@ -155,7 +155,7 @@ class UserRepository implements UserRepositoryInterface
         return $this->findUserById($foundEmail->getUserId());
     }
 
-    public function findUsers($where = [], $order = [], $limit = [])
+    public function findUsers($where = [], $order = [], $limit = null, $offset = null)
     {
         $select = new Select('user');
         $select->columns([
@@ -174,11 +174,11 @@ class UserRepository implements UserRepositoryInterface
         ]);
         $select->where($where);
         $select->order($order);
-        if (isset($limit['limit'])) {
-            $select->limit($limit['limit']);
+        if (isset($limit)) {
+            $select->limit($limit);
         }
-        if (isset($limit['offset'])) {
-            $select->offset($limit['offset']);
+        if (isset($offset)) {
+            $select->offset($offset);
         }
 
         $users = Extracter::extractValues($select, $this->db, $this->hydrator, $this->prototype);
