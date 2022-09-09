@@ -18,6 +18,8 @@ class StatusFieldset extends Fieldset
      */
     public function __construct($statusRepository)
     {
+        parent::__construct();
+
         $this->statusRepository = $statusRepository;
     }
 
