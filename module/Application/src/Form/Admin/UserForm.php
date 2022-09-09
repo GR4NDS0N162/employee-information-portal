@@ -58,6 +58,7 @@ class UserForm extends Form
                     'children' => [
                         'id'         => 'd-none',
                         'image'      => 'col-12',
+                        'imageFile'  => 'col-12',
                         'surname'    => 'col-12 col-lg-4',
                         'name'       => 'col-12 col-sm-6 col-lg-4',
                         'patronymic' => 'col-12 col-sm-6 col-lg-4',
