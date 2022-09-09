@@ -78,9 +78,7 @@ class AdminController extends AbstractActionController
     {
         $viewModel = new ViewModel();
 
-        $headTitleName = 'Список пользователей (Администратор)';
-
-        $this->layout()->setVariable('headTitleName', $headTitleName);
+        $this->layout()->setVariable('headTitleName', 'Список пользователей (Администратор)');
         $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
 
         $userInfo = [
