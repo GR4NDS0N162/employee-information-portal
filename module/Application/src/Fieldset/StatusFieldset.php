@@ -25,36 +25,25 @@ class StatusFieldset extends Fieldset
     {
         parent::init();
 
-        $this->add([
-            'name'       => 'admin',
-            'type'       => Checkbox::class,
-            'attributes' => [
-                'class' => 'form-check-input',
-                'id'    => uniqid('checkbox_', true),
-            ],
-            'options'    => [
-                'label'              => 'Администратор',
-                'label_attributes'   => [
-                    'class' => 'form-check-label',
-                ],
-                'use_hidden_element' => false,
-            ],
-        ]);
+        $statuses = $this->statusRepository->findAllStatuses();
 
-        $this->add([
-            'name'       => 'active',
-            'type'       => Checkbox::class,
-            'attributes' => [
-                'class' => 'form-check-input',
-                'id'    => uniqid('checkbox_', true),
-            ],
-            'options'    => [
-                'label'              => 'Активен',
-                'label_attributes'   => [
-                    'class' => 'form-check-label',
+        foreach ($statuses as $status) {
+            $this->add([
+                'name'       => $status->getName(),
+                'type'       => Checkbox::class,
+                'attributes' => [
+                    'class' => 'form-check-input',
+                    'id'    => uniqid('checkbox_', true),
                 ],
-                'use_hidden_element' => false,
-            ],
-        ]);
+                'options'    => [
+                    // TODO: Add a column for the name of the status displayed to the user.
+                    'label'              => $status->getName(),
+                    'label_attributes'   => [
+                        'class' => 'form-check-label',
+                    ],
+                    'use_hidden_element' => false,
+                ],
+            ]);
+        }
     }
 }
