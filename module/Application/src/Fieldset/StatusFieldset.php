@@ -2,11 +2,25 @@
 
 namespace Application\Fieldset;
 
+use Application\Model\Repository\StatusRepositoryInterface;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Fieldset;
 
 class StatusFieldset extends Fieldset
 {
+    /**
+     * @var StatusRepositoryInterface
+     */
+    private $statusRepository;
+
+    /**
+     * @param StatusRepositoryInterface $statusRepository
+     */
+    public function __construct($statusRepository)
+    {
+        $this->statusRepository = $statusRepository;
+    }
+
     public function init()
     {
         parent::init();
