@@ -6,7 +6,6 @@ use Application\Form\Admin as Form;
 use Application\Model\Command\PositionCommandInterface;
 use Application\Model\Command\UserCommandInterface;
 use Application\Model\Entity\PositionList;
-use Application\Model\PhotoUrlGenerator;
 use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
@@ -81,51 +80,8 @@ class AdminController extends AbstractActionController
         $this->layout()->setVariable('headTitleName', 'Список пользователей (Администратор)');
         $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
 
-        $userInfo = [
-            [
-                'userId'   => 1,
-                'isAdmin'  => true,
-                'isActive' => true,
-                'photo'    => PhotoUrlGenerator::generate(),
-                'fullname' => 'Зубенко Михаил Петрович',
-                'position' => 'Уборщик',
-                'gender'   => 'Мужской',
-                'age'      => 47,
-            ],
-            [
-                'userId'   => 2,
-                'isAdmin'  => false,
-                'isActive' => true,
-                'photo'    => PhotoUrlGenerator::generate(),
-                'fullname' => 'Егоров Владимир Егорович',
-                'position' => 'Бухгалтер',
-                'gender'   => 'Мужской',
-                'age'      => 31,
-            ],
-            [
-                'userId'   => 3,
-                'isAdmin'  => true,
-                'isActive' => false,
-                'photo'    => PhotoUrlGenerator::generate(),
-                'fullname' => 'Мельникова Алёна Вадимовна',
-                'position' => 'Юрист',
-                'gender'   => 'Женский',
-                'age'      => 23,
-            ],
-            [
-                'userId'   => 4,
-                'isAdmin'  => false,
-                'isActive' => false,
-                'photo'    => PhotoUrlGenerator::generate(),
-                'fullname' => 'Тимофеева Вероника Денисовна',
-                'position' => 'Менеджер',
-                'gender'   => 'Женский',
-                'age'      => 36,
-            ],
-        ];
-
         $viewModel->setVariables([
-            'userInfo'        => $userInfo,
+            'userInfo'        => $this->userRepository->findUsers(),
             'maxPageCount'    => self::maxPageCount,
             'page'            => 1,
             'adminFilterForm' => $this->adminFilterForm,
