@@ -81,10 +81,11 @@ class AdminController extends AbstractActionController
         $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
 
         $viewModel->setVariables([
-            'userInfo'        => $this->userRepository->findUsers(),
-            'maxPageCount'    => self::maxPageCount,
-            'page'            => 1,
-            'adminFilterForm' => $this->adminFilterForm,
+            'userInfo'           => $this->userRepository->findUsers(),
+            'positionRepository' => $this->positionRepository,
+            'maxPageCount'       => self::maxPageCount,
+            'page'               => 1,
+            'adminFilterForm'    => $this->adminFilterForm,
         ]);
 
         return $viewModel;
