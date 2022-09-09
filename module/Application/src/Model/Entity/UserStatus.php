@@ -78,6 +78,16 @@ class UserStatus implements InputFilterAwareInterface, HydratorAwareInterface
         $this->hydrator->addStrategy('statusId', ScalarTypeStrategy::createToInt());
     }
 
+    public function __get($prop)
+    {
+        return $this->$prop;
+    }
+
+    public function __isset($prop): bool
+    {
+        return isset($this->$prop);
+    }
+
     public function getInputFilter()
     {
         return $this->inputFilter;
