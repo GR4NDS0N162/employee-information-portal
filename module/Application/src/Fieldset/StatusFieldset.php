@@ -7,11 +7,9 @@ use Laminas\Form\Fieldset;
 
 class StatusFieldset extends Fieldset
 {
-    public const DEFAULT_NAME = 'status';
-
-    public function __construct($name = self::DEFAULT_NAME)
+    public function init()
     {
-        parent::__construct($name);
+        parent::init();
 
         $this->add([
             'name'       => 'admin',
