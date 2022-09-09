@@ -3,6 +3,7 @@
 namespace Application\Model\Repository;
 
 use Application\Model\Entity\Email;
+use Application\Model\Entity\Status;
 use Application\Model\Entity\User;
 use Application\Model\Entity\UserStatus;
 use InvalidArgumentException;
@@ -146,6 +147,34 @@ class UserRepository implements UserRepositoryInterface
         $user->setPhones($phones);
 
         return $user;
+    }
+
+    /**
+     * @param User $user
+     *
+     * @return Status[]
+     */
+    private function getStatuses($user)
+    {
+        $select = new Select('user_status');
+        $select->columns([
+            'id',
+            'name',
+        ], false);
+        $select->join('status', 'status_id = id');
+        $select->where(['user_id = ?' => $user->getId()]);
+
+        $prototype = new Status();
+
+        /** @var Status[] $statuses */
+        $statuses = Extracter::extractValues(
+            $select,
+            $this->db,
+            $prototype->getHydrator(),
+            $prototype
+        );
+
+        return $statuses;
     }
 
     private function findUserByEmail($email)
