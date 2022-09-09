@@ -18,4 +18,9 @@ class MessageCommand implements MessageCommandInterface
     {
         $this->db = $db;
     }
+
+    public function sendMessage($message)
+    {
+        // TODO: Implement sendMessage() method.
+    }
 }
