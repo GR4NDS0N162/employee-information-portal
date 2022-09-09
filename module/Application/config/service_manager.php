@@ -26,6 +26,7 @@ return [
         Command\EmailCommandInterface::class    => Command\EmailCommand::class,
         Command\PhoneCommandInterface::class    => Command\PhoneCommand::class,
         Command\DialogCommandInterface::class   => Command\DialogCommand::class,
+        Command\MessageCommandInterface::class  => Command\MessageCommand::class,
     ],
     'factories' => [
         Command\UserCommand::class     => CommandFactory\UserCommandFactory::class,
@@ -33,6 +34,7 @@ return [
         Command\EmailCommand::class    => CommandFactory\EmailCommandFactory::class,
         Command\PhoneCommand::class    => CommandFactory\PhoneCommandFactory::class,
         Command\DialogCommand::class   => CommandFactory\DialogCommandFactory::class,
+        Command\MessageCommand::class  => CommandFactory\MessageCommandFactory::class,
 
         Options\PositionOptions::class => OptionsFactory\PositionOptionsFactory::class,
 
