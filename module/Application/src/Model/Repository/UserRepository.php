@@ -5,7 +5,6 @@ namespace Application\Model\Repository;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\Status;
 use Application\Model\Entity\User;
-use Application\Model\Entity\UserStatus;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Select;
@@ -130,20 +129,17 @@ class UserRepository implements UserRepositoryInterface
      */
     private function pullExtraInfo($user)
     {
-        $userStatuses = $this->userStatusRepository->findStatusesOfUser($user->getId());
+        $userStatuses = $this->getStatuses($user);
         $statusMap = [];
-        foreach ($this->statusRepository->findAllStatuses() as $status) {
-            $statusMap[$status->getName()] = in_array(
-                new UserStatus($status->getId(), $user->getId()),
-                $userStatuses
-            );
+        foreach ($userStatuses as $status) {
+            $statusMap[$status->getName()] = true;
         }
+        $user->setStatus($statusMap);
 
         $emails = $this->emailRepository->findEmailsOfUser($user->getId());
-        $phones = $this->phoneRepository->findPhonesOfUser($user->getId());
-
-        $user->setStatus($statusMap);
         $user->setEmails($emails);
+
+        $phones = $this->phoneRepository->findPhonesOfUser($user->getId());
         $user->setPhones($phones);
 
         return $user;
