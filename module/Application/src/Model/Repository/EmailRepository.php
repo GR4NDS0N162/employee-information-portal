@@ -24,12 +24,12 @@ class EmailRepository implements EmailRepositoryInterface
 
     public function findEmailsOfUser($userId)
     {
-        $select = new Select('email');
+        $select = new Select(['e' => 'email']);
         $select->columns([
-            'address',
-            'userId' => 'user_id',
-        ]);
-        $select->where(['user_id = ?' => $userId]);
+            'address' => 'e.address',
+            'userId'  => 'e.user_id',
+        ], false);
+        $select->where(['e.user_id = ?' => $userId]);
 
         return Extracter::extractValues(
             $select,
@@ -41,12 +41,12 @@ class EmailRepository implements EmailRepositoryInterface
 
     public function findEmail($address)
     {
-        $select = new Select('email');
+        $select = new Select(['e' => 'email']);
         $select->columns([
-            'address',
-            'userId' => 'user_id',
-        ]);
-        $select->where(['address = ?' => $address]);
+            'address' => 'e.address',
+            'userId'  => 'e.user_id',
+        ], false);
+        $select->where(['e.address = ?' => $address]);
 
         return Extracter::extractValue(
             $select,
