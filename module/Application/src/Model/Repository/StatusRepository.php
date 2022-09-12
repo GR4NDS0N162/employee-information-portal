@@ -28,4 +28,9 @@ class StatusRepository implements StatusRepositoryInterface
 
         return Extracter::extractValues($select, $this->db, $this->hydrator, $this->prototype);
     }
+
+    public function findStatusesOfUser($userId)
+    {
+        // TODO: Implement findStatusesOfUser() method.
+    }
 }
