@@ -34,8 +34,6 @@ class User extends Profile
      * @param string      $password
      * @param Email[]     $emails
      * @param Phone[]     $phones
-     * @param string|null $tempPassword
-     * @param string|null $tpCreatedAt
      * @param string|null $surname
      * @param string|null $name
      * @param string|null $patronymic
