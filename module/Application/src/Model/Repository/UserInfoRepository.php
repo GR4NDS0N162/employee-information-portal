@@ -29,10 +29,6 @@ class UserInfoRepository implements UserInfoRepositoryInterface
      */
     private $statusRepository;
     /**
-     * @var UserStatusRepositoryInterface
-     */
-    private $userStatusRepository;
-    /**
      * @var UserRepositoryInterface
      */
     private $userRepository;
@@ -44,7 +40,6 @@ class UserInfoRepository implements UserInfoRepositoryInterface
      * @param EmailRepositoryInterface        $emailRepository
      * @param PhoneRepositoryInterface        $phoneRepository
      * @param StatusRepositoryInterface       $statusRepository
-     * @param UserStatusRepositoryInterface   $userStatusRepository
      */
     public function __construct(
         $db,
@@ -52,8 +47,7 @@ class UserInfoRepository implements UserInfoRepositoryInterface
         $userRepository,
         $emailRepository,
         $phoneRepository,
-        $statusRepository,
-        $userStatusRepository
+        $statusRepository
     ) {
         $this->db = $db;
         $this->prototype = $prototype;
@@ -61,7 +55,6 @@ class UserInfoRepository implements UserInfoRepositoryInterface
         $this->emailRepository = $emailRepository;
         $this->phoneRepository = $phoneRepository;
         $this->statusRepository = $statusRepository;
-        $this->userStatusRepository = $userStatusRepository;
     }
 
     public function findUsersInfo($where = [], $order = [])

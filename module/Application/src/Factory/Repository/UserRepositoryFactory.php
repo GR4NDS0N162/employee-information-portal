@@ -7,7 +7,6 @@ use Application\Model\Repository\EmailRepositoryInterface;
 use Application\Model\Repository\PhoneRepositoryInterface;
 use Application\Model\Repository\StatusRepositoryInterface;
 use Application\Model\Repository\UserRepository;
-use Application\Model\Repository\UserStatusRepositoryInterface;
 use Interop\Container\ContainerInterface;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
@@ -24,7 +23,6 @@ class UserRepositoryFactory implements FactoryInterface
             $container->get(EmailRepositoryInterface::class),
             $container->get(PhoneRepositoryInterface::class),
             $container->get(StatusRepositoryInterface::class),
-            $container->get(UserStatusRepositoryInterface::class),
         );
     }
 }

@@ -31,33 +31,26 @@ class UserRepository implements UserRepositoryInterface
      * @var StatusRepositoryInterface
      */
     private $statusRepository;
-    /**
-     * @var UserStatusRepositoryInterface
-     */
-    private $userStatusRepository;
 
     /**
-     * @param AdapterInterface              $db
-     * @param User|HydratorAwareInterface   $prototype
-     * @param EmailRepositoryInterface      $emailRepository
-     * @param PhoneRepositoryInterface      $phoneRepository
-     * @param StatusRepositoryInterface     $statusRepository
-     * @param UserStatusRepositoryInterface $userStatusRepository
+     * @param AdapterInterface            $db
+     * @param User|HydratorAwareInterface $prototype
+     * @param EmailRepositoryInterface    $emailRepository
+     * @param PhoneRepositoryInterface    $phoneRepository
+     * @param StatusRepositoryInterface   $statusRepository
      */
     public function __construct(
         $db,
         $prototype,
         $emailRepository,
         $phoneRepository,
-        $statusRepository,
-        $userStatusRepository
+        $statusRepository
     ) {
         $this->db = $db;
         $this->prototype = $prototype;
         $this->emailRepository = $emailRepository;
         $this->phoneRepository = $phoneRepository;
         $this->statusRepository = $statusRepository;
-        $this->userStatusRepository = $userStatusRepository;
     }
 
     public function findProfile($identifier)
