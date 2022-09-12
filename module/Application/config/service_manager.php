@@ -16,7 +16,6 @@ return [
         Repository\PositionRepositoryInterface::class => Repository\PositionRepository::class,
         Repository\StatusRepositoryInterface::class   => Repository\StatusRepository::class,
         Repository\UserRepositoryInterface::class     => Repository\UserRepository::class,
-        Repository\UserInfoRepositoryInterface::class => Repository\UserInfoRepository::class,
         Repository\DialogRepositoryInterface::class   => Repository\DialogRepository::class,
         Repository\MessageRepositoryInterface::class  => Repository\MessageRepository::class,
 
@@ -42,7 +41,6 @@ return [
         Repository\PositionRepository::class => RepositoryFactory\PositionRepositoryFactory::class,
         Repository\StatusRepository::class   => RepositoryFactory\StatusRepositoryFactory::class,
         Repository\UserRepository::class     => RepositoryFactory\UserRepositoryFactory::class,
-        Repository\UserInfoRepository::class => RepositoryFactory\UserInfoRepositoryFactory::class,
         Repository\DialogRepository::class   => RepositoryFactory\DialogRepositoryFactory::class,
         Repository\MessageRepository::class  => RepositoryFactory\MessageRepositoryFactory::class,
     ],
