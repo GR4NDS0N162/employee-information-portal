@@ -160,10 +160,13 @@ class UserCommand implements UserCommandInterface
         $update->set([
             'password' => $changePassword->getNewPassword(),
         ]);
-        $update->where([
-            'id = ?'       => $changePassword->getId(),
-            'password = ?' => $changePassword->getCurrentPassword(),
-        ]);
+        $update->where
+            ->equalTo('id', $changePassword->getId())
+            ->nest()
+            ->equalTo('password', $changePassword->getCurrentPassword())
+            ->or
+            ->equalTo('temp_password', $changePassword->getCurrentPassword())
+            ->unnest();
 
         Executer::executeSql($update, $this->db);
     }
