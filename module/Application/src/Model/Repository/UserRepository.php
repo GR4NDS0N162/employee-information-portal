@@ -151,9 +151,14 @@ class UserRepository implements UserRepositoryInterface
         return $this->findUserById($foundEmail->getUserId());
     }
 
-    public function findUsers($where = [], $order = [], $limit = null, $offset = null)
-    {
+    public function findUsers(
+        $where = [],
+        $order = [],
+        $limit = null,
+        $offset = null
+    ) {
         $select = new Select('user');
+        $select->quantifier(Select::QUANTIFIER_DISTINCT);
         $select->columns([
             'id',
             'password',
@@ -167,7 +172,13 @@ class UserRepository implements UserRepositoryInterface
             'birthday',
             'image',
             'skype',
-        ]);
+        ], false);
+        $select->join(
+            'user_status',
+            'id = user_id',
+            [],
+            Select::JOIN_LEFT
+        );
         $select->where($where);
         $select->order($order);
         if (isset($limit)) {
