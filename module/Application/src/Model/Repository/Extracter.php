@@ -46,14 +46,14 @@ class Extracter
     /**
      * @param PreparableSqlInterface $preparable
      * @param AdapterInterface       $db
-     * @param HydratorInterface      $hydrator
+     * @param HydratorInterface|null $hydrator
      * @param object|null            $prototype
      *
      * @return object
      * @throws RuntimeException
      * @throws InvalidArgumentException
      */
-    public static function extractValue($preparable, $db, $hydrator, $prototype = null)
+    public static function extractValue($preparable, $db, $hydrator = null, $prototype = null)
     {
         $sql = new Sql($db);
         $statement = $sql->prepareStatementForSqlObject($preparable);
