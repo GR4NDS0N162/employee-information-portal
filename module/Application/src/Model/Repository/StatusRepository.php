@@ -5,7 +5,6 @@ namespace Application\Model\Repository;
 use Application\Model\Entity\Status;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Select;
-use Laminas\Db\Sql\Sql;
 use Laminas\Hydrator\HydratorAwareInterface;
 
 class StatusRepository implements StatusRepositoryInterface
@@ -31,19 +30,21 @@ class StatusRepository implements StatusRepositoryInterface
 
     public function findAllStatuses()
     {
-        $sql = new Sql($this->db);
-        $select = $sql->select('status');
+        $select = new Select('status');
         $select->columns([
             'id',
             'name',
         ]);
 
-        return Extracter::extractValues(
+        /** @var Status[] $statuses */
+        $statuses = Extracter::extractValues(
             $select,
             $this->db,
             $this->prototype->getHydrator(),
             $this->prototype
         );
+
+        return $statuses;
     }
 
     public function findStatusesOfUser($userId)
