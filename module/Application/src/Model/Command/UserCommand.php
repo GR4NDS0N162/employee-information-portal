@@ -89,20 +89,6 @@ class UserCommand implements UserCommandInterface
         }
     }
 
-    public function setTempPassword($identifier)
-    {
-        $foundUser = $this->userRepository->findUser($identifier);
-
-        $update = new Update('user');
-        $update->set([
-            'temp_password' => PasswordGenerator::generate(),
-            'tp_created_at' => date('Y-m-d H:i:s'),
-        ]);
-        $update->where(['id = ?' => $foundUser->getId()]);
-
-        Executer::executeSql($update, $this->db);
-    }
-
     public function updateUser($user)
     {
         $this->updateProfile($user);
@@ -119,20 +105,6 @@ class UserCommand implements UserCommandInterface
         if ($user->isGenNewPassword()) {
             $this->setTempPassword($user->getId());
         }
-    }
-
-    public function changePassword($changePassword)
-    {
-        $update = new Update('user');
-        $update->set([
-            'password' => $changePassword->getNewPassword(),
-        ]);
-        $update->where([
-            'id = ?'       => $changePassword->getId(),
-            'password = ?' => $changePassword->getCurrentPassword(),
-        ]);
-
-        Executer::executeSql($update, $this->db);
     }
 
     public function updateProfile($profile)
@@ -166,5 +138,33 @@ class UserCommand implements UserCommandInterface
             $this->phoneRepository->findPhonesOfUser($profile->getId()),
             $profile->getPhones()
         );
+    }
+
+    public function setTempPassword($identifier)
+    {
+        $foundUser = $this->userRepository->findUser($identifier);
+
+        $update = new Update('user');
+        $update->set([
+            'temp_password' => PasswordGenerator::generate(),
+            'tp_created_at' => date('Y-m-d H:i:s'),
+        ]);
+        $update->where(['id = ?' => $foundUser->getId()]);
+
+        Executer::executeSql($update, $this->db);
+    }
+
+    public function changePassword($changePassword)
+    {
+        $update = new Update('user');
+        $update->set([
+            'password' => $changePassword->getNewPassword(),
+        ]);
+        $update->where([
+            'id = ?'       => $changePassword->getId(),
+            'password = ?' => $changePassword->getCurrentPassword(),
+        ]);
+
+        Executer::executeSql($update, $this->db);
     }
 }
