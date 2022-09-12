@@ -3,7 +3,6 @@
 namespace Application\Model\Repository;
 
 use Application\Model\Entity\Email;
-use Application\Model\Entity\Status;
 use Application\Model\Entity\User;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
@@ -129,7 +128,7 @@ class UserRepository implements UserRepositoryInterface
      */
     private function pullExtraInfo($user)
     {
-        $userStatuses = $this->getStatuses($user);
+        $userStatuses = $this->statusRepository->findStatusesOfUser($user->getId());
         $statusMap = [];
         foreach ($userStatuses as $status) {
             $statusMap[$status->getName()] = true;
@@ -143,34 +142,6 @@ class UserRepository implements UserRepositoryInterface
         $user->setPhones($phones);
 
         return $user;
-    }
-
-    /**
-     * @param User $user
-     *
-     * @return Status[]
-     */
-    private function getStatuses($user)
-    {
-        $select = new Select('user_status');
-        $select->columns([
-            'id',
-            'name',
-        ], false);
-        $select->join('status', 'status_id = id');
-        $select->where(['user_id = ?' => $user->getId()]);
-
-        $prototype = new Status();
-
-        /** @var Status[] $statuses */
-        $statuses = Extracter::extractValues(
-            $select,
-            $this->db,
-            $prototype->getHydrator(),
-            $prototype
-        );
-
-        return $statuses;
     }
 
     private function findUserByEmail($email)
