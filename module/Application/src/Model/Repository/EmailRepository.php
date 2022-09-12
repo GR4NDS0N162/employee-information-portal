@@ -5,23 +5,20 @@ namespace Application\Model\Repository;
 use Application\Model\Entity\Email;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Select;
-use Laminas\Hydrator\HydratorInterface;
+use Laminas\Hydrator\HydratorAwareInterface;
 
 class EmailRepository implements EmailRepositoryInterface
 {
     private $db;
-    private $hydrator;
     private $prototype;
 
     /**
-     * @param AdapterInterface  $db
-     * @param HydratorInterface $hydrator
-     * @param Email             $prototype
+     * @param AdapterInterface             $db
+     * @param Email|HydratorAwareInterface $prototype
      */
-    public function __construct($db, $hydrator, $prototype)
+    public function __construct($db, $prototype)
     {
         $this->db = $db;
-        $this->hydrator = $hydrator;
         $this->prototype = $prototype;
     }
 
@@ -34,7 +31,12 @@ class EmailRepository implements EmailRepositoryInterface
         ]);
         $select->where(['user_id = ?' => $userId]);
 
-        return Extracter::extractValues($select, $this->db, $this->hydrator, $this->prototype);
+        return Extracter::extractValues(
+            $select,
+            $this->db,
+            $this->prototype->getHydrator(),
+            $this->prototype
+        );
     }
 
     public function findEmail($address)
@@ -46,6 +48,11 @@ class EmailRepository implements EmailRepositoryInterface
         ]);
         $select->where(['address = ?' => $address]);
 
-        return Extracter::extractValue($select, $this->db, $this->hydrator, $this->prototype);
+        return Extracter::extractValue(
+            $select,
+            $this->db,
+            $this->prototype->getHydrator(),
+            $this->prototype
+        );
     }
 }

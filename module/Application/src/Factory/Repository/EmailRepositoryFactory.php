@@ -12,12 +12,9 @@ class EmailRepositoryFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
-        $prototype = new Email();
-
         return new EmailRepository(
             $container->get(AdapterInterface::class),
-            $prototype->getHydrator(),
-            $prototype,
+            new Email(),
         );
     }
 }
