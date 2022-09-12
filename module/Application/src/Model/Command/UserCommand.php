@@ -10,7 +10,6 @@ use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Insert;
-use Laminas\Db\Sql\Sql;
 use Laminas\Db\Sql\Update;
 use RuntimeException;
 
@@ -107,22 +106,12 @@ class UserCommand implements UserCommandInterface
 
     public function updateUser($user)
     {
-        if (empty($user->getId())) {
-            throw new RuntimeException('Cannot update user; missing identifier');
-        }
+        $this->updateProfile($user);
 
-        $sql = new Sql($this->db);
-        $update = $sql->update('user');
+        $update = new Update('user');
         $update->set([
             'password'    => $user->getPassword(),
             'position_id' => $user->getPositionId(),
-            'surname'     => $user->getSurname(),
-            'name'        => $user->getName(),
-            'patronymic'  => $user->getPatronymic(),
-            'gender'      => $user->getGender(),
-            'birthday'    => $user->getBirthday(),
-            'image'       => $user->getImage(),
-            'skype'       => $user->getSkype(),
         ]);
         $update->where(['id = ?' => $user->getId()]);
 
