@@ -12,12 +12,9 @@ class PhoneRepositoryFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
-        $prototype = new Phone();
-
         return new PhoneRepository(
             $container->get(AdapterInterface::class),
-            $prototype->getHydrator(),
-            $prototype,
+            new Phone(),
         );
     }
 }

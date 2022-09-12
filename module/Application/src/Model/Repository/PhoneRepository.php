@@ -5,7 +5,6 @@ namespace Application\Model\Repository;
 use Application\Model\Entity\Phone;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Select;
-use Laminas\Hydrator\HydratorInterface;
 
 class PhoneRepository implements PhoneRepositoryInterface
 {
@@ -14,23 +13,17 @@ class PhoneRepository implements PhoneRepositoryInterface
      */
     private $db;
     /**
-     * @var HydratorInterface
-     */
-    private $hydrator;
-    /**
      * @var Phone
      */
     private $prototype;
 
     /**
-     * @param AdapterInterface  $db
-     * @param HydratorInterface $hydrator
-     * @param Phone             $prototype
+     * @param AdapterInterface $db
+     * @param Phone            $prototype
      */
-    public function __construct($db, $hydrator, $prototype)
+    public function __construct($db, $prototype)
     {
         $this->db = $db;
-        $this->hydrator = $hydrator;
         $this->prototype = $prototype;
     }
 
@@ -43,6 +36,11 @@ class PhoneRepository implements PhoneRepositoryInterface
         ]);
         $select->where(['user_id = ?' => $userId]);
 
-        return Extracter::extractValues($select, $this->db, $this->hydrator, $this->prototype);
+        return Extracter::extractValues(
+            $select,
+            $this->db,
+            $this->prototype->getHydrator(),
+            $this->prototype
+        );
     }
 }
