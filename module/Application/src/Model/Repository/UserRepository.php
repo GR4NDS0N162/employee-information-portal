@@ -174,6 +174,12 @@ class UserRepository implements UserRepositoryInterface
             [],
             Select::JOIN_LEFT
         );
+        $select->join(
+            ['s' => 'status'],
+            's.id = us.status_id',
+            [],
+            Select::JOIN_LEFT
+        );
         $select->where($where);
         $select->order($order);
         if (isset($limit)) {
