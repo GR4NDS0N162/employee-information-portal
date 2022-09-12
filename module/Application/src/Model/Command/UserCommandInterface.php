@@ -25,11 +25,11 @@ interface UserCommandInterface
     public function changePassword($changePassword);
 
     /**
-     * @param Email $email
+     * @param Email|int $identifier
      *
      * @return void
      */
-    public function setTempPassword($email);
+    public function setTempPassword($identifier);
 
     /**
      * @param User $user

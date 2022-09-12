@@ -89,10 +89,9 @@ class UserCommand implements UserCommandInterface
         }
     }
 
-    public function setTempPassword($email)
+    public function setTempPassword($identifier)
     {
-        $foundEmail = $this->emailRepository->findEmail($email->getAddress());
-        $foundUser = $this->userRepository->findUser($foundEmail);
+        $foundUser = $this->userRepository->findUser($identifier);
 
         $update = new Update('user');
         $update->set([
