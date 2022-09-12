@@ -115,6 +115,10 @@ class User extends Profile
                 ['name' => IsCountable::class],
             ],
         ]);
+        $this->inputFilter->add([
+            'name'     => 'genNewPassword',
+            'required' => false,
+        ]);
 
         $this->hydrator->addStrategy('password', ScalarTypeStrategy::createToString());
         $this->hydrator->addStrategy('positionId', ScalarTypeStrategy::createToInt());
