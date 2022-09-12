@@ -27,7 +27,7 @@ class UserForm extends Form
         ]);
 
         $this->add([
-            'name'       => 'gen_new_password',
+            'name'       => 'genNewPassword',
             'type'       => Checkbox::class,
             'attributes' => [
                 'class' => 'form-check-input',
@@ -53,7 +53,7 @@ class UserForm extends Form
 
         FieldsetMapper::setAttributes($this, [
             'children' => [
-                'user'             => [
+                'user'           => [
                     'value'    => 'col-12',
                     'children' => [
                         'id'         => 'd-none',
@@ -84,8 +84,8 @@ class UserForm extends Form
                         ],
                     ],
                 ],
-                'gen_new_password' => 'col-12',
-                'submit'           => 'col-12',
+                'genNewPassword' => 'col-12',
+                'submit'         => 'col-12',
             ]
         ]);
     }
