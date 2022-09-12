@@ -4,6 +4,7 @@ namespace Application\Fieldset;
 
 use Application\Model\Entity\User;
 use Application\Model\Options\PositionOptions;
+use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Select;
 use Laminas\Form\Element\Text;
 
@@ -32,6 +33,22 @@ class UserFieldset extends ProfileFieldset
 
         $this->setPriority('emails', -100);
         $this->setPriority('phones', -100);
+
+        $this->add([
+            'name'       => 'genNewPassword',
+            'type'       => Checkbox::class,
+            'attributes' => [
+                'class' => 'form-check-input',
+                'id'    => uniqid('checkbox_', true),
+            ],
+            'options'    => [
+                'label'              => 'Сгенерировать пароль и отправить на почту',
+                'label_attributes'   => [
+                    'class' => 'form-check-label',
+                ],
+                'use_hidden_element' => false,
+            ],
+        ], ['priority' => -200]);
 
         $this->add([
             'name'       => 'positionId',
