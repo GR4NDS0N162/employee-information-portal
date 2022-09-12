@@ -20,7 +20,6 @@ class UserRepositoryFactory implements FactoryInterface
 
         return new UserRepository(
             $container->get(AdapterInterface::class),
-            $prototype->getHydrator(),
             $prototype,
             $container->get(EmailRepositoryInterface::class),
             $container->get(PhoneRepositoryInterface::class),

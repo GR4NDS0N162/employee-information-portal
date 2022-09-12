@@ -7,7 +7,7 @@ use Application\Model\Entity\User;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Select;
-use Laminas\Hydrator\HydratorInterface;
+use Laminas\Hydrator\HydratorAwareInterface;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -16,11 +16,7 @@ class UserRepository implements UserRepositoryInterface
      */
     private $db;
     /**
-     * @var HydratorInterface
-     */
-    private $hydrator;
-    /**
-     * @var User
+     * @var User|HydratorAwareInterface
      */
     private $prototype;
     /**
@@ -42,8 +38,7 @@ class UserRepository implements UserRepositoryInterface
 
     /**
      * @param AdapterInterface              $db
-     * @param HydratorInterface             $hydrator
-     * @param User                          $prototype
+     * @param User|HydratorAwareInterface   $prototype
      * @param EmailRepositoryInterface      $emailRepository
      * @param PhoneRepositoryInterface      $phoneRepository
      * @param StatusRepositoryInterface     $statusRepository
@@ -51,7 +46,6 @@ class UserRepository implements UserRepositoryInterface
      */
     public function __construct(
         $db,
-        $hydrator,
         $prototype,
         $emailRepository,
         $phoneRepository,
@@ -59,7 +53,6 @@ class UserRepository implements UserRepositoryInterface
         $userStatusRepository
     ) {
         $this->db = $db;
-        $this->hydrator = $hydrator;
         $this->prototype = $prototype;
         $this->emailRepository = $emailRepository;
         $this->phoneRepository = $phoneRepository;
@@ -109,7 +102,12 @@ class UserRepository implements UserRepositoryInterface
         $select->where(['id = ?' => $id]);
 
         /** @var User $user */
-        $user = Extracter::extractValue($select, $this->db, $this->hydrator, $this->prototype);
+        $user = Extracter::extractValue(
+            $select,
+            $this->db,
+            $this->prototype->getHydrator(),
+            $this->prototype
+        );
 
         $this->pullExtraInfo($user);
 
@@ -189,7 +187,13 @@ class UserRepository implements UserRepositoryInterface
             $select->offset($offset);
         }
 
-        $users = Extracter::extractValues($select, $this->db, $this->hydrator, $this->prototype);
+        /** @var User[] $users */
+        $users = Extracter::extractValues(
+            $select,
+            $this->db,
+            $this->prototype->getHydrator(),
+            $this->prototype
+        );
 
         foreach ($users as $user) {
             $this->pullExtraInfo($user);
