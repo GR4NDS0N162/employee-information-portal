@@ -8,7 +8,6 @@ use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Select;
 use Laminas\Hydrator\HydratorInterface;
-use RuntimeException;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -109,12 +108,8 @@ class UserRepository implements UserRepositoryInterface
         ]);
         $select->where(['id = ?' => $id]);
 
+        /** @var User $user */
         $user = Extracter::extractValue($select, $this->db, $this->hydrator, $this->prototype);
-        if (!$user instanceof User) {
-            throw new RuntimeException(
-                'Failed retrieving the object; unknown repository error.'
-            );
-        }
 
         $this->pullExtraInfo($user);
 
