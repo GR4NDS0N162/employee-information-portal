@@ -2,6 +2,8 @@
 
 namespace Application\Model\Repository;
 
+use Application\Model\Entity\Status;
+use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Sql;
 
 class StatusRepository implements StatusRepositoryInterface
@@ -31,6 +33,22 @@ class StatusRepository implements StatusRepositoryInterface
 
     public function findStatusesOfUser($userId)
     {
-        // TODO: Implement findStatusesOfUser() method.
+        $select = new Select('user_status');
+        $select->columns([
+            'id',
+            'name',
+        ], false);
+        $select->join('status', 'status_id = id');
+        $select->where(['user_id = ?' => $userId]);
+
+        /** @var Status[] $statuses */
+        $statuses = Extracter::extractValues(
+            $select,
+            $this->db,
+            $this->prototype->getHydrator(),
+            $this->prototype
+        );
+
+        return $statuses;
     }
 }
