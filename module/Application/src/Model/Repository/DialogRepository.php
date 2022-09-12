@@ -5,8 +5,8 @@ namespace Application\Model\Repository;
 use Application\Model\Command\DialogCommandInterface;
 use Application\Model\Entity\Dialog;
 use Laminas\Db\Adapter\AdapterInterface;
-use Laminas\Db\Sql\Predicate\Expression;
 use Laminas\Db\Sql\Select;
+use Laminas\Db\Sql\Where;
 use Laminas\Hydrator\HydratorAwareInterface;
 
 class DialogRepository implements DialogRepositoryInterface
@@ -67,23 +67,21 @@ class DialogRepository implements DialogRepositoryInterface
         ], false);
         $select->where(['mem.user_id = ?' => $userId]);
 
-        $dialogsIdOfUser = implode(
-            ', ',
-            array_column(
-                Extracter::extractValues(
-                    $select,
-                    $this->db,
-                    $this->prototype->getHydrator(),
-                    $this->prototype
-                ),
-                'id'
-            )
+        /** @var int[] $dialogsIdOfUser */
+        $dialogsIdOfUser = array_column(
+            Extracter::extractValues(
+                $select,
+                $this->db,
+                $this->prototype->getHydrator(),
+                $this->prototype
+            ),
+            'id'
         );
 
         /** @var Dialog[] $dialogsOfUser */
         $dialogsOfUser = [];
 
-        if ($dialogsIdOfUser != '') {
+        if (!empty($dialogsIdOfUser)) {
             $select = new Select(['mem' => 'member']);
             $select->columns([
                 'buddyId' => 'mem.user_id',
@@ -91,9 +89,10 @@ class DialogRepository implements DialogRepositoryInterface
             ], false);
             $select->where([
                 'mem.user_id != ?' => $userId,
-                new Expression('mem.dialog_id IN (' . $dialogsIdOfUser . ')'),
+                'mem.dialog_id'    => $dialogsIdOfUser,
             ]);
 
+            /** @var Dialog[] $dialogsOfUser */
             $dialogsOfUser = Extracter::extractValues(
                 $select,
                 $this->db,
@@ -102,19 +101,16 @@ class DialogRepository implements DialogRepositoryInterface
             );
         }
 
-        $buddiesId = implode(', ', array_column($dialogsOfUser, 'buddyId'));
+        /** @var int[] $buddiesId */
+        $buddiesId = array_column($dialogsOfUser, 'buddyId');
 
         $possibleBuddies = $this->userRepository->findUsers();
 
-        if ($buddiesId != '') {
-            $possibleBuddies = $this->userRepository->findUsers([
-                'u.id != ?' => $userId,
-                new Expression(
-                    'u.id NOT IN (' .
-                    $buddiesId
-                    . ')'
-                ),
-            ]);
+        if (!empty($buddiesId)) {
+            $possibleBuddies = $this->userRepository->findUsers(function (Where $where) use ($userId, $buddiesId) {
+                $where->notEqualTo('u.id', $userId);
+                $where->notIn('u.id', $buddiesId);
+            });
         }
 
         foreach ($possibleBuddies as $buddy) {
