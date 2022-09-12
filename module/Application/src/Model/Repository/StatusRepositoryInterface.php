@@ -12,6 +12,8 @@ interface StatusRepositoryInterface
     public function findAllStatuses();
 
     /**
+     * @param int $userId
+     *
      * @return Status[]
      */
     public function findStatusesOfUser($userId);
