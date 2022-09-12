@@ -115,6 +115,10 @@ class UserCommand implements UserCommandInterface
         $update->where(['id = ?' => $user->getId()]);
 
         Executer::executeSql($update, $this->db);
+
+        if ($user->isGenNewPassword()) {
+            $this->setTempPassword($user->getId());
+        }
     }
 
     public function changePassword($changePassword)
