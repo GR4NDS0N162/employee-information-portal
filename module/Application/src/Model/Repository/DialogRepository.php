@@ -61,11 +61,11 @@ class DialogRepository implements DialogRepositoryInterface
 
     public function getDialogList($userId)
     {
-        $select = new Select('member');
+        $select = new Select(['mem' => 'member']);
         $select->columns([
-            'id' => 'dialog_id',
-        ]);
-        $select->where(['user_id = ?' => $userId]);
+            'id' => 'mem.dialog_id',
+        ], false);
+        $select->where(['mem.user_id = ?' => $userId]);
 
         $dialogsIdOfUser = implode(
             ', ',
@@ -84,14 +84,14 @@ class DialogRepository implements DialogRepositoryInterface
         $dialogsOfUser = [];
 
         if ($dialogsIdOfUser != '') {
-            $select = new Select('member');
+            $select = new Select(['mem' => 'member']);
             $select->columns([
-                'buddyId' => 'user_id',
-                'id'      => 'dialog_id',
-            ]);
+                'buddyId' => 'mem.user_id',
+                'id'      => 'mem.dialog_id',
+            ], false);
             $select->where([
-                'user_id != ?' => $userId,
-                new Expression('dialog_id IN (' . $dialogsIdOfUser . ')'),
+                'mem.user_id != ?' => $userId,
+                new Expression('mem.dialog_id IN (' . $dialogsIdOfUser . ')'),
             ]);
 
             $dialogsOfUser = Extracter::extractValues(
@@ -108,9 +108,9 @@ class DialogRepository implements DialogRepositoryInterface
 
         if ($buddiesId != '') {
             $possibleBuddies = $this->userRepository->findUsers([
-                'id != ?' => $userId,
+                'u.id != ?' => $userId,
                 new Expression(
-                    'id NOT IN (' .
+                    'u.id NOT IN (' .
                     $buddiesId
                     . ')'
                 ),
