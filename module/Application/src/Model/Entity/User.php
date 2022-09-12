@@ -23,6 +23,10 @@ class User extends Profile
      * @var bool[]
      */
     protected $status;
+    /**
+     * @var bool
+     */
+    protected $genNewPassword;
 
     /**
      * @param int         $positionId
@@ -40,6 +44,7 @@ class User extends Profile
      * @param string|null $image
      * @param string|null $skype
      * @param int|null    $id
+     * @param bool        $genNewPassword
      */
     public function __construct(
         $password = '',
@@ -54,7 +59,8 @@ class User extends Profile
         $birthday = null,
         $image = null,
         $skype = null,
-        $id = null
+        $id = null,
+        $genNewPassword = false
     ) {
         parent::__construct(
             $emails,
@@ -72,6 +78,7 @@ class User extends Profile
         $this->password = $password;
         $this->positionId = $positionId;
         $this->status = $status;
+        $this->genNewPassword = $genNewPassword;
 
         $this->inputFilter->add([
             'name'       => 'password',
@@ -122,6 +129,7 @@ class User extends Profile
 
         $this->hydrator->addStrategy('password', ScalarTypeStrategy::createToString());
         $this->hydrator->addStrategy('positionId', ScalarTypeStrategy::createToInt());
+        $this->hydrator->addStrategy('genNewPassword', ScalarTypeStrategy::createToBoolean());
     }
 
     /**
@@ -172,5 +180,21 @@ class User extends Profile
     public function setPassword($password)
     {
         $this->password = $password;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isGenNewPassword()
+    {
+        return $this->genNewPassword;
+    }
+
+    /**
+     * @param bool $genNewPassword
+     */
+    public function setGenNewPassword($genNewPassword)
+    {
+        $this->genNewPassword = $genNewPassword;
     }
 }
