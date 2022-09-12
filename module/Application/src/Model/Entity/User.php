@@ -5,6 +5,7 @@ namespace Application\Model\Entity;
 use Laminas\Filter\ToInt;
 use Laminas\Hydrator\Strategy\ScalarTypeStrategy;
 use Laminas\Validator\GreaterThan;
+use Laminas\Validator\IsCountable;
 use Laminas\Validator\Regex;
 use Laminas\Validator\StringLength;
 
@@ -105,6 +106,13 @@ class User extends Profile
                         'min' => 0,
                     ],
                 ],
+            ],
+        ]);
+        $this->inputFilter->add([
+            'name'       => 'status',
+            'required'   => false,
+            'validators' => [
+                ['name' => IsCountable::class],
             ],
         ]);
 
