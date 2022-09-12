@@ -35,18 +35,18 @@ class MessageRepository implements MessageRepositoryInterface
         $limit = null,
         $offset = null
     ) {
-        $select = new Select('message');
+        $select = new Select(['mes' => 'message']);
         $select->columns([
-            'id',
-            'userId'    => 'user_id',
-            'dialogId'  => 'dialog_id',
-            'createdAt' => 'created_at',
-            'openedAt'  => 'opened_at',
-            'content',
+            'id'        => 'mes.id',
+            'userId'    => 'mes.user_id',
+            'dialogId'  => 'mes.dialog_id',
+            'createdAt' => 'mes.created_at',
+            'openedAt'  => 'mes.opened_at',
+            'content'   => 'c.content',
         ], false);
-        $select->where(['dialog_id = ?' => $dialogId]);
-        $select->join('content', 'id = message_id');
-        $select->order(['created_at DESC', 'id DESC']);
+        $select->where(['mes.dialog_id = ?' => $dialogId]);
+        $select->join(['c' => 'content'], 'mes.id = c.message_id');
+        $select->order(['mes.created_at DESC', 'mes.id DESC']);
 
         /** @var Message[] $messages */
         $messages = Extracter::extractValues(
