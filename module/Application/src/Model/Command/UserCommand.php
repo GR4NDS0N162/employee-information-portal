@@ -10,6 +10,7 @@ use Application\Model\Repository\StatusRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\Sql\Delete;
 use Laminas\Db\Sql\Insert;
 use Laminas\Db\Sql\Update;
 use RuntimeException;
@@ -119,6 +120,27 @@ class UserCommand implements UserCommandInterface
 
         if ($user->isGenNewPassword()) {
             $this->setTempPassword($user->getId());
+        }
+
+        foreach ($this->statusRepository->findAllStatuses() as $status) {
+            $delete = new Delete('user_status');
+            $delete->where([
+                'user_id'   => $user->getId(),
+                'status_id' => $status->getId(),
+            ]);
+            Executer::executeSql($delete, $this->db);
+
+            if (
+                isset($user->getStatus()[$status->getName()]) &&
+                $user->getStatus()[$status->getName()] !== true
+            ) {
+                $insert = new Insert('user_status');
+                $insert->values([
+                    'user_id'   => $user->getId(),
+                    'status_id' => $status->getId(),
+                ]);
+                Executer::executeSql($insert, $this->db);
+            }
         }
     }
 
