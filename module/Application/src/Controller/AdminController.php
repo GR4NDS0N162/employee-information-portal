@@ -132,6 +132,14 @@ class AdminController extends AbstractActionController
         $order = array_unique($order);
 
         $where = [];
+        if (isset($form['active'])) {
+            $sign = $form['active'] == '1' ? '=' : '!=';
+            $where['s.name ' . $sign . ' ?'] = 'active';
+        }
+        if (isset($form['admin'])) {
+            $sign = $form['active'] == '1' ? '=' : '!=';
+            $where['s.name ' . $sign . ' ?'] = 'admin';
+        }
 
         $viewModel->setVariables([
             'userList' => $this->userRepository->findUsers(
