@@ -25,6 +25,10 @@ class Status implements InputFilterAwareInterface, HydratorAwareInterface
      */
     private $name;
     /**
+     * @var string
+     */
+    private $label;
+    /**
      * @var InputFilterInterface
      */
     private $inputFilter;
@@ -35,14 +39,17 @@ class Status implements InputFilterAwareInterface, HydratorAwareInterface
 
     /**
      * @param string   $name
+     * @param string   $label
      * @param int|null $id
      */
     public function __construct(
         $name = '',
+        $label = '',
         $id = null
     ) {
         $this->id = $id;
         $this->name = $name;
+        $this->label = $label;
 
         $this->inputFilter = new InputFilter();
         $this->inputFilter->add([
@@ -72,10 +79,24 @@ class Status implements InputFilterAwareInterface, HydratorAwareInterface
                 ],
             ],
         ]);
+        $this->inputFilter->add([
+            'name'       => 'label',
+            'required'   => true,
+            'validators' => [
+                [
+                    'name'    => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'max'      => 30,
+                    ],
+                ],
+            ],
+        ]);
 
         $this->hydrator = new ClassMethodsHydrator(false);
         $this->hydrator->addStrategy('id', new NullableStrategy(ScalarTypeStrategy::createToInt(), true));
         $this->hydrator->addStrategy('name', ScalarTypeStrategy::createToString());
+        $this->hydrator->addStrategy('label', ScalarTypeStrategy::createToString());
     }
 
     public function getInputFilter()
@@ -128,5 +149,21 @@ class Status implements InputFilterAwareInterface, HydratorAwareInterface
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * @param string $label
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
     }
 }

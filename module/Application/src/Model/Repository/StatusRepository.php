@@ -32,8 +32,9 @@ class StatusRepository implements StatusRepositoryInterface
     {
         $select = new Select(['s' => 'status']);
         $select->columns([
-            'id'   => 's.id',
-            'name' => 's.name',
+            'id'    => 's.id',
+            'name'  => 's.name',
+            'label' => 's.label',
         ], false);
 
         /** @var Status[] $statuses */
@@ -57,8 +58,9 @@ class StatusRepository implements StatusRepositoryInterface
             [],
         );
         $select->columns([
-            'id'   => 's.id',
-            'name' => 's.name',
+            'id'    => 's.id',
+            'name'  => 's.name',
+            'label' => 's.label',
         ], false);
 
         /** @var Status[] $statuses */

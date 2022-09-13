@@ -40,8 +40,7 @@ class StatusFieldset extends Fieldset
                     'id'                => uniqid('checkbox_', true),
                 ],
                 'options'    => [
-                    // TODO: Add a column for the name of the status displayed to the user.
-                    'label'              => $status->getName(),
+                    'label'              => $status->getLabel(),
                     'label_attributes'   => [
                         'class' => 'form-check-label',
                     ],
