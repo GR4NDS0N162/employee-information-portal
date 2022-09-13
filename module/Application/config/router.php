@@ -152,6 +152,15 @@ return [
                     ],
                     'may_terminate' => true,
                     'child_routes'  => [
+                        'get-users' => [
+                            'type'    => Literal::class,
+                            'options' => [
+                                'route'    => '/get',
+                                'defaults' => [
+                                    'action' => 'get-users',
+                                ],
+                            ],
+                        ],
                         'edit-user' => [
                             'type'    => Segment::class,
                             'options' => [

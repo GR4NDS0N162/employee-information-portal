@@ -91,6 +91,10 @@ class AdminController extends AbstractActionController
         return $viewModel;
     }
 
+    public function getUsersAction()
+    {
+    }
+
     public function editUserAction()
     {
         $userId = (int)$this->params()->fromRoute('id');
