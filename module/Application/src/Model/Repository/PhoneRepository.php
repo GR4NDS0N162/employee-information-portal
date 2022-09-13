@@ -29,12 +29,12 @@ class PhoneRepository implements PhoneRepositoryInterface
 
     public function findPhonesOfUser($userId)
     {
-        $select = new Select('phone');
+        $select = new Select(['ph' => 'phone']);
         $select->columns([
-            'number',
-            'userId' => 'user_id',
-        ]);
-        $select->where(['user_id = ?' => $userId]);
+            'number' => 'ph.number',
+            'userId' => 'ph.user_id',
+        ], false);
+        $select->where(['ph.user_id = ?' => $userId]);
 
         return Extracter::extractValues(
             $select,
