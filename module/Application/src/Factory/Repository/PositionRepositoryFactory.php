@@ -12,12 +12,9 @@ class PositionRepositoryFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
-        $prototype = new Position();
-
         return new PositionRepository(
             $container->get(AdapterInterface::class),
-            $prototype->getHydrator(),
-            $prototype,
+            new Position(),
         );
     }
 }

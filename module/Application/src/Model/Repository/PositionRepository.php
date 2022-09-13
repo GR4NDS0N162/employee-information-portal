@@ -5,7 +5,7 @@ namespace Application\Model\Repository;
 use Application\Model\Entity\Position;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Select;
-use Laminas\Hydrator\HydratorInterface;
+use Laminas\Hydrator\HydratorAwareInterface;
 
 class PositionRepository implements PositionRepositoryInterface
 {
@@ -14,23 +14,17 @@ class PositionRepository implements PositionRepositoryInterface
      */
     private $db;
     /**
-     * @var HydratorInterface
-     */
-    private $hydrator;
-    /**
      * @var Position
      */
     private $prototype;
 
     /**
-     * @param AdapterInterface  $db
-     * @param HydratorInterface $hydrator
-     * @param Position          $prototype
+     * @param AdapterInterface                $db
+     * @param Position|HydratorAwareInterface $prototype
      */
-    public function __construct($db, $hydrator, $prototype)
+    public function __construct($db, $prototype)
     {
         $this->db = $db;
-        $this->hydrator = $hydrator;
         $this->prototype = $prototype;
     }
 
@@ -43,7 +37,12 @@ class PositionRepository implements PositionRepositoryInterface
         ]);
         $select->order(['name ASC']);
 
-        return Extracter::extractValues($select, $this->db, $this->hydrator, $this->prototype);
+        return Extracter::extractValues(
+            $select,
+            $this->db,
+            $this->prototype->getHydrator(),
+            $this->prototype
+        );
     }
 
     public function findPositionById($id)
@@ -55,6 +54,11 @@ class PositionRepository implements PositionRepositoryInterface
         ]);
         $select->where(['id = ?' => $id]);
 
-        return Extracter::extractValue($select, $this->db, $this->hydrator, $this->prototype);
+        return Extracter::extractValue(
+            $select,
+            $this->db,
+            $this->prototype->getHydrator(),
+            $this->prototype
+        );
     }
 }
