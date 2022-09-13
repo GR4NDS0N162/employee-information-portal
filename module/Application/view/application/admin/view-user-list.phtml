@@ -11,6 +11,8 @@
 use Application\Form\Admin\AdminFilterForm;
 use Application\Model\Repository\PositionRepositoryInterface;
 
+$this->inlineScript()
+    ->appendFile($this->basePath('js/user-filter.js'))
 ?>
 <div class="row g-3">
     <div class="col-12">
