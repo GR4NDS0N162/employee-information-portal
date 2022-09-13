@@ -233,13 +233,13 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
 
         $this->hydrator = new ClassMethodsHydrator(false);
         $this->hydrator->addStrategy('id', new NullableStrategy(ScalarTypeStrategy::createToInt(), true));
-        $this->hydrator->addStrategy('surname', new NullableStrategy(ScalarTypeStrategy::createToString()));
-        $this->hydrator->addStrategy('name', new NullableStrategy(ScalarTypeStrategy::createToString()));
-        $this->hydrator->addStrategy('patronymic', new NullableStrategy(ScalarTypeStrategy::createToString()));
-        $this->hydrator->addStrategy('gender', new NullableStrategy(ScalarTypeStrategy::createToInt()));
-        $this->hydrator->addStrategy('birthday', new NullableStrategy(ScalarTypeStrategy::createToString()));
+        $this->hydrator->addStrategy('surname', new NullableStrategy(ScalarTypeStrategy::createToString(), true));
+        $this->hydrator->addStrategy('name', new NullableStrategy(ScalarTypeStrategy::createToString(), true));
+        $this->hydrator->addStrategy('patronymic', new NullableStrategy(ScalarTypeStrategy::createToString(), true));
+        $this->hydrator->addStrategy('gender', new NullableStrategy(ScalarTypeStrategy::createToInt(), true));
+        $this->hydrator->addStrategy('birthday', new NullableStrategy(ScalarTypeStrategy::createToString(), true));
         // TODO: Добавить подходящую стратегию для фото пользователя
-        $this->hydrator->addStrategy('skype', new NullableStrategy(ScalarTypeStrategy::createToString()));
+        $this->hydrator->addStrategy('skype', new NullableStrategy(ScalarTypeStrategy::createToString(), true));
     }
 
     public function getHydrator(): ?HydratorInterface
