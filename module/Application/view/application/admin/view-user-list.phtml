@@ -69,7 +69,9 @@ $this->inlineScript()
                     </div>
                     <div class="col-auto">
                         <select id="page"
-                                class="form-select">
+                                name="page"
+                                class="form-select"
+                                form="AdminFilterForm">
                             <?php for ($i = 1; $i < $userCount / AdminController::maxPageCount + 1; $i++): ?>
                                 <option value="<?= $i ?>"><?= $i ?></option>
                             <?php endfor; ?>
