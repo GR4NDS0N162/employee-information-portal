@@ -20,7 +20,10 @@ pageSelect.addEventListener('change', () =>
 function updateContent()
 {
     $.ajax({
-        data: options,
+        data: {
+            form: $(`#AdminFilterForm`).serialize(),
+            type: 'all',
+        },
     }).done((data) =>
     {
         $(`#user-list`).html(data);
