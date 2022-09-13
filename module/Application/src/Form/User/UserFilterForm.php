@@ -32,7 +32,7 @@ class UserFilterForm extends Form
         $this->setAttribute('novalidate', true);
 
         $this->add([
-            'name'       => 'position',
+            'name'       => 'positionId',
             'type'       => Element\Select::class,
             'attributes' => [
                 'class' => 'form-select',
@@ -73,7 +73,7 @@ class UserFilterForm extends Form
         ]);
 
         $this->add([
-            'name'       => 'fullname-phone-email',
+            'name'       => 'fullnamePhoneEmail',
             'type'       => Element\Textarea::class,
             'attributes' => [
                 'class'       => 'form-control',
@@ -89,7 +89,7 @@ class UserFilterForm extends Form
         ]);
 
         $this->add([
-            'name'       => 'submit-button',
+            'name'       => 'submitButton',
             'type'       => Element\Button::class,
             'attributes' => [
                 'type'  => 'submit',
@@ -104,17 +104,17 @@ class UserFilterForm extends Form
 
         FieldsetMapper::setAttributes($this, [
             'children' => [
-                'position'             => 'col-12',
-                'gender'               => 'col-12',
-                'age'                  => [
+                'positionId'         => 'col-12',
+                'gender'             => 'col-12',
+                'age'                => [
                     'value'    => 'col-12',
                     'children' => [
                         'min' => 'col-6',
                         'max' => 'col-6',
                     ],
                 ],
-                'fullname-phone-email' => 'col-12',
-                'submit-button'        => 'col-12',
+                'fullnamePhoneEmail' => 'col-12',
+                'submitButton'       => 'col-12',
             ],
         ]);
     }
