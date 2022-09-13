@@ -6,6 +6,7 @@ use Application\Model\Executer;
 use Application\Model\PasswordGenerator;
 use Application\Model\Repository\EmailRepositoryInterface;
 use Application\Model\Repository\PhoneRepositoryInterface;
+use Application\Model\Repository\StatusRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
@@ -39,20 +40,34 @@ class UserCommand implements UserCommandInterface
      * @var PhoneCommandInterface
      */
     private $phoneCommand;
+    /**
+     * @var StatusRepositoryInterface
+     */
+    private $statusRepository;
 
     /**
-     * @param AdapterInterface         $db
-     * @param EmailRepositoryInterface $emailRepository
-     * @param UserRepositoryInterface  $userRepository
-     * @param EmailCommandInterface    $emailCommand
-     * @param PhoneCommandInterface    $phoneCommand
+     * @param AdapterInterface          $db
+     * @param EmailRepositoryInterface  $emailRepository
+     * @param PhoneRepositoryInterface  $phoneRepository
+     * @param UserRepositoryInterface   $userRepository
+     * @param StatusRepositoryInterface $statusRepository
+     * @param EmailCommandInterface     $emailCommand
+     * @param PhoneCommandInterface     $phoneCommand
      */
-    public function __construct($db, $emailRepository, $phoneRepository, $userRepository, $emailCommand, $phoneCommand)
-    {
+    public function __construct(
+        $db,
+        $emailRepository,
+        $phoneRepository,
+        $userRepository,
+        $statusRepository,
+        $emailCommand,
+        $phoneCommand
+    ) {
         $this->db = $db;
         $this->emailRepository = $emailRepository;
         $this->phoneRepository = $phoneRepository;
         $this->userRepository = $userRepository;
+        $this->statusRepository = $statusRepository;
         $this->emailCommand = $emailCommand;
         $this->phoneCommand = $phoneCommand;
     }

@@ -7,6 +7,7 @@ use Application\Model\Command\PhoneCommandInterface;
 use Application\Model\Command\UserCommand;
 use Application\Model\Repository\EmailRepositoryInterface;
 use Application\Model\Repository\PhoneRepositoryInterface;
+use Application\Model\Repository\StatusRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use Interop\Container\ContainerInterface;
 use Laminas\Db\Adapter\AdapterInterface;
@@ -21,6 +22,7 @@ class UserCommandFactory implements FactoryInterface
             $container->get(EmailRepositoryInterface::class),
             $container->get(PhoneRepositoryInterface::class),
             $container->get(UserRepositoryInterface::class),
+            $container->get(StatusRepositoryInterface::class),
             $container->get(EmailCommandInterface::class),
             $container->get(PhoneCommandInterface::class),
         );
