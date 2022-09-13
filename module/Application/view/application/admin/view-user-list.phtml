@@ -29,25 +29,21 @@ $this->inlineScript()
                 </p>
             </div>
             <div class="col-auto">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle"
-                            type="button"
-                            id="dropdown-sort"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                        Сортировка
-                    </button>
-                    <ul class="dropdown-menu"
-                        aria-labelledby="dropdown-sort">
-                        <li><a class="dropdown-item"
-                               href="#">Должность</a></li>
-                        <li><a class="dropdown-item"
-                               href="#">Пол</a></li>
-                        <li><a class="dropdown-item"
-                               href="#">Возраст</a></li>
-                        <li><a class="dropdown-item"
-                               href="#">ФИО</a></li>
-                    </ul>
+                <div class="row g-2">
+                    <div class="col-auto d-flex align-items-center">
+                        <label for="sort">Сортировать по:</label>
+                    </div>
+                    <div class="col-auto">
+                        <select id="sort"
+                                name="sort"
+                                class="form-select"
+                                form="AdminFilterForm">
+                            <option value="fullname">ФИО</option>
+                            <option value="position">Должности</option>
+                            <option value="age">Возрасту</option>
+                            <option value="gender">Полу</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
