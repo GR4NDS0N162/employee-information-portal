@@ -2,6 +2,7 @@
 
 namespace Application\Fieldset;
 
+use Application\Helper\FieldsetMapper;
 use Application\Model\Repository\StatusRepositoryInterface;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Fieldset;
@@ -34,8 +35,9 @@ class StatusFieldset extends Fieldset
                 'name'       => $status->getName(),
                 'type'       => Checkbox::class,
                 'attributes' => [
-                    'class' => 'form-check-input',
-                    'id'    => uniqid('checkbox_', true),
+                    'class'             => 'form-check-input',
+                    FieldsetMapper::KEY => 'col-12 col-sm-6',
+                    'id'                => uniqid('checkbox_', true),
                 ],
                 'options'    => [
                     // TODO: Add a column for the name of the status displayed to the user.

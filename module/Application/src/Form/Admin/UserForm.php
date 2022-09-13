@@ -58,13 +58,7 @@ class UserForm extends Form
                         ],
                         'positionId'     => 'col-12',
                         'password'       => 'col-12',
-                        'status'         => [
-                            'value'    => 'col-12',
-                            'children' => [
-                                'admin'  => 'col-12 col-sm-6',
-                                'active' => 'col-12 col-sm-6',
-                            ],
-                        ],
+                        'status'         => 'col-12',
                         'genNewPassword' => 'col-12',
                     ],
                 ],
