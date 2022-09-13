@@ -139,36 +139,17 @@ use Application\Model\Repository\PositionRepositoryInterface;
                         </div>
                     <?php endforeach; ?>
                 </div>
-                <div class="row justify-content-center mt-3">
+                <div class="row gx-2 justify-content-center mt-3">
+                    <div class="col-auto d-flex align-items-center">
+                        <label for="page">Страница</label>
+                    </div>
                     <div class="col-auto">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination mb-0">
-                                <li class="page-item">
-                                    <a class="page-link"
-                                       href="#">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link"
-                                       href="#">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link"
-                                       href="#">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link"
-                                       href="#">3</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link"
-                                       href="#">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                        <select id="page"
+                                class="form-select">
+                            <?php for ($i = 1; $i < $userCount / $maxPageCount + 1; $i++): ?>
+                                <option value="<?= $i ?>"><?= $i ?></option>
+                            <?php endfor; ?>
+                        </select>
                     </div>
                 </div>
             </div>
