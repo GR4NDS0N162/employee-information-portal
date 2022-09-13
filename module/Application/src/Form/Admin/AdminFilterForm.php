@@ -9,6 +9,13 @@ use Laminas\Form\Element;
 
 class AdminFilterForm extends UserFilterForm
 {
+    public function __construct(
+        $positionOptions,
+        $name = 'AdminFilterForm'
+    ) {
+        parent::__construct($positionOptions, $name);
+    }
+
     public function init()
     {
         parent::init();

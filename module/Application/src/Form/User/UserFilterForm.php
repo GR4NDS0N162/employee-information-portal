@@ -16,10 +16,15 @@ class UserFilterForm extends Form
      */
     private $positionOptions;
 
+    /**
+     * @param PositionOptions $positionOptions
+     * @param string          $name
+     */
     public function __construct(
-        PositionOptions $positionOptions
+        $positionOptions,
+        $name = 'UserFilterForm'
     ) {
-        parent::__construct();
+        parent::__construct($name);
 
         $this->positionOptions = $positionOptions;
     }
