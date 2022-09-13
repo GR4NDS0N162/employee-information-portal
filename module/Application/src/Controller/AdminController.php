@@ -93,6 +93,11 @@ class AdminController extends AbstractActionController
 
     public function getUsersAction()
     {
+        $viewModel = new ViewModel([
+        ]);
+        $viewModel->setTerminal(true);
+        $viewModel->setTemplate('partial/user-list-admin.phtml');
+        return $viewModel;
     }
 
     public function editUserAction()
