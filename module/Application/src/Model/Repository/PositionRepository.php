@@ -30,12 +30,12 @@ class PositionRepository implements PositionRepositoryInterface
 
     public function findAllPositions()
     {
-        $select = new Select('position');
+        $select = new Select(['pos' => 'position']);
         $select->columns([
-            'id',
-            'name',
-        ]);
-        $select->order(['name ASC']);
+            'id'   => 'pos.id',
+            'name' => 'pos.name',
+        ], false);
+        $select->order(['pos.name ASC']);
 
         return Extracter::extractValues(
             $select,
@@ -47,12 +47,12 @@ class PositionRepository implements PositionRepositoryInterface
 
     public function findPositionById($id)
     {
-        $select = new Select('position');
+        $select = new Select(['pos' => 'position']);
         $select->columns([
-            'id',
-            'name',
-        ]);
-        $select->where(['id = ?' => $id]);
+            'id'   => 'pos.id',
+            'name' => 'pos.name',
+        ], false);
+        $select->where(['pos.id = ?' => $id]);
 
         return Extracter::extractValue(
             $select,

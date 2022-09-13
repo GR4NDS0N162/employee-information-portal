@@ -30,11 +30,11 @@ class StatusRepository implements StatusRepositoryInterface
 
     public function findAllStatuses()
     {
-        $select = new Select('status');
+        $select = new Select(['s' => 'status']);
         $select->columns([
-            'id',
-            'name',
-        ]);
+            'id'   => 's.id',
+            'name' => 's.name',
+        ], false);
 
         /** @var Status[] $statuses */
         $statuses = Extracter::extractValues(
@@ -49,13 +49,17 @@ class StatusRepository implements StatusRepositoryInterface
 
     public function findStatusesOfUser($userId)
     {
-        $select = new Select('user_status');
+        $select = new Select(['us' => 'user_status']);
+        $select->where(['us.user_id = ?' => $userId]);
+        $select->join(
+            ['s' => 'status'],
+            'us.status_id = s.id',
+            [],
+        );
         $select->columns([
-            'id',
-            'name',
+            'id'   => 's.id',
+            'name' => 's.name',
         ], false);
-        $select->join('status', 'status_id = id');
-        $select->where(['user_id = ?' => $userId]);
 
         /** @var Status[] $statuses */
         $statuses = Extracter::extractValues(

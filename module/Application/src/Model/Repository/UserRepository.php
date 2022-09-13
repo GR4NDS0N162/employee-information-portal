@@ -77,22 +77,22 @@ class UserRepository implements UserRepositoryInterface
 
     private function findUserById($id)
     {
-        $select = new Select('user');
+        $select = new Select(['u' => 'user']);
         $select->columns([
-            'id',
-            'password',
-            'tempPassword' => 'temp_password',
-            'tpCreatedAt'  => 'tp_created_at',
-            'positionId'   => 'position_id',
-            'surname',
-            'name',
-            'patronymic',
-            'gender',
-            'birthday',
-            'image',
-            'skype',
-        ]);
-        $select->where(['id = ?' => $id]);
+            'id'           => 'u.id',
+            'password'     => 'u.password',
+            'tempPassword' => 'u.temp_password',
+            'tpCreatedAt'  => 'u.tp_created_at',
+            'positionId'   => 'u.position_id',
+            'surname'      => 'u.surname',
+            'name'         => 'u.name',
+            'patronymic'   => 'u.patronymic',
+            'gender'       => 'u.gender',
+            'birthday'     => 'u.birthday',
+            'image'        => 'u.image',
+            'skype'        => 'u.skype',
+        ], false);
+        $select->where(['u.id = ?' => $id]);
 
         /** @var User $user */
         $user = Extracter::extractValue(
