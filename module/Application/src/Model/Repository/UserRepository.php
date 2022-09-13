@@ -154,7 +154,7 @@ class UserRepository implements UserRepositoryInterface
     public function findUsers(
         $where = ['s.name = ?' => 'active'],
         $order = [],
-        $limit = true,
+        $limit = false,
         $page = 1
     ) {
         $select = new Select(['u' => 'user']);
