@@ -83,7 +83,6 @@ class AdminController extends AbstractActionController
         $viewModel->setVariables([
             'userInfo'           => $this->userRepository->findUsers(),
             'positionRepository' => $this->positionRepository,
-            'maxPageCount'       => self::maxPageCount,
             'page'               => 1,
             'adminFilterForm'    => $this->adminFilterForm,
         ]);
