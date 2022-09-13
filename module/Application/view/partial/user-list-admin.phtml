@@ -46,8 +46,7 @@ $positionRepository = $this->positionRepository;
                         </div>
                         <div class="col-auto">
                             <span class="text-secondary">Должность:</span>
-                            <?php $position = $positionRepository->findPositionById($user->getPositionId()); ?>
-                            <span class="position"><?= $this->escapeHtml($position->getName()); ?></span>
+                            <span class="position"><?= $this->escapeHtml($user->getPositionName()); ?></span>
                         </div>
                         <div class="col-auto">
                             <span class="text-secondary">Возраст:</span>

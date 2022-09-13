@@ -20,6 +20,10 @@ class User extends Profile
      */
     protected $positionId;
     /**
+     * @var string
+     */
+    protected $positionName;
+    /**
      * @var bool[]
      */
     protected $status;
@@ -30,6 +34,7 @@ class User extends Profile
 
     /**
      * @param int         $positionId
+     * @param string      $positionName
      * @param bool[]      $status
      * @param string      $password
      * @param Email[]     $emails
@@ -47,6 +52,7 @@ class User extends Profile
     public function __construct(
         $password = '',
         $positionId = 0,
+        $positionName = '',
         $status = [],
         $emails = [],
         $phones = [],
@@ -75,6 +81,7 @@ class User extends Profile
 
         $this->password = $password;
         $this->positionId = $positionId;
+        $this->positionName = $positionName;
         $this->status = $status;
         $this->genNewPassword = $genNewPassword;
 
@@ -114,6 +121,19 @@ class User extends Profile
             ],
         ]);
         $this->inputFilter->add([
+            'name'       => 'positionName',
+            'required'   => true,
+            'validators' => [
+                [
+                    'name'    => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'max'      => 100,
+                    ],
+                ],
+            ],
+        ]);
+        $this->inputFilter->add([
             'name'       => 'status',
             'required'   => false,
             'validators' => [
@@ -127,6 +147,7 @@ class User extends Profile
 
         $this->hydrator->addStrategy('password', ScalarTypeStrategy::createToString());
         $this->hydrator->addStrategy('positionId', ScalarTypeStrategy::createToInt());
+        $this->hydrator->addStrategy('positionName', ScalarTypeStrategy::createToString());
         $this->hydrator->addStrategy('genNewPassword', ScalarTypeStrategy::createToBoolean());
     }
 
@@ -194,5 +215,21 @@ class User extends Profile
     public function setGenNewPassword($genNewPassword)
     {
         $this->genNewPassword = $genNewPassword;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPositionName()
+    {
+        return $this->positionName;
+    }
+
+    /**
+     * @param string $positionName
+     */
+    public function setPositionName($positionName)
+    {
+        $this->positionName = $positionName;
     }
 }

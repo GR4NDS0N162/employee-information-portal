@@ -91,6 +91,7 @@ class UserRepository implements UserRepositoryInterface
             'tempPassword' => 'u.temp_password',
             'tpCreatedAt'  => 'u.tp_created_at',
             'positionId'   => 'u.position_id',
+            'positionName' => 'pos.name',
             'surname'      => 'u.surname',
             'name'         => 'u.name',
             'patronymic'   => 'u.patronymic',
@@ -100,6 +101,11 @@ class UserRepository implements UserRepositoryInterface
             'skype'        => 'u.skype',
         ], false);
         $select->where(['u.id = ?' => $id]);
+        $select->join(
+            ['pos' => 'position'],
+            'pos.id = u.position_id',
+            [],
+        );
 
         /** @var User $user */
         $user = Extracter::extractValue(
@@ -158,6 +164,7 @@ class UserRepository implements UserRepositoryInterface
             'tempPassword' => 'u.temp_password',
             'tpCreatedAt'  => 'u.tp_created_at',
             'positionId'   => 'u.position_id',
+            'positionName' => 'pos.name',
             'surname'      => 'u.surname',
             'name'         => 'u.name',
             'patronymic'   => 'u.patronymic',
@@ -177,6 +184,11 @@ class UserRepository implements UserRepositoryInterface
             's.id = us.status_id',
             [],
             Select::JOIN_LEFT
+        );
+        $select->join(
+            ['pos' => 'position'],
+            'pos.id = u.position_id',
+            [],
         );
         $select->where($where);
         $select->order($order);
