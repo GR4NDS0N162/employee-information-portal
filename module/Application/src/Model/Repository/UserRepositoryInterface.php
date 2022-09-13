@@ -28,13 +28,13 @@ interface UserRepositoryInterface
     /**
      * @param Where|Closure|string|array|PredicateInterface $where
      * @param string|array|Expression                       $order
-     * @param int|null                                      $offset
+     * @param int                                           $page
      *
      * @return User[]
      */
     public function findUsers(
         $where = ['s.name = ?' => 'active'],
         $order = [],
-        $offset = null
+        $page = 1
     );
 }

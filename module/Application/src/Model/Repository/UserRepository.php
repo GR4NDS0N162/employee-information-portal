@@ -154,7 +154,7 @@ class UserRepository implements UserRepositoryInterface
     public function findUsers(
         $where = ['s.name = ?' => 'active'],
         $order = [],
-        $offset = null
+        $page = 1
     ) {
         $select = new Select(['u' => 'user']);
         $select->quantifier(Select::QUANTIFIER_DISTINCT);
@@ -193,9 +193,7 @@ class UserRepository implements UserRepositoryInterface
         $select->where($where);
         $select->order($order);
         $select->limit(AdminController::maxPageCount);
-        if (isset($offset)) {
-            $select->offset($offset);
-        }
+        $select->offset(($page - 1) * AdminController::maxPageCount);
 
         /** @var User[] $users */
         $users = Extracter::extractValues(
