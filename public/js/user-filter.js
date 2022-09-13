@@ -6,23 +6,24 @@ $.ajaxSetup({
 
 let options = {};
 
-const pageSelect = $(`#page`)[0];
-
-options['page'] = pageSelect.value;
 updateContent();
 
-pageSelect.addEventListener('change', () =>
+$(`#page`)[0].addEventListener('change', () =>
 {
-    options['page'] = pageSelect.value;
     updateContent();
 });
 
-function updateContent()
+$(`#sort`)[0].addEventListener('change', () =>
+{
+    updateContent();
+});
+
+function updateContent(type = 'all')
 {
     $.ajax({
         data: {
-            form: $(`#AdminFilterForm`).serialize(),
-            type: 'all',
+            form: $('#AdminFilterForm').serializeArray(),
+            type: type,
         },
     }).done((data) =>
     {

@@ -103,13 +103,42 @@ class AdminController extends AbstractActionController
         }
 
         $data = $request->getPost()->toArray();
+        $form = array_filter(
+            array_column(
+                $data['form'],
+                'value',
+                'name'
+            )
+        );
+        $type = $data['type'];
+
+        $page = (int)$form['page'];
+
+        $order = [
+            'u.surname',
+            'u.name',
+            'u.patronymic',
+            'pos.name',
+            'u.gender',
+            'u.birthday DESC',
+        ];
+        if ($form['sort'] == 'position') {
+            array_unshift($order, 'pos.name');
+        } elseif ($form['sort'] == 'age') {
+            array_unshift($order, 'u.birthday DESC');
+        } elseif ($form['sort'] == 'gender') {
+            array_unshift($order, 'u.gender');
+        }
+        $order = array_unique($order);
+
+        $where = [];
 
         $viewModel->setVariables([
             'userList' => $this->userRepository->findUsers(
-                ['s.name = ?' => 'active'],
-                [],
+                $where,
+                $order,
                 true,
-                $page = (int)$data['page']
+                $page
             ),
         ]);
 
