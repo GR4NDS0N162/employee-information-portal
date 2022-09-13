@@ -2,6 +2,7 @@
 
 namespace Application\Model\Repository;
 
+use Application\Controller\AdminController;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\User;
 use InvalidArgumentException;
@@ -153,7 +154,6 @@ class UserRepository implements UserRepositoryInterface
     public function findUsers(
         $where = ['s.name = ?' => 'active'],
         $order = [],
-        $limit = null,
         $offset = null
     ) {
         $select = new Select(['u' => 'user']);
@@ -192,9 +192,7 @@ class UserRepository implements UserRepositoryInterface
         );
         $select->where($where);
         $select->order($order);
-        if (isset($limit)) {
-            $select->limit($limit);
-        }
+        $select->limit(AdminController::maxPageCount);
         if (isset($offset)) {
             $select->offset($offset);
         }
