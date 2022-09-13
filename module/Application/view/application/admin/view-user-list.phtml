@@ -60,7 +60,8 @@ $this->inlineScript()
                 </div>
             </div>
             <div class="col">
-                <div class="row g-3">
+                <div class="row g-3"
+                     id="user-list">
                     <?php foreach ($userInfo as $item): ?>
                         <div class="col-12<?= (!$item->getStatus()['active']) ? ' card-gray-bg' : ''; ?>">
                             <div class="card p-3">
