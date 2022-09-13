@@ -28,6 +28,7 @@ interface UserRepositoryInterface
     /**
      * @param Where|Closure|string|array|PredicateInterface $where
      * @param string|array|Expression                       $order
+     * @param bool                                          $limit
      * @param int                                           $page
      *
      * @return User[]
@@ -35,6 +36,7 @@ interface UserRepositoryInterface
     public function findUsers(
         $where = ['s.name = ?' => 'active'],
         $order = [],
+        $limit = true,
         $page = 1
     );
 }

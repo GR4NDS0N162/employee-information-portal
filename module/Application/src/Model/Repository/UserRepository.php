@@ -154,6 +154,7 @@ class UserRepository implements UserRepositoryInterface
     public function findUsers(
         $where = ['s.name = ?' => 'active'],
         $order = [],
+        $limit = true,
         $page = 1
     ) {
         $select = new Select(['u' => 'user']);
@@ -192,7 +193,9 @@ class UserRepository implements UserRepositoryInterface
         );
         $select->where($where);
         $select->order($order);
-        $select->limit(AdminController::maxPageCount);
+        if ($limit) {
+            $select->limit(AdminController::maxPageCount);
+        }
         $select->offset(($page - 1) * AdminController::maxPageCount);
 
         /** @var User[] $users */
