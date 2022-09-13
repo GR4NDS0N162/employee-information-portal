@@ -14,7 +14,7 @@ use Laminas\View\Model\ViewModel;
 
 class AdminController extends AbstractActionController
 {
-    public const maxPageCount = 20;
+    public const maxPageCount = 5;
     public const userId = 1;
 
     /**
