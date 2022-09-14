@@ -52,8 +52,6 @@ function updateContent(type = 'all')
         byName(oldForm, 'admin').value = byName(newForm, 'admin').value;
     }
 
-    console.log(...oldForm);
-
     $.ajax({
         data: {
             form: oldForm,
