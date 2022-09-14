@@ -1,9 +1,3 @@
-$.ajaxSetup({
-    url: '/admin/list/get',
-    method: 'post',
-    dataType: 'json',
-});
-
 const formSelector = $('#AdminFilterForm');
 const sort = $(`#sort`)[0];
 const page = $(`#page`)[0];
@@ -53,6 +47,9 @@ function updateContent(type = 'all')
     }
 
     $.ajax({
+        url: '/admin/list/get',
+        method: 'post',
+        dataType: 'html',
         data: {
             form: oldForm,
         },
