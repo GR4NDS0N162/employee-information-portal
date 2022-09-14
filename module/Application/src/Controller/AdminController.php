@@ -141,16 +141,10 @@ class AdminController extends AbstractActionController
             $where['s.name ' . $sign . ' ?'] = 'admin';
         }
         if (isset($form['age[min]'])) {
-            $where[] = new Expression(
-                'TIMESTAMPDIFF(YEAR, u.birthday, NOW()) > ?))',
-                [$form['age[min]']]
-            );
+            $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) > ?', [$form['age[min]']]);
         }
         if (isset($form['age[max]'])) {
-            $where[] = new Expression(
-                'TIMESTAMPDIFF(YEAR, u.birthday, NOW()) < ?))',
-                [$form['age[max]']]
-            );
+            $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) < ?', [$form['age[max]']]);
         }
 
         $viewModel->setVariables([
