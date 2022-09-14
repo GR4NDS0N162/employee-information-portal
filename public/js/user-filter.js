@@ -1,7 +1,7 @@
 $.ajaxSetup({
     url: '/admin/list/get',
     method: 'post',
-    dataType: 'html',
+    dataType: 'json',
 });
 
 const formSelector = $('#AdminFilterForm');
