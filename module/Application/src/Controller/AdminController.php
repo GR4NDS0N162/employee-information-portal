@@ -133,12 +133,12 @@ class AdminController extends AbstractActionController
 
         $where = [];
         if (isset($form['active'])) {
-            $sign = $form['active'] == '1' ? '=' : '!=';
-            $where['s.name ' . $sign . ' ?'] = 'active';
+            $sign = $form['active'] == '1' ? 'IN' : 'NOT IN';
+            $where[] = new Expression('u.id ' . $sign . ' ( SELECT us.user_id FROM user_status us WHERE us.status_id = 2 )');
         }
         if (isset($form['admin'])) {
-            $sign = $form['active'] == '1' ? '=' : '!=';
-            $where['s.name ' . $sign . ' ?'] = 'admin';
+            $sign = $form['admin'] == '1' ? 'IN' : 'NOT IN';
+            $where[] = new Expression('u.id ' . $sign . ' ( SELECT us.user_id FROM user_status us WHERE us.status_id = 1 )');
         }
         if (isset($form['age[min]'])) {
             $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) > ?', [$form['age[min]']]);
