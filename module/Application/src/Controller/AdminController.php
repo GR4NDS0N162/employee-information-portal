@@ -95,13 +95,13 @@ class AdminController extends AbstractActionController
     {
         $request = $this->getRequest();
 
+        if (!$request->isXmlHttpRequest() || !$request->isPost()) {
+            exit();
+        }
+
         $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
         $viewModel->setTemplate('partial/user-list-admin.phtml');
-
-        if (!$request->isXmlHttpRequest() && $request->isPost()) {
-            return $viewModel;
-        }
 
         $data = $request->getPost()->toArray();
         $form = array_filter(
