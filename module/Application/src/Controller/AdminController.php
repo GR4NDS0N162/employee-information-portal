@@ -112,40 +112,7 @@ class AdminController extends AbstractActionController
             )
         );
 
-        $page = (int)$form['page'];
-
-        $order = [
-            'u.surname',
-            'u.name',
-            'u.patronymic',
-            'pos.name',
-            'u.gender',
-            'u.birthday DESC',
-        ];
-        if ($form['sort'] == 'position') {
-            array_unshift($order, 'pos.name');
-        } elseif ($form['sort'] == 'age') {
-            array_unshift($order, 'u.birthday DESC');
-        } elseif ($form['sort'] == 'gender') {
-            array_unshift($order, 'u.gender');
-        }
-        $order = array_unique($order);
-
-        $where = [];
-        if (isset($form['active'])) {
-            $sign = $form['active'] == '1' ? 'IN' : 'NOT IN';
-            $where[] = new Expression('u.id ' . $sign . ' ( SELECT us.user_id FROM user_status us WHERE us.status_id = 2 )');
-        }
-        if (isset($form['admin'])) {
-            $sign = $form['admin'] == '1' ? 'IN' : 'NOT IN';
-            $where[] = new Expression('u.id ' . $sign . ' ( SELECT us.user_id FROM user_status us WHERE us.status_id = 1 )');
-        }
-        if (isset($form['age[min]'])) {
-            $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) > ?', [$form['age[min]']]);
-        }
-        if (isset($form['age[max]'])) {
-            $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) < ?', [$form['age[max]']]);
-        }
+        list($page, $order, $where) = $this->extractOptions($form);
 
         $viewModel->setVariables([
             'userList' => $this->userRepository->findUsers(
@@ -225,5 +192,49 @@ class AdminController extends AbstractActionController
         );
 
         return $this->redirect()->toRoute('admin/edit-position');
+    }
+
+    /**
+     * @param array $form
+     *
+     * @return array
+     */
+    public function extractOptions(array $form): array
+    {
+        $page = (int)$form['page'];
+
+        $order = [
+            'u.surname',
+            'u.name',
+            'u.patronymic',
+            'pos.name',
+            'u.gender',
+            'u.birthday DESC',
+        ];
+        if ($form['sort'] == 'position') {
+            array_unshift($order, 'pos.name');
+        } elseif ($form['sort'] == 'age') {
+            array_unshift($order, 'u.birthday DESC');
+        } elseif ($form['sort'] == 'gender') {
+            array_unshift($order, 'u.gender');
+        }
+        $order = array_unique($order);
+
+        $where = [];
+        if (isset($form['active'])) {
+            $sign = $form['active'] == '1' ? 'IN' : 'NOT IN';
+            $where[] = new Expression('u.id ' . $sign . ' ( SELECT us.user_id FROM user_status us WHERE us.status_id = 2 )');
+        }
+        if (isset($form['admin'])) {
+            $sign = $form['admin'] == '1' ? 'IN' : 'NOT IN';
+            $where[] = new Expression('u.id ' . $sign . ' ( SELECT us.user_id FROM user_status us WHERE us.status_id = 1 )');
+        }
+        if (isset($form['age[min]'])) {
+            $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) > ?', [$form['age[min]']]);
+        }
+        if (isset($form['age[max]'])) {
+            $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) < ?', [$form['age[max]']]);
+        }
+        return array($page, $order, $where);
     }
 }
