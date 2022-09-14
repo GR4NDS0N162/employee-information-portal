@@ -152,7 +152,7 @@ class UserRepository implements UserRepositoryInterface
     }
 
     public function findUsers(
-        $where = ['s.name = ?' => 'active'],
+        $where = [],
         $order = [],
         $limit = false,
         $page = 1
@@ -174,18 +174,6 @@ class UserRepository implements UserRepositoryInterface
             'image'        => 'u.image',
             'skype'        => 'u.skype',
         ], false);
-        $select->join(
-            ['us' => 'user_status'],
-            'u.id = us.user_id',
-            [],
-            Select::JOIN_LEFT
-        );
-        $select->join(
-            ['s' => 'status'],
-            's.id = us.status_id',
-            [],
-            Select::JOIN_LEFT
-        );
         $select->join(
             ['pos' => 'position'],
             'pos.id = u.position_id',

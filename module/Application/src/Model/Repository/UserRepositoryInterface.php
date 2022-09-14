@@ -34,7 +34,7 @@ interface UserRepositoryInterface
      * @return User[]
      */
     public function findUsers(
-        $where = ['s.name = ?' => 'active'],
+        $where = [],
         $order = [],
         $limit = false,
         $page = 1
