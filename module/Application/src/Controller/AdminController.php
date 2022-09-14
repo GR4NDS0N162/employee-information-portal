@@ -111,7 +111,6 @@ class AdminController extends AbstractActionController
                 'name'
             )
         );
-        $type = $data['type'];
 
         $page = (int)$form['page'];
 
