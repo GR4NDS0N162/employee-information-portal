@@ -9,6 +9,7 @@ use Application\Model\Entity\PositionList;
 use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
+use Laminas\Db\Sql\Predicate\Expression;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
@@ -139,6 +140,18 @@ class AdminController extends AbstractActionController
         if (isset($form['admin'])) {
             $sign = $form['active'] == '1' ? '=' : '!=';
             $where['s.name ' . $sign . ' ?'] = 'admin';
+        }
+        if (isset($form['age[min]'])) {
+            $where[] = new Expression(
+                'TIMESTAMPDIFF(YEAR, u.birthday, NOW()) > ?))',
+                [$form['age[min]']]
+            );
+        }
+        if (isset($form['age[max]'])) {
+            $where[] = new Expression(
+                'TIMESTAMPDIFF(YEAR, u.birthday, NOW()) < ?))',
+                [$form['age[max]']]
+            );
         }
 
         $viewModel->setVariables([
