@@ -103,11 +103,11 @@ class AdminController extends AbstractActionController
         parse_str($data['where'], $data['where']);
         $data['where'] = array_filter_recursive($data['where']);
 
+        list($page, $order, $where) = extractOptions($data);
+
         $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
         $viewModel->setTemplate('partial/user-list-admin.phtml');
-
-        list($page, $order, $where) = extractOptions($data);
 
         $viewModel->setVariables([
             'userList' => $this->userRepository->findUsers(
