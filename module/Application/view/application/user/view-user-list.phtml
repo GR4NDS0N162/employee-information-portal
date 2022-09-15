@@ -11,41 +11,31 @@
 use Application\Form\User\UserFilterForm;
 use Application\Model\Repository\PositionRepositoryInterface;
 
+$this->inlineScript()
+    ->appendFile($this->basePath('js/user-filter.js'))
 ?>
 <div class="row g-3">
     <div class="col-12">
         <div class="row align-items-center justify-content-between g-3">
             <div class="col-auto">
-                <p class="h5 mb-0">
-                    <?php $userCount = count($userInfo); ?>
-                    <?= sprintf(
-                        'Показаны: %d-%d из %d',
-                        (1 + ($page - 1) * $maxPageCount),
-                        min($page * $maxPageCount, $userCount),
-                        $userCount,
-                    ); ?>
-                </p>
+                <p class="h5 mb-0"
+                   id="display-info">Показаны: <span id="shown"></span></p>
             </div>
             <div class="col-auto">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle"
-                            type="button"
-                            id="dropdown-sort"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                        Сортировка
-                    </button>
-                    <ul class="dropdown-menu"
-                        aria-labelledby="dropdown-sort">
-                        <li><a class="dropdown-item"
-                               href="#">Должность</a></li>
-                        <li><a class="dropdown-item"
-                               href="#">Пол</a></li>
-                        <li><a class="dropdown-item"
-                               href="#">Возраст</a></li>
-                        <li><a class="dropdown-item"
-                               href="#">ФИО</a></li>
-                    </ul>
+                <div class="row g-2">
+                    <div class="col-auto d-flex align-items-center">
+                        <label for="sort">Сортировать по:</label>
+                    </div>
+                    <div class="col-auto">
+                        <select id="sort"
+                                name="sort"
+                                class="form-select">
+                            <option value="fullname">ФИО</option>
+                            <option value="position">Должности</option>
+                            <option value="age">Возрасту</option>
+                            <option value="gender">Полу</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
@@ -61,36 +51,15 @@ use Application\Model\Repository\PositionRepositoryInterface;
                 <div class="row g-3"
                      id="user-list">
                 </div>
-                <div class="row justify-content-center mt-3">
+                <div class="row gx-2 justify-content-center mt-3">
+                    <div class="col-auto d-flex align-items-center">
+                        <label for="page">Страница</label>
+                    </div>
                     <div class="col-auto">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination mb-0">
-                                <li class="page-item">
-                                    <a class="page-link"
-                                       href="#">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link"
-                                       href="#">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link"
-                                       href="#">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link"
-                                       href="#">3</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link"
-                                       href="#">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                        <select id="page"
+                                name="page"
+                                class="form-select">
+                        </select>
                     </div>
                 </div>
             </div>
