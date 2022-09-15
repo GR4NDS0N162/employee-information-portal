@@ -1,12 +1,11 @@
 const formSelector = $('#AdminFilterForm');
 const sortSelector = $(`#sort`);
 const pageSelector = $(`#page`);
+const shownEl = $(`#shown`)[0];
 
 let oldWhere = formSelector.serialize();
 let count;
 let maxPageCount;
-
-updateContent();
 
 formSelector[0].addEventListener('submit', (e) =>
 {
@@ -74,6 +73,12 @@ function updateContent()
         data: getData(),
     }).done((data) =>
     {
+        const selectedPage = pageSelector[0].value;
+        const from = Math.min(1 + (selectedPage - 1) * maxPageCount, count);
+        const to = Math.min(selectedPage * maxPageCount, count);
+
+        shownEl.innerText = (count) ? `${from}-${to} из ${count}` : count;
+
         $(`#user-list`).html(data);
     });
 }
