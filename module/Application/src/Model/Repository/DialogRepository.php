@@ -59,7 +59,7 @@ class DialogRepository implements DialogRepositoryInterface
         return $commonDialogsId[0];
     }
 
-    public function getDialogList($userId)
+    public function getDialogList($userId, $where = [])
     {
         $select = new Select(['mem' => 'member']);
         $select->columns([
