@@ -36,8 +36,7 @@ $this->inlineScript()
                     <div class="col-auto">
                         <select id="sort"
                                 name="sort"
-                                class="form-select"
-                                form="AdminFilterForm">
+                                class="form-select">
                             <option value="fullname">ФИО</option>
                             <option value="position">Должности</option>
                             <option value="age">Возрасту</option>
@@ -66,8 +65,7 @@ $this->inlineScript()
                     <div class="col-auto">
                         <select id="page"
                                 name="page"
-                                class="form-select"
-                                form="AdminFilterForm">
+                                class="form-select">
                             <?php for ($i = 1; $i < $userCount / AdminController::maxPageCount + 1; $i++): ?>
                                 <option value="<?= $i ?>"><?= $i ?></option>
                             <?php endfor; ?>
