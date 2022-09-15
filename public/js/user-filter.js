@@ -16,8 +16,8 @@ function getData()
 formSelector[0].addEventListener('submit', (e) =>
 {
     e.preventDefault();
-    page.value = 1;
-    updateContent('where');
+
+    updateContent();
 });
 
 function updateContent()
