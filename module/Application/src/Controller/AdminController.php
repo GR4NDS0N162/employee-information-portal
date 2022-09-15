@@ -250,7 +250,62 @@ function extractOptions(array $data): array
             $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) < ?', [$whereArr['age']['max']]);
         }
     }
+    $empty = '-';
+    if (isset($whereArr['fullnamePhone'])) {
+        $filterArr = array_map('trim', explode(',', $whereArr['fullnamePhoneEmail']));
+        if (count($filterArr) == 2) {
+            list($fullname, $phone) = $filterArr;
+            $where = getWhere($fullname, $empty, $where, $phone);
+        }
+    } elseif (isset($whereArr['fullnamePhoneEmail'])) {
+        $filterArr = array_map('trim', explode(',', $whereArr['fullnamePhoneEmail']));
+        if (count($filterArr) == 3) {
+            list($fullname, $phone, $email) = $filterArr;
+            $where = getWhere($fullname, $empty, $where, $phone);
+
+            if ($email != $empty) {
+                $where[] = new Expression(
+                    'u.id IN ( SELECT e.user_id FROM email AS e ' .
+                    'WHERE e.address LIKE LOWER(CONCAT("%", ?, "%")))', [$email]
+                );
+            }
+        }
+    }
     return array($page, $order, $where);
+}
+
+/**
+ * @param        $fullname
+ * @param string $empty
+ * @param array  $where
+ * @param        $phone
+ *
+ * @return array
+ */
+function getWhere($fullname, string $empty, array $where, $phone): array
+{
+    $fullnameArr = explode(' ', $fullname);
+
+    if (count($fullnameArr) == 3) {
+        list($surname, $name, $patronymic) = $fullnameArr;
+        if ($surname != $empty) {
+            $where[] = new Expression('LOWER(u.surname) LIKE LOWER(CONCAT("%", ?, "%"))', [$surname]);
+        }
+        if ($name != $empty) {
+            $where[] = new Expression('LOWER(u.name) LIKE LOWER(CONCAT("%", ?, "%"))', [$name]);
+        }
+        if ($patronymic != $empty) {
+            $where[] = new Expression('LOWER(u.patronymic) LIKE LOWER(CONCAT("%", ?, "%"))', [$patronymic]);
+        }
+    }
+
+    if ($phone != $empty) {
+        $where[] = new Expression(
+            'u.id IN ( SELECT ph.user_id FROM phone AS ph ' .
+            'WHERE ph.number LIKE LOWER(CONCAT("%", ?, "%")))', [$phone]
+        );
+    }
+    return $where;
 }
 
 function array_filter_recursive($array, $callback = null)
