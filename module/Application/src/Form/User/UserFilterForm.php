@@ -6,6 +6,7 @@ use Application\Fieldset\AgeFilterFieldset;
 use Application\Helper\FieldsetMapper;
 use Application\Model\Options\GenderOptions;
 use Application\Model\Options\PositionOptions;
+use Application\Model\Options\YesNoOptions;
 use Laminas\Form\Element;
 use Laminas\Form\Form;
 
@@ -107,6 +108,21 @@ class UserFilterForm extends Form
             'priority' => -10 ** 9,
         ]);
 
+        $this->add([
+            'name'       => 'active',
+            'type'       => Element\Select::class,
+            'attributes' => [
+                'class' => 'form-select',
+            ],
+            'options'    => [
+                'label'            => 'Активен',
+                'label_attributes' => [
+                    'class' => 'form-label',
+                ],
+                'options'          => YesNoOptions::getActiveOptions(),
+            ],
+        ]);
+
         FieldsetMapper::setAttributes($this, [
             'children' => [
                 'positionId'         => 'col-12',
@@ -119,6 +135,7 @@ class UserFilterForm extends Form
                     ],
                 ],
                 'fullnamePhoneEmail' => 'col-12',
+                'active'             => 'd-none',
                 'submitButton'       => 'col-12',
             ],
         ]);
