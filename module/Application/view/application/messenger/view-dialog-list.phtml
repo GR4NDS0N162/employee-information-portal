@@ -11,6 +11,8 @@ use Application\Form\Messenger\DialogFilterForm;
 use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 
+$this->inlineScript()
+    ->appendFile($this->basePath('js/dialog-filter.js'))
 ?>
 <div class="row g-3">
     <div class="col-12 col-lg-4 col col-xl-3">
