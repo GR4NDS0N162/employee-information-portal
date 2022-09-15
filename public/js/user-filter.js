@@ -4,6 +4,13 @@ const page = $(`#page`);
 
 updateContent();
 
+formSelector[0].addEventListener('submit', (e) =>
+{
+    e.preventDefault();
+
+    updateContent();
+});
+
 function getData()
 {
     return {
@@ -20,13 +27,6 @@ function getData()
         order: sort[0].value || 'fullname',
     };
 }
-
-formSelector[0].addEventListener('submit', (e) =>
-{
-    e.preventDefault();
-
-    updateContent();
-});
 
 function updateContent()
 {
