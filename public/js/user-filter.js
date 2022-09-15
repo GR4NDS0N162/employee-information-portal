@@ -1,6 +1,6 @@
 const formSelector = $('#AdminFilterForm');
-const sort = $(`#sort`)[0];
-const page = $(`#page`)[0];
+const sort = $(`#sort`);
+const page = $(`#page`);
 
 formSelector[0].addEventListener('submit', (e) =>
 {
