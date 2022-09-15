@@ -33,7 +33,7 @@ class DialogFilterForm extends Form
         $this->setAttribute('novalidate', true);
 
         $this->add([
-            'name'       => 'position',
+            'name'       => 'positionId',
             'type'       => Element\Select::class,
             'attributes' => [
                 'class' => 'form-select',
@@ -74,7 +74,7 @@ class DialogFilterForm extends Form
         ]);
 
         $this->add([
-            'name'       => 'fullname-phone',
+            'name'       => 'fullnamePhone',
             'type'       => Element\Textarea::class,
             'attributes' => [
                 'class'       => 'form-control',
@@ -90,7 +90,7 @@ class DialogFilterForm extends Form
         ]);
 
         $this->add([
-            'name'       => 'submit-button',
+            'name'       => 'submitButton',
             'type'       => Element\Button::class,
             'attributes' => [
                 'type'  => 'submit',
@@ -105,17 +105,17 @@ class DialogFilterForm extends Form
 
         FieldsetMapper::setAttributes($this, [
             'children' => [
-                'position'       => 'col-12',
-                'gender'         => 'col-12',
-                'age'            => [
+                'positionId'    => 'col-12',
+                'gender'        => 'col-12',
+                'age'           => [
                     'value'    => 'col-12',
                     'children' => [
                         'min' => 'col-12',
                         'max' => 'col-12',
                     ],
                 ],
-                'fullname-phone' => 'col-12',
-                'submit-button'  => 'col-12',
+                'fullnamePhone' => 'col-12',
+                'submitButton'  => 'col-12',
             ],
         ]);
     }
