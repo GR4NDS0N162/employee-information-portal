@@ -105,6 +105,15 @@ class AdminController extends AbstractActionController
 
         list($page, $order, $where) = extractOptions($data);
 
+        if (isset($data['updatePage'])) {
+            $count = count($this->userRepository->findUsers($where));
+            echo json_encode([
+                'count'        => $count,
+                'maxPageCount' => self::maxPageCount,
+            ]);
+            exit();
+        }
+
         $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
         $viewModel->setTemplate('partial/user-list-admin.phtml');
