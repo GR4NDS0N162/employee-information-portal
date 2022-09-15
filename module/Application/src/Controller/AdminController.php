@@ -189,14 +189,9 @@ class AdminController extends AbstractActionController
         return $this->redirect()->toRoute('admin/edit-position');
     }
 
-    /**
-     * @param array $form
-     *
-     * @return array
-     */
-    public function extractOptions(array $form): array
+    public function extractOptions(array $data): array
     {
-        $page = (int)$form['page'];
+        $page = (int)$data['page'];
 
         $order = [
             'u.surname',
@@ -206,29 +201,32 @@ class AdminController extends AbstractActionController
             'u.gender',
             'u.birthday DESC',
         ];
-        if ($form['sort'] == 'position') {
+        if ($data['order'] == 'position') {
             array_unshift($order, 'pos.name');
-        } elseif ($form['sort'] == 'age') {
+        } elseif ($data['order'] == 'age') {
             array_unshift($order, 'u.birthday DESC');
-        } elseif ($form['sort'] == 'gender') {
+        } elseif ($data['order'] == 'gender') {
             array_unshift($order, 'u.gender');
         }
         $order = array_unique($order);
 
+        $whereArr = $data['where'];
         $where = [];
-        if (isset($form['active'])) {
-            $sign = $form['active'] == '1' ? 'IN' : 'NOT IN';
+        if (isset($whereArr['active'])) {
+            $sign = $whereArr['active'] == '1' ? 'IN' : 'NOT IN';
             $where[] = new Expression('u.id ' . $sign . ' ( SELECT us.user_id FROM user_status us WHERE us.status_id = 2 )');
         }
-        if (isset($form['admin'])) {
-            $sign = $form['admin'] == '1' ? 'IN' : 'NOT IN';
+        if (isset($whereArr['admin'])) {
+            $sign = $whereArr['admin'] == '1' ? 'IN' : 'NOT IN';
             $where[] = new Expression('u.id ' . $sign . ' ( SELECT us.user_id FROM user_status us WHERE us.status_id = 1 )');
         }
-        if (isset($form['age[min]'])) {
-            $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) > ?', [$form['age[min]']]);
-        }
-        if (isset($form['age[max]'])) {
-            $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) < ?', [$form['age[max]']]);
+        if (isset($whereArr['age'])) {
+            if (isset($whereArr['age']['min'])) {
+                $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) > ?', [$whereArr['age']['min']]);
+            }
+            if (isset($whereArr['age']['max'])) {
+                $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) < ?', [$whereArr['age']['max']]);
+            }
         }
         return array($page, $order, $where);
     }
