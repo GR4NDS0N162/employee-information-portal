@@ -58,71 +58,8 @@ use Application\Model\Repository\PositionRepositoryInterface;
                 </div>
             </div>
             <div class="col">
-                <div class="row g-3">
-                    <?php foreach ($userInfo as $item): ?>
-                        <div class="col-12">
-                            <div class="card p-3">
-                                <div class="row g-3">
-                                    <div class="col-auto">
-                                        <img src="<?= $this->escapeHtml($item->getImage() ?: '/img/headshot-1024x1024.jpg'); ?>"
-                                             class="user-photo img-fluid rounded"
-                                             alt="Фото пользователя">
-                                    </div>
-                                    <div class="col">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <p class="h6 full-name"><?= $this->escapeHtml(
-                                                        implode(' ', [
-                                                            $item->getSurname() ?: '—',
-                                                            $item->getName() ?: '—',
-                                                            $item->getPatronymic() ?: '—',
-                                                        ])
-                                                    ); ?></p>
-                                            </div>
-                                            <div class="col-auto">
-                                                <span class="text-secondary">Должность:</span>
-                                                <?php $position = $positionRepository->findPositionById($item->getPositionId()); ?>
-                                                <span class="position"><?= $this->escapeHtml($position->getName()); ?></span>
-                                            </div>
-                                            <div class="col-auto">
-                                                <span class="text-secondary">Возраст:</span>
-                                                <?php $age = 'Не указан'; ?>
-                                                <?php if ($item->getBirthday()): ?>
-                                                    <?php $age = (new DateTime($item->getBirthday()))->diff(new DateTime())->y; ?>
-                                                    <?php $ageLastNumber = $age % 10; ?>
-                                                    <?php $old = ''; ?>
-                                                    <?php $isExclusion = ($age % 100 >= 11) && ($age % 100 <= 14); ?>
-                                                    <?php if ($ageLastNumber == 1): ?>
-                                                        <?php $old = "год"; ?>
-                                                    <?php elseif ($ageLastNumber == 0 || $ageLastNumber >= 5): ?>
-                                                        <?php $old = "лет"; ?>
-                                                    <?php elseif ($ageLastNumber >= 2 && $ageLastNumber <= 4): ?>
-                                                        <?php $old = "года"; ?>
-                                                    <?php endif; ?>
-                                                    <?php if ($isExclusion): ?>
-                                                        <?php $old = "лет"; ?>
-                                                    <?php endif; ?>
-                                                    <?php $age .= ' ' . $old; ?>
-                                                <?php endif; ?>
-                                                <span class="age"><?= $this->escapeHtml($age); ?></span>
-                                            </div>
-                                            <div class="col-auto">
-                                                <span class="text-secondary">Пол:</span>
-                                                <?php if ($item->getGender() == 1): ?>
-                                                    <?php $gender = 'Мужской'; ?>
-                                                <?php elseif ($item->getGender() == 2): ?>
-                                                    <?php $gender = 'Женский'; ?>
-                                                <?php else: ?>
-                                                    <?php $gender = 'Не указан'; ?>
-                                                <?php endif; ?>
-                                                <span class="gender"><?= $this->escapeHtml($gender); ?></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
+                <div class="row g-3"
+                     id="user-list">
                 </div>
                 <div class="row justify-content-center mt-3">
                     <div class="col-auto">
