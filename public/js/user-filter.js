@@ -1,4 +1,4 @@
-const formSelector = $('#AdminFilterForm');
+const formSelector = $('#AdminFilterForm, #UserFilterForm');
 const sortSelector = $(`#sort`);
 const pageSelector = $(`#page`);
 const shownEl = $(`#shown`)[0];

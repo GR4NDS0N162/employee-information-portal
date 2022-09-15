@@ -16,9 +16,11 @@ class DialogFilterForm extends Form
      */
     private $positionOptions;
 
-    public function __construct(PositionOptions $positionOptions)
-    {
-        parent::__construct();
+    public function __construct(
+        $positionOptions,
+        $name = 'DialogFilterForm'
+    ) {
+        parent::__construct($name);
 
         $this->positionOptions = $positionOptions;
     }
