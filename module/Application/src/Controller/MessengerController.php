@@ -95,4 +95,9 @@ class MessengerController extends AbstractActionController
 
         return $viewModel;
     }
+
+    public function getDialogsAction()
+    {
+
+    }
 }

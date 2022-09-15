@@ -128,6 +128,15 @@ return [
                                 ],
                             ],
                         ],
+                        'get-dialogs'   => [
+                            'type'    => Literal::class,
+                            'options' => [
+                                'route'    => '/get',
+                                'defaults' => [
+                                    'action' => 'get-dialogs',
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ],
