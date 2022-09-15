@@ -2,6 +2,8 @@ const formSelector = $('#AdminFilterForm');
 const sort = $(`#sort`);
 const page = $(`#page`);
 
+updateContent();
+
 function getData()
 {
     return {
@@ -17,3 +19,16 @@ formSelector[0].addEventListener('submit', (e) =>
     page.value = 1;
     updateContent('where');
 });
+
+function updateContent()
+{
+    $.ajax({
+        url: '/admin/list/get',
+        method: 'post',
+        dataType: 'html',
+        data: getData(),
+    }).done((data) =>
+    {
+        $(`#user-list`).html(data);
+    });
+}
