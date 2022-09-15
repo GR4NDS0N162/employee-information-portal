@@ -238,3 +238,28 @@ class AdminController extends AbstractActionController
         return array($page, $order, $where);
     }
 }
+
+function array_filter_recursive($array, $callback = null)
+{
+    foreach ($array as $key => & $value) {
+        if (is_array($value)) {
+            $value = array_filter_recursive($value, $callback);
+            if (!$value) {
+                unset($array[$key]);
+            }
+        } else {
+            if (!is_null($callback)) {
+                if (!$callback($value)) {
+                    unset($array[$key]);
+                }
+            } else {
+                if (!$value) {
+                    unset($array[$key]);
+                }
+            }
+        }
+    }
+    unset($value);
+
+    return $array;
+}
