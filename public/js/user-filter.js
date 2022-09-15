@@ -52,6 +52,7 @@ formSelector[0].dispatchEvent(new Event('submit'));
 function getData(updatePage = false)
 {
     const data = {
+        formName: formSelector[0].getAttribute('name'),
         where: oldWhere,
         page: pageSelector[0].value || 1,
         order: sortSelector[0].value || 'fullname',

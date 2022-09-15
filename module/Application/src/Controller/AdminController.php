@@ -125,6 +125,7 @@ class AdminController extends AbstractActionController
                 true,
                 $page
             ),
+            'formName' => $data['formName'],
         ]);
 
         return $viewModel;

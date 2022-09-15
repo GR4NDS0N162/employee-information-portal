@@ -7,6 +7,9 @@ use Application\Model\Entity\User;
 
 /** @var User[] $userList */
 $userList = $this->userList;
+
+/** @var string $formName */
+$formName = $this->formName;
 ?>
 
 <?php foreach ($userList as $user): ?>
@@ -28,7 +31,10 @@ $userList = $this->userList;
                                         $user->getPatronymic() ?: '—',
                                     ])
                                 ); ?>
-                                <?php if ($user->getStatus()['admin']): ?>
+                                <?php if (
+                                    $formName == 'AdminFilterForm' &&
+                                    $user->getStatus()['admin']
+                                ): ?>
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                          width="24"
                                          height="24"
@@ -79,10 +85,12 @@ $userList = $this->userList;
                         </div>
                     </div>
                 </div>
-                <div class="col-auto d-flex align-items-center">
-                    <a href="<?= $this->url('admin/view-user-list/edit-user', ['id' => $user->getId()]); ?>"
-                       class="btn btn-primary">Редактировать</a>
-                </div>
+                <?php if ($formName == 'AdminFilterForm'): ?>
+                    <div class="col-auto d-flex align-items-center">
+                        <a href="<?= $this->url('admin/view-user-list/edit-user', ['id' => $user->getId()]); ?>"
+                           class="btn btn-primary">Редактировать</a>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
