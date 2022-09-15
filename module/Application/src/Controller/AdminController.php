@@ -212,6 +212,18 @@ class AdminController extends AbstractActionController
 
         $whereArr = $data['where'];
         $where = [];
+        if (isset($whereArr['positionId'])) {
+            $where[] = new Expression(
+                'u.position_id = ?',
+                [$whereArr['positionId']]
+            );
+        }
+        if (isset($whereArr['gender'])) {
+            $where[] = new Expression(
+                'u.gender = ?',
+                [$whereArr['gender']]
+            );
+        }
         if (isset($whereArr['active'])) {
             $sign = $whereArr['active'] == '1' ? 'IN' : 'NOT IN';
             $where[] = new Expression('u.id ' . $sign . ' ( SELECT us.user_id FROM user_status us WHERE us.status_id = 2 )');
