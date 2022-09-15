@@ -1,6 +1,6 @@
 const formSelector = $('#AdminFilterForm');
-const sort = $(`#sort`);
-const page = $(`#page`);
+const sortSelector = $(`#sort`);
+const pageSelector = $(`#page`);
 
 updateContent();
 
@@ -23,8 +23,8 @@ function getData()
             'active=1',
             'admin='
         ].join('&'),
-        page: page[0].value || 1,
-        order: sort[0].value || 'fullname',
+        page: pageSelector[0].value || 1,
+        order: sortSelector[0].value || 'fullname',
     };
 }
 
