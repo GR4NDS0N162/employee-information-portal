@@ -66,7 +66,7 @@ class DialogFilterForm extends Form
             'name'       => 'age',
             'type'       => AgeFilterFieldset::class,
             'attributes' => [
-                'class' => 'row gx-3',
+                'class' => 'row g-3',
             ],
             'options'    => [
                 'label' => 'Возраст',
@@ -110,8 +110,8 @@ class DialogFilterForm extends Form
                 'age'            => [
                     'value'    => 'col-12',
                     'children' => [
-                        'min' => 'col-6',
-                        'max' => 'col-6',
+                        'min' => 'col-12',
+                        'max' => 'col-12',
                     ],
                 ],
                 'fullname-phone' => 'col-12',
