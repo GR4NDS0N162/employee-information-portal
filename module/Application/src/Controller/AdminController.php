@@ -99,6 +99,10 @@ class AdminController extends AbstractActionController
             exit();
         }
 
+        $data = $request->getPost()->toArray();
+        parse_str($data['where'], $data['where']);
+        $data['where'] = array_filter_recursive($data['where']);
+
         $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
         $viewModel->setTemplate('partial/user-list-admin.phtml');
