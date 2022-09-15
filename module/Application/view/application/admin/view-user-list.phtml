@@ -7,7 +7,6 @@
  * @var AdminFilterForm                   $adminFilterForm
  */
 
-use Application\Controller\AdminController;
 use Application\Form\Admin\AdminFilterForm;
 use Application\Model\Repository\PositionRepositoryInterface;
 
@@ -18,15 +17,8 @@ $this->inlineScript()
     <div class="col-12">
         <div class="row align-items-center justify-content-between g-3">
             <div class="col-auto">
-                <p class="h5 mb-0">
-                    <?php $userCount = count($userInfo); ?>
-                    <?= sprintf(
-                        'Показаны: %d-%d из %d',
-                        (1 + ($page - 1) * AdminController::maxPageCount),
-                        min($page * AdminController::maxPageCount, $userCount),
-                        $userCount,
-                    ); ?>
-                </p>
+                <p class="h5 mb-0"
+                   id="display-info"></p>
             </div>
             <div class="col-auto">
                 <div class="row g-2">
@@ -66,9 +58,6 @@ $this->inlineScript()
                         <select id="page"
                                 name="page"
                                 class="form-select">
-                            <?php for ($i = 1; $i < $userCount / AdminController::maxPageCount + 1; $i++): ?>
-                                <option value="<?= $i ?>"><?= $i ?></option>
-                            <?php endfor; ?>
                         </select>
                     </div>
                 </div>
