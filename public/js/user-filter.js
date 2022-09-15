@@ -7,7 +7,15 @@ updateContent();
 function getData()
 {
     return {
-        where: formSelector.serialize(),
+        where: formSelector.serialize() || [
+            'positionId=',
+            'gender=',
+            'age[min]=',
+            'age[max]=',
+            'fullnamePhoneEmail=',
+            'active=1',
+            'admin='
+        ].join('&'),
         page: page[0].value || 1,
         order: sort[0].value || 'fullname',
     };
