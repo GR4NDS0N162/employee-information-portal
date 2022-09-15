@@ -107,16 +107,7 @@ class AdminController extends AbstractActionController
         $viewModel->setTerminal(true);
         $viewModel->setTemplate('partial/user-list-admin.phtml');
 
-        $data = $request->getPost()->toArray();
-        $form = array_filter(
-            array_column(
-                $data['form'],
-                'value',
-                'name'
-            )
-        );
-
-        list($page, $order, $where) = $this->extractOptions($form);
+        list($page, $order, $where) = $this->extractOptions($data);
 
         $viewModel->setVariables([
             'userList' => $this->userRepository->findUsers(
