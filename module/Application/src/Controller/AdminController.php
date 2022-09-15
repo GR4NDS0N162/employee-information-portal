@@ -101,9 +101,9 @@ class AdminController extends AbstractActionController
 
         $data = $request->getPost()->toArray();
         parse_str($data['where'], $data['where']);
-        $data['where'] = array_filter_recursive($data['where']);
+        $data['where'] = self::array_filter_recursive($data['where']);
 
-        list($page, $order, $where) = extractOptions($data);
+        list($page, $order, $where) = self::extractOptions($data);
 
         if (isset($data['updatePage'])) {
             $count = count($this->userRepository->findUsers($where));
@@ -198,138 +198,130 @@ class AdminController extends AbstractActionController
 
         return $this->redirect()->toRoute('admin/edit-position');
     }
-}
 
-function extractOptions(array $data): array
-{
-    $page = (int)$data['page'];
+    public static function extractOptions(array $data): array
+    {
+        $page = (int)$data['page'];
 
-    $order = [
-        'u.surname',
-        'u.name',
-        'u.patronymic',
-        'pos.name',
-        'u.gender',
-        'u.birthday DESC',
-    ];
-    if ($data['order'] == 'position') {
-        array_unshift($order, 'pos.name');
-    } elseif ($data['order'] == 'age') {
-        array_unshift($order, 'u.birthday DESC');
-    } elseif ($data['order'] == 'gender') {
-        array_unshift($order, 'u.gender');
-    }
-    $order = array_unique($order);
-
-    $whereArr = $data['where'];
-    $where = [];
-    if (isset($whereArr['positionId'])) {
-        $where[] = new Expression(
-            'u.position_id = ?',
-            [$whereArr['positionId']]
-        );
-    }
-    if (isset($whereArr['gender'])) {
-        $where[] = new Expression(
-            'u.gender = ?',
-            [$whereArr['gender']]
-        );
-    }
-    if (isset($whereArr['active'])) {
-        $sign = $whereArr['active'] == '1' ? 'IN' : 'NOT IN';
-        $where[] = new Expression('u.id ' . $sign . ' ( SELECT us.user_id FROM user_status us WHERE us.status_id = 2 )');
-    }
-    if (isset($whereArr['admin'])) {
-        $sign = $whereArr['admin'] == '1' ? 'IN' : 'NOT IN';
-        $where[] = new Expression('u.id ' . $sign . ' ( SELECT us.user_id FROM user_status us WHERE us.status_id = 1 )');
-    }
-    if (isset($whereArr['age'])) {
-        if (isset($whereArr['age']['min'])) {
-            $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) > ?', [$whereArr['age']['min']]);
+        $order = [
+            'u.surname',
+            'u.name',
+            'u.patronymic',
+            'pos.name',
+            'u.gender',
+            'u.birthday DESC',
+        ];
+        if ($data['order'] == 'position') {
+            array_unshift($order, 'pos.name');
+        } elseif ($data['order'] == 'age') {
+            array_unshift($order, 'u.birthday DESC');
+        } elseif ($data['order'] == 'gender') {
+            array_unshift($order, 'u.gender');
         }
-        if (isset($whereArr['age']['max'])) {
-            $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) < ?', [$whereArr['age']['max']]);
-        }
-    }
-    $empty = '-';
-    if (isset($whereArr['fullnamePhone'])) {
-        $filterArr = array_map('trim', explode(',', $whereArr['fullnamePhoneEmail']));
-        if (count($filterArr) == 2) {
-            list($fullname, $phone) = $filterArr;
-            $where = getWhere($fullname, $empty, $where, $phone);
-        }
-    } elseif (isset($whereArr['fullnamePhoneEmail'])) {
-        $filterArr = array_map('trim', explode(',', $whereArr['fullnamePhoneEmail']));
-        if (count($filterArr) == 3) {
-            list($fullname, $phone, $email) = $filterArr;
-            $where = getWhere($fullname, $empty, $where, $phone);
+        $order = array_unique($order);
 
-            if ($email != $empty) {
-                $where[] = new Expression(
-                    'u.id IN ( SELECT e.user_id FROM email AS e ' .
-                    'WHERE e.address LIKE LOWER(CONCAT("%", ?, "%")))', [$email]
-                );
+        $whereArr = $data['where'];
+        $where = [];
+        if (isset($whereArr['positionId'])) {
+            $where[] = new Expression(
+                'u.position_id = ?',
+                [$whereArr['positionId']]
+            );
+        }
+        if (isset($whereArr['gender'])) {
+            $where[] = new Expression(
+                'u.gender = ?',
+                [$whereArr['gender']]
+            );
+        }
+        if (isset($whereArr['active'])) {
+            $sign = $whereArr['active'] == '1' ? 'IN' : 'NOT IN';
+            $where[] = new Expression('u.id ' . $sign . ' ( SELECT us.user_id FROM user_status us WHERE us.status_id = 2 )');
+        }
+        if (isset($whereArr['admin'])) {
+            $sign = $whereArr['admin'] == '1' ? 'IN' : 'NOT IN';
+            $where[] = new Expression('u.id ' . $sign . ' ( SELECT us.user_id FROM user_status us WHERE us.status_id = 1 )');
+        }
+        if (isset($whereArr['age'])) {
+            if (isset($whereArr['age']['min'])) {
+                $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) > ?', [$whereArr['age']['min']]);
+            }
+            if (isset($whereArr['age']['max'])) {
+                $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) < ?', [$whereArr['age']['max']]);
             }
         }
-    }
-    return array($page, $order, $where);
-}
-
-/**
- * @param        $fullname
- * @param string $empty
- * @param array  $where
- * @param        $phone
- *
- * @return array
- */
-function getWhere($fullname, string $empty, array $where, $phone): array
-{
-    $fullnameArr = explode(' ', $fullname);
-
-    if (count($fullnameArr) == 3) {
-        list($surname, $name, $patronymic) = $fullnameArr;
-        if ($surname != $empty) {
-            $where[] = new Expression('LOWER(u.surname) LIKE LOWER(CONCAT("%", ?, "%"))', [$surname]);
-        }
-        if ($name != $empty) {
-            $where[] = new Expression('LOWER(u.name) LIKE LOWER(CONCAT("%", ?, "%"))', [$name]);
-        }
-        if ($patronymic != $empty) {
-            $where[] = new Expression('LOWER(u.patronymic) LIKE LOWER(CONCAT("%", ?, "%"))', [$patronymic]);
-        }
-    }
-
-    if ($phone != $empty) {
-        $where[] = new Expression(
-            'u.id IN ( SELECT ph.user_id FROM phone AS ph ' .
-            'WHERE ph.number LIKE LOWER(CONCAT("%", ?, "%")))', [$phone]
-        );
-    }
-    return $where;
-}
-
-function array_filter_recursive($array, $callback = null)
-{
-    foreach ($array as $key => & $value) {
-        if (is_array($value)) {
-            $value = array_filter_recursive($value, $callback);
-            if (!$value) {
-                unset($array[$key]);
+        $empty = '-';
+        if (isset($whereArr['fullnamePhone'])) {
+            $filterArr = array_map('trim', explode(',', $whereArr['fullnamePhoneEmail']));
+            if (count($filterArr) == 2) {
+                list($fullname, $phone) = $filterArr;
+                $where = self::getWhere($fullname, $empty, $where, $phone);
             }
-        } else {
-            if (!is_null($callback)) {
-                if (!$callback($value)) {
-                    unset($array[$key]);
+        } elseif (isset($whereArr['fullnamePhoneEmail'])) {
+            $filterArr = array_map('trim', explode(',', $whereArr['fullnamePhoneEmail']));
+            if (count($filterArr) == 3) {
+                list($fullname, $phone, $email) = $filterArr;
+                $where = self::getWhere($fullname, $empty, $where, $phone);
+
+                if ($email != $empty) {
+                    $where[] = new Expression(
+                        'u.id IN ( SELECT e.user_id FROM email AS e ' .
+                        'WHERE e.address LIKE LOWER(CONCAT("%", ?, "%")))', [$email]
+                    );
                 }
-            } else {
+            }
+        }
+        return array($page, $order, $where);
+    }
+
+    public static function getWhere($fullname, string $empty, array $where, $phone): array
+    {
+        $fullnameArr = explode(' ', $fullname);
+
+        if (count($fullnameArr) == 3) {
+            list($surname, $name, $patronymic) = $fullnameArr;
+            if ($surname != $empty) {
+                $where[] = new Expression('LOWER(u.surname) LIKE LOWER(CONCAT("%", ?, "%"))', [$surname]);
+            }
+            if ($name != $empty) {
+                $where[] = new Expression('LOWER(u.name) LIKE LOWER(CONCAT("%", ?, "%"))', [$name]);
+            }
+            if ($patronymic != $empty) {
+                $where[] = new Expression('LOWER(u.patronymic) LIKE LOWER(CONCAT("%", ?, "%"))', [$patronymic]);
+            }
+        }
+
+        if ($phone != $empty) {
+            $where[] = new Expression(
+                'u.id IN ( SELECT ph.user_id FROM phone AS ph ' .
+                'WHERE ph.number LIKE LOWER(CONCAT("%", ?, "%")))', [$phone]
+            );
+        }
+        return $where;
+    }
+
+    public static function array_filter_recursive($array, $callback = null)
+    {
+        foreach ($array as $key => & $value) {
+            if (is_array($value)) {
+                $value = AdminController::array_filter_recursive($value, $callback);
                 if (!$value) {
                     unset($array[$key]);
                 }
+            } else {
+                if (!is_null($callback)) {
+                    if (!$callback($value)) {
+                        unset($array[$key]);
+                    }
+                } else {
+                    if (!$value) {
+                        unset($array[$key]);
+                    }
+                }
             }
         }
-    }
-    unset($value);
+        unset($value);
 
-    return $array;
+        return $array;
+    }
 }
