@@ -2,6 +2,7 @@
 
 namespace Application\Model\Entity;
 
+use DateTime;
 use Laminas\Filter\ToInt;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\Hydrator\HydratorAwareInterface;
@@ -356,6 +357,32 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
     public function setBirthday($birthday)
     {
         $this->birthday = $birthday;
+    }
+
+    public function getAgeString()
+    {
+        $age = 'Не указан';
+
+        if ($this->birthday) {
+            $age = (new DateTime($this->birthday))->diff(new DateTime())->y;
+            $ageLastNumber = $age % 10;
+            $old = '';
+            $isExclusion = ($age % 100 >= 11) && ($age % 100 <= 14);
+            if ($ageLastNumber == 1) {
+                $old = "год";
+            } elseif ($ageLastNumber == 0 || $ageLastNumber >= 5) {
+                $old = "лет";
+            } elseif ($ageLastNumber >= 2 && $ageLastNumber <= 4) {
+                $old = "года";
+            }
+            if ($isExclusion) {
+                $old = "лет";
+            }
+        }
+
+        $age .= ' ' . $old;
+
+        return $age;
     }
 
     /**
