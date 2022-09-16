@@ -207,9 +207,9 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
                 [
                     'name'    => RenameUpload::class,
                     'options' => [
-                        'target'          => './data/img/',
-                        'randomize'       => true,
-                        'use_upload_name' => true,
+                        'target'               => './public/img/',
+                        'randomize'            => true,
+                        'use_upload_extension' => true,
                     ],
                 ],
             ],
@@ -430,6 +430,15 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
     public function setImage($image)
     {
         $this->image = $image;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImagePath()
+    {
+        $pos = strpos($this->image, '/img/');
+        return substr($this->image, $pos);
     }
 
     /**

@@ -150,6 +150,16 @@ class UserCommand implements UserCommandInterface
             throw new RuntimeException('Cannot update profile; missing identifier');
         }
 
+        if (
+            isset($profile->getImageFile()['tmp_name']) &&
+            !empty($profile->getImageFile()['tmp_name'])
+        ) {
+            if (!empty($profile->getImage())) {
+                unlink($profile->getImage());
+            }
+            $profile->setImage($profile->getImageFile()['tmp_name']);
+        }
+
         $update = new Update('user');
         $update->set([
             'surname'    => $profile->getSurname(),

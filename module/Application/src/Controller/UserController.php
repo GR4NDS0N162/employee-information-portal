@@ -80,7 +80,7 @@ class UserController extends AbstractActionController
         $profile = $this->userRepository->findProfile(self::userId);
         $this->viewProfileForm->bind($profile);
         $this->viewProfileForm->get('profile')->get('image')
-            ->setAttribute('src', $profile->getImage() ?: '/img/headshot-1024x1024.jpg');
+            ->setAttribute('src', $profile->getImagePath() ?: '/img/headshot-1024x1024.jpg');
 
         return $viewModel;
     }
