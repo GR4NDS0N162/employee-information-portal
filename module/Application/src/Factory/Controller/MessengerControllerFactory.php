@@ -5,6 +5,7 @@ namespace Application\Factory\Controller;
 use Application\Controller\MessengerController;
 use Application\Form\Messenger\DialogFilterForm;
 use Application\Form\Messenger\NewMessageForm;
+use Application\Model\Command\MessageCommandInterface;
 use Application\Model\Repository\DialogRepositoryInterface;
 use Application\Model\Repository\MessageRepositoryInterface;
 use Application\Model\Repository\PositionRepositoryInterface;
@@ -25,6 +26,7 @@ class MessengerControllerFactory implements FactoryInterface
             $container->get(UserRepositoryInterface::class),
             $container->get(PositionRepositoryInterface::class),
             $container->get(MessageRepositoryInterface::class),
+            $container->get(MessageCommandInterface::class),
         );
     }
 }

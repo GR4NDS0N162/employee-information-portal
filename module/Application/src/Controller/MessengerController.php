@@ -3,6 +3,7 @@
 namespace Application\Controller;
 
 use Application\Form;
+use Application\Model\Command\MessageCommandInterface;
 use Application\Model\Repository\DialogRepositoryInterface;
 use Application\Model\Repository\MessageRepositoryInterface;
 use Application\Model\Repository\PositionRepositoryInterface;
@@ -32,6 +33,10 @@ class MessengerController extends AbstractActionController
      * @var MessageRepositoryInterface
      */
     private $messageRepository;
+    /**
+     * @var MessageCommandInterface
+     */
+    private $messageCommand;
 
     public function __construct(
         $dialogFilterForm,
@@ -39,7 +44,8 @@ class MessengerController extends AbstractActionController
         $dialogRepository,
         $userRepository,
         $positionRepository,
-        $messageRepository
+        $messageRepository,
+        $messageCommand
     ) {
         $this->dialogFilterForm = $dialogFilterForm;
         $this->newMessageForm = $newMessageForm;
@@ -47,6 +53,7 @@ class MessengerController extends AbstractActionController
         $this->userRepository = $userRepository;
         $this->positionRepository = $positionRepository;
         $this->messageRepository = $messageRepository;
+        $this->messageCommand = $messageCommand;
     }
 
     public function viewDialogListAction()
