@@ -98,6 +98,27 @@ class MessengerController extends AbstractActionController
 
     public function getDialogsAction()
     {
+        $request = $this->getRequest();
+
+        if (!$request->isXmlHttpRequest() || !$request->isPost()) {
+            exit();
+        }
+
+        $data = AdminController::array_filter_recursive($request->getPost()->toArray());
+
+        $viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
+        $viewModel->setTemplate('partial/dialog-list.phtml');
+
+        $viewModel->setVariables([
+            'dialogList'     => $this->dialogRepository->getDialogList(
+                self::userId,
+                AdminController::getWhere($data)
+            ),
+            'userRepository' => $this->userRepository,
+        ]);
+
+        return $viewModel;
 
     }
 }
