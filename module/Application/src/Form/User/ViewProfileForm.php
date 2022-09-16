@@ -16,7 +16,7 @@ class ViewProfileForm extends ProfileForm
             'name'       => 'image',
             'type'       => Element\Image::class,
             'attributes' => [
-                'class' => 'user-photo-bg w-100 rounded-circle',
+                'class' => 'user-photo-bg w-100 rounded',
                 'alt'   => 'Фото пользователя'
             ],
         ], ['priority' => 100]);
