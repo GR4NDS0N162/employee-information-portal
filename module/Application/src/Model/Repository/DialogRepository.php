@@ -5,8 +5,9 @@ namespace Application\Model\Repository;
 use Application\Model\Command\DialogCommandInterface;
 use Application\Model\Entity\Dialog;
 use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\Sql\Expression;
+use Laminas\Db\Sql\Predicate;
 use Laminas\Db\Sql\Select;
-use Laminas\Db\Sql\Where;
 use Laminas\Hydrator\HydratorAwareInterface;
 
 class DialogRepository implements DialogRepositoryInterface
@@ -61,62 +62,31 @@ class DialogRepository implements DialogRepositoryInterface
 
     public function getDialogList($userId, $where = [])
     {
-        $select = new Select(['mem' => 'member']);
+        $select = new Select(['u' => 'user']);
         $select->columns([
-            'id' => 'mem.dialog_id',
+            'id'      => 'mem.dialog_id',
+            'buddyId' => 'u.id',
         ], false);
-        $select->where(['mem.user_id = ?' => $userId]);
-
-        /** @var int[] $dialogsIdOfUser */
-        $dialogsIdOfUser = array_column(
-            Extracter::extractValues(
-                $select,
-                $this->db,
-                $this->prototype->getHydrator(),
-                $this->prototype
+        $select->join(
+            ['mem' => 'member'],
+            new Predicate\Expression(
+                'u.id = mem.user_id AND ' .
+                'mem.dialog_id IN ( SELECT dialog_id FROM member ' .
+                'WHERE user_id = ? )', $userId
             ),
-            'id'
+            [],
+            Select::JOIN_LEFT
         );
+        $select->where(array_merge(['u.id != ?' => $userId], $where));
+        $select->order([
+            new Expression('ISNULL(mem.dialog_id)'),
+        ]);
 
-        /** @var Dialog[] $dialogsOfUser */
-        $dialogsOfUser = [];
-
-        if (!empty($dialogsIdOfUser)) {
-            $select = new Select(['mem' => 'member']);
-            $select->columns([
-                'buddyId' => 'mem.user_id',
-                'id'      => 'mem.dialog_id',
-            ], false);
-            $select->where([
-                'mem.user_id != ?' => $userId,
-                'mem.dialog_id'    => $dialogsIdOfUser,
-            ]);
-
-            /** @var Dialog[] $dialogsOfUser */
-            $dialogsOfUser = Extracter::extractValues(
-                $select,
-                $this->db,
-                $this->prototype->getHydrator(),
-                $this->prototype
-            );
-        }
-
-        /** @var int[] $buddiesId */
-        $buddiesId = array_column($dialogsOfUser, 'buddyId');
-
-        $possibleBuddies = $this->userRepository->findUsers();
-
-        if (!empty($buddiesId)) {
-            $possibleBuddies = $this->userRepository->findUsers(function (Where $where) use ($userId, $buddiesId) {
-                $where->notEqualTo('u.id', $userId);
-                $where->notIn('u.id', $buddiesId);
-            });
-        }
-
-        foreach ($possibleBuddies as $buddy) {
-            $dialogsOfUser[] = new Dialog($buddy->getId());
-        }
-
-        return $dialogsOfUser;
+        return Extracter::extractValues(
+            $select,
+            $this->db,
+            $this->prototype->getHydrator(),
+            $this->prototype
+        );
     }
 }
