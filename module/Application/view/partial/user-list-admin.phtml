@@ -17,11 +17,7 @@ $formName = $this->formName;
         <div class="card p-3">
             <div class="row g-3">
                 <div class="col-auto">
-                    <img src="<?= $this->escapeHtml(
-                        file_exists($user->getImage()) ?
-                            $user->getImagePath() :
-                            '/img/headshot-1024x1024.jpg'
-                    ); ?>"
+                    <img src="<?= $this->escapeHtml($user->getImagePath()); ?>"
                          class="user-photo img-fluid rounded"
                          alt="Фото пользователя">
                 </div>

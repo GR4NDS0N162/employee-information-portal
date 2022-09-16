@@ -419,6 +419,17 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
     /**
      * @return string|null
      */
+    public function getImagePath()
+    {
+        $pos = strpos($this->image, '/img/');
+        return file_exists($this->getImage()) ?
+            substr($this->image, $pos) :
+            '/img/headshot-1024x1024.jpg';
+    }
+
+    /**
+     * @return string|null
+     */
     public function getImage()
     {
         return $this->image;
@@ -430,15 +441,6 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
     public function setImage($image)
     {
         $this->image = $image;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getImagePath()
-    {
-        $pos = strpos($this->image, '/img/');
-        return substr($this->image, $pos);
     }
 
     /**

@@ -25,11 +25,7 @@ $this->inlineScript()
             <div class="col-12 col-md-auto">
                 <div class="row g-2 align-items-center">
                     <div class="col-auto order-md-1">
-                        <img src="<?= $this->escapeHtml(
-                            file_exists($buddyInfo->getImage()) ?
-                                $buddyInfo->getImagePath() :
-                                '/img/headshot-1024x1024.jpg'
-                        ); ?>"
+                        <img src="<?= $this->escapeHtml($buddyInfo->getImagePath()); ?>"
                              class="buddy-photo img-fluid rounded"
                              alt="Фото пользователя">
                     </div>
@@ -61,7 +57,7 @@ $this->inlineScript()
                 <div class="col-12">
                     <div class="row g-3">
                         <div class="col-auto">
-                            <img src="<?= $this->escapeHtml(file_exists($user->getImage()) ? $user->getImagePath() : '/img/headshot-1024x1024.jpg'); ?>"
+                            <img src="<?= $this->escapeHtml($user->getImagePath()); ?>"
                                  class="message-avatar img-fluid rounded"
                                  alt="Фото пользователя">
                         </div>
