@@ -52,25 +52,7 @@ $formName = $this->formName;
                         </div>
                         <div class="col-auto">
                             <span class="text-secondary">Возраст:</span>
-                            <?php $age = 'Не указан'; ?>
-                            <?php if ($user->getBirthday()): ?>
-                                <?php $age = (new DateTime($user->getBirthday()))->diff(new DateTime())->y; ?>
-                                <?php $ageLastNumber = $age % 10; ?>
-                                <?php $old = ''; ?>
-                                <?php $isExclusion = ($age % 100 >= 11) && ($age % 100 <= 14); ?>
-                                <?php if ($ageLastNumber == 1): ?>
-                                    <?php $old = "год"; ?>
-                                <?php elseif ($ageLastNumber == 0 || $ageLastNumber >= 5): ?>
-                                    <?php $old = "лет"; ?>
-                                <?php elseif ($ageLastNumber >= 2 && $ageLastNumber <= 4): ?>
-                                    <?php $old = "года"; ?>
-                                <?php endif; ?>
-                                <?php if ($isExclusion): ?>
-                                    <?php $old = "лет"; ?>
-                                <?php endif; ?>
-                                <?php $age .= ' ' . $old; ?>
-                            <?php endif; ?>
-                            <span class="age"><?= $this->escapeHtml($age); ?></span>
+                            <span class="age"><?= $this->escapeHtml($user->getAgeString()); ?></span>
                         </div>
                         <div class="col-auto">
                             <span class="text-secondary">Пол:</span>
