@@ -122,7 +122,7 @@ class User extends Profile
         ]);
         $this->inputFilter->add([
             'name'       => 'positionName',
-            'required'   => true,
+            'required'   => false,
             'validators' => [
                 [
                     'name'    => StringLength::class,
