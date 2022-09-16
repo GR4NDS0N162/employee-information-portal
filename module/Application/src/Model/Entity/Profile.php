@@ -3,6 +3,7 @@
 namespace Application\Model\Entity;
 
 use DateTime;
+use Laminas\Filter\File\RenameUpload;
 use Laminas\Filter\ToInt;
 use Laminas\Hydrator\ClassMethodsHydrator;
 use Laminas\Hydrator\HydratorAwareInterface;
@@ -199,7 +200,24 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
                 ],
             ],
         ]);
-        // TODO: Добавить inputFilter для фото пользователя
+        $this->inputFilter->add([
+            'name'     => 'imageFile',
+            'required' => false,
+            'filters'  => [
+                [
+                    'name'    => RenameUpload::class,
+                    'options' => [
+                        'target'          => './data/img/',
+                        'randomize'       => true,
+                        'use_upload_name' => true,
+                    ],
+                ],
+            ],
+        ]);
+        $this->inputFilter->add([
+            'name'     => 'image',
+            'required' => false,
+        ]);
         $this->inputFilter->add([
             'name'       => 'skype',
             'required'   => false,
