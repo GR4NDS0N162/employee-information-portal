@@ -287,9 +287,9 @@ class AdminController extends AbstractActionController
 
     public function editUserAction()
     {
-        $userId = (int)$this->params()->fromRoute('id');
+        $userId = (int)$this->params()->fromRoute('id', 0);
 
-        if (empty($userId)) {
+        if ($userId === 0) {
             return $this->redirect()->toRoute('admin/view-user-list');
         }
 
