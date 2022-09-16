@@ -12,6 +12,8 @@ use Application\Form\Messenger\NewMessageForm;
 use Application\Model\Entity\Message;
 use Application\Model\Repository\UserRepositoryInterface;
 
+$this->inlineScript()
+    ->appendFile($this->basePath('js/message-ajax.js'));
 ?>
 <div class="row gy-3">
     <div class="col-12">
