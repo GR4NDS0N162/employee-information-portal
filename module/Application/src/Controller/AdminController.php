@@ -312,7 +312,12 @@ class AdminController extends AbstractActionController
             return $viewModel;
         }
 
-        $this->userForm->setData($request->getPost());
+        $postData = array_merge_recursive(
+            $request->getPost()->toArray(),
+            $request->getFiles()->toArray()
+        );
+
+        $this->userForm->setData($postData);
 
         if (!$this->userForm->isValid()) {
             return $viewModel;
