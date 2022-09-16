@@ -137,6 +137,24 @@ return [
                                 ],
                             ],
                         ],
+                        'send-message'  => [
+                            'type'    => Literal::class,
+                            'options' => [
+                                'route'    => '/send',
+                                'defaults' => [
+                                    'action' => 'send-message',
+                                ],
+                            ],
+                        ],
+                        'load-messages' => [
+                            'type'    => Literal::class,
+                            'options' => [
+                                'route'    => '/load',
+                                'defaults' => [
+                                    'action' => 'load-messages',
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ],

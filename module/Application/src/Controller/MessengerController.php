@@ -128,4 +128,12 @@ class MessengerController extends AbstractActionController
         return $viewModel;
 
     }
+
+    public function sendMessageAction()
+    {
+    }
+
+    public function loadMessagesAction()
+    {
+    }
 }
