@@ -56,14 +56,7 @@ $formName = $this->formName;
                         </div>
                         <div class="col-auto">
                             <span class="text-secondary">Пол:</span>
-                            <?php if ($user->getGender() == 1): ?>
-                                <?php $gender = 'Мужской'; ?>
-                            <?php elseif ($user->getGender() == 2): ?>
-                                <?php $gender = 'Женский'; ?>
-                            <?php else: ?>
-                                <?php $gender = 'Не указан'; ?>
-                            <?php endif; ?>
-                            <span class="gender"><?= $this->escapeHtml($gender); ?></span>
+                            <span class="gender"><?= $this->escapeHtml($user->getGenderString()); ?></span>
                         </div>
                     </div>
                 </div>

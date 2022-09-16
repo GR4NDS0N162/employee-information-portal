@@ -44,14 +44,7 @@ $userRepository = $this->userRepository;
                         </div>
                         <div class="col-auto">
                             <span class="text-secondary">Пол:</span>
-                            <?php if ($buddy->getGender() == 1): ?>
-                                <?php $gender = 'Мужской'; ?>
-                            <?php elseif ($buddy->getGender() == 2): ?>
-                                <?php $gender = 'Женский'; ?>
-                            <?php else: ?>
-                                <?php $gender = 'Не указан'; ?>
-                            <?php endif; ?>
-                            <span class="gender"><?= $this->escapeHtml($gender); ?></span>
+                            <span class="gender"><?= $this->escapeHtml($buddy->getGenderString()); ?></span>
                         </div>
                     </div>
                 </div>

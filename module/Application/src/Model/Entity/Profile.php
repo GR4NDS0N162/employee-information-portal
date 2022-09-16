@@ -343,6 +343,19 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
         $this->gender = $gender;
     }
 
+    public function getGenderString()
+    {
+        if ($this->gender == 1) {
+            $gender = 'Мужской';
+        } elseif ($this->gender == 2) {
+            $gender = 'Женский';
+        } else {
+            $gender = 'Не указан';
+        }
+
+        return $gender;
+    }
+
     /**
      * @return string|null
      */
