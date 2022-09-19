@@ -2,6 +2,8 @@
 
 namespace Application;
 
+use Laminas\ServiceManager\Factory\InvokableFactory;
+
 return [
     'aliases'   => [
     ],
@@ -13,5 +15,6 @@ return [
         Form\User\UserFilterForm::class        => Factory\Form\UserFilterFormFactory::class,
         Form\Admin\AdminFilterForm::class      => Factory\Form\AdminFilterFormFactory::class,
         Form\Messenger\DialogFilterForm::class => Factory\Form\DialogFilterFormFactory::class,
+        Form\Messenger\NewMessageForm::class   => InvokableFactory::class,
     ],
 ];

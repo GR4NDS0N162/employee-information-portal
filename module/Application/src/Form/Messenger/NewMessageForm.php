@@ -8,6 +8,11 @@ use Laminas\Form\Form;
 
 class NewMessageForm extends Form
 {
+    public function __construct($name = 'NewMessageForm', array $options = [])
+    {
+        parent::__construct($name, $options);
+    }
+
     public function init()
     {
         parent::init();
