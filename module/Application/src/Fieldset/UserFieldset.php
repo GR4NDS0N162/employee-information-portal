@@ -10,6 +10,10 @@ use Laminas\Form\Element\Text;
 
 class UserFieldset extends ProfileFieldset
 {
+    const DEFAULT_CHECK_LABEL_ATTRIBUTES = [
+        'class' => 'form-check-label',
+    ];
+
     /**
      * @var PositionOptions
      */
@@ -43,9 +47,7 @@ class UserFieldset extends ProfileFieldset
             ],
             'options'    => [
                 'label'              => 'Сгенерировать пароль и отправить на почту',
-                'label_attributes'   => [
-                    'class' => 'form-check-label',
-                ],
+                'label_attributes'   => UserFieldset::DEFAULT_CHECK_LABEL_ATTRIBUTES,
                 'use_hidden_element' => false,
             ],
         ], ['priority' => -200]);

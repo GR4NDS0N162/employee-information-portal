@@ -41,9 +41,7 @@ class StatusFieldset extends Fieldset
                 ],
                 'options'    => [
                     'label'              => $status->getLabel(),
-                    'label_attributes'   => [
-                        'class' => 'form-check-label',
-                    ],
+                    'label_attributes'   => UserFieldset::DEFAULT_CHECK_LABEL_ATTRIBUTES,
                     'use_hidden_element' => false,
                 ],
             ]);
