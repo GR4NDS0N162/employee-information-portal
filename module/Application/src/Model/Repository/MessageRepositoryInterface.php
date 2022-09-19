@@ -9,8 +9,8 @@ interface MessageRepositoryInterface
 {
     /**
      * @param int      $dialogId
-     * @param int|null $limit
-     * @param int|null $offset
+     * @param int|null $lastMessageId
+     * @param int      $maxLoadCount
      *
      * @return Message[]
      */
