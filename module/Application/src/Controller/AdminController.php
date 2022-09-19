@@ -177,11 +177,11 @@ class AdminController extends AbstractActionController
     }
 
     /**
-     * @param $order1
+     * @param string $orderConfig
      *
      * @return string[]
      */
-    public static function getOrder($order1): array
+    public static function getOrder($orderConfig)
     {
         $order = [
             'u.surname',
@@ -191,11 +191,11 @@ class AdminController extends AbstractActionController
             'u.gender',
             'u.birthday DESC',
         ];
-        if ($order1 == 'position') {
+        if ($orderConfig == 'position') {
             array_unshift($order, 'pos.name');
-        } elseif ($order1 == 'age') {
+        } elseif ($orderConfig == 'age') {
             array_unshift($order, 'u.birthday DESC');
-        } elseif ($order1 == 'gender') {
+        } elseif ($orderConfig == 'gender') {
             array_unshift($order, 'u.gender');
         }
         $order = array_unique($order);
