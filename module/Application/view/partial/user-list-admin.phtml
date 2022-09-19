@@ -12,6 +12,7 @@ $userList = $this->userList;
 $formName = $this->formName;
 ?>
 
+<div class="notification">Список пуст.</div>
 <?php foreach ($userList as $user): ?>
     <div class="col-12<?= (!$user->getStatus()['active']) ? ' card-gray-bg' : ''; ?>">
         <div class="card p-3">

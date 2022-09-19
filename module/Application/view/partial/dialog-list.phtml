@@ -13,6 +13,7 @@ $dialogList = $this->dialogList;
 $userRepository = $this->userRepository;
 ?>
 
+<div class="notification">Список пуст.</div>
 <?php foreach ($dialogList as $dialog): ?>
     <?php $buddy = $userRepository->findUser($dialog->getBuddyId()); ?>
     <div class="col-12<?= (!$dialog->getId()) ? ' card-gray-bg' : ''; ?>">
