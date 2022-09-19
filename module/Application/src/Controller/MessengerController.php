@@ -136,5 +136,15 @@ class MessengerController extends AbstractActionController
 
     public function loadMessagesAction()
     {
+        $request = $this->getRequest();
+
+        if (!$request->isXmlHttpRequest() || !$request->isPost()) {
+            exit();
+        }
+
+        $post = $request->getPost();
+        $lastMessageId = $post->get('lastMessageId', 0);
+
+        exit();
     }
 }
