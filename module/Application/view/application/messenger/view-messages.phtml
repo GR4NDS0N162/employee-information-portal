@@ -1,19 +1,22 @@
 <?php
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
- * @var NewMessageForm                    $newMessageForm
- * @var Message[]                         $messages
- * @var UserRepositoryInterface           $userRepository
- * @var Application\Model\Entity\User     $userInfo
- * @var Application\Model\Entity\User     $buddyInfo
  */
 
 use Application\Form\Messenger\NewMessageForm;
-use Application\Model\Entity\Message;
-use Application\Model\Repository\UserRepositoryInterface;
+use Application\Model\Entity\User;
 
 $this->inlineScript()
     ->appendFile($this->basePath('js/message-ajax.js'));
+
+/** @var NewMessageForm $newMessageForm */
+$newMessageForm = $this->newMessageForm;
+
+/** @var User $userInfo */
+$userInfo = $this->userInfo;
+
+/** @var User $buddyInfo */
+$buddyInfo = $this->buddyInfo;
 ?>
 <div class="row gy-3">
     <div class="col-12">
@@ -46,54 +49,9 @@ $this->inlineScript()
         <?= $this->userForm()->render($newMessageForm); ?>
     </div>
     <div class="col-12">
-        <div class="row gy-3">
+        <div class="row gy-3"
+             id="message-list">
             <div class="notification">Сообщений нет.</div>
-            <?php foreach ($messages as $message): ?>
-                <?php if ($message->getUserId() == $userInfo->getId()) {
-                    $user = $userInfo;
-                } else {
-                    $user = $buddyInfo;
-                } ?>
-                <div class="col-12">
-                    <div class="row g-3">
-                        <div class="col-auto">
-                            <img src="<?= $this->escapeHtml($user->getImagePath()); ?>"
-                                 class="message-avatar img-fluid rounded"
-                                 alt="Фото пользователя">
-                        </div>
-                        <div class="col">
-                            <div class="row g-1">
-                                <div class="col-12">
-                                    <div class="row gx-2">
-                                        <div class="col-auto">
-                                <span class="h6"><?= $this->escapeHtml(
-                                        implode(' ', [
-                                            $user->getSurname() ?: '—',
-                                            $user->getName() ?: '—',
-                                            $user->getPatronymic() ?: '—',
-                                        ])
-                                    ); ?></span>
-                                        </div>
-                                        <div class="col-auto">
-                                            <span class="small"><?= $this->escapeHtml($message->getCreatedAt()); ?></span>
-                                        </div>
-                                        <?php if ($message->getOpenedAt()): ?>
-                                            <div class="col-auto">
-                                                <span class="small text-muted"><?= $this->escapeHtml($message->getOpenedAt()); ?></span>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <p class="m-0">
-                                        <?= $this->escapeHtml($message->getContent()); ?>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php endforeach; ?>
         </div>
     </div>
     <div class="col-12 d-flex justify-content-center">

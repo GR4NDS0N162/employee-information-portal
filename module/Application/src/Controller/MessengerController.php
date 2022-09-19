@@ -89,14 +89,9 @@ class MessengerController extends AbstractActionController
 
         $userInfo = $this->userRepository->findUser(self::userId);
         $buddyInfo = $this->userRepository->findUser($buddyId);
-        $messages = $this->messageRepository->findMessagesOfDialog(
-            $this->dialogRepository->getDialogId(self::userId, $buddyId)
-        );
 
         $viewModel->setVariables([
             'newMessageForm' => $this->newMessageForm,
-            'messages'       => $messages,
-            'userRepository' => $this->userRepository,
             'userInfo'       => $userInfo,
             'buddyInfo'      => $buddyInfo,
         ]);
