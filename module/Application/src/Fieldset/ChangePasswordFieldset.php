@@ -62,9 +62,10 @@ class ChangePasswordFieldset extends Fieldset
             'name'       => 'passwordCheck',
             'type'       => Password::class,
             'attributes' => [
-                'class'       => 'form-control',
-                'placeholder' => 'qwerty123',
-                'required'    => 'required',
+                'class'        => 'form-control',
+                'placeholder'  => 'qwerty123',
+                'required'     => 'required',
+                'autocomplete' => 'new-password',
             ],
             'options'    => [
                 'label'            => 'Подтверждение пароля',
