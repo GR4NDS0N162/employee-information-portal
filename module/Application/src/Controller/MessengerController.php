@@ -46,6 +46,15 @@ class MessengerController extends AbstractActionController
      */
     private $messageCommand;
 
+    /**
+     * @param DialogFilterForm            $dialogFilterForm
+     * @param NewMessageForm              $newMessageForm
+     * @param DialogRepositoryInterface   $dialogRepository
+     * @param UserRepositoryInterface     $userRepository
+     * @param PositionRepositoryInterface $positionRepository
+     * @param MessageRepositoryInterface  $messageRepository
+     * @param MessageCommandInterface     $messageCommand
+     */
     public function __construct(
         $dialogFilterForm,
         $newMessageForm,
