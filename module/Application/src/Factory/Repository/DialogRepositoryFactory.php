@@ -17,7 +17,6 @@ class DialogRepositoryFactory implements FactoryInterface
         return new DialogRepository(
             $container->get(AdapterInterface::class),
             new Dialog(),
-            $container->get(UserRepositoryInterface::class),
             $container->get(DialogCommandInterface::class),
         );
     }

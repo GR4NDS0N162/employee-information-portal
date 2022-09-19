@@ -21,10 +21,6 @@ class DialogRepository implements DialogRepositoryInterface
      */
     private $prototype;
     /**
-     * @var UserRepositoryInterface
-     */
-    private $userRepository;
-    /**
      * @var DialogCommandInterface
      */
     private $dialogCommand;
@@ -32,17 +28,14 @@ class DialogRepository implements DialogRepositoryInterface
     /**
      * @param AdapterInterface              $db
      * @param Dialog|HydratorAwareInterface $prototype
-     * @param UserRepositoryInterface       $userRepository
      */
     public function __construct(
         $db,
         $prototype,
-        $userRepository,
         $dialogCommand
     ) {
         $this->db = $db;
         $this->prototype = $prototype;
-        $this->userRepository = $userRepository;
         $this->dialogCommand = $dialogCommand;
     }
 
