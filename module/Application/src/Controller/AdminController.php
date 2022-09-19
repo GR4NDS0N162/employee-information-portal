@@ -202,50 +202,61 @@ class AdminController extends AbstractActionController
         return $order;
     }
 
-    public static function getWhere($where1): array
+    /**
+     * @param array $whereConfig
+     *
+     * @return array
+     */
+    public static function getWhere($whereConfig)
     {
-        $whereArr = $where1;
         $where = [];
-        if (isset($whereArr['positionId'])) {
+
+        if (isset($whereConfig['positionId'])) {
             $where[] = new Expression(
                 'u.position_id = ?',
-                [$whereArr['positionId']]
+                [$whereConfig['positionId']]
             );
         }
-        if (isset($whereArr['gender'])) {
+
+        if (isset($whereConfig['gender'])) {
             $where[] = new Expression(
                 'u.gender = ?',
-                [$whereArr['gender']]
+                [$whereConfig['gender']]
             );
         }
-        if (isset($whereArr['active'])) {
-            $sign = $whereArr['active'] == '1' ? 'IN' : 'NOT IN';
+
+        if (isset($whereConfig['active'])) {
+            $sign = $whereConfig['active'] == '1' ? 'IN' : 'NOT IN';
             $where[] = new Expression('u.id ' . $sign . ' ( SELECT us.user_id FROM user_status us WHERE us.status_id = 2 )');
         }
-        if (isset($whereArr['admin'])) {
-            $sign = $whereArr['admin'] == '1' ? 'IN' : 'NOT IN';
+
+        if (isset($whereConfig['admin'])) {
+            $sign = $whereConfig['admin'] == '1' ? 'IN' : 'NOT IN';
             $where[] = new Expression('u.id ' . $sign . ' ( SELECT us.user_id FROM user_status us WHERE us.status_id = 1 )');
         }
-        if (isset($whereArr['age'])) {
-            if (isset($whereArr['age']['min'])) {
-                $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) >= ?', [$whereArr['age']['min']]);
+
+        if (isset($whereConfig['age'])) {
+            if (isset($whereConfig['age']['min'])) {
+                $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) >= ?', [$whereConfig['age']['min']]);
             }
-            if (isset($whereArr['age']['max'])) {
-                $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) <= ?', [$whereArr['age']['max']]);
+            if (isset($whereConfig['age']['max'])) {
+                $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) <= ?', [$whereConfig['age']['max']]);
             }
         }
+
         $empty = '-';
-        if (isset($whereArr['fullnamePhone'])) {
-            $filterArr = array_map('trim', explode(',', $whereArr['fullnamePhone']));
+
+        if (isset($whereConfig['fullnamePhone'])) {
+            $filterArr = array_map('trim', explode(',', $whereConfig['fullnamePhone']));
             if (count($filterArr) == 2) {
                 list($fullname, $phone) = $filterArr;
-                $where = self::getTextareaFilter($fullname, $empty, $where, $phone);
+                $where = self::getTextareaFilter($where, $fullname, $phone, $empty);
             }
-        } elseif (isset($whereArr['fullnamePhoneEmail'])) {
-            $filterArr = array_map('trim', explode(',', $whereArr['fullnamePhoneEmail']));
+        } elseif (isset($whereConfig['fullnamePhoneEmail'])) {
+            $filterArr = array_map('trim', explode(',', $whereConfig['fullnamePhoneEmail']));
             if (count($filterArr) == 3) {
                 list($fullname, $phone, $email) = $filterArr;
-                $where = self::getTextareaFilter($fullname, $empty, $where, $phone);
+                $where = self::getTextareaFilter($where, $fullname, $phone, $empty);
 
                 if ($email != $empty) {
                     $where[] = new Expression(
@@ -255,6 +266,7 @@ class AdminController extends AbstractActionController
                 }
             }
         }
+
         return $where;
     }
 
