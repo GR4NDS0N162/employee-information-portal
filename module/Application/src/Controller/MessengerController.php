@@ -14,6 +14,7 @@ use Laminas\View\Model\ViewModel;
 class MessengerController extends AbstractActionController
 {
     public const userId = 1;
+    public const maxLoadCount = 5;
 
     private $dialogFilterForm;
     private $newMessageForm;
