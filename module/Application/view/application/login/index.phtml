@@ -10,7 +10,6 @@ use Application\Form\Login\LoginForm;
 use Application\Form\Login\RecoverForm;
 use Application\Form\Login\SignUpForm;
 
-$this->formRow()->setPartial('partial/floating-element.phtml');
 $this->inlineScript()
     ->appendFile($this->basePath('js/password-form-validation.js'))
     ->appendFile($this->basePath('js/login-signup-recover-validation.js'));
