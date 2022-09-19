@@ -1,3 +1,5 @@
+const loadBtn = $(`#load`);
+
 let lastMessageId;
 
 function loadMessages()
