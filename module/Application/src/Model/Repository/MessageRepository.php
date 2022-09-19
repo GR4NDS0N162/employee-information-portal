@@ -46,7 +46,13 @@ class MessageRepository implements MessageRepositoryInterface
             'content'   => 'c.content',
         ], false);
         $select->join(['c' => 'content'], 'mes.id = c.message_id');
-        $select->where(['mes.dialog_id = ?' => $dialogId]);
+
+        $where = ['mes.dialog_id = ?' => $dialogId];
+        if (isset($lastMessageId)) {
+            $where['mes.id < ?'] = $lastMessageId;
+        }
+        $select->where($where);
+
         $select->order(['mes.created_at DESC', 'mes.id DESC']);
         $select->limit($maxLoadCount);
 
