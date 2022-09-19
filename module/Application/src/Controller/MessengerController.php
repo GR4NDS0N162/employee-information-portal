@@ -168,6 +168,8 @@ class MessengerController extends AbstractActionController
             $lastMessageId,
         );
 
+        $messageList = $this->messageCommand->readBy(self::userId, $messageList);
+
         $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
         $viewModel->setTemplate('partial/message-list.phtml');
