@@ -45,7 +45,11 @@ class MessageRepository implements MessageRepositoryInterface
             'openedAt'  => 'mes.opened_at',
             'content'   => 'c.content',
         ], false);
-        $select->join(['c' => 'content'], 'mes.id = c.message_id');
+        $select->join(
+            ['c' => 'content'],
+            'mes.id = c.message_id',
+            [],
+        );
 
         $where = ['mes.dialog_id = ?' => $dialogId];
         if (isset($lastMessageId)) {
