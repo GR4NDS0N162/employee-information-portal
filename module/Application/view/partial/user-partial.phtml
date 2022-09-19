@@ -6,16 +6,20 @@
 use Application\Helper\FieldsetMapper;
 use Laminas\Form\Element;
 
-$element = $this->element;
 /** @var Laminas\Form\ElementInterface $element */
-$label = $this->label;
+$element = $this->element;
+
 /** @var string|null $label */
-$labelAttributes = $this->labelAttributes;
+$label = $this->label;
+
 /** @var array|null $labelAttributes */
-$labelPosition = $this->labelPosition;
+$labelAttributes = $this->labelAttributes;
+
 /** @var string|null $labelPosition */
-$renderErrors = $this->renderErrors;
+$labelPosition = $this->labelPosition;
+
 /** @var bool $renderErrors */
+$renderErrors = $this->renderErrors;
 ?>
 
 <?php if ($element->hasAttribute(FieldsetMapper::KEY)): ?>

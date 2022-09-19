@@ -41,7 +41,9 @@ $userRepository = $this->userRepository;
                             </div>
                             <?php if ($message->getOpenedAt()): ?>
                                 <div class="col-auto">
-                                    <span class="small text-muted"><?= $this->escapeHtml($message->getOpenedAt()); ?></span>
+                                    <span class="small text-muted"><?= $this->escapeHtml(
+                                            $message->getOpenedAt()
+                                        ); ?></span>
                                 </div>
                             <?php endif; ?>
                         </div>

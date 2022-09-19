@@ -226,12 +226,16 @@ class AdminController extends AbstractActionController
 
         if (isset($whereConfig['active'])) {
             $sign = $whereConfig['active'] == '1' ? 'IN' : 'NOT IN';
-            $where[] = new Expression('u.id ' . $sign . ' ( SELECT us.user_id FROM user_status us WHERE us.status_id = 2 )');
+            $where[] = new Expression(
+                'u.id ' . $sign . ' ( SELECT us.user_id FROM user_status us WHERE us.status_id = 2 )'
+            );
         }
 
         if (isset($whereConfig['admin'])) {
             $sign = $whereConfig['admin'] == '1' ? 'IN' : 'NOT IN';
-            $where[] = new Expression('u.id ' . $sign . ' ( SELECT us.user_id FROM user_status us WHERE us.status_id = 1 )');
+            $where[] = new Expression(
+                'u.id ' . $sign . ' ( SELECT us.user_id FROM user_status us WHERE us.status_id = 1 )'
+            );
         }
 
         if (isset($whereConfig['age'])) {

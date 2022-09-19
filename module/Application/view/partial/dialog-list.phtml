@@ -51,10 +51,14 @@ $userRepository = $this->userRepository;
                 </div>
                 <div class="col-auto d-flex align-items-center">
                     <?php if ($dialog->getId()): ?>
-                        <a href="<?= $this->url('user/view-dialog-list/view-messages', ['id' => $dialog->getBuddyId()]); ?>"
+                        <a href="<?= $this->url('user/view-dialog-list/view-messages', [
+                            'id' => $dialog->getBuddyId(),
+                        ]); ?>"
                            class="btn btn-primary">К диалогу</a>
                     <?php else: ?>
-                        <a href="<?= $this->url('user/view-dialog-list/view-messages', ['id' => $dialog->getBuddyId()]); ?>"
+                        <a href="<?= $this->url('user/view-dialog-list/view-messages', [
+                            'id' => $dialog->getBuddyId(),
+                        ]); ?>"
                            class="btn btn-success">Создать диалог</a>
                     <?php endif; ?>
                 </div>
