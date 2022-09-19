@@ -70,7 +70,7 @@ class UserRepository implements UserRepositoryInterface
     {
         if (is_int($identifier)) {
             return $this->findUserById($identifier);
-        } else if ($identifier instanceof Email) {
+        } elseif ($identifier instanceof Email) {
             return $this->findUserByEmail($identifier);
         } else {
             throw new InvalidArgumentException(
