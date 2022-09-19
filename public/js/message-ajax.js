@@ -1,6 +1,7 @@
 const loadBtn = $(`#load`);
 const newMessageForm = $(`#NewMessageForm`);
 const messageContent = $(`#NewMessageForm input[name="message"]`);
+const $messageList = $(`#message-list`);
 
 let lastMessageId;
 
@@ -30,12 +31,17 @@ function loadMessages()
         },
     }).done((data) =>
     {
-        $(`#message-list`)[0].innerHTML += data;
+        data = data.trim();
 
-        let lastMessage = $(`#message-list > [message_id]:last-child`);
+        if (data) {
+            $messageList[0].innerHTML += data;
+            let lastMessage = $(`#message-list > [message_id]:last-child`);
 
-        if (lastMessage.length) {
-            lastMessageId = parseInt(lastMessage[0].getAttribute('message_id'));
+            if (lastMessage.length) {
+                lastMessageId = parseInt(lastMessage[0].getAttribute('message_id'));
+            }
+        } else {
+            $messageList[0].innerHTML += `<div class="notification">Загружены последние сообщения.</div>`
         }
     });
 }
