@@ -3,6 +3,7 @@
 namespace Application\Form\Messenger;
 
 use Application\Fieldset\AgeFilterFieldset;
+use Application\Fieldset\ProfileFieldset;
 use Application\Helper\FieldsetMapper;
 use Application\Model\Options\GenderOptions;
 use Application\Model\Options\PositionOptions;
@@ -40,9 +41,7 @@ class DialogFilterForm extends Form
             ],
             'options'    => [
                 'label'            => 'Должность',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
                 'options'          => $this->positionOptions->getEnabledOptions(),
             ],
         ]);
@@ -55,9 +54,7 @@ class DialogFilterForm extends Form
             ],
             'options'    => [
                 'label'            => 'Пол',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
                 'options'          => GenderOptions::getOptions(),
             ],
         ]);
@@ -83,9 +80,7 @@ class DialogFilterForm extends Form
             ],
             'options'    => [
                 'label'            => 'ФИО, телефон',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 

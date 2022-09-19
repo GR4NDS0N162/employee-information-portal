@@ -2,6 +2,7 @@
 
 namespace Application\Form\Login;
 
+use Application\Fieldset\ProfileFieldset;
 use Application\Helper\FieldsetMapper;
 use Application\Model\Options\PositionOptions;
 use Laminas\Form\Element;
@@ -40,9 +41,7 @@ class SignUpForm extends Form
             ],
             'options'    => [
                 'label'            => 'E-mail',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
@@ -55,9 +54,7 @@ class SignUpForm extends Form
             ],
             'options'    => [
                 'label'            => 'Должность',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
                 'options'          => $this->positionOptions->getDisabledOptions(),
             ],
         ]);
@@ -76,9 +73,7 @@ class SignUpForm extends Form
             ],
             'options'    => [
                 'label'            => 'Пароль',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
@@ -93,9 +88,7 @@ class SignUpForm extends Form
             ],
             'options'    => [
                 'label'            => 'Подтверждение пароля',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 

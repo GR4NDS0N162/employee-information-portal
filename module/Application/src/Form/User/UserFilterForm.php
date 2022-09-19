@@ -3,6 +3,7 @@
 namespace Application\Form\User;
 
 use Application\Fieldset\AgeFilterFieldset;
+use Application\Fieldset\ProfileFieldset;
 use Application\Helper\FieldsetMapper;
 use Application\Model\Options\GenderOptions;
 use Application\Model\Options\PositionOptions;
@@ -45,9 +46,7 @@ class UserFilterForm extends Form
             ],
             'options'    => [
                 'label'            => 'Должность',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
                 'options'          => $this->positionOptions->getEnabledOptions(),
             ],
         ]);
@@ -60,9 +59,7 @@ class UserFilterForm extends Form
             ],
             'options'    => [
                 'label'            => 'Пол',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
                 'options'          => GenderOptions::getOptions(),
             ],
         ]);
@@ -88,9 +85,7 @@ class UserFilterForm extends Form
             ],
             'options'    => [
                 'label'            => 'ФИО, телефон, email',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
@@ -116,9 +111,7 @@ class UserFilterForm extends Form
             ],
             'options'    => [
                 'label'            => 'Активен',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
                 'options'          => YesNoOptions::getActiveOptions(),
             ],
         ]);

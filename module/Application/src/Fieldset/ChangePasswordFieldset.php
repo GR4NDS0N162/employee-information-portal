@@ -32,9 +32,7 @@ class ChangePasswordFieldset extends Fieldset
             ],
             'options'    => [
                 'label'            => 'Текущий пароль',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
@@ -52,9 +50,7 @@ class ChangePasswordFieldset extends Fieldset
             ],
             'options'    => [
                 'label'            => 'Новый пароль',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
@@ -69,9 +65,7 @@ class ChangePasswordFieldset extends Fieldset
             ],
             'options'    => [
                 'label'            => 'Подтверждение пароля',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
     }

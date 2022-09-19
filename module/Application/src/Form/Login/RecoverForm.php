@@ -2,6 +2,7 @@
 
 namespace Application\Form\Login;
 
+use Application\Fieldset\ProfileFieldset;
 use Application\Helper\FieldsetMapper;
 use Laminas\Form\Element;
 use Laminas\Form\Form;
@@ -26,9 +27,7 @@ class RecoverForm extends Form
             ],
             'options'    => [
                 'label'            => 'E-mail',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 

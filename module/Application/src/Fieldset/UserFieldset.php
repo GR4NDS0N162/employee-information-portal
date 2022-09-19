@@ -59,9 +59,7 @@ class UserFieldset extends ProfileFieldset
             ],
             'options'    => [
                 'label'            => 'Должность',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
                 'options'          => $this->positionOptions->getOptions(),
             ],
         ]);
@@ -79,9 +77,7 @@ class UserFieldset extends ProfileFieldset
             ],
             'options'    => [
                 'label'            => 'Пароль',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 

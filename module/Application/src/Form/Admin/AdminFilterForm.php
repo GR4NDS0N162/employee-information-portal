@@ -2,6 +2,7 @@
 
 namespace Application\Form\Admin;
 
+use Application\Fieldset\ProfileFieldset;
 use Application\Form\User\UserFilterForm;
 use Application\Helper\FieldsetMapper;
 use Application\Model\Options\YesNoOptions;
@@ -28,9 +29,7 @@ class AdminFilterForm extends UserFilterForm
             ],
             'options'    => [
                 'label'            => 'Администратор',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
                 'options'          => YesNoOptions::getAdminOptions(),
             ],
         ]);

@@ -33,7 +33,7 @@ class ProfileFieldset extends Fieldset
             ],
             'options'    => [
                 'label'            => 'Фото',
-                'label_attributes' => self::DEFAULT_LABEL_ATTRIBUTES,
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
@@ -46,7 +46,7 @@ class ProfileFieldset extends Fieldset
             ],
             'options'    => [
                 'label'            => 'Фамилия',
-                'label_attributes' => self::DEFAULT_LABEL_ATTRIBUTES,
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
@@ -59,7 +59,7 @@ class ProfileFieldset extends Fieldset
             ],
             'options'    => [
                 'label'            => 'Имя',
-                'label_attributes' => self::DEFAULT_LABEL_ATTRIBUTES,
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
@@ -72,7 +72,7 @@ class ProfileFieldset extends Fieldset
             ],
             'options'    => [
                 'label'            => 'Отчество',
-                'label_attributes' => self::DEFAULT_LABEL_ATTRIBUTES,
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
@@ -84,7 +84,7 @@ class ProfileFieldset extends Fieldset
             ],
             'options'    => [
                 'label'            => 'Пол',
-                'label_attributes' => self::DEFAULT_LABEL_ATTRIBUTES,
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
                 'options'          => GenderOptions::getOptions(),
             ],
         ]);
@@ -97,7 +97,7 @@ class ProfileFieldset extends Fieldset
             ],
             'options'    => [
                 'label'            => 'Дата рождения',
-                'label_attributes' => self::DEFAULT_LABEL_ATTRIBUTES,
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
@@ -110,7 +110,7 @@ class ProfileFieldset extends Fieldset
             ],
             'options'    => [
                 'label'            => 'Skype',
-                'label_attributes' => self::DEFAULT_LABEL_ATTRIBUTES,
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
