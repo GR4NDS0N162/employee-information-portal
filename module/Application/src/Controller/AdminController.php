@@ -229,10 +229,10 @@ class AdminController extends AbstractActionController
         }
         if (isset($whereArr['age'])) {
             if (isset($whereArr['age']['min'])) {
-                $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) > ?', [$whereArr['age']['min']]);
+                $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) >= ?', [$whereArr['age']['min']]);
             }
             if (isset($whereArr['age']['max'])) {
-                $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) < ?', [$whereArr['age']['max']]);
+                $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) <= ?', [$whereArr['age']['max']]);
             }
         }
         $empty = '-';
