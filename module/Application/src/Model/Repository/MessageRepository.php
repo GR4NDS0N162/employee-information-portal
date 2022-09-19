@@ -2,6 +2,7 @@
 
 namespace Application\Model\Repository;
 
+use Application\Controller\MessengerController;
 use Application\Model\Entity\Message;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Select;
@@ -32,7 +33,8 @@ class MessageRepository implements MessageRepositoryInterface
 
     public function findMessagesOfDialog(
         $dialogId,
-        $lastMessageId = null
+        $lastMessageId = null,
+        $maxLoadCount = MessengerController::maxLoadCount
     ) {
         $select = new Select(['mes' => 'message']);
         $select->columns([

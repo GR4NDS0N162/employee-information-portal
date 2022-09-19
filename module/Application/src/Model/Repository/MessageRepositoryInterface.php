@@ -2,6 +2,7 @@
 
 namespace Application\Model\Repository;
 
+use Application\Controller\MessengerController;
 use Application\Model\Entity\Message;
 
 interface MessageRepositoryInterface
@@ -15,6 +16,7 @@ interface MessageRepositoryInterface
      */
     public function findMessagesOfDialog(
         $dialogId,
-        $lastMessageId = null
+        $lastMessageId = null,
+        $maxLoadCount = MessengerController::maxLoadCount
     );
 }
