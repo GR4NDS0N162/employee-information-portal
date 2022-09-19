@@ -20,31 +20,31 @@ class AdminController extends AbstractActionController
     /**
      * @var Form\PositionForm
      */
-    private $positionForm;
+    private Form\PositionForm $positionForm;
     /**
      * @var Form\UserForm
      */
-    private $userForm;
+    private Form\UserForm $userForm;
     /**
      * @var Form\AdminFilterForm
      */
-    private $adminFilterForm;
+    private Form\AdminFilterForm $adminFilterForm;
     /**
      * @var UserRepositoryInterface
      */
-    private $userRepository;
+    private UserRepositoryInterface $userRepository;
     /**
      * @var PositionRepositoryInterface
      */
-    private $positionRepository;
+    private PositionRepositoryInterface $positionRepository;
     /**
      * @var UserCommandInterface
      */
-    private $userCommand;
+    private UserCommandInterface $userCommand;
     /**
      * @var PositionCommandInterface
      */
-    private $positionCommand;
+    private PositionCommandInterface $positionCommand;
 
     /**
      * @param Form\PositionForm           $positionForm
@@ -56,13 +56,13 @@ class AdminController extends AbstractActionController
      * @param PositionCommandInterface    $positionCommand
      */
     public function __construct(
-        $positionForm,
-        $userForm,
-        $adminFilterForm,
-        $userRepository,
-        $positionRepository,
-        $userCommand,
-        $positionCommand
+        Form\PositionForm           $positionForm,
+        Form\UserForm               $userForm,
+        Form\AdminFilterForm        $adminFilterForm,
+        UserRepositoryInterface     $userRepository,
+        PositionRepositoryInterface $positionRepository,
+        UserCommandInterface        $userCommand,
+        PositionCommandInterface    $positionCommand
     ) {
         $this->positionForm = $positionForm;
         $this->userForm = $userForm;

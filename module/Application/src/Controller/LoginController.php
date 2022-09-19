@@ -14,19 +14,19 @@ class LoginController extends AbstractActionController
     /**
      * @var Login\LoginForm
      */
-    private $loginForm;
+    private Login\LoginForm $loginForm;
     /**
      * @var Login\SignUpForm
      */
-    private $signUpForm;
+    private Login\SignUpForm $signUpForm;
     /**
      * @var Login\RecoverForm
      */
-    private $recoverForm;
+    private Login\RecoverForm $recoverForm;
     /**
      * @var UserCommandInterface
      */
-    private $userCommand;
+    private UserCommandInterface $userCommand;
 
     /**
      * @param Login\LoginForm      $loginForm
@@ -35,10 +35,10 @@ class LoginController extends AbstractActionController
      * @param UserCommandInterface $userCommand
      */
     public function __construct(
-        $loginForm,
-        $signUpForm,
-        $recoverForm,
-        $userCommand
+        Login\LoginForm      $loginForm,
+        Login\SignUpForm     $signUpForm,
+        Login\RecoverForm    $recoverForm,
+        UserCommandInterface $userCommand
     ) {
         $this->loginForm = $loginForm;
         $this->signUpForm = $signUpForm;

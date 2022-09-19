@@ -20,31 +20,31 @@ class MessengerController extends AbstractActionController
     /**
      * @var DialogFilterForm
      */
-    private $dialogFilterForm;
+    private DialogFilterForm $dialogFilterForm;
     /**
      * @var NewMessageForm
      */
-    private $newMessageForm;
+    private NewMessageForm $newMessageForm;
     /**
      * @var DialogRepositoryInterface
      */
-    private $dialogRepository;
+    private DialogRepositoryInterface $dialogRepository;
     /**
      * @var UserRepositoryInterface
      */
-    private $userRepository;
+    private UserRepositoryInterface $userRepository;
     /**
      * @var PositionRepositoryInterface
      */
-    private $positionRepository;
+    private PositionRepositoryInterface $positionRepository;
     /**
      * @var MessageRepositoryInterface
      */
-    private $messageRepository;
+    private MessageRepositoryInterface $messageRepository;
     /**
      * @var MessageCommandInterface
      */
-    private $messageCommand;
+    private MessageCommandInterface $messageCommand;
 
     /**
      * @param DialogFilterForm            $dialogFilterForm
@@ -56,13 +56,13 @@ class MessengerController extends AbstractActionController
      * @param MessageCommandInterface     $messageCommand
      */
     public function __construct(
-        $dialogFilterForm,
-        $newMessageForm,
-        $dialogRepository,
-        $userRepository,
-        $positionRepository,
-        $messageRepository,
-        $messageCommand
+        DialogFilterForm            $dialogFilterForm,
+        NewMessageForm              $newMessageForm,
+        DialogRepositoryInterface   $dialogRepository,
+        UserRepositoryInterface     $userRepository,
+        PositionRepositoryInterface $positionRepository,
+        MessageRepositoryInterface  $messageRepository,
+        MessageCommandInterface     $messageCommand
     ) {
         $this->dialogFilterForm = $dialogFilterForm;
         $this->newMessageForm = $newMessageForm;

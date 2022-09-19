@@ -19,31 +19,31 @@ class UserController extends AbstractActionController
     /**
      * @var Form\ProfileForm
      */
-    private $profileForm;
+    private Form\ProfileForm $profileForm;
     /**
      * @var Form\ViewProfileForm
      */
-    private $viewProfileForm;
+    private Form\ViewProfileForm $viewProfileForm;
     /**
      * @var Form\UserFilterForm
      */
-    private $userFilterForm;
+    private Form\UserFilterForm $userFilterForm;
     /**
      * @var Form\ChangePasswordForm
      */
-    private $changePasswordForm;
+    private Form\ChangePasswordForm $changePasswordForm;
     /**
      * @var UserRepositoryInterface
      */
-    private $userRepository;
+    private UserRepositoryInterface $userRepository;
     /**
      * @var PositionRepositoryInterface
      */
-    private $positionRepository;
+    private PositionRepositoryInterface $positionRepository;
     /**
      * @var UserCommandInterface
      */
-    private $userCommand;
+    private UserCommandInterface $userCommand;
 
     /**
      * @param Form\ProfileForm            $profileForm
@@ -55,13 +55,13 @@ class UserController extends AbstractActionController
      * @param UserCommandInterface        $userCommand
      */
     public function __construct(
-        $profileForm,
-        $viewProfileForm,
-        $userFilterForm,
-        $changePasswordForm,
-        $userRepository,
-        $positionRepository,
-        $userCommand
+        Form\ProfileForm            $profileForm,
+        Form\ViewProfileForm        $viewProfileForm,
+        Form\UserFilterForm         $userFilterForm,
+        Form\ChangePasswordForm     $changePasswordForm,
+        UserRepositoryInterface     $userRepository,
+        PositionRepositoryInterface $positionRepository,
+        UserCommandInterface        $userCommand
     ) {
         $this->profileForm = $profileForm;
         $this->viewProfileForm = $viewProfileForm;
