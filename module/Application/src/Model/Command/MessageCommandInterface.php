@@ -12,4 +12,12 @@ interface MessageCommandInterface
      * @return void
      */
     public function sendMessage($message);
+
+    /**
+     * @param int       $userId
+     * @param Message[] $messageList
+     *
+     * @return Message[]
+     */
+    public function readBy($userId, $messageList);
 }

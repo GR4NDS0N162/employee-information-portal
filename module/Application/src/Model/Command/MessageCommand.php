@@ -38,4 +38,9 @@ class MessageCommand implements MessageCommandInterface
         ]);
         Executer::executeSql($insert, $this->db);
     }
+
+    public function readBy($userId, $messageList)
+    {
+        // TODO: Implement readBy() method.
+    }
 }
