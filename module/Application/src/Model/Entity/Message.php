@@ -40,19 +40,19 @@ class Message implements HydratorAwareInterface
     private $hydrator;
 
     /**
-     * @param int|null    $id
-     * @param int         $userId
      * @param int         $dialogId
+     * @param int         $userId
      * @param string      $createdAt
-     * @param string|null $openedAt
      * @param string      $content
+     * @param string|null $openedAt
+     * @param int|null    $id
      */
     public function __construct(
         $dialogId = 0,
         $userId = 0,
         $createdAt = '',
-        $openedAt = null,
         $content = '',
+        $openedAt = null,
         $id = null
     ) {
         $this->id = $id;

@@ -143,7 +143,6 @@ class MessengerController extends AbstractActionController
                 $this->dialogRepository->getDialogId(self::userId, $buddyId),
                 self::userId,
                 date('Y-m-d H:i:s'),
-                null,
                 $content,
             )
         );
