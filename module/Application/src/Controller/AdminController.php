@@ -167,14 +167,13 @@ class AdminController extends AbstractActionController
     }
 
     /**
-     * @param $page1
+     * @param string $page
      *
      * @return int
      */
-    public static function getPage($page1): int
+    public static function getPage($page)
     {
-        $page = (int)$page1;
-        return $page;
+        return (int)$page;
     }
 
     /**
