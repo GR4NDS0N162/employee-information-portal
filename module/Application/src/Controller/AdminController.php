@@ -355,7 +355,7 @@ class AdminController extends AbstractActionController
     {
         $this->layout()->setVariables([
             'headTitleName' => 'Управление должностями (Администратор)',
-            'navbar'        => 'Laminas\Navigation\Admin'
+            'navbar'        => 'Laminas\Navigation\Admin',
         ]);
 
         $list = $this->positionRepository->findAllPositions();

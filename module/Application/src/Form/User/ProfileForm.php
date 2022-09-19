@@ -59,7 +59,7 @@ class ProfileForm extends Form
                     ],
                 ],
                 'submit'  => 'col-12',
-            ]
+            ],
         ]);
     }
 }

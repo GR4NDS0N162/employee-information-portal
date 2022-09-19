@@ -47,7 +47,7 @@ class NewMessageForm extends Form
             'children' => [
                 'message'       => 'col',
                 'submit-button' => 'col-auto',
-            ]
+            ],
         ]);
     }
 }

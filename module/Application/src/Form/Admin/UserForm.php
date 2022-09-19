@@ -63,7 +63,7 @@ class UserForm extends Form
                     ],
                 ],
                 'submit' => 'col-12',
-            ]
+            ],
         ]);
     }
 }
