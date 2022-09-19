@@ -86,6 +86,20 @@ class UserController extends AbstractActionController
         return $viewModel;
     }
 
+    /**
+     * @param UserRepositoryInterface  $userRepository
+     * @param AbstractActionController $controller
+     * @param int                      $userId
+     *
+     * @return void
+     */
+    public static function setAdminNavbar($userRepository, $controller, $userId)
+    {
+        if ($userRepository->findUser($userId)->getStatus()['admin']) {
+            $controller->layout()->setVariables(['navbar' => 'Laminas\Navigation\Admin']);
+        }
+    }
+
     public function editProfileAction()
     {
         UserController::setAdminNavbar($this->userRepository, $this, self::userId);
@@ -172,19 +186,5 @@ class UserController extends AbstractActionController
         ]);
 
         return $viewModel;
-    }
-
-    /**
-     * @param UserRepositoryInterface  $userRepository
-     * @param AbstractActionController $controller
-     * @param int                      $userId
-     *
-     * @return void
-     */
-    public static function setAdminNavbar($userRepository, $controller, $userId)
-    {
-        if ($userRepository->findUser($userId)->getStatus()['admin']) {
-            $controller->layout()->setVariables(['navbar' => 'Laminas\Navigation\Admin']);
-        }
     }
 }
