@@ -48,6 +48,7 @@ class MessageRepository implements MessageRepositoryInterface
         $select->join(['c' => 'content'], 'mes.id = c.message_id');
         $select->where(['mes.dialog_id = ?' => $dialogId]);
         $select->order(['mes.created_at DESC', 'mes.id DESC']);
+        $select->limit($maxLoadCount);
 
         /** @var Message[] $messages */
         $messages = Extracter::extractValues(
