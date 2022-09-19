@@ -14,7 +14,6 @@ use Laminas\View\Model\ViewModel;
 
 class MessengerController extends AbstractActionController
 {
-    public const userId = 1;
     public const maxLoadCount = 20;
 
     private $dialogFilterForm;
@@ -60,12 +59,12 @@ class MessengerController extends AbstractActionController
 
     public function viewDialogListAction()
     {
-        UserController::setAdminNavbar($this->userRepository, $this, self::userId);
+        UserController::setAdminNavbar($this->userRepository, $this, UserController::userId);
         $viewModel = new ViewModel();
 
         $this->layout()->setVariable('headTitleName', 'Диалоги');
 
-        $dialogs = $this->dialogRepository->getDialogList(self::userId);
+        $dialogs = $this->dialogRepository->getDialogList(UserController::userId);
 
         $viewModel->setVariables([
             'dialogs'            => $dialogs,
@@ -79,7 +78,7 @@ class MessengerController extends AbstractActionController
 
     public function viewMessagesAction()
     {
-        UserController::setAdminNavbar($this->userRepository, $this, self::userId);
+        UserController::setAdminNavbar($this->userRepository, $this, UserController::userId);
         $buddyId = (int)$this->params()->fromRoute('id', 0);
 
         if ($buddyId === 0) {
@@ -90,7 +89,7 @@ class MessengerController extends AbstractActionController
 
         $this->layout()->setVariable('headTitleName', 'Сообщения');
 
-        $userInfo = $this->userRepository->findUser(self::userId);
+        $userInfo = $this->userRepository->findUser(UserController::userId);
         $buddyInfo = $this->userRepository->findUser($buddyId);
 
         $viewModel->setVariables([
@@ -118,7 +117,7 @@ class MessengerController extends AbstractActionController
 
         $viewModel->setVariables([
             'dialogList'     => $this->dialogRepository->getDialogList(
-                self::userId,
+                UserController::userId,
                 AdminController::getWhere($data)
             ),
             'userRepository' => $this->userRepository,
@@ -142,8 +141,8 @@ class MessengerController extends AbstractActionController
 
         $this->messageCommand->sendMessage(
             new Message(
-                $this->dialogRepository->getDialogId(self::userId, $buddyId),
-                self::userId,
+                $this->dialogRepository->getDialogId(UserController::userId, $buddyId),
+                UserController::userId,
                 date('Y-m-d H:i:s'),
                 $content,
             )
@@ -165,11 +164,11 @@ class MessengerController extends AbstractActionController
         $buddyId = (int)$post->get('buddyId');
 
         $messageList = $this->messageRepository->findMessagesOfDialog(
-            $this->dialogRepository->getDialogId(self::userId, $buddyId),
+            $this->dialogRepository->getDialogId(UserController::userId, $buddyId),
             $lastMessageId,
         );
 
-        $messageList = $this->messageCommand->readBy(self::userId, $messageList);
+        $messageList = $this->messageCommand->readBy(UserController::userId, $messageList);
 
         $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
