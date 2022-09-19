@@ -237,7 +237,7 @@ class AdminController extends AbstractActionController
         }
         $empty = '-';
         if (isset($whereArr['fullnamePhone'])) {
-            $filterArr = array_map('trim', explode(',', $whereArr['fullnamePhoneEmail']));
+            $filterArr = array_map('trim', explode(',', $whereArr['fullnamePhone']));
             if (count($filterArr) == 2) {
                 list($fullname, $phone) = $filterArr;
                 $where = self::getTextareaFilter($fullname, $empty, $where, $phone);
