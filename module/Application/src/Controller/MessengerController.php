@@ -139,8 +139,21 @@ class MessengerController extends AbstractActionController
 
         $post = $request->getPost();
         $lastMessageId = $post->get('lastMessageId');
-        $buddyId = $post->get('buddyId');
+        $buddyId = (int)$post->get('buddyId');
 
-        exit();
+        $messageList = $this->messageRepository->findMessagesOfDialog(
+            $this->dialogRepository->getDialogId(self::userId, $buddyId),
+            $lastMessageId,
+        );
+
+        $viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
+        $viewModel->setTemplate('partial/message-list.phtml');
+        $viewModel->setVariables([
+            'messageList'    => $messageList,
+            'userRepository' => $this->userRepository,
+        ]);
+
+        return $viewModel;
     }
 }
