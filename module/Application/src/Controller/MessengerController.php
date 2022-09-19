@@ -2,7 +2,8 @@
 
 namespace Application\Controller;
 
-use Application\Form;
+use Application\Form\Messenger\DialogFilterForm;
+use Application\Form\Messenger\NewMessageForm;
 use Application\Model\Command\MessageCommandInterface;
 use Application\Model\Entity\Message;
 use Application\Model\Repository\DialogRepositoryInterface;
@@ -16,7 +17,13 @@ class MessengerController extends AbstractActionController
 {
     public const maxLoadCount = 20;
 
+    /**
+     * @var DialogFilterForm
+     */
     private $dialogFilterForm;
+    /**
+     * @var NewMessageForm
+     */
     private $newMessageForm;
     /**
      * @var DialogRepositoryInterface
