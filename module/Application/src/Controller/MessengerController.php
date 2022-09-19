@@ -4,6 +4,7 @@ namespace Application\Controller;
 
 use Application\Form;
 use Application\Model\Command\MessageCommandInterface;
+use Application\Model\Entity\Message;
 use Application\Model\Repository\DialogRepositoryInterface;
 use Application\Model\Repository\MessageRepositoryInterface;
 use Application\Model\Repository\PositionRepositoryInterface;
@@ -127,6 +128,27 @@ class MessengerController extends AbstractActionController
 
     public function sendMessageAction()
     {
+        $request = $this->getRequest();
+
+        if (!$request->isXmlHttpRequest() || !$request->isPost()) {
+            exit();
+        }
+
+        $post = $request->getPost();
+        $content = (string)$post->get('content');
+        $buddyId = (int)$post->get('buddyId');
+
+        $this->messageCommand->sendMessage(
+            new Message(
+                $this->dialogRepository->getDialogId(self::userId, $buddyId),
+                self::userId,
+                date('Y-m-d H:i:s'),
+                null,
+                $content,
+            )
+        );
+
+        exit();
     }
 
     public function loadMessagesAction()
