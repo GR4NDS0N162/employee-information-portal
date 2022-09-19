@@ -15,7 +15,6 @@ interface MessageRepositoryInterface
      */
     public function findMessagesOfDialog(
         $dialogId,
-        $limit = null,
-        $offset = null
+        $lastMessageId = null
     );
 }
