@@ -4,6 +4,8 @@ let lastMessageId;
 
 loadBtn[0].addEventListener('click', () => loadMessages());
 
+loadMessages();
+
 function loadMessages()
 {
     $.ajax({
