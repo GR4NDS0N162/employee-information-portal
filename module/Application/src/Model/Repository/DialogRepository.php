@@ -57,7 +57,7 @@ class DialogRepository implements DialogRepositoryInterface
             return $this->dialogCommand->createDialog($userId, $buddyId);
         }
 
-        return $commonDialogsId[0];
+        return array_values($commonDialogsId)[0];
     }
 
     public function getDialogList($userId, $where = [])
