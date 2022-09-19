@@ -5,6 +5,7 @@ namespace Application\Model\Command;
 use Application\Model\Executer;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Insert;
+use Laminas\Db\Sql\Update;
 
 class MessageCommand implements MessageCommandInterface
 {
@@ -41,6 +42,33 @@ class MessageCommand implements MessageCommandInterface
 
     public function readBy($userId, $messageList)
     {
-        // TODO: Implement readBy() method.
+        if (empty($messageList)) {
+            return $messageList;
+        }
+
+        $currentDateTime = date('Y-m-d H:i:s');
+        foreach ($messageList as $message) {
+            if (
+                $message->getOpenedAt() === null &&
+                $message->getUserId() != $userId
+            ) {
+                $message->setOpenedAt($currentDateTime);
+            }
+        }
+        $dialogId = $message->getDialogId();
+
+        $update = new Update('message');
+        $update->set([
+            'opened_at' => $currentDateTime,
+        ]);
+        $update->where([
+            'dialog_id = ' . $dialogId,
+            'opened_at IS NULL',
+            'user_id != ' . $userId,
+        ]);
+
+        Executer::executeSql($update, $this->db);
+
+        return $messageList;
     }
 }
