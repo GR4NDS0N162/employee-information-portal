@@ -138,8 +138,8 @@ class MessengerController extends AbstractActionController
         }
 
         $post = $request->getPost();
-        $lastMessageId = $post->get('lastMessageId', 0);
-        $buddyId = $post->get('buddyId', 0);
+        $lastMessageId = $post->get('lastMessageId');
+        $buddyId = $post->get('buddyId');
 
         exit();
     }
