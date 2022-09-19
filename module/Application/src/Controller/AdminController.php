@@ -270,12 +270,21 @@ class AdminController extends AbstractActionController
         return $where;
     }
 
-    public static function getTextareaFilter($fullname, string $empty, array $where, $phone): array
+    /**
+     * @param array  $where
+     * @param string $fullname
+     * @param string $phone
+     * @param string $empty
+     *
+     * @return array
+     */
+    public static function getTextareaFilter($where, $fullname, $phone, $empty)
     {
         $fullnameArr = explode(' ', $fullname);
 
         if (count($fullnameArr) == 3) {
             list($surname, $name, $patronymic) = $fullnameArr;
+
             if ($surname != $empty) {
                 $where[] = new Expression('LOWER(u.surname) LIKE LOWER(CONCAT("%", ?, "%"))', [$surname]);
             }
@@ -293,6 +302,7 @@ class AdminController extends AbstractActionController
                 'WHERE ph.number LIKE LOWER(CONCAT("%", ?, "%")))', [$phone]
             );
         }
+
         return $where;
     }
 
