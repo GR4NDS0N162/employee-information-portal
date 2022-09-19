@@ -1,5 +1,7 @@
 const loadBtn = $(`#load`);
 
+loadBtn[0].addEventListener('click', () => loadMessages());
+
 let lastMessageId;
 
 function loadMessages()
