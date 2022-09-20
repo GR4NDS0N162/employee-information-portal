@@ -98,7 +98,7 @@ class AdminController extends AbstractActionController
 
         $data = $request->getPost()->toArray();
         parse_str($data['where'], $data['where']);
-        $data['where'] = self::array_filter_recursive($data['where']);
+        $data['where'] = self::arrayFilterRecursive($data['where']);
 
         list($page, $order, $where) = self::extractOptions($data);
 
@@ -128,11 +128,11 @@ class AdminController extends AbstractActionController
         return $viewModel;
     }
 
-    public static function array_filter_recursive($array, $callback = null)
+    public static function arrayFilterRecursive($array, $callback = null)
     {
         foreach ($array as $key => & $value) {
             if (is_array($value)) {
-                $value = AdminController::array_filter_recursive($value, $callback);
+                $value = AdminController::arrayFilterRecursive($value, $callback);
                 if (!$value) {
                     unset($array[$key]);
                 }

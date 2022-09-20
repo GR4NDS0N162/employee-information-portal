@@ -128,7 +128,7 @@ class MessengerController extends AbstractActionController
             exit();
         }
 
-        $data = AdminController::array_filter_recursive($request->getPost()->toArray());
+        $data = AdminController::arrayFilterRecursive($request->getPost()->toArray());
 
         $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
