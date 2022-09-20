@@ -15,8 +15,6 @@ use Laminas\View\Model\ViewModel;
 
 class AdminController extends AbstractActionController
 {
-    public const maxPageCount = 20;
-
     /**
      * @var Form\PositionForm
      */
@@ -108,7 +106,7 @@ class AdminController extends AbstractActionController
             $count = count($this->userRepository->findUsers($where));
             echo json_encode([
                 'count'        => $count,
-                'maxPageCount' => self::maxPageCount,
+                'maxPageCount' => UserController::maxPageCount,
             ]);
             exit();
         }
