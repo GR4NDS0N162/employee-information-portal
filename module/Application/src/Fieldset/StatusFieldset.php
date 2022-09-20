@@ -12,7 +12,7 @@ class StatusFieldset extends Fieldset
     /**
      * @var StatusRepositoryInterface
      */
-    private $statusRepository;
+    private StatusRepositoryInterface $statusRepository;
 
     /**
      * @param StatusRepositoryInterface $statusRepository
