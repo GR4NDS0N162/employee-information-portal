@@ -8,34 +8,32 @@ use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Expression;
 use Laminas\Db\Sql\Predicate;
 use Laminas\Db\Sql\Select;
-use Laminas\Hydrator\HydratorAwareInterface;
 
 class DialogRepository implements DialogRepositoryInterface
 {
     /**
      * @var AdapterInterface
      */
-    private $db;
+    private AdapterInterface $db;
     /**
-     * @var Dialog|HydratorAwareInterface
+     * @var Dialog
      */
-    private $prototype;
+    private Dialog $prototype;
     /**
      * @var DialogCommandInterface
      */
-    private $dialogCommand;
+    private DialogCommandInterface $dialogCommand;
 
     /**
-     * @param AdapterInterface              $db
-     * @param Dialog|HydratorAwareInterface $prototype
+     * @param AdapterInterface       $db
+     * @param DialogCommandInterface $dialogCommand
      */
     public function __construct(
-        $db,
-        $prototype,
-        $dialogCommand
+        AdapterInterface       $db,
+        DialogCommandInterface $dialogCommand
     ) {
         $this->db = $db;
-        $this->prototype = $prototype;
+        $this->prototype = new Dialog();
         $this->dialogCommand = $dialogCommand;
     }
 
