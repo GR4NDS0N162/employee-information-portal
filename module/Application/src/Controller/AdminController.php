@@ -168,7 +168,7 @@ class AdminController extends AbstractActionController
      *
      * @return int
      */
-    public static function getPage($page)
+    public static function getPage(string $page): int
     {
         return (int)$page;
     }
@@ -178,7 +178,7 @@ class AdminController extends AbstractActionController
      *
      * @return string[]
      */
-    public static function getOrder($orderConfig)
+    public static function getOrder(string $orderConfig): array
     {
         $order = [
             'u.surname',
@@ -204,7 +204,7 @@ class AdminController extends AbstractActionController
      *
      * @return array
      */
-    public static function getWhere($whereConfig)
+    public static function getWhere(array $whereConfig): array
     {
         $where = [];
 
@@ -279,8 +279,12 @@ class AdminController extends AbstractActionController
      *
      * @return array
      */
-    public static function getTextareaFilter($where, $fullname, $phone, $empty)
-    {
+    public static function getTextareaFilter(
+        array  $where,
+        string $fullname,
+        string $phone,
+        string $empty
+    ): array {
         $fullnameArr = explode(' ', $fullname);
 
         if (count($fullnameArr) == 3) {
