@@ -6,29 +6,26 @@ use Application\Controller\MessengerController;
 use Application\Model\Entity\Message;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Select;
-use Laminas\Hydrator\HydratorAwareInterface;
 
 class MessageRepository implements MessageRepositoryInterface
 {
     /**
      * @var AdapterInterface
      */
-    private $db;
+    private AdapterInterface $db;
     /**
-     * @var Message|HydratorAwareInterface
+     * @var Message
      */
-    private $prototype;
+    private Message $prototype;
 
     /**
-     * @param AdapterInterface               $db
-     * @param Message|HydratorAwareInterface $prototype
+     * @param AdapterInterface $db
      */
     public function __construct(
-        $db,
-        $prototype
+        AdapterInterface $db
     ) {
         $this->db = $db;
-        $this->prototype = $prototype;
+        $this->prototype = new Message();
     }
 
     public function findMessagesOfDialog(

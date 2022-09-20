@@ -8,47 +8,44 @@ use Application\Model\Entity\User;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Select;
-use Laminas\Hydrator\HydratorAwareInterface;
 
 class UserRepository implements UserRepositoryInterface
 {
     /**
      * @var AdapterInterface
      */
-    private $db;
+    private AdapterInterface $db;
     /**
-     * @var User|HydratorAwareInterface
+     * @var User
      */
-    private $prototype;
+    private User $prototype;
     /**
      * @var EmailRepositoryInterface
      */
-    private $emailRepository;
+    private EmailRepositoryInterface $emailRepository;
     /**
      * @var PhoneRepositoryInterface
      */
-    private $phoneRepository;
+    private PhoneRepositoryInterface $phoneRepository;
     /**
      * @var StatusRepositoryInterface
      */
-    private $statusRepository;
+    private StatusRepositoryInterface $statusRepository;
 
     /**
-     * @param AdapterInterface            $db
-     * @param User|HydratorAwareInterface $prototype
-     * @param EmailRepositoryInterface    $emailRepository
-     * @param PhoneRepositoryInterface    $phoneRepository
-     * @param StatusRepositoryInterface   $statusRepository
+     * @param AdapterInterface          $db
+     * @param EmailRepositoryInterface  $emailRepository
+     * @param PhoneRepositoryInterface  $phoneRepository
+     * @param StatusRepositoryInterface $statusRepository
      */
     public function __construct(
-        $db,
-        $prototype,
-        $emailRepository,
-        $phoneRepository,
-        $statusRepository
+        AdapterInterface          $db,
+        EmailRepositoryInterface  $emailRepository,
+        PhoneRepositoryInterface  $phoneRepository,
+        StatusRepositoryInterface $statusRepository
     ) {
         $this->db = $db;
-        $this->prototype = $prototype;
+        $this->prototype = new User();
         $this->emailRepository = $emailRepository;
         $this->phoneRepository = $phoneRepository;
         $this->statusRepository = $statusRepository;

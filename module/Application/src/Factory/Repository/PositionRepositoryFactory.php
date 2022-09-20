@@ -2,7 +2,6 @@
 
 namespace Application\Factory\Repository;
 
-use Application\Model\Entity\Position;
 use Application\Model\Repository\PositionRepository;
 use Interop\Container\ContainerInterface;
 use Laminas\Db\Adapter\AdapterInterface;
@@ -14,7 +13,6 @@ class PositionRepositoryFactory implements FactoryInterface
     {
         return new PositionRepository(
             $container->get(AdapterInterface::class),
-            new Position(),
         );
     }
 }

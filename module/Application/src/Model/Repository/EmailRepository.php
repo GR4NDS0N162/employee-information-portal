@@ -5,21 +5,25 @@ namespace Application\Model\Repository;
 use Application\Model\Entity\Email;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Select;
-use Laminas\Hydrator\HydratorAwareInterface;
 
 class EmailRepository implements EmailRepositoryInterface
 {
-    private $db;
-    private $prototype;
+    /**
+     * @var AdapterInterface
+     */
+    private AdapterInterface $db;
+    /**
+     * @var Email
+     */
+    private Email $prototype;
 
     /**
-     * @param AdapterInterface             $db
-     * @param Email|HydratorAwareInterface $prototype
+     * @param AdapterInterface $db
      */
-    public function __construct($db, $prototype)
+    public function __construct(AdapterInterface $db)
     {
         $this->db = $db;
-        $this->prototype = $prototype;
+        $this->prototype = new Email();
     }
 
     public function findEmailsOfUser($userId)

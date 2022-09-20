@@ -2,7 +2,6 @@
 
 namespace Application\Factory\Repository;
 
-use Application\Model\Entity\Message;
 use Application\Model\Repository\MessageRepository;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
@@ -14,7 +13,6 @@ class MessageRepositoryFactory implements FactoryInterface
     {
         return new MessageRepository(
             $container->get(AdapterInterface::class),
-            new Message(),
         );
     }
 }

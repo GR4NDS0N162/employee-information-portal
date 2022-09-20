@@ -2,7 +2,6 @@
 
 namespace Application\Factory\Repository;
 
-use Application\Model\Entity\Phone;
 use Application\Model\Repository\PhoneRepository;
 use Interop\Container\ContainerInterface;
 use Laminas\Db\Adapter\AdapterInterface;
@@ -14,7 +13,6 @@ class PhoneRepositoryFactory implements FactoryInterface
     {
         return new PhoneRepository(
             $container->get(AdapterInterface::class),
-            new Phone(),
         );
     }
 }

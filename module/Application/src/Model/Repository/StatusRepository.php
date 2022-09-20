@@ -5,27 +5,25 @@ namespace Application\Model\Repository;
 use Application\Model\Entity\Status;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Select;
-use Laminas\Hydrator\HydratorAwareInterface;
 
 class StatusRepository implements StatusRepositoryInterface
 {
     /**
      * @var AdapterInterface
      */
-    private $db;
+    private AdapterInterface $db;
     /**
-     * @var Status|HydratorAwareInterface
+     * @var Status
      */
-    private $prototype;
+    private Status $prototype;
 
     /**
-     * @param AdapterInterface              $db
-     * @param Status|HydratorAwareInterface $prototype
+     * @param AdapterInterface $db
      */
-    public function __construct($db, $prototype)
+    public function __construct(AdapterInterface $db)
     {
         $this->db = $db;
-        $this->prototype = $prototype;
+        $this->prototype = new Status();
     }
 
     public function findAllStatuses()

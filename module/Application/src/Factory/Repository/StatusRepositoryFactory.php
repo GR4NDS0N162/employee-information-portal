@@ -2,7 +2,6 @@
 
 namespace Application\Factory\Repository;
 
-use Application\Model\Entity\Status;
 use Application\Model\Repository\StatusRepository;
 use Interop\Container\ContainerInterface;
 use Laminas\Db\Adapter\AdapterInterface;
@@ -14,7 +13,6 @@ class StatusRepositoryFactory implements FactoryInterface
     {
         return new StatusRepository(
             $container->get(AdapterInterface::class),
-            new Status(),
         );
     }
 }

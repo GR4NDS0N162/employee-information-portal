@@ -11,20 +11,19 @@ class PhoneRepository implements PhoneRepositoryInterface
     /**
      * @var AdapterInterface
      */
-    private $db;
+    private AdapterInterface $db;
     /**
      * @var Phone
      */
-    private $prototype;
+    private Phone $prototype;
 
     /**
      * @param AdapterInterface $db
-     * @param Phone            $prototype
      */
-    public function __construct($db, $prototype)
+    public function __construct(AdapterInterface $db)
     {
         $this->db = $db;
-        $this->prototype = $prototype;
+        $this->prototype = new Phone();
     }
 
     public function findPhonesOfUser($userId)
