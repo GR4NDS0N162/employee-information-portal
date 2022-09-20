@@ -17,6 +17,7 @@ class MessengerControllerFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
+        /** @var ContainerInterface $formManager */
         $formManager = $container->get('FormElementManager');
 
         return new MessengerController(
