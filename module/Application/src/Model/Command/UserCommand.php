@@ -20,31 +20,31 @@ class UserCommand implements UserCommandInterface
     /**
      * @var AdapterInterface
      */
-    private $db;
+    private AdapterInterface $db;
     /**
      * @var EmailRepositoryInterface
      */
-    private $emailRepository;
+    private EmailRepositoryInterface $emailRepository;
     /**
      * @var PhoneRepositoryInterface
      */
-    private $phoneRepository;
+    private PhoneRepositoryInterface $phoneRepository;
     /**
      * @var UserRepositoryInterface
      */
-    private $userRepository;
+    private UserRepositoryInterface $userRepository;
     /**
      * @var EmailCommandInterface
      */
-    private $emailCommand;
+    private EmailCommandInterface $emailCommand;
     /**
      * @var PhoneCommandInterface
      */
-    private $phoneCommand;
+    private PhoneCommandInterface $phoneCommand;
     /**
      * @var StatusRepositoryInterface
      */
-    private $statusRepository;
+    private StatusRepositoryInterface $statusRepository;
 
     /**
      * @param AdapterInterface          $db
@@ -56,13 +56,13 @@ class UserCommand implements UserCommandInterface
      * @param PhoneCommandInterface     $phoneCommand
      */
     public function __construct(
-        $db,
-        $emailRepository,
-        $phoneRepository,
-        $userRepository,
-        $statusRepository,
-        $emailCommand,
-        $phoneCommand
+        AdapterInterface          $db,
+        EmailRepositoryInterface  $emailRepository,
+        PhoneRepositoryInterface  $phoneRepository,
+        UserRepositoryInterface   $userRepository,
+        StatusRepositoryInterface $statusRepository,
+        EmailCommandInterface     $emailCommand,
+        PhoneCommandInterface     $phoneCommand
     ) {
         $this->db = $db;
         $this->emailRepository = $emailRepository;
