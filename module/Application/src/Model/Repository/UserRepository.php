@@ -120,6 +120,9 @@ class UserRepository implements UserRepositoryInterface
     {
         $userStatuses = $this->statusRepository->findStatusesOfUser($user->getId());
         $statusMap = [];
+        foreach ($this->statusRepository->findAllStatuses() as $status) {
+            $statusMap[$status->getName()] = false;
+        }
         foreach ($userStatuses as $status) {
             $statusMap[$status->getName()] = true;
         }
