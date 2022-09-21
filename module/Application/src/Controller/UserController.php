@@ -16,7 +16,7 @@ use Laminas\View\Model\ViewModel;
 class UserController extends AbstractActionController
 {
     /** @var int Maximum number of users displayed on a page. */
-    public const maxPageCount = 20;
+    public const MAX_USER_COUNT = 20;
     /** @var int The ID of the user who is currently logged in to the system. */
     public const userId = 1;
 
@@ -158,7 +158,7 @@ class UserController extends AbstractActionController
         $viewModel->setVariables([
             'userInfo'           => $this->userRepository->findUsers(),
             'positionRepository' => $this->positionRepository,
-            'maxPageCount'       => self::maxPageCount,
+            'maxPageCount'       => self::MAX_USER_COUNT,
             'page'               => 1,
             'userFilterForm'     => $this->userFilterForm,
         ]);

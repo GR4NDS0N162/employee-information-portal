@@ -80,7 +80,7 @@ class AdminController extends AbstractActionController
             $count = count($this->userRepository->findUsers($where));
             echo json_encode([
                 'count'        => $count,
-                'maxPageCount' => UserController::maxPageCount,
+                'maxPageCount' => UserController::MAX_USER_COUNT,
             ]);
             exit();
         }
