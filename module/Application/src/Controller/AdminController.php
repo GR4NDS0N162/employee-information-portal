@@ -334,4 +334,9 @@ class AdminController extends AbstractActionController
 
         return $this->redirect()->toRoute('admin/edit-position');
     }
+
+    private function getUserId(): ?int
+    {
+        return $this->sessionContainer->offsetGet(LoginController::USER_ID);
+    }
 }
