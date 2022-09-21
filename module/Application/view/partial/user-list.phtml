@@ -8,7 +8,7 @@ use Application\Model\Entity\User;
 /** @var User[] $userList */
 $userList = $this->userList;
 ?>
-<div class="notification">Список пуст.</div>
+<div class="notification">The list is empty.</div>
 <?php foreach ($userList as $user): ?>
     <div class="col-12">
         <div class="card p-3">
@@ -30,11 +30,11 @@ $userList = $this->userList;
                                 ); ?></p>
                         </div>
                         <div class="col-auto">
-                            <span class="text-secondary">Должность:</span>
+                            <span class="text-secondary">Position:</span>
                             <span class="position"><?= $this->escapeHtml($user->getPositionName()); ?></span>
                         </div>
                         <div class="col-auto">
-                            <span class="text-secondary">Возраст:</span>
+                            <span class="text-secondary">Age:</span>
                             <?php $age = 'Не указан'; ?>
                             <?php if ($user->getBirthday()): ?>
                                 <?php $age = (new DateTime($user->getBirthday()))->diff(new DateTime())->y; ?>
@@ -56,7 +56,7 @@ $userList = $this->userList;
                             <span class="age"><?= $this->escapeHtml($age); ?></span>
                         </div>
                         <div class="col-auto">
-                            <span class="text-secondary">Пол:</span>
+                            <span class="text-secondary">Gender:</span>
                             <?php if ($user->getGender() == 1): ?>
                                 <?php $gender = 'Мужской'; ?>
                             <?php elseif ($user->getGender() == 2): ?>

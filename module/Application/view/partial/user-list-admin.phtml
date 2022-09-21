@@ -12,7 +12,7 @@ $userList = $this->userList;
 $formName = $this->formName;
 ?>
 
-<div class="notification">Список пуст.</div>
+<div class="notification">The list is empty.</div>
 <?php foreach ($userList as $user): ?>
     <div class="col-12<?= (!$user->getStatus()['active']) ? ' card-gray-bg' : ''; ?>">
         <div class="card p-3">
@@ -48,15 +48,15 @@ $formName = $this->formName;
                             </p>
                         </div>
                         <div class="col-auto">
-                            <span class="text-secondary">Должность:</span>
+                            <span class="text-secondary">Position:</span>
                             <span class="position"><?= $this->escapeHtml($user->getPositionName()); ?></span>
                         </div>
                         <div class="col-auto">
-                            <span class="text-secondary">Возраст:</span>
+                            <span class="text-secondary">Age:</span>
                             <span class="age"><?= $this->escapeHtml($user->getAgeString()); ?></span>
                         </div>
                         <div class="col-auto">
-                            <span class="text-secondary">Пол:</span>
+                            <span class="text-secondary">Gender:</span>
                             <span class="gender"><?= $this->escapeHtml($user->getGenderString()); ?></span>
                         </div>
                     </div>
@@ -64,7 +64,7 @@ $formName = $this->formName;
                 <?php if ($formName == 'AdminFilterForm'): ?>
                     <div class="col-auto d-flex align-items-center">
                         <a href="<?= $this->url('admin/view-user-list/edit-user', ['id' => $user->getId()]); ?>"
-                           class="btn btn-primary">Редактировать</a>
+                           class="btn btn-primary">Edit</a>
                     </div>
                 <?php endif; ?>
             </div>
