@@ -80,12 +80,14 @@ class UserController extends AbstractActionController
 
     public function editProfileAction()
     {
-        UserController::setAdminNavbar($this->userRepository, $this, self::userId);
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID);
+
+        UserController::setAdminNavbar($this->userRepository, $this, $userId);
 
         $this->layout()->setVariables(['headTitleName' => 'Редактирование профиля']);
 
         try {
-            $foundProfile = $this->userRepository->findProfile(self::userId);
+            $foundProfile = $this->userRepository->findProfile($userId);
             $changePassword = new ChangePassword($foundProfile->getId());
         } catch (InvalidArgumentException $ex) {
             return $this->redirect()->toRoute('home');
@@ -149,7 +151,10 @@ class UserController extends AbstractActionController
 
     public function viewUserListAction()
     {
-        UserController::setAdminNavbar($this->userRepository, $this, self::userId);
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID);
+
+        UserController::setAdminNavbar($this->userRepository, $this, $userId);
+
         $viewModel = new ViewModel();
 
         $this->layout()->setVariable('headTitleName', 'Список пользователей');
