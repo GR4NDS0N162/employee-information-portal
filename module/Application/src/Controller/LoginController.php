@@ -132,7 +132,9 @@ class LoginController extends AbstractActionController
             $data['positionId'],
         );
 
-        $this->userCommand->insertUser($user, $email);
+        $userId = $this->userCommand->insertUser($user, $email);
+        $this->sessionContainer->offsetSet('userId', $userId);
+
         return $this->redirect()->toRoute('user/view-profile');
     }
 
