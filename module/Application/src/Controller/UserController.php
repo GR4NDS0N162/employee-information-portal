@@ -88,7 +88,7 @@ class UserController extends AbstractActionController
 
     public function viewProfileAction()
     {
-        $userId = $this->sessionContainer->offsetGet('userId');
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID);
 
         UserController::setAdminNavbar($this->userRepository, $this, $userId);
 

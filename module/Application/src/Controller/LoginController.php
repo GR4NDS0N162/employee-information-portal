@@ -14,6 +14,9 @@ use Laminas\View\Model\ViewModel;
 
 class LoginController extends AbstractActionController
 {
+    /** @var string The user ID key in the session container. */
+    const USER_ID = 'userId';
+
     /**
      * @var Login\LoginForm
      */
@@ -103,7 +106,7 @@ class LoginController extends AbstractActionController
         if (
             $foundUser->getPassword() == $data['currentPassword']
         ) {
-            $this->sessionContainer->offsetSet('userId', $foundUser->getId());
+            $this->sessionContainer->offsetSet(LoginController::USER_ID, $foundUser->getId());
             return $this->redirect()->toRoute('user/view-profile');
         } else {
             return $this->redirect()->toRoute('home');
@@ -133,7 +136,7 @@ class LoginController extends AbstractActionController
         );
 
         $userId = $this->userCommand->insertUser($user, $email);
-        $this->sessionContainer->offsetSet('userId', $userId);
+        $this->sessionContainer->offsetSet(LoginController::USER_ID, $userId);
 
         return $this->redirect()->toRoute('user/view-profile');
     }
