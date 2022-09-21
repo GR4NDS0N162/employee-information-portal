@@ -50,12 +50,15 @@ class MessengerController extends AbstractActionController
 
     public function viewDialogListAction()
     {
-        UserController::setAdminNavbar($this->userRepository, $this, UserController::userId);
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID);
+
+        UserController::setAdminNavbar($this->userRepository, $this, $userId);
+
         $viewModel = new ViewModel();
 
         $this->layout()->setVariable('headTitleName', 'Диалоги');
 
-        $dialogs = $this->dialogRepository->getDialogList(UserController::userId);
+        $dialogs = $this->dialogRepository->getDialogList($userId);
 
         $viewModel->setVariables([
             'dialogs'            => $dialogs,
@@ -69,12 +72,15 @@ class MessengerController extends AbstractActionController
 
     public function viewMessagesAction()
     {
-        UserController::setAdminNavbar($this->userRepository, $this, UserController::userId);
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID);
+
+        UserController::setAdminNavbar($this->userRepository, $this, $userId);
+
         $buddyId = (int)$this->params()->fromRoute('id', 0);
 
         if (
             $buddyId === 0 ||
-            $buddyId === UserController::userId
+            $buddyId === $userId
         ) {
             return $this->redirect()->toRoute('user/view-dialog-list');
         }
@@ -83,7 +89,7 @@ class MessengerController extends AbstractActionController
 
         $this->layout()->setVariable('headTitleName', 'Сообщения');
 
-        $userInfo = $this->userRepository->findUser(UserController::userId);
+        $userInfo = $this->userRepository->findUser($userId);
         $buddyInfo = $this->userRepository->findUser($buddyId);
 
         $viewModel->setVariables([
@@ -97,6 +103,8 @@ class MessengerController extends AbstractActionController
 
     public function getDialogsAction()
     {
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID);
+
         $request = $this->getRequest();
 
         if (!$request->isXmlHttpRequest() || !$request->isPost()) {
@@ -111,7 +119,7 @@ class MessengerController extends AbstractActionController
 
         $viewModel->setVariables([
             'dialogList'     => $this->dialogRepository->getDialogList(
-                UserController::userId,
+                $userId,
                 AdminController::getWhere($data)
             ),
             'userRepository' => $this->userRepository,
@@ -123,6 +131,8 @@ class MessengerController extends AbstractActionController
 
     public function sendMessageAction()
     {
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID);
+
         $request = $this->getRequest();
 
         if (!$request->isXmlHttpRequest() || !$request->isPost()) {
@@ -135,8 +145,8 @@ class MessengerController extends AbstractActionController
 
         $this->messageCommand->sendMessage(
             new Message(
-                $this->dialogRepository->getDialogId(UserController::userId, $buddyId),
-                UserController::userId,
+                $this->dialogRepository->getDialogId($userId, $buddyId),
+                $userId,
                 date('Y-m-d H:i:s'),
                 $content,
             )
@@ -147,6 +157,8 @@ class MessengerController extends AbstractActionController
 
     public function loadMessagesAction()
     {
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID);
+
         $request = $this->getRequest();
 
         if (!$request->isXmlHttpRequest() || !$request->isPost()) {
@@ -158,11 +170,11 @@ class MessengerController extends AbstractActionController
         $buddyId = (int)$post->get('buddyId');
 
         $messageList = $this->messageRepository->findMessagesOfDialog(
-            $this->dialogRepository->getDialogId(UserController::userId, $buddyId),
+            $this->dialogRepository->getDialogId($userId, $buddyId),
             $lastMessageId,
         );
 
-        $messageList = $this->messageCommand->readBy(UserController::userId, $messageList);
+        $messageList = $this->messageCommand->readBy($userId, $messageList);
 
         $viewModel = new ViewModel();
         $viewModel->setTerminal(true);

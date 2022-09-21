@@ -17,8 +17,6 @@ class UserController extends AbstractActionController
 {
     /** @var int Maximum number of users displayed on a page. */
     public const MAX_USER_COUNT = 20;
-    /** @var int The ID of the user who is currently logged in to the system. */
-    public const userId = 1;
 
     private Form\ProfileForm $profileForm;
     private Form\ViewProfileForm $viewProfileForm;
