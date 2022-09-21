@@ -1,11 +1,13 @@
 <?php
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
- * @var UserFilterForm                    $userFilterForm
  */
 
 use Application\Form\User\UserFilterForm;
 use Application\Model\Repository\PositionRepositoryInterface;
+
+/** @var UserFilterForm $userFilterForm */
+$userFilterForm = $this->userFilterForm;
 
 $this->inlineScript()
     ->appendFile($this->basePath('js/user-filter.js'))
