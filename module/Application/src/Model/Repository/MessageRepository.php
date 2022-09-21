@@ -31,7 +31,7 @@ class MessageRepository implements MessageRepositoryInterface
     public function findMessagesOfDialog(
         $dialogId,
         $lastMessageId = null,
-        $maxLoadCount = MessengerController::MAX_MESSAGE_COUNT
+        $maxMessageCount = MessengerController::MAX_MESSAGE_COUNT
     ) {
         $select = new Select(['mes' => 'message']);
         $select->columns([
@@ -55,7 +55,7 @@ class MessageRepository implements MessageRepositoryInterface
         $select->where($where);
 
         $select->order(['mes.created_at DESC', 'mes.id DESC']);
-        $select->limit($maxLoadCount);
+        $select->limit($maxMessageCount);
 
         /** @var Message[] $messages */
         $messages = Extracter::extractValues(
