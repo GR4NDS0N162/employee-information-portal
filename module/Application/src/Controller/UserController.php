@@ -15,13 +15,9 @@ use Laminas\View\Model\ViewModel;
 
 class UserController extends AbstractActionController
 {
-    /**
-     * Maximum number of users displayed on a page.
-     */
+    /** @var int Maximum number of users displayed on a page. */
     public const maxPageCount = 20;
-    /**
-     * The ID of the user who is currently logged in to the system.
-     */
+    /** @var int The ID of the user who is currently logged in to the system. */
     public const userId = 1;
 
     private Form\ProfileForm $profileForm;
