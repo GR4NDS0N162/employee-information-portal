@@ -87,6 +87,7 @@ class UserController extends AbstractActionController
 
     public function viewProfileAction()
     {
+        $userId = $this->sessionContainer->offsetGet('userId');
         UserController::setAdminNavbar($this->userRepository, $this, self::userId);
         $this->layout()->setVariables(['headTitleName' => 'Просмотр профиля']);
         $viewModel = new ViewModel(['viewProfileForm' => $this->viewProfileForm]);
