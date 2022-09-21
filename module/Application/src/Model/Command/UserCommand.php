@@ -104,6 +104,8 @@ class UserCommand implements UserCommandInterface
                     $email->getAddress()
                 )
             );
+        } else {
+            return $id;
         }
     }
 
