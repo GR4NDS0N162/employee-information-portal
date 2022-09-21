@@ -38,7 +38,7 @@ function delete_item(button)
         const feedback = button.previousSibling.previousSibling;
         const input = feedback.previousSibling.previousSibling;
 
-        feedback.childNodes[0].nodeValue = 'Этот список не может быть пустым.';
+        feedback.childNodes[0].nodeValue = 'This list cannot be empty.';
         input.classList.add('is-invalid');
     }
 }

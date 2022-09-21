@@ -26,7 +26,7 @@ function hangOnFocusout(input, feedback)
     input.addEventListener('focusout', () =>
     {
         if (input.validity.valueMissing) {
-            feedback.childNodes[0].nodeValue = 'Поле не должно оставаться пустым.';
+            feedback.childNodes[0].nodeValue = 'The field should not remain empty.';
         }
     });
 }
@@ -38,7 +38,7 @@ function hangOnKeydown(input, feedback)
         const maxlength = parseInt(input.getAttribute('maxlength'));
 
         if (input.value.length >= maxlength) {
-            feedback.childNodes[0].nodeValue = `Максимальная длина - ${maxlength}.`;
+            feedback.childNodes[0].nodeValue = `Maximum length - ${maxlength}.`;
         }
     });
 }

@@ -78,7 +78,7 @@ function updateContent()
         const from = Math.min(1 + (selectedPage - 1) * maxPageCount, count);
         const to = Math.min(selectedPage * maxPageCount, count);
 
-        shownEl.innerText = (count) ? `${from}-${to} из ${count}` : count;
+        shownEl.innerText = (count) ? `${from}-${to} of ${count}` : count;
 
         $(`#user-list`).html(data);
     });

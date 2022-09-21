@@ -13,7 +13,7 @@ for (const input of emailInputs) {
     input.addEventListener('input', function ()
     {
         if (input.validity.patternMismatch) {
-            feedback.childNodes[0].nodeValue = 'Введённое значение - не электронный адрес.';
+            feedback.childNodes[0].nodeValue = 'The entered value is not an email address.';
         }
     });
 }

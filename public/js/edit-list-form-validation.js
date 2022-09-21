@@ -27,8 +27,8 @@ function hangHandlers(item)
 
 
     const validationMap = {
-        'validation-pattern-email': 'Введённое значение - не электронный адрес.',
-        'validation-pattern-phone': 'Введённое значение - не телефон.',
+        'validation-pattern-email': 'The entered value is not an email address.',
+        'validation-pattern-phone': 'The entered value is not a phone number.',
     };
 
     const possibleAdditionalValidation = input.className.match(/validation[-a-z]+/);
