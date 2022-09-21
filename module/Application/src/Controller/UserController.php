@@ -24,48 +24,15 @@ class UserController extends AbstractActionController
      */
     public const userId = 1;
 
-    /**
-     * @var Form\ProfileForm
-     */
     private Form\ProfileForm $profileForm;
-    /**
-     * @var Form\ViewProfileForm
-     */
     private Form\ViewProfileForm $viewProfileForm;
-    /**
-     * @var Form\UserFilterForm
-     */
     private Form\UserFilterForm $userFilterForm;
-    /**
-     * @var Form\ChangePasswordForm
-     */
     private Form\ChangePasswordForm $changePasswordForm;
-    /**
-     * @var UserRepositoryInterface
-     */
     private UserRepositoryInterface $userRepository;
-    /**
-     * @var PositionRepositoryInterface
-     */
     private PositionRepositoryInterface $positionRepository;
-    /**
-     * @var UserCommandInterface
-     */
     private UserCommandInterface $userCommand;
-    /**
-     * @var SessionContainer
-     */
     private SessionContainer $sessionContainer;
 
-    /**
-     * @param Form\ProfileForm            $profileForm
-     * @param Form\ViewProfileForm        $viewProfileForm
-     * @param Form\UserFilterForm         $userFilterForm
-     * @param Form\ChangePasswordForm     $changePasswordForm
-     * @param UserRepositoryInterface     $userRepository
-     * @param PositionRepositoryInterface $positionRepository
-     * @param UserCommandInterface        $userCommand
-     */
     public function __construct(
         Form\ProfileForm            $profileForm,
         Form\ViewProfileForm        $viewProfileForm,
@@ -105,13 +72,6 @@ class UserController extends AbstractActionController
         return $viewModel;
     }
 
-    /**
-     * @param UserRepositoryInterface $userRepository
-     * @param AbstractController      $controller
-     * @param int                     $userId
-     *
-     * @return void
-     */
     public static function setAdminNavbar(
         UserRepositoryInterface $userRepository,
         AbstractController      $controller,

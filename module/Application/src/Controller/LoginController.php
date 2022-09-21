@@ -17,39 +17,13 @@ class LoginController extends AbstractActionController
     /** @var string The user ID key in the session container. */
     const USER_ID = 'userId';
 
-    /**
-     * @var Login\LoginForm
-     */
     private Login\LoginForm $loginForm;
-    /**
-     * @var Login\SignUpForm
-     */
     private Login\SignUpForm $signUpForm;
-    /**
-     * @var Login\RecoverForm
-     */
     private Login\RecoverForm $recoverForm;
-    /**
-     * @var UserCommandInterface
-     */
     private UserCommandInterface $userCommand;
-    /**
-     * @var SessionContainer
-     */
     private SessionContainer $sessionContainer;
-    /**
-     * @var UserRepositoryInterface
-     */
     private UserRepositoryInterface $userRepository;
 
-    /**
-     * @param Login\LoginForm         $loginForm
-     * @param Login\SignUpForm        $signUpForm
-     * @param Login\RecoverForm       $recoverForm
-     * @param UserRepositoryInterface $userRepository
-     * @param UserCommandInterface    $userCommand
-     * @param SessionContainer        $sessionContainer
-     */
     public function __construct(
         Login\LoginForm         $loginForm,
         Login\SignUpForm        $signUpForm,

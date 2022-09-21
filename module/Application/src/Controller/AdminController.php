@@ -16,49 +16,15 @@ use Laminas\View\Model\ViewModel;
 
 class AdminController extends AbstractActionController
 {
-    /**
-     * @var Form\PositionForm
-     */
     private Form\PositionForm $positionForm;
-    /**
-     * @var Form\UserForm
-     */
     private Form\UserForm $userForm;
-    /**
-     * @var Form\AdminFilterForm
-     */
     private Form\AdminFilterForm $adminFilterForm;
-    /**
-     * @var UserRepositoryInterface
-     */
     private UserRepositoryInterface $userRepository;
-    /**
-     * @var PositionRepositoryInterface
-     */
     private PositionRepositoryInterface $positionRepository;
-    /**
-     * @var UserCommandInterface
-     */
     private UserCommandInterface $userCommand;
-    /**
-     * @var PositionCommandInterface
-     */
     private PositionCommandInterface $positionCommand;
-    /**
-     * @var SessionContainer
-     */
     private SessionContainer $sessionContainer;
 
-    /**
-     * @param Form\PositionForm           $positionForm
-     * @param Form\UserForm               $userForm
-     * @param Form\AdminFilterForm        $adminFilterForm
-     * @param UserRepositoryInterface     $userRepository
-     * @param PositionRepositoryInterface $positionRepository
-     * @param UserCommandInterface        $userCommand
-     * @param PositionCommandInterface    $positionCommand
-     * @param SessionContainer            $sessionContainer
-     */
     public function __construct(
         Form\PositionForm           $positionForm,
         Form\UserForm               $userForm,
@@ -171,21 +137,11 @@ class AdminController extends AbstractActionController
         return array($page, $order, $where);
     }
 
-    /**
-     * @param string $page
-     *
-     * @return int
-     */
     public static function getPage(string $page): int
     {
         return (int)$page;
     }
 
-    /**
-     * @param string $orderConfig
-     *
-     * @return string[]
-     */
     public static function getOrder(string $orderConfig): array
     {
         $order = [
@@ -207,11 +163,6 @@ class AdminController extends AbstractActionController
         return $order;
     }
 
-    /**
-     * @param array $whereConfig
-     *
-     * @return array
-     */
     public static function getWhere(array $whereConfig): array
     {
         $where = [];
@@ -279,14 +230,6 @@ class AdminController extends AbstractActionController
         return $where;
     }
 
-    /**
-     * @param array  $where
-     * @param string $fullname
-     * @param string $phone
-     * @param string $empty
-     *
-     * @return array
-     */
     public static function getTextareaFilter(
         array  $where,
         string $fullname,
