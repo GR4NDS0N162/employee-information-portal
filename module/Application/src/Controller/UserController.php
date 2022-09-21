@@ -81,6 +81,7 @@ class UserController extends AbstractActionController
     public function editProfileAction()
     {
         UserController::setAdminNavbar($this->userRepository, $this, self::userId);
+
         $this->layout()->setVariables(['headTitleName' => 'Редактирование профиля']);
 
         try {
