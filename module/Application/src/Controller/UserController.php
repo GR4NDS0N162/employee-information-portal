@@ -16,11 +16,11 @@ class UserController extends AbstractActionController
     /**
      * Maximum number of users displayed on a page.
      */
-    public const maxPageCount = 20;
+    public const MAX_USER_COUNT = 20;
     /**
      * The ID of the user who is currently logged in to the system.
      */
-    public const userId = 1;
+    public const USER_ID = 1;
 
     /**
      * @var Form\ProfileForm
@@ -80,11 +80,11 @@ class UserController extends AbstractActionController
 
     public function viewProfileAction()
     {
-        UserController::setAdminNavbar($this->userRepository, $this, self::userId);
+        UserController::setAdminNavbar($this->userRepository, $this, self::USER_ID);
         $this->layout()->setVariables(['headTitleName' => 'Просмотр профиля']);
         $viewModel = new ViewModel(['viewProfileForm' => $this->viewProfileForm]);
 
-        $profile = $this->userRepository->findProfile(self::userId);
+        $profile = $this->userRepository->findProfile(self::USER_ID);
         $this->viewProfileForm->bind($profile);
         $this->viewProfileForm->get('profile')->get('image')
             ->setAttribute('src', $profile->getImagePath());
@@ -111,11 +111,11 @@ class UserController extends AbstractActionController
 
     public function editProfileAction()
     {
-        UserController::setAdminNavbar($this->userRepository, $this, self::userId);
+        UserController::setAdminNavbar($this->userRepository, $this, self::USER_ID);
         $this->layout()->setVariables(['headTitleName' => 'Редактирование профиля']);
 
         try {
-            $foundProfile = $this->userRepository->findProfile(self::userId);
+            $foundProfile = $this->userRepository->findProfile(self::USER_ID);
             $changePassword = new ChangePassword($foundProfile->getId());
         } catch (InvalidArgumentException $ex) {
             return $this->redirect()->toRoute('home');
@@ -179,7 +179,7 @@ class UserController extends AbstractActionController
 
     public function viewUserListAction()
     {
-        UserController::setAdminNavbar($this->userRepository, $this, self::userId);
+        UserController::setAdminNavbar($this->userRepository, $this, self::USER_ID);
         $viewModel = new ViewModel();
 
         $headTitleName = 'Список пользователей';
@@ -189,7 +189,7 @@ class UserController extends AbstractActionController
         $viewModel->setVariables([
             'userInfo'           => $this->userRepository->findUsers(),
             'positionRepository' => $this->positionRepository,
-            'maxPageCount'       => self::maxPageCount,
+            'maxPageCount'       => self::MAX_USER_COUNT,
             'page'               => 1,
             'userFilterForm'     => $this->userFilterForm,
         ]);

@@ -172,9 +172,9 @@ class UserRepository implements UserRepositoryInterface
         $select->where($where);
         $select->order($order);
         if ($limit) {
-            $select->limit(UserController::maxPageCount);
+            $select->limit(UserController::MAX_USER_COUNT);
         }
-        $select->offset(($page - 1) * UserController::maxPageCount);
+        $select->offset(($page - 1) * UserController::MAX_USER_COUNT);
 
         /** @var User[] $users */
         $users = Extracter::extractValues(
