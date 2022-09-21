@@ -49,6 +49,13 @@ class AdminController extends AbstractActionController
     {
         $userId = $this->getUserId();
 
+        if (
+            !isset($userId) ||
+            !$this->userRepository->findUser($userId)->getStatus()['admin']
+        ) {
+            return $this->redirect()->toRoute('user/view-profile');
+        }
+
         $viewModel = new ViewModel();
 
         $this->layout()->setVariable('headTitleName', 'Список пользователей (Администратор)');
