@@ -6,6 +6,7 @@ use Application\Form\Login;
 use Application\Model\Command\UserCommandInterface;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\User;
+use Application\Model\Repository\UserRepositoryInterface;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Session\Container as SessionContainer;
 use Laminas\View\Model\ViewModel;
@@ -32,23 +33,31 @@ class LoginController extends AbstractActionController
      * @var SessionContainer
      */
     private SessionContainer $sessionContainer;
+    /**
+     * @var UserRepositoryInterface
+     */
+    private UserRepositoryInterface $userRepository;
 
     /**
-     * @param Login\LoginForm      $loginForm
-     * @param Login\SignUpForm     $signUpForm
-     * @param Login\RecoverForm    $recoverForm
-     * @param UserCommandInterface $userCommand
+     * @param Login\LoginForm         $loginForm
+     * @param Login\SignUpForm        $signUpForm
+     * @param Login\RecoverForm       $recoverForm
+     * @param UserRepositoryInterface $userRepository
+     * @param UserCommandInterface    $userCommand
+     * @param SessionContainer        $sessionContainer
      */
     public function __construct(
-        Login\LoginForm      $loginForm,
-        Login\SignUpForm     $signUpForm,
-        Login\RecoverForm    $recoverForm,
-        UserCommandInterface $userCommand,
-        SessionContainer     $sessionContainer
+        Login\LoginForm         $loginForm,
+        Login\SignUpForm        $signUpForm,
+        Login\RecoverForm       $recoverForm,
+        UserRepositoryInterface $userRepository,
+        UserCommandInterface    $userCommand,
+        SessionContainer        $sessionContainer
     ) {
         $this->loginForm = $loginForm;
         $this->signUpForm = $signUpForm;
         $this->recoverForm = $recoverForm;
+        $this->userRepository = $userRepository;
         $this->userCommand = $userCommand;
         $this->sessionContainer = $sessionContainer;
     }
