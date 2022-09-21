@@ -89,13 +89,13 @@ class UserController extends AbstractActionController
     {
         $userId = $this->sessionContainer->offsetGet('userId');
 
-        UserController::setAdminNavbar($this->userRepository, $this, self::userId);
+        UserController::setAdminNavbar($this->userRepository, $this, $userId);
 
         $this->layout()->setVariables(['headTitleName' => 'Просмотр профиля']);
 
         $viewModel = new ViewModel(['viewProfileForm' => $this->viewProfileForm]);
 
-        $profile = $this->userRepository->findProfile(self::userId);
+        $profile = $this->userRepository->findProfile($userId);
 
         $this->viewProfileForm->bind($profile);
         $this->viewProfileForm->get('profile')->get('image')
