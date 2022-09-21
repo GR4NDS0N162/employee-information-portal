@@ -80,7 +80,7 @@ class LoginController extends AbstractActionController
         if (
             $foundUser->getPassword() == $data['currentPassword']
         ) {
-            $this->sessionContainer->offsetSet(LoginController::USER_ID, $foundUser->getId());
+            $this->setUserId($foundUser->getId());
             return $this->redirect()->toRoute('user/view-profile');
         } else {
             return $this->redirect()->toRoute('home');
@@ -110,7 +110,7 @@ class LoginController extends AbstractActionController
         );
 
         $userId = $this->userCommand->insertUser($user, $email);
-        $this->sessionContainer->offsetSet(LoginController::USER_ID, $userId);
+        $this->setUserId($userId);
 
         return $this->redirect()->toRoute('user/view-profile');
     }
@@ -134,5 +134,10 @@ class LoginController extends AbstractActionController
 
         $this->userCommand->setTempPassword($email);
         return $this->redirect()->toRoute('home');
+    }
+
+    private function setUserId(int $userId): void
+    {
+        $this->sessionContainer->offsetSet(LoginController::USER_ID, $userId);
     }
 }
