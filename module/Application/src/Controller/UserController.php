@@ -49,7 +49,7 @@ class UserController extends AbstractActionController
 
     public function viewProfileAction()
     {
-        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID);
+        $userId = $this->getUserId();
 
         UserController::setAdminNavbar($this->userRepository, $this, $userId);
 
@@ -78,7 +78,7 @@ class UserController extends AbstractActionController
 
     public function editProfileAction()
     {
-        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID);
+        $userId = $this->getUserId();
 
         UserController::setAdminNavbar($this->userRepository, $this, $userId);
 
@@ -149,7 +149,7 @@ class UserController extends AbstractActionController
 
     public function viewUserListAction()
     {
-        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID);
+        $userId = $this->getUserId();
 
         UserController::setAdminNavbar($this->userRepository, $this, $userId);
 
@@ -162,5 +162,10 @@ class UserController extends AbstractActionController
         ]);
 
         return $viewModel;
+    }
+
+    private function getUserId(): ?int
+    {
+        return $this->sessionContainer->offsetGet(LoginController::USER_ID);
     }
 }

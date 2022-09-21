@@ -50,7 +50,7 @@ class MessengerController extends AbstractActionController
 
     public function viewDialogListAction()
     {
-        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID);
+        $userId = $this->getUserId();
 
         UserController::setAdminNavbar($this->userRepository, $this, $userId);
 
@@ -72,7 +72,7 @@ class MessengerController extends AbstractActionController
 
     public function viewMessagesAction()
     {
-        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID);
+        $userId = $this->getUserId();
 
         UserController::setAdminNavbar($this->userRepository, $this, $userId);
 
@@ -103,7 +103,7 @@ class MessengerController extends AbstractActionController
 
     public function getDialogsAction()
     {
-        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID);
+        $userId = $this->getUserId();
 
         $request = $this->getRequest();
 
@@ -131,7 +131,7 @@ class MessengerController extends AbstractActionController
 
     public function sendMessageAction()
     {
-        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID);
+        $userId = $this->getUserId();
 
         $request = $this->getRequest();
 
@@ -157,7 +157,7 @@ class MessengerController extends AbstractActionController
 
     public function loadMessagesAction()
     {
-        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID);
+        $userId = $this->getUserId();
 
         $request = $this->getRequest();
 
@@ -185,5 +185,10 @@ class MessengerController extends AbstractActionController
         ]);
 
         return $viewModel;
+    }
+
+    private function getUserId(): ?int
+    {
+        return $this->sessionContainer->offsetGet(LoginController::USER_ID);
     }
 }
