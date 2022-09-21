@@ -17,6 +17,6 @@ interface MessageRepositoryInterface
     public function findMessagesOfDialog(
         $dialogId,
         $lastMessageId = null,
-        $maxLoadCount = MessengerController::maxLoadCount
+        $maxLoadCount = MessengerController::MAX_MESSAGE_COUNT
     );
 }

@@ -17,7 +17,7 @@ use Laminas\View\Model\ViewModel;
 class MessengerController extends AbstractActionController
 {
     /** @var int Maximum number of uploaded messages at a time. */
-    public const maxLoadCount = 20;
+    public const MAX_MESSAGE_COUNT = 20;
 
     private DialogFilterForm $dialogFilterForm;
     private NewMessageForm $newMessageForm;

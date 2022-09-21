@@ -31,7 +31,7 @@ class MessageRepository implements MessageRepositoryInterface
     public function findMessagesOfDialog(
         $dialogId,
         $lastMessageId = null,
-        $maxLoadCount = MessengerController::maxLoadCount
+        $maxLoadCount = MessengerController::MAX_MESSAGE_COUNT
     ) {
         $select = new Select(['mes' => 'message']);
         $select->columns([
