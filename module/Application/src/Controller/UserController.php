@@ -9,6 +9,7 @@ use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\Controller\AbstractController;
 use Laminas\Session\Container as SessionContainer;
 use Laminas\View\Model\ViewModel;
 
@@ -105,16 +106,16 @@ class UserController extends AbstractActionController
     }
 
     /**
-     * @param UserRepositoryInterface  $userRepository
-     * @param AbstractActionController $controller
-     * @param int                      $userId
+     * @param UserRepositoryInterface $userRepository
+     * @param AbstractController      $controller
+     * @param int                     $userId
      *
      * @return void
      */
     public static function setAdminNavbar(
-        UserRepositoryInterface  $userRepository,
-        AbstractActionController $controller,
-        int                      $userId
+        UserRepositoryInterface $userRepository,
+        AbstractController      $controller,
+        int                     $userId
     ) {
         if ($userRepository->findUser($userId)->getStatus()['admin']) {
             $controller->layout()->setVariables(['navbar' => 'Laminas\Navigation\Admin']);
