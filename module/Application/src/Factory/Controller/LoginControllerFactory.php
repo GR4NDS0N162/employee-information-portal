@@ -9,6 +9,7 @@ use Application\Form\Login\SignUpForm;
 use Application\Model\Command\UserCommandInterface;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\Session\Container as SessionContainer;
 
 class LoginControllerFactory implements FactoryInterface
 {
@@ -22,6 +23,7 @@ class LoginControllerFactory implements FactoryInterface
             $formManager->get(SignUpForm::class),
             $formManager->get(RecoverForm::class),
             $container->get(UserCommandInterface::class),
+            $container->get(SessionContainer::class),
         );
     }
 }

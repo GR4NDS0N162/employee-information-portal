@@ -8,6 +8,8 @@ use Application\Factory\Repository as RepositoryFactory;
 use Application\Model\Command as Command;
 use Application\Model\Options as Options;
 use Application\Model\Repository as Repository;
+use Laminas\ServiceManager\Factory\InvokableFactory;
+use Laminas\Session\Container;
 
 return [
     'aliases'   => [
@@ -40,5 +42,6 @@ return [
         Repository\UserRepository::class     => RepositoryFactory\UserRepositoryFactory::class,
         Repository\DialogRepository::class   => RepositoryFactory\DialogRepositoryFactory::class,
         Repository\MessageRepository::class  => RepositoryFactory\MessageRepositoryFactory::class,
+        Container::class                     => InvokableFactory::class,
     ],
 ];

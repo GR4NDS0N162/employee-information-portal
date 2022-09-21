@@ -11,6 +11,7 @@ use Application\Model\Repository\MessageRepositoryInterface;
 use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Session\Container as SessionContainer;
 use Laminas\View\Model\ViewModel;
 
 class MessengerController extends AbstractActionController
@@ -48,6 +49,10 @@ class MessengerController extends AbstractActionController
      * @var MessageCommandInterface
      */
     private MessageCommandInterface $messageCommand;
+    /**
+     * @var SessionContainer
+     */
+    private SessionContainer $sessionContainer;
 
     /**
      * @param DialogFilterForm            $dialogFilterForm
@@ -65,7 +70,8 @@ class MessengerController extends AbstractActionController
         UserRepositoryInterface     $userRepository,
         PositionRepositoryInterface $positionRepository,
         MessageRepositoryInterface  $messageRepository,
-        MessageCommandInterface     $messageCommand
+        MessageCommandInterface     $messageCommand,
+        SessionContainer            $sessionContainer
     ) {
         $this->dialogFilterForm = $dialogFilterForm;
         $this->newMessageForm = $newMessageForm;
@@ -74,6 +80,7 @@ class MessengerController extends AbstractActionController
         $this->positionRepository = $positionRepository;
         $this->messageRepository = $messageRepository;
         $this->messageCommand = $messageCommand;
+        $this->sessionContainer = $sessionContainer;
     }
 
     public function viewDialogListAction()

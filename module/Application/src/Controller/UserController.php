@@ -9,6 +9,7 @@ use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Session\Container as SessionContainer;
 use Laminas\View\Model\ViewModel;
 
 class UserController extends AbstractActionController
@@ -50,6 +51,10 @@ class UserController extends AbstractActionController
      * @var UserCommandInterface
      */
     private UserCommandInterface $userCommand;
+    /**
+     * @var SessionContainer
+     */
+    private SessionContainer $sessionContainer;
 
     /**
      * @param Form\ProfileForm            $profileForm
@@ -67,7 +72,8 @@ class UserController extends AbstractActionController
         Form\ChangePasswordForm     $changePasswordForm,
         UserRepositoryInterface     $userRepository,
         PositionRepositoryInterface $positionRepository,
-        UserCommandInterface        $userCommand
+        UserCommandInterface        $userCommand,
+        SessionContainer            $sessionContainer
     ) {
         $this->profileForm = $profileForm;
         $this->viewProfileForm = $viewProfileForm;
@@ -76,6 +82,7 @@ class UserController extends AbstractActionController
         $this->userRepository = $userRepository;
         $this->positionRepository = $positionRepository;
         $this->userCommand = $userCommand;
+        $this->sessionContainer = $sessionContainer;
     }
 
     public function viewProfileAction()

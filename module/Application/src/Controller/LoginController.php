@@ -7,6 +7,7 @@ use Application\Model\Command\UserCommandInterface;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\User;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Session\Container;
 use Laminas\View\Model\ViewModel;
 
 class LoginController extends AbstractActionController
@@ -27,6 +28,10 @@ class LoginController extends AbstractActionController
      * @var UserCommandInterface
      */
     private UserCommandInterface $userCommand;
+    /**
+     * @var Container
+     */
+    private Container $container;
 
     /**
      * @param Login\LoginForm      $loginForm
@@ -38,12 +43,14 @@ class LoginController extends AbstractActionController
         Login\LoginForm      $loginForm,
         Login\SignUpForm     $signUpForm,
         Login\RecoverForm    $recoverForm,
-        UserCommandInterface $userCommand
+        UserCommandInterface $userCommand,
+        Container            $container
     ) {
         $this->loginForm = $loginForm;
         $this->signUpForm = $signUpForm;
         $this->recoverForm = $recoverForm;
         $this->userCommand = $userCommand;
+        $this->container = $container;
     }
 
     public function indexAction()

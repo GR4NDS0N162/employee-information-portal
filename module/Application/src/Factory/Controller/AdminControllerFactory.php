@@ -12,6 +12,7 @@ use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\Session\Container as SessionContainer;
 
 class AdminControllerFactory implements FactoryInterface
 {
@@ -28,6 +29,7 @@ class AdminControllerFactory implements FactoryInterface
             $container->get(PositionRepositoryInterface::class),
             $container->get(UserCommandInterface::class),
             $container->get(PositionCommandInterface::class),
+            $container->get(SessionContainer::class),
         );
     }
 }
