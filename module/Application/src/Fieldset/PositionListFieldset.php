@@ -21,7 +21,7 @@ class PositionListFieldset extends Fieldset
                 'class' => 'row g-3',
             ],
             'options'    => [
-                'label'                  => 'Должности',
+                'label'                  => 'Positions',
                 'count'                  => 0,
                 'allow_add'              => true,
                 'allow_remove'           => true,

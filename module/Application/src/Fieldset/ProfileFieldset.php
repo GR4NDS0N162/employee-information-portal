@@ -32,7 +32,7 @@ class ProfileFieldset extends Fieldset
                 'accept' => 'image/*',
             ],
             'options'    => [
-                'label'            => 'Фото',
+                'label'            => 'Image',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
@@ -42,10 +42,10 @@ class ProfileFieldset extends Fieldset
             'type'       => Element\Text::class,
             'attributes' => [
                 'class'       => 'form-control',
-                'placeholder' => 'Иванов',
+                'placeholder' => 'Smith',
             ],
             'options'    => [
-                'label'            => 'Фамилия',
+                'label'            => 'Surname',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
@@ -55,10 +55,10 @@ class ProfileFieldset extends Fieldset
             'type'       => Element\Text::class,
             'attributes' => [
                 'class'       => 'form-control',
-                'placeholder' => 'Иван',
+                'placeholder' => 'Jerry',
             ],
             'options'    => [
-                'label'            => 'Имя',
+                'label'            => 'Name',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
@@ -68,10 +68,10 @@ class ProfileFieldset extends Fieldset
             'type'       => Element\Text::class,
             'attributes' => [
                 'class'       => 'form-control',
-                'placeholder' => 'Иванович',
+                'placeholder' => 'Richard',
             ],
             'options'    => [
-                'label'            => 'Отчество',
+                'label'            => 'Patronymic',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
@@ -83,7 +83,7 @@ class ProfileFieldset extends Fieldset
                 'class' => 'form-select',
             ],
             'options'    => [
-                'label'            => 'Пол',
+                'label'            => 'Gender',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
                 'options'          => GenderOptions::getOptions(),
             ],
@@ -96,7 +96,7 @@ class ProfileFieldset extends Fieldset
                 'class' => 'form-control',
             ],
             'options'    => [
-                'label'            => 'Дата рождения',
+                'label'            => 'Date of birth',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
@@ -121,7 +121,7 @@ class ProfileFieldset extends Fieldset
                 'class' => 'row g-3 non-empty-collection',
             ],
             'options'    => [
-                'label'                  => 'E-mail-ы',
+                'label'                  => 'Emails',
                 'count'                  => 1,
                 'allow_add'              => true,
                 'allow_remove'           => true,
@@ -143,7 +143,7 @@ class ProfileFieldset extends Fieldset
                 'class' => 'row g-3',
             ],
             'options'    => [
-                'label'                  => 'Телефоны',
+                'label'                  => 'Phone numbers',
                 'count'                  => 0,
                 'allow_add'              => true,
                 'allow_remove'           => true,

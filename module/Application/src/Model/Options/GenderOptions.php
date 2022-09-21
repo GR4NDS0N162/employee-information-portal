@@ -10,9 +10,9 @@ class GenderOptions
     public static function getOptions()
     {
         return [
-            null => 'Не выбран',
-            1    => 'Мужской',
-            2    => 'Женский',
+            null => 'Not specified',
+            1    => 'Male',
+            2    => 'Female',
         ];
     }
 }

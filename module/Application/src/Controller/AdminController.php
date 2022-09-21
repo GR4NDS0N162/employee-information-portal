@@ -58,7 +58,7 @@ class AdminController extends AbstractActionController
 
         $viewModel = new ViewModel();
 
-        $this->layout()->setVariable('headTitleName', 'Список пользователей (Администратор)');
+        $this->layout()->setVariable('headTitleName', 'List of users (Administrator)');
         $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
 
         $viewModel->setVariables([
@@ -286,7 +286,7 @@ class AdminController extends AbstractActionController
         }
 
         $this->layout()->setVariables([
-            'headTitleName' => 'Редактирование пользователя (Администратор)',
+            'headTitleName' => 'Editing the user (Administrator)',
             'navbar'        => 'Laminas\Navigation\Admin',
         ]);
 
@@ -318,7 +318,7 @@ class AdminController extends AbstractActionController
         $userId = $this->getUserId();
 
         $this->layout()->setVariables([
-            'headTitleName' => 'Управление должностями (Администратор)',
+            'headTitleName' => 'Position administration (Administrator)',
             'navbar'        => 'Laminas\Navigation\Admin',
         ]);
 

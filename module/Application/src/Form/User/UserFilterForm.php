@@ -45,7 +45,7 @@ class UserFilterForm extends Form
                 'class' => 'form-select',
             ],
             'options'    => [
-                'label'            => 'Должность',
+                'label'            => 'Position',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
                 'options'          => $this->positionOptions->getEnabledOptions(),
             ],
@@ -58,7 +58,7 @@ class UserFilterForm extends Form
                 'class' => 'form-select',
             ],
             'options'    => [
-                'label'            => 'Пол',
+                'label'            => 'Gender',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
                 'options'          => GenderOptions::getOptions(),
             ],
@@ -71,7 +71,7 @@ class UserFilterForm extends Form
                 'class' => 'row g-3',
             ],
             'options'    => [
-                'label' => 'Возраст',
+                'label' => 'Age',
             ],
         ]);
 
@@ -81,10 +81,10 @@ class UserFilterForm extends Form
             'attributes' => [
                 'class'       => 'form-control',
                 'rows'        => '3',
-                'placeholder' => 'Иванов Иван Иванович, +79283627374, example@name.com',
+                'placeholder' => 'Smith Jerry Richard, +79283627374, example@name.com',
             ],
             'options'    => [
-                'label'            => 'ФИО, телефон, email',
+                'label'            => 'Full name, phone number, email',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
@@ -97,7 +97,7 @@ class UserFilterForm extends Form
                 'class' => 'btn btn-outline-success w-100',
             ],
             'options'    => [
-                'label' => 'Применить фильтры',
+                'label' => 'Apply the filters',
             ],
         ], [
             'priority' => -10 ** 9,
@@ -110,7 +110,7 @@ class UserFilterForm extends Form
                 'class' => 'form-select',
             ],
             'options'    => [
-                'label'            => 'Активен',
+                'label'            => 'Active',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
                 'options'          => YesNoOptions::getActiveOptions(),
             ],

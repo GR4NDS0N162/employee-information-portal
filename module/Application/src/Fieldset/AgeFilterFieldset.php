@@ -19,7 +19,7 @@ class AgeFilterFieldset extends Fieldset
                 'placeholder' => 1,
             ],
             'options'    => [
-                'label' => 'От',
+                'label' => 'From',
             ],
         ]);
 
@@ -31,7 +31,7 @@ class AgeFilterFieldset extends Fieldset
                 'placeholder' => 99,
             ],
             'options'    => [
-                'label' => 'До',
+                'label' => 'To',
             ],
         ]);
     }

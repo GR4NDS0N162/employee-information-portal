@@ -56,7 +56,7 @@ class MessengerController extends AbstractActionController
 
         $viewModel = new ViewModel();
 
-        $this->layout()->setVariable('headTitleName', 'Диалоги');
+        $this->layout()->setVariable('headTitleName', 'Dialogs');
 
         $dialogs = $this->dialogRepository->getDialogList($userId);
 
@@ -87,7 +87,7 @@ class MessengerController extends AbstractActionController
 
         $viewModel = new ViewModel();
 
-        $this->layout()->setVariable('headTitleName', 'Сообщения');
+        $this->layout()->setVariable('headTitleName', 'Messages');
 
         $userInfo = $this->userRepository->findUser($userId);
         $buddyInfo = $this->userRepository->findUser($buddyId);

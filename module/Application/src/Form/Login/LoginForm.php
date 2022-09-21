@@ -40,7 +40,7 @@ class LoginForm extends Form
                 'required'    => 'required',
             ],
             'options'    => [
-                'label'            => 'Пароль',
+                'label'            => 'Password',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
@@ -53,7 +53,7 @@ class LoginForm extends Form
                 'class' => 'btn btn-lg btn-outline-primary w-100',
             ],
             'options'    => [
-                'label' => 'Войти',
+                'label' => 'Login',
             ],
         ], [
             'priority' => -10 ** 9,

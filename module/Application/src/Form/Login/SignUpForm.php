@@ -53,7 +53,7 @@ class SignUpForm extends Form
                 'required' => 'required',
             ],
             'options'    => [
-                'label'            => 'Должность',
+                'label'            => 'Position',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
                 'options'          => $this->positionOptions->getDisabledOptions(),
             ],
@@ -72,7 +72,7 @@ class SignUpForm extends Form
                 'pattern'      => '^(?=.*?[а-яa-z])(?=.*?[А-ЯA-Z])(?=.*?[0-9])(?=.*?[!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~])[а-яa-zА-ЯA-Z0-9!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]*$',
             ],
             'options'    => [
-                'label'            => 'Пароль',
+                'label'            => 'Password',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
@@ -87,7 +87,7 @@ class SignUpForm extends Form
                 'pattern'     => '',
             ],
             'options'    => [
-                'label'            => 'Подтверждение пароля',
+                'label'            => 'Password confirm',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
@@ -100,7 +100,7 @@ class SignUpForm extends Form
                 'class' => 'btn btn-lg btn-outline-success w-100',
             ],
             'options'    => [
-                'label' => 'Зарегистрироваться',
+                'label' => 'Sign up',
             ],
         ], [
             'priority' => -10 ** 9,

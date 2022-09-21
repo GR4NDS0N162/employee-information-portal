@@ -19,7 +19,7 @@ class PositionFieldset extends Fieldset
             'type'       => Element\Text::class,
             'attributes' => [
                 'class'       => 'form-control',
-                'placeholder' => 'Уборщик',
+                'placeholder' => 'Part of the ship, part of the crew',
                 'required'    => 'required',
             ],
         ]);

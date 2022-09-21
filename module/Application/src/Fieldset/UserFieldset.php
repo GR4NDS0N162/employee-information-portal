@@ -46,7 +46,7 @@ class UserFieldset extends ProfileFieldset
                 'id'    => uniqid('checkbox_', true),
             ],
             'options'    => [
-                'label'              => 'Сгенерировать пароль и отправить на почту',
+                'label'              => 'Generate a password and send it by email',
                 'label_attributes'   => UserFieldset::DEFAULT_CHECK_LABEL_ATTRIBUTES,
                 'use_hidden_element' => false,
             ],
@@ -60,7 +60,7 @@ class UserFieldset extends ProfileFieldset
                 'required' => 'required',
             ],
             'options'    => [
-                'label'            => 'Должность',
+                'label'            => 'Position',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
                 'options'          => $this->positionOptions->getOptions(),
             ],
@@ -78,7 +78,7 @@ class UserFieldset extends ProfileFieldset
                 'pattern'     => '^(?=.*?[а-яa-z])(?=.*?[А-ЯA-Z])(?=.*?[0-9])(?=.*?[!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~])[а-яa-zА-ЯA-Z0-9!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]*$',
             ],
             'options'    => [
-                'label'            => 'Пароль',
+                'label'            => 'Password',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);

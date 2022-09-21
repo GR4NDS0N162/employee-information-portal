@@ -29,7 +29,7 @@ class ProfileForm extends Form
             'name'       => 'submit',
             'type'       => Submit::class,
             'attributes' => [
-                'value' => 'Сохранить изменения',
+                'value' => 'Save your changes',
                 'class' => 'btn btn-outline-success w-100',
             ],
         ]);

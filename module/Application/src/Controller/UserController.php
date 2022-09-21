@@ -53,7 +53,7 @@ class UserController extends AbstractActionController
 
         UserController::setAdminNavbar($this->userRepository, $this, $userId);
 
-        $this->layout()->setVariables(['headTitleName' => 'Просмотр профиля']);
+        $this->layout()->setVariables(['headTitleName' => 'View profile']);
 
         $viewModel = new ViewModel(['viewProfileForm' => $this->viewProfileForm]);
 
@@ -82,7 +82,7 @@ class UserController extends AbstractActionController
 
         UserController::setAdminNavbar($this->userRepository, $this, $userId);
 
-        $this->layout()->setVariables(['headTitleName' => 'Редактирование профиля']);
+        $this->layout()->setVariables(['headTitleName' => 'Edit profile']);
 
         try {
             $foundProfile = $this->userRepository->findProfile($userId);
@@ -155,7 +155,7 @@ class UserController extends AbstractActionController
 
         $viewModel = new ViewModel();
 
-        $this->layout()->setVariable('headTitleName', 'Список пользователей');
+        $this->layout()->setVariable('headTitleName', 'List of users');
 
         $viewModel->setVariables([
             'userFilterForm' => $this->userFilterForm,

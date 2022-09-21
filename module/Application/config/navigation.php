@@ -5,61 +5,61 @@ namespace Application;
 return [
     'default' => [
         [
-            'label' => 'Профиль',
+            'label' => 'Profile',
             'route' => 'user/view-profile',
             'pages' => [
                 [
-                    'label' => 'Просмотр',
+                    'label' => 'View',
                     'route' => 'user/view-profile',
                 ],
                 [
-                    'label' => 'Редактирование',
+                    'label' => 'Edit',
                     'route' => 'user/edit-profile',
                 ],
             ],
         ],
         [
-            'label' => 'Пользователи',
+            'label' => 'Users',
             'route' => 'user/view-user-list',
         ],
         [
-            'label' => 'Диалоги',
+            'label' => 'Dialogs',
             'route' => 'user/view-dialog-list',
         ],
     ],
     'admin'   => [
         [
-            'label' => 'Профиль',
+            'label' => 'Profile',
             'route' => 'user/view-profile',
             'pages' => [
                 [
-                    'label' => 'Просмотр',
+                    'label' => 'View',
                     'route' => 'user/view-profile',
                 ],
                 [
-                    'label' => 'Редактирование',
+                    'label' => 'Edit',
                     'route' => 'user/edit-profile',
                 ],
             ],
         ],
         [
-            'label' => 'Пользователи',
+            'label' => 'Users',
             'route' => 'user/view-user-list',
         ],
         [
-            'label' => 'Диалоги',
+            'label' => 'Dialogs',
             'route' => 'user/view-dialog-list',
         ],
         [
-            'label' => 'Администраторам',
+            'label' => 'For admins',
             'route' => 'admin/view-user-list',
             'pages' => [
                 [
-                    'label' => 'Пользователи',
+                    'label' => 'Users',
                     'route' => 'admin/view-user-list',
                 ],
                 [
-                    'label' => 'Должности',
+                    'label' => 'Positions',
                     'route' => 'admin/edit-position',
                 ],
             ],

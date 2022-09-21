@@ -16,7 +16,7 @@ class UserFormCollection extends FormCollection
         $this->setLabelWrapper('<div class="form-label order-first">%s</div>');
         $this->setTemplateWrapper(
             '<span class="d-none" data-template="%s"></span>' .
-            '<div class="notification">Список пуст.</div>'
+            '<div class="notification">The list is empty.</div>'
         );
     }
 
@@ -30,7 +30,7 @@ class UserFormCollection extends FormCollection
             $format = sprintf(
                 '<div class="card d-flex p-3">%1$s%2$s</div>',
                 $format,
-                '<button type="button" name="add" class="btn btn-outline-primary order-first mb-3" value="">Добавить в список</button>'
+                '<button type="button" name="add" class="btn btn-outline-primary order-first mb-3" value="">Add to the list</button>'
             );
         }
 

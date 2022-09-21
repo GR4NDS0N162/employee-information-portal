@@ -24,7 +24,7 @@ class NewMessageForm extends Form
             'type'       => Element\Text::class,
             'attributes' => [
                 'class'       => 'form-control',
-                'placeholder' => 'Напишите сообщение...',
+                'placeholder' => 'Write a message...',
                 'required'    => 'required',
             ],
         ]);
@@ -37,7 +37,7 @@ class NewMessageForm extends Form
                 'class' => 'btn btn-outline-success w-100',
             ],
             'options'    => [
-                'label' => 'Отправить',
+                'label' => 'Send',
             ],
         ], [
             'priority' => -10 ** 9,
