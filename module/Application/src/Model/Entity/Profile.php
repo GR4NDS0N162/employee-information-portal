@@ -409,9 +409,9 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
             if ($isExclusion) {
                 $old = "лет";
             }
-        }
 
-        $age .= ' ' . $old;
+            $age .= ' ' . $old;
+        }
 
         return $age;
     }
