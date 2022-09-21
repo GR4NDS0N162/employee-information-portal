@@ -2,6 +2,8 @@
 
 namespace Application\Model\Command;
 
+use Application\Model\Entity\Email;
+use Application\Model\Entity\User;
 use Application\Model\Executer;
 use Application\Model\PasswordGenerator;
 use Application\Model\Repository\EmailRepositoryInterface;
@@ -73,7 +75,7 @@ class UserCommand implements UserCommandInterface
         $this->phoneCommand = $phoneCommand;
     }
 
-    public function insertUser($user, $email)
+    public function insertUser(User $user, Email $email): int
     {
         try {
             $foundEmail = $this->emailRepository->findEmail($email->getAddress());
