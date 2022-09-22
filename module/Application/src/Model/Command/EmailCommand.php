@@ -6,14 +6,8 @@ use Laminas\Db\Adapter\AdapterInterface;
 
 class EmailCommand implements EmailCommandInterface
 {
-    /**
-     * @var AdapterInterface
-     */
     private AdapterInterface $db;
 
-    /**
-     * @param AdapterInterface $db
-     */
     public function __construct(AdapterInterface $db)
     {
         $this->db = $db;
