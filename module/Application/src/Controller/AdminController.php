@@ -160,22 +160,12 @@ class AdminController extends AbstractActionController
 
     public static function extractOptions(array $data): array
     {
-        $page = self::getPage($data['page']);
+        $page = (int)$data['page'];
 
         $order = self::getOrder($data['order']);
 
         $where = self::getWhere($data['where']);
         return array($page, $order, $where);
-    }
-
-    /**
-     * @param string $page
-     *
-     * @return int
-     */
-    public static function getPage(string $page): int
-    {
-        return (int)$page;
     }
 
     /**
