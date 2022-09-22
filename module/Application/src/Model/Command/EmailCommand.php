@@ -9,12 +9,12 @@ class EmailCommand implements EmailCommandInterface
     /**
      * @var AdapterInterface
      */
-    private $db;
+    private AdapterInterface $db;
 
     /**
      * @param AdapterInterface $db
      */
-    public function __construct($db)
+    public function __construct(AdapterInterface $db)
     {
         $this->db = $db;
     }
