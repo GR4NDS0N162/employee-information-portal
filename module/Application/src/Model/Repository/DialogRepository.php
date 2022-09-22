@@ -8,6 +8,7 @@ use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Expression;
 use Laminas\Db\Sql\Predicate;
 use Laminas\Db\Sql\Select;
+use Laminas\Db\Sql\Where;
 
 class DialogRepository implements DialogRepositoryInterface
 {
@@ -51,7 +52,7 @@ class DialogRepository implements DialogRepositoryInterface
         return array_values($commonDialogsId)[0];
     }
 
-    public function getDialogList($userId, $where = [])
+    public function getDialogList(int $userId, array $whereConfig)
     {
         $select = new Select(['u' => 'user']);
         $select->columns([
@@ -68,7 +69,7 @@ class DialogRepository implements DialogRepositoryInterface
             [],
             Select::JOIN_LEFT
         );
-        $select->where(array_merge(['u.id != ?' => $userId], $where));
+        $select->where(array_merge(['u.id != ?' => $userId], $whereConfig));
         $select->order([
             new Expression('ISNULL(mem.dialog_id)'),
         ]);

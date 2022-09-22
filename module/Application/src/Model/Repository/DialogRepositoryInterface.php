@@ -3,18 +3,16 @@
 namespace Application\Model\Repository;
 
 use Application\Model\Entity\Dialog;
-use Laminas\Db\Sql\Predicate\PredicateInterface;
-use Laminas\Db\Sql\Where;
 
 interface DialogRepositoryInterface
 {
     /**
-     * @param int                                           $userId
-     * @param Where|Closure|string|array|PredicateInterface $where
+     * @param int   $userId
+     * @param array $whereConfig
      *
      * @return Dialog[]
      */
-    public function getDialogList($userId, $where = []);
+    public function getDialogList(int $userId, array $whereConfig);
 
     /**
      * @param int $userId
