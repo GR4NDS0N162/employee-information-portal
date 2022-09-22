@@ -140,7 +140,7 @@ class MessengerController extends AbstractActionController
         $viewModel->setVariables([
             'dialogList'     => $this->dialogRepository->getDialogList(
                 UserController::USER_ID,
-                AdminController::getWhere($data)
+                $data
             ),
             'userRepository' => $this->userRepository,
         ]);
