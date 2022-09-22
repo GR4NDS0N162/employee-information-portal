@@ -131,8 +131,8 @@ class UserCommand implements UserCommandInterface
             Executer::executeSql($delete, $this->db);
 
             if (
-                isset($user->getStatus()[$status->getName()]) &&
-                $user->getStatus()[$status->getName()] !== true
+                isset($user->getStatus()[$status->getName()])
+                && $user->getStatus()[$status->getName()] !== true
             ) {
                 $insert = new Insert('user_status');
                 $insert->values([
@@ -151,8 +151,8 @@ class UserCommand implements UserCommandInterface
         }
 
         if (
-            isset($profile->getImageFile()['tmp_name']) &&
-            !empty($profile->getImageFile()['tmp_name'])
+            isset($profile->getImageFile()['tmp_name'])
+            && !empty($profile->getImageFile()['tmp_name'])
         ) {
             if (!empty($profile->getImage())) {
                 unlink($profile->getImage());

@@ -29,17 +29,17 @@ class FieldsetMapper
         }
 
         if (
-            isset($config['value']) &&
-            is_string($config['value']) &&
-            !empty($config['value'])
+            isset($config['value'])
+            && is_string($config['value'])
+            && !empty($config['value'])
         ) {
             $element->setAttribute(self::KEY, $config['value']);
         }
 
         if (
-            ($element instanceof Collection) &&
-            isset($config['target_element']) &&
-            !empty($config['target_element'])
+            ($element instanceof Collection)
+            && isset($config['target_element'])
+            && !empty($config['target_element'])
         ) {
             self::setAttributes($element->getTargetElement(), $config['target_element']);
             return;

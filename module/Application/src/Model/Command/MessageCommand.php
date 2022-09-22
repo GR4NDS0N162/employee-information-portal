@@ -49,8 +49,8 @@ class MessageCommand implements MessageCommandInterface
         $currentDateTime = date('Y-m-d H:i:s');
         foreach ($messageList as $message) {
             if (
-                $message->getOpenedAt() === null &&
-                $message->getUserId() != $userId
+                $message->getOpenedAt() === null
+                && $message->getUserId() != $userId
             ) {
                 $message->setOpenedAt($currentDateTime);
             }

@@ -101,8 +101,8 @@ class MessengerController extends AbstractActionController
         $buddyId = (int)$this->params()->fromRoute('id', 0);
 
         if (
-            $buddyId === 0 ||
-            $buddyId === UserController::USER_ID
+            $buddyId === 0
+            || $buddyId === UserController::USER_ID
         ) {
             return $this->redirect()->toRoute('user/view-dialog-list');
         }
