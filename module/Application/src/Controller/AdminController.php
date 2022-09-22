@@ -133,24 +133,16 @@ class AdminController extends AbstractActionController
         return $viewModel;
     }
 
-    public static function arrayFilterRecursive($array, $callback = null)
+    public static function arrayFilterRecursive($array)
     {
         foreach ($array as $key => & $value) {
             if (is_array($value)) {
-                $value = AdminController::arrayFilterRecursive($value, $callback);
+                $value = AdminController::arrayFilterRecursive($value);
                 if (!$value) {
                     unset($array[$key]);
                 }
-            } else {
-                if (!is_null($callback)) {
-                    if (!$callback($value)) {
-                        unset($array[$key]);
-                    }
-                } else {
-                    if (!$value) {
-                        unset($array[$key]);
-                    }
-                }
+            } elseif (!$value) {
+                unset($array[$key]);
             }
         }
         unset($value);
