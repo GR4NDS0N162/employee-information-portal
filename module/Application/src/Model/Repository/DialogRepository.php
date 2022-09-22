@@ -52,7 +52,7 @@ class DialogRepository implements DialogRepositoryInterface
         return array_values($commonDialogsId)[0];
     }
 
-    public function getDialogList(int $userId, array $whereConfig)
+    public function getDialogList(int $userId, array $whereConfig = [])
     {
         $select = new Select(['u' => 'user']);
         $select->columns([
