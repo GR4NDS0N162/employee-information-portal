@@ -138,10 +138,8 @@ class AdminController extends AbstractActionController
         foreach ($array as $key => & $value) {
             if (is_array($value)) {
                 $value = AdminController::arrayFilterRecursive($value);
-                if (!$value) {
-                    unset($array[$key]);
-                }
-            } elseif (!$value) {
+            }
+            if (!$value) {
                 unset($array[$key]);
             }
         }
