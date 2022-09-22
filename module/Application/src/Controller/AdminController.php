@@ -15,6 +15,11 @@ use Laminas\View\Model\ViewModel;
 
 class AdminController extends AbstractActionController
 {
+    /** @var string A sign of emptiness.
+     * Indicates that there is no search for some column.
+     */
+    const EMPTY = '-';
+
     /**
      * @var Form\PositionForm
      */
@@ -245,21 +250,19 @@ class AdminController extends AbstractActionController
             }
         }
 
-        $empty = '-';
-
         if (isset($whereConfig['fullnamePhone'])) {
             $filterArr = array_map('trim', explode(',', $whereConfig['fullnamePhone']));
             if (count($filterArr) == 2) {
                 list($fullname, $phone) = $filterArr;
-                $where = self::getTextareaFilter($where, $fullname, $phone, $empty);
+                $where = self::getTextareaFilter($where, $fullname, $phone);
             }
         } elseif (isset($whereConfig['fullnamePhoneEmail'])) {
             $filterArr = array_map('trim', explode(',', $whereConfig['fullnamePhoneEmail']));
             if (count($filterArr) == 3) {
                 list($fullname, $phone, $email) = $filterArr;
-                $where = self::getTextareaFilter($where, $fullname, $phone, $empty);
+                $where = self::getTextareaFilter($where, $fullname, $phone);
 
-                if ($email != $empty) {
+                if ($email != self::EMPTY) {
                     $where[] = new Expression(
                         'u.id IN ( SELECT e.user_id FROM email AS e ' .
                         'WHERE e.address LIKE LOWER(CONCAT("%", ?, "%")))', [$email]
@@ -275,33 +278,31 @@ class AdminController extends AbstractActionController
      * @param array  $where
      * @param string $fullname
      * @param string $phone
-     * @param string $empty
      *
      * @return array
      */
     public static function getTextareaFilter(
         array  $where,
         string $fullname,
-        string $phone,
-        string $empty
+        string $phone
     ): array {
         $fullnameArr = explode(' ', $fullname);
 
         if (count($fullnameArr) == 3) {
             list($surname, $name, $patronymic) = $fullnameArr;
 
-            if ($surname != $empty) {
+            if ($surname != self::EMPTY) {
                 $where[] = new Expression('LOWER(u.surname) LIKE LOWER(CONCAT("%", ?, "%"))', [$surname]);
             }
-            if ($name != $empty) {
+            if ($name != self::EMPTY) {
                 $where[] = new Expression('LOWER(u.name) LIKE LOWER(CONCAT("%", ?, "%"))', [$name]);
             }
-            if ($patronymic != $empty) {
+            if ($patronymic != self::EMPTY) {
                 $where[] = new Expression('LOWER(u.patronymic) LIKE LOWER(CONCAT("%", ?, "%"))', [$patronymic]);
             }
         }
 
-        if ($phone != $empty) {
+        if ($phone != self::EMPTY) {
             $where[] = new Expression(
                 'u.id IN ( SELECT ph.user_id FROM phone AS ph ' .
                 'WHERE ph.number LIKE LOWER(CONCAT("%", ?, "%")))', [$phone]
