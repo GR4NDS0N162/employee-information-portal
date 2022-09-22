@@ -137,7 +137,7 @@ class DialogRepository implements DialogRepositoryInterface
             }
         }
 
-        $select->where(array_merge(['u.id != ?' => $userId], $whereConfig));
+        $select->where($where);
         $select->order([
             new Expression('ISNULL(mem.dialog_id)'),
         ]);
