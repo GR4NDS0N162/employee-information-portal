@@ -69,6 +69,74 @@ class DialogRepository implements DialogRepositoryInterface
             [],
             Select::JOIN_LEFT
         );
+
+        $where = new Where();
+        $where->notEqualTo('u.id', $userId);
+
+        if (isset($whereConfig['positionId'])) {
+            $where->equalTo(
+                'u.position_id',
+                (int)$whereConfig['positionId']
+            );
+        }
+
+        if (isset($whereConfig['gender'])) {
+            $where->equalTo(
+                'u.gender',
+                (int)$whereConfig['gender']
+            );
+        }
+
+        if (isset($whereConfig['active'])) {
+            $statusConfig = $whereConfig['active'];
+
+            $statusSelect = new Select(['us' => 'user_status']);
+            $statusSelect->columns(['us.user_id']);
+            $statusSelect->where(['us.status_id' => 2]);
+
+            if ($statusConfig == '1') {
+                $where->in('u.id', $statusSelect);
+            } elseif ($statusConfig == '2') {
+                $where->notIn('u.id', $statusSelect);
+            }
+        }
+
+        if (isset($whereConfig['admin'])) {
+            $statusConfig = $whereConfig['admin'];
+
+            $statusSelect = new Select(['us' => 'user_status']);
+            $statusSelect->columns(['us.user_id']);
+            $statusSelect->where(['us.status_id' => 1]);
+
+            if ($statusConfig == '1') {
+                $where->in('u.id', $statusSelect);
+            } elseif ($statusConfig == '2') {
+                $where->notIn('u.id', $statusSelect);
+            }
+        }
+
+        if (isset($whereConfig['age'])) {
+            $ageConfig = $whereConfig['age'];
+
+            if (isset($ageConfig['min'])) {
+                $where->greaterThanOrEqualTo(
+                    new Predicate\Expression(
+                        'TIMESTAMPDIFF(YEAR, u.birthday, NOW())'
+                    ),
+                    (int)$ageConfig['min']
+                );
+            }
+
+            if (isset($ageConfig['max'])) {
+                $where->lessThanOrEqualTo(
+                    new Predicate\Expression(
+                        'TIMESTAMPDIFF(YEAR, u.birthday, NOW())'
+                    ),
+                    (int)$ageConfig['max']
+                );
+            }
+        }
+
         $select->where(array_merge(['u.id != ?' => $userId], $whereConfig));
         $select->order([
             new Expression('ISNULL(mem.dialog_id)'),
