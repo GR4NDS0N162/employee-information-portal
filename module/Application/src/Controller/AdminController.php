@@ -133,7 +133,7 @@ class AdminController extends AbstractActionController
         return $viewModel;
     }
 
-    public static function arrayFilterRecursive($array)
+    public static function arrayFilterRecursive(array $array): array
     {
         foreach ($array as $key => & $value) {
             if (is_array($value)) {
