@@ -253,6 +253,7 @@ class UserRepository implements UserRepositoryInterface
             if (
                 isset($whereConfig['fullnamePhoneEmail'])
                 && isset($emailConfig)
+                && $emailConfig != ''
             ) {
                 // TODO: Сделай парсинг емейла.
             }
