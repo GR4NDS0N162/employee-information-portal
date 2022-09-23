@@ -15,42 +15,18 @@ use Laminas\Validator;
 
 class ChangePassword implements InputFilterAwareInterface, HydratorAwareInterface
 {
-    /**
-     * @var int|null
-     */
-    private $id;
-    /**
-     * @var string
-     */
-    private $currentPassword;
-    /**
-     * @var string
-     */
-    private $newPassword;
-    /**
-     * @var string
-     */
-    private $passwordCheck;
-    /**
-     * @var InputFilterInterface
-     */
-    private $inputFilter;
-    /**
-     * @var HydratorInterface
-     */
-    private $hydrator;
+    private ?int $id;
+    private string $currentPassword;
+    private string $newPassword;
+    private string $passwordCheck;
+    private InputFilterInterface $inputFilter;
+    private HydratorInterface $hydrator;
 
-    /**
-     * @param int|null $id
-     * @param string   $currentPassword
-     * @param string   $newPassword
-     * @param string   $passwordCheck
-     */
     public function __construct(
-        $id = null,
-        $currentPassword = '',
-        $newPassword = '',
-        $passwordCheck = ''
+        ?int   $id = null,
+        string $currentPassword = '',
+        string $newPassword = '',
+        string $passwordCheck = ''
     ) {
         $this->id = $id;
         $this->currentPassword = $currentPassword;
@@ -125,76 +101,52 @@ class ChangePassword implements InputFilterAwareInterface, HydratorAwareInterfac
         ]);
     }
 
-    public function getInputFilter()
+    public function getInputFilter():InputFilterInterface
     {
         return $this->inputFilter;
     }
 
-    public function setInputFilter($inputFilter)
+    public function setInputFilter(InputFilterInterface $inputFilter)
     {
         $this->inputFilter = $inputFilter;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @param int|null $id
-     */
-    public function setId($id)
+    public function setId(?int $id)
     {
         $this->id = $id;
     }
 
-    /**
-     * @return string
-     */
-    public function getCurrentPassword()
+    public function getCurrentPassword(): string
     {
         return $this->currentPassword;
     }
 
-    /**
-     * @param string $currentPassword
-     */
-    public function setCurrentPassword($currentPassword)
+    public function setCurrentPassword(string $currentPassword)
     {
         $this->currentPassword = $currentPassword;
     }
 
-    /**
-     * @return string
-     */
-    public function getNewPassword()
+    public function getNewPassword(): string
     {
         return $this->newPassword;
     }
 
-    /**
-     * @param string $newPassword
-     */
-    public function setNewPassword($newPassword)
+    public function setNewPassword(string $newPassword)
     {
         $this->newPassword = $newPassword;
     }
 
-    /**
-     * @return string
-     */
-    public function getPasswordCheck()
+    public function getPasswordCheck(): string
     {
         return $this->passwordCheck;
     }
 
-    /**
-     * @param string $passwordCheck
-     */
-    public function setPasswordCheck($passwordCheck)
+    public function setPasswordCheck(string $passwordCheck)
     {
         $this->passwordCheck = $passwordCheck;
     }

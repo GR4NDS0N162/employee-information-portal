@@ -12,14 +12,11 @@ use Laminas\Form\Form;
 
 class DialogFilterForm extends Form
 {
-    /**
-     * @var PositionOptions
-     */
-    private $positionOptions;
+    private PositionOptions $positionOptions;
 
     public function __construct(
-        $positionOptions,
-        $name = 'DialogFilterForm'
+        PositionOptions $positionOptions,
+                        $name = 'DialogFilterForm'
     ) {
         parent::__construct($name);
 

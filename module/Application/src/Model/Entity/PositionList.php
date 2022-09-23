@@ -15,20 +15,14 @@ class PositionList implements InputFilterAwareInterface, HydratorAwareInterface
     /**
      * @var Position[]
      */
-    private $list;
-    /**
-     * @var InputFilterInterface
-     */
-    private $inputFilter;
-    /**
-     * @var HydratorInterface
-     */
-    private $hydrator;
+    private array $list;
+    private InputFilterInterface $inputFilter;
+    private HydratorInterface $hydrator;
 
     /**
      * @param Position[] $list
      */
-    public function __construct($list = [])
+    public function __construct(array $list = [])
     {
         $this->list = $list;
 
@@ -56,12 +50,12 @@ class PositionList implements InputFilterAwareInterface, HydratorAwareInterface
         $this->hydrator = $hydrator;
     }
 
-    public function getInputFilter()
+    public function getInputFilter():InputFilterInterface
     {
         return $this->inputFilter;
     }
 
-    public function setInputFilter($inputFilter)
+    public function setInputFilter(InputFilterInterface $inputFilter)
     {
         $this->inputFilter = $inputFilter;
     }
@@ -69,7 +63,7 @@ class PositionList implements InputFilterAwareInterface, HydratorAwareInterface
     /**
      * @return Position[]
      */
-    public function getList()
+    public function getList(): array
     {
         return $this->list;
     }
@@ -77,7 +71,7 @@ class PositionList implements InputFilterAwareInterface, HydratorAwareInterface
     /**
      * @param Position[] $list
      */
-    public function setList($list)
+    public function setList(array $list)
     {
         $this->list = $list;
     }

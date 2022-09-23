@@ -14,10 +14,7 @@ class UserFieldset extends ProfileFieldset
         'class' => 'form-check-label',
     ];
 
-    /**
-     * @var PositionOptions
-     */
-    private $positionOptions;
+    private PositionOptions $positionOptions;
 
     public function __construct(
         PositionOptions $positionOptions,

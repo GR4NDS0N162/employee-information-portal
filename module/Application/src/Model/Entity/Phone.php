@@ -17,30 +17,14 @@ use Laminas\Validator\StringLength;
 
 class Phone implements InputFilterAwareInterface, HydratorAwareInterface
 {
-    /**
-     * @var string
-     */
-    private $number;
-    /**
-     * @var int|null
-     */
-    private $userId;
-    /**
-     * @var InputFilterInterface
-     */
-    private $inputFilter;
-    /**
-     * @var HydratorInterface
-     */
-    private $hydrator;
+    private string $number;
+    private ?int $userId;
+    private InputFilterInterface $inputFilter;
+    private HydratorInterface $hydrator;
 
-    /**
-     * @param string   $number
-     * @param int|null $userId
-     */
     public function __construct(
-        $number = '',
-        $userId = null
+        string $number = '',
+        ?int   $userId = null
     ) {
         $this->number = $number;
         $this->userId = $userId;
@@ -96,12 +80,12 @@ class Phone implements InputFilterAwareInterface, HydratorAwareInterface
         return isset($this->$prop);
     }
 
-    public function getInputFilter()
+    public function getInputFilter(): InputFilterInterface
     {
         return $this->inputFilter;
     }
 
-    public function setInputFilter($inputFilter)
+    public function setInputFilter(InputFilterInterface $inputFilter)
     {
         $this->inputFilter = $inputFilter;
     }
@@ -116,34 +100,22 @@ class Phone implements InputFilterAwareInterface, HydratorAwareInterface
         $this->hydrator = $hydrator;
     }
 
-    /**
-     * @return string
-     */
-    public function getNumber()
+    public function getNumber(): string
     {
         return $this->number;
     }
 
-    /**
-     * @param string $number
-     */
-    public function setNumber($number)
+    public function setNumber(string $number)
     {
         $this->number = $number;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getUserId()
+    public function getUserId(): ?int
     {
         return $this->userId;
     }
 
-    /**
-     * @param int|null $userId
-     */
-    public function setUserId($userId)
+    public function setUserId(?int $userId)
     {
         $this->userId = $userId;
     }

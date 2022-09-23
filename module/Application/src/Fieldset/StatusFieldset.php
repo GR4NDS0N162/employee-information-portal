@@ -9,14 +9,8 @@ use Laminas\Form\Fieldset;
 
 class StatusFieldset extends Fieldset
 {
-    /**
-     * @var StatusRepositoryInterface
-     */
     private StatusRepositoryInterface $statusRepository;
 
-    /**
-     * @param StatusRepositoryInterface $statusRepository
-     */
     public function __construct($statusRepository)
     {
         parent::__construct();

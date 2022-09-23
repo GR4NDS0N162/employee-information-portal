@@ -2,6 +2,8 @@
 
 namespace Application\Model\Command;
 
+use Application\Model\Entity\Position;
+use Application\Model\Entity\PositionList;
 use Application\Model\Executer;
 use Application\Model\Repository\PositionRepositoryInterface;
 use Laminas\Db\Adapter\AdapterInterface;
@@ -11,26 +13,18 @@ use Laminas\Db\Sql\Update;
 
 class PositionCommand implements PositionCommandInterface
 {
-    /**
-     * @var AdapterInterface
-     */
-    private $db;
-    /**
-     * @var PositionRepositoryInterface
-     */
-    private $positionRepository;
+    private AdapterInterface $db;
+    private PositionRepositoryInterface $positionRepository;
 
-    /**
-     * @param AdapterInterface            $db
-     * @param PositionRepositoryInterface $positionRepository
-     */
-    public function __construct($db, $positionRepository)
-    {
+    public function __construct(
+        AdapterInterface            $db,
+        PositionRepositoryInterface $positionRepository
+    ) {
         $this->db = $db;
         $this->positionRepository = $positionRepository;
     }
 
-    public function updatePositions($positionList)
+    public function updatePositions(PositionList $positionList)
     {
         $oldList = $this->positionRepository->findAllPositions();
         $newList = $positionList->getList();
@@ -53,7 +47,7 @@ class PositionCommand implements PositionCommandInterface
         }
     }
 
-    public function deletePositionById($id)
+    public function deletePositionById(int $id)
     {
         $delete = new Delete('position');
         $delete->where(['id = ?' => $id]);
@@ -61,7 +55,7 @@ class PositionCommand implements PositionCommandInterface
         Executer::executeSql($delete, $this->db);
     }
 
-    public function updatePosition($position)
+    public function updatePosition(Position $position)
     {
         $update = new Update('position');
         $update->set(['name' => $position->getName()]);
@@ -70,7 +64,7 @@ class PositionCommand implements PositionCommandInterface
         Executer::executeSql($update, $this->db);
     }
 
-    public function addPosition($position)
+    public function addPosition(Position $position)
     {
         $insert = new Insert('position');
         $insert->values(['name' => $position->getName()]);

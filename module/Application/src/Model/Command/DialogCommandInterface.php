@@ -10,5 +10,5 @@ interface DialogCommandInterface
      *
      * @return int
      */
-    public function createDialog($userId, $buddyId);
+    public function createDialog(int $userId, int $buddyId): int;
 }

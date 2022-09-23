@@ -10,26 +10,13 @@ use Laminas\Hydrator\Strategy\ScalarTypeStrategy;
 
 class Dialog implements HydratorAwareInterface
 {
-    /**
-     * @var int|null
-     */
-    private $id;
-    /**
-     * @var int
-     */
-    private $buddyId;
-    /**
-     * @var HydratorInterface
-     */
-    private $hydrator;
+    private ?int $id;
+    private int $buddyId;
+    private HydratorInterface $hydrator;
 
-    /**
-     * @param int|null $id
-     * @param int      $buddyId
-     */
     public function __construct(
-        $buddyId = 0,
-        $id = null
+        int $buddyId = 0,
+        ?int $id = null
     ) {
         $this->id = $id;
         $this->buddyId = $buddyId;
@@ -49,22 +36,22 @@ class Dialog implements HydratorAwareInterface
         return isset($this->$prop);
     }
 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setId($id)
+    public function setId(?int $id)
     {
         $this->id = $id;
     }
 
-    public function getBuddyId()
+    public function getBuddyId(): int
     {
         return $this->buddyId;
     }
 
-    public function setBuddyId($buddyId)
+    public function setBuddyId(int $buddyId)
     {
         $this->buddyId = $buddyId;
     }

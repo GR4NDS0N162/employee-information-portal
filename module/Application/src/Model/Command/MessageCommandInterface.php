@@ -11,7 +11,7 @@ interface MessageCommandInterface
      *
      * @return void
      */
-    public function sendMessage($message);
+    public function sendMessage(Message $message);
 
     /**
      * @param int       $userId
@@ -19,5 +19,5 @@ interface MessageCommandInterface
      *
      * @return Message[]
      */
-    public function readBy($userId, $messageList);
+    public function readBy(int $userId, array $messageList):array;
 }

@@ -2,6 +2,7 @@
 
 namespace Application\Model\Command;
 
+use Application\Model\Entity\Message;
 use Application\Model\Executer;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Insert;
@@ -9,20 +10,14 @@ use Laminas\Db\Sql\Update;
 
 class MessageCommand implements MessageCommandInterface
 {
-    /**
-     * @var AdapterInterface
-     */
-    private $db;
+    private AdapterInterface $db;
 
-    /**
-     * @param AdapterInterface $db
-     */
-    public function __construct($db)
+    public function __construct(AdapterInterface $db)
     {
         $this->db = $db;
     }
 
-    public function sendMessage($message)
+    public function sendMessage(Message $message)
     {
         $insert = new Insert('message');
         $insert->values([
@@ -40,7 +35,7 @@ class MessageCommand implements MessageCommandInterface
         Executer::executeSql($insert, $this->db);
     }
 
-    public function readBy($userId, $messageList)
+    public function readBy(int $userId, array $messageList):array
     {
         if (empty($messageList)) {
             return $messageList;

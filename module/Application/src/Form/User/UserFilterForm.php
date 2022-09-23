@@ -13,18 +13,11 @@ use Laminas\Form\Form;
 
 class UserFilterForm extends Form
 {
-    /**
-     * @var PositionOptions
-     */
-    private $positionOptions;
+    private PositionOptions $positionOptions;
 
-    /**
-     * @param PositionOptions $positionOptions
-     * @param string          $name
-     */
     public function __construct(
-        $positionOptions,
-        $name = 'UserFilterForm'
+        PositionOptions $positionOptions,
+                        $name = 'UserFilterForm'
     ) {
         parent::__construct($name);
 

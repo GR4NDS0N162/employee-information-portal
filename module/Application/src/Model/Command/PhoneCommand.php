@@ -10,20 +10,14 @@ use Laminas\Db\Sql\Insert;
 
 class PhoneCommand implements PhoneCommandInterface
 {
-    /**
-     * @var AdapterInterface
-     */
-    private $db;
+    private AdapterInterface $db;
 
-    /**
-     * @param AdapterInterface $db
-     */
-    public function __construct($db)
+    public function __construct(AdapterInterface $db)
     {
         $this->db = $db;
     }
 
-    public function updatePhones($userId, $oldList, $newList)
+    public function updatePhones(int $userId, array $oldList, array $newList)
     {
         $oldNumberList = array_column($oldList, 'number');
         $newNumberList = array_column($newList, 'number');
@@ -41,12 +35,7 @@ class PhoneCommand implements PhoneCommandInterface
         }
     }
 
-    /**
-     * @param string $number
-     *
-     * @return void
-     */
-    private function deletePhoneByNumber($number)
+    private function deletePhoneByNumber(string $number)
     {
         $delete = new Delete('phone');
         $delete->where(['number = ?' => $number]);
@@ -54,12 +43,7 @@ class PhoneCommand implements PhoneCommandInterface
         Executer::executeSql($delete, $this->db);
     }
 
-    /**
-     * @param Phone $phone
-     *
-     * @return void
-     */
-    private function addPhone($phone)
+    private function addPhone(Phone $phone)
     {
         $insert = new Insert('phone');
         $insert->values([

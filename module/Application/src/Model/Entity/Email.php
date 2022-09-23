@@ -17,30 +17,14 @@ use Laminas\Validator\StringLength;
 
 class Email implements InputFilterAwareInterface, HydratorAwareInterface
 {
-    /**
-     * @var string
-     */
-    private $address;
-    /**
-     * @var int|null
-     */
-    private $userId;
-    /**
-     * @var InputFilterInterface
-     */
-    private $inputFilter;
-    /**
-     * @var HydratorInterface
-     */
-    private $hydrator;
+    private string $address;
+    private ?int $userId;
+    private InputFilterInterface $inputFilter;
+    private HydratorInterface $hydrator;
 
-    /**
-     * @param string   $address
-     * @param int|null $userId
-     */
     public function __construct(
-        $address = '',
-        $userId = null
+        string $address = '',
+        ?int   $userId = null
     ) {
         $this->address = $address;
         $this->userId = $userId;
@@ -96,44 +80,32 @@ class Email implements InputFilterAwareInterface, HydratorAwareInterface
         return isset($this->$prop);
     }
 
-    public function getInputFilter()
+    public function getInputFilter(): InputFilterInterface
     {
         return $this->inputFilter;
     }
 
-    public function setInputFilter($inputFilter)
+    public function setInputFilter(InputFilterInterface $inputFilter)
     {
         $this->inputFilter = $inputFilter;
     }
 
-    /**
-     * @return string
-     */
-    public function getAddress()
+    public function getAddress(): string
     {
         return $this->address;
     }
 
-    /**
-     * @param string $address
-     */
-    public function setAddress($address)
+    public function setAddress(string $address)
     {
         $this->address = $address;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getUserId()
+    public function getUserId(): ?int
     {
         return $this->userId;
     }
 
-    /**
-     * @param int|null $userId
-     */
-    public function setUserId($userId)
+    public function setUserId(?int $userId)
     {
         $this->userId = $userId;
     }

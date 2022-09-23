@@ -10,10 +10,7 @@ use Laminas\Form\Form;
 
 class SignUpForm extends Form
 {
-    /**
-     * @var PositionOptions
-     */
-    private $positionOptions;
+    private PositionOptions $positionOptions;
 
     public function __construct(
         PositionOptions $positionOptions

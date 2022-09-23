@@ -2,6 +2,10 @@
 
 namespace Application\Model\Command;
 
+use Application\Model\Entity\ChangePassword;
+use Application\Model\Entity\Email;
+use Application\Model\Entity\Profile;
+use Application\Model\Entity\User;
 use Application\Model\Executer;
 use Application\Model\PasswordGenerator;
 use Application\Model\Repository\EmailRepositoryInterface;
@@ -17,52 +21,22 @@ use RuntimeException;
 
 class UserCommand implements UserCommandInterface
 {
-    /**
-     * @var AdapterInterface
-     */
-    private $db;
-    /**
-     * @var EmailRepositoryInterface
-     */
-    private $emailRepository;
-    /**
-     * @var PhoneRepositoryInterface
-     */
-    private $phoneRepository;
-    /**
-     * @var UserRepositoryInterface
-     */
-    private $userRepository;
-    /**
-     * @var EmailCommandInterface
-     */
-    private $emailCommand;
-    /**
-     * @var PhoneCommandInterface
-     */
-    private $phoneCommand;
-    /**
-     * @var StatusRepositoryInterface
-     */
-    private $statusRepository;
+    private AdapterInterface $db;
+    private EmailRepositoryInterface $emailRepository;
+    private PhoneRepositoryInterface $phoneRepository;
+    private UserRepositoryInterface $userRepository;
+    private EmailCommandInterface $emailCommand;
+    private PhoneCommandInterface $phoneCommand;
+    private StatusRepositoryInterface $statusRepository;
 
-    /**
-     * @param AdapterInterface          $db
-     * @param EmailRepositoryInterface  $emailRepository
-     * @param PhoneRepositoryInterface  $phoneRepository
-     * @param UserRepositoryInterface   $userRepository
-     * @param StatusRepositoryInterface $statusRepository
-     * @param EmailCommandInterface     $emailCommand
-     * @param PhoneCommandInterface     $phoneCommand
-     */
     public function __construct(
-        $db,
-        $emailRepository,
-        $phoneRepository,
-        $userRepository,
-        $statusRepository,
-        $emailCommand,
-        $phoneCommand
+        AdapterInterface          $db,
+        EmailRepositoryInterface  $emailRepository,
+        PhoneRepositoryInterface  $phoneRepository,
+        UserRepositoryInterface   $userRepository,
+        StatusRepositoryInterface $statusRepository,
+        EmailCommandInterface     $emailCommand,
+        PhoneCommandInterface     $phoneCommand
     ) {
         $this->db = $db;
         $this->emailRepository = $emailRepository;
@@ -73,7 +47,7 @@ class UserCommand implements UserCommandInterface
         $this->phoneCommand = $phoneCommand;
     }
 
-    public function insertUser($user, $email)
+    public function insertUser(User $user, Email $email)
     {
         try {
             $foundEmail = $this->emailRepository->findEmail($email->getAddress());
@@ -105,7 +79,7 @@ class UserCommand implements UserCommandInterface
         }
     }
 
-    public function updateUser($user)
+    public function updateUser(User $user)
     {
         $this->updateProfile($user);
 
@@ -144,7 +118,7 @@ class UserCommand implements UserCommandInterface
         }
     }
 
-    public function updateProfile($profile)
+    public function updateProfile(Profile $profile)
     {
         if (empty($profile->getId())) {
             throw new RuntimeException('Cannot update profile; missing identifier');
@@ -201,7 +175,7 @@ class UserCommand implements UserCommandInterface
         Executer::executeSql($update, $this->db);
     }
 
-    public function changePassword($changePassword)
+    public function changePassword(ChangePassword $changePassword)
     {
         $update = new Update('user');
         $update->set([

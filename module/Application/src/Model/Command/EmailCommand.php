@@ -16,7 +16,7 @@ class EmailCommand implements EmailCommandInterface
         $this->db = $db;
     }
 
-    public function updateEmails($userId, $oldList, $newList)
+    public function updateEmails(int $userId, array $oldList, array $newList)
     {
         $oldAddressList = array_column($oldList, 'address');
         $newAddressList = array_column($newList, 'address');

@@ -13,5 +13,5 @@ interface EmailCommandInterface
      *
      * @return void
      */
-    public function updateEmails($userId, $oldList, $newList);
+    public function updateEmails(int $userId, array $oldList, array $newList);
 }

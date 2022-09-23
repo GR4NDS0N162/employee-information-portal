@@ -13,5 +13,5 @@ interface PhoneCommandInterface
      *
      * @return void
      */
-    public function updatePhones($userId, $oldList, $newList);
+    public function updatePhones(int $userId, array $oldList, array $newList);
 }

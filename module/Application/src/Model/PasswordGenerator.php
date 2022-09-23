@@ -4,12 +4,7 @@ namespace Application\Model;
 
 class PasswordGenerator
 {
-    /**
-     * @param int $length
-     *
-     * @return string
-     */
-    public static function generate($length = 8)
+    public static function generate(int $length = 8): string
     {
         $chars = [
             [

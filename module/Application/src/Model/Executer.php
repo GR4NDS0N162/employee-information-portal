@@ -23,19 +23,11 @@ class Executer
     const SELECT = 'select';
     const UPDATE = 'update';
 
-    /**
-     * @param PreparableSqlInterface $preparable
-     * @param AdapterInterface       $db
-     * @param string                 $operationDescription
-     * @param string                 $runtimeExceptionFormat
-     *
-     * @return mixed|null
-     */
     public static function executeSql(
-        $preparable,
-        $db,
-        $operationDescription = 'sql',
-        $runtimeExceptionFormat = 'Database error occurred during %s operation.'
+        PreparableSqlInterface $preparable,
+        AdapterInterface       $db,
+        string                 $operationDescription = 'sql',
+        string                 $runtimeExceptionFormat = 'Database error occurred during %s operation.'
     ) {
         $sql = new Sql($db);
         $statement = $sql->prepareStatementForSqlObject($preparable);

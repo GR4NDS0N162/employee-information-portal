@@ -21,58 +21,21 @@ use Laminas\Validator\StringLength;
 
 class Profile implements InputFilterAwareInterface, HydratorAwareInterface
 {
-    /**
-     * @var int|null
-     */
-    protected $id;
-    /**
-     * @var string|null
-     */
-    protected $surname;
-    /**
-     * @var string|null
-     */
-    protected $name;
-    /**
-     * @var string|null
-     */
-    protected $patronymic;
-    /**
-     * @var int|null
-     */
-    protected $gender;
-    /**
-     * @var string|null
-     */
-    protected $birthday;
-    /**
-     * @var string|null
-     */
-    protected $image;
-    /**
-     * @var array|null
-     */
-    protected $imageFile;
-    /**
-     * @var string|null
-     */
-    protected $skype;
-    /**
-     * @var Email[]
-     */
-    protected $emails;
-    /**
-     * @var Phone[]
-     */
-    protected $phones;
-    /**
-     * @var HydratorInterface
-     */
-    protected $hydrator;
-    /**
-     * @var InputFilterInterface
-     */
-    protected $inputFilter;
+    protected ?int $id;
+    protected ?string $surname;
+    protected ?string $name;
+    protected ?string $patronymic;
+    protected ?int $gender;
+    protected ?string $birthday;
+    protected ?string $image;
+    protected ?array $imageFile;
+    protected ?string $skype;
+    /** @var Email[] */
+    protected array $emails;
+    /** @var Phone[]  */
+    protected array $phones;
+    protected HydratorInterface $hydrator;
+    protected InputFilterInterface $inputFilter;
 
     /**
      * @param Email[]     $emails

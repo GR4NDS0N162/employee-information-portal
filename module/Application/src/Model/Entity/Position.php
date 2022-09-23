@@ -16,28 +16,12 @@ use Laminas\Validator\StringLength;
 
 class Position implements InputFilterAwareInterface, HydratorAwareInterface
 {
-    /**
-     * @var int|null
-     */
-    private $id;
-    /**
-     * @var string
-     */
-    private $name;
-    /**
-     * @var InputFilterInterface
-     */
-    private $inputFilter;
-    /**
-     * @var HydratorInterface
-     */
-    private $hydrator;
+    private ?int $id;
+    private string $name;
+    private InputFilterInterface $inputFilter;
+    private HydratorInterface $hydrator;
 
-    /**
-     * @param string   $name
-     * @param int|null $id
-     */
-    public function __construct($name = '', $id = null)
+    public function __construct(string $name = '', ?int $id = null)
     {
         $this->id = $id;
         $this->name = $name;
@@ -76,12 +60,12 @@ class Position implements InputFilterAwareInterface, HydratorAwareInterface
         $this->hydrator->addStrategy('name', ScalarTypeStrategy::createToString());
     }
 
-    public function getInputFilter()
+    public function getInputFilter(): InputFilterInterface
     {
         return $this->inputFilter;
     }
 
-    public function setInputFilter($inputFilter)
+    public function setInputFilter(InputFilterInterface $inputFilter)
     {
         $this->inputFilter = $inputFilter;
     }
@@ -106,34 +90,22 @@ class Position implements InputFilterAwareInterface, HydratorAwareInterface
         return isset($this->$prop);
     }
 
-    /**
-     * @return int|null
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @param int|null $id
-     */
-    public function setId($id)
+    public function setId(?int $id)
     {
         $this->id = $id;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }

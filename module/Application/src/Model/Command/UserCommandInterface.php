@@ -15,14 +15,14 @@ interface UserCommandInterface
      *
      * @return void
      */
-    public function insertUser($user, $email);
+    public function insertUser(User $user, Email $email);
 
     /**
      * @param ChangePassword $changePassword
      *
      * @return void
      */
-    public function changePassword($changePassword);
+    public function changePassword(ChangePassword $changePassword);
 
     /**
      * @param Email|int $identifier
@@ -36,12 +36,12 @@ interface UserCommandInterface
      *
      * @return void
      */
-    public function updateUser($user);
+    public function updateUser(User $user);
 
     /**
      * @param Profile $profile
      *
      * @return void
      */
-    public function updateProfile($profile);
+    public function updateProfile(Profile $profile);
 }

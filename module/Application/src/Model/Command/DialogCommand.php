@@ -8,20 +8,14 @@ use Laminas\Db\Sql\Insert;
 
 class DialogCommand implements DialogCommandInterface
 {
-    /**
-     * @var AdapterInterface
-     */
-    private $db;
+    private AdapterInterface $db;
 
-    /**
-     * @param AdapterInterface $db
-     */
-    public function __construct($db)
+    public function __construct(AdapterInterface $db)
     {
         $this->db = $db;
     }
 
-    public function createDialog($userId, $buddyId)
+    public function createDialog(int $userId, int $buddyId): int
     {
         $insert = new Insert('dialog');
         $insert->columns(['id']);
