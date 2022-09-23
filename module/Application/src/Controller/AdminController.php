@@ -86,7 +86,7 @@ class AdminController extends AbstractActionController
 
         $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
-        $viewModel->setTemplate('partial/user-list-admin.phtml');
+        $viewModel->setTemplate('partial/user-list.phtml');
 
         $viewModel->setVariables([
             'userList' => $this->userRepository->findUsers(
