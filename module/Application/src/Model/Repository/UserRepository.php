@@ -240,39 +240,45 @@ class UserRepository implements UserRepositoryInterface
 
         // TODO: Добавить парсинг $whereConfig['fullnamePhoneEmail'].
 
-        $statusSelect = new Select(['us' => 'user_status']);
-        $statusSelect->columns([
-            'us.user_id',
-        ], false);
-        $statusSelect->join(
-            ['s' => 'status'],
-            's.id = us.status_id',
-            [],
-        );
-
         if (isset($whereConfig['active'])) {
-            $statusConfig = $whereConfig['active'];
-            $statusSelect->where(
-                (new Where())->equalTo('s.name', 'active')
+            $activeSelect = new Select(['us' => 'user_status']);
+            $activeSelect->columns([
+                'us.user_id',
+            ], false);
+            $activeSelect->join(
+                ['s' => 'status'],
+                's.id = us.status_id',
+                [],
             );
+            $activeSelect->where(['s.name' => 'active']);
+
+            $statusConfig = $whereConfig['active'];
 
             if ($statusConfig == '1') {
-                $where->in('u.id', $statusSelect);
+                $where->in('u.id', $activeSelect);
             } elseif ($statusConfig == '2') {
-                $where->notIn('u.id', $statusSelect);
+                $where->notIn('u.id', $activeSelect);
             }
         }
 
         if (isset($whereConfig['admin'])) {
-            $statusConfig = $whereConfig['admin'];
-            $statusSelect->where(
-                (new Where())->equalTo('s.name', 'admin')
+            $adminSelect = new Select(['us' => 'user_status']);
+            $adminSelect->columns([
+                'us.user_id',
+            ], false);
+            $adminSelect->join(
+                ['s' => 'status'],
+                's.id = us.status_id',
+                [],
             );
+            $adminSelect->where(['s.name' => 'admin']);
+
+            $statusConfig = $whereConfig['admin'];
 
             if ($statusConfig == '1') {
-                $where->in('u.id', $statusSelect);
+                $where->in('u.id', $adminSelect);
             } elseif ($statusConfig == '2') {
-                $where->notIn('u.id', $statusSelect);
+                $where->notIn('u.id', $adminSelect);
             }
         }
 
