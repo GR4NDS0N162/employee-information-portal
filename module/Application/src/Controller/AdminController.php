@@ -20,44 +20,14 @@ class AdminController extends AbstractActionController
      */
     const EMPTY = '-';
 
-    /**
-     * @var Form\PositionForm
-     */
     private Form\PositionForm $positionForm;
-    /**
-     * @var Form\UserForm
-     */
     private Form\UserForm $userForm;
-    /**
-     * @var Form\AdminFilterForm
-     */
     private Form\AdminFilterForm $adminFilterForm;
-    /**
-     * @var UserRepositoryInterface
-     */
     private UserRepositoryInterface $userRepository;
-    /**
-     * @var PositionRepositoryInterface
-     */
     private PositionRepositoryInterface $positionRepository;
-    /**
-     * @var UserCommandInterface
-     */
     private UserCommandInterface $userCommand;
-    /**
-     * @var PositionCommandInterface
-     */
     private PositionCommandInterface $positionCommand;
 
-    /**
-     * @param Form\PositionForm           $positionForm
-     * @param Form\UserForm               $userForm
-     * @param Form\AdminFilterForm        $adminFilterForm
-     * @param UserRepositoryInterface     $userRepository
-     * @param PositionRepositoryInterface $positionRepository
-     * @param UserCommandInterface        $userCommand
-     * @param PositionCommandInterface    $positionCommand
-     */
     public function __construct(
         Form\PositionForm           $positionForm,
         Form\UserForm               $userForm,
