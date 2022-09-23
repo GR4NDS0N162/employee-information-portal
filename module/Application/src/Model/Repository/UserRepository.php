@@ -195,9 +195,13 @@ class UserRepository implements UserRepositoryInterface
         return $users;
     }
 
-    public static function parseWhereConfig(array $whereConfig): Where
-    {
-        $where = new Where();
+    public static function parseWhereConfig(
+        array  $whereConfig,
+        ?Where $where = null
+    ): Where {
+        if (!isset($where)) {
+            $where = new Where();
+        }
 
         if (isset($whereConfig['positionId'])) {
             $positionId = (integer)$whereConfig['positionId'];
