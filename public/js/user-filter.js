@@ -47,6 +47,7 @@ function getData(updatePage = false)
         where: oldWhere,
         page: pageSelector[0].value || 1,
         order: sortSelector[0].value || 'fullname',
+        formName: formSelector[0].getAttribute('name'),
     };
 
     if (updatePage) {
