@@ -22,44 +22,14 @@ class UserController extends AbstractActionController
      */
     public const USER_ID = 1;
 
-    /**
-     * @var Form\ProfileForm
-     */
     private Form\ProfileForm $profileForm;
-    /**
-     * @var Form\ViewProfileForm
-     */
     private Form\ViewProfileForm $viewProfileForm;
-    /**
-     * @var Form\UserFilterForm
-     */
     private Form\UserFilterForm $userFilterForm;
-    /**
-     * @var Form\ChangePasswordForm
-     */
     private Form\ChangePasswordForm $changePasswordForm;
-    /**
-     * @var UserRepositoryInterface
-     */
     private UserRepositoryInterface $userRepository;
-    /**
-     * @var PositionRepositoryInterface
-     */
     private PositionRepositoryInterface $positionRepository;
-    /**
-     * @var UserCommandInterface
-     */
     private UserCommandInterface $userCommand;
 
-    /**
-     * @param Form\ProfileForm            $profileForm
-     * @param Form\ViewProfileForm        $viewProfileForm
-     * @param Form\UserFilterForm         $userFilterForm
-     * @param Form\ChangePasswordForm     $changePasswordForm
-     * @param UserRepositoryInterface     $userRepository
-     * @param PositionRepositoryInterface $positionRepository
-     * @param UserCommandInterface        $userCommand
-     */
     public function __construct(
         Form\ProfileForm            $profileForm,
         Form\ViewProfileForm        $viewProfileForm,
