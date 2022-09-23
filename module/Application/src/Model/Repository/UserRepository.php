@@ -10,6 +10,7 @@ use Application\Model\Entity\User;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Predicate\Expression;
+use Laminas\Db\Sql\Predicate\Like;
 use Laminas\Db\Sql\Predicate\PredicateSet;
 use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Where;
@@ -235,8 +236,15 @@ class UserRepository implements UserRepositoryInterface
                 unset($fullnameWhere);
             }
 
-            if (isset($phoneConfig)) {
-                // TODO: Сделай парсинг телефона.
+            if (!empty($phoneConfig)) {
+                $phoneSelect = new Select('phone');
+                $phoneSelect->columns([
+                    'user_id',
+                ], false);
+                $phoneSelect->where(new Like('number', '%' . $phoneConfig . '%'));
+
+                $where->in('u.id', $phoneSelect);
+                unset($phoneSelect);
             }
 
             if (
