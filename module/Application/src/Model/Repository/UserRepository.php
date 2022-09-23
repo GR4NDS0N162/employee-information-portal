@@ -7,7 +7,7 @@ use Application\Model\Entity\Email;
 use Application\Model\Entity\User;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
-use Laminas\Db\Sql\ExpressionInterface;
+use Laminas\Db\Sql\Predicate\Expression;
 use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Where;
 
@@ -221,9 +221,8 @@ class UserRepository implements UserRepositoryInterface
                 $minAge = (integer)$ageConfig['min'];
 
                 $where->greaterThanOrEqualTo(
-                    'TIMESTAMPDIFF(YEAR, u.birthday, NOW())',
+                    new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW())'),
                     $minAge,
-                    ExpressionInterface::TYPE_LITERAL
                 );
             }
 
@@ -231,9 +230,8 @@ class UserRepository implements UserRepositoryInterface
                 $maxAge = (integer)$ageConfig['max'];
 
                 $where->lessThanOrEqualTo(
-                    'TIMESTAMPDIFF(YEAR, u.birthday, NOW())',
+                    new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW())'),
                     $maxAge,
-                    ExpressionInterface::TYPE_LITERAL
                 );
             }
         }
