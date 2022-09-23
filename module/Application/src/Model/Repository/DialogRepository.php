@@ -153,6 +153,8 @@ class DialogRepository implements DialogRepositoryInterface
             }
         }
 
+        // TODO: Добавить парсинг $whereConfig['fullnamePhone'].
+
         $select->where($where);
         $select->order([
             new Expression('ISNULL(mem.dialog_id)'),
