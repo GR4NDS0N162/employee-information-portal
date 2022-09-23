@@ -171,16 +171,9 @@ class UserRepository implements UserRepositoryInterface
             [],
         );
 
+        $select->where(UserRepository::parseWhereConfig($whereConfig));
 
-        $where = new Where();
-
-        $select->where($where);
-
-
-        $order = [];
-
-        $select->order($order);
-
+        $select->order(UserRepository::parseOrderConfig($orderConfig));
 
         if ($limit) {
             $select->limit(UserController::MAX_USER_COUNT);
