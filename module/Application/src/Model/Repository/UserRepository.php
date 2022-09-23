@@ -2,6 +2,7 @@
 
 namespace Application\Model\Repository;
 
+use Application\Controller\AdminController;
 use Application\Controller\UserController;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\Profile;
@@ -9,6 +10,7 @@ use Application\Model\Entity\User;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Predicate\Expression;
+use Laminas\Db\Sql\Predicate\PredicateSet;
 use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Where;
 
@@ -218,8 +220,19 @@ class UserRepository implements UserRepositoryInterface
                 explode(',', $whereConfig['fullnamePhoneEmail'] ?: $whereConfig['fullnamePhone'])
             );
 
-            if (isset($fullnameConfig)) {
-                // TODO: Сделай парсинг ФИО.
+            $fullnameConfig = AdminController::arrayFilterRecursive(explode(' ', $fullnameConfig));
+            if (!empty($fullnameConfig)) {
+                $fullnameWhere = new Where(null, PredicateSet::COMBINED_BY_OR);
+
+                foreach ($fullnameConfig as $str) {
+                    $str = strtolower($str);
+                    $fullnameWhere->like(new Expression('LOWER(u.surname)'), '%' . $str . '%');
+                    $fullnameWhere->like(new Expression('LOWER(u.name)'), '%' . $str . '%');
+                    $fullnameWhere->like(new Expression('LOWER(u.patronymic)'), '%' . $str . '%');
+                }
+
+                $where->addPredicates($fullnameWhere);
+                unset($fullnameWhere);
             }
 
             if (isset($phoneConfig)) {
