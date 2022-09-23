@@ -7,6 +7,7 @@ use Application\Model\Entity\Email;
 use Application\Model\Entity\User;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\Sql\ExpressionInterface;
 use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Where;
 
@@ -211,6 +212,66 @@ class UserRepository implements UserRepositoryInterface
         if (isset($whereConfig['gender'])) {
             $gender = (integer)$whereConfig['gender'];
             $where->equalTo('u.gender', $gender);
+        }
+
+        if (isset($whereConfig['age'])) {
+            $ageConfig = $whereConfig['age'];
+
+            if (isset($ageConfig['min'])) {
+                $minAge = (integer)$ageConfig['min'];
+
+                $where->greaterThanOrEqualTo(
+                    'TIMESTAMPDIFF(YEAR, u.birthday, NOW())',
+                    $minAge,
+                    ExpressionInterface::TYPE_LITERAL
+                );
+            }
+
+            if (isset($ageConfig['max'])) {
+                $maxAge = (integer)$ageConfig['max'];
+
+                $where->lessThanOrEqualTo(
+                    'TIMESTAMPDIFF(YEAR, u.birthday, NOW())',
+                    $maxAge,
+                    ExpressionInterface::TYPE_LITERAL
+                );
+            }
+        }
+
+        // TODO: Добавить парсинг $whereConfig['fullnamePhone'].
+
+        // TODO: Добавить парсинг $whereConfig['fullnamePhoneEmail'].
+
+        $statusSelect = new Select(['us' => 'user_status']);
+        $statusSelect->columns([
+            'us.user_id',
+        ], false);
+        $statusSelect->join(
+            ['s' => 'status'],
+            's.id = us.status_id',
+            [],
+        );
+
+        if (isset($whereConfig['active'])) {
+            $statusConfig = $whereConfig['active'];
+            $statusSelect->where(new Where(['s.name' => 'active']));
+
+            if ($statusConfig == '1') {
+                $where->in('u.id', $statusSelect);
+            } elseif ($statusConfig == '2') {
+                $where->notIn('u.id', $statusSelect);
+            }
+        }
+
+        if (isset($whereConfig['admin'])) {
+            $statusConfig = $whereConfig['admin'];
+            $statusSelect->where(new Where(['s.name' => 'admin']));
+
+            if ($statusConfig == '1') {
+                $where->in('u.id', $statusSelect);
+            } elseif ($statusConfig == '2') {
+                $where->notIn('u.id', $statusSelect);
+            }
         }
 
         return $where;
