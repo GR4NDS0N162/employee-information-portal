@@ -40,7 +40,7 @@ class UserRepository implements UserRepositoryInterface
 
     public function findUser($identifier): User
     {
-        if (is_int($identifier)) {
+        if (is_integer($identifier)) {
             return $this->findUserById($identifier);
         } elseif ($identifier instanceof Email) {
             return $this->findUserByEmail($identifier);
@@ -55,7 +55,7 @@ class UserRepository implements UserRepositoryInterface
         }
     }
 
-    private function findUserById($id)
+    private function findUserById(int $userId): User
     {
         $select = new Select(['u' => 'user']);
         $select->columns([
@@ -73,7 +73,7 @@ class UserRepository implements UserRepositoryInterface
             'image'        => 'u.image',
             'skype'        => 'u.skype',
         ], false);
-        $select->where(['u.id = ?' => $id]);
+        $select->where(['u.id' => $userId]);
         $select->join(
             ['pos' => 'position'],
             'pos.id = u.position_id',
@@ -93,12 +93,7 @@ class UserRepository implements UserRepositoryInterface
         return $user;
     }
 
-    /**
-     * @param User $user
-     *
-     * @return User
-     */
-    private function pullExtraInfo($user)
+    private function pullExtraInfo(User $user)
     {
         $userStatuses = $this->statusRepository->findStatusesOfUser($user->getId());
         $statusMap = [];
@@ -112,11 +107,9 @@ class UserRepository implements UserRepositoryInterface
 
         $phones = $this->phoneRepository->findPhonesOfUser($user->getId());
         $user->setPhones($phones);
-
-        return $user;
     }
 
-    private function findUserByEmail($email)
+    private function findUserByEmail(Email $email): User
     {
         $foundEmail = $this->emailRepository->findEmail($email->getAddress());
 
