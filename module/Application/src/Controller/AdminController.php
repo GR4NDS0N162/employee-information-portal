@@ -103,12 +103,12 @@ class AdminController extends AbstractActionController
 
         $data = $request->getPost()->toArray();
         parse_str($data['where'], $data['where']);
-        $data['where'] = self::arrayFilterRecursive($data['where']);
-
-        list($page, $order, $where) = self::extractOptions($data);
+        $whereConfig = self::arrayFilterRecursive($data['where']);
+        $orderConfig = $data['order'];
+        $page = (integer)$data['page'];
 
         if (isset($data['updatePage'])) {
-            $count = count($this->userRepository->findUsers($where));
+            $count = count($this->userRepository->findUsers($whereConfig));
             echo json_encode([
                 'count'        => $count,
                 'maxPageCount' => UserController::MAX_USER_COUNT,
@@ -122,8 +122,8 @@ class AdminController extends AbstractActionController
 
         $viewModel->setVariables([
             'userList' => $this->userRepository->findUsers(
-                $where,
-                $order,
+                $whereConfig,
+                $orderConfig,
                 true,
                 $page
             ),
@@ -146,150 +146,6 @@ class AdminController extends AbstractActionController
         unset($value);
 
         return $array;
-    }
-
-    public static function extractOptions(array $data): array
-    {
-        $page = (int)$data['page'];
-
-        $order = self::getOrder($data['order']);
-
-        $where = self::getWhere($data['where']);
-        return array($page, $order, $where);
-    }
-
-    /**
-     * @param string $orderConfig
-     *
-     * @return string[]
-     */
-    public static function getOrder(string $orderConfig): array
-    {
-        $order = [
-            'u.surname',
-            'u.name',
-            'u.patronymic',
-            'pos.name',
-            'u.gender',
-            'u.birthday DESC',
-        ];
-        if ($orderConfig == 'position') {
-            array_unshift($order, 'pos.name');
-        } elseif ($orderConfig == 'age') {
-            array_unshift($order, 'u.birthday DESC');
-        } elseif ($orderConfig == 'gender') {
-            array_unshift($order, 'u.gender');
-        }
-        $order = array_unique($order);
-        return $order;
-    }
-
-    /**
-     * @param array $whereConfig
-     *
-     * @return array
-     */
-    public static function getWhere(array $whereConfig): array
-    {
-        $where = [];
-
-        if (isset($whereConfig['positionId'])) {
-            $where[] = new Expression(
-                'u.position_id = ?',
-                [$whereConfig['positionId']]
-            );
-        }
-
-        if (isset($whereConfig['gender'])) {
-            $where[] = new Expression(
-                'u.gender = ?',
-                [$whereConfig['gender']]
-            );
-        }
-
-        if (isset($whereConfig['active'])) {
-            $sign = $whereConfig['active'] == '1' ? 'IN' : 'NOT IN';
-            $where[] = new Expression(
-                'u.id ' . $sign . ' ( SELECT us.user_id FROM user_status us WHERE us.status_id = 2 )'
-            );
-        }
-
-        if (isset($whereConfig['admin'])) {
-            $sign = $whereConfig['admin'] == '1' ? 'IN' : 'NOT IN';
-            $where[] = new Expression(
-                'u.id ' . $sign . ' ( SELECT us.user_id FROM user_status us WHERE us.status_id = 1 )'
-            );
-        }
-
-        if (isset($whereConfig['age'])) {
-            if (isset($whereConfig['age']['min'])) {
-                $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) >= ?', [$whereConfig['age']['min']]);
-            }
-            if (isset($whereConfig['age']['max'])) {
-                $where[] = new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW()) <= ?', [$whereConfig['age']['max']]);
-            }
-        }
-
-        if (isset($whereConfig['fullnamePhone'])) {
-            $filterArr = array_map('trim', explode(',', $whereConfig['fullnamePhone']));
-            if (count($filterArr) == 2) {
-                list($fullname, $phone) = $filterArr;
-                $where = self::getTextareaFilter($where, $fullname, $phone);
-            }
-        } elseif (isset($whereConfig['fullnamePhoneEmail'])) {
-            $filterArr = array_map('trim', explode(',', $whereConfig['fullnamePhoneEmail']));
-            if (count($filterArr) == 3) {
-                list($fullname, $phone, $email) = $filterArr;
-                $where = self::getTextareaFilter($where, $fullname, $phone);
-
-                if ($email != self::EMPTY) {
-                    $where[] = new Expression(
-                        'u.id IN ( SELECT e.user_id FROM email AS e ' .
-                        'WHERE e.address LIKE LOWER(CONCAT("%", ?, "%")))', [$email]
-                    );
-                }
-            }
-        }
-
-        return $where;
-    }
-
-    /**
-     * @param array  $where
-     * @param string $fullname
-     * @param string $phone
-     *
-     * @return array
-     */
-    public static function getTextareaFilter(
-        array  $where,
-        string $fullname,
-        string $phone
-    ): array {
-        $fullnameArr = explode(' ', $fullname);
-
-        if (count($fullnameArr) == 3) {
-            list($surname, $name, $patronymic) = $fullnameArr;
-
-            if ($surname != self::EMPTY) {
-                $where[] = new Expression('LOWER(u.surname) LIKE LOWER(CONCAT("%", ?, "%"))', [$surname]);
-            }
-            if ($name != self::EMPTY) {
-                $where[] = new Expression('LOWER(u.name) LIKE LOWER(CONCAT("%", ?, "%"))', [$name]);
-            }
-            if ($patronymic != self::EMPTY) {
-                $where[] = new Expression('LOWER(u.patronymic) LIKE LOWER(CONCAT("%", ?, "%"))', [$patronymic]);
-            }
-        }
-
-        if ($phone != self::EMPTY) {
-            $where[] = new Expression(
-                'u.id IN ( SELECT ph.user_id FROM phone AS ph ' .
-                'WHERE ph.number LIKE LOWER(CONCAT("%", ?, "%")))', [$phone]
-            );
-        }
-
-        return $where;
     }
 
     public function editUserAction()
