@@ -76,14 +76,14 @@ class DialogRepository implements DialogRepositoryInterface
         if (isset($whereConfig['positionId'])) {
             $where->equalTo(
                 'u.position_id',
-                (int)$whereConfig['positionId']
+                (integer)$whereConfig['positionId']
             );
         }
 
         if (isset($whereConfig['gender'])) {
             $where->equalTo(
                 'u.gender',
-                (int)$whereConfig['gender']
+                (integer)$whereConfig['gender']
             );
         }
 
