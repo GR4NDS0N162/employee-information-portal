@@ -87,11 +87,15 @@ class DialogRepository implements DialogRepositoryInterface
             );
         }
 
+
+        $statusSelect = new Select(['us' => 'user_status']);
+        $statusSelect->columns([
+            'us.user_id',
+        ], false);
+
         if (isset($whereConfig['active'])) {
             $statusConfig = $whereConfig['active'];
 
-            $statusSelect = new Select(['us' => 'user_status']);
-            $statusSelect->columns(['us.user_id']);
             $statusSelect->where(['us.status_id' => 2]);
 
             if ($statusConfig == '1') {
@@ -104,8 +108,6 @@ class DialogRepository implements DialogRepositoryInterface
         if (isset($whereConfig['admin'])) {
             $statusConfig = $whereConfig['admin'];
 
-            $statusSelect = new Select(['us' => 'user_status']);
-            $statusSelect->columns(['us.user_id']);
             $statusSelect->where(['us.status_id' => 1]);
 
             if ($statusConfig == '1') {
@@ -114,6 +116,7 @@ class DialogRepository implements DialogRepositoryInterface
                 $where->notIn('u.id', $statusSelect);
             }
         }
+
 
         if (isset($whereConfig['age'])) {
             $ageConfig = $whereConfig['age'];
