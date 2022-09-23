@@ -213,14 +213,22 @@ class UserRepository implements UserRepositoryInterface
             'u.birthday DESC',
         ];
 
-        if ($orderConfig == 'position') {
-            array_unshift($order, 'pos.name');
-        } elseif ($orderConfig == 'age') {
-            array_unshift($order, 'u.birthday DESC');
-        } elseif ($orderConfig == 'gender') {
-            array_unshift($order, 'u.gender');
-        } elseif ($orderConfig != 'fullname') {
-            return [];
+        switch ($orderConfig) {
+            case 'fullname':
+                return $order;
+
+            case 'position':
+                array_unshift($order, 'pos.name');
+                break;
+            case 'age':
+                array_unshift($order, 'u.birthday DESC');
+                break;
+            case 'gender':
+                array_unshift($order, 'u.gender');
+                break;
+
+            default:
+                return [];
         }
 
         return array_unique($order);
