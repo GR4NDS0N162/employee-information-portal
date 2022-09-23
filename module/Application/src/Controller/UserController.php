@@ -180,7 +180,7 @@ class UserController extends AbstractActionController
         $this->layout()->setVariable('headTitleName', $headTitleName);
 
         $viewModel->setVariables([
-            'userFilterForm'     => $this->userFilterForm,
+            'userFilterForm' => $this->userFilterForm,
         ]);
 
         return $viewModel;
