@@ -38,7 +38,7 @@ class DialogRepository implements DialogRepositoryInterface
         $this->dialogCommand = $dialogCommand;
     }
 
-    public function getDialogId($userId, $buddyId)
+    public function getDialogId(int $userId, int $buddyId): int
     {
         $userDialogsId = array_column($this->getDialogList($userId), 'id');
         $buddyDialogsId = array_column($this->getDialogList($buddyId), 'id');
@@ -52,7 +52,7 @@ class DialogRepository implements DialogRepositoryInterface
         return array_values($commonDialogsId)[0];
     }
 
-    public function getDialogList(int $userId, array $whereConfig = [])
+    public function getDialogList(int $userId, array $whereConfig = []): array
     {
         $select = new Select(['u' => 'user']);
         $select->columns([

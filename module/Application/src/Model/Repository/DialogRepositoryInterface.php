@@ -12,7 +12,7 @@ interface DialogRepositoryInterface
      *
      * @return Dialog[]
      */
-    public function getDialogList(int $userId, array $whereConfig = []);
+    public function getDialogList(int $userId, array $whereConfig = []): array;
 
     /**
      * @param int $userId
@@ -20,5 +20,5 @@ interface DialogRepositoryInterface
      *
      * @return int
      */
-    public function getDialogId($userId, $buddyId);
+    public function getDialogId(int $userId, int $buddyId): int;
 }
