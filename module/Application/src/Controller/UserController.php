@@ -16,7 +16,7 @@ class UserController extends AbstractActionController
     /**
      * Maximum number of users displayed on a page.
      */
-    public const MAX_USER_COUNT = 20;
+    public const MAX_USER_COUNT = 5;
     /**
      * The ID of the user who is currently logged in to the system.
      */
