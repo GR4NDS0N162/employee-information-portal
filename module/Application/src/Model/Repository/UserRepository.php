@@ -255,7 +255,14 @@ class UserRepository implements UserRepositoryInterface
                 && isset($emailConfig)
                 && $emailConfig != ''
             ) {
-                // TODO: Сделай парсинг емейла.
+                $emailSelect = new Select('email');
+                $emailSelect->columns([
+                    'user_id',
+                ], false);
+                $emailSelect->where(new Like('address', '%' . $emailConfig . '%'));
+
+                $where->in('u.id', $emailSelect);
+                unset($emailSelect);
             }
         }
 
