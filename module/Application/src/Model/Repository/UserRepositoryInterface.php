@@ -13,14 +13,14 @@ interface UserRepositoryInterface
      *
      * @return Profile
      */
-    public function findProfile($identifier);
+    public function findProfile($identifier): Profile;
 
     /**
      * @param int|Email $identifier
      *
      * @return User
      */
-    public function findUser($identifier);
+    public function findUser($identifier): User;
 
     /**
      * @param array  $whereConfig

@@ -4,6 +4,7 @@ namespace Application\Model\Repository;
 
 use Application\Controller\UserController;
 use Application\Model\Entity\Email;
+use Application\Model\Entity\Profile;
 use Application\Model\Entity\User;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
@@ -32,12 +33,12 @@ class UserRepository implements UserRepositoryInterface
         $this->statusRepository = $statusRepository;
     }
 
-    public function findProfile($identifier)
+    public function findProfile($identifier): Profile
     {
         return $this->findUser($identifier);
     }
 
-    public function findUser($identifier)
+    public function findUser($identifier): User
     {
         if (is_int($identifier)) {
             return $this->findUserById($identifier);
