@@ -187,10 +187,6 @@ class UserController extends AbstractActionController
         $this->layout()->setVariable('headTitleName', $headTitleName);
 
         $viewModel->setVariables([
-            'userInfo'           => $this->userRepository->findUsers(),
-            'positionRepository' => $this->positionRepository,
-            'maxPageCount'       => self::MAX_USER_COUNT,
-            'page'               => 1,
             'userFilterForm'     => $this->userFilterForm,
         ]);
 
