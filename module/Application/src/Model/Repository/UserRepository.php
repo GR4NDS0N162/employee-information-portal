@@ -236,7 +236,10 @@ class UserRepository implements UserRepositoryInterface
                 unset($fullnameWhere);
             }
 
-            if (!empty($phoneConfig)) {
+            if (
+                isset($phoneConfig)
+                && $phoneConfig != ''
+            ) {
                 $phoneSelect = new Select('phone');
                 $phoneSelect->columns([
                     'user_id',
