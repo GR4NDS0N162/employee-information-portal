@@ -208,4 +208,18 @@ class UserRepository implements UserRepositoryInterface
 
         return $where;
     }
+
+    public static function parseOrderConfig(string $orderConfig): array
+    {
+        $order = [
+            'u.surname',
+            'u.name',
+            'u.patronymic',
+            'pos.name',
+            'u.gender',
+            'u.birthday DESC',
+        ];
+
+        return $order;
+    }
 }
