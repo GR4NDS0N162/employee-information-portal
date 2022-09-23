@@ -34,8 +34,7 @@ formSelector[0].addEventListener('submit', (e) =>
     });
 
     updateContent();
-})
-;
+});
 
 pageSelector[0].addEventListener('change', () =>
 {
