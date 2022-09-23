@@ -13,24 +13,17 @@ formSelector[0].addEventListener('submit', (e) =>
 
     oldWhere = formSelector.serialize();
 
+    console.log(getData(true));
+
     $.ajax({
         url: '/admin/list/get',
         method: 'post',
-        dataType: 'json',
+        dataType: 'html',
         async: false,
         data: getData(true),
     }).done((data) =>
     {
-        count = data.count;
-        maxPageCount = data.maxPageCount;
-
-        const pageCount = Math.ceil(count / maxPageCount);
-
-        let options = `<option value="1">1</option>`;
-        for (let i = 2; i <= pageCount; i++) {
-            options += `<option value="${i}">${i}</option>`;
-        }
-        pageSelector[0].innerHTML = options;
+        pageSelector.html(data);
     });
 
     updateContent();
@@ -50,8 +43,7 @@ formSelector[0].dispatchEvent(new Event('submit'));
 
 function getData(updatePage = false)
 {
-    const data = {
-        formName: formSelector[0].getAttribute('name'),
+    let data = {
         where: oldWhere,
         page: pageSelector[0].value || 1,
         order: sortSelector[0].value || 'fullname',
@@ -66,6 +58,8 @@ function getData(updatePage = false)
 
 function updateContent()
 {
+    console.log(getData());
+
     $.ajax({
         url: '/admin/list/get',
         method: 'post',
@@ -73,12 +67,6 @@ function updateContent()
         data: getData(),
     }).done((data) =>
     {
-        const selectedPage = pageSelector[0].value;
-        const from = Math.min(1 + (selectedPage - 1) * maxPageCount, count);
-        const to = Math.min(selectedPage * maxPageCount, count);
-
-        shownEl.innerText = (count) ? `${from}-${to} из ${count}` : count;
-
         $(`#user-list`).html(data);
     });
 }

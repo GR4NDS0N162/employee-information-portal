@@ -9,7 +9,6 @@ use Application\Model\Entity\PositionList;
 use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
-use Laminas\Db\Sql\Predicate\Expression;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
@@ -78,12 +77,19 @@ class AdminController extends AbstractActionController
         $page = (integer)$data['page'];
 
         if (isset($data['updatePage'])) {
-            $count = count($this->userRepository->findUsers($whereConfig));
-            echo json_encode([
-                'count'        => $count,
-                'maxPageCount' => UserController::MAX_USER_COUNT,
+            $userCount = count(
+                $this->userRepository->findUsers($whereConfig)
+            );
+
+            $viewModel = new ViewModel();
+            $viewModel->setTerminal(true);
+            $viewModel->setTemplate('partial/page-select.phtml');
+
+            $viewModel->setVariables([
+                'pageCount' => ceil($userCount / UserController::MAX_USER_COUNT),
             ]);
-            exit();
+
+            return $viewModel;
         }
 
         $viewModel = new ViewModel();
