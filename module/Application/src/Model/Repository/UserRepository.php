@@ -199,6 +199,16 @@ class UserRepository implements UserRepositoryInterface
     {
         $where = new Where();
 
+        if (isset($whereConfig['positionId'])) {
+            $positionId = (integer)$whereConfig['positionId'];
+            $where->equalTo('u.position_id', $positionId);
+        }
+
+        if (isset($whereConfig['gender'])) {
+            $gender = (integer)$whereConfig['gender'];
+            $where->equalTo('u.gender', $gender);
+        }
+
         return $where;
     }
 
