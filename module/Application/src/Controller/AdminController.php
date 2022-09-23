@@ -14,11 +14,6 @@ use Laminas\View\Model\ViewModel;
 
 class AdminController extends AbstractActionController
 {
-    /** @var string A sign of emptiness.
-     * Indicates that there is no search for some column.
-     */
-    const EMPTY = '-';
-
     private Form\PositionForm $positionForm;
     private Form\UserForm $userForm;
     private Form\AdminFilterForm $adminFilterForm;
