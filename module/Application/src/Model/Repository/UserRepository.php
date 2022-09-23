@@ -209,9 +209,30 @@ class UserRepository implements UserRepositoryInterface
             }
         }
 
-        // TODO: Добавить парсинг $whereConfig['fullnamePhone'].
+        if (
+            isset($whereConfig['fullnamePhone'])
+            || isset($whereConfig['fullnamePhoneEmail'])
+        ) {
+            list($fullnameConfig, $phoneConfig, $emailConfig) = array_map(
+                'trim',
+                explode(',', $whereConfig['fullnamePhoneEmail'] ?: $whereConfig['fullnamePhone'])
+            );
 
-        // TODO: Добавить парсинг $whereConfig['fullnamePhoneEmail'].
+            if (isset($fullnameConfig)) {
+                // TODO: Сделай парсинг ФИО.
+            }
+
+            if (isset($phoneConfig)) {
+                // TODO: Сделай парсинг телефона.
+            }
+
+            if (
+                isset($whereConfig['fullnamePhoneEmail'])
+                && isset($emailConfig)
+            ) {
+                // TODO: Сделай парсинг емейла.
+            }
+        }
 
         if (isset($whereConfig['active'])) {
             $activeSelect = new Select(['us' => 'user_status']);
