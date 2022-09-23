@@ -101,7 +101,11 @@ class DialogRepository implements DialogRepositoryInterface
         if (isset($whereConfig['active'])) {
             $statusConfig = $whereConfig['active'];
 
-            $statusSelect->where(['us.status_id' => 2]);
+            $statusSelect->where(
+                new Where([
+                    's.name' => 'active',
+                ]),
+            );
 
             if ($statusConfig == '1') {
                 $where->in('u.id', $statusSelect);
@@ -113,7 +117,11 @@ class DialogRepository implements DialogRepositoryInterface
         if (isset($whereConfig['admin'])) {
             $statusConfig = $whereConfig['admin'];
 
-            $statusSelect->where(['us.status_id' => 1]);
+            $statusSelect->where(
+                new Where([
+                    's.name' => 'admin',
+                ]),
+            );
 
             if ($statusConfig == '1') {
                 $where->in('u.id', $statusSelect);
