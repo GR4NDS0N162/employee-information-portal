@@ -201,4 +201,11 @@ class UserRepository implements UserRepositoryInterface
 
         return $users;
     }
+
+    public static function parseWhereConfig(array $whereConfig): Where
+    {
+        $where = new Where();
+
+        return $where;
+    }
 }
