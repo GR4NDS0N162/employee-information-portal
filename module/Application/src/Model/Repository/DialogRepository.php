@@ -92,6 +92,11 @@ class DialogRepository implements DialogRepositoryInterface
         $statusSelect->columns([
             'us.user_id',
         ], false);
+        $statusSelect->join(
+            ['s' => 'status'],
+            's.id = us.status_id',
+            [],
+        );
 
         if (isset($whereConfig['active'])) {
             $statusConfig = $whereConfig['active'];
