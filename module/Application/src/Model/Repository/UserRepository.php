@@ -8,6 +8,7 @@ use Application\Model\Entity\User;
 use InvalidArgumentException;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\Sql\Select;
+use Laminas\Db\Sql\Where;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -169,8 +170,18 @@ class UserRepository implements UserRepositoryInterface
             'pos.id = u.position_id',
             [],
         );
+
+
+        $where = new Where();
+
         $select->where($where);
+
+
+        $order = [];
+
         $select->order($order);
+
+
         if ($limit) {
             $select->limit(UserController::MAX_USER_COUNT);
         }
