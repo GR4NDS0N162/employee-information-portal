@@ -252,7 +252,9 @@ class UserRepository implements UserRepositoryInterface
 
         if (isset($whereConfig['active'])) {
             $statusConfig = $whereConfig['active'];
-            $statusSelect->where(new Where(['s.name' => 'active']));
+            $statusSelect->where(
+                (new Where())->equalTo('s.name', 'active')
+            );
 
             if ($statusConfig == '1') {
                 $where->in('u.id', $statusSelect);
@@ -263,7 +265,9 @@ class UserRepository implements UserRepositoryInterface
 
         if (isset($whereConfig['admin'])) {
             $statusConfig = $whereConfig['admin'];
-            $statusSelect->where(new Where(['s.name' => 'admin']));
+            $statusSelect->where(
+                (new Where())->equalTo('s.name', 'admin')
+            );
 
             if ($statusConfig == '1') {
                 $where->in('u.id', $statusSelect);
