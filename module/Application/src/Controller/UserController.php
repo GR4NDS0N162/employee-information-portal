@@ -92,13 +92,6 @@ class UserController extends AbstractActionController
         return $viewModel;
     }
 
-    /**
-     * @param UserRepositoryInterface  $userRepository
-     * @param AbstractActionController $controller
-     * @param int                      $userId
-     *
-     * @return void
-     */
     public static function setAdminNavbar(
         UserRepositoryInterface  $userRepository,
         AbstractActionController $controller,
