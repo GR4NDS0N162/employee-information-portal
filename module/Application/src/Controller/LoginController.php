@@ -11,29 +11,11 @@ use Laminas\View\Model\ViewModel;
 
 class LoginController extends AbstractActionController
 {
-    /**
-     * @var Login\LoginForm
-     */
     private Login\LoginForm $loginForm;
-    /**
-     * @var Login\SignUpForm
-     */
     private Login\SignUpForm $signUpForm;
-    /**
-     * @var Login\RecoverForm
-     */
     private Login\RecoverForm $recoverForm;
-    /**
-     * @var UserCommandInterface
-     */
     private UserCommandInterface $userCommand;
 
-    /**
-     * @param Login\LoginForm      $loginForm
-     * @param Login\SignUpForm     $signUpForm
-     * @param Login\RecoverForm    $recoverForm
-     * @param UserCommandInterface $userCommand
-     */
     public function __construct(
         Login\LoginForm      $loginForm,
         Login\SignUpForm     $signUpForm,
