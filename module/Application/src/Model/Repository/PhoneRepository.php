@@ -8,18 +8,9 @@ use Laminas\Db\Sql\Select;
 
 class PhoneRepository implements PhoneRepositoryInterface
 {
-    /**
-     * @var AdapterInterface
-     */
     private AdapterInterface $db;
-    /**
-     * @var Phone
-     */
     private Phone $prototype;
 
-    /**
-     * @param AdapterInterface $db
-     */
     public function __construct(AdapterInterface $db)
     {
         $this->db = $db;

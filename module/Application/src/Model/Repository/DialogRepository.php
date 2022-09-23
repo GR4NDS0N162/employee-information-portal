@@ -12,23 +12,10 @@ use Laminas\Db\Sql\Where;
 
 class DialogRepository implements DialogRepositoryInterface
 {
-    /**
-     * @var AdapterInterface
-     */
     private AdapterInterface $db;
-    /**
-     * @var Dialog
-     */
     private Dialog $prototype;
-    /**
-     * @var DialogCommandInterface
-     */
     private DialogCommandInterface $dialogCommand;
 
-    /**
-     * @param AdapterInterface       $db
-     * @param DialogCommandInterface $dialogCommand
-     */
     public function __construct(
         AdapterInterface       $db,
         DialogCommandInterface $dialogCommand

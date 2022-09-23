@@ -8,18 +8,9 @@ use Laminas\Db\Sql\Select;
 
 class EmailRepository implements EmailRepositoryInterface
 {
-    /**
-     * @var AdapterInterface
-     */
     private AdapterInterface $db;
-    /**
-     * @var Email
-     */
     private Email $prototype;
 
-    /**
-     * @param AdapterInterface $db
-     */
     public function __construct(AdapterInterface $db)
     {
         $this->db = $db;

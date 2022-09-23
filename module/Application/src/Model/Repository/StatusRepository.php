@@ -8,18 +8,9 @@ use Laminas\Db\Sql\Select;
 
 class StatusRepository implements StatusRepositoryInterface
 {
-    /**
-     * @var AdapterInterface
-     */
     private AdapterInterface $db;
-    /**
-     * @var Status
-     */
     private Status $prototype;
 
-    /**
-     * @param AdapterInterface $db
-     */
     public function __construct(AdapterInterface $db)
     {
         $this->db = $db;

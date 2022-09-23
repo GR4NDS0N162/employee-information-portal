@@ -13,33 +13,12 @@ use Laminas\Db\Sql\Where;
 
 class UserRepository implements UserRepositoryInterface
 {
-    /**
-     * @var AdapterInterface
-     */
     private AdapterInterface $db;
-    /**
-     * @var User
-     */
     private User $prototype;
-    /**
-     * @var EmailRepositoryInterface
-     */
     private EmailRepositoryInterface $emailRepository;
-    /**
-     * @var PhoneRepositoryInterface
-     */
     private PhoneRepositoryInterface $phoneRepository;
-    /**
-     * @var StatusRepositoryInterface
-     */
     private StatusRepositoryInterface $statusRepository;
 
-    /**
-     * @param AdapterInterface          $db
-     * @param EmailRepositoryInterface  $emailRepository
-     * @param PhoneRepositoryInterface  $phoneRepository
-     * @param StatusRepositoryInterface $statusRepository
-     */
     public function __construct(
         AdapterInterface          $db,
         EmailRepositoryInterface  $emailRepository,

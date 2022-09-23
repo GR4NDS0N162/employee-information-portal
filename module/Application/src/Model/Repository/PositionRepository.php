@@ -8,18 +8,9 @@ use Laminas\Db\Sql\Select;
 
 class PositionRepository implements PositionRepositoryInterface
 {
-    /**
-     * @var AdapterInterface
-     */
     private AdapterInterface $db;
-    /**
-     * @var Position
-     */
     private Position $prototype;
 
-    /**
-     * @param AdapterInterface $db
-     */
     public function __construct(AdapterInterface $db)
     {
         $this->db = $db;
