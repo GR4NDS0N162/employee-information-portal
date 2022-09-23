@@ -142,11 +142,11 @@ class UserRepository implements UserRepositoryInterface
     }
 
     public function findUsers(
-        $where = [],
-        $order = [],
-        $limit = false,
-        $page = 1
-    ) {
+        array  $whereConfig = [],
+        string $orderConfig = 'fullname',
+        bool   $limit = false,
+        int    $page = 1
+    ): array {
         $select = new Select(['u' => 'user']);
         $select->quantifier(Select::QUANTIFIER_DISTINCT);
         $select->columns([
