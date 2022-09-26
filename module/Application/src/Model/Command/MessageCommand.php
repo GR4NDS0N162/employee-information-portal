@@ -35,7 +35,7 @@ class MessageCommand implements MessageCommandInterface
         Executer::executeSql($insert, $this->db);
     }
 
-    public function readBy(int $userId, array $messageList):array
+    public function readBy(int $userId, array $messageList): array
     {
         if (empty($messageList)) {
             return $messageList;

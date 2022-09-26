@@ -32,7 +32,7 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
     protected ?string $skype;
     /** @var Email[] */
     protected array $emails;
-    /** @var Phone[]  */
+    /** @var Phone[] */
     protected array $phones;
     protected HydratorInterface $hydrator;
     protected InputFilterInterface $inputFilter;

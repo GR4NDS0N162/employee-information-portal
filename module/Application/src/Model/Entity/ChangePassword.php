@@ -101,7 +101,7 @@ class ChangePassword implements InputFilterAwareInterface, HydratorAwareInterfac
         ]);
     }
 
-    public function getInputFilter():InputFilterInterface
+    public function getInputFilter(): InputFilterInterface
     {
         return $this->inputFilter;
     }

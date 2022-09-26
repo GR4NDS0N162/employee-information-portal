@@ -19,5 +19,5 @@ interface MessageCommandInterface
      *
      * @return Message[]
      */
-    public function readBy(int $userId, array $messageList):array;
+    public function readBy(int $userId, array $messageList): array;
 }

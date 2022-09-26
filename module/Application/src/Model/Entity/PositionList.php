@@ -50,7 +50,7 @@ class PositionList implements InputFilterAwareInterface, HydratorAwareInterface
         $this->hydrator = $hydrator;
     }
 
-    public function getInputFilter():InputFilterInterface
+    public function getInputFilter(): InputFilterInterface
     {
         return $this->inputFilter;
     }

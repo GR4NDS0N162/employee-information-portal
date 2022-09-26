@@ -15,7 +15,7 @@ class Dialog implements HydratorAwareInterface
     private HydratorInterface $hydrator;
 
     public function __construct(
-        int $buddyId = 0,
+        int  $buddyId = 0,
         ?int $id = null
     ) {
         $this->id = $id;
