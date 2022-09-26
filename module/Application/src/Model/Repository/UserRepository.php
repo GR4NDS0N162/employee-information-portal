@@ -2,8 +2,8 @@
 
 namespace Application\Model\Repository;
 
-use Application\Controller\AdminController;
 use Application\Controller\UserController;
+use Application\Helper\ConfigHelper;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\Profile;
 use Application\Model\Entity\User;
@@ -221,7 +221,7 @@ class UserRepository implements UserRepositoryInterface
                 explode(',', $whereConfig['fullnamePhoneEmail'] ?: $whereConfig['fullnamePhone'])
             );
 
-            $fullnameConfig = AdminController::arrayFilterRecursive(explode(' ', $fullnameConfig));
+            $fullnameConfig = ConfigHelper::filterEmpty(explode(' ', $fullnameConfig));
             if (!empty($fullnameConfig)) {
                 $fullnameWhere = new Where(null, PredicateSet::COMBINED_BY_OR);
 

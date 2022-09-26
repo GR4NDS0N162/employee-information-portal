@@ -3,6 +3,7 @@
 namespace Application\Controller;
 
 use Application\Form\Admin as Form;
+use Application\Helper\ConfigHelper;
 use Application\Model\Command\PositionCommandInterface;
 use Application\Model\Command\UserCommandInterface;
 use Application\Model\Entity\PositionList;
@@ -64,7 +65,7 @@ class AdminController extends AbstractActionController
 
         $data = $request->getPost()->toArray();
         parse_str($data['where'], $data['where']);
-        $whereConfig = self::arrayFilterRecursive($data['where']);
+        $whereConfig = ConfigHelper::filterEmpty($data['where']);
         $orderConfig = $data['order'];
         $page = (integer)$data['page'];
 
@@ -99,21 +100,6 @@ class AdminController extends AbstractActionController
         ]);
 
         return $viewModel;
-    }
-
-    public static function arrayFilterRecursive(array $array): array
-    {
-        foreach ($array as $key => & $value) {
-            if (is_array($value)) {
-                $value = AdminController::arrayFilterRecursive($value);
-            }
-            if (!$value) {
-                unset($array[$key]);
-            }
-        }
-        unset($value);
-
-        return $array;
     }
 
     public function editUserAction()

@@ -4,6 +4,7 @@ namespace Application\Controller;
 
 use Application\Form\Messenger\DialogFilterForm;
 use Application\Form\Messenger\NewMessageForm;
+use Application\Helper\ConfigHelper;
 use Application\Model\Command\MessageCommandInterface;
 use Application\Model\Entity\Message;
 use Application\Model\Repository\DialogRepositoryInterface;
@@ -99,7 +100,7 @@ class MessengerController extends AbstractActionController
             exit();
         }
 
-        $data = AdminController::arrayFilterRecursive($request->getPost()->toArray());
+        $data = ConfigHelper::filterEmpty($request->getPost()->toArray());
 
         $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
