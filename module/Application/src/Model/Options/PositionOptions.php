@@ -38,7 +38,7 @@ class PositionOptions
      */
     public function getEnabledOptions()
     {
-        $positions = [null => 'Не выбрана'];
+        $positions = [null => 'Not specified'];
 
         foreach ($this->repository->findAllPositions() as $position) {
             $positions[$position->getId()] = $position->getName();
@@ -54,7 +54,7 @@ class PositionOptions
     {
         $positions = [
             null => [
-                'label'    => 'Не выбрана',
+                'label'    => 'Not specified',
                 'disabled' => 'disabled',
                 'selected' => 'selected',
             ],

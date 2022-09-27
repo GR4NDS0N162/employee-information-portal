@@ -35,7 +35,7 @@ class ChangePasswordForm extends Form
                 'class' => 'btn btn-outline-success w-100',
             ],
             'options'    => [
-                'label' => 'Изменить пароль',
+                'label' => 'Change Password',
             ],
         ]);
 

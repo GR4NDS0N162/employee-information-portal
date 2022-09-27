@@ -327,11 +327,11 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
     public function getGenderString()
     {
         if ($this->gender == 1) {
-            $gender = 'Мужской';
+            $gender = 'Male';
         } elseif ($this->gender == 2) {
-            $gender = 'Женский';
+            $gender = 'Female';
         } else {
-            $gender = 'Не указан';
+            $gender = 'Not specified';
         }
 
         return $gender;
@@ -355,25 +355,16 @@ class Profile implements InputFilterAwareInterface, HydratorAwareInterface
 
     public function getAgeString()
     {
-        $age = 'Не указан';
+        $age = 'Not specified';
 
         if ($this->birthday) {
             $age = (new DateTime($this->birthday))->diff(new DateTime())->y;
-            $ageLastNumber = $age % 10;
-            $old = '';
-            $isExclusion = ($age % 100 >= 11) && ($age % 100 <= 14);
-            if ($ageLastNumber == 1) {
-                $old = "год";
-            } elseif ($ageLastNumber == 0 || $ageLastNumber >= 5) {
-                $old = "лет";
-            } elseif ($ageLastNumber >= 2 && $ageLastNumber <= 4) {
-                $old = "года";
-            }
-            if ($isExclusion) {
-                $old = "лет";
-            }
 
-            $age .= ' ' . $old;
+            if ($age > 1) {
+                $age .= ' years old';
+            } else {
+                $age .= ' year old';
+            }
         }
 
         return $age;

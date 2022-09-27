@@ -31,7 +31,7 @@ class PositionForm extends Form
             'name'       => 'submit',
             'type'       => Submit::class,
             'attributes' => [
-                'value' => 'Сохранить изменения',
+                'value' => 'Save Changes',
                 'class' => 'btn btn-outline-success w-100',
             ],
         ]);

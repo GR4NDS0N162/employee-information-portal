@@ -77,7 +77,7 @@ function updateContent(updatePage = false)
         if ('userList' in data) {
             const userList = data['userList'];
 
-            listSelector[0].innerHTML = `<div class="notification">Список пуст.</div>`;
+            listSelector[0].innerHTML = `<div class="notification">The list is empty.</div>`;
 
             for (const user of userList) {
                 const isActive = user['isActive'];
@@ -97,7 +97,7 @@ function updateContent(updatePage = false)
                 const imageHtml = `<div class="col-auto">
                         <img src="${imagePath}"
                              class="user-photo img-fluid rounded"
-                             alt="Фото пользователя">
+                             alt="User's photo">
                     </div>`;
 
                 const fullnameHtml = `<div class="col-12">
@@ -108,22 +108,22 @@ function updateContent(updatePage = false)
                     </div>`;
 
                 const posHtml = `<div class="col-auto">
-                        <span class="text-secondary">Должность:</span>
+                        <span class="text-secondary">Position:</span>
                         <span class="position">${positionName}</span>
                     </div>`;
 
                 const ageHtml = `<div class="col-auto">
-                        <span class="text-secondary">Возраст:</span>
+                        <span class="text-secondary">Age:</span>
                         <span class="age">${ageString}</span>
                     </div>`;
 
                 const genderHtml = `<div class="col-auto">
-                        <span class="text-secondary">Пол:</span>
+                        <span class="text-secondary">Gender:</span>
                         <span class="gender">${genderString}</span>
                     </div>`;
 
                 const editHtml = `<div class="col-auto d-flex align-items-center">
-                        <a href="/admin/list/${userId}" class="btn btn-primary">Редактировать</a>
+                        <a href="/admin/list/${userId}" class="btn btn-primary">Edit</a>
                     </div>`;
 
                 listSelector[0].innerHTML += `<div class="col-12${!isActive ? ' card-gray-bg' : ''}">

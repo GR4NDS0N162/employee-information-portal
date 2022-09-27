@@ -53,7 +53,7 @@ class MessengerController extends AbstractActionController
         UserController::setAdminNavbar($this->userRepository, $this, UserController::USER_ID);
         $viewModel = new ViewModel();
 
-        $this->layout()->setVariable('headTitleName', 'Диалоги');
+        $this->layout()->setVariable('headTitleName', 'Dialogs');
 
         $dialogs = $this->dialogRepository->getDialogList(UserController::USER_ID);
 
@@ -80,7 +80,7 @@ class MessengerController extends AbstractActionController
 
         $viewModel = new ViewModel();
 
-        $this->layout()->setVariable('headTitleName', 'Сообщения');
+        $this->layout()->setVariable('headTitleName', 'Messages');
 
         $userInfo = $this->userRepository->findUser(UserController::USER_ID);
         $buddyInfo = $this->userRepository->findUser($buddyId);

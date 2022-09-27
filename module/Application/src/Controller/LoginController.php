@@ -37,7 +37,7 @@ class LoginController extends AbstractActionController
         ]);
 
         $this->layout('layout/home-layout');
-        $this->layout()->setVariable('headTitleName', 'Вход | Регистрация');
+        $this->layout()->setVariable('headTitleName', 'Login | Sign up');
 
         return $viewModel;
     }

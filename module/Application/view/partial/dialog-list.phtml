@@ -13,7 +13,7 @@ $dialogList = $this->dialogList;
 $userRepository = $this->userRepository;
 ?>
 
-<div class="notification">Список пуст.</div>
+<div class="notification">The list is empty.</div>
 <?php foreach ($dialogList as $dialog): ?>
     <?php $buddy = $userRepository->findUser($dialog->getBuddyId()); ?>
     <div class="col-12<?= (!$dialog->getId()) ? ' card-gray-bg' : ''; ?>">
@@ -22,7 +22,7 @@ $userRepository = $this->userRepository;
                 <div class="col-auto">
                     <img src="<?= $this->escapeHtml($buddy->getImagePath()); ?>"
                          class="user-photo img-fluid rounded"
-                         alt="Фото пользователя">
+                         alt="User's photo">
                 </div>
                 <div class="col">
                     <div class="row">
@@ -36,15 +36,15 @@ $userRepository = $this->userRepository;
                                 ); ?></p>
                         </div>
                         <div class="col-auto">
-                            <span class="text-secondary">Должность:</span>
+                            <span class="text-secondary">Position:</span>
                             <span class="position"><?= $this->escapeHtml($buddy->getPositionName()); ?></span>
                         </div>
                         <div class="col-auto">
-                            <span class="text-secondary">Возраст:</span>
+                            <span class="text-secondary">Age:</span>
                             <span class="age"><?= $this->escapeHtml($buddy->getAgeString()); ?></span>
                         </div>
                         <div class="col-auto">
-                            <span class="text-secondary">Пол:</span>
+                            <span class="text-secondary">Gender:</span>
                             <span class="gender"><?= $this->escapeHtml($buddy->getGenderString()); ?></span>
                         </div>
                     </div>
@@ -54,12 +54,12 @@ $userRepository = $this->userRepository;
                         <a href="<?= $this->url('user/view-dialog-list/view-messages', [
                             'id' => $dialog->getBuddyId(),
                         ]); ?>"
-                           class="btn btn-primary">К диалогу</a>
+                           class="btn btn-primary">To the dialog</a>
                     <?php else: ?>
                         <a href="<?= $this->url('user/view-dialog-list/view-messages', [
                             'id' => $dialog->getBuddyId(),
                         ]); ?>"
-                           class="btn btn-success">Создать диалог</a>
+                           class="btn btn-success">Create a dialog</a>
                     <?php endif; ?>
                 </div>
             </div>

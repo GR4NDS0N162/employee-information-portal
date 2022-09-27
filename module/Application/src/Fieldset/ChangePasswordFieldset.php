@@ -31,7 +31,7 @@ class ChangePasswordFieldset extends Fieldset
                 'autocomplete' => 'current-password',
             ],
             'options'    => [
-                'label'            => 'Текущий пароль',
+                'label'            => 'Current password',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
@@ -46,10 +46,10 @@ class ChangePasswordFieldset extends Fieldset
                 'autocomplete' => 'new-password',
                 'minlength'    => 8,
                 'maxlength'    => 32,
-                'pattern'      => '^(?=.*?[а-яa-z])(?=.*?[А-ЯA-Z])(?=.*?[0-9])(?=.*?[!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~])[а-яa-zА-ЯA-Z0-9!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]*$',
+                'pattern'      => '^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~])[a-zA-Z0-9!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]*$',
             ],
             'options'    => [
-                'label'            => 'Новый пароль',
+                'label'            => 'New password',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
@@ -64,7 +64,7 @@ class ChangePasswordFieldset extends Fieldset
                 'autocomplete' => 'new-password',
             ],
             'options'    => [
-                'label'            => 'Подтверждение пароля',
+                'label'            => 'Password check',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);

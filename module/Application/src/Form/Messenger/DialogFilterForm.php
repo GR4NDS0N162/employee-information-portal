@@ -37,7 +37,7 @@ class DialogFilterForm extends Form
                 'class' => 'form-select',
             ],
             'options'    => [
-                'label'            => 'Должность',
+                'label'            => 'Position',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
                 'options'          => $this->positionOptions->getEnabledOptions(),
             ],
@@ -50,7 +50,7 @@ class DialogFilterForm extends Form
                 'class' => 'form-select',
             ],
             'options'    => [
-                'label'            => 'Пол',
+                'label'            => 'Gender',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
                 'options'          => GenderOptions::getOptions(),
             ],
@@ -63,7 +63,7 @@ class DialogFilterForm extends Form
                 'class' => 'row g-3',
             ],
             'options'    => [
-                'label' => 'Возраст',
+                'label' => 'Age',
             ],
         ]);
 
@@ -73,10 +73,10 @@ class DialogFilterForm extends Form
             'attributes' => [
                 'class'       => 'form-control',
                 'rows'        => '2',
-                'placeholder' => 'Иванов Иван Иванович, +79283627374',
+                'placeholder' => 'Dwayne Douglas Johnson, +79283627374',
             ],
             'options'    => [
-                'label'            => 'ФИО, телефон',
+                'label'            => 'Fullname, phone number',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
@@ -89,7 +89,7 @@ class DialogFilterForm extends Form
                 'class' => 'btn btn-outline-success w-100',
             ],
             'options'    => [
-                'label' => 'Применить фильтры',
+                'label' => 'Apply Filters',
             ],
         ], [
             'priority' => -10 ** 9,

@@ -28,7 +28,7 @@ class AdminFilterForm extends UserFilterForm
                 'class' => 'form-select',
             ],
             'options'    => [
-                'label'            => 'Администратор',
+                'label'            => 'Administrator',
                 'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
                 'options'          => YesNoOptions::getAdminOptions(),
             ],

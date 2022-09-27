@@ -41,7 +41,7 @@ function loadMessages()
                 lastMessageId = parseInt(lastMessage[0].getAttribute('message_id'));
             }
         } else {
-            $messageList[0].innerHTML += `<div class="notification">Загружены последние сообщения.</div>`
+            $messageList[0].innerHTML += `<div class="notification">The latest messages have been loaded.</div>`
         }
     });
 }

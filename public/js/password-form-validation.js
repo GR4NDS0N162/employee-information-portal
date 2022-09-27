@@ -55,7 +55,7 @@ if ((newPasswordInput && newPasswordFeedback) &&
             !newPasswordInput.validity.valueMissing &&
             passwordCheckInput.validity.patternMismatch
         ) {
-            passwordCheckFeedback.childNodes[0].nodeValue = 'Пароли не совпадают.';
+            passwordCheckFeedback.childNodes[0].nodeValue = 'Passwords don\'t match.';
         }
     });
 }
@@ -66,10 +66,10 @@ function validateOnInputPasswordInput(input, feedback)
     const maxlength = input.getAttribute('maxlength');
 
     if (input.validity.tooShort) {
-        feedback.childNodes[0].nodeValue = `Минимальная длина - ${minlength}.`;
+        feedback.childNodes[0].nodeValue = `Minimum length - ${minlength}.`;
     } else if (input.validity.tooLong) {
-        feedback.childNodes[0].nodeValue = `Максимальная длина - ${maxlength}.`;
+        feedback.childNodes[0].nodeValue = `Maximum length - ${maxlength}.`;
     } else if (input.validity.patternMismatch) {
-        feedback.childNodes[0].nodeValue = 'Введённый пароль слишком лёгкий.';
+        feedback.childNodes[0].nodeValue = 'The entered password is too easy.';
     }
 }

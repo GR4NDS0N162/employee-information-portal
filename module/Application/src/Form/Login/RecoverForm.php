@@ -39,7 +39,7 @@ class RecoverForm extends Form
                 'class' => 'btn btn-lg btn-outline-danger w-100',
             ],
             'options'    => [
-                'label' => 'Восстановить',
+                'label' => 'Recover',
             ],
         ], [
             'priority' => -10 ** 9,

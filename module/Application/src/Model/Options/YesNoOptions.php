@@ -10,13 +10,13 @@ class YesNoOptions
     public static function getActiveOptions()
     {
         return [
-            null => 'Не выбран',
+            null => 'Not specified',
             1    => [
                 'value'    => '1',
-                'label'    => 'Да',
+                'label'    => 'Yes',
                 'selected' => 'selected',
             ],
-            2    => 'Нет',
+            2    => 'No',
         ];
     }
 
@@ -27,11 +27,11 @@ class YesNoOptions
     {
         return [
             null => [
-                'label'    => 'Не выбран',
+                'label'    => 'Not specified',
                 'selected' => 'selected',
             ],
-            1    => 'Да',
-            2    => 'Нет',
+            1    => 'Yes',
+            2    => 'No',
         ];
     }
 }
