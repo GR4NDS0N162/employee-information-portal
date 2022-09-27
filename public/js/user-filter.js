@@ -1,7 +1,7 @@
 const formSelector = $('#AdminFilterForm, #UserFilterForm');
 const sortSelector = $(`#sort`);
 const pageSelector = $(`#page`);
-const shownEl = $(`#shown`)[0];
+const shownEl = $(`#shown`);
 const listSelector = $(`#user-list`);
 const isAdminPage = formSelector[0].getAttribute('name') === 'AdminFilterForm';
 
@@ -61,6 +61,17 @@ function updateContent(updatePage = false)
             for (let i = 2; i <= pageCount; i++) {
                 pageSelector[0].innerHTML += `<option value="${i}">${i}</option>`;
             }
+        }
+
+        if ('userCount' in data) {
+            const userCount = data['userCount'];
+            const selectedPage = parseInt(pageSelector[0].value);
+
+            const first = (selectedPage - 1) * MAX_USER_COUNT + 1;
+            const last = Math.min(userCount, (selectedPage) * MAX_USER_COUNT);
+
+            shownEl[0].innerText = `${first}-${last} from ${userCount}`;
+            console.log(userCount, selectedPage);
         }
 
         if ('userList' in data) {
