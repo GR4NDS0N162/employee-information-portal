@@ -3,6 +3,7 @@
  * @var Laminas\View\Renderer\PhpRenderer $this
  */
 
+use Application\Controller\UserController;
 use Application\Form\Admin\AdminFilterForm;
 
 /** @var AdminFilterForm $adminFilterForm */
@@ -63,3 +64,6 @@ $this->inlineScript()
         </div>
     </div>
 </div>
+<script>
+    const MAX_USER_COUNT = <?= $this->escapeHtml(UserController::MAX_USER_COUNT); ?>;
+</script>
