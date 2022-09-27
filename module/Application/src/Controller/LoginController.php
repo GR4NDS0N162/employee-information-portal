@@ -103,10 +103,10 @@ class LoginController extends AbstractActionController
 
         $data = $this->signUpForm->getData();
 
-        $email = new Email($data['email']);
+        $email = new Email((string)$data['email']);
         $user = new User(
-            $data['newPassword'],
-            $data['positionId'],
+            (string)$data['newPassword'],
+            (integer)$data['positionId'],
         );
 
         $this->userCommand->insertUser($user, $email);
