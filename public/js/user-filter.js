@@ -6,8 +6,6 @@ const listSelector = $(`#user-list`);
 const isAdminPage = formSelector[0].getAttribute('name') === 'AdminFilterForm';
 
 let oldWhere = formSelector.serialize();
-let count;
-let maxPageCount;
 
 formSelector[0].addEventListener('submit', (e) =>
 {
