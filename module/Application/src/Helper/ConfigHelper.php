@@ -142,6 +142,21 @@ class ConfigHelper
         }
     }
 
+    public static function filterEmpty(array $array): array
+    {
+        foreach ($array as $key => & $value) {
+            if (is_array($value)) {
+                $value = ConfigHelper::filterEmpty($value);
+            }
+            if (!$value) {
+                unset($array[$key]);
+            }
+        }
+        unset($value);
+
+        return $array;
+    }
+
     private static function addStatusFilter(
         string $statusName,
         array  $whereConfig,
@@ -167,21 +182,6 @@ class ConfigHelper
                 $where->notIn('u.id', $valueSet);
             }
         }
-    }
-
-    public static function filterEmpty(array $array): array
-    {
-        foreach ($array as $key => & $value) {
-            if (is_array($value)) {
-                $value = ConfigHelper::filterEmpty($value);
-            }
-            if (!$value) {
-                unset($array[$key]);
-            }
-        }
-        unset($value);
-
-        return $array;
     }
 
     public static function parseOrderConfig(string $orderConfig): array
