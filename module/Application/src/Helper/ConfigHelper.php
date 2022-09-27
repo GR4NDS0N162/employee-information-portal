@@ -71,43 +71,6 @@ class ConfigHelper
         }
     }
 
-    private static function addEmailFilter(
-        ?string $configString,
-        Where   $where
-    ) {
-        if (
-            isset($configString)
-            && $configString != ''
-        ) {
-            $emailSelect = new Select('email');
-            $emailSelect->columns([
-                'user_id',
-            ], false);
-            $emailSelect->where(new Like('address', '%' . $configString . '%'));
-
-            $where->in('u.id', $emailSelect);
-        }
-    }
-
-    private static function addPhoneFilter(
-        ?string $configString,
-        Where   $where
-    ) {
-        if (
-            isset($configString)
-            && $configString != ''
-        ) {
-            $phoneSelect = new Select('phone');
-            $phoneSelect->columns([
-                'user_id',
-            ], false);
-            $phoneSelect->where(new Like('number', '%' . $configString . '%'));
-
-            $where->in('u.id', $phoneSelect);
-            unset($phoneSelect);
-        }
-    }
-
     private static function addFullnameFilter(
         ?string $configString,
         Where   $where
