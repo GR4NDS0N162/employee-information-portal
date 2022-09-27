@@ -40,19 +40,7 @@ class ConfigHelper
 
             self::addFullnameFilter($fullnameConfig, $where);
 
-            if (
-                isset($phoneConfig)
-                && $phoneConfig != ''
-            ) {
-                $phoneSelect = new Select('phone');
-                $phoneSelect->columns([
-                    'user_id',
-                ], false);
-                $phoneSelect->where(new Like('number', '%' . $phoneConfig . '%'));
-
-                $where->in('u.id', $phoneSelect);
-                unset($phoneSelect);
-            }
+            self::addPhoneFilter($phoneConfig, $where);
 
             if (
                 isset($whereConfig['fullnamePhoneEmail'])
@@ -74,6 +62,25 @@ class ConfigHelper
         self::addStatusFilter('admin', $whereConfig, $where);
 
         return $where;
+    }
+
+    private static function addPhoneFilter(
+        string $configString,
+        Where  $where
+    ) {
+        if (
+            isset($configString)
+            && $configString != ''
+        ) {
+            $phoneSelect = new Select('phone');
+            $phoneSelect->columns([
+                'user_id',
+            ], false);
+            $phoneSelect->where(new Like('number', '%' . $configString . '%'));
+
+            $where->in('u.id', $phoneSelect);
+            unset($phoneSelect);
+        }
     }
 
     private static function addFullnameFilter(
