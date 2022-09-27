@@ -65,8 +65,8 @@ class ConfigHelper
     }
 
     private static function addPhoneFilter(
-        string $configString,
-        Where  $where
+        ?string $configString,
+        Where   $where
     ) {
         if (
             isset($configString)
@@ -84,8 +84,8 @@ class ConfigHelper
     }
 
     private static function addFullnameFilter(
-        string $configString,
-        Where  $where
+        ?string $configString,
+        Where   $where
     ) {
         $config = self::filterEmpty(explode(' ', $configString));
 
