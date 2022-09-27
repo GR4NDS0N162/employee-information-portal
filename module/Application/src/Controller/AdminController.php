@@ -74,6 +74,7 @@ class AdminController extends AbstractActionController
         $limit = UserController::MAX_USER_COUNT;
 
         $users = $this->userRepository->findUsers($whereConfig, $orderConfig);
+        $userCount = count($users);
 
         $jsonData = [];
 
@@ -85,7 +86,7 @@ class AdminController extends AbstractActionController
         $jsonData['userList'] = $userList;
 
         if (isset($data['updatePage'])) {
-            $pageCount = ceil(count($users) / UserController::MAX_USER_COUNT);
+            $pageCount = ceil($userCount / UserController::MAX_USER_COUNT);
             $jsonData['pageCount'] = $pageCount;
         }
 
