@@ -57,8 +57,10 @@ function updateContent(updatePage = false)
     }).done((data) =>
     {
         if ('pageCount' in data) {
+            const pageCount = data['pageCount'];
+
             pageSelector[0].innerHTML = '<option value="1">1</option>';
-            for (let i = 2; i <= data['pageCount']; i++) {
+            for (let i = 2; i <= pageCount; i++) {
                 pageSelector[0].innerHTML += `<option value="${i}">${i}</option>`;
             }
         }
