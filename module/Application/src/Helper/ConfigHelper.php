@@ -27,27 +27,7 @@ class ConfigHelper
 
         self::addGenderFilter($whereConfig, $where);
 
-        if (isset($whereConfig['age'])) {
-            $ageConfig = $whereConfig['age'];
-
-            if (isset($ageConfig['min'])) {
-                $minAge = (integer)$ageConfig['min'];
-
-                $where->greaterThanOrEqualTo(
-                    new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW())'),
-                    $minAge,
-                );
-            }
-
-            if (isset($ageConfig['max'])) {
-                $maxAge = (integer)$ageConfig['max'];
-
-                $where->lessThanOrEqualTo(
-                    new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW())'),
-                    $maxAge,
-                );
-            }
-        }
+        self::addAgeFilter($whereConfig, $where);
 
         if (
             isset($whereConfig['fullnamePhone'])
@@ -126,6 +106,39 @@ class ConfigHelper
         if (isset($whereConfig['gender'])) {
             $gender = (integer)$whereConfig['gender'];
             $where->equalTo('u.gender', $gender);
+        }
+    }
+
+    private static function addAgeFilter(
+        array  $whereConfig,
+        ?Where $where
+    ) {
+        if (isset($whereConfig['age'])) {
+            $ageConfig = $whereConfig['age'];
+
+            self::addBetweenFilter(
+                new Expression('TIMESTAMPDIFF(YEAR, u.birthday, NOW())'),
+                $ageConfig,
+                $where
+            );
+        }
+    }
+
+    private static function addBetweenFilter(
+        Expression $operand,
+        array      $config,
+        ?Where     $where
+    ) {
+        if (isset($config['min']) && isset($config['max'])) {
+            $min = (integer)$config['min'];
+            $max = (integer)$config['max'];
+            $where->between($operand, $min, $max);
+        } elseif (isset($config['min'])) {
+            $min = (integer)$config['min'];
+            $where->greaterThanOrEqualTo($operand, $min);
+        } elseif (isset($config['max'])) {
+            $max = (integer)$config['max'];
+            $where->lessThanOrEqualTo($operand, $max);
         }
     }
 
