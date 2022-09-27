@@ -2,6 +2,7 @@
 
 namespace Application\Model\Repository;
 
+use Application\Helper\ConfigHelper;
 use Application\Model\Command\DialogCommandInterface;
 use Application\Model\Entity\Dialog;
 use Laminas\Db\Adapter\AdapterInterface;
@@ -60,7 +61,7 @@ class DialogRepository implements DialogRepositoryInterface
         $where = new Where();
         $where->notEqualTo('u.id', $userId);
 
-        $select->where(UserRepository::parseWhereConfig($whereConfig, $where));
+        $select->where(ConfigHelper::parseWhereConfig($whereConfig, $where));
 
         $select->order([
             new Expression('ISNULL(mem.dialog_id)'),
