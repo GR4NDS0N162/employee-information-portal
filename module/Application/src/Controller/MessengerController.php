@@ -69,8 +69,7 @@ class MessengerController extends AbstractActionController
         UserController::setAdminNavbar($this->userRepository, $this, UserController::USER_ID);
         $buddyId = (int)$this->params()->fromRoute('id', 0);
 
-        if (
-            $buddyId === 0
+        if ($buddyId === 0
             || $buddyId === UserController::USER_ID
         ) {
             return $this->redirect()->toRoute('user/view-dialog-list');
