@@ -12,6 +12,7 @@ use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
+use LogicException;
 
 class AdminController extends AbstractActionController
 {
@@ -60,7 +61,7 @@ class AdminController extends AbstractActionController
         $request = $this->getRequest();
 
         if (!$request->isXmlHttpRequest() || !$request->isPost()) {
-            exit();
+            throw new LogicException('The request to the address must be ajax and post.');
         }
 
         $data = $request->getPost()->toArray();

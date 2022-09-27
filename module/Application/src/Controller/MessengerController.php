@@ -13,6 +13,7 @@ use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
+use LogicException;
 
 class MessengerController extends AbstractActionController
 {
@@ -96,7 +97,7 @@ class MessengerController extends AbstractActionController
         $request = $this->getRequest();
 
         if (!$request->isXmlHttpRequest() || !$request->isPost()) {
-            exit();
+            throw new LogicException('The request to the address must be ajax and post.');
         }
 
         $data = ConfigHelper::filterEmpty($request->getPost()->toArray());
@@ -122,7 +123,7 @@ class MessengerController extends AbstractActionController
         $request = $this->getRequest();
 
         if (!$request->isXmlHttpRequest() || !$request->isPost()) {
-            exit();
+            throw new LogicException('The request to the address must be ajax and post.');
         }
 
         $post = $request->getPost();
@@ -146,7 +147,7 @@ class MessengerController extends AbstractActionController
         $request = $this->getRequest();
 
         if (!$request->isXmlHttpRequest() || !$request->isPost()) {
-            exit();
+            throw new LogicException('The request to the address must be ajax and post.');
         }
 
         $post = $request->getPost();
