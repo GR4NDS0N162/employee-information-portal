@@ -13,18 +13,7 @@ formSelector[0].addEventListener('submit', (e) =>
 
     oldWhere = formSelector.serialize();
 
-    $.ajax({
-        url: '/admin/list/get',
-        method: 'post',
-        dataType: 'html',
-        async: false,
-        data: getData(true),
-    }).done((data) =>
-    {
-        pageSelector.html(data);
-    });
-
-    updateContent();
+    updateContent(true);
 });
 
 pageSelector[0].addEventListener('change', () =>
