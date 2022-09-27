@@ -8,6 +8,7 @@ use Application\Model\Entity\ChangePassword;
 use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Session\Container as SessionContainer;
 use Laminas\View\Model\ViewModel;
 
 class UserController extends AbstractActionController
@@ -23,6 +24,7 @@ class UserController extends AbstractActionController
     private Form\ChangePasswordForm $changePasswordForm;
     private UserRepositoryInterface $userRepository;
     private UserCommandInterface $userCommand;
+    private SessionContainer $sessionContainer;
 
     public function __construct(
         Form\ProfileForm        $profileForm,
@@ -30,7 +32,8 @@ class UserController extends AbstractActionController
         Form\UserFilterForm     $userFilterForm,
         Form\ChangePasswordForm $changePasswordForm,
         UserRepositoryInterface $userRepository,
-        UserCommandInterface    $userCommand
+        UserCommandInterface    $userCommand,
+        SessionContainer        $sessionContainer
     ) {
         $this->profileForm = $profileForm;
         $this->viewProfileForm = $viewProfileForm;
@@ -38,6 +41,7 @@ class UserController extends AbstractActionController
         $this->changePasswordForm = $changePasswordForm;
         $this->userRepository = $userRepository;
         $this->userCommand = $userCommand;
+        $this->sessionContainer = $sessionContainer;
     }
 
     public function viewProfileAction()

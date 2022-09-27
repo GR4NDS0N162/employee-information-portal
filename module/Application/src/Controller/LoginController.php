@@ -7,6 +7,7 @@ use Application\Model\Command\UserCommandInterface;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\User;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Session\Container as SessionContainer;
 use Laminas\View\Model\ViewModel;
 
 class LoginController extends AbstractActionController
@@ -15,17 +16,20 @@ class LoginController extends AbstractActionController
     private Login\SignUpForm $signUpForm;
     private Login\RecoverForm $recoverForm;
     private UserCommandInterface $userCommand;
+    private SessionContainer $sessionContainer;
 
     public function __construct(
         Login\LoginForm      $loginForm,
         Login\SignUpForm     $signUpForm,
         Login\RecoverForm    $recoverForm,
-        UserCommandInterface $userCommand
+        UserCommandInterface $userCommand,
+        SessionContainer     $sessionContainer
     ) {
         $this->loginForm = $loginForm;
         $this->signUpForm = $signUpForm;
         $this->recoverForm = $recoverForm;
         $this->userCommand = $userCommand;
+        $this->sessionContainer = $sessionContainer;
     }
 
     public function indexAction()

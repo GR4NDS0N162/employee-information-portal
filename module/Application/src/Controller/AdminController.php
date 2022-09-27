@@ -11,6 +11,7 @@ use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Session\Container as SessionContainer;
 use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
 use LogicException;
@@ -24,6 +25,7 @@ class AdminController extends AbstractActionController
     private PositionRepositoryInterface $positionRepository;
     private UserCommandInterface $userCommand;
     private PositionCommandInterface $positionCommand;
+    private SessionContainer $sessionContainer;
 
     public function __construct(
         Form\PositionForm           $positionForm,
@@ -32,7 +34,8 @@ class AdminController extends AbstractActionController
         UserRepositoryInterface     $userRepository,
         PositionRepositoryInterface $positionRepository,
         UserCommandInterface        $userCommand,
-        PositionCommandInterface    $positionCommand
+        PositionCommandInterface    $positionCommand,
+        SessionContainer            $sessionContainer
     ) {
         $this->positionForm = $positionForm;
         $this->userForm = $userForm;
@@ -41,6 +44,7 @@ class AdminController extends AbstractActionController
         $this->positionRepository = $positionRepository;
         $this->userCommand = $userCommand;
         $this->positionCommand = $positionCommand;
+        $this->sessionContainer = $sessionContainer;
     }
 
     public function viewUserListAction()
