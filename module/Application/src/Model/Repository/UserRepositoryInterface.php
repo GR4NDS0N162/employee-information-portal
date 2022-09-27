@@ -25,15 +25,11 @@ interface UserRepositoryInterface
     /**
      * @param array  $whereConfig
      * @param string $orderConfig
-     * @param bool   $limit
-     * @param int    $page
      *
      * @return User[]
      */
     public function findUsers(
         array  $whereConfig = [],
-        string $orderConfig = 'fullname',
-        bool   $limit = false,
-        int    $page = 1
+        string $orderConfig = 'fullname'
     ): array;
 }

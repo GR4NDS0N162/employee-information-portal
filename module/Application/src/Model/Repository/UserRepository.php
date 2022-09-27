@@ -117,9 +117,7 @@ class UserRepository implements UserRepositoryInterface
 
     public function findUsers(
         array  $whereConfig = [],
-        string $orderConfig = 'fullname',
-        bool   $limit = false,
-        int    $page = 1
+        string $orderConfig = 'fullname'
     ): array {
         $select = new Select(['u' => 'user']);
         $select->quantifier(Select::QUANTIFIER_DISTINCT);
@@ -147,11 +145,6 @@ class UserRepository implements UserRepositoryInterface
         $select->where(ConfigHelper::parseWhereConfig($whereConfig));
 
         $select->order(ConfigHelper::parseOrderConfig($orderConfig));
-
-        if ($limit) {
-            $select->limit(UserController::MAX_USER_COUNT);
-        }
-        $select->offset(($page - 1) * UserController::MAX_USER_COUNT);
 
         /** @var User[] $users */
         $users = Extracter::extractValues(
