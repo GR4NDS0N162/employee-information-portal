@@ -11,6 +11,7 @@ use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
 use LogicException;
 
@@ -69,38 +70,26 @@ class AdminController extends AbstractActionController
         $whereConfig = ConfigHelper::filterEmpty($data['where']);
         $orderConfig = $data['order'];
         $page = (integer)$data['page'];
+        $offset = ($page - 1) * UserController::MAX_USER_COUNT;
+        $limit = UserController::MAX_USER_COUNT;
+
+        $users = $this->userRepository->findUsers($whereConfig, $orderConfig);
+
+        $jsonData = [];
+
+        $userList = array_slice($users, $offset, $limit);
+        $userList = array_map(function ($item) {
+            return $item->toArray();
+        }, $userList);
+
+        $jsonData['userList'] = $userList;
 
         if (isset($data['updatePage'])) {
-            $userCount = count(
-                $this->userRepository->findUsers($whereConfig)
-            );
-
-            $viewModel = new ViewModel();
-            $viewModel->setTerminal(true);
-            $viewModel->setTemplate('partial/page-select.phtml');
-
-            $viewModel->setVariables([
-                'pageCount' => ceil($userCount / UserController::MAX_USER_COUNT),
-            ]);
-
-            return $viewModel;
+            $pageCount = ceil(count($users) / UserController::MAX_USER_COUNT);
+            $jsonData['pageCount'] = $pageCount;
         }
 
-        $viewModel = new ViewModel();
-        $viewModel->setTerminal(true);
-        $viewModel->setTemplate('partial/user-list.phtml');
-
-        $viewModel->setVariables([
-            'userList' => $this->userRepository->findUsers(
-                $whereConfig,
-                $orderConfig,
-                true,
-                $page
-            ),
-            'formName' => $data['formName'],
-        ]);
-
-        return $viewModel;
+        return new JsonModel($jsonData);
     }
 
     public function editUserAction()
