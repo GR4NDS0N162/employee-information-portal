@@ -41,6 +41,7 @@ function getData(updatePage = false)
 
     if (updatePage) {
         data.updatePage = true;
+        data.page = 1;
     }
 
     return data;
