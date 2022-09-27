@@ -10,6 +10,11 @@ use Laminas\Db\Sql\Where;
 
 class ConfigHelper
 {
+    /** @var string An option indicating that the status belongs to the user. */
+    const YES_OPTION = '1';
+    /** @var string An option indicating that the status doesn't belong to the user. */
+    const NO_OPTION = '2';
+
     public static function parseWhereConfig(
         array  $whereConfig,
         ?Where $where = null
@@ -104,49 +109,37 @@ class ConfigHelper
             }
         }
 
-        if (isset($whereConfig['active'])) {
-            $activeSelect = new Select(['us' => 'user_status']);
-            $activeSelect->columns([
-                'us.user_id',
-            ], false);
-            $activeSelect->join(
-                ['s' => 'status'],
-                's.id = us.status_id',
-                [],
-            );
-            $activeSelect->where(['s.name' => 'active']);
-
-            $statusConfig = $whereConfig['active'];
-
-            if ($statusConfig == '1') {
-                $where->in('u.id', $activeSelect);
-            } elseif ($statusConfig == '2') {
-                $where->notIn('u.id', $activeSelect);
-            }
-        }
-
-        if (isset($whereConfig['admin'])) {
-            $adminSelect = new Select(['us' => 'user_status']);
-            $adminSelect->columns([
-                'us.user_id',
-            ], false);
-            $adminSelect->join(
-                ['s' => 'status'],
-                's.id = us.status_id',
-                [],
-            );
-            $adminSelect->where(['s.name' => 'admin']);
-
-            $statusConfig = $whereConfig['admin'];
-
-            if ($statusConfig == '1') {
-                $where->in('u.id', $adminSelect);
-            } elseif ($statusConfig == '2') {
-                $where->notIn('u.id', $adminSelect);
-            }
-        }
+        self::addStatusFilter('active', $whereConfig, $where);
+        self::addStatusFilter('admin', $whereConfig, $where);
 
         return $where;
+    }
+
+    private static function addStatusFilter(
+        string $statusName,
+        array  $whereConfig,
+        ?Where $where
+    ) {
+        if (isset($whereConfig[$statusName])) {
+            $valueSet = new Select(['us' => 'user_status']);
+            $valueSet->columns([
+                'us.user_id',
+            ], false);
+            $valueSet->join(
+                ['s' => 'status'],
+                's.id = us.status_id',
+                [],
+            );
+            $valueSet->where(['s.name' => $statusName]);
+
+            $statusConfig = $whereConfig[$statusName];
+
+            if ($statusConfig == self::YES_OPTION) {
+                $where->in('u.id', $valueSet);
+            } elseif ($statusConfig == self::NO_OPTION) {
+                $where->notIn('u.id', $valueSet);
+            }
+        }
     }
 
     public static function filterEmpty(array $array): array
