@@ -122,7 +122,7 @@ class ConfigHelper
     {
         foreach ($array as $key => & $value) {
             if (is_array($value)) {
-                $value = ConfigHelper::filterEmpty($value);
+                $value = self::filterEmpty($value);
             }
             if (!$value) {
                 unset($array[$key]);
