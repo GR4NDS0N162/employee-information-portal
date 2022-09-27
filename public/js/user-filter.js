@@ -2,6 +2,8 @@ const formSelector = $('#AdminFilterForm, #UserFilterForm');
 const sortSelector = $(`#sort`);
 const pageSelector = $(`#page`);
 const shownEl = $(`#shown`)[0];
+const listSelector = $(`#user-list`);
+const isAdminPage = formSelector[0].getAttribute('name') === 'AdminFilterForm';
 
 let oldWhere = formSelector.serialize();
 let count;
