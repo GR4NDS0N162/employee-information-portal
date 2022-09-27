@@ -46,11 +46,17 @@ class UserController extends AbstractActionController
 
     public function viewProfileAction()
     {
-        UserController::setAdminNavbar($this->userRepository, $this, self::USER_ID);
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
+
+        UserController::setAdminNavbar($this->userRepository, $this, $userId);
+
         $this->layout()->setVariables(['headTitleName' => 'View profile']);
         $viewModel = new ViewModel(['viewProfileForm' => $this->viewProfileForm]);
 
-        $profile = $this->userRepository->findProfile(self::USER_ID);
+        $profile = $this->userRepository->findProfile($userId);
         $this->viewProfileForm->bind($profile);
         $this->viewProfileForm->get('profile')->get('image')
             ->setAttribute('src', $profile->getImagePath());
