@@ -70,6 +70,14 @@ class Email implements InputFilterAwareInterface, HydratorAwareInterface
         $this->hydrator->addStrategy('userId', new NullableStrategy(ScalarTypeStrategy::createToInt(), true));
     }
 
+    public function toArray(): array
+    {
+        return [
+            'address' => $this->address,
+            'userId'  => $this->userId,
+        ];
+    }
+
     public function __get($prop)
     {
         return $this->$prop;

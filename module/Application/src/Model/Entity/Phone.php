@@ -70,6 +70,14 @@ class Phone implements InputFilterAwareInterface, HydratorAwareInterface
         $this->hydrator->addStrategy('userId', new NullableStrategy(ScalarTypeStrategy::createToInt(), true));
     }
 
+    public function toArray()
+    {
+        return [
+            'number' => $this->number,
+            'userId' => $this->userId,
+        ];
+    }
+
     public function __get($prop)
     {
         return $this->$prop;
