@@ -53,6 +53,24 @@ class ConfigHelper
         return $where;
     }
 
+    private static function addLikeFilter(
+        string  $table,
+        string  $searchColumn,
+        ?string $configString,
+        Where   $where
+    ) {
+        if (
+            isset($configString)
+            && $configString != ''
+        ) {
+            $valueSet = new Select($table);
+            $valueSet->columns(['user_id'], false);
+            $valueSet->where(new Like($searchColumn, '%' . $configString . '%'));
+
+            $where->in('u.id', $valueSet);
+        }
+    }
+
     private static function addEmailFilter(
         ?string $configString,
         Where   $where
