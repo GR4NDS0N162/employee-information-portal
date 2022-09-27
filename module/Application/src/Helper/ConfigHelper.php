@@ -38,20 +38,7 @@ class ConfigHelper
                 explode(',', $whereConfig['fullnamePhoneEmail'] ?: $whereConfig['fullnamePhone'])
             );
 
-            $fullnameConfig = ConfigHelper::filterEmpty(explode(' ', $fullnameConfig));
-            if (!empty($fullnameConfig)) {
-                $fullnameWhere = new Where(null, PredicateSet::COMBINED_BY_OR);
-
-                foreach ($fullnameConfig as $str) {
-                    $str = strtolower($str);
-                    $fullnameWhere->like(new Expression('LOWER(u.surname)'), '%' . $str . '%');
-                    $fullnameWhere->like(new Expression('LOWER(u.name)'), '%' . $str . '%');
-                    $fullnameWhere->like(new Expression('LOWER(u.patronymic)'), '%' . $str . '%');
-                }
-
-                $where->addPredicates($fullnameWhere);
-                unset($fullnameWhere);
-            }
+            self::addFullnameFilter($fullnameConfig, $where);
 
             if (
                 isset($phoneConfig)
@@ -87,6 +74,26 @@ class ConfigHelper
         self::addStatusFilter('admin', $whereConfig, $where);
 
         return $where;
+    }
+
+    private static function addFullnameFilter(
+        string $configString,
+        Where  $where
+    ) {
+        $config = self::filterEmpty(explode(' ', $configString));
+
+        if (!empty($config)) {
+            $fullnameWhere = new Where(null, PredicateSet::COMBINED_BY_OR);
+
+            foreach ($config as $str) {
+                $str = strtolower($str);
+                $fullnameWhere->like(new Expression('LOWER(u.surname)'), '%' . $str . '%');
+                $fullnameWhere->like(new Expression('LOWER(u.name)'), '%' . $str . '%');
+                $fullnameWhere->like(new Expression('LOWER(u.patronymic)'), '%' . $str . '%');
+            }
+
+            $where->addPredicates($fullnameWhere);
+        }
     }
 
     private static function addPositionFilter(
