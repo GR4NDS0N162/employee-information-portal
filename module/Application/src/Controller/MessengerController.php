@@ -12,8 +12,10 @@ use Application\Model\Repository\MessageRepositoryInterface;
 use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
 use LogicException;
+use RuntimeException;
 
 class MessengerController extends AbstractActionController
 {
@@ -130,16 +132,20 @@ class MessengerController extends AbstractActionController
         $content = (string)$post->get('content');
         $buddyId = (int)$post->get('buddyId');
 
-        $this->messageCommand->sendMessage(
-            new Message(
-                $this->dialogRepository->getDialogId(UserController::USER_ID, $buddyId),
-                UserController::USER_ID,
-                date('Y-m-d H:i:s'),
-                $content,
-            )
-        );
+        try {
+            $this->messageCommand->sendMessage(
+                new Message(
+                    $this->dialogRepository->getDialogId(UserController::USER_ID, $buddyId),
+                    UserController::USER_ID,
+                    date('Y-m-d H:i:s'),
+                    $content,
+                )
+            );
 
-        exit();
+            return new JsonModel(['ok']);
+        } catch (RuntimeException $ex) {
+            return new JsonModel([$ex->getMessage()]);
+        }
     }
 
     public function loadMessagesAction()
