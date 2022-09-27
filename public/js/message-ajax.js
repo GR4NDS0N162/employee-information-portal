@@ -51,6 +51,7 @@ function sendMessage(content)
     $.ajax({
         url: '/user/im/send',
         method: 'post',
+        dataType: 'json',
         data: {
             content: content,
             buddyId: buddyId,
