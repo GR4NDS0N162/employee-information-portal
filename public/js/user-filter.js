@@ -46,13 +46,13 @@ function getData(updatePage = false)
     return data;
 }
 
-function updateContent()
+function updateContent(updatePage = false)
 {
     $.ajax({
         url: '/admin/list/get',
         method: 'post',
         dataType: 'html',
-        data: getData(),
+        data: getData(updatePage),
     }).done((data) =>
     {
         $(`#user-list`).html(data);
