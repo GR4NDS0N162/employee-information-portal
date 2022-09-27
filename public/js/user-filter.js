@@ -13,8 +13,6 @@ formSelector[0].addEventListener('submit', (e) =>
 
     oldWhere = formSelector.serialize();
 
-    console.log(getData(true));
-
     $.ajax({
         url: '/admin/list/get',
         method: 'post',
@@ -59,8 +57,6 @@ function getData(updatePage = false)
 
 function updateContent()
 {
-    console.log(getData());
-
     $.ajax({
         url: '/admin/list/get',
         method: 'post',
