@@ -84,6 +84,7 @@ class AdminController extends AbstractActionController
         }, $userList);
 
         $jsonData['userList'] = $userList;
+        $jsonData['userCount'] = $userCount;
 
         if (isset($data['updatePage'])) {
             $pageCount = ceil($userCount / UserController::MAX_USER_COUNT);
