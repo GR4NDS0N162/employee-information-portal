@@ -51,7 +51,7 @@ function updateContent(updatePage = false)
     $.ajax({
         url: '/admin/list/get',
         method: 'post',
-        dataType: 'html',
+        dataType: 'json',
         data: getData(updatePage),
     }).done((data) =>
     {
