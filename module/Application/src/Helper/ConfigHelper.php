@@ -90,8 +90,8 @@ class ConfigHelper
     }
 
     private static function addPositionFilter(
-        array  $whereConfig,
-        ?Where $where
+        array $whereConfig,
+        Where $where
     ) {
         if (isset($whereConfig['positionId'])) {
             $positionId = (integer)$whereConfig['positionId'];
@@ -100,8 +100,8 @@ class ConfigHelper
     }
 
     private static function addGenderFilter(
-        array  $whereConfig,
-        ?Where $where
+        array $whereConfig,
+        Where $where
     ) {
         if (isset($whereConfig['gender'])) {
             $gender = (integer)$whereConfig['gender'];
@@ -110,8 +110,8 @@ class ConfigHelper
     }
 
     private static function addAgeFilter(
-        array  $whereConfig,
-        ?Where $where
+        array $whereConfig,
+        Where $where
     ) {
         if (isset($whereConfig['age'])) {
             $ageConfig = $whereConfig['age'];
@@ -127,7 +127,7 @@ class ConfigHelper
     private static function addBetweenFilter(
         Expression $operand,
         array      $config,
-        ?Where     $where
+        Where      $where
     ) {
         if (isset($config['min']) && isset($config['max'])) {
             $min = (integer)$config['min'];
@@ -145,7 +145,7 @@ class ConfigHelper
     private static function addStatusFilter(
         string $statusName,
         array  $whereConfig,
-        ?Where $where
+        Where  $where
     ) {
         if (isset($whereConfig[$statusName])) {
             $valueSet = new Select(['us' => 'user_status']);
