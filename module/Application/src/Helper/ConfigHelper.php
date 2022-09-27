@@ -40,10 +40,10 @@ class ConfigHelper
 
             self::addFullnameFilter($fullnameConfig, $where);
 
-            self::addPhoneFilter($phoneConfig, $where);
+            self::addLikeFilter('phone', 'number', $phoneConfig, $where);
 
             if (isset($whereConfig['fullnamePhoneEmail'])) {
-                self::addEmailFilter($emailConfig, $where);
+                self::addLikeFilter('email', 'address', $emailConfig, $where);
             }
         }
 
