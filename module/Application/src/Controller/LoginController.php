@@ -109,7 +109,7 @@ class LoginController extends AbstractActionController
             (integer)$data['positionId'],
         );
 
-        $this->userCommand->insertUser($user, $email);
+        $userId = $this->userCommand->insertUser($user, $email);
         return $this->redirect()->toRoute('user/view-profile');
     }
 
