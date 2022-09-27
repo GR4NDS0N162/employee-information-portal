@@ -53,68 +53,24 @@ class ConfigHelper
         return $where;
     }
 
-    private static function addLikeFilter(
-        string  $table,
-        string  $searchColumn,
-        ?string $configString,
-        Where   $where
-    ) {
-        if (
-            isset($configString)
-            && $configString != ''
-        ) {
-            $valueSet = new Select($table);
-            $valueSet->columns(['user_id'], false);
-            $valueSet->where(new Like($searchColumn, '%' . $configString . '%'));
-
-            $where->in('u.id', $valueSet);
-        }
-    }
-
-    private static function addFullnameFilter(
-        ?string $configString,
-        Where   $where
-    ) {
-        $config = self::filterEmpty(explode(' ', $configString));
-
-        if (!empty($config)) {
-            $fullnameWhere = new Where(null, PredicateSet::COMBINED_BY_OR);
-
-            foreach ($config as $str) {
-                $str = strtolower($str);
-                $fullnameWhere->like(new Expression('LOWER(u.surname)'), '%' . $str . '%');
-                $fullnameWhere->like(new Expression('LOWER(u.name)'), '%' . $str . '%');
-                $fullnameWhere->like(new Expression('LOWER(u.patronymic)'), '%' . $str . '%');
-            }
-
-            $where->addPredicates($fullnameWhere);
-        }
-    }
-
-    private static function addPositionFilter(
-        array $whereConfig,
-        Where $where
-    ) {
+    private static function addPositionFilter(array $whereConfig, Where $where)
+    {
         if (isset($whereConfig['positionId'])) {
             $positionId = (integer)$whereConfig['positionId'];
             $where->equalTo('u.position_id', $positionId);
         }
     }
 
-    private static function addGenderFilter(
-        array $whereConfig,
-        Where $where
-    ) {
+    private static function addGenderFilter(array $whereConfig, Where $where)
+    {
         if (isset($whereConfig['gender'])) {
             $gender = (integer)$whereConfig['gender'];
             $where->equalTo('u.gender', $gender);
         }
     }
 
-    private static function addAgeFilter(
-        array $whereConfig,
-        Where $where
-    ) {
+    private static function addAgeFilter(array $whereConfig, Where $where)
+    {
         if (isset($whereConfig['age'])) {
             $ageConfig = $whereConfig['age'];
 
@@ -144,6 +100,24 @@ class ConfigHelper
         }
     }
 
+    private static function addFullnameFilter(?string $configString, Where $where)
+    {
+        $config = self::filterEmpty(explode(' ', $configString));
+
+        if (!empty($config)) {
+            $fullnameWhere = new Where(null, PredicateSet::COMBINED_BY_OR);
+
+            foreach ($config as $str) {
+                $str = strtolower($str);
+                $fullnameWhere->like(new Expression('LOWER(u.surname)'), '%' . $str . '%');
+                $fullnameWhere->like(new Expression('LOWER(u.name)'), '%' . $str . '%');
+                $fullnameWhere->like(new Expression('LOWER(u.patronymic)'), '%' . $str . '%');
+            }
+
+            $where->addPredicates($fullnameWhere);
+        }
+    }
+
     public static function filterEmpty(array $array): array
     {
         foreach ($array as $key => & $value) {
@@ -157,6 +131,24 @@ class ConfigHelper
         unset($value);
 
         return $array;
+    }
+
+    private static function addLikeFilter(
+        string  $table,
+        string  $searchColumn,
+        ?string $configString,
+        Where   $where
+    ) {
+        if (
+            isset($configString)
+            && $configString != ''
+        ) {
+            $valueSet = new Select($table);
+            $valueSet->columns(['user_id'], false);
+            $valueSet->where(new Like($searchColumn, '%' . $configString . '%'));
+
+            $where->in('u.id', $valueSet);
+        }
     }
 
     private static function addStatusFilter(
