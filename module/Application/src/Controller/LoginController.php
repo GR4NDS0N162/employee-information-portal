@@ -7,12 +7,16 @@ use Application\Model\Command\UserCommandInterface;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\User;
 use Application\Model\Repository\UserRepositoryInterface;
+use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Session\Container as SessionContainer;
 use Laminas\View\Model\ViewModel;
 
 class LoginController extends AbstractActionController
 {
+    /** @var string The key that stores the id of the logged-in user. */
+    const USER_ID = 'userId';
+
     private Login\LoginForm $loginForm;
     private Login\SignUpForm $signUpForm;
     private Login\RecoverForm $recoverForm;
@@ -52,6 +56,35 @@ class LoginController extends AbstractActionController
 
     public function loginAction()
     {
+        $request = $this->getRequest();
+
+        if (!$request->isPost()) {
+            return $this->redirect()->toRoute('home');
+        }
+
+        $this->loginForm->setData($request->getPost());
+
+        if (!$this->loginForm->isValid()) {
+            return $this->redirect()->toRoute('home');
+        }
+
+        $data = $this->loginForm->getData();
+
+        $email = new Email($data['email']);
+        $password = $data['currentPassword'];
+
+        try {
+            $foundUser = $this->userRepository->findUser($email);
+        } catch (InvalidArgumentException $ex) {
+            return $this->redirect()->toRoute('home');
+        }
+
+        if ($foundUser->getPassword() == $password) {
+            $this->sessionContainer->offsetSet(self::USER_ID, $foundUser->getId());
+            return $this->redirect()->toRoute('user/view-profile');
+        } else {
+            return $this->redirect()->toRoute('home');
+        }
     }
 
     public function signUpAction()
