@@ -23,15 +23,9 @@ class ConfigHelper
             $where = new Where();
         }
 
-        if (isset($whereConfig['positionId'])) {
-            $positionId = (integer)$whereConfig['positionId'];
-            $where->equalTo('u.position_id', $positionId);
-        }
+        self::addPositionFilter($whereConfig, $where);
 
-        if (isset($whereConfig['gender'])) {
-            $gender = (integer)$whereConfig['gender'];
-            $where->equalTo('u.gender', $gender);
-        }
+        self::addGenderFilter($whereConfig, $where);
 
         if (isset($whereConfig['age'])) {
             $ageConfig = $whereConfig['age'];
@@ -113,6 +107,26 @@ class ConfigHelper
         self::addStatusFilter('admin', $whereConfig, $where);
 
         return $where;
+    }
+
+    private static function addPositionFilter(
+        array  $whereConfig,
+        ?Where $where
+    ) {
+        if (isset($whereConfig['positionId'])) {
+            $positionId = (integer)$whereConfig['positionId'];
+            $where->equalTo('u.position_id', $positionId);
+        }
+    }
+
+    private static function addGenderFilter(
+        array  $whereConfig,
+        ?Where $where
+    ) {
+        if (isset($whereConfig['gender'])) {
+            $gender = (integer)$whereConfig['gender'];
+            $where->equalTo('u.gender', $gender);
+        }
     }
 
     private static function addStatusFilter(
