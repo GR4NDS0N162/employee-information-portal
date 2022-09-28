@@ -149,8 +149,8 @@ class MessengerController extends AbstractActionController
         try {
             $this->messageCommand->sendMessage(
                 new Message(
-                    $this->dialogRepository->getDialogId(UserController::USER_ID, $buddyId),
-                    UserController::USER_ID,
+                    $this->dialogRepository->getDialogId($userId, $buddyId),
+                    $userId,
                     date('Y-m-d H:i:s'),
                     $content,
                 )
