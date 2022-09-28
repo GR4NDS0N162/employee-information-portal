@@ -11,6 +11,7 @@ use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\StatusRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
+use Laminas\Http\Header\Referer;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Session\Container as SessionContainer;
 use Laminas\View\Model\JsonModel;
@@ -93,7 +94,11 @@ class AdminController extends AbstractActionController
         $offset = ($page - 1) * UserController::MAX_USER_COUNT;
         $limit = UserController::MAX_USER_COUNT;
 
-        if (!$this->statusRepository->checkStatusOfUser($userId, 'admin')) {
+        /** @var Referer $referer */
+        $referer = $request->getHeader('Referer', null);
+        $isAdminPage = is_null($referer) || strpos($referer->getUri(), 'admin') !== false;
+
+        if ($isAdminPage) {
             $whereConfig['active'] = ConfigHelper::YES_OPTION;
         }
 
