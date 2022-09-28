@@ -91,6 +91,7 @@ class AdminController extends AbstractActionController
         $isAdminPage = is_null($referer) || strpos($referer->getUri(), 'admin') !== false;
 
         $data = $request->getPost()->toArray();
+
         $whereConfig = ConfigHelper::configWhereData($data['where'], $isAdminPage);
         $orderConfig = $data['order'];
         $page = (integer)$data['page'];
@@ -121,7 +122,6 @@ class AdminController extends AbstractActionController
     public function editUserAction()
     {
         $userId = (int)$this->params()->fromRoute('id', 0);
-
         if ($userId === 0) {
             return $this->redirect()->toRoute('admin/view-user-list');
         }
@@ -138,6 +138,7 @@ class AdminController extends AbstractActionController
         ]);
 
         $this->userForm->bind($user);
+
         $viewModel = new ViewModel(['userForm' => $this->userForm]);
 
         $request = $this->getRequest();
