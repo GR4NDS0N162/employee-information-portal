@@ -173,7 +173,7 @@ class UserController extends AbstractActionController
             return $this->redirect()->toRoute('home');
         }
 
-        self::setAdminNavbar($this->statusRepository, $this, self::USER_ID);
+        self::setAdminNavbar($this->statusRepository, $this, $userId);
         $viewModel = new ViewModel();
 
         $headTitleName = 'List of users';
