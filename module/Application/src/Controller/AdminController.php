@@ -80,7 +80,6 @@ class AdminController extends AbstractActionController
         }
 
         $request = $this->getRequest();
-        $uriPath = $request->getUri()->getPath();
 
         if (!$request->isXmlHttpRequest() || !$request->isPost()) {
             throw new LogicException('The request to the address must be ajax and post.');
