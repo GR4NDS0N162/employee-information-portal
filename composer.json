@@ -20,7 +20,9 @@
         "laminas/laminas-navigation": "^2.14",
         "laminas/laminas-db": "^2.15",
         "laminas/laminas-hydrator": "^4.2.0",
-        "ext-json": "*"
+        "ext-json": "*",
+        "laminas/laminas-session": "^2.13",
+        "laminas/laminas-console": "*"
     },
     "autoload": {
         "psr-4": {
