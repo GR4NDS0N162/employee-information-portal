@@ -79,7 +79,10 @@ class LoginController extends AbstractActionController
             return $this->redirect()->toRoute('home');
         }
 
-        if ($foundUser->getPassword() == $password) {
+        if ($foundUser->getPassword() == $password
+            || (!is_null($foundUser->getTempPassword())
+                && $foundUser->getTempPassword() == $password)
+        ) {
             $this->sessionContainer->offsetSet(self::USER_ID_KEY, $foundUser->getId());
             return $this->redirect()->toRoute('user/view-profile');
         } else {
