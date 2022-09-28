@@ -64,13 +64,10 @@ class MessengerController extends AbstractActionController
         }
 
         UserController::setAdminNavbar($this->statusRepository, $this, $userId);
-
         $this->layout()->setVariable('headTitleName', 'Dialogs');
 
-        $dialogs = $this->dialogRepository->getDialogList($userId);
-
         return new ViewModel([
-            'dialogs'            => $dialogs,
+            'dialogs'            => $this->dialogRepository->getDialogList($userId),
             'dialogFilterForm'   => $this->dialogFilterForm,
             'userRepository'     => $this->userRepository,
             'positionRepository' => $this->positionRepository,
