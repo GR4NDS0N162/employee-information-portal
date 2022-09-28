@@ -3,6 +3,7 @@
 namespace Application\Model\Entity;
 
 use Laminas\Filter\ToInt;
+use Laminas\Hydrator\Strategy\NullableStrategy;
 use Laminas\Hydrator\Strategy\ScalarTypeStrategy;
 use Laminas\Validator\GreaterThan;
 use Laminas\Validator\IsCountable;
@@ -15,6 +16,10 @@ class User extends Profile
      * @var string
      */
     protected $password;
+    /**
+     * @var string|null
+     */
+    protected $tempPassword;
     /**
      * @var int
      */
@@ -46,6 +51,7 @@ class User extends Profile
      * @param string|null $birthday
      * @param string|null $image
      * @param string|null $skype
+     * @param string|null $tempPassword
      * @param int|null    $id
      * @param bool        $genNewPassword
      */
@@ -63,6 +69,7 @@ class User extends Profile
         $birthday = null,
         $image = null,
         $skype = null,
+        $tempPassword = null,
         $id = null,
         $genNewPassword = false
     ) {
@@ -80,6 +87,7 @@ class User extends Profile
         );
 
         $this->password = $password;
+        $this->tempPassword = $tempPassword;
         $this->positionId = $positionId;
         $this->positionName = $positionName;
         $this->status = $status;
@@ -88,6 +96,26 @@ class User extends Profile
         $this->inputFilter->add([
             'name'       => 'password',
             'required'   => true,
+            'validators' => [
+                [
+                    'name'    => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'min'      => 8,
+                        'max'      => 32,
+                    ],
+                ],
+                [
+                    'name'    => Regex::class,
+                    'options' => [
+                        'pattern' => '/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~])[a-zA-Z0-9!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]*$/',
+                    ],
+                ],
+            ],
+        ]);
+        $this->inputFilter->add([
+            'name'       => 'tempPassword',
+            'required'   => false,
             'validators' => [
                 [
                     'name'    => StringLength::class,
@@ -146,6 +174,7 @@ class User extends Profile
         ]);
 
         $this->hydrator->addStrategy('password', ScalarTypeStrategy::createToString());
+        $this->hydrator->addStrategy('tempPassword', new NullableStrategy(ScalarTypeStrategy::createToString(), true));
         $this->hydrator->addStrategy('positionId', ScalarTypeStrategy::createToInt());
         $this->hydrator->addStrategy('positionName', ScalarTypeStrategy::createToString());
         $this->hydrator->addStrategy('genNewPassword', ScalarTypeStrategy::createToBoolean());
@@ -217,6 +246,22 @@ class User extends Profile
     public function setPassword($password)
     {
         $this->password = $password;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTempPassword()
+    {
+        return $this->tempPassword;
+    }
+
+    /**
+     * @param string|null $tempPassword
+     */
+    public function setTempPassword($tempPassword)
+    {
+        $this->tempPassword = $tempPassword;
     }
 
     /**
