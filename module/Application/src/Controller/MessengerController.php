@@ -177,7 +177,7 @@ class MessengerController extends AbstractActionController
         }
 
         $post = $request->getPost();
-        $lastMessageId = (int)$post->get('lastMessageId');
+        $lastMessageId = $post->get('lastMessageId');
         $buddyId = (int)$this->params()->fromRoute('id');
 
         $messageList = $this->messageRepository->findMessagesOfDialog(
