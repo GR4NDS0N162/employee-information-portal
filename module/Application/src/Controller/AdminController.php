@@ -172,6 +172,15 @@ class AdminController extends AbstractActionController
 
     public function editPositionsAction()
     {
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
+
+        if (!$this->statusRepository->checkStatusOfUser($userId, 'admin')) {
+            return $this->redirect()->toRoute('user/view-profile');
+        }
+
         $this->layout()->setVariables([
             'headTitleName' => 'Position Management (Administrator)',
             'navbar'        => 'Laminas\Navigation\Admin',
