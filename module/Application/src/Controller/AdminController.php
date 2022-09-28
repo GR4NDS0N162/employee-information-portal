@@ -92,7 +92,11 @@ class AdminController extends AbstractActionController
 
         $data = $request->getPost()->toArray();
 
-        $whereConfig = ConfigHelper::configWhereData($data['where'], !$isAdminPage);
+        $whereConfig = ConfigHelper::configWhereData(
+            $data['where'],
+            !$isAdminPage,
+            !$isAdminPage
+        );
         $orderConfig = $data['order'];
         $page = (integer)$data['page'];
         $offset = ($page - 1) * UserController::MAX_USER_COUNT;

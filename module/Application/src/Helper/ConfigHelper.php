@@ -212,14 +212,16 @@ class ConfigHelper
 
     public static function configWhereData(
         string $whereData,
-        bool   $forceActive = false
-    ): array
-    {
+        bool   $forceActive = false,
+        bool   $deleteAdminFilter = false
+    ): array {
         parse_str($whereData, $whereData);
         $whereConfig = ConfigHelper::filterEmpty((array)$whereData);
 
         if ($forceActive) {
             $whereConfig['active'] = ConfigHelper::YES_OPTION;
+        }
+        if ($deleteAdminFilter) {
             if (isset($whereConfig['admin'])) {
                 unset($whereConfig['admin']);
             }
