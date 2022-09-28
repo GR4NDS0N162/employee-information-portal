@@ -121,6 +121,11 @@ class AdminController extends AbstractActionController
 
     public function editUserAction()
     {
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
+
         $userToEditId = (int)$this->params()->fromRoute('id', 0);
         if ($userToEditId === 0) {
             return $this->redirect()->toRoute('admin/view-user-list');
