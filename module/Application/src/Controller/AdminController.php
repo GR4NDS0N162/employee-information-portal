@@ -94,6 +94,10 @@ class AdminController extends AbstractActionController
         $offset = ($page - 1) * UserController::MAX_USER_COUNT;
         $limit = UserController::MAX_USER_COUNT;
 
+        if (!$this->statusRepository->checkStatusOfUser($userId, 'admin')) {
+            $whereConfig['active'] = ConfigHelper::YES_OPTION;
+        }
+
         $users = $this->userRepository->findUsers($whereConfig, $orderConfig);
         $userCount = count($users);
 
