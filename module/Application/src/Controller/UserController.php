@@ -176,9 +176,7 @@ class UserController extends AbstractActionController
         self::setAdminNavbar($this->statusRepository, $this, $userId);
         $viewModel = new ViewModel();
 
-        $headTitleName = 'List of users';
-
-        $this->layout()->setVariable('headTitleName', $headTitleName);
+        $this->layout()->setVariables(['headTitleName' => 'List of users']);
 
         $viewModel->setVariables([
             'userFilterForm' => $this->userFilterForm,
