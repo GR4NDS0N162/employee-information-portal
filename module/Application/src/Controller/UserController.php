@@ -55,7 +55,7 @@ class UserController extends AbstractActionController
             return $this->redirect()->toRoute('home');
         }
 
-        UserController::setAdminNavbar($this->statusRepository, $this, $userId);
+        self::setAdminNavbar($this->statusRepository, $this, $userId);
         $this->layout()->setVariables(['headTitleName' => 'View profile']);
 
         $viewModel = new ViewModel(['viewProfileForm' => $this->viewProfileForm]);
@@ -80,7 +80,7 @@ class UserController extends AbstractActionController
 
     public function editProfileAction()
     {
-        UserController::setAdminNavbar($this->statusRepository, $this, self::USER_ID);
+        self::setAdminNavbar($this->statusRepository, $this, self::USER_ID);
         $this->layout()->setVariables(['headTitleName' => 'Edit profile']);
 
         try {
@@ -148,7 +148,7 @@ class UserController extends AbstractActionController
 
     public function viewUserListAction()
     {
-        UserController::setAdminNavbar($this->statusRepository, $this, self::USER_ID);
+        self::setAdminNavbar($this->statusRepository, $this, self::USER_ID);
         $viewModel = new ViewModel();
 
         $headTitleName = 'List of users';
