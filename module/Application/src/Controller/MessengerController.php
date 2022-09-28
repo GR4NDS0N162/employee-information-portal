@@ -81,11 +81,11 @@ class MessengerController extends AbstractActionController
             return $this->redirect()->toRoute('home');
         }
 
-        UserController::setAdminNavbar($this->statusRepository, $this, UserController::USER_ID);
+        UserController::setAdminNavbar($this->statusRepository, $this, $userId);
         $buddyId = (int)$this->params()->fromRoute('id', 0);
 
         if ($buddyId === 0
-            || $buddyId === UserController::USER_ID
+            || $buddyId === $userId
         ) {
             return $this->redirect()->toRoute('user/view-dialog-list');
         }
@@ -94,7 +94,7 @@ class MessengerController extends AbstractActionController
 
         $this->layout()->setVariable('headTitleName', 'Messages');
 
-        $userInfo = $this->userRepository->findUser(UserController::USER_ID);
+        $userInfo = $this->userRepository->findUser($userId);
         $buddyInfo = $this->userRepository->findUser($buddyId);
 
         $viewModel->setVariables([
