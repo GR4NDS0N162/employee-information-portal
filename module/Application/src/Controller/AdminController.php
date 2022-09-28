@@ -91,19 +91,11 @@ class AdminController extends AbstractActionController
         $isAdminPage = is_null($referer) || strpos($referer->getUri(), 'admin') !== false;
 
         $data = $request->getPost()->toArray();
-        parse_str($data['where'], $data['where']);
-        $whereConfig = ConfigHelper::filterEmpty($data['where']);
+        $whereConfig = ConfigHelper::configWhereData($data['where'], $isAdminPage);
         $orderConfig = $data['order'];
         $page = (integer)$data['page'];
         $offset = ($page - 1) * UserController::MAX_USER_COUNT;
         $limit = UserController::MAX_USER_COUNT;
-
-        if (!$isAdminPage) {
-            $whereConfig['active'] = ConfigHelper::YES_OPTION;
-            if (isset($whereConfig['admin'])) {
-                unset($whereConfig['admin']);
-            }
-        }
 
         $users = $this->userRepository->findUsers($whereConfig, $orderConfig);
         $userCount = count($users);

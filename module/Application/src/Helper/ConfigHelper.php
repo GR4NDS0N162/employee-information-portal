@@ -209,4 +209,19 @@ class ConfigHelper
 
         return array_unique($order);
     }
+
+    public static function configWhereData(string $whereData, bool $isAdminPage): array
+    {
+        parse_str($whereData, $whereData);
+        $whereConfig = ConfigHelper::filterEmpty((array)$whereData);
+
+        if (!$isAdminPage) {
+            $whereConfig['active'] = ConfigHelper::YES_OPTION;
+            if (isset($whereConfig['admin'])) {
+                unset($whereConfig['admin']);
+            }
+        }
+
+        return $whereConfig;
+    }
 }
