@@ -142,6 +142,11 @@ class UserController extends AbstractActionController
 
     public function changePasswordFormAction()
     {
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
+
         $request = $this->getRequest();
 
         if (!$request->isPost()) {
@@ -154,9 +159,11 @@ class UserController extends AbstractActionController
             return $this->redirect()->toRoute('user/edit-profile');
         }
 
-        $this->userCommand->changePassword(
-            $this->changePasswordForm->getObject()
-        );
+        /** @var ChangePassword $changePassword */
+        $changePassword = $this->changePasswordForm->getObject();
+        $changePassword->setId($userId);
+
+        $this->userCommand->changePassword($changePassword);
 
         return $this->redirect()->toRoute('user/edit-profile');
     }
