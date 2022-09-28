@@ -126,6 +126,10 @@ class AdminController extends AbstractActionController
             return $this->redirect()->toRoute('home');
         }
 
+        if (!$this->statusRepository->checkStatusOfUser($userId, 'admin')) {
+            return $this->redirect()->toRoute('user/edit-profile');
+        }
+
         $userToEditId = (int)$this->params()->fromRoute('id', 0);
         if ($userToEditId === 0) {
             return $this->redirect()->toRoute('admin/view-user-list');
