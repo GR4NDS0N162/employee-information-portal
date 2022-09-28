@@ -76,6 +76,11 @@ class MessengerController extends AbstractActionController
 
     public function viewMessagesAction()
     {
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
+
         UserController::setAdminNavbar($this->statusRepository, $this, UserController::USER_ID);
         $buddyId = (int)$this->params()->fromRoute('id', 0);
 
