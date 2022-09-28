@@ -121,13 +121,13 @@ class AdminController extends AbstractActionController
 
     public function editUserAction()
     {
-        $userId = (int)$this->params()->fromRoute('id', 0);
-        if ($userId === 0) {
+        $userToEditId = (int)$this->params()->fromRoute('id', 0);
+        if ($userToEditId === 0) {
             return $this->redirect()->toRoute('admin/view-user-list');
         }
 
         try {
-            $user = $this->userRepository->findUser($userId);
+            $user = $this->userRepository->findUser($userToEditId);
         } catch (InvalidArgumentException $ex) {
             return $this->redirect()->toRoute('admin/view-user-list');
         }
