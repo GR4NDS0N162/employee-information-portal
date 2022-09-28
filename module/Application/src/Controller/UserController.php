@@ -95,15 +95,13 @@ class UserController extends AbstractActionController
             return $this->redirect()->toRoute('home');
         }
 
-        $viewModel = new ViewModel([
-            'profileForm'        => $this->profileForm,
-            'changePasswordForm' => $this->changePasswordForm,
-        ]);
-
         $this->profileForm->bind($foundProfile);
         $this->changePasswordForm->bind($changePassword);
 
-        return $viewModel;
+        return new ViewModel([
+            'profileForm'        => $this->profileForm,
+            'changePasswordForm' => $this->changePasswordForm,
+        ]);
     }
 
     public function profileFormAction()
