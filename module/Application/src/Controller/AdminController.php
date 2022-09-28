@@ -49,6 +49,11 @@ class AdminController extends AbstractActionController
 
     public function viewUserListAction()
     {
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
+
         $this->layout()->setVariables([
             'headTitleName' => 'List of users (Administrator)',
             'navbar'        => 'Laminas\Navigation\Admin',
