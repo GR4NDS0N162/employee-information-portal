@@ -145,7 +145,7 @@ class MessengerController extends AbstractActionController
 
         $post = $request->getPost();
         $content = (string)$post->get('content');
-        $buddyId = (int)$this->params()->fromRoute('id');
+        $buddyId = self::getBuddyId($request);
 
         try {
             $this->messageCommand->sendMessage(
@@ -178,7 +178,7 @@ class MessengerController extends AbstractActionController
 
         $post = $request->getPost();
         $lastMessageId = $post->get('lastMessageId');
-        $buddyId = (int)$this->params()->fromRoute('id');
+        $buddyId = self::getBuddyId($request);
 
         $messageList = $this->messageRepository->findMessagesOfDialog(
             $this->dialogRepository->getDialogId($userId, $buddyId),
