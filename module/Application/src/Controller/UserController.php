@@ -5,6 +5,7 @@ namespace Application\Controller;
 use Application\Form\User as Form;
 use Application\Model\Command\UserCommandInterface;
 use Application\Model\Entity\ChangePassword;
+use Application\Model\Entity\Profile;
 use Application\Model\Repository\StatusRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
@@ -106,6 +107,11 @@ class UserController extends AbstractActionController
 
     public function profileFormAction()
     {
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
+
         $request = $this->getRequest();
 
         if (!$request->isPost()) {
@@ -123,7 +129,13 @@ class UserController extends AbstractActionController
             return $this->redirect()->toRoute('user/edit-profile');
         }
 
-        $this->userCommand->updateProfile($this->profileForm->getObject());
+        /** @var Profile $profile */
+        $profile = $this->profileForm->getObject();
+        if ($profile->getId() != $userId) {
+            return $this->redirect()->toRoute('home');
+        }
+
+        $this->userCommand->updateProfile($profile);
 
         return $this->redirect()->toRoute('user/view-profile');
     }
