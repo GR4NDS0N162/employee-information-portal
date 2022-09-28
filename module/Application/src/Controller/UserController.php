@@ -168,6 +168,11 @@ class UserController extends AbstractActionController
 
     public function viewUserListAction()
     {
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
+
         self::setAdminNavbar($this->statusRepository, $this, self::USER_ID);
         $viewModel = new ViewModel();
 
