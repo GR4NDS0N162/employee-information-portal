@@ -122,10 +122,7 @@ class MessengerController extends AbstractActionController
         $viewModel->setTemplate('partial/dialog-list.phtml');
 
         $viewModel->setVariables([
-            'dialogList'     => $this->dialogRepository->getDialogList(
-                UserController::USER_ID,
-                $data
-            ),
+            'dialogList'     => $this->dialogRepository->getDialogList($userId, $data),
             'userRepository' => $this->userRepository,
         ]);
 
