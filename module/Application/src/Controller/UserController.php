@@ -69,11 +69,11 @@ class UserController extends AbstractActionController
     }
 
     public static function setAdminNavbar(
-        UserRepositoryInterface  $userRepository,
-        AbstractActionController $controller,
-        int                      $userId
+        StatusRepositoryInterface $statusRepository,
+        AbstractActionController  $controller,
+        int                       $userId
     ) {
-        if ($userRepository->findUser($userId)->getStatus()['admin']) {
+        if ($statusRepository->checkStatusOfUser($userId, 'admin')) {
             $controller->layout()->setVariables(['navbar' => 'Laminas\Navigation\Admin']);
         }
     }
