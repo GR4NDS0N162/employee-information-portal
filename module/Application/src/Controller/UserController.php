@@ -131,9 +131,7 @@ class UserController extends AbstractActionController
 
         /** @var Profile $profile */
         $profile = $this->profileForm->getObject();
-        if ($profile->getId() != $userId) {
-            return $this->redirect()->toRoute('home');
-        }
+        $profile->setId($userId);
 
         $this->userCommand->updateProfile($profile);
 
