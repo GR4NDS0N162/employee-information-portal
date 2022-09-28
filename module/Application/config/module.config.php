@@ -9,6 +9,7 @@ return [
     'service_manager'    => include __DIR__ . '/service_manager.php',
     'form_elements'      => include __DIR__ . '/form_elements.php',
     'router'             => include __DIR__ . '/router.php',
+    'console'            => include __DIR__ . '/console.php',
     'navigation'         => include __DIR__ . '/navigation.php',
     'controllers'        => include __DIR__ . '/controllers.php',
     'view_manager'       => include __DIR__ . '/view_manager.php',
