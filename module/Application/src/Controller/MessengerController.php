@@ -10,6 +10,7 @@ use Application\Model\Entity\Message;
 use Application\Model\Repository\DialogRepositoryInterface;
 use Application\Model\Repository\MessageRepositoryInterface;
 use Application\Model\Repository\PositionRepositoryInterface;
+use Application\Model\Repository\StatusRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Session\Container as SessionContainer;
@@ -31,12 +32,14 @@ class MessengerController extends AbstractActionController
     private MessageRepositoryInterface $messageRepository;
     private MessageCommandInterface $messageCommand;
     private SessionContainer $sessionContainer;
+    private StatusRepositoryInterface $statusRepository;
 
     public function __construct(
         DialogFilterForm            $dialogFilterForm,
         NewMessageForm              $newMessageForm,
         DialogRepositoryInterface   $dialogRepository,
         UserRepositoryInterface     $userRepository,
+        StatusRepositoryInterface   $statusRepository,
         PositionRepositoryInterface $positionRepository,
         MessageRepositoryInterface  $messageRepository,
         MessageCommandInterface     $messageCommand,
@@ -46,6 +49,7 @@ class MessengerController extends AbstractActionController
         $this->newMessageForm = $newMessageForm;
         $this->dialogRepository = $dialogRepository;
         $this->userRepository = $userRepository;
+        $this->statusRepository = $statusRepository;
         $this->positionRepository = $positionRepository;
         $this->messageRepository = $messageRepository;
         $this->messageCommand = $messageCommand;
