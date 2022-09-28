@@ -144,7 +144,7 @@ class MessengerController extends AbstractActionController
 
         $post = $request->getPost();
         $content = (string)$post->get('content');
-        $buddyId = (int)$post->get('buddyId');
+        $buddyId = (int)$this->params()->fromRoute('id');
 
         try {
             $this->messageCommand->sendMessage(
