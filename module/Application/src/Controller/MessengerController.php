@@ -58,7 +58,7 @@ class MessengerController extends AbstractActionController
 
     public function viewDialogListAction()
     {
-        UserController::setAdminNavbar($this->userRepository, $this, UserController::USER_ID);
+        UserController::setAdminNavbar($this->statusRepository, $this, UserController::USER_ID);
         $viewModel = new ViewModel();
 
         $this->layout()->setVariable('headTitleName', 'Dialogs');
@@ -77,7 +77,7 @@ class MessengerController extends AbstractActionController
 
     public function viewMessagesAction()
     {
-        UserController::setAdminNavbar($this->userRepository, $this, UserController::USER_ID);
+        UserController::setAdminNavbar($this->statusRepository, $this, UserController::USER_ID);
         $buddyId = (int)$this->params()->fromRoute('id', 0);
 
         if ($buddyId === 0
