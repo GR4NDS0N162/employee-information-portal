@@ -50,7 +50,7 @@ class UserController extends AbstractActionController
 
     public function viewProfileAction()
     {
-        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID);
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
         if (!is_integer($userId)) {
             return $this->redirect()->toRoute('home');
         }
