@@ -115,7 +115,7 @@ class MessengerController extends AbstractActionController
             throw new LogicException('The request to the address must be ajax and post.');
         }
 
-        $data = ConfigHelper::configWhereData($request->getContent(), true);
+        $data = ConfigHelper::configWhereData($request->getContent());
 
         $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
