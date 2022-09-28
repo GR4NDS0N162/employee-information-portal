@@ -58,12 +58,17 @@ class MessengerController extends AbstractActionController
 
     public function viewDialogListAction()
     {
-        UserController::setAdminNavbar($this->statusRepository, $this, UserController::USER_ID);
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
+
+        UserController::setAdminNavbar($this->statusRepository, $this, $userId);
         $viewModel = new ViewModel();
 
         $this->layout()->setVariable('headTitleName', 'Dialogs');
 
-        $dialogs = $this->dialogRepository->getDialogList(UserController::USER_ID);
+        $dialogs = $this->dialogRepository->getDialogList($userId);
 
         $viewModel->setVariables([
             'dialogs'            => $dialogs,
