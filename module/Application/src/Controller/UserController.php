@@ -56,8 +56,8 @@ class UserController extends AbstractActionController
         }
 
         UserController::setAdminNavbar($this->statusRepository, $this, $userId);
-
         $this->layout()->setVariables(['headTitleName' => 'View profile']);
+
         $viewModel = new ViewModel(['viewProfileForm' => $this->viewProfileForm]);
 
         $profile = $this->userRepository->findProfile($userId);
