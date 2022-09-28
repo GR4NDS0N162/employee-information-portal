@@ -8,6 +8,7 @@ use Application\Model\Command\PositionCommandInterface;
 use Application\Model\Command\UserCommandInterface;
 use Application\Model\Entity\PositionList;
 use Application\Model\Repository\PositionRepositoryInterface;
+use Application\Model\Repository\StatusRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
@@ -26,12 +27,14 @@ class AdminController extends AbstractActionController
     private UserCommandInterface $userCommand;
     private PositionCommandInterface $positionCommand;
     private SessionContainer $sessionContainer;
+    private StatusRepositoryInterface $statusRepository;
 
     public function __construct(
         Form\PositionForm           $positionForm,
         Form\UserForm               $userForm,
         Form\AdminFilterForm        $adminFilterForm,
         UserRepositoryInterface     $userRepository,
+        StatusRepositoryInterface   $statusRepository,
         PositionRepositoryInterface $positionRepository,
         UserCommandInterface        $userCommand,
         PositionCommandInterface    $positionCommand,
@@ -41,6 +44,7 @@ class AdminController extends AbstractActionController
         $this->userForm = $userForm;
         $this->adminFilterForm = $adminFilterForm;
         $this->userRepository = $userRepository;
+        $this->statusRepository = $statusRepository;
         $this->positionRepository = $positionRepository;
         $this->userCommand = $userCommand;
         $this->positionCommand = $positionCommand;
