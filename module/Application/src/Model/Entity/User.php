@@ -151,11 +151,11 @@ class User extends Profile
         $this->hydrator->addStrategy('genNewPassword', ScalarTypeStrategy::createToBoolean());
     }
 
-    public function toArray(): array
+    public function toArray(bool $isAdminPage): array
     {
         return [
             'isActive'     => $this->status['active'] ?? false,
-            'isAdmin'      => $this->status['admin'] ?? false,
+            'isAdmin'      => $isAdminPage && ($this->status['admin'] ?? false),
             'positionName' => $this->positionName,
             'fullname'     => implode(' ', [
                 $this->surname ?: '—',

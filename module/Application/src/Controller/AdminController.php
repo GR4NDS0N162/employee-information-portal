@@ -98,8 +98,11 @@ class AdminController extends AbstractActionController
         $referer = $request->getHeader('Referer', null);
         $isAdminPage = is_null($referer) || strpos($referer->getUri(), 'admin') !== false;
 
-        if ($isAdminPage) {
+        if (!$isAdminPage) {
             $whereConfig['active'] = ConfigHelper::YES_OPTION;
+            if (isset($whereConfig['admin'])) {
+                unset($whereConfig['admin']);
+            }
         }
 
         $users = $this->userRepository->findUsers($whereConfig, $orderConfig);
@@ -108,8 +111,8 @@ class AdminController extends AbstractActionController
         $jsonData = [];
 
         $userList = array_slice($users, $offset, $limit);
-        $userList = array_map(function ($item) {
-            return $item->toArray();
+        $userList = array_map(function ($item) use ($isAdminPage) {
+            return $item->toArray($isAdminPage);
         }, $userList);
 
         $jsonData['userList'] = $userList;
