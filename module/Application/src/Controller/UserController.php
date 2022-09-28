@@ -80,11 +80,16 @@ class UserController extends AbstractActionController
 
     public function editProfileAction()
     {
-        self::setAdminNavbar($this->statusRepository, $this, self::USER_ID);
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
+
+        self::setAdminNavbar($this->statusRepository, $this, $userId);
         $this->layout()->setVariables(['headTitleName' => 'Edit profile']);
 
         try {
-            $foundProfile = $this->userRepository->findProfile(self::USER_ID);
+            $foundProfile = $this->userRepository->findProfile($userId);
             $changePassword = new ChangePassword($foundProfile->getId());
         } catch (InvalidArgumentException $ex) {
             return $this->redirect()->toRoute('home');
