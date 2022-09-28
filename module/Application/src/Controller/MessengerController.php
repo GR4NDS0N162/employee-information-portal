@@ -180,11 +180,11 @@ class MessengerController extends AbstractActionController
         $buddyId = (int)$this->params()->fromRoute('id');
 
         $messageList = $this->messageRepository->findMessagesOfDialog(
-            $this->dialogRepository->getDialogId(UserController::USER_ID, $buddyId),
+            $this->dialogRepository->getDialogId($userId, $buddyId),
             $lastMessageId,
         );
 
-        $messageList = $this->messageCommand->readBy(UserController::USER_ID, $messageList);
+        $messageList = $this->messageCommand->readBy($userId, $messageList);
 
         $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
