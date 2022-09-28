@@ -62,4 +62,9 @@ class StatusRepository implements StatusRepositoryInterface
 
         return $statuses;
     }
+
+    public function checkStatusOfUser(int $userId, $statusIdentifier): bool
+    {
+        // TODO: Implement checkStatusOfUser() method.
+    }
 }
