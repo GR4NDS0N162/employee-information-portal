@@ -12,6 +12,7 @@ use Application\Model\Repository\MessageRepositoryInterface;
 use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\StatusRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
+use Laminas\Http\Request;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Session\Container as SessionContainer;
 use Laminas\View\Model\JsonModel;
@@ -195,5 +196,15 @@ class MessengerController extends AbstractActionController
         ]);
 
         return $viewModel;
+    }
+
+    private static function getBuddyId(Request $request): int
+    {
+        preg_match(
+            '/(?<=im\/)[1-9]\d*/',
+            $request->getHeader('Referer')->getUri(),
+            $matches
+        );
+        return (int)array_values($matches)[0];
     }
 }
