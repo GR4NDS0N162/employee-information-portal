@@ -86,6 +86,10 @@ class AdminController extends AbstractActionController
             throw new LogicException('The request to the address must be ajax and post.');
         }
 
+        /** @var Referer $referer */
+        $referer = $request->getHeader('Referer', null);
+        $isAdminPage = is_null($referer) || strpos($referer->getUri(), 'admin') !== false;
+
         $data = $request->getPost()->toArray();
         parse_str($data['where'], $data['where']);
         $whereConfig = ConfigHelper::filterEmpty($data['where']);
@@ -93,10 +97,6 @@ class AdminController extends AbstractActionController
         $page = (integer)$data['page'];
         $offset = ($page - 1) * UserController::MAX_USER_COUNT;
         $limit = UserController::MAX_USER_COUNT;
-
-        /** @var Referer $referer */
-        $referer = $request->getHeader('Referer', null);
-        $isAdminPage = is_null($referer) || strpos($referer->getUri(), 'admin') !== false;
 
         if (!$isAdminPage) {
             $whereConfig['active'] = ConfigHelper::YES_OPTION;
