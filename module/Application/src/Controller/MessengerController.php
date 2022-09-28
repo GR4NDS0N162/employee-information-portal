@@ -89,21 +89,17 @@ class MessengerController extends AbstractActionController
             return $this->redirect()->toRoute('user/view-dialog-list');
         }
 
-        $viewModel = new ViewModel();
-
         UserController::setAdminNavbar($this->statusRepository, $this, $userId);
         $this->layout()->setVariables(['headTitleName' => 'Messages']);
 
         $userInfo = $this->userRepository->findUser($userId);
         $buddyInfo = $this->userRepository->findUser($buddyId);
 
-        $viewModel->setVariables([
+        return new ViewModel([
             'newMessageForm' => $this->newMessageForm,
             'userInfo'       => $userInfo,
             'buddyInfo'      => $buddyInfo,
         ]);
-
-        return $viewModel;
     }
 
     public function getDialogsAction()
