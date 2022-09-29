@@ -28,6 +28,7 @@ return [
         Command\PhoneCommandInterface::class          => Command\PhoneCommand::class,
         Command\DialogCommandInterface::class         => Command\DialogCommand::class,
         Command\MessageCommandInterface::class        => Command\MessageCommand::class,
+        Command\NotifierInterface::class              => Command\Notifier::class,
     ],
     'factories' => [
         Command\UserCommand::class           => CommandFactory\UserCommandFactory::class,
