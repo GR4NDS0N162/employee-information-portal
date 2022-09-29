@@ -5,6 +5,7 @@ namespace Application\Command;
 use Application\Model\Command\NotifierInterface;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\Message;
+use Application\Model\Repository\EmailRepositoryInterface;
 use Application\Model\Repository\Extracter;
 use Application\Model\Repository\MessageRepositoryInterface;
 use Laminas\Db\Adapter\AdapterInterface;
@@ -19,10 +20,12 @@ class NotifyUsersCommand extends Command
     private AdapterInterface $db;
     private Email $prototype;
     private MessageRepositoryInterface $messageRepository;
+    private EmailRepositoryInterface $emailRepository;
     private NotifierInterface $notifier;
 
     public function __construct(
         MessageRepositoryInterface $messageRepository,
+        EmailRepositoryInterface   $emailRepository,
         AdapterInterface           $db,
         NotifierInterface          $notifier,
         string                     $name = null
@@ -32,6 +35,7 @@ class NotifyUsersCommand extends Command
         $this->db = $db;
         $this->prototype = new Email();
         $this->messageRepository = $messageRepository;
+        $this->emailRepository = $emailRepository;
         $this->notifier = $notifier;
     }
 

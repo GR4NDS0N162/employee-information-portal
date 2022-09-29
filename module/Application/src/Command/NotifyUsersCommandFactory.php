@@ -3,6 +3,7 @@
 namespace Application\Command;
 
 use Application\Model\Command\NotifierInterface;
+use Application\Model\Repository\EmailRepositoryInterface;
 use Application\Model\Repository\MessageRepositoryInterface;
 use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
@@ -14,6 +15,7 @@ class NotifyUsersCommandFactory implements FactoryInterface
     {
         return new NotifyUsersCommand(
             $container->get(MessageRepositoryInterface::class),
+            $container->get(EmailRepositoryInterface::class),
             $container->get(AdapterInterface::class),
             $container->get(NotifierInterface::class),
         );
