@@ -99,7 +99,7 @@ class StatusRepository implements StatusRepositoryInterface
         ]);
 
         try {
-            $status = Extracter::extractValue(
+            Extracter::extractValue(
                 $select,
                 $this->db,
                 $this->prototype->getHydrator(),
