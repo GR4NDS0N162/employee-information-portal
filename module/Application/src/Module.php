@@ -2,22 +2,26 @@
 
 namespace Application;
 
-use Laminas\Mvc\MvcEvent;
+use Laminas\EventManager\EventInterface;
+use Laminas\ModuleManager\Feature\BootstrapListenerInterface;
+use Laminas\ModuleManager\Feature\ConfigProviderInterface;
 
-class Module
+class Module implements
+    ConfigProviderInterface,
+    BootstrapListenerInterface
 {
     public function getConfig(): array
     {
         return include __DIR__ . '/../config/module.config.php';
     }
 
-    public function onBootstrap(MvcEvent $e)
+    public function onBootstrap(EventInterface $e)
     {
         $app = $e->getApplication();
         $app->getEventManager()->attach('render', [$this, 'registerJsonStrategy'], 100);
     }
 
-    public function registerJsonStrategy(MvcEvent $e)
+    public function registerJsonStrategy(EventInterface $e)
     {
         $app = $e->getTarget();
         $locator = $app->getServiceManager();
