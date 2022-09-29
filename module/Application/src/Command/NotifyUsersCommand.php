@@ -13,6 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class NotifyUsersCommand extends Command
 {
     private AdapterInterface $db;
+    private Email $prototype;
     private MessageRepositoryInterface $messageRepository;
     private NotifierInterface $notifier;
 
@@ -25,6 +26,7 @@ class NotifyUsersCommand extends Command
         parent::__construct($name);
 
         $this->db = $db;
+        $this->prototype = new Email();
         $this->messageRepository = $messageRepository;
         $this->notifier = $notifier;
     }
