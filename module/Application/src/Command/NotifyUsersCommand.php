@@ -4,22 +4,26 @@ namespace Application\Command;
 
 use Application\Model\Command\NotifierInterface;
 use Application\Model\Repository\MessageRepositoryInterface;
+use Laminas\Db\Adapter\AdapterInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class NotifyUsersCommand extends Command
 {
+    private AdapterInterface $db;
     private MessageRepositoryInterface $messageRepository;
     private NotifierInterface $notifier;
 
     public function __construct(
+        AdapterInterface           $db,
         MessageRepositoryInterface $messageRepository,
         NotifierInterface          $notifier,
         string                     $name = null
     ) {
         parent::__construct($name);
 
+        $this->db = $db;
         $this->messageRepository = $messageRepository;
         $this->notifier = $notifier;
     }
