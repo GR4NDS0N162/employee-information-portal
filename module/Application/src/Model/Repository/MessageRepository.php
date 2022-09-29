@@ -67,4 +67,9 @@ class MessageRepository implements MessageRepositoryInterface
 
         return $messages;
     }
+
+    public function getUnreadMessages()
+    {
+        // TODO: Implement getUnreadMessages() method.
+    }
 }
