@@ -4,6 +4,7 @@ namespace Application\Command;
 
 use Application\Model\Command\NotifierInterface;
 use Application\Model\Entity\Email;
+use Application\Model\Entity\Message;
 use Application\Model\Repository\MessageRepositoryInterface;
 use Laminas\Db\Adapter\AdapterInterface;
 use Symfony\Component\Console\Command\Command;
@@ -39,9 +40,11 @@ class NotifyUsersCommand extends Command
     }
 
     /**
+     * @param Message[] $messages
+     *
      * @return Email[]
      */
-    private function generateMails(): array
+    private function generateMails(array $messages): array
     {
         // TODO: Implement generateMails() method.
     }
