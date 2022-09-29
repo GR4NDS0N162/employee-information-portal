@@ -2,6 +2,7 @@
 
 namespace Application\Command;
 
+use Application\Model\Command\NotifierInterface;
 use Application\Model\Repository\MessageRepositoryInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
@@ -12,6 +13,7 @@ class MyCommandFactory implements FactoryInterface
     {
         return new MyCommand(
             $container->get(MessageRepositoryInterface::class),
+            $container->get(NotifierInterface::class),
         );
     }
 }
