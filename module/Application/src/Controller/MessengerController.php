@@ -163,6 +163,16 @@ class MessengerController extends AbstractActionController
         }
     }
 
+    private static function getBuddyId(Request $request): int
+    {
+        preg_match(
+            '/(?<=im\/)[1-9]\d*/',
+            $request->getHeader('Referer')->getUri(),
+            $matches
+        );
+        return (int)array_values($matches)[0];
+    }
+
     public function loadMessagesAction()
     {
         $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
@@ -196,15 +206,5 @@ class MessengerController extends AbstractActionController
         ]);
 
         return $viewModel;
-    }
-
-    private static function getBuddyId(Request $request): int
-    {
-        preg_match(
-            '/(?<=im\/)[1-9]\d*/',
-            $request->getHeader('Referer')->getUri(),
-            $matches
-        );
-        return (int)array_values($matches)[0];
     }
 }
