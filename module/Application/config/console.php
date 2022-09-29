@@ -8,6 +8,7 @@ return [
     'router' => [
         'routes' => [
             'send-emails' => [
+                'type'    => 'simple',
                 'options' => [
                     'route'    => 'send-emails',
                     'defaults' => [
