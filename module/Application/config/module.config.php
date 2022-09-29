@@ -23,4 +23,7 @@ return [
     'session_config'     => [
         'gc_maxlifetime' => 7200,
     ],
+    'strategies'         => [
+        'ViewJsonStrategy',
+    ],
 ];
