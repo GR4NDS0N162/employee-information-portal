@@ -3,6 +3,7 @@
 namespace Application\Command;
 
 use Application\Model\Command\NotifierInterface;
+use Application\Model\Entity\Email;
 use Application\Model\Repository\MessageRepositoryInterface;
 use Laminas\Db\Adapter\AdapterInterface;
 use Symfony\Component\Console\Command\Command;
@@ -33,5 +34,13 @@ class NotifyUsersCommand extends Command
         $unreadMessages = $this->messageRepository->getUnreadMessages();
         $this->notifier->sendEmails($unreadMessages);
         return 0;
+    }
+
+    /**
+     * @return Email[]
+     */
+    private function generateMails(): array
+    {
+        // TODO: Implement generateMails() method.
     }
 }
