@@ -26,16 +26,16 @@ class Notifier implements NotifierInterface
         $transport = new Sendmail();
 
         foreach ($mailsInfo as $email) {
-            $mail = new Message();
-            $mail->setBody(
+            $message = new Message();
+            $message->setBody(
                 'You have an unread message from a user with an ID '
                 . $email->getUserId()
             );
-            $mail->setFrom('infoportal@corp.com', "Employee Information Portal");
-            $mail->addTo($email->getAddress(), 'Your name');
-            $mail->setSubject('Unread message');
+            $message->setFrom('infoportal@corp.com', "Employee Information Portal");
+            $message->addTo($email->getAddress(), 'Your name');
+            $message->setSubject('Unread message');
 
-            $transport->send($mail);
+            $transport->send($message);
         }
     }
 }
