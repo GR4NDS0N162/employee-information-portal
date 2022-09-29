@@ -28,7 +28,7 @@ return [
     ],
     'laminas-cli'        => [
         'commands' => [
-            'send-emails' => Command\MyCommand::class,
+            'send-emails' => Command\NotifyUsersCommand::class,
         ],
     ],
 ];

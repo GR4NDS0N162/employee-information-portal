@@ -7,11 +7,11 @@ use Application\Model\Repository\MessageRepositoryInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
 
-class MyCommandFactory implements FactoryInterface
+class NotifyUsersCommandFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
-        return new MyCommand(
+        return new NotifyUsersCommand(
             $container->get(MessageRepositoryInterface::class),
             $container->get(NotifierInterface::class),
         );
