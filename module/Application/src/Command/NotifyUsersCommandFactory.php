@@ -13,8 +13,8 @@ class NotifyUsersCommandFactory implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null)
     {
         return new NotifyUsersCommand(
-            $container->get(AdapterInterface::class),
             $container->get(MessageRepositoryInterface::class),
+            $container->get(AdapterInterface::class),
             $container->get(NotifierInterface::class),
         );
     }

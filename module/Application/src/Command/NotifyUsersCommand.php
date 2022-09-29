@@ -22,8 +22,8 @@ class NotifyUsersCommand extends Command
     private NotifierInterface $notifier;
 
     public function __construct(
-        AdapterInterface           $db,
         MessageRepositoryInterface $messageRepository,
+        AdapterInterface           $db,
         NotifierInterface          $notifier,
         string                     $name = null
     ) {
