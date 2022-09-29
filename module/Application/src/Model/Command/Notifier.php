@@ -21,7 +21,7 @@ class Notifier implements NotifierInterface
         $this->prototype = new Email();
     }
 
-    public function sendEmails(array $messages)
+    public function sendEmails(array $mailsInfo)
     {
         $select = new Select(['mes' => 'message']);
         $select->columns([

@@ -2,14 +2,14 @@
 
 namespace Application\Model\Command;
 
-use Application\Model\Entity\Message;
+use Application\Model\Entity\Email;
 
 interface NotifierInterface
 {
     /**
-     * @param Message[] $messages
+     * @param Email[] $mailsInfo
      *
      * @return void
      */
-    public function sendEmails(array $messages);
+    public function sendEmails(array $mailsInfo);
 }
