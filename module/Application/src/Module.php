@@ -6,11 +6,13 @@ use Laminas\Console\Adapter\AdapterInterface;
 use Laminas\EventManager\EventInterface;
 use Laminas\ModuleManager\Feature\BootstrapListenerInterface;
 use Laminas\ModuleManager\Feature\ConfigProviderInterface;
+use Laminas\ModuleManager\Feature\ConsoleBannerProviderInterface;
 use Laminas\ModuleManager\Feature\ConsoleUsageProviderInterface;
 
 class Module implements
     ConfigProviderInterface,
     BootstrapListenerInterface,
+    ConsoleBannerProviderInterface,
     ConsoleUsageProviderInterface
 {
     public function getConfig(): array
@@ -39,5 +41,10 @@ class Module implements
         return [
             'send-emails' => 'Send an email to those who have unread messages',
         ];
+    }
+
+    public function getConsoleBanner(AdapterInterface $console)
+    {
+        return 'MyModule 0.0.1';
     }
 }
