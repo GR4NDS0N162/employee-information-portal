@@ -2,13 +2,16 @@
 
 namespace Application;
 
+use Laminas\Console\Adapter\AdapterInterface;
 use Laminas\EventManager\EventInterface;
 use Laminas\ModuleManager\Feature\BootstrapListenerInterface;
 use Laminas\ModuleManager\Feature\ConfigProviderInterface;
+use Laminas\ModuleManager\Feature\ConsoleUsageProviderInterface;
 
 class Module implements
     ConfigProviderInterface,
-    BootstrapListenerInterface
+    BootstrapListenerInterface,
+    ConsoleUsageProviderInterface
 {
     public function getConfig(): array
     {
@@ -29,5 +32,12 @@ class Module implements
         $jsonStrategy = $locator->get('ViewJsonStrategy');
 
         $jsonStrategy->attach($view->getEventManager(), 100);
+    }
+
+    public function getConsoleUsage(AdapterInterface $console)
+    {
+        return [
+            'send-emails' => 'Send an email to those who have unread messages',
+        ];
     }
 }
