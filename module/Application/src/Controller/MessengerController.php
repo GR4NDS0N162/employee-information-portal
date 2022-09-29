@@ -12,7 +12,6 @@ use Application\Model\Repository\MessageRepositoryInterface;
 use Application\Model\Repository\PositionRepositoryInterface;
 use Application\Model\Repository\StatusRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
-use Laminas\Console\Request as ConsoleRequest;
 use Laminas\Http\Request;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Session\Container as SessionContainer;
@@ -207,16 +206,5 @@ class MessengerController extends AbstractActionController
             $matches
         );
         return (int)array_values($matches)[0];
-    }
-
-    public function sendEmailsAction()
-    {
-        $request = $this->getRequest();
-
-        if (!$request instanceof ConsoleRequest) {
-            throw new RuntimeException('You can only use this action from a console!');
-        }
-
-        return 'ok';
     }
 }
