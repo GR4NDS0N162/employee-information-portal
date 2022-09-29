@@ -38,7 +38,10 @@ class NotifyUsersCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $unreadMessages = $this->messageRepository->getUnreadMessages();
-        $this->notifier->sendEmails($unreadMessages);
+        $mails = $this->generateMails($unreadMessages);
+
+        $this->notifier->sendEmails($mails);
+
         return 0;
     }
 
