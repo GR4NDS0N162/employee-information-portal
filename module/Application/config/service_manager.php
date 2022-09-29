@@ -2,6 +2,8 @@
 
 namespace Application;
 
+use Application\Command\MyCommand;
+use Application\Command\MyCommandFactory;
 use Application\Factory\Command as CommandFactory;
 use Application\Factory\Options as OptionsFactory;
 use Application\Factory\Repository as RepositoryFactory;
@@ -43,5 +45,6 @@ return [
         Repository\DialogRepository::class   => RepositoryFactory\DialogRepositoryFactory::class,
         Repository\MessageRepository::class  => RepositoryFactory\MessageRepositoryFactory::class,
         SessionContainer::class              => InvokableFactory::class,
+        MyCommand::class                     => MyCommandFactory::class,
     ],
 ];

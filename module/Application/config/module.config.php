@@ -31,9 +31,4 @@ return [
             'send-emails' => Command\MyCommand::class,
         ],
     ],
-    'dependencies'       => [
-        'factories' => [
-            Command\MyCommand::class => Command\MyCommandFactory::class,
-        ],
-    ],
 ];
