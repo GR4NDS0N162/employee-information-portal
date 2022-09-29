@@ -16,7 +16,6 @@ class NotifyUsersCommandFactory implements FactoryInterface
         return new NotifyUsersCommand(
             $container->get(MessageRepositoryInterface::class),
             $container->get(EmailRepositoryInterface::class),
-            $container->get(AdapterInterface::class),
             $container->get(NotifierInterface::class),
         );
     }
