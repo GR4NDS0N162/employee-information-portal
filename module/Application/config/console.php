@@ -2,7 +2,7 @@
 
 namespace Application;
 
-use Application\Controller\MessengerController;
+use Application\Controller\ConsoleController;
 
 return [
     'router' => [
@@ -11,7 +11,7 @@ return [
                 'options' => [
                     'route'    => 'send-emails',
                     'defaults' => [
-                        'controller' => MessengerController::class,
+                        'controller' => ConsoleController::class,
                         'action'     => 'send-emails',
                     ],
                 ],
