@@ -5,7 +5,6 @@ namespace Application\Command;
 use Application\Model\Command\NotifierInterface;
 use Application\Model\Repository\EmailRepositoryInterface;
 use Application\Model\Repository\MessageRepositoryInterface;
-use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Psr\Container\ContainerInterface;
 
