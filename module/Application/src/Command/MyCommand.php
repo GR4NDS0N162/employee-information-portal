@@ -27,7 +27,7 @@ class MyCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $unreadMessages = $this->messageRepository->getUnreadMessages();
-
+        $this->notifier->sendEmails($unreadMessages);
         return 0;
     }
 }
