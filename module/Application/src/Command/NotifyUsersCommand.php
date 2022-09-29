@@ -5,8 +5,11 @@ namespace Application\Command;
 use Application\Model\Command\NotifierInterface;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\Message;
+use Application\Model\Repository\Extracter;
 use Application\Model\Repository\MessageRepositoryInterface;
 use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\Sql\Predicate\Expression;
+use Laminas\Db\Sql\Select;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -46,6 +49,34 @@ class NotifyUsersCommand extends Command
      */
     private function generateMails(array $messages): array
     {
-        // TODO: Implement generateMails() method.
+        $select = new Select(['mes' => 'message']);
+        $select->columns([
+            'address' => new Expression('MIN(e.address)'),
+            'userId'  => 'mes.user_id',
+        ], false);
+        $select->join(
+            ['mem' => 'member'],
+            new Expression(
+                'mes.dialog_id = mem.dialog_id ' .
+                'AND mes.user_id != mem.user_id'
+            ),
+            []
+        );
+        $select->join(
+            ['e' => 'email'],
+            'mem.user_id = e.user_id',
+            []
+        );
+        $select->where([
+            'mes.id' => array_column($messages, 'id'),
+        ]);
+        $select->group(['e.user_id', 'mes.user_id']);
+
+        return Extracter::extractValues(
+            $select,
+            $this->db,
+            $this->prototype->getHydrator(),
+            $this->prototype
+        );
     }
 }
