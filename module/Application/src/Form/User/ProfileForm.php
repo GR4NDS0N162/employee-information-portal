@@ -29,7 +29,7 @@ class ProfileForm extends Form
             'name'       => 'submit',
             'type'       => Submit::class,
             'attributes' => [
-                'value' => 'Сохранить изменения',
+                'value' => 'Save Changes',
                 'class' => 'btn btn-outline-success w-100',
             ],
         ]);
@@ -41,6 +41,7 @@ class ProfileForm extends Form
                     'children' => [
                         'id'         => 'd-none',
                         'image'      => 'col-12',
+                        'imageFile'  => 'col-12',
                         'surname'    => 'col-12 col-lg-4',
                         'name'       => 'col-12 col-sm-6 col-lg-4',
                         'patronymic' => 'col-12 col-sm-6 col-lg-4',
@@ -58,7 +59,7 @@ class ProfileForm extends Form
                     ],
                 ],
                 'submit'  => 'col-12',
-            ]
+            ],
         ]);
     }
 }

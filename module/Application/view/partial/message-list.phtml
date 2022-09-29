@@ -2,39 +2,55 @@
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
  */
+
+use Application\Model\Entity\Message;
+use Application\Model\Repository\UserRepositoryInterface;
+
+/** @var Message[] $messageList */
+$messageList = $this->messageList;
+
+/** @var UserRepositoryInterface $userRepository */
+$userRepository = $this->userRepository;
 ?>
 
-<?php foreach (array_reverse($this->messages) as $message): ?>
-    <div class="col-12">
+<?php foreach ($messageList as $message): ?>
+    <?php $user = $userRepository->findUser($message->getUserId()); ?>
+    <div class="col-12"
+         message_id="<?= $this->escapeHtml($message->getId()); ?>">
         <div class="row g-3">
             <div class="col-auto">
-                <img src="<?= $this->escapeHtml(($message['isUserSender']) ?
-                    $this->userInfo['photo'] :
-                    $this->buddyInfo['photo']); ?>"
+                <img src="<?= $this->escapeHtml($user->getImagePath()); ?>"
                      class="message-avatar img-fluid rounded"
-                     alt="Фото пользователя"></div>
+                     alt="User's photo">
+            </div>
             <div class="col">
                 <div class="row g-1">
                     <div class="col-12">
                         <div class="row gx-2">
                             <div class="col-auto">
-                                <span class="h6"><?= $this->escapeHtml(($message['isUserSender']) ?
-                                        $this->userInfo['fullname'] :
-                                        $this->buddyInfo['fullname']); ?></span>
+                                <span class="h6"><?= $this->escapeHtml(
+                                        implode(' ', [
+                                            $user->getSurname() ?: '—',
+                                            $user->getName() ?: '—',
+                                            $user->getPatronymic() ?: '—',
+                                        ])
+                                    ); ?></span>
                             </div>
                             <div class="col-auto">
-                                <span class="small"><?= $this->escapeHtml($message['createdAt']); ?></span>
+                                <span class="small"><?= $this->escapeHtml($message->getCreatedAt()); ?></span>
                             </div>
-                            <?php if ($message['openedAt']): ?>
+                            <?php if ($message->getOpenedAt()): ?>
                                 <div class="col-auto">
-                                    <span class="small text-muted"><?= $this->escapeHtml($message['openedAt']); ?></span>
+                                    <span class="small text-muted"><?= $this->escapeHtml(
+                                            $message->getOpenedAt()
+                                        ); ?></span>
                                 </div>
                             <?php endif; ?>
                         </div>
                     </div>
                     <div class="col-12">
                         <p class="m-0">
-                            <?= $this->escapeHtml($message['content']); ?>
+                            <?= $this->escapeHtml($message->getContent()); ?>
                         </p>
                     </div>
                 </div>

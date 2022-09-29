@@ -3,6 +3,7 @@
 namespace Application\Form\Messenger;
 
 use Application\Fieldset\AgeFilterFieldset;
+use Application\Fieldset\ProfileFieldset;
 use Application\Helper\FieldsetMapper;
 use Application\Model\Options\GenderOptions;
 use Application\Model\Options\PositionOptions;
@@ -11,27 +12,34 @@ use Laminas\Form\Form;
 
 class DialogFilterForm extends Form
 {
-    public const DEFAULT_NAME = 'dialog-filter-form';
+    private PositionOptions $positionOptions;
 
-    public function __construct($name = self::DEFAULT_NAME)
-    {
+    public function __construct(
+        PositionOptions $positionOptions,
+                        $name = 'DialogFilterForm'
+    ) {
         parent::__construct($name);
+
+        $this->positionOptions = $positionOptions;
+    }
+
+    public function init()
+    {
+        parent::init();
 
         $this->setAttribute('class', 'row g-3 needs-validation');
         $this->setAttribute('novalidate', true);
 
         $this->add([
-            'name'       => 'position',
+            'name'       => 'positionId',
             'type'       => Element\Select::class,
             'attributes' => [
                 'class' => 'form-select',
             ],
             'options'    => [
-                'label'            => 'Должность',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
-                'options'          => PositionOptions::getEnabledOptions(),
+                'label'            => 'Position',
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
+                'options'          => $this->positionOptions->getEnabledOptions(),
             ],
         ]);
 
@@ -42,10 +50,8 @@ class DialogFilterForm extends Form
                 'class' => 'form-select',
             ],
             'options'    => [
-                'label'            => 'Пол',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label'            => 'Gender',
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
                 'options'          => GenderOptions::getOptions(),
             ],
         ]);
@@ -54,38 +60,36 @@ class DialogFilterForm extends Form
             'name'       => 'age',
             'type'       => AgeFilterFieldset::class,
             'attributes' => [
-                'class' => 'row gx-3',
+                'class' => 'row g-3',
             ],
             'options'    => [
-                'label' => 'Возраст',
+                'label' => 'Age',
             ],
         ]);
 
         $this->add([
-            'name'       => 'fullname-phone',
+            'name'       => 'fullnamePhone',
             'type'       => Element\Textarea::class,
             'attributes' => [
                 'class'       => 'form-control',
                 'rows'        => '2',
-                'placeholder' => 'Иванов Иван Иванович, +79283627374',
+                'placeholder' => 'Dwayne Douglas Johnson, +79283627374',
             ],
             'options'    => [
-                'label'            => 'ФИО, телефон',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label'            => 'Fullname, phone number',
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
         $this->add([
-            'name'       => 'submit-button',
+            'name'       => 'submitButton',
             'type'       => Element\Button::class,
             'attributes' => [
                 'type'  => 'submit',
                 'class' => 'btn btn-outline-success w-100',
             ],
             'options'    => [
-                'label' => 'Применить фильтры',
+                'label' => 'Apply Filters',
             ],
         ], [
             'priority' => -10 ** 9,
@@ -93,17 +97,17 @@ class DialogFilterForm extends Form
 
         FieldsetMapper::setAttributes($this, [
             'children' => [
-                'position'       => 'col-12',
-                'gender'         => 'col-12',
-                'age'            => [
+                'positionId'    => 'col-12',
+                'gender'        => 'col-12',
+                'age'           => [
                     'value'    => 'col-12',
                     'children' => [
-                        'min' => 'col-6',
-                        'max' => 'col-6',
+                        'min' => 'col-12',
+                        'max' => 'col-12',
                     ],
                 ],
-                'fullname-phone' => 'col-12',
-                'submit-button'  => 'col-12',
+                'fullnamePhone' => 'col-12',
+                'submitButton'  => 'col-12',
             ],
         ]);
     }

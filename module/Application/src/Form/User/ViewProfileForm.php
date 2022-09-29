@@ -11,10 +11,14 @@ class ViewProfileForm extends ProfileForm
     {
         parent::init();
 
-        $this->get('profile')->remove('image');
+        $this->get('profile')->remove('imageFile');
         $this->get('profile')->add([
-            'name' => 'image',
-            'type' => Element\Image::class,
+            'name'       => 'image',
+            'type'       => Element\Image::class,
+            'attributes' => [
+                'class' => 'user-photo-bg w-100 rounded',
+                'alt'   => 'User\'s photo',
+            ],
         ], ['priority' => 100]);
 
         FieldsetMapper::setDisabled($this);

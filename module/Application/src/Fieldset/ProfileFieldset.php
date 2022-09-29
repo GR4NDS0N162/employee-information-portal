@@ -2,11 +2,10 @@
 
 namespace Application\Fieldset;
 
+use Application\Model\Entity\Profile;
 use Application\Model\Options\GenderOptions;
-use Application\Model\Profile;
 use Laminas\Form\Element;
 use Laminas\Form\Fieldset;
-use Laminas\Hydrator\ClassMethodsHydrator;
 
 class ProfileFieldset extends Fieldset
 {
@@ -16,7 +15,8 @@ class ProfileFieldset extends Fieldset
 
     public function init()
     {
-        $this->setHydrator(new ClassMethodsHydrator(false, true));
+        parent::init();
+
         $this->setObject(new Profile());
 
         $this->add([
@@ -25,15 +25,15 @@ class ProfileFieldset extends Fieldset
         ]);
 
         $this->add([
-            'name'       => 'image',
+            'name'       => 'imageFile',
             'type'       => Element\File::class,
             'attributes' => [
                 'class'  => 'form-control',
                 'accept' => 'image/*',
             ],
             'options'    => [
-                'label'            => 'Фото',
-                'label_attributes' => self::DEFAULT_LABEL_ATTRIBUTES,
+                'label'            => 'Image',
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
@@ -42,11 +42,11 @@ class ProfileFieldset extends Fieldset
             'type'       => Element\Text::class,
             'attributes' => [
                 'class'       => 'form-control',
-                'placeholder' => 'Иванов',
+                'placeholder' => 'Johnson',
             ],
             'options'    => [
-                'label'            => 'Фамилия',
-                'label_attributes' => self::DEFAULT_LABEL_ATTRIBUTES,
+                'label'            => 'Surname',
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
@@ -55,11 +55,11 @@ class ProfileFieldset extends Fieldset
             'type'       => Element\Text::class,
             'attributes' => [
                 'class'       => 'form-control',
-                'placeholder' => 'Иван',
+                'placeholder' => 'Dwayne',
             ],
             'options'    => [
-                'label'            => 'Имя',
-                'label_attributes' => self::DEFAULT_LABEL_ATTRIBUTES,
+                'label'            => 'Name',
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
@@ -68,11 +68,11 @@ class ProfileFieldset extends Fieldset
             'type'       => Element\Text::class,
             'attributes' => [
                 'class'       => 'form-control',
-                'placeholder' => 'Иванович',
+                'placeholder' => 'Douglas',
             ],
             'options'    => [
-                'label'            => 'Отчество',
-                'label_attributes' => self::DEFAULT_LABEL_ATTRIBUTES,
+                'label'            => 'Patronymic',
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
@@ -83,8 +83,8 @@ class ProfileFieldset extends Fieldset
                 'class' => 'form-select',
             ],
             'options'    => [
-                'label'            => 'Пол',
-                'label_attributes' => self::DEFAULT_LABEL_ATTRIBUTES,
+                'label'            => 'Gender',
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
                 'options'          => GenderOptions::getOptions(),
             ],
         ]);
@@ -96,8 +96,8 @@ class ProfileFieldset extends Fieldset
                 'class' => 'form-control',
             ],
             'options'    => [
-                'label'            => 'Дата рождения',
-                'label_attributes' => self::DEFAULT_LABEL_ATTRIBUTES,
+                'label'            => 'Date of birth',
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
@@ -110,7 +110,7 @@ class ProfileFieldset extends Fieldset
             ],
             'options'    => [
                 'label'            => 'Skype',
-                'label_attributes' => self::DEFAULT_LABEL_ATTRIBUTES,
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
@@ -121,7 +121,7 @@ class ProfileFieldset extends Fieldset
                 'class' => 'row g-3 non-empty-collection',
             ],
             'options'    => [
-                'label'                  => 'E-mail-ы',
+                'label'                  => 'Emails',
                 'count'                  => 1,
                 'allow_add'              => true,
                 'allow_remove'           => true,
@@ -143,7 +143,7 @@ class ProfileFieldset extends Fieldset
                 'class' => 'row g-3',
             ],
             'options'    => [
-                'label'                  => 'Телефоны',
+                'label'                  => 'Phones',
                 'count'                  => 0,
                 'allow_add'              => true,
                 'allow_remove'           => true,

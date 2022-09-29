@@ -2,6 +2,7 @@
 
 namespace Application\Form\Login;
 
+use Application\Fieldset\ProfileFieldset;
 use Application\Helper\FieldsetMapper;
 use Application\Model\Options\PositionOptions;
 use Laminas\Form\Element;
@@ -9,11 +10,19 @@ use Laminas\Form\Form;
 
 class SignUpForm extends Form
 {
-    public const DEFAULT_NAME = 'signup-form';
+    private PositionOptions $positionOptions;
 
-    public function __construct($name = self::DEFAULT_NAME)
+    public function __construct(
+        PositionOptions $positionOptions
+    ) {
+        parent::__construct();
+
+        $this->positionOptions = $positionOptions;
+    }
+
+    public function init()
     {
-        parent::__construct($name);
+        parent::init();
 
         $this->setAttribute('class', 'row gy-3 needs-validation');
         $this->setAttribute('novalidate', true);
@@ -29,30 +38,26 @@ class SignUpForm extends Form
             ],
             'options'    => [
                 'label'            => 'E-mail',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
         $this->add([
-            'name'       => 'position',
+            'name'       => 'positionId',
             'type'       => Element\Select::class,
             'attributes' => [
                 'class'    => 'form-select',
                 'required' => 'required',
             ],
             'options'    => [
-                'label'            => 'Должность',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
-                'options'          => PositionOptions::getDisabledOptions(),
+                'label'            => 'Position',
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
+                'options'          => $this->positionOptions->getDisabledOptions(),
             ],
         ]);
 
         $this->add([
-            'name'       => 'new-password',
+            'name'       => 'newPassword',
             'type'       => Element\Password::class,
             'attributes' => [
                 'class'        => 'form-control',
@@ -61,18 +66,16 @@ class SignUpForm extends Form
                 'autocomplete' => 'new-password',
                 'minlength'    => 8,
                 'maxlength'    => 32,
-                'pattern'      => '^(?=.*?[а-яa-z])(?=.*?[А-ЯA-Z])(?=.*?[0-9])(?=.*?[!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~])[а-яa-zА-ЯA-Z0-9!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]*$',
+                'pattern'      => '^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~])[a-zA-Z0-9!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]*$',
             ],
             'options'    => [
-                'label'            => 'Пароль',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label'            => 'Password',
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
         $this->add([
-            'name'       => 'password-check',
+            'name'       => 'passwordCheck',
             'type'       => Element\Password::class,
             'attributes' => [
                 'class'       => 'form-control',
@@ -81,22 +84,20 @@ class SignUpForm extends Form
                 'pattern'     => '',
             ],
             'options'    => [
-                'label'            => 'Подтверждение пароля',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label'            => 'Password check',
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
         $this->add([
-            'name'       => 'submit-button',
+            'name'       => 'submitButton',
             'type'       => Element\Button::class,
             'attributes' => [
                 'type'  => 'submit',
                 'class' => 'btn btn-lg btn-outline-success w-100',
             ],
             'options'    => [
-                'label' => 'Зарегистрироваться',
+                'label' => 'Sign up',
             ],
         ], [
             'priority' => -10 ** 9,
@@ -104,11 +105,11 @@ class SignUpForm extends Form
 
         FieldsetMapper::setAttributes($this, [
             'children' => [
-                'email'          => 'col-12',
-                'position'       => 'col-12',
-                'new-password'   => 'col-12',
-                'password-check' => 'col-12',
-                'submit-button'  => 'col-12',
+                'email'         => 'col-12',
+                'positionId'    => 'col-12',
+                'newPassword'   => 'col-12',
+                'passwordCheck' => 'col-12',
+                'submitButton'  => 'col-12',
             ],
         ]);
     }

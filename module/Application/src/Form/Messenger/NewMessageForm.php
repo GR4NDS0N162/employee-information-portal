@@ -8,11 +8,14 @@ use Laminas\Form\Form;
 
 class NewMessageForm extends Form
 {
-    public const DEFAULT_NAME = 'new-message-form';
-
-    public function __construct($name = self::DEFAULT_NAME)
+    public function __construct($name = 'NewMessageForm', array $options = [])
     {
-        parent::__construct($name);
+        parent::__construct($name, $options);
+    }
+
+    public function init()
+    {
+        parent::init();
 
         $this->setAttribute('class', 'row gx-3');
 
@@ -21,7 +24,7 @@ class NewMessageForm extends Form
             'type'       => Element\Text::class,
             'attributes' => [
                 'class'       => 'form-control',
-                'placeholder' => 'Напишите сообщение...',
+                'placeholder' => 'Write a message...',
                 'required'    => 'required',
             ],
         ]);
@@ -34,7 +37,7 @@ class NewMessageForm extends Form
                 'class' => 'btn btn-outline-success w-100',
             ],
             'options'    => [
-                'label' => 'Отправить',
+                'label' => 'Send',
             ],
         ], [
             'priority' => -10 ** 9,
@@ -44,7 +47,7 @@ class NewMessageForm extends Form
             'children' => [
                 'message'       => 'col',
                 'submit-button' => 'col-auto',
-            ]
+            ],
         ]);
     }
 }

@@ -8,9 +8,12 @@ return [
     'aliases'   => [
     ],
     'factories' => [
-        Form\Admin\UserForm::class       => InvokableFactory::class,
-        Form\User\ProfileForm::class     => InvokableFactory::class,
-        Form\User\ViewProfileForm::class => InvokableFactory::class,
-        Form\Admin\PositionForm::class   => InvokableFactory::class,
+        Fieldset\UserFieldset::class           => Factory\Fieldset\UserFieldsetFactory::class,
+        Fieldset\StatusFieldset::class         => Factory\Fieldset\StatusFieldsetFactory::class,
+        Form\Login\SignUpForm::class           => Factory\Form\SignUpFormFactory::class,
+        Form\User\UserFilterForm::class        => Factory\Form\UserFilterFormFactory::class,
+        Form\Admin\AdminFilterForm::class      => Factory\Form\AdminFilterFormFactory::class,
+        Form\Messenger\DialogFilterForm::class => Factory\Form\DialogFilterFormFactory::class,
+        Form\Messenger\NewMessageForm::class   => InvokableFactory::class,
     ],
 ];

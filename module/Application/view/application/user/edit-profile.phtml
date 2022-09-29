@@ -1,17 +1,25 @@
 <?php
 /**
- * @var Laminas\View\Renderer\PhpRenderer         $this
- * @var \Application\Form\User\ChangePasswordForm $changePasswordForm
+ * @var Laminas\View\Renderer\PhpRenderer $this
  */
+
+use Application\Form\User\ChangePasswordForm;
+use Application\Form\User\ProfileForm;
+
 $this->inlineScript()
     ->appendFile($this->basePath('js/collection-manipulation.js'))
     ->appendFile($this->basePath('js/password-form-validation.js'))
     ->appendFile($this->basePath('js/edit-list-form-validation.js'));
 
-/**
- * @var \Application\Form\User\ProfileForm $profileForm
- */
+/** @var ProfileForm $profileForm */
 $profileForm = $this->profileForm;
+$profileForm->setAttribute('action', $this->url('user/edit-profile/profile-form', [], true));
+$profileForm->prepare();
+
+/** @var ChangePasswordForm $changePasswordForm */
+$changePasswordForm = $this->changePasswordForm;
+$changePasswordForm->setAttribute('action', $this->url('user/edit-profile/change-password-form', [], true));
+$changePasswordForm->prepare();
 ?>
 <div class="row g-3">
     <div class="col-12">
@@ -21,7 +29,7 @@ $profileForm = $this->profileForm;
     </div>
     <div class="col-12">
         <div class="card p-3">
-            <div class="form-label">Пароль</div>
+            <div class="form-label">Password</div>
             <?= $this->userForm()->render($changePasswordForm); ?>
         </div>
     </div>

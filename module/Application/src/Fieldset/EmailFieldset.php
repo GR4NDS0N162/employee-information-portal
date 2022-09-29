@@ -2,17 +2,17 @@
 
 namespace Application\Fieldset;
 
-use Application\Model\Email;
+use Application\Model\Entity\Email;
 use Laminas\Form\Element;
 use Laminas\Form\Fieldset;
-use Laminas\Hydrator\ClassMethodsHydrator;
 
 class EmailFieldset extends Fieldset
 {
     public function init()
     {
-        $this->setHydrator(new ClassMethodsHydrator(false, true));
-        $this->setObject(new Email(''));
+        parent::init();
+
+        $this->setObject(new Email());
 
         $this->add([
             'name'       => 'address',

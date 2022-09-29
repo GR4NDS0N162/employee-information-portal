@@ -2,160 +2,168 @@
 
 namespace Application\Controller;
 
-use Application\Form;
-use Application\Model\Email;
-use Application\Model\Phone;
-use Application\Model\PhotoUrlGenerator;
-use Application\Model\User;
+use Application\Form\Admin as Form;
+use Application\Helper\ConfigHelper;
+use Application\Model\Command\PositionCommandInterface;
+use Application\Model\Command\UserCommandInterface;
+use Application\Model\Entity\PositionList;
+use Application\Model\Repository\PositionRepositoryInterface;
+use Application\Model\Repository\UserRepositoryInterface;
+use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
+use LogicException;
 
 class AdminController extends AbstractActionController
 {
-    public const maxPageCount = 20;
-
-    /**
-     * @var \Application\Form\Admin\PositionForm
-     */
-    private $positionForm;
-
-    /**
-     * @var \Application\Form\Admin\UserForm
-     */
-    private $userForm;
-
-    /**
-     * @var User
-     */
-    private $userPrototype;
+    private Form\PositionForm $positionForm;
+    private Form\UserForm $userForm;
+    private Form\AdminFilterForm $adminFilterForm;
+    private UserRepositoryInterface $userRepository;
+    private PositionRepositoryInterface $positionRepository;
+    private UserCommandInterface $userCommand;
+    private PositionCommandInterface $positionCommand;
 
     public function __construct(
-        Form\Admin\PositionForm $positionForm,
-        Form\Admin\UserForm     $userForm
+        Form\PositionForm           $positionForm,
+        Form\UserForm               $userForm,
+        Form\AdminFilterForm        $adminFilterForm,
+        UserRepositoryInterface     $userRepository,
+        PositionRepositoryInterface $positionRepository,
+        UserCommandInterface        $userCommand,
+        PositionCommandInterface    $positionCommand
     ) {
         $this->positionForm = $positionForm;
         $this->userForm = $userForm;
-        $this->userPrototype = new User(
-            4,
-            [
-                'admin'  => true,
-                'active' => false,
-            ],
-            'Anypassword1.',
-            [
-                new Email('cfhsoft@verizon.net'),
-                new Email('isotopian@att.net'),
-                new Email('camenisch@comcast.net'),
-                new Email('wetter@mac.com'),
-            ],
-            [
-                new Phone('+79283748264'),
-                new Phone('+79365839604'),
-                new Phone('+79305847200'),
-            ],
-            null,
-            null,
-            'Внуков',
-            'Кирилл',
-            'Денисович',
-            1,
-            '2003-05-19',
-            '/img/favicon.ico',
-            'gr4nds0n162',
+        $this->adminFilterForm = $adminFilterForm;
+        $this->userRepository = $userRepository;
+        $this->positionRepository = $positionRepository;
+        $this->userCommand = $userCommand;
+        $this->positionCommand = $positionCommand;
+    }
+
+    public function viewUserListAction()
+    {
+        $viewModel = new ViewModel();
+
+        $this->layout()->setVariable('headTitleName', 'List of users (Administrator)');
+        $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
+
+        $viewModel->setVariables([
+            'adminFilterForm' => $this->adminFilterForm,
+        ]);
+
+        return $viewModel;
+    }
+
+    public function getUsersAction()
+    {
+        $request = $this->getRequest();
+
+        if (!$request->isXmlHttpRequest() || !$request->isPost()) {
+            throw new LogicException('The request to the address must be ajax and post.');
+        }
+
+        $data = $request->getPost()->toArray();
+        parse_str($data['where'], $data['where']);
+        $whereConfig = ConfigHelper::filterEmpty($data['where']);
+        $orderConfig = $data['order'];
+        $page = (integer)$data['page'];
+        $offset = ($page - 1) * UserController::MAX_USER_COUNT;
+        $limit = UserController::MAX_USER_COUNT;
+
+        $users = $this->userRepository->findUsers($whereConfig, $orderConfig);
+        $userCount = count($users);
+
+        $jsonData = [];
+
+        $userList = array_slice($users, $offset, $limit);
+        $userList = array_map(function ($item) {
+            return $item->toArray();
+        }, $userList);
+
+        $jsonData['userList'] = $userList;
+        $jsonData['userCount'] = $userCount;
+
+        if (isset($data['updatePage'])) {
+            $pageCount = ceil($userCount / UserController::MAX_USER_COUNT);
+            $jsonData['pageCount'] = $pageCount;
+        }
+
+        return new JsonModel($jsonData);
+    }
+
+    public function editUserAction()
+    {
+        $userId = (int)$this->params()->fromRoute('id', 0);
+
+        if ($userId === 0) {
+            return $this->redirect()->toRoute('admin/view-user-list');
+        }
+
+        try {
+            $user = $this->userRepository->findUser($userId);
+        } catch (InvalidArgumentException $ex) {
+            return $this->redirect()->toRoute('admin/view-user-list');
+        }
+
+        $this->layout()->setVariables([
+            'headTitleName' => 'Edit user (Administrator)',
+            'navbar'        => 'Laminas\Navigation\Admin',
+        ]);
+
+        $this->userForm->bind($user);
+        $viewModel = new ViewModel(['userForm' => $this->userForm]);
+
+        $request = $this->getRequest();
+        if (!$request->isPost()) {
+            return $viewModel;
+        }
+
+        $postData = array_merge_recursive(
+            $request->getPost()->toArray(),
+            $request->getFiles()->toArray()
         );
+
+        $this->userForm->setData($postData);
+
+        if (!$this->userForm->isValid()) {
+            return $viewModel;
+        }
+
+        $this->userCommand->updateUser($user);
+        return $this->redirect()->toRoute('admin/view-user-list');
     }
 
-    public function viewUserListAction(): ViewModel
+    public function editPositionsAction()
     {
-        $viewModel = new ViewModel();
-
-        $headTitleName = 'Список пользователей (Администратор)';
-
-        $this->layout()->setVariable('headTitleName', $headTitleName);
-        $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
-
-        $userInfo = [
-            [
-                'userId'   => 1,
-                'isAdmin'  => true,
-                'isActive' => true,
-                'photo'    => PhotoUrlGenerator::generate(),
-                'fullname' => 'Зубенко Михаил Петрович',
-                'position' => 'Уборщик',
-                'gender'   => 'Мужской',
-                'age'      => 47,
-            ],
-            [
-                'userId'   => 2,
-                'isAdmin'  => false,
-                'isActive' => true,
-                'photo'    => PhotoUrlGenerator::generate(),
-                'fullname' => 'Егоров Владимир Егорович',
-                'position' => 'Бухгалтер',
-                'gender'   => 'Мужской',
-                'age'      => 31,
-            ],
-            [
-                'userId'   => 3,
-                'isAdmin'  => true,
-                'isActive' => false,
-                'photo'    => PhotoUrlGenerator::generate(),
-                'fullname' => 'Мельникова Алёна Вадимовна',
-                'position' => 'Юрист',
-                'gender'   => 'Женский',
-                'age'      => 23,
-            ],
-            [
-                'userId'   => 4,
-                'isAdmin'  => false,
-                'isActive' => false,
-                'photo'    => PhotoUrlGenerator::generate(),
-                'fullname' => 'Тимофеева Вероника Денисовна',
-                'position' => 'Менеджер',
-                'gender'   => 'Женский',
-                'age'      => 36,
-            ],
-        ];
-
-        $viewModel->setVariables([
-            'userInfo'        => $userInfo,
-            'maxPageCount'    => self::maxPageCount,
-            'page'            => 1,
-            'adminFilterForm' => new Form\Admin\AdminFilterForm(),
+        $this->layout()->setVariables([
+            'headTitleName' => 'Position Management (Administrator)',
+            'navbar'        => 'Laminas\Navigation\Admin',
         ]);
 
-        return $viewModel;
-    }
+        $list = $this->positionRepository->findAllPositions();
+        $positionList = new PositionList($list);
+        $this->positionForm->bind($positionList);
 
-    public function editUserAction(): ViewModel
-    {
-        $viewModel = new ViewModel();
+        $viewModel = new ViewModel(['positionForm' => $this->positionForm]);
 
-        $headTitleName = 'Редактирование пользователя (Администратор)';
+        $request = $this->getRequest();
+        if (!$request->isPost()) {
+            return $viewModel;
+        }
 
-        $this->layout()->setVariable('headTitleName', $headTitleName);
-        $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
+        $this->positionForm->setData($request->getPost());
 
-        $this->userForm->bind($this->userPrototype);
+        if (!$this->positionForm->isValid()) {
+            return $viewModel;
+        }
 
-        $viewModel->setVariables([
-            'userForm' => $this->userForm,
-        ]);
+        $this->positionCommand->updatePositions(
+            $this->positionForm->getObject()
+        );
 
-        return $viewModel;
-    }
-
-    public function editPositionsAction(): ViewModel
-    {
-        $viewModel = new ViewModel();
-
-        $headTitleName = 'Управление должностями (Администратор)';
-
-        $this->layout()->setVariable('headTitleName', $headTitleName);
-        $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
-
-        $viewModel->setVariable('positionForm', $this->positionForm);
-
-        return $viewModel;
+        return $this->redirect()->toRoute('admin/edit-position');
     }
 }

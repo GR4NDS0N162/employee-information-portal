@@ -1,0 +1,64 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ * @var LoginForm                         $loginForm
+ * @var SignUpForm                        $signUpForm
+ * @var RecoverForm                       $recoverForm
+ */
+
+use Application\Form\Login\LoginForm;
+use Application\Form\Login\RecoverForm;
+use Application\Form\Login\SignUpForm;
+
+$this->inlineScript()
+    ->appendFile($this->basePath('js/password-form-validation.js'))
+    ->appendFile($this->basePath('js/login-signup-recover-validation.js'));
+
+$loginForm->setAttribute('action', $this->url('home/login'));
+$loginForm->prepare();
+
+$signUpForm->setAttribute('action', $this->url('home/signup'));
+$signUpForm->prepare();
+
+$recoverForm->setAttribute('action', $this->url('home/recover'));
+$recoverForm->prepare();
+?>
+<div class="card p-4"
+     id="login-card">
+    <h1 class="mb-3">Login</h1>
+    <?= $this->userForm()->render($loginForm); ?>
+    <div class="row gy-2 mt-2">
+        <div class="col-12">
+            <span>Don't have an account?</span>
+            <button class="p-0 border-0 bg-transparent text-success signup-show">Sign up</button>
+        </div>
+        <div class="col-12">
+            <span>Forgot your password?</span>
+            <button class="p-0 border-0 bg-transparent text-danger recover-show">Recover</button>
+        </div>
+    </div>
+</div>
+
+<div class="card p-4"
+     id="signup-card">
+    <h1 class="mb-3">Sign up</h1>
+    <?= $this->userForm()->render($signUpForm); ?>
+    <div class="row gy-2 mt-2">
+        <div class="col-12">
+            <span>Already have an account?</span>
+            <button class="p-0 border-0 bg-transparent text-primary login-show">Login</button>
+        </div>
+    </div>
+</div>
+
+<div class="card p-4"
+     id="recover-card">
+    <h1 class="mb-3">Recovery</h1>
+    <?= $this->userForm()->render($recoverForm); ?>
+    <div class="row gy-2 mt-2">
+        <div class="col-12">
+            <span>Remember the password?</span>
+            <button class="p-0 border-0 bg-transparent text-primary login-show">Login</button>
+        </div>
+    </div>
+</div>

@@ -2,17 +2,16 @@
 
 namespace Application\Form\Login;
 
+use Application\Fieldset\ProfileFieldset;
 use Application\Helper\FieldsetMapper;
 use Laminas\Form\Element;
 use Laminas\Form\Form;
 
 class RecoverForm extends Form
 {
-    public const DEFAULT_NAME = 'recover-form';
-
-    public function __construct($name = self::DEFAULT_NAME)
+    public function init()
     {
-        parent::__construct($name);
+        parent::init();
 
         $this->setAttribute('class', 'row gy-3 needs-validation');
         $this->setAttribute('novalidate', true);
@@ -28,21 +27,19 @@ class RecoverForm extends Form
             ],
             'options'    => [
                 'label'            => 'E-mail',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
         $this->add([
-            'name'       => 'submit-button',
+            'name'       => 'submitButton',
             'type'       => Element\Button::class,
             'attributes' => [
                 'type'  => 'submit',
                 'class' => 'btn btn-lg btn-outline-danger w-100',
             ],
             'options'    => [
-                'label' => 'Восстановить',
+                'label' => 'Recover',
             ],
         ], [
             'priority' => -10 ** 9,
@@ -50,8 +47,8 @@ class RecoverForm extends Form
 
         FieldsetMapper::setAttributes($this, [
             'children' => [
-                'email'         => 'col-12',
-                'submit-button' => 'col-12',
+                'email'        => 'col-12',
+                'submitButton' => 'col-12',
             ],
         ]);
     }

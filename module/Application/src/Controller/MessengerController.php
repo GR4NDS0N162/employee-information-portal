@@ -2,121 +2,177 @@
 
 namespace Application\Controller;
 
-use Application\Form;
-use Application\Model\PhotoUrlGenerator;
+use Application\Form\Messenger\DialogFilterForm;
+use Application\Form\Messenger\NewMessageForm;
+use Application\Helper\ConfigHelper;
+use Application\Model\Command\MessageCommandInterface;
+use Application\Model\Entity\Message;
+use Application\Model\Repository\DialogRepositoryInterface;
+use Application\Model\Repository\MessageRepositoryInterface;
+use Application\Model\Repository\PositionRepositoryInterface;
+use Application\Model\Repository\UserRepositoryInterface;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
+use LogicException;
+use RuntimeException;
 
 class MessengerController extends AbstractActionController
 {
-    public function viewDialogListAction(): ViewModel
+    /** @var int Maximum number of uploaded messages at a time. */
+    public const MAX_MESSAGE_COUNT = 20;
+
+    private DialogFilterForm $dialogFilterForm;
+    private NewMessageForm $newMessageForm;
+    private DialogRepositoryInterface $dialogRepository;
+    private UserRepositoryInterface $userRepository;
+    private PositionRepositoryInterface $positionRepository;
+    private MessageRepositoryInterface $messageRepository;
+    private MessageCommandInterface $messageCommand;
+
+    public function __construct(
+        DialogFilterForm            $dialogFilterForm,
+        NewMessageForm              $newMessageForm,
+        DialogRepositoryInterface   $dialogRepository,
+        UserRepositoryInterface     $userRepository,
+        PositionRepositoryInterface $positionRepository,
+        MessageRepositoryInterface  $messageRepository,
+        MessageCommandInterface     $messageCommand
+    ) {
+        $this->dialogFilterForm = $dialogFilterForm;
+        $this->newMessageForm = $newMessageForm;
+        $this->dialogRepository = $dialogRepository;
+        $this->userRepository = $userRepository;
+        $this->positionRepository = $positionRepository;
+        $this->messageRepository = $messageRepository;
+        $this->messageCommand = $messageCommand;
+    }
+
+    public function viewDialogListAction()
     {
+        UserController::setAdminNavbar($this->userRepository, $this, UserController::USER_ID);
         $viewModel = new ViewModel();
 
-        $headTitleName = 'Диалоги';
+        $this->layout()->setVariable('headTitleName', 'Dialogs');
 
-        $this->layout()->setVariable('headTitleName', $headTitleName);
+        $dialogs = $this->dialogRepository->getDialogList(UserController::USER_ID);
 
-        $dialogs = [
-            [
-                'userId'    => 1,
-                'hasDialog' => true,
-                'photo'     => PhotoUrlGenerator::generate(),
-                'fullname'  => 'Зубенко Михаил Петрович',
-                'position'  => 'Уборщик',
-                'gender'    => 'Мужской',
-                'age'       => 47,
-            ],
-            [
-                'userId'    => 2,
-                'hasDialog' => true,
-                'photo'     => PhotoUrlGenerator::generate(),
-                'fullname'  => 'Егоров Владимир Егорович',
-                'position'  => 'Бухгалтер',
-                'gender'    => 'Мужской',
-                'age'       => 31,
-            ],
-            [
-                'userId'    => 3,
-                'hasDialog' => false,
-                'photo'     => PhotoUrlGenerator::generate(),
-                'fullname'  => 'Мельникова Алёна Вадимовна',
-                'position'  => 'Юрист',
-                'gender'    => 'Женский',
-                'age'       => 23,
-            ],
-            [
-                'userId'    => 4,
-                'hasDialog' => false,
-                'photo'     => PhotoUrlGenerator::generate(),
-                'fullname'  => 'Тимофеева Вероника Денисовна',
-                'position'  => 'Менеджер',
-                'gender'    => 'Женский',
-                'age'       => 36,
-            ],
-        ];
-
-        $viewModel->setVariable('dialogs', $dialogs);
-        $viewModel->setVariable('dialogFilterForm', new Form\Messenger\DialogFilterForm());
+        $viewModel->setVariables([
+            'dialogs'            => $dialogs,
+            'dialogFilterForm'   => $this->dialogFilterForm,
+            'userRepository'     => $this->userRepository,
+            'positionRepository' => $this->positionRepository,
+        ]);
 
         return $viewModel;
     }
 
-    public function viewMessagesAction(): ViewModel
+    public function viewMessagesAction()
     {
+        UserController::setAdminNavbar($this->userRepository, $this, UserController::USER_ID);
+        $buddyId = (int)$this->params()->fromRoute('id', 0);
+
+        if ($buddyId === 0
+            || $buddyId === UserController::USER_ID
+        ) {
+            return $this->redirect()->toRoute('user/view-dialog-list');
+        }
+
         $viewModel = new ViewModel();
 
-        $headTitleName = 'Сообщения';
+        $this->layout()->setVariable('headTitleName', 'Messages');
 
-        $this->layout()->setVariable('headTitleName', $headTitleName);
-
-        $viewModel->setVariable('newMessageForm', new Form\Messenger\NewMessageForm());
-
-        $userInfo = [
-            'fullname' => 'Иван Иванов',
-            'photo'    => PhotoUrlGenerator::generate(),
-        ];
-
-        $buddyInfo = [
-            'fullname' => 'Петя Петров',
-            'photo'    => PhotoUrlGenerator::generate(),
-        ];
-
-        $messages = [
-            [
-                'isUserSender' => true,
-                'content'      => 'Привет1',
-                'createdAt'    => '16.05.2022 16:32',
-                'openedAt'     => '16.05.2022 16:34',
-            ],
-            [
-                'isUserSender' => true,
-                'content'      => 'Привет2',
-                'createdAt'    => '16.05.2022 16:36',
-                'openedAt'     => '16.05.2022 16:37',
-            ],
-            [
-                'isUserSender' => false,
-                'content'      => 'Привет3',
-                'createdAt'    => '16.05.2022 16:38',
-                'openedAt'     => '16.05.2022 16:39',
-            ],
-            [
-                'isUserSender' => true,
-                'content'      => 'Привет4',
-                'createdAt'    => '16.05.2022 16:40',
-            ],
-            [
-                'isUserSender' => false,
-                'content'      => 'Привет5',
-                'createdAt'    => '16.05.2022 16:42',
-            ],
-        ];
+        $userInfo = $this->userRepository->findUser(UserController::USER_ID);
+        $buddyInfo = $this->userRepository->findUser($buddyId);
 
         $viewModel->setVariables([
-            'messages'  => $messages,
-            'userInfo'  => $userInfo,
-            'buddyInfo' => $buddyInfo,
+            'newMessageForm' => $this->newMessageForm,
+            'userInfo'       => $userInfo,
+            'buddyInfo'      => $buddyInfo,
+        ]);
+
+        return $viewModel;
+    }
+
+    public function getDialogsAction()
+    {
+        $request = $this->getRequest();
+
+        if (!$request->isXmlHttpRequest() || !$request->isPost()) {
+            throw new LogicException('The request to the address must be ajax and post.');
+        }
+
+        $data = ConfigHelper::filterEmpty($request->getPost()->toArray());
+
+        $viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
+        $viewModel->setTemplate('partial/dialog-list.phtml');
+
+        $viewModel->setVariables([
+            'dialogList'     => $this->dialogRepository->getDialogList(
+                UserController::USER_ID,
+                $data
+            ),
+            'userRepository' => $this->userRepository,
+        ]);
+
+        return $viewModel;
+
+    }
+
+    public function sendMessageAction()
+    {
+        $request = $this->getRequest();
+
+        if (!$request->isXmlHttpRequest() || !$request->isPost()) {
+            throw new LogicException('The request to the address must be ajax and post.');
+        }
+
+        $post = $request->getPost();
+        $content = (string)$post->get('content');
+        $buddyId = (int)$post->get('buddyId');
+
+        try {
+            $this->messageCommand->sendMessage(
+                new Message(
+                    $this->dialogRepository->getDialogId(UserController::USER_ID, $buddyId),
+                    UserController::USER_ID,
+                    date('Y-m-d H:i:s'),
+                    $content,
+                )
+            );
+
+            return new JsonModel(['ok']);
+        } catch (RuntimeException $ex) {
+            return new JsonModel([$ex->getMessage()]);
+        }
+    }
+
+    public function loadMessagesAction()
+    {
+        $request = $this->getRequest();
+
+        if (!$request->isXmlHttpRequest() || !$request->isPost()) {
+            throw new LogicException('The request to the address must be ajax and post.');
+        }
+
+        $post = $request->getPost();
+        $lastMessageId = $post->get('lastMessageId');
+        $buddyId = (int)$post->get('buddyId');
+
+        $messageList = $this->messageRepository->findMessagesOfDialog(
+            $this->dialogRepository->getDialogId(UserController::USER_ID, $buddyId),
+            $lastMessageId,
+        );
+
+        $messageList = $this->messageCommand->readBy(UserController::USER_ID, $messageList);
+
+        $viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
+        $viewModel->setTemplate('partial/message-list.phtml');
+        $viewModel->setVariables([
+            'messageList'    => $messageList,
+            'userRepository' => $this->userRepository,
         ]);
 
         return $viewModel;

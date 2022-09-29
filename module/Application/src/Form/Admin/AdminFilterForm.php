@@ -2,6 +2,7 @@
 
 namespace Application\Form\Admin;
 
+use Application\Fieldset\ProfileFieldset;
 use Application\Form\User\UserFilterForm;
 use Application\Helper\FieldsetMapper;
 use Application\Model\Options\YesNoOptions;
@@ -9,26 +10,16 @@ use Laminas\Form\Element;
 
 class AdminFilterForm extends UserFilterForm
 {
-    public const DEFAULT_NAME = 'admin-filter-form';
+    public function __construct(
+        $positionOptions,
+        $name = 'AdminFilterForm'
+    ) {
+        parent::__construct($positionOptions, $name);
+    }
 
-    public function __construct($name = self::DEFAULT_NAME)
+    public function init()
     {
-        parent::__construct($name);
-
-        $this->add([
-            'name'       => 'active',
-            'type'       => Element\Select::class,
-            'attributes' => [
-                'class' => 'form-select',
-            ],
-            'options'    => [
-                'label'            => 'Активен',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
-                'options'          => YesNoOptions::getActiveOptions(),
-            ],
-        ]);
+        parent::init();
 
         $this->add([
             'name'       => 'admin',
@@ -37,10 +28,8 @@ class AdminFilterForm extends UserFilterForm
                 'class' => 'form-select',
             ],
             'options'    => [
-                'label'            => 'Администратор',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label'            => 'Administrator',
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
                 'options'          => YesNoOptions::getAdminOptions(),
             ],
         ]);

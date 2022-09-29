@@ -4,15 +4,15 @@ namespace Application\Model\Options;
 
 class GenderOptions
 {
+    /**
+     * @return string[]
+     */
     public static function getOptions()
     {
         return [
-            null => [
-                'label'    => 'Не выбран',
-                'selected' => 'selected',
-            ],
-            1    => 'Мужской',
-            2    => 'Женский',
+            null => 'Not specified',
+            1    => 'Male',
+            2    => 'Female',
         ];
     }
 }

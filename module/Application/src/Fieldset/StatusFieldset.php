@@ -2,47 +2,43 @@
 
 namespace Application\Fieldset;
 
+use Application\Helper\FieldsetMapper;
+use Application\Model\Repository\StatusRepositoryInterface;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Fieldset;
 
 class StatusFieldset extends Fieldset
 {
-    public const DEFAULT_NAME = 'status';
+    private StatusRepositoryInterface $statusRepository;
 
-    public function __construct($name = self::DEFAULT_NAME)
+    public function __construct($statusRepository)
     {
-        parent::__construct($name);
+        parent::__construct();
 
-        $this->add([
-            'name'       => 'admin',
-            'type'       => Checkbox::class,
-            'attributes' => [
-                'class' => 'form-check-input',
-                'id'    => uniqid('checkbox_', true),
-            ],
-            'options'    => [
-                'label'              => 'Администратор',
-                'label_attributes'   => [
-                    'class' => 'form-check-label',
-                ],
-                'use_hidden_element' => false,
-            ],
-        ]);
+        $this->statusRepository = $statusRepository;
+    }
 
-        $this->add([
-            'name'       => 'active',
-            'type'       => Checkbox::class,
-            'attributes' => [
-                'class' => 'form-check-input',
-                'id'    => uniqid('checkbox_', true),
-            ],
-            'options'    => [
-                'label'              => 'Активен',
-                'label_attributes'   => [
-                    'class' => 'form-check-label',
+    public function init()
+    {
+        parent::init();
+
+        $statuses = $this->statusRepository->findAllStatuses();
+
+        foreach ($statuses as $status) {
+            $this->add([
+                'name'       => $status->getName(),
+                'type'       => Checkbox::class,
+                'attributes' => [
+                    'class'             => 'form-check-input',
+                    FieldsetMapper::KEY => 'col-12 col-sm-6',
+                    'id'                => uniqid('checkbox_', true),
                 ],
-                'use_hidden_element' => false,
-            ],
-        ]);
+                'options'    => [
+                    'label'              => $status->getLabel(),
+                    'label_attributes'   => UserFieldset::DEFAULT_CHECK_LABEL_ATTRIBUTES,
+                    'use_hidden_element' => false,
+                ],
+            ]);
+        }
     }
 }

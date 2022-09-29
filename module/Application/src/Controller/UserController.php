@@ -2,144 +2,147 @@
 
 namespace Application\Controller;
 
-use Application\Form;
-use Application\Model\Email;
-use Application\Model\Phone;
-use Application\Model\PhotoUrlGenerator;
-use Application\Model\Profile;
+use Application\Form\User as Form;
+use Application\Model\Command\UserCommandInterface;
+use Application\Model\Entity\ChangePassword;
+use Application\Model\Repository\UserRepositoryInterface;
+use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
 class UserController extends AbstractActionController
 {
-    public const maxPageCount = 20;
+    /** @var int Maximum number of users displayed on a page. */
+    public const MAX_USER_COUNT = 20;
+    /** @var int The ID of the user who is currently logged in to the system. */
+    public const USER_ID = 1;
 
-    /**
-     * @var \Application\Form\User\ProfileForm
-     */
-    private $profileForm;
+    private Form\ProfileForm $profileForm;
+    private Form\ViewProfileForm $viewProfileForm;
+    private Form\UserFilterForm $userFilterForm;
+    private Form\ChangePasswordForm $changePasswordForm;
+    private UserRepositoryInterface $userRepository;
+    private UserCommandInterface $userCommand;
 
-    /**
-     * @var \Application\Form\User\ViewProfileForm
-     */
-    private $viewProfileForm;
-
-    /**
-     * @var Profile
-     */
-    private $profilePrototype;
-
-    /**
-     * @param \Application\Form\User\ProfileForm     $profileForm
-     * @param \Application\Form\User\ViewProfileForm $viewProfileForm
-     */
-    public function __construct($profileForm, $viewProfileForm)
-    {
+    public function __construct(
+        Form\ProfileForm        $profileForm,
+        Form\ViewProfileForm    $viewProfileForm,
+        Form\UserFilterForm     $userFilterForm,
+        Form\ChangePasswordForm $changePasswordForm,
+        UserRepositoryInterface $userRepository,
+        UserCommandInterface    $userCommand
+    ) {
         $this->profileForm = $profileForm;
         $this->viewProfileForm = $viewProfileForm;
-        $this->profilePrototype = new Profile(
-            '',
-            [
-                new Email('cfhsoft@verizon.net'),
-                new Email('isotopian@att.net'),
-                new Email('camenisch@comcast.net'),
-                new Email('wetter@mac.com'),
-            ],
-            [
-                new Phone('+79283748264'),
-                new Phone('+79365839604'),
-                new Phone('+79305847200'),
-            ],
-            null,
-            null,
-            'Внуков',
-            'Кирилл',
-            'Денисович',
-            1,
-            '2003-05-19',
-            '/img/favicon.ico',
-            'gr4nds0n162',
-        );
+        $this->userFilterForm = $userFilterForm;
+        $this->changePasswordForm = $changePasswordForm;
+        $this->userRepository = $userRepository;
+        $this->userCommand = $userCommand;
     }
 
-    public function viewProfileAction(): ViewModel
+    public function viewProfileAction()
     {
-        $viewModel = new ViewModel();
+        UserController::setAdminNavbar($this->userRepository, $this, self::USER_ID);
+        $this->layout()->setVariables(['headTitleName' => 'View profile']);
+        $viewModel = new ViewModel(['viewProfileForm' => $this->viewProfileForm]);
 
-        $headTitleName = 'Просмотр профиля';
-
-        $this->layout()->setVariable('headTitleName', $headTitleName);
-
-        $this->viewProfileForm->bind($this->profilePrototype);
-        $this->viewProfileForm->get('profile')->get('image')->setAttribute('src', $this->profilePrototype->getImage());
-
-        $viewModel->setVariable('viewProfileForm', $this->viewProfileForm);
+        $profile = $this->userRepository->findProfile(self::USER_ID);
+        $this->viewProfileForm->bind($profile);
+        $this->viewProfileForm->get('profile')->get('image')
+            ->setAttribute('src', $profile->getImagePath());
 
         return $viewModel;
     }
 
-    public function editProfileAction(): ViewModel
+    public static function setAdminNavbar(
+        UserRepositoryInterface  $userRepository,
+        AbstractActionController $controller,
+        int                      $userId
+    ) {
+        if ($userRepository->findUser($userId)->getStatus()['admin']) {
+            $controller->layout()->setVariables(['navbar' => 'Laminas\Navigation\Admin']);
+        }
+    }
+
+    public function editProfileAction()
     {
-        $viewModel = new ViewModel();
+        UserController::setAdminNavbar($this->userRepository, $this, self::USER_ID);
+        $this->layout()->setVariables(['headTitleName' => 'Edit profile']);
 
-        $headTitleName = 'Редактирование профиля';
+        try {
+            $foundProfile = $this->userRepository->findProfile(self::USER_ID);
+            $changePassword = new ChangePassword($foundProfile->getId());
+        } catch (InvalidArgumentException $ex) {
+            return $this->redirect()->toRoute('home');
+        }
 
-        $this->layout()->setVariable('headTitleName', $headTitleName);
-
-        $this->profileForm->bind($this->profilePrototype);
-
-        $viewModel->setVariables([
+        $viewModel = new ViewModel([
             'profileForm'        => $this->profileForm,
-            'changePasswordForm' => new Form\User\ChangePasswordForm(),
+            'changePasswordForm' => $this->changePasswordForm,
         ]);
 
+        $this->profileForm->bind($foundProfile);
+        $this->changePasswordForm->bind($changePassword);
+
         return $viewModel;
     }
 
-    public function viewUserListAction(): ViewModel
+    public function profileFormAction()
     {
+        $request = $this->getRequest();
+
+        if (!$request->isPost()) {
+            return $this->redirect()->toRoute('user/edit-profile');
+        }
+
+        $postData = array_merge_recursive(
+            $request->getPost()->toArray(),
+            $request->getFiles()->toArray()
+        );
+
+        $this->profileForm->setData($postData);
+
+        if (!$this->profileForm->isValid()) {
+            return $this->redirect()->toRoute('user/edit-profile');
+        }
+
+        $this->userCommand->updateProfile($this->profileForm->getObject());
+
+        return $this->redirect()->toRoute('user/view-profile');
+    }
+
+    public function changePasswordFormAction()
+    {
+        $request = $this->getRequest();
+
+        if (!$request->isPost()) {
+            return $this->redirect()->toRoute('user/edit-profile');
+        }
+
+        $this->changePasswordForm->setData($request->getPost());
+
+        if (!$this->changePasswordForm->isValid()) {
+            return $this->redirect()->toRoute('user/edit-profile');
+        }
+
+        $this->userCommand->changePassword(
+            $this->changePasswordForm->getObject()
+        );
+
+        return $this->redirect()->toRoute('user/edit-profile');
+    }
+
+    public function viewUserListAction()
+    {
+        UserController::setAdminNavbar($this->userRepository, $this, self::USER_ID);
         $viewModel = new ViewModel();
 
-        $headTitleName = 'Список пользователей';
+        $headTitleName = 'List of users';
 
         $this->layout()->setVariable('headTitleName', $headTitleName);
 
-        $userInfo = [
-            [
-                'photo'    => PhotoUrlGenerator::generate(),
-                'fullname' => 'Зубенко Михаил Петрович',
-                'position' => 'Уборщик',
-                'gender'   => 'Мужской',
-                'age'      => 47,
-            ],
-            [
-                'photo'    => PhotoUrlGenerator::generate(),
-                'fullname' => 'Егоров Владимир Егорович',
-                'position' => 'Бухгалтер',
-                'gender'   => 'Мужской',
-                'age'      => 31,
-            ],
-            [
-                'photo'    => PhotoUrlGenerator::generate(),
-                'fullname' => 'Мельникова Алёна Вадимовна',
-                'position' => 'Юрист',
-                'gender'   => 'Женский',
-                'age'      => 23,
-            ],
-            [
-                'photo'    => PhotoUrlGenerator::generate(),
-                'fullname' => 'Тимофеева Вероника Денисовна',
-                'position' => 'Менеджер',
-                'gender'   => 'Женский',
-                'age'      => 36,
-            ],
-        ];
-
         $viewModel->setVariables([
-            'userInfo'       => $userInfo,
-            'maxPageCount'   => self::maxPageCount,
-            'page'           => 1,
-            'userFilterForm' => new Form\User\UserFilterForm(),
+            'userFilterForm' => $this->userFilterForm,
         ]);
 
         return $viewModel;

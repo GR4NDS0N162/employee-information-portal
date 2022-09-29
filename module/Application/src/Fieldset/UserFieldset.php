@@ -2,13 +2,30 @@
 
 namespace Application\Fieldset;
 
+use Application\Model\Entity\User;
 use Application\Model\Options\PositionOptions;
-use Application\Model\User;
+use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Select;
 use Laminas\Form\Element\Text;
 
 class UserFieldset extends ProfileFieldset
 {
+    const DEFAULT_CHECK_LABEL_ATTRIBUTES = [
+        'class' => 'form-check-label',
+    ];
+
+    private PositionOptions $positionOptions;
+
+    public function __construct(
+        PositionOptions $positionOptions,
+                        $name = null,
+        array           $options = []
+    ) {
+        parent::__construct($name, $options);
+
+        $this->positionOptions = $positionOptions;
+    }
+
     public function init()
     {
         parent::init();
@@ -19,6 +36,20 @@ class UserFieldset extends ProfileFieldset
         $this->setPriority('phones', -100);
 
         $this->add([
+            'name'       => 'genNewPassword',
+            'type'       => Checkbox::class,
+            'attributes' => [
+                'class' => 'form-check-input',
+                'id'    => uniqid('checkbox_', true),
+            ],
+            'options'    => [
+                'label'              => 'Generate a password and send it by email',
+                'label_attributes'   => UserFieldset::DEFAULT_CHECK_LABEL_ATTRIBUTES,
+                'use_hidden_element' => false,
+            ],
+        ], ['priority' => -200]);
+
+        $this->add([
             'name'       => 'positionId',
             'type'       => Select::class,
             'attributes' => [
@@ -26,11 +57,9 @@ class UserFieldset extends ProfileFieldset
                 'required' => 'required',
             ],
             'options'    => [
-                'label'            => 'Должность',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
-                'options'          => PositionOptions::getOptions(),
+                'label'            => 'Position',
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
+                'options'          => $this->positionOptions->getOptions(),
             ],
         ]);
 
@@ -43,13 +72,11 @@ class UserFieldset extends ProfileFieldset
                 'required'    => 'required',
                 'minlength'   => 8,
                 'maxlength'   => 32,
-                'pattern'     => '^(?=.*?[а-яa-z])(?=.*?[А-ЯA-Z])(?=.*?[0-9])(?=.*?[!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~])[а-яa-zА-ЯA-Z0-9!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]*$',
+                'pattern'     => '^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~])[a-zA-Z0-9!"#\$%&\'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]*$',
             ],
             'options'    => [
-                'label'            => 'Пароль',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label'            => 'Password',
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 

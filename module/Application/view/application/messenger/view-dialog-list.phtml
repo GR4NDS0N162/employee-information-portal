@@ -1,9 +1,18 @@
 <?php
 /**
- * @var Laminas\View\Renderer\PhpRenderer            $this
- * @var \Application\Form\Messenger\DialogFilterForm $dialogFilterForm
- * @var array                                        $dialogs
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ * @var DialogFilterForm                  $dialogFilterForm
+ * @var UserRepositoryInterface           $userRepository
+ * @var PositionRepositoryInterface       $positionRepository
+ * @var Application\Model\Entity\Dialog[] $dialogs
  */
+
+use Application\Form\Messenger\DialogFilterForm;
+use Application\Model\Repository\PositionRepositoryInterface;
+use Application\Model\Repository\UserRepositoryInterface;
+
+$this->inlineScript()
+    ->appendFile($this->basePath('js/dialog-filter.js'))
 ?>
 <div class="row g-3">
     <div class="col-12 col-lg-4 col col-xl-3">
@@ -12,8 +21,8 @@
         </div>
     </div>
     <div class="col">
-        <div class="row g-3">
-            <?= $this->partialLoop('partial/dialog-list.phtml', $dialogs); ?>
+        <div class="row g-3"
+             id="dialog-list">
         </div>
     </div>
 </div>

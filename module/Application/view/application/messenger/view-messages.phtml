@@ -1,28 +1,45 @@
 <?php
 /**
- * @var Laminas\View\Renderer\PhpRenderer          $this
- * @var \Application\Form\Messenger\NewMessageForm $newMessageForm
- * @var array                                      $messages
- * @var array                                      $userInfo
- * @var array                                      $buddyInfo
+ * @var Laminas\View\Renderer\PhpRenderer $this
  */
+
+use Application\Form\Messenger\NewMessageForm;
+use Application\Model\Entity\User;
+
+$this->inlineScript()
+    ->appendFile($this->basePath('js/message-ajax.js'));
+
+/** @var NewMessageForm $newMessageForm */
+$newMessageForm = $this->newMessageForm;
+
+/** @var User $userInfo */
+$userInfo = $this->userInfo;
+
+/** @var User $buddyInfo */
+$buddyInfo = $this->buddyInfo;
 ?>
 <div class="row gy-3">
     <div class="col-12">
         <div class="row g-3 justify-content-between align-items-center">
             <div class="col-12 col-md-auto">
                 <a href="<?= $this->url('user/view-dialog-list'); ?>"
-                   class="btn btn-primary">Вернуться к диалогам</a>
+                   class="btn btn-primary">Back to dialogs</a>
             </div>
             <div class="col-12 col-md-auto">
                 <div class="row g-2 align-items-center">
                     <div class="col-auto order-md-1">
-                        <img src="<?= $this->escapeHtml($buddyInfo['photo']); ?>"
+                        <img src="<?= $this->escapeHtml($buddyInfo->getImagePath()); ?>"
                              class="buddy-photo img-fluid rounded"
-                             alt="Фото пользователя">
+                             alt="User's photo">
                     </div>
                     <div class="col-auto order-md-0">
-                        <span class="h6"><?= $this->escapeHtml($buddyInfo['fullname']); ?></span>
+                        <span class="h6"><?= $this->escapeHtml(
+                                implode(' ', [
+                                    $buddyInfo->getSurname() ?: '—',
+                                    $buddyInfo->getName() ?: '—',
+                                    $buddyInfo->getPatronymic() ?: '—',
+                                ])
+                            ); ?></span>
                     </div>
                 </div>
             </div>
@@ -32,15 +49,18 @@
         <?= $this->userForm()->render($newMessageForm); ?>
     </div>
     <div class="col-12">
-        <div class="row gy-3">
-            <?= $this->partial('partial/message-list.phtml', [
-                'messages'  => $messages,
-                'userInfo'  => $userInfo,
-                'buddyInfo' => $buddyInfo,
-            ]); ?>
+        <div class="row gy-3"
+             id="message-list">
+            <div class="notification">There are no messages.</div>
         </div>
     </div>
     <div class="col-12 d-flex justify-content-center">
-        <button class="btn btn-primary">Загрузить ещё</button>
+        <button class="btn btn-primary"
+                id="load">
+            Load more
+        </button>
     </div>
 </div>
+<script>
+    const buddyId = <?= $this->escapeHtml($buddyInfo->getId()); ?>;
+</script>

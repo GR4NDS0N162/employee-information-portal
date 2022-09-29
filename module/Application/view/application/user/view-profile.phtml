@@ -3,8 +3,10 @@
  * @var Laminas\View\Renderer\PhpRenderer $this
  */
 
+use Application\Form\User\ViewProfileForm;
+
+/** @var ViewProfileForm $viewProfileForm */
 $viewProfileForm = $this->viewProfileForm;
-/** @var \Application\Form\User\ViewProfileForm $viewProfileForm */
 ?>
 
 <?= $this->viewForm()->render($viewProfileForm); ?>

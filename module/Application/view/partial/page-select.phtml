@@ -1,0 +1,12 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+
+/** @var int $pageCount */
+$pageCount = $this->pageCount;
+?>
+<option value="1">1</option>
+<?php for ($i = 2; $i <= $pageCount; $i++): ?>
+    <option value="<?= $i ?>"><?= $i ?></option>
+<?php endfor; ?>

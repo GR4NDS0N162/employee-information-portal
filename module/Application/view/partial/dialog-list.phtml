@@ -2,44 +2,67 @@
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
  */
+
+use Application\Model\Entity\Dialog;
+use Application\Model\Repository\UserRepositoryInterface;
+
+/** @var Dialog[] $dialogList */
+$dialogList = $this->dialogList;
+
+/** @var UserRepositoryInterface $userRepository */
+$userRepository = $this->userRepository;
 ?>
 
-<div class="col-12<?= (!$this->hasDialog) ? ' card-gray-bg' : ''; ?>">
-    <div class="card p-3">
-        <div class="row g-3">
-            <div class="col-auto">
-                <img src="<?= $this->escapeHtml($this->photo); ?>"
-                     class="user-photo img-fluid rounded"
-                     alt="Фото пользователя">
-            </div>
-            <div class="col">
-                <div class="row">
-                    <div class="col-12">
-                        <p class="h6 full-name"><?= $this->escapeHtml($this->fullname); ?></p>
-                    </div>
-                    <div class="col-auto">
-                        <span class="text-secondary">Должность:</span>
-                        <span class="position"><?= $this->escapeHtml($this->position); ?></span>
-                    </div>
-                    <div class="col-auto">
-                        <span class="text-secondary">Возраст:</span>
-                        <span class="age"><?= $this->escapeHtml($this->age); ?></span> лет
-                    </div>
-                    <div class="col-auto">
-                        <span class="text-secondary">Пол:</span>
-                        <span class="gender"><?= $this->escapeHtml($this->gender); ?></span>
+<div class="notification">The list is empty.</div>
+<?php foreach ($dialogList as $dialog): ?>
+    <?php $buddy = $userRepository->findUser($dialog->getBuddyId()); ?>
+    <div class="col-12<?= (!$dialog->getId()) ? ' card-gray-bg' : ''; ?>">
+        <div class="card p-3">
+            <div class="row g-3">
+                <div class="col-auto">
+                    <img src="<?= $this->escapeHtml($buddy->getImagePath()); ?>"
+                         class="user-photo img-fluid rounded"
+                         alt="User's photo">
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="h6 full-name"><?= $this->escapeHtml(
+                                    implode(' ', [
+                                        $buddy->getSurname() ?: '—',
+                                        $buddy->getName() ?: '—',
+                                        $buddy->getPatronymic() ?: '—',
+                                    ])
+                                ); ?></p>
+                        </div>
+                        <div class="col-auto">
+                            <span class="text-secondary">Position:</span>
+                            <span class="position"><?= $this->escapeHtml($buddy->getPositionName()); ?></span>
+                        </div>
+                        <div class="col-auto">
+                            <span class="text-secondary">Age:</span>
+                            <span class="age"><?= $this->escapeHtml($buddy->getAgeString()); ?></span>
+                        </div>
+                        <div class="col-auto">
+                            <span class="text-secondary">Gender:</span>
+                            <span class="gender"><?= $this->escapeHtml($buddy->getGenderString()); ?></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-auto d-flex align-items-center">
-                <?php if ($this->hasDialog): ?>
-                    <a href="<?= $this->url('user/view-dialog-list/view-messages', ['id' => $this->userId]); ?>"
-                       class="btn btn-primary">К диалогу</a>
-                <?php else: ?>
-                    <a href="<?= $this->url('user/view-dialog-list/view-messages', ['id' => $this->userId]); ?>"
-                       class="btn btn-success">Создать диалог</a>
-                <?php endif; ?>
+                <div class="col-auto d-flex align-items-center">
+                    <?php if ($dialog->getId()): ?>
+                        <a href="<?= $this->url('user/view-dialog-list/view-messages', [
+                            'id' => $dialog->getBuddyId(),
+                        ]); ?>"
+                           class="btn btn-primary">To the dialog</a>
+                    <?php else: ?>
+                        <a href="<?= $this->url('user/view-dialog-list/view-messages', [
+                            'id' => $dialog->getBuddyId(),
+                        ]); ?>"
+                           class="btn btn-success">Create a dialog</a>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </div>
-</div>
+<?php endforeach; ?>

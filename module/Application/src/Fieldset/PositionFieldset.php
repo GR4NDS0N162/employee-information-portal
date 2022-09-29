@@ -2,10 +2,9 @@
 
 namespace Application\Fieldset;
 
-use Application\Model\Position;
+use Application\Model\Entity\Position;
 use Laminas\Form\Element;
 use Laminas\Form\Fieldset;
-use Laminas\Hydrator\ClassMethodsHydrator;
 
 class PositionFieldset extends Fieldset
 {
@@ -13,15 +12,14 @@ class PositionFieldset extends Fieldset
     {
         parent::init();
 
-        $this->setHydrator(new ClassMethodsHydrator(false, true));
-        $this->setObject(new Position(''));
+        $this->setObject(new Position());
 
         $this->add([
             'name'       => 'name',
             'type'       => Element\Text::class,
             'attributes' => [
                 'class'       => 'form-control',
-                'placeholder' => 'Уборщик',
+                'placeholder' => 'Part of the ship, part of the crew',
                 'required'    => 'required',
             ],
         ]);

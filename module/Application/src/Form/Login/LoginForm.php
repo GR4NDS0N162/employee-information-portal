@@ -2,17 +2,16 @@
 
 namespace Application\Form\Login;
 
+use Application\Fieldset\ProfileFieldset;
 use Application\Helper\FieldsetMapper;
 use Laminas\Form\Element;
 use Laminas\Form\Form;
 
 class LoginForm extends Form
 {
-    public const DEFAULT_NAME = 'login-form';
-
-    public function __construct($name = self::DEFAULT_NAME)
+    public function init()
     {
-        parent::__construct($name);
+        parent::init();
 
         $this->setAttribute('class', 'row gy-3 needs-validation');
         $this->setAttribute('novalidate', true);
@@ -28,14 +27,12 @@ class LoginForm extends Form
             ],
             'options'    => [
                 'label'            => 'E-mail',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
         $this->add([
-            'name'       => 'current-password',
+            'name'       => 'currentPassword',
             'type'       => Element\Password::class,
             'attributes' => [
                 'class'       => 'form-control',
@@ -43,22 +40,20 @@ class LoginForm extends Form
                 'required'    => 'required',
             ],
             'options'    => [
-                'label'            => 'Пароль',
-                'label_attributes' => [
-                    'class' => 'form-label',
-                ],
+                'label'            => 'Password',
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
             ],
         ]);
 
         $this->add([
-            'name'       => 'submit-button',
+            'name'       => 'submitButton',
             'type'       => Element\Button::class,
             'attributes' => [
                 'type'  => 'submit',
                 'class' => 'btn btn-lg btn-outline-primary w-100',
             ],
             'options'    => [
-                'label' => 'Войти',
+                'label' => 'Login',
             ],
         ], [
             'priority' => -10 ** 9,
@@ -66,9 +61,9 @@ class LoginForm extends Form
 
         FieldsetMapper::setAttributes($this, [
             'children' => [
-                'email'            => 'col-12',
-                'current-password' => 'col-12',
-                'submit-button'    => 'col-12',
+                'email'           => 'col-12',
+                'currentPassword' => 'col-12',
+                'submitButton'    => 'col-12',
             ],
         ]);
     }

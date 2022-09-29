@@ -1,11 +1,11 @@
-const currentPasswordInput = $(`input[name="current-password"]`)[0];
-const currentPasswordFeedback = $(`input[name="current-password"] ~ .invalid-feedback`)[0];
+const currentPasswordInput = $(`input[name*="currentPassword"]`)[0];
+const currentPasswordFeedback = $(`input[name*="currentPassword"] ~ .invalid-feedback`)[0];
 
-const newPasswordInput = $(`input[name="new-password"]`)[0];
-const newPasswordFeedback = $(`input[name="new-password"] ~ .invalid-feedback`)[0];
+const newPasswordInput = $(`input[name*="newPassword"]`)[0];
+const newPasswordFeedback = $(`input[name*="newPassword"] ~ .invalid-feedback`)[0];
 
-const passwordCheckInput = $(`input[name="password-check"]`)[0];
-const passwordCheckFeedback = $(`input[name="password-check"] ~ .invalid-feedback`)[0];
+const passwordCheckInput = $(`input[name*="passwordCheck"]`)[0];
+const passwordCheckFeedback = $(`input[name*="passwordCheck"] ~ .invalid-feedback`)[0];
 
 const passwordInput = $(`input[name="user[password]"]`)[0];
 const passwordFeedback = $(`input[name="user[password]"] ~ .invalid-feedback`)[0];
@@ -55,41 +55,9 @@ if ((newPasswordInput && newPasswordFeedback) &&
             !newPasswordInput.validity.valueMissing &&
             passwordCheckInput.validity.patternMismatch
         ) {
-            passwordCheckFeedback.childNodes[0].nodeValue = 'Пароли не совпадают.';
+            passwordCheckFeedback.childNodes[0].nodeValue = 'Passwords don\'t match.';
         }
     });
-}
-
-function hangOnFocusout(input, feedback)
-{
-    input.addEventListener('focusout', () =>
-    {
-        if (input.validity.valueMissing) {
-            feedback.childNodes[0].nodeValue = 'Поле не должно оставаться пустым.';
-        }
-    });
-}
-
-function hangOnKeydown(input, feedback)
-{
-    input.addEventListener('keydown', () =>
-    {
-        const maxlength = parseInt(input.getAttribute('maxlength'));
-
-        if (input.value.length >= maxlength) {
-            feedback.childNodes[0].nodeValue = `Максимальная длина - ${maxlength}.`;
-        }
-    });
-}
-
-function dispatchOnFocusout(input)
-{
-    input.dispatchEvent(new Event('focusout'));
-}
-
-function dispatchOnInput(input)
-{
-    input.dispatchEvent(new Event('input'));
 }
 
 function validateOnInputPasswordInput(input, feedback)
@@ -98,10 +66,10 @@ function validateOnInputPasswordInput(input, feedback)
     const maxlength = input.getAttribute('maxlength');
 
     if (input.validity.tooShort) {
-        feedback.childNodes[0].nodeValue = `Минимальная длина - ${minlength}.`;
+        feedback.childNodes[0].nodeValue = `Minimum length - ${minlength}.`;
     } else if (input.validity.tooLong) {
-        feedback.childNodes[0].nodeValue = `Максимальная длина - ${maxlength}.`;
+        feedback.childNodes[0].nodeValue = `Maximum length - ${maxlength}.`;
     } else if (input.validity.patternMismatch) {
-        feedback.childNodes[0].nodeValue = 'Введённый пароль слишком лёгкий.';
+        feedback.childNodes[0].nodeValue = 'The entered password is too easy.';
     }
 }

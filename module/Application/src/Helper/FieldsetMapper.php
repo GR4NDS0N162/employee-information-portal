@@ -5,6 +5,7 @@ namespace Application\Helper;
 use Laminas\Form\Element\Collection;
 use Laminas\Form\ElementInterface;
 use Laminas\Form\FieldsetInterface;
+use Laminas\Hydrator\AbstractHydrator;
 
 class FieldsetMapper
 {
@@ -27,11 +28,19 @@ class FieldsetMapper
             return;
         }
 
-        if (is_string($config['value']) && !empty($config['value'])) {
+        if (
+            isset($config['value'])
+            && is_string($config['value'])
+            && !empty($config['value'])
+        ) {
             $element->setAttribute(self::KEY, $config['value']);
         }
 
-        if (($element instanceof Collection) && !empty($config['target_element'])) {
+        if (
+            ($element instanceof Collection)
+            && isset($config['target_element'])
+            && !empty($config['target_element'])
+        ) {
             self::setAttributes($element->getTargetElement(), $config['target_element']);
             return;
         }
@@ -60,6 +69,13 @@ class FieldsetMapper
             }
         } else {
             $element->setAttribute('disabled', true);
+        }
+    }
+
+    public static function setStrategies(AbstractHydrator $hydrator, $config)
+    {
+        foreach ($config as $name => $strategy) {
+            $hydrator->addStrategy($name, $strategy);
         }
     }
 }

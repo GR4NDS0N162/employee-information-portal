@@ -7,11 +7,9 @@ use Laminas\Form\Fieldset;
 
 class AgeFilterFieldset extends Fieldset
 {
-    public const DEFAULT_NAME = 'age';
-
-    public function __construct($name = self::DEFAULT_NAME)
+    public function init()
     {
-        parent::__construct($name);
+        parent::init();
 
         $this->add([
             'name'       => 'min',
@@ -21,7 +19,7 @@ class AgeFilterFieldset extends Fieldset
                 'placeholder' => 1,
             ],
             'options'    => [
-                'label' => 'От',
+                'label' => 'From',
             ],
         ]);
 
@@ -33,7 +31,7 @@ class AgeFilterFieldset extends Fieldset
                 'placeholder' => 99,
             ],
             'options'    => [
-                'label' => 'До',
+                'label' => 'To',
             ],
         ]);
     }

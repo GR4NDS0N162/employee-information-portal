@@ -3,13 +3,17 @@
  * @var Laminas\View\Renderer\PhpRenderer $this
  */
 
+use Application\Form\Admin\UserForm;
+
 $this->inlineScript()
     ->appendFile($this->basePath('js/collection-manipulation.js'))
     ->appendFile($this->basePath('js/password-form-validation.js'))
     ->appendFile($this->basePath('js/edit-list-form-validation.js'));
 
-/** @var \Application\Form\Admin\UserForm $userForm */
+/** @var UserForm $userForm */
 $userForm = $this->userForm;
+$userForm->setAttribute('action', $this->url('admin/view-user-list/edit-user', [], true));
+$userForm->prepare();
 ?>
 
 <div class="card p-3">
