@@ -26,4 +26,14 @@ return [
     'strategies'         => [
         'ViewJsonStrategy',
     ],
+    'laminas-cli'        => [
+        'commands' => [
+            'send-emails' => Command\MyCommand::class,
+        ],
+    ],
+    'dependencies'       => [
+        'factories' => [
+            Command\MyCommand::class => Command\MyCommandFactory::class,
+        ],
+    ],
 ];
