@@ -44,7 +44,7 @@ class Notifier implements NotifierInterface
         $select->where([
             'mes.id' => array_column($messages, 'id'),
         ]);
-        $select->group(['e.user_id']);
+        $select->group(['e.user_id', 'mes.user_id']);
 
         /** @var Email[] $mailsInfo */
         $mailsInfo = Extracter::extractValues(
