@@ -22,7 +22,7 @@ class MyCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        // TODO: Implement execute() method.
+        $unreadMessages = $this->messageRepository->getUnreadMessages();
 
         return 0;
     }
