@@ -37,6 +37,7 @@ return [
         Command\PhoneCommand::class          => CommandFactory\PhoneCommandFactory::class,
         Command\DialogCommand::class         => CommandFactory\DialogCommandFactory::class,
         Command\MessageCommand::class        => CommandFactory\MessageCommandFactory::class,
+        Command\Notifier::class              => CommandFactory\NotifierFactory::class,
         Options\PositionOptions::class       => OptionsFactory\PositionOptionsFactory::class,
         Repository\EmailRepository::class    => RepositoryFactory\EmailRepositoryFactory::class,
         Repository\PhoneRepository::class    => RepositoryFactory\PhoneRepositoryFactory::class,
