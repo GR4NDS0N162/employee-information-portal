@@ -11,6 +11,5 @@ return [
         Controller\UserController::class      => Factory\UserControllerFactory::class,
         Controller\AdminController::class     => Factory\AdminControllerFactory::class,
         Controller\MessengerController::class => Factory\MessengerControllerFactory::class,
-        Controller\ConsoleController::class   => LazyControllerAbstractFactory::class,
     ],
 ];
