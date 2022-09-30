@@ -27,7 +27,6 @@ function loadMessages()
         async: false,
         data: {
             lastMessageId: lastMessageId,
-            buddyId: buddyId,
         },
     }).done((data) =>
     {
@@ -54,7 +53,6 @@ function sendMessage(content)
         dataType: 'json',
         data: {
             content: content,
-            buddyId: buddyId,
         },
     });
 }

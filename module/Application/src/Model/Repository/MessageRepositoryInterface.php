@@ -19,4 +19,9 @@ interface MessageRepositoryInterface
         $lastMessageId = null,
         $maxLoadCount = MessengerController::MAX_MESSAGE_COUNT
     );
+
+    /**
+     * @return Message[]
+     */
+    public function getUnreadMessages();
 }

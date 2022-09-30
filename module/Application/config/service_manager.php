@@ -2,12 +2,16 @@
 
 namespace Application;
 
+use Application\Command\NotifyUsersCommand;
+use Application\Command\NotifyUsersCommandFactory;
 use Application\Factory\Command as CommandFactory;
 use Application\Factory\Options as OptionsFactory;
 use Application\Factory\Repository as RepositoryFactory;
 use Application\Model\Command as Command;
 use Application\Model\Options as Options;
 use Application\Model\Repository as Repository;
+use Laminas\ServiceManager\Factory\InvokableFactory;
+use Laminas\Session\Container as SessionContainer;
 
 return [
     'aliases'   => [
@@ -24,6 +28,7 @@ return [
         Command\PhoneCommandInterface::class          => Command\PhoneCommand::class,
         Command\DialogCommandInterface::class         => Command\DialogCommand::class,
         Command\MessageCommandInterface::class        => Command\MessageCommand::class,
+        Command\NotifierInterface::class              => Command\Notifier::class,
     ],
     'factories' => [
         Command\UserCommand::class           => CommandFactory\UserCommandFactory::class,
@@ -32,6 +37,7 @@ return [
         Command\PhoneCommand::class          => CommandFactory\PhoneCommandFactory::class,
         Command\DialogCommand::class         => CommandFactory\DialogCommandFactory::class,
         Command\MessageCommand::class        => CommandFactory\MessageCommandFactory::class,
+        Command\Notifier::class              => CommandFactory\NotifierFactory::class,
         Options\PositionOptions::class       => OptionsFactory\PositionOptionsFactory::class,
         Repository\EmailRepository::class    => RepositoryFactory\EmailRepositoryFactory::class,
         Repository\PhoneRepository::class    => RepositoryFactory\PhoneRepositoryFactory::class,
@@ -40,5 +46,7 @@ return [
         Repository\UserRepository::class     => RepositoryFactory\UserRepositoryFactory::class,
         Repository\DialogRepository::class   => RepositoryFactory\DialogRepositoryFactory::class,
         Repository\MessageRepository::class  => RepositoryFactory\MessageRepositoryFactory::class,
+        SessionContainer::class              => InvokableFactory::class,
+        NotifyUsersCommand::class            => NotifyUsersCommandFactory::class,
     ],
 ];

@@ -17,4 +17,12 @@ interface StatusRepositoryInterface
      * @return Status[]
      */
     public function findStatusesOfUser($userId);
+
+    /**
+     * @param int        $userId
+     * @param int|string $statusIdentifier
+     *
+     * @return bool
+     */
+    public function checkStatusOfUser(int $userId, $statusIdentifier): bool;
 }

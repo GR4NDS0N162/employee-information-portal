@@ -47,7 +47,7 @@ class UserCommand implements UserCommandInterface
         $this->phoneCommand = $phoneCommand;
     }
 
-    public function insertUser(User $user, Email $email)
+    public function insertUser(User $user, Email $email): int
     {
         try {
             $foundEmail = $this->emailRepository->findEmail($email->getAddress());
@@ -58,12 +58,13 @@ class UserCommand implements UserCommandInterface
                 'position_id' => $user->getPositionId(),
             ]);
 
-            $id = Executer::executeSql($insert, $this->db);
+            /** @var integer $userId */
+            $userId = Executer::executeSql($insert, $this->db);
 
             $insert = new Insert('email');
             $insert->values([
                 'address' => $email->getAddress(),
-                'user_id' => $id,
+                'user_id' => $userId,
             ]);
 
             Executer::executeSql($insert, $this->db);
@@ -77,6 +78,8 @@ class UserCommand implements UserCommandInterface
                 )
             );
         }
+
+        return $userId;
     }
 
     public function updateUser(User $user)

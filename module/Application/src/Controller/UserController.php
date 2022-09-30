@@ -5,9 +5,12 @@ namespace Application\Controller;
 use Application\Form\User as Form;
 use Application\Model\Command\UserCommandInterface;
 use Application\Model\Entity\ChangePassword;
+use Application\Model\Entity\Profile;
+use Application\Model\Repository\StatusRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Session\Container as SessionContainer;
 use Laminas\View\Model\ViewModel;
 
 class UserController extends AbstractActionController
@@ -23,30 +26,42 @@ class UserController extends AbstractActionController
     private Form\ChangePasswordForm $changePasswordForm;
     private UserRepositoryInterface $userRepository;
     private UserCommandInterface $userCommand;
+    private SessionContainer $sessionContainer;
+    private StatusRepositoryInterface $statusRepository;
 
     public function __construct(
-        Form\ProfileForm        $profileForm,
-        Form\ViewProfileForm    $viewProfileForm,
-        Form\UserFilterForm     $userFilterForm,
-        Form\ChangePasswordForm $changePasswordForm,
-        UserRepositoryInterface $userRepository,
-        UserCommandInterface    $userCommand
+        Form\ProfileForm          $profileForm,
+        Form\ViewProfileForm      $viewProfileForm,
+        Form\UserFilterForm       $userFilterForm,
+        Form\ChangePasswordForm   $changePasswordForm,
+        UserRepositoryInterface   $userRepository,
+        StatusRepositoryInterface $statusRepository,
+        UserCommandInterface      $userCommand,
+        SessionContainer          $sessionContainer
     ) {
         $this->profileForm = $profileForm;
         $this->viewProfileForm = $viewProfileForm;
         $this->userFilterForm = $userFilterForm;
         $this->changePasswordForm = $changePasswordForm;
         $this->userRepository = $userRepository;
+        $this->statusRepository = $statusRepository;
         $this->userCommand = $userCommand;
+        $this->sessionContainer = $sessionContainer;
     }
 
     public function viewProfileAction()
     {
-        UserController::setAdminNavbar($this->userRepository, $this, self::USER_ID);
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
+
+        self::setAdminNavbar($this->statusRepository, $this, $userId);
         $this->layout()->setVariables(['headTitleName' => 'View profile']);
+
         $viewModel = new ViewModel(['viewProfileForm' => $this->viewProfileForm]);
 
-        $profile = $this->userRepository->findProfile(self::USER_ID);
+        $profile = $this->userRepository->findProfile($userId);
         $this->viewProfileForm->bind($profile);
         $this->viewProfileForm->get('profile')->get('image')
             ->setAttribute('src', $profile->getImagePath());
@@ -55,40 +70,48 @@ class UserController extends AbstractActionController
     }
 
     public static function setAdminNavbar(
-        UserRepositoryInterface  $userRepository,
-        AbstractActionController $controller,
-        int                      $userId
+        StatusRepositoryInterface $statusRepository,
+        AbstractActionController  $controller,
+        int                       $userId
     ) {
-        if ($userRepository->findUser($userId)->getStatus()['admin']) {
+        if ($statusRepository->checkStatusOfUser($userId, 'admin')) {
             $controller->layout()->setVariables(['navbar' => 'Laminas\Navigation\Admin']);
         }
     }
 
     public function editProfileAction()
     {
-        UserController::setAdminNavbar($this->userRepository, $this, self::USER_ID);
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
+
+        self::setAdminNavbar($this->statusRepository, $this, $userId);
         $this->layout()->setVariables(['headTitleName' => 'Edit profile']);
 
         try {
-            $foundProfile = $this->userRepository->findProfile(self::USER_ID);
+            $foundProfile = $this->userRepository->findProfile($userId);
             $changePassword = new ChangePassword($foundProfile->getId());
         } catch (InvalidArgumentException $ex) {
             return $this->redirect()->toRoute('home');
         }
 
-        $viewModel = new ViewModel([
-            'profileForm'        => $this->profileForm,
-            'changePasswordForm' => $this->changePasswordForm,
-        ]);
-
         $this->profileForm->bind($foundProfile);
         $this->changePasswordForm->bind($changePassword);
 
-        return $viewModel;
+        return new ViewModel([
+            'profileForm'        => $this->profileForm,
+            'changePasswordForm' => $this->changePasswordForm,
+        ]);
     }
 
     public function profileFormAction()
     {
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
+
         $request = $this->getRequest();
 
         if (!$request->isPost()) {
@@ -106,13 +129,22 @@ class UserController extends AbstractActionController
             return $this->redirect()->toRoute('user/edit-profile');
         }
 
-        $this->userCommand->updateProfile($this->profileForm->getObject());
+        /** @var Profile $profile */
+        $profile = $this->profileForm->getObject();
+        $profile->setId($userId);
+
+        $this->userCommand->updateProfile($profile);
 
         return $this->redirect()->toRoute('user/view-profile');
     }
 
     public function changePasswordFormAction()
     {
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
+
         $request = $this->getRequest();
 
         if (!$request->isPost()) {
@@ -125,26 +157,27 @@ class UserController extends AbstractActionController
             return $this->redirect()->toRoute('user/edit-profile');
         }
 
-        $this->userCommand->changePassword(
-            $this->changePasswordForm->getObject()
-        );
+        /** @var ChangePassword $changePassword */
+        $changePassword = $this->changePasswordForm->getObject();
+        $changePassword->setId($userId);
+
+        $this->userCommand->changePassword($changePassword);
 
         return $this->redirect()->toRoute('user/edit-profile');
     }
 
     public function viewUserListAction()
     {
-        UserController::setAdminNavbar($this->userRepository, $this, self::USER_ID);
-        $viewModel = new ViewModel();
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
 
-        $headTitleName = 'List of users';
+        self::setAdminNavbar($this->statusRepository, $this, $userId);
+        $this->layout()->setVariables(['headTitleName' => 'List of users']);
 
-        $this->layout()->setVariable('headTitleName', $headTitleName);
-
-        $viewModel->setVariables([
+        return new ViewModel([
             'userFilterForm' => $this->userFilterForm,
         ]);
-
-        return $viewModel;
     }
 }

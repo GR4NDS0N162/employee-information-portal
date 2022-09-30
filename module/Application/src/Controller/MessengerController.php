@@ -10,8 +10,11 @@ use Application\Model\Entity\Message;
 use Application\Model\Repository\DialogRepositoryInterface;
 use Application\Model\Repository\MessageRepositoryInterface;
 use Application\Model\Repository\PositionRepositoryInterface;
+use Application\Model\Repository\StatusRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
+use Laminas\Http\Request;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Session\Container as SessionContainer;
 use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
 use LogicException;
@@ -29,99 +32,111 @@ class MessengerController extends AbstractActionController
     private PositionRepositoryInterface $positionRepository;
     private MessageRepositoryInterface $messageRepository;
     private MessageCommandInterface $messageCommand;
+    private SessionContainer $sessionContainer;
+    private StatusRepositoryInterface $statusRepository;
 
     public function __construct(
         DialogFilterForm            $dialogFilterForm,
         NewMessageForm              $newMessageForm,
         DialogRepositoryInterface   $dialogRepository,
         UserRepositoryInterface     $userRepository,
+        StatusRepositoryInterface   $statusRepository,
         PositionRepositoryInterface $positionRepository,
         MessageRepositoryInterface  $messageRepository,
-        MessageCommandInterface     $messageCommand
+        MessageCommandInterface     $messageCommand,
+        SessionContainer            $sessionContainer
     ) {
         $this->dialogFilterForm = $dialogFilterForm;
         $this->newMessageForm = $newMessageForm;
         $this->dialogRepository = $dialogRepository;
         $this->userRepository = $userRepository;
+        $this->statusRepository = $statusRepository;
         $this->positionRepository = $positionRepository;
         $this->messageRepository = $messageRepository;
         $this->messageCommand = $messageCommand;
+        $this->sessionContainer = $sessionContainer;
     }
 
     public function viewDialogListAction()
     {
-        UserController::setAdminNavbar($this->userRepository, $this, UserController::USER_ID);
-        $viewModel = new ViewModel();
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
 
+        UserController::setAdminNavbar($this->statusRepository, $this, $userId);
         $this->layout()->setVariable('headTitleName', 'Dialogs');
 
-        $dialogs = $this->dialogRepository->getDialogList(UserController::USER_ID);
-
-        $viewModel->setVariables([
-            'dialogs'            => $dialogs,
+        return new ViewModel([
+            'dialogs'            => $this->dialogRepository->getDialogList($userId),
             'dialogFilterForm'   => $this->dialogFilterForm,
             'userRepository'     => $this->userRepository,
             'positionRepository' => $this->positionRepository,
         ]);
-
-        return $viewModel;
     }
 
     public function viewMessagesAction()
     {
-        UserController::setAdminNavbar($this->userRepository, $this, UserController::USER_ID);
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
+
         $buddyId = (int)$this->params()->fromRoute('id', 0);
 
         if ($buddyId === 0
-            || $buddyId === UserController::USER_ID
+            || $buddyId === $userId
         ) {
             return $this->redirect()->toRoute('user/view-dialog-list');
         }
 
-        $viewModel = new ViewModel();
+        UserController::setAdminNavbar($this->statusRepository, $this, $userId);
+        $this->layout()->setVariables(['headTitleName' => 'Messages']);
 
-        $this->layout()->setVariable('headTitleName', 'Messages');
-
-        $userInfo = $this->userRepository->findUser(UserController::USER_ID);
+        $userInfo = $this->userRepository->findUser($userId);
         $buddyInfo = $this->userRepository->findUser($buddyId);
 
-        $viewModel->setVariables([
+        return new ViewModel([
             'newMessageForm' => $this->newMessageForm,
             'userInfo'       => $userInfo,
             'buddyInfo'      => $buddyInfo,
         ]);
-
-        return $viewModel;
     }
 
     public function getDialogsAction()
     {
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
+
         $request = $this->getRequest();
 
         if (!$request->isXmlHttpRequest() || !$request->isPost()) {
             throw new LogicException('The request to the address must be ajax and post.');
         }
 
-        $data = ConfigHelper::filterEmpty($request->getPost()->toArray());
+        $data = ConfigHelper::configWhereData($request->getContent());
 
         $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
         $viewModel->setTemplate('partial/dialog-list.phtml');
 
         $viewModel->setVariables([
-            'dialogList'     => $this->dialogRepository->getDialogList(
-                UserController::USER_ID,
-                $data
-            ),
+            'dialogList'     => $this->dialogRepository->getDialogList($userId, $data),
             'userRepository' => $this->userRepository,
         ]);
 
         return $viewModel;
-
     }
 
     public function sendMessageAction()
     {
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
+
         $request = $this->getRequest();
 
         if (!$request->isXmlHttpRequest() || !$request->isPost()) {
@@ -130,13 +145,13 @@ class MessengerController extends AbstractActionController
 
         $post = $request->getPost();
         $content = (string)$post->get('content');
-        $buddyId = (int)$post->get('buddyId');
+        $buddyId = self::getBuddyId($request);
 
         try {
             $this->messageCommand->sendMessage(
                 new Message(
-                    $this->dialogRepository->getDialogId(UserController::USER_ID, $buddyId),
-                    UserController::USER_ID,
+                    $this->dialogRepository->getDialogId($userId, $buddyId),
+                    $userId,
                     date('Y-m-d H:i:s'),
                     $content,
                 )
@@ -148,8 +163,23 @@ class MessengerController extends AbstractActionController
         }
     }
 
+    private static function getBuddyId(Request $request): int
+    {
+        preg_match(
+            '/(?<=im\/)[1-9]\d*/',
+            $request->getHeader('Referer')->getUri(),
+            $matches
+        );
+        return (int)array_values($matches)[0];
+    }
+
     public function loadMessagesAction()
     {
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
+
         $request = $this->getRequest();
 
         if (!$request->isXmlHttpRequest() || !$request->isPost()) {
@@ -158,14 +188,14 @@ class MessengerController extends AbstractActionController
 
         $post = $request->getPost();
         $lastMessageId = $post->get('lastMessageId');
-        $buddyId = (int)$post->get('buddyId');
+        $buddyId = self::getBuddyId($request);
 
         $messageList = $this->messageRepository->findMessagesOfDialog(
-            $this->dialogRepository->getDialogId(UserController::USER_ID, $buddyId),
+            $this->dialogRepository->getDialogId($userId, $buddyId),
             $lastMessageId,
         );
 
-        $messageList = $this->messageCommand->readBy(UserController::USER_ID, $messageList);
+        $messageList = $this->messageCommand->readBy($userId, $messageList);
 
         $viewModel = new ViewModel();
         $viewModel->setTerminal(true);

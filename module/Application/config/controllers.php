@@ -3,6 +3,7 @@
 namespace Application;
 
 use Application\Factory\Controller as Factory;
+use Laminas\Mvc\Controller\LazyControllerAbstractFactory;
 
 return [
     'factories' => [

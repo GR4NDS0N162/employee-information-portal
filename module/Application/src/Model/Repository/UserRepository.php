@@ -2,7 +2,6 @@
 
 namespace Application\Model\Repository;
 
-use Application\Controller\UserController;
 use Application\Helper\ConfigHelper;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\Profile;

@@ -6,6 +6,9 @@
  * This should be an array of module namespaces used in the application.
  */
 return [
+    'Laminas\Mail',
+    'Laminas\Mvc\Console',
+    'Laminas\Session',
     'Laminas\Db',
     'Laminas\Form',
     'Laminas\Hydrator',
@@ -15,5 +18,6 @@ return [
     'Laminas\I18n',
     'Laminas\Router',
     'Laminas\Validator',
+    'Laminas\ZendFrameworkBridge',
     'Application',
 ];

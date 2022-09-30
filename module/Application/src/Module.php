@@ -2,22 +2,31 @@
 
 namespace Application;
 
-use Laminas\Mvc\MvcEvent;
+use Laminas\Console\Adapter\AdapterInterface;
+use Laminas\EventManager\EventInterface;
+use Laminas\ModuleManager\Feature\BootstrapListenerInterface;
+use Laminas\ModuleManager\Feature\ConfigProviderInterface;
+use Laminas\ModuleManager\Feature\ConsoleBannerProviderInterface;
+use Laminas\ModuleManager\Feature\ConsoleUsageProviderInterface;
 
-class Module
+class Module implements
+    ConfigProviderInterface,
+    BootstrapListenerInterface,
+    ConsoleBannerProviderInterface,
+    ConsoleUsageProviderInterface
 {
     public function getConfig(): array
     {
         return include __DIR__ . '/../config/module.config.php';
     }
 
-    public function onBootstrap(MvcEvent $e)
+    public function onBootstrap(EventInterface $e)
     {
         $app = $e->getApplication();
         $app->getEventManager()->attach('render', [$this, 'registerJsonStrategy'], 100);
     }
 
-    public function registerJsonStrategy(MvcEvent $e)
+    public function registerJsonStrategy(EventInterface $e)
     {
         $app = $e->getTarget();
         $locator = $app->getServiceManager();
@@ -25,5 +34,17 @@ class Module
         $jsonStrategy = $locator->get('ViewJsonStrategy');
 
         $jsonStrategy->attach($view->getEventManager(), 100);
+    }
+
+    public function getConsoleUsage(AdapterInterface $console)
+    {
+        return [
+            'send-emails' => 'Send an email to those who have unread messages',
+        ];
+    }
+
+    public function getConsoleBanner(AdapterInterface $console)
+    {
+        return 'MyModule 0.0.1';
     }
 }

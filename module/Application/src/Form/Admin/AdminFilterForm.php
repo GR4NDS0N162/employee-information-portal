@@ -22,6 +22,19 @@ class AdminFilterForm extends UserFilterForm
         parent::init();
 
         $this->add([
+            'name'       => 'active',
+            'type'       => Element\Select::class,
+            'attributes' => [
+                'class' => 'form-select',
+            ],
+            'options'    => [
+                'label'            => 'Active',
+                'label_attributes' => ProfileFieldset::DEFAULT_LABEL_ATTRIBUTES,
+                'options'          => YesNoOptions::getActiveOptions(),
+            ],
+        ]);
+
+        $this->add([
             'name'       => 'admin',
             'type'       => Element\Select::class,
             'attributes' => [

@@ -8,9 +8,12 @@ use Application\Model\Command\PositionCommandInterface;
 use Application\Model\Command\UserCommandInterface;
 use Application\Model\Entity\PositionList;
 use Application\Model\Repository\PositionRepositoryInterface;
+use Application\Model\Repository\StatusRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use InvalidArgumentException;
+use Laminas\Http\Header\Referer;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Session\Container as SessionContainer;
 use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
 use LogicException;
@@ -24,50 +27,76 @@ class AdminController extends AbstractActionController
     private PositionRepositoryInterface $positionRepository;
     private UserCommandInterface $userCommand;
     private PositionCommandInterface $positionCommand;
+    private SessionContainer $sessionContainer;
+    private StatusRepositoryInterface $statusRepository;
 
     public function __construct(
         Form\PositionForm           $positionForm,
         Form\UserForm               $userForm,
         Form\AdminFilterForm        $adminFilterForm,
         UserRepositoryInterface     $userRepository,
+        StatusRepositoryInterface   $statusRepository,
         PositionRepositoryInterface $positionRepository,
         UserCommandInterface        $userCommand,
-        PositionCommandInterface    $positionCommand
+        PositionCommandInterface    $positionCommand,
+        SessionContainer            $sessionContainer
     ) {
         $this->positionForm = $positionForm;
         $this->userForm = $userForm;
         $this->adminFilterForm = $adminFilterForm;
         $this->userRepository = $userRepository;
+        $this->statusRepository = $statusRepository;
         $this->positionRepository = $positionRepository;
         $this->userCommand = $userCommand;
         $this->positionCommand = $positionCommand;
+        $this->sessionContainer = $sessionContainer;
     }
 
     public function viewUserListAction()
     {
-        $viewModel = new ViewModel();
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
 
-        $this->layout()->setVariable('headTitleName', 'List of users (Administrator)');
-        $this->layout()->setVariable('navbar', 'Laminas\Navigation\Admin');
+        if (!$this->statusRepository->checkStatusOfUser($userId, 'admin')) {
+            return $this->redirect()->toRoute('user/view-profile');
+        }
 
-        $viewModel->setVariables([
-            'adminFilterForm' => $this->adminFilterForm,
+        $this->layout()->setVariables([
+            'headTitleName' => 'List of users (Administrator)',
+            'navbar'        => 'Laminas\Navigation\Admin',
         ]);
 
-        return $viewModel;
+        return new ViewModel([
+            'adminFilterForm' => $this->adminFilterForm,
+        ]);
     }
 
     public function getUsersAction()
     {
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
+
         $request = $this->getRequest();
 
         if (!$request->isXmlHttpRequest() || !$request->isPost()) {
             throw new LogicException('The request to the address must be ajax and post.');
         }
 
+        /** @var Referer $referer */
+        $referer = $request->getHeader('Referer', null);
+        $isAdminPage = is_null($referer) || strpos($referer->getUri(), 'admin') !== false;
+
         $data = $request->getPost()->toArray();
-        parse_str($data['where'], $data['where']);
-        $whereConfig = ConfigHelper::filterEmpty($data['where']);
+
+        $whereConfig = ConfigHelper::configWhereData(
+            $data['where'],
+            !$isAdminPage,
+            !$isAdminPage
+        );
         $orderConfig = $data['order'];
         $page = (integer)$data['page'];
         $offset = ($page - 1) * UserController::MAX_USER_COUNT;
@@ -79,8 +108,8 @@ class AdminController extends AbstractActionController
         $jsonData = [];
 
         $userList = array_slice($users, $offset, $limit);
-        $userList = array_map(function ($item) {
-            return $item->toArray();
+        $userList = array_map(function ($item) use ($isAdminPage) {
+            return $item->toArray($isAdminPage);
         }, $userList);
 
         $jsonData['userList'] = $userList;
@@ -96,14 +125,22 @@ class AdminController extends AbstractActionController
 
     public function editUserAction()
     {
-        $userId = (int)$this->params()->fromRoute('id', 0);
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
 
-        if ($userId === 0) {
+        if (!$this->statusRepository->checkStatusOfUser($userId, 'admin')) {
+            return $this->redirect()->toRoute('user/edit-profile');
+        }
+
+        $userToEditId = (int)$this->params()->fromRoute('id', 0);
+        if ($userToEditId === 0) {
             return $this->redirect()->toRoute('admin/view-user-list');
         }
 
         try {
-            $user = $this->userRepository->findUser($userId);
+            $user = $this->userRepository->findUser($userToEditId);
         } catch (InvalidArgumentException $ex) {
             return $this->redirect()->toRoute('admin/view-user-list');
         }
@@ -114,6 +151,7 @@ class AdminController extends AbstractActionController
         ]);
 
         $this->userForm->bind($user);
+
         $viewModel = new ViewModel(['userForm' => $this->userForm]);
 
         $request = $this->getRequest();
@@ -138,6 +176,15 @@ class AdminController extends AbstractActionController
 
     public function editPositionsAction()
     {
+        $userId = $this->sessionContainer->offsetGet(LoginController::USER_ID_KEY);
+        if (!is_integer($userId)) {
+            return $this->redirect()->toRoute('home');
+        }
+
+        if (!$this->statusRepository->checkStatusOfUser($userId, 'admin')) {
+            return $this->redirect()->toRoute('user/view-profile');
+        }
+
         $this->layout()->setVariables([
             'headTitleName' => 'Position Management (Administrator)',
             'navbar'        => 'Laminas\Navigation\Admin',

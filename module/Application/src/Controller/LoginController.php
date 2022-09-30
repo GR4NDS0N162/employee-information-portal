@@ -6,26 +6,38 @@ use Application\Form\Login;
 use Application\Model\Command\UserCommandInterface;
 use Application\Model\Entity\Email;
 use Application\Model\Entity\User;
+use Application\Model\Repository\UserRepositoryInterface;
+use InvalidArgumentException;
 use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Session\Container as SessionContainer;
 use Laminas\View\Model\ViewModel;
 
 class LoginController extends AbstractActionController
 {
+    /** @var string The key that stores the id of the logged-in user. */
+    const USER_ID_KEY = 'userId';
+
     private Login\LoginForm $loginForm;
     private Login\SignUpForm $signUpForm;
     private Login\RecoverForm $recoverForm;
     private UserCommandInterface $userCommand;
+    private UserRepositoryInterface $userRepository;
+    private SessionContainer $sessionContainer;
 
     public function __construct(
-        Login\LoginForm      $loginForm,
-        Login\SignUpForm     $signUpForm,
-        Login\RecoverForm    $recoverForm,
-        UserCommandInterface $userCommand
+        Login\LoginForm         $loginForm,
+        Login\SignUpForm        $signUpForm,
+        Login\RecoverForm       $recoverForm,
+        UserCommandInterface    $userCommand,
+        UserRepositoryInterface $userRepository,
+        SessionContainer        $sessionContainer
     ) {
         $this->loginForm = $loginForm;
         $this->signUpForm = $signUpForm;
         $this->recoverForm = $recoverForm;
         $this->userCommand = $userCommand;
+        $this->userRepository = $userRepository;
+        $this->sessionContainer = $sessionContainer;
     }
 
     public function indexAction()
@@ -44,6 +56,38 @@ class LoginController extends AbstractActionController
 
     public function loginAction()
     {
+        $request = $this->getRequest();
+
+        if (!$request->isPost()) {
+            return $this->redirect()->toRoute('home');
+        }
+
+        $this->loginForm->setData($request->getPost());
+
+        if (!$this->loginForm->isValid()) {
+            return $this->redirect()->toRoute('home');
+        }
+
+        $data = $this->loginForm->getData();
+
+        $email = new Email($data['email']);
+        $password = $data['currentPassword'];
+
+        try {
+            $foundUser = $this->userRepository->findUser($email);
+        } catch (InvalidArgumentException $ex) {
+            return $this->redirect()->toRoute('home');
+        }
+
+        if ($foundUser->getPassword() == $password
+            || (!is_null($foundUser->getTempPassword())
+                && $foundUser->getTempPassword() == $password)
+        ) {
+            $this->sessionContainer->offsetSet(self::USER_ID_KEY, $foundUser->getId());
+            return $this->redirect()->toRoute('user/view-profile');
+        } else {
+            return $this->redirect()->toRoute('home');
+        }
     }
 
     public function signUpAction()
@@ -62,13 +106,16 @@ class LoginController extends AbstractActionController
 
         $data = $this->signUpForm->getData();
 
-        $email = new Email($data['email']);
+        $email = new Email((string)$data['email']);
         $user = new User(
-            $data['newPassword'],
-            $data['positionId'],
+            (string)$data['newPassword'],
+            (integer)$data['positionId'],
         );
 
-        $this->userCommand->insertUser($user, $email);
+        $userId = $this->userCommand->insertUser($user, $email);
+
+        $this->sessionContainer->offsetSet(self::USER_ID_KEY, $userId);
+
         return $this->redirect()->toRoute('user/view-profile');
     }
 

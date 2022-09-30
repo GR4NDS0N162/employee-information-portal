@@ -8,9 +8,11 @@ use Application\Form\User\ProfileForm;
 use Application\Form\User\UserFilterForm;
 use Application\Form\User\ViewProfileForm;
 use Application\Model\Command\UserCommandInterface;
+use Application\Model\Repository\StatusRepositoryInterface;
 use Application\Model\Repository\UserRepositoryInterface;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Laminas\Session\Container as SessionContainer;
 
 class UserControllerFactory implements FactoryInterface
 {
@@ -25,7 +27,9 @@ class UserControllerFactory implements FactoryInterface
             $formManager->get(UserFilterForm::class),
             $formManager->get(ChangePasswordForm::class),
             $container->get(UserRepositoryInterface::class),
+            $container->get(StatusRepositoryInterface::class),
             $container->get(UserCommandInterface::class),
+            $container->get(SessionContainer::class),
         );
     }
 }
