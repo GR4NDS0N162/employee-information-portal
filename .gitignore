@@ -7,3 +7,4 @@ data/cache/*
 phpunit.xml
 .phpunit.result.cache
 /public/img/php*
+/.idea
